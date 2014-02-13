@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="CoreDBTermPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>org.olanto.myterm.coredb.entityclasses.Domains</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Owners</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Translations</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Terms</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Langsets</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Descriptors</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Languages</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Resources</class>
+    <class>org.olanto.myterm.coredb.entityclasses.Concepts</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/myterm?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.password" value="x"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="adminmyterm"/>
+    </properties>
+  </persistence-unit>
+</persistence>
