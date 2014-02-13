@@ -27,8 +27,8 @@ public class ParseTBX {
 
     public static void main(String[] args) {
         //  procesADir("h:/PATDB/XML/docdb");
-       // loadATBXFile("C:/MYTERM/tests/TBX-basic-samples.tbx","TESTTBX");
-        loadATBXFile("C:/MYTERM/tests/WTODisputeSettlementTerminology.xml","TESTOMC");
+        loadATBXFile("C:/MYTERM/tests/TBX-basic-samples.tbx","TESTTBX");
+       // loadATBXFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC");
       }
 
     
