@@ -1,52 +1,36 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author simple
  */
 @Entity
+@Table(name = "concepts")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Concepts.findAll", query = "SELECT c FROM Concepts c"),
-    @NamedQuery(name = "Concepts.findByIdConcept", query = "SELECT c FROM Concepts c WHERE c.idConcept = :idConcept")})
+    @NamedQuery(name = "Concepts.findByIdConcept", query = "SELECT c FROM Concepts c WHERE c.idConcept = :idConcept"),
+    @NamedQuery(name = "Concepts.findByIdResource", query = "SELECT c FROM Concepts c WHERE c.idResource = :idResource"),
+    @NamedQuery(name = "Concepts.findBySubjectField", query = "SELECT c FROM Concepts c WHERE c.subjectField = :subjectField"),
+    @NamedQuery(name = "Concepts.findByConceptDefinition", query = "SELECT c FROM Concepts c WHERE c.conceptDefinition = :conceptDefinition"),
+    @NamedQuery(name = "Concepts.findByConceptSourceDefinition", query = "SELECT c FROM Concepts c WHERE c.conceptSourceDefinition = :conceptSourceDefinition"),
+    @NamedQuery(name = "Concepts.findByExtra", query = "SELECT c FROM Concepts c WHERE c.extra = :extra")})
 public class Concepts implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,30 +38,28 @@ public class Concepts implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_concept")
     private Long idConcept;
+    @Basic(optional = false)
+    @Column(name = "id_resource")
+    private long idResource;
     @Column(name = "subject_field")
-    private String subjectfield;
-    @Column(name = "extra")
-    private String extra;
+    private String subjectField;
     @Column(name = "concept_definition")
     private String conceptDefinition;
     @Column(name = "concept_source_definition")
     private String conceptSourceDefinition;
-    @JoinTable(name = "concepts_domains", joinColumns = {
-        @JoinColumn(name = "id_concept", referencedColumnName = "id_concept")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_domain", referencedColumnName = "id_domain")})
-    @ManyToMany
-    private Collection<Domains> domainsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idConcept")
-    private Collection<Langsets> langsetsCollection;
-    @JoinColumn(name = "id_resource", referencedColumnName = "id_resource")
-    @ManyToOne(optional = false)
-    private Resources idResource;
+    @Column(name = "extra")
+    private String extra;
 
     public Concepts() {
     }
 
     public Concepts(Long idConcept) {
         this.idConcept = idConcept;
+    }
+
+    public Concepts(Long idConcept, long idResource) {
+        this.idConcept = idConcept;
+        this.idResource = idResource;
     }
 
     public Long getIdConcept() {
@@ -88,30 +70,44 @@ public class Concepts implements Serializable {
         this.idConcept = idConcept;
     }
 
-    @XmlTransient
-    public Collection<Domains> getDomainsCollection() {
-        return domainsCollection;
-    }
-
-    public void setDomainsCollection(Collection<Domains> domainsCollection) {
-        this.domainsCollection = domainsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Langsets> getLangsetsCollection() {
-        return langsetsCollection;
-    }
-
-    public void setLangsetsCollection(Collection<Langsets> langsetsCollection) {
-        this.langsetsCollection = langsetsCollection;
-    }
-
-    public Resources getIdResource() {
+    public long getIdResource() {
         return idResource;
     }
 
-    public void setIdResource(Resources idResource) {
+    public void setIdResource(long idResource) {
         this.idResource = idResource;
+    }
+
+    public String getSubjectField() {
+        return subjectField;
+    }
+
+    public void setSubjectField(String subjectField) {
+        this.subjectField = subjectField;
+    }
+
+    public String getConceptDefinition() {
+        return conceptDefinition;
+    }
+
+    public void setConceptDefinition(String conceptDefinition) {
+        this.conceptDefinition = conceptDefinition;
+    }
+
+    public String getConceptSourceDefinition() {
+        return conceptSourceDefinition;
+    }
+
+    public void setConceptSourceDefinition(String conceptSourceDefinition) {
+        this.conceptSourceDefinition = conceptSourceDefinition;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     @Override
@@ -137,62 +133,6 @@ public class Concepts implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Concepts[ idConcept=" + idConcept + " ]";
-    }
-
-    /**
-     * @return the conceptDefinition
-     */
-    public String getConceptDefinition() {
-        return conceptDefinition;
-    }
-
-    /**
-     * @param conceptDefinition the conceptDefinition to set
-     */
-    public void setConceptDefinition(String conceptDefinition) {
-        this.conceptDefinition = conceptDefinition;
-    }
-
-    /**
-     * @return the conceptSourceDefinition
-     */
-    public String getConceptSourceDefinition() {
-        return conceptSourceDefinition;
-    }
-
-    /**
-     * @param conceptSourceDefinition the conceptSourceDefinition to set
-     */
-    public void setConceptSourceDefinition(String conceptSourceDefinition) {
-        this.conceptSourceDefinition = conceptSourceDefinition;
-    }
-
-    /**
-     * @return the subjectfield
-     */
-    public String getSubjectfield() {
-        return subjectfield;
-    }
-
-    /**
-     * @param subjectfield the subjectfield to set
-     */
-    public void setSubjectfield(String subjectfield) {
-        this.subjectfield = subjectfield;
-    }
-
-    /**
-     * @return the extra
-     */
-    public String getExtra() {
-        return extra;
-    }
-
-    /**
-     * @param extra the extra to set
-     */
-    public void setExtra(String extra) {
-        this.extra = extra;
     }
     
 }

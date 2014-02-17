@@ -43,11 +43,9 @@ create table resources
   resource_name varchar(32)  not null,
   resource_privacy varchar(16)  not null, -- PRIVATE, PUBLIC
   extra varchar(1024),
-PRIMARY KEY (id_resource),
-CONSTRAINT resources_FK1_owners
-   FOREIGN KEY (id_owner)
-   REFERENCES owners (id_owner)
-ON DELETE NO ACTION ON UPDATE CASCADE)
+PRIMARY KEY (id_resource)
+-- , CONSTRAINT resources_FK1_owners FOREIGN KEY (id_owner) REFERENCES owners (id_owner) ON DELETE NO ACTION ON UPDATE CASCADE
+)
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into resources
@@ -74,15 +72,9 @@ select * from domains;
 create table resources_domains
  (id_domain bigint not null,
   id_resource bigint not null,
-PRIMARY KEY (id_domain,id_resource),
-CONSTRAINT resources_domains_FK1_resources
-   FOREIGN KEY (id_resource)
-   REFERENCES resources (id_resource)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT resources_domains_FK2_domains
-   FOREIGN KEY (id_domain)
-   REFERENCES domains (id_domain)
-ON DELETE NO ACTION ON UPDATE CASCADE
+PRIMARY KEY (id_domain,id_resource)
+-- ,CONSTRAINT resources_domains_FK1_resources FOREIGN KEY (id_resource) REFERENCES resources (id_resource) ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT resources_domains_FK2_domains FOREIGN KEY (id_domain) REFERENCES domains (id_domain) ON DELETE NO ACTION ON UPDATE CASCADE
 )
 DEFAULT CHARSET=utf8;
 
@@ -119,11 +111,8 @@ create table translations
   type_obj varchar(32) not null, -- DOMAINS, ...
   id_obj bigint not null,
   label varchar(4000) not null,
-PRIMARY KEY (id_language,type_obj,id_obj),
-CONSTRAINT translations_FK1_languages
-   FOREIGN KEY (id_language)
-   REFERENCES languages (id_language)
-ON DELETE NO ACTION ON UPDATE CASCADE
+PRIMARY KEY (id_language,type_obj,id_obj)
+-- ,CONSTRAINT translations_FK1_languages FOREIGN KEY (id_language) REFERENCES languages (id_language) ON DELETE NO ACTION ON UPDATE CASCADE
 )
 DEFAULT CHARSET=utf8;
 
@@ -146,11 +135,8 @@ create table concepts
   concept_definition varchar(512),
   concept_source_definition varchar(512),
   extra varchar(1024),
-PRIMARY KEY (id_concept),
-CONSTRAINT concepts_FK1_resources
-   FOREIGN KEY (id_resource)
-   REFERENCES resources (id_resource)
-ON DELETE NO ACTION ON UPDATE CASCADE
+PRIMARY KEY (id_concept)
+-- ,CONSTRAINT concepts_FK1_resources FOREIGN KEY (id_resource)REFERENCES resources (id_resource)ON DELETE NO ACTION ON UPDATE CASCADE
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
@@ -164,15 +150,9 @@ select * from concepts;
 create table concepts_domains
  (id_domain bigint  not null,
   id_concept bigint  not null,
-PRIMARY KEY (id_domain,id_concept),
-CONSTRAINT concepts_domains_FK1_concept
-   FOREIGN KEY (id_concept)
-   REFERENCES concepts (id_concept)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT concepts_FK2_domains
-   FOREIGN KEY (id_domain)
-   REFERENCES domains (id_domain)
-ON DELETE NO ACTION ON UPDATE CASCADE
+PRIMARY KEY (id_domain,id_concept)
+-- ,CONSTRAINT concepts_domains_FK1_concept FOREIGN KEY (id_concept)REFERENCES concepts (id_concept)ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT concepts_FK2_domains FOREIGN KEY (id_domain) REFERENCES domains (id_domain)ON DELETE NO ACTION ON UPDATE CASCADE
 )
 DEFAULT CHARSET=utf8;
 
@@ -189,15 +169,9 @@ create table langsets
   id_concept bigint not null,
   seq int default 0,
   extra varchar(1024),
-PRIMARY KEY (id_langset),
-CONSTRAINT langsets_FK1_concept
-   FOREIGN KEY (id_concept)
-   REFERENCES concepts (id_concept)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT langsets_FK2_languages
-   FOREIGN KEY (id_language)
-   REFERENCES languages (id_language)
-ON DELETE NO ACTION ON UPDATE CASCADE
+PRIMARY KEY (id_langset)
+-- ,CONSTRAINT langsets_FK1_concept FOREIGN KEY (id_concept)REFERENCES concepts (id_concept)ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT langsets_FK2_languages FOREIGN KEY (id_language)REFERENCES languages (id_language)ON DELETE NO ACTION ON UPDATE CASCADE
 
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
@@ -216,7 +190,7 @@ create table terms
  (id_term bigint not null auto_increment,
   id_language varchar(5)  not null,
   id_langset bigint  not null,
-  term_form varchar(8000)  not null,
+  term_form varchar(255)  not null,
   term_source varchar(512),
   term_definition varchar(512),
   term_source_definition varchar(512),
@@ -236,24 +210,11 @@ create table terms
   status char(1)  not null, -- published, revised, edited
   seq int default 0,
   extra varchar(4096),
-PRIMARY KEY (id_term),
-CONSTRAINT terms_FK1_langset
-   FOREIGN KEY (id_langset)
-   REFERENCES langsets (id_langset)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT terms_FK2_languages
-   FOREIGN KEY (id_language)
-   REFERENCES languages (id_language)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT terms_FK3_create_by
-   FOREIGN KEY (create_by)
-   REFERENCES owners (id_owner)
-ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT terms_FK4_lastmodified_by
-   FOREIGN KEY (lastmodified_by)
-   REFERENCES owners (id_owner)
-ON DELETE NO ACTION ON UPDATE CASCADE
-
+PRIMARY KEY (id_term)
+-- ,CONSTRAINT terms_FK1_langset FOREIGN KEY (id_langset)REFERENCES langsets (id_langset)ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT terms_FK2_languages FOREIGN KEY (id_language)REFERENCES languages (id_language)ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT terms_FK3_create_by FOREIGN KEY (create_by)REFERENCES owners (id_owner)ON DELETE NO ACTION ON UPDATE CASCADE
+-- ,CONSTRAINT terms_FK4_lastmodified_by FOREIGN KEY (lastmodified_by)REFERENCES owners (id_owner)ON DELETE NO ACTION ON UPDATE CASCADE
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 

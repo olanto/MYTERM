@@ -1,22 +1,7 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.jpacontroller;
 
 import java.io.Serializable;
@@ -27,7 +12,6 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.olanto.myterm.coredb.entityclasses.Languages;
 import org.olanto.myterm.coredb.entityclasses.Translations;
 import org.olanto.myterm.coredb.entityclasses.TranslationsPK;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
@@ -52,21 +36,11 @@ public class TranslationsJpaController implements Serializable {
         if (translations.getTranslationsPK() == null) {
             translations.setTranslationsPK(new TranslationsPK());
         }
-        translations.getTranslationsPK().setIdLanguage(translations.getLanguages().getIdLanguage());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Languages languages = translations.getLanguages();
-            if (languages != null) {
-                languages = em.getReference(languages.getClass(), languages.getIdLanguage());
-                translations.setLanguages(languages);
-            }
             em.persist(translations);
-            if (languages != null) {
-                languages.getTranslationsCollection().add(translations);
-                languages = em.merge(languages);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findTranslations(translations.getTranslationsPK()) != null) {
@@ -81,27 +55,11 @@ public class TranslationsJpaController implements Serializable {
     }
 
     public void edit(Translations translations) throws NonexistentEntityException, Exception {
-        translations.getTranslationsPK().setIdLanguage(translations.getLanguages().getIdLanguage());
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Translations persistentTranslations = em.find(Translations.class, translations.getTranslationsPK());
-            Languages languagesOld = persistentTranslations.getLanguages();
-            Languages languagesNew = translations.getLanguages();
-            if (languagesNew != null) {
-                languagesNew = em.getReference(languagesNew.getClass(), languagesNew.getIdLanguage());
-                translations.setLanguages(languagesNew);
-            }
             translations = em.merge(translations);
-            if (languagesOld != null && !languagesOld.equals(languagesNew)) {
-                languagesOld.getTranslationsCollection().remove(translations);
-                languagesOld = em.merge(languagesOld);
-            }
-            if (languagesNew != null && !languagesNew.equals(languagesOld)) {
-                languagesNew.getTranslationsCollection().add(translations);
-                languagesNew = em.merge(languagesNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -130,11 +88,6 @@ public class TranslationsJpaController implements Serializable {
                 translations.getTranslationsPK();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The translations with id " + id + " no longer exists.", enfe);
-            }
-            Languages languages = translations.getLanguages();
-            if (languages != null) {
-                languages.getTranslationsCollection().remove(translations);
-                languages = em.merge(languages);
             }
             em.remove(translations);
             em.getTransaction().commit();

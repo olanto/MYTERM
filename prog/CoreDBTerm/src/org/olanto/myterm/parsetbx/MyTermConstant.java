@@ -24,27 +24,10 @@ package org.olanto.myterm.parsetbx;
  *
  * @author simple
  */
-public class LanguageCode {
+public class MyTermConstant {
 
    
- 
-   public static String getISO2From3(String iso3){
-       iso3=iso3.toUpperCase();
-       if (iso3.length()!=3) {
-               System.out.println("Fatal Error code ISO 3 not on 3 chars: "+iso3);
-                      System.exit(0);}
-              switch (iso3) {
-            case "ENG":
-                return "en";
-           case "FRE":
-                return "fr";
-          case "RUS":
-                return "ru";
-            default:
-                System.out.println("ISO2 Conversion not implemented for: "+iso3);
-                      System.exit(0);
-       return null;
-   }
-   }
+public static int TERM_FORM_MAX_LENGTH=8000; 
+  
     
 }

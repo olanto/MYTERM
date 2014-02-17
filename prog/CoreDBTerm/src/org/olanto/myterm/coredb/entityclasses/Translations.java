@@ -1,32 +1,17 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author simple
  */
 @Entity
+@Table(name = "translations")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Translations.findAll", query = "SELECT t FROM Translations t"),
@@ -46,10 +32,8 @@ public class Translations implements Serializable {
     @EmbeddedId
     protected TranslationsPK translationsPK;
     @Basic(optional = false)
+    @Column(name = "label")
     private String label;
-    @JoinColumn(name = "id_language", referencedColumnName = "id_language", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Languages languages;
 
     public Translations() {
     }
@@ -81,14 +65,6 @@ public class Translations implements Serializable {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public Languages getLanguages() {
-        return languages;
-    }
-
-    public void setLanguages(Languages languages) {
-        this.languages = languages;
     }
 
     @Override

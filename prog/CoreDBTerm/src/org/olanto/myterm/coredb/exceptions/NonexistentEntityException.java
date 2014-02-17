@@ -1,4 +1,4 @@
-package org.olanto.myterm.coredb.jpacontroller.exceptions;
+package org.olanto.myterm.coredb.exceptions;
 
 public class NonexistentEntityException extends Exception {
     public NonexistentEntityException(String message, Throwable cause) {

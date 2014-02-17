@@ -1,4 +1,4 @@
-package org.olanto.myterm.coredb.jpacontroller.exceptions;
+package org.olanto.myterm.coredb.exceptions;
 
 public class PreexistingEntityException extends Exception {
     public PreexistingEntityException(String message, Throwable cause) {

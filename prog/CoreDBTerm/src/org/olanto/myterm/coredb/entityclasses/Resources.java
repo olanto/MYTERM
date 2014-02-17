@@ -1,54 +1,35 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author simple
  */
 @Entity
+@Table(name = "resources")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Resources.findAll", query = "SELECT r FROM Resources r"),
     @NamedQuery(name = "Resources.findByIdResource", query = "SELECT r FROM Resources r WHERE r.idResource = :idResource"),
+    @NamedQuery(name = "Resources.findByIdOwner", query = "SELECT r FROM Resources r WHERE r.idOwner = :idOwner"),
     @NamedQuery(name = "Resources.findByResourceName", query = "SELECT r FROM Resources r WHERE r.resourceName = :resourceName"),
-    @NamedQuery(name = "Resources.findByResourcePrivacy", query = "SELECT r FROM Resources r WHERE r.resourcePrivacy = :resourcePrivacy")})
+    @NamedQuery(name = "Resources.findByResourcePrivacy", query = "SELECT r FROM Resources r WHERE r.resourcePrivacy = :resourcePrivacy"),
+    @NamedQuery(name = "Resources.findByExtra", query = "SELECT r FROM Resources r WHERE r.extra = :extra")})
 public class Resources implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,23 +38,16 @@ public class Resources implements Serializable {
     @Column(name = "id_resource")
     private Long idResource;
     @Basic(optional = false)
+    @Column(name = "id_owner")
+    private long idOwner;
+    @Basic(optional = false)
     @Column(name = "resource_name")
     private String resourceName;
-    @Column(name = "extra")
-    private String extra;
     @Basic(optional = false)
     @Column(name = "resource_privacy")
     private String resourcePrivacy;
-    @JoinTable(name = "resources_domains", joinColumns = {
-        @JoinColumn(name = "id_resource", referencedColumnName = "id_resource")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_domain", referencedColumnName = "id_domain")})
-    @ManyToMany
-    private Collection<Domains> domainsCollection;
-    @JoinColumn(name = "id_owner", referencedColumnName = "id_owner")
-    @ManyToOne(optional = false)
-    private Owners idOwner;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idResource")
-    private Collection<Concepts> conceptsCollection;
+    @Column(name = "extra")
+    private String extra;
 
     public Resources() {
     }
@@ -82,8 +56,15 @@ public class Resources implements Serializable {
         this.idResource = idResource;
     }
 
-    public Resources(Long idResource, String resourceName, String resourcePrivacy) {
+    public Resources(Long idResource, long idOwner, String resourceName, String resourcePrivacy) {
         this.idResource = idResource;
+        this.idOwner = idOwner;
+        this.resourceName = resourceName;
+        this.resourcePrivacy = resourcePrivacy;
+    }
+   public Resources(Long idResource, String resourceName, String resourcePrivacy) {
+        this.idResource = idResource;
+        this.idOwner = idOwner;
         this.resourceName = resourceName;
         this.resourcePrivacy = resourcePrivacy;
     }
@@ -94,6 +75,14 @@ public class Resources implements Serializable {
 
     public void setIdResource(Long idResource) {
         this.idResource = idResource;
+    }
+
+    public long getIdOwner() {
+        return idOwner;
+    }
+
+    public void setIdOwner(long idOwner) {
+        this.idOwner = idOwner;
     }
 
     public String getResourceName() {
@@ -112,30 +101,12 @@ public class Resources implements Serializable {
         this.resourcePrivacy = resourcePrivacy;
     }
 
-    @XmlTransient
-    public Collection<Domains> getDomainsCollection() {
-        return domainsCollection;
+    public String getExtra() {
+        return extra;
     }
 
-    public void setDomainsCollection(Collection<Domains> domainsCollection) {
-        this.domainsCollection = domainsCollection;
-    }
-
-    public Owners getIdOwner() {
-        return idOwner;
-    }
-
-    public void setIdOwner(Owners idOwner) {
-        this.idOwner = idOwner;
-    }
-
-    @XmlTransient
-    public Collection<Concepts> getConceptsCollection() {
-        return conceptsCollection;
-    }
-
-    public void setConceptsCollection(Collection<Concepts> conceptsCollection) {
-        this.conceptsCollection = conceptsCollection;
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     @Override
@@ -161,20 +132,6 @@ public class Resources implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Resources[ idResource=" + idResource + " ]";
-    }
-
-    /**
-     * @return the extra
-     */
-    public String getExtra() {
-        return extra;
-    }
-
-    /**
-     * @param extra the extra to set
-     */
-    public void setExtra(String extra) {
-        this.extra = extra;
     }
     
 }

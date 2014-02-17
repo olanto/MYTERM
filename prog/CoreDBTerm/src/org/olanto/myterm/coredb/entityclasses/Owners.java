@@ -1,28 +1,11 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,15 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author simple
  */
 @Entity
+@Table(name = "owners")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Owners.findAll", query = "SELECT o FROM Owners o"),
@@ -69,12 +52,6 @@ public class Owners implements Serializable {
     @Basic(optional = false)
     @Column(name = "owner_status")
     private String ownerStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOwner")
-    private Collection<Resources> resourcesCollection;
-    @OneToMany(mappedBy = "lastmodifiedBy")
-    private Collection<Terms> termsCollection;
-    @OneToMany(mappedBy = "createBy")
-    private Collection<Terms> termsCollection1;
 
     public Owners() {
     }
@@ -137,33 +114,6 @@ public class Owners implements Serializable {
 
     public void setOwnerStatus(String ownerStatus) {
         this.ownerStatus = ownerStatus;
-    }
-
-    @XmlTransient
-    public Collection<Resources> getResourcesCollection() {
-        return resourcesCollection;
-    }
-
-    public void setResourcesCollection(Collection<Resources> resourcesCollection) {
-        this.resourcesCollection = resourcesCollection;
-    }
-
-    @XmlTransient
-    public Collection<Terms> getTermsCollection() {
-        return termsCollection;
-    }
-
-    public void setTermsCollection(Collection<Terms> termsCollection) {
-        this.termsCollection = termsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Terms> getTermsCollection1() {
-        return termsCollection1;
-    }
-
-    public void setTermsCollection1(Collection<Terms> termsCollection1) {
-        this.termsCollection1 = termsCollection1;
     }
 
     @Override

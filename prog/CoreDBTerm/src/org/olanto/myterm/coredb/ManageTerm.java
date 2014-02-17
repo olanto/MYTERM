@@ -20,8 +20,10 @@
 package org.olanto.myterm.coredb;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Query;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.IllegalOrphanException;
@@ -35,19 +37,22 @@ public class ManageTerm {
 
     public static Terms addTermToLangset(Langsets lan,  String termForm, char status) {
          Terms ter = new Terms(null, termForm, status);
-         ter.setIdLangset(lan);
+         ter.setIdLangset(lan.getIdLangset());
          ter.setIdLanguage(lan.getIdLanguage());
         TermDB.termsJC.create(ter);
         return ter;
    }
     public static Terms addTermToLangset(Langsets lan, Terms ter) {
-         ter.setIdLangset(lan);
+         ter.setIdLangset(lan.getIdLangset());
          ter.setIdLanguage(lan.getIdLanguage());
         TermDB.termsJC.create(ter);
         return ter;
    }
-       public static void remove(Collection<Terms> listOfTerms) {
-          for (Terms ter: listOfTerms ){
+       public static void remove(Langsets lan) {
+        Query query = TermDB.em.createNamedQuery("Terms.findByIdLangset");
+        query.setParameter("idLangset", lan.getIdLangset());
+        List<Terms>  listOfTerms= query.getResultList();
+      for (Terms ter: listOfTerms ){
                try {
                    TermDB.termsJC.destroy(ter.getIdTerm());
                } catch (NonexistentEntityException ex) {

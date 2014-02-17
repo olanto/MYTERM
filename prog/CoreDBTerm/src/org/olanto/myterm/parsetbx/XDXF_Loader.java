@@ -116,7 +116,7 @@ public class XDXF_Loader implements Loader {
         while (i.hasNext()) {
             Element info = (Element) i.next();
             if (info.getName().equals("k")) {
-                courantEntry.addLangSet(talang);
+                courantEntry.addLangSet(solang);
                 courantEntry.prepareTerm(getText(info, localverbose));
                 courantEntry.addTerm();
             } else {

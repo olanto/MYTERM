@@ -12,7 +12,8 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.olanto.myterm.coredb.entityclasses.Languages;
+import org.olanto.myterm.coredb.entityclasses.ConceptsDomains;
+import org.olanto.myterm.coredb.entityclasses.ConceptsDomainsPK;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.PreexistingEntityException;
 
@@ -20,9 +21,9 @@ import org.olanto.myterm.coredb.jpacontroller.exceptions.PreexistingEntityExcept
  *
  * @author simple
  */
-public class LanguagesJpaController implements Serializable {
+public class ConceptsDomainsJpaController implements Serializable {
 
-    public LanguagesJpaController(EntityManagerFactory emf) {
+    public ConceptsDomainsJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,16 +32,19 @@ public class LanguagesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Languages languages) throws PreexistingEntityException, Exception {
+    public void create(ConceptsDomains conceptsDomains) throws PreexistingEntityException, Exception {
+        if (conceptsDomains.getConceptsDomainsPK() == null) {
+            conceptsDomains.setConceptsDomainsPK(new ConceptsDomainsPK());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(languages);
+            em.persist(conceptsDomains);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findLanguages(languages.getIdLanguage()) != null) {
-                throw new PreexistingEntityException("Languages " + languages + " already exists.", ex);
+            if (findConceptsDomains(conceptsDomains.getConceptsDomainsPK()) != null) {
+                throw new PreexistingEntityException("ConceptsDomains " + conceptsDomains + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -50,19 +54,19 @@ public class LanguagesJpaController implements Serializable {
         }
     }
 
-    public void edit(Languages languages) throws NonexistentEntityException, Exception {
+    public void edit(ConceptsDomains conceptsDomains) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            languages = em.merge(languages);
+            conceptsDomains = em.merge(conceptsDomains);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = languages.getIdLanguage();
-                if (findLanguages(id) == null) {
-                    throw new NonexistentEntityException("The languages with id " + id + " no longer exists.");
+                ConceptsDomainsPK id = conceptsDomains.getConceptsDomainsPK();
+                if (findConceptsDomains(id) == null) {
+                    throw new NonexistentEntityException("The conceptsDomains with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,19 +77,19 @@ public class LanguagesJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
+    public void destroy(ConceptsDomainsPK id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Languages languages;
+            ConceptsDomains conceptsDomains;
             try {
-                languages = em.getReference(Languages.class, id);
-                languages.getIdLanguage();
+                conceptsDomains = em.getReference(ConceptsDomains.class, id);
+                conceptsDomains.getConceptsDomainsPK();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The languages with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The conceptsDomains with id " + id + " no longer exists.", enfe);
             }
-            em.remove(languages);
+            em.remove(conceptsDomains);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +98,19 @@ public class LanguagesJpaController implements Serializable {
         }
     }
 
-    public List<Languages> findLanguagesEntities() {
-        return findLanguagesEntities(true, -1, -1);
+    public List<ConceptsDomains> findConceptsDomainsEntities() {
+        return findConceptsDomainsEntities(true, -1, -1);
     }
 
-    public List<Languages> findLanguagesEntities(int maxResults, int firstResult) {
-        return findLanguagesEntities(false, maxResults, firstResult);
+    public List<ConceptsDomains> findConceptsDomainsEntities(int maxResults, int firstResult) {
+        return findConceptsDomainsEntities(false, maxResults, firstResult);
     }
 
-    private List<Languages> findLanguagesEntities(boolean all, int maxResults, int firstResult) {
+    private List<ConceptsDomains> findConceptsDomainsEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Languages.class));
+            cq.select(cq.from(ConceptsDomains.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,20 +122,20 @@ public class LanguagesJpaController implements Serializable {
         }
     }
 
-    public Languages findLanguages(String id) {
+    public ConceptsDomains findConceptsDomains(ConceptsDomainsPK id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Languages.class, id);
+            return em.find(ConceptsDomains.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getLanguagesCount() {
+    public int getConceptsDomainsCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Languages> rt = cq.from(Languages.class);
+            Root<ConceptsDomains> rt = cq.from(ConceptsDomains.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

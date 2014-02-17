@@ -118,7 +118,7 @@ public class TBX_Loader implements Loader{
                 termFormExist = true;
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
-                courantEntry.getTerm().setTermGeographicalUsage(getText(info, localverbose));
+                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("context")) {
@@ -190,7 +190,7 @@ public class TBX_Loader implements Loader{
             Element info = (Element) i.next();
             if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("subjectField")) {
-                courantEntry.getConcept().setSubjectfield(getText(info, localverbose));
+                courantEntry.getConcept().setSubjectField(getText(info, localverbose));
             } else if (info.getName().equals("descripGrp")) {
                 getDescripGrpConcept(info);
             } else if (info.getName().equals("langSet")) {

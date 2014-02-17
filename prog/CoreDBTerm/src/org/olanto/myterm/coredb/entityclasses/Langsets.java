@@ -1,51 +1,35 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author simple
  */
 @Entity
+@Table(name = "langsets")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Langsets.findAll", query = "SELECT l FROM Langsets l"),
     @NamedQuery(name = "Langsets.findByIdLangset", query = "SELECT l FROM Langsets l WHERE l.idLangset = :idLangset"),
-    @NamedQuery(name = "Langsets.findBySeq", query = "SELECT l FROM Langsets l WHERE l.seq = :seq")})
+    @NamedQuery(name = "Langsets.findByIdLanguage", query = "SELECT l FROM Langsets l WHERE l.idLanguage = :idLanguage"),
+    @NamedQuery(name = "Langsets.findByIdConcept", query = "SELECT l FROM Langsets l WHERE l.idConcept = :idConcept"),
+    @NamedQuery(name = "Langsets.findBySeq", query = "SELECT l FROM Langsets l WHERE l.seq = :seq"),
+    @NamedQuery(name = "Langsets.findByExtra", query = "SELECT l FROM Langsets l WHERE l.extra = :extra")})
 public class Langsets implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,23 +37,28 @@ public class Langsets implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_langset")
     private Long idLangset;
-      @Column(name = "extra")
+    @Basic(optional = false)
+    @Column(name = "id_language")
+    private String idLanguage;
+    @Basic(optional = false)
+    @Column(name = "id_concept")
+    private long idConcept;
+    @Column(name = "seq")
+    private Integer seq;
+    @Column(name = "extra")
     private String extra;
-  private Integer seq;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idLangset")
-    private Collection<Terms> termsCollection;
-    @JoinColumn(name = "id_language", referencedColumnName = "id_language")
-    @ManyToOne(optional = false)
-    private Languages idLanguage;
-    @JoinColumn(name = "id_concept", referencedColumnName = "id_concept")
-    @ManyToOne(optional = false)
-    private Concepts idConcept;
 
     public Langsets() {
     }
 
     public Langsets(Long idLangset) {
         this.idLangset = idLangset;
+    }
+
+    public Langsets(Long idLangset, String idLanguage, long idConcept) {
+        this.idLangset = idLangset;
+        this.idLanguage = idLanguage;
+        this.idConcept = idConcept;
     }
 
     public Long getIdLangset() {
@@ -80,6 +69,22 @@ public class Langsets implements Serializable {
         this.idLangset = idLangset;
     }
 
+    public String getIdLanguage() {
+        return idLanguage;
+    }
+
+    public void setIdLanguage(String idLanguage) {
+        this.idLanguage = idLanguage;
+    }
+
+    public long getIdConcept() {
+        return idConcept;
+    }
+
+    public void setIdConcept(long idConcept) {
+        this.idConcept = idConcept;
+    }
+
     public Integer getSeq() {
         return seq;
     }
@@ -88,29 +93,12 @@ public class Langsets implements Serializable {
         this.seq = seq;
     }
 
-    @XmlTransient
-    public Collection<Terms> getTermsCollection() {
-        return termsCollection;
+    public String getExtra() {
+        return extra;
     }
 
-    public void setTermsCollection(Collection<Terms> termsCollection) {
-        this.termsCollection = termsCollection;
-    }
-
-    public Languages getIdLanguage() {
-        return idLanguage;
-    }
-
-    public void setIdLanguage(Languages idLanguage) {
-        this.idLanguage = idLanguage;
-    }
-
-    public Concepts getIdConcept() {
-        return idConcept;
-    }
-
-    public void setIdConcept(Concepts idConcept) {
-        this.idConcept = idConcept;
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     @Override
@@ -136,20 +124,6 @@ public class Langsets implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Langsets[ idLangset=" + idLangset + " ]";
-    }
-
-    /**
-     * @return the extra
-     */
-    public String getExtra() {
-        return extra;
-    }
-
-    /**
-     * @param extra the extra to set
-     */
-    public void setExtra(String extra) {
-        this.extra = extra;
     }
     
 }

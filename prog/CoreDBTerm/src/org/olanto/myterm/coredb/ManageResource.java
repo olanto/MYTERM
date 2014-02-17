@@ -35,7 +35,7 @@ public class ManageResource {
     public static Resources create(String resourceName, String resourcePrivacy, String ownerLastName, String extra) {
          Resources res = new Resources(null,resourceName,resourcePrivacy);
          Owners own=Queries.getOwnerID(ownerLastName, TermEnum.AutoCreate.YES);
-         res.setIdOwner(own);
+         res.setIdOwner(own.getIdOwner());
          res.setExtra(extra);
         TermDB.resourcesJC.create(res);
         return res;
@@ -46,13 +46,12 @@ public class ManageResource {
                          System.out.println("This ressource doesnt exist :" + resourceName);
                          return;
          }
-         ManageConcept.remove(res.getConceptsCollection());
+         ManageConcept.remove(res);
         try {
             TermDB.resourcesJC.destroy(res.getIdResource());
-        } catch (IllegalOrphanException ex) {
-            Logger.getLogger(ManageResource.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ManageResource.class.getName()).log(Level.SEVERE, null, ex);
         }
+  
    }
 }

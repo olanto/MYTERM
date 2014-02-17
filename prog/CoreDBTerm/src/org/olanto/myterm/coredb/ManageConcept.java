@@ -20,9 +20,12 @@
 package org.olanto.myterm.coredb;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Query;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
+import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.IllegalOrphanException;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
@@ -36,32 +39,33 @@ public class ManageConcept {
     public static Concepts addConceptToResource(String resourceName) {
          Concepts con = new Concepts();
          Resources res=Queries.getResourceID(resourceName, TermEnum.AutoCreate.YES);
-         con.setIdResource(res);
+         con.setIdResource(res.getIdResource());
         TermDB.conceptsJC.create(con);
         return con;
    }
    public static Concepts addConceptToResource(String resourceName, Concepts con) {
          Resources res=Queries.getResourceID(resourceName, TermEnum.AutoCreate.YES);
-         con.setIdResource(res);
+         con.setIdResource(res.getIdResource());
         TermDB.conceptsJC.create(con);
         return con;
    }
    public static Concepts addConceptToResource(Resources res, Concepts con) {
-         con.setIdResource(res);
+        con.setIdResource(res.getIdResource());
         TermDB.conceptsJC.create(con);
         return con;
    }
-      public static void remove(Collection<Concepts> listOfConcept) {
-          for (Concepts con: listOfConcept ){
+      public static void remove(Resources res) {
+             Query query = TermDB.em.createNamedQuery("Concepts.findByIdResource");
+        query.setParameter("idResource", res.getIdResource());
+        List<Concepts>  listOfConcept= query.getResultList();
+        for (Concepts con: listOfConcept ){
+                  ManageLangsets.remove(con);
               try {
-                  ManageLangsets.remove(con.getLangsetsCollection());
                   TermDB.conceptsJC.destroy(con.getIdConcept());
-              } catch (IllegalOrphanException ex) {
-                  Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
               } catch (NonexistentEntityException ex) {
                   Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
               }
-          }
+            }
       }
 
  }

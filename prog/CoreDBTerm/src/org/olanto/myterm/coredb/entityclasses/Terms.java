@@ -1,25 +1,11 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -27,10 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,10 +25,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author simple
  */
 @Entity
+@Table(name = "terms")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Terms.findAll", query = "SELECT t FROM Terms t"),
     @NamedQuery(name = "Terms.findByIdTerm", query = "SELECT t FROM Terms t WHERE t.idTerm = :idTerm"),
+    @NamedQuery(name = "Terms.findByIdLanguage", query = "SELECT t FROM Terms t WHERE t.idLanguage = :idLanguage"),
+    @NamedQuery(name = "Terms.findByIdLangset", query = "SELECT t FROM Terms t WHERE t.idLangset = :idLangset"),
     @NamedQuery(name = "Terms.findByTermForm", query = "SELECT t FROM Terms t WHERE t.termForm = :termForm"),
     @NamedQuery(name = "Terms.findByTermSource", query = "SELECT t FROM Terms t WHERE t.termSource = :termSource"),
     @NamedQuery(name = "Terms.findByTermDefinition", query = "SELECT t FROM Terms t WHERE t.termDefinition = :termDefinition"),
@@ -55,10 +43,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Terms.findByTermType", query = "SELECT t FROM Terms t WHERE t.termType = :termType"),
     @NamedQuery(name = "Terms.findByTermPartofspeech", query = "SELECT t FROM Terms t WHERE t.termPartofspeech = :termPartofspeech"),
     @NamedQuery(name = "Terms.findByTermGender", query = "SELECT t FROM Terms t WHERE t.termGender = :termGender"),
+    @NamedQuery(name = "Terms.findByTermAdminStatus", query = "SELECT t FROM Terms t WHERE t.termAdminStatus = :termAdminStatus"),
+    @NamedQuery(name = "Terms.findByTermGeoUsage", query = "SELECT t FROM Terms t WHERE t.termGeoUsage = :termGeoUsage"),
     @NamedQuery(name = "Terms.findByCreation", query = "SELECT t FROM Terms t WHERE t.creation = :creation"),
+    @NamedQuery(name = "Terms.findByCreateBy", query = "SELECT t FROM Terms t WHERE t.createBy = :createBy"),
     @NamedQuery(name = "Terms.findByLastmodified", query = "SELECT t FROM Terms t WHERE t.lastmodified = :lastmodified"),
+    @NamedQuery(name = "Terms.findByLastmodifiedBy", query = "SELECT t FROM Terms t WHERE t.lastmodifiedBy = :lastmodifiedBy"),
     @NamedQuery(name = "Terms.findByStatus", query = "SELECT t FROM Terms t WHERE t.status = :status"),
-    @NamedQuery(name = "Terms.findBySeq", query = "SELECT t FROM Terms t WHERE t.seq = :seq")})
+    @NamedQuery(name = "Terms.findBySeq", query = "SELECT t FROM Terms t WHERE t.seq = :seq"),
+    @NamedQuery(name = "Terms.findByExtra", query = "SELECT t FROM Terms t WHERE t.extra = :extra")})
 public class Terms implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,9 +60,13 @@ public class Terms implements Serializable {
     @Column(name = "id_term")
     private Long idTerm;
     @Basic(optional = false)
-       @Column(name = "extra")
-    private String extra;
- @Column(name = "term_form")
+    @Column(name = "id_language")
+    private String idLanguage;
+    @Basic(optional = false)
+    @Column(name = "id_langset")
+    private long idLangset;
+    @Basic(optional = false)
+    @Column(name = "term_form")
     private String termForm;
     @Column(name = "term_source")
     private String termSource;
@@ -89,31 +86,29 @@ public class Terms implements Serializable {
     private String termType;
     @Column(name = "term_partofspeech")
     private String termPartofspeech;
+    @Column(name = "term_gender")
+    private String termGender;
     @Column(name = "term_admin_status")
     private String termAdminStatus;
     @Column(name = "term_geo_usage")
-    private String termGeographicalUsage;
-    @Column(name = "term_gender")
-    private String termGender;
+    private String termGeoUsage;
+    @Column(name = "creation")
     @Temporal(TemporalType.DATE)
     private Date creation;
+    @Column(name = "create_by")
+    private BigInteger createBy;
+    @Column(name = "lastmodified")
     @Temporal(TemporalType.DATE)
     private Date lastmodified;
+    @Column(name = "lastmodified_by")
+    private BigInteger lastmodifiedBy;
     @Basic(optional = false)
+    @Column(name = "status")
     private char status;
+    @Column(name = "seq")
     private Integer seq;
-    @JoinColumn(name = "lastmodified_by", referencedColumnName = "id_owner")
-    @ManyToOne
-    private Owners lastmodifiedBy;
-    @JoinColumn(name = "create_by", referencedColumnName = "id_owner")
-    @ManyToOne
-    private Owners createBy;
-    @JoinColumn(name = "id_language", referencedColumnName = "id_language")
-    @ManyToOne(optional = false)
-    private Languages idLanguage;
-    @JoinColumn(name = "id_langset", referencedColumnName = "id_langset")
-    @ManyToOne(optional = false)
-    private Langsets idLangset;
+    @Column(name = "extra")
+    private String extra;
 
     public Terms() {
     }
@@ -122,8 +117,18 @@ public class Terms implements Serializable {
         this.idTerm = idTerm;
     }
 
+      public Terms(Long idTerm, String idLanguage, long idLangset, String termForm, char status) {
+        this.idTerm = idTerm;
+        this.idLanguage = idLanguage;
+        this.idLangset = idLangset;
+        this.termForm = termForm;
+        this.status = status;
+    }
+
     public Terms(Long idTerm, String termForm, char status) {
         this.idTerm = idTerm;
+        this.idLanguage = idLanguage;
+        this.idLangset = idLangset;
         this.termForm = termForm;
         this.status = status;
     }
@@ -134,6 +139,22 @@ public class Terms implements Serializable {
 
     public void setIdTerm(Long idTerm) {
         this.idTerm = idTerm;
+    }
+
+    public String getIdLanguage() {
+        return idLanguage;
+    }
+
+    public void setIdLanguage(String idLanguage) {
+        this.idLanguage = idLanguage;
+    }
+
+    public long getIdLangset() {
+        return idLangset;
+    }
+
+    public void setIdLangset(long idLangset) {
+        this.idLangset = idLangset;
     }
 
     public String getTermForm() {
@@ -224,6 +245,22 @@ public class Terms implements Serializable {
         this.termGender = termGender;
     }
 
+    public String getTermAdminStatus() {
+        return termAdminStatus;
+    }
+
+    public void setTermAdminStatus(String termAdminStatus) {
+        this.termAdminStatus = termAdminStatus;
+    }
+
+    public String getTermGeoUsage() {
+        return termGeoUsage;
+    }
+
+    public void setTermGeoUsage(String termGeoUsage) {
+        this.termGeoUsage = termGeoUsage;
+    }
+
     public Date getCreation() {
         return creation;
     }
@@ -232,12 +269,28 @@ public class Terms implements Serializable {
         this.creation = creation;
     }
 
+    public BigInteger getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(BigInteger createBy) {
+        this.createBy = createBy;
+    }
+
     public Date getLastmodified() {
         return lastmodified;
     }
 
     public void setLastmodified(Date lastmodified) {
         this.lastmodified = lastmodified;
+    }
+
+    public BigInteger getLastmodifiedBy() {
+        return lastmodifiedBy;
+    }
+
+    public void setLastmodifiedBy(BigInteger lastmodifiedBy) {
+        this.lastmodifiedBy = lastmodifiedBy;
     }
 
     public char getStatus() {
@@ -256,36 +309,12 @@ public class Terms implements Serializable {
         this.seq = seq;
     }
 
-    public Owners getLastmodifiedBy() {
-        return lastmodifiedBy;
+    public String getExtra() {
+        return extra;
     }
 
-    public void setLastmodifiedBy(Owners lastmodifiedBy) {
-        this.lastmodifiedBy = lastmodifiedBy;
-    }
-
-    public Owners getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(Owners createBy) {
-        this.createBy = createBy;
-    }
-
-    public Languages getIdLanguage() {
-        return idLanguage;
-    }
-
-    public void setIdLanguage(Languages idLanguage) {
-        this.idLanguage = idLanguage;
-    }
-
-    public Langsets getIdLangset() {
-        return idLangset;
-    }
-
-    public void setIdLangset(Langsets idLangset) {
-        this.idLangset = idLangset;
+    public void setExtra(String extra) {
+        this.extra = extra;
     }
 
     @Override
@@ -311,48 +340,6 @@ public class Terms implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Terms[ idTerm=" + idTerm + " ]";
-    }
-
-    /**
-     * @return the termAdminStatus
-     */
-    public String getTermAdminStatus() {
-        return termAdminStatus;
-    }
-
-    /**
-     * @param termAdminStatus the termAdminStatus to set
-     */
-    public void setTermAdminStatus(String termAdminStatus) {
-        this.termAdminStatus = termAdminStatus;
-    }
-
-    /**
-     * @return the termGeographicalUsage
-     */
-    public String getTermGeographicalUsage() {
-        return termGeographicalUsage;
-    }
-
-    /**
-     * @param termGeographicalUsage the termGeographicalUsage to set
-     */
-    public void setTermGeographicalUsage(String termGeographicalUsage) {
-        this.termGeographicalUsage = termGeographicalUsage;
-    }
-
-    /**
-     * @return the extra
-     */
-    public String getExtra() {
-        return extra;
-    }
-
-    /**
-     * @param extra the extra to set
-     */
-    public void setExtra(String extra) {
-        this.extra = extra;
     }
     
 }

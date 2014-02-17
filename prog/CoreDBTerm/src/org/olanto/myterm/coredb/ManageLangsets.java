@@ -22,8 +22,10 @@
 package org.olanto.myterm.coredb;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Query;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
@@ -38,25 +40,26 @@ public class ManageLangsets {
 
     public static Langsets addLangsetToConcept(Concepts con, String idLanguage) {
         Langsets lan = new Langsets();
-        Languages language = Queries.getLanguageID(idLanguage, TermEnum.AutoCreate.NO);
-        lan.setIdLanguage(language);
-        lan.setIdConcept(con);
+        lan.setIdLanguage(idLanguage);
+        lan.setIdConcept(con.getIdConcept());
         TermDB.langsetsJC.create(lan);
         return lan;
     }
   
-    public static void remove(Collection<Langsets> listOfLangsets) {
+    public static void remove(Concepts con) {
+               Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
+        query.setParameter("idConcept", con.getIdConcept());
+        List<Langsets>  listOfLangsets= query.getResultList();
+
           for (Langsets lan: listOfLangsets ){
-              try {
-                  ManageTerm.remove(lan.getTermsCollection());
-                  TermDB.langsetsJC.destroy(lan.getIdLangset());
-              } catch (IllegalOrphanException ex) {
-                  Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
-              } catch (NonexistentEntityException ex) {
-                  Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
-              }
-          }
-      }
+                  ManageTerm.remove(lan);
+                   try {
+                       TermDB.langsetsJC.destroy(lan.getIdLangset());
+                   } catch (NonexistentEntityException ex) {
+                       Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+       }
+    }
 
     public static Langsets updateExtra(Long idLangset, String extra) {
         Langsets lan = Queries.getIdLangset(idLangset);

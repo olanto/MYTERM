@@ -1,4 +1,4 @@
-package org.olanto.myterm.coredb.jpacontroller.exceptions;
+package org.olanto.myterm.coredb.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;
