@@ -1,3 +1,22 @@
+/**********
+    Copyright © 2013-2014 Olanto Foundation Geneva
+
+   This file is part of myTERM.
+
+   myCAT is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    myCAT is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
+
+**********/
 package org.olanto.myterm.parsetbx;
 
 import java.io.*;
@@ -14,7 +33,7 @@ import org.olanto.myterm.coredb.ManageResource;
  *
  * @author jg
  */
-public class ParseTBX {
+public class TBX_Loader implements Loader{
 
     static org.jdom2.Document document;
     static long totEntries;
@@ -25,18 +44,9 @@ public class ParseTBX {
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = true;
 
-    public static void main(String[] args) {
-        //  procesADir("h:/PATDB/XML/docdb");
-        loadATBXFile("C:/MYTERM/tests/TBX-basic-samples.tbx","TESTTBX");
-       // loadATBXFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC");
-      }
-
-    
-     public static void loadATBXFile(String fileName, String _resourceName) {
+     
+     public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
         resourceName = _resourceName;
-        System.out.println("-------- try to remove Resource if exist : "+resourceName);
-        ManageResource.remove(resourceName);
-         System.out.println("-------- start loading TBX file : "+fileName); 
          totEntries=0;
          processAFile(fileName);
         System.out.println(fileName + "; " + totEntries + "; ");
@@ -44,7 +54,7 @@ public class ParseTBX {
      }
    
     
-    public static void processAFile(String fileName) {
+     static void processAFile(String fileName) {
         //On crï¿½e une instance de SAXBuilder
         SAXBuilder sxb = new SAXBuilder();
         try {
@@ -165,7 +175,10 @@ public class ParseTBX {
 
     static String getTermEntry(Element e) {
         boolean localverbose = true;
-        courantEntry = new Entry(resourceName, true);
+  //      courantEntry = new Entry(resourceName, true);
+        
+        
+ /// !!!!
         courantEntry.setExtraConcepts("");
         totEntries++;
         if (localverbose) {

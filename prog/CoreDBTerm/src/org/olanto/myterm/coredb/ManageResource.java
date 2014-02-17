@@ -32,10 +32,11 @@ import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityExcept
  */
 public class ManageResource {
 
-    public static Resources create(String resourceName, String resourcePrivacy, String ownerLastName) {
+    public static Resources create(String resourceName, String resourcePrivacy, String ownerLastName, String extra) {
          Resources res = new Resources(null,resourceName,resourcePrivacy);
          Owners own=Queries.getOwnerID(ownerLastName, TermEnum.AutoCreate.YES);
          res.setIdOwner(own);
+         res.setExtra(extra);
         TermDB.resourcesJC.create(res);
         return res;
    }

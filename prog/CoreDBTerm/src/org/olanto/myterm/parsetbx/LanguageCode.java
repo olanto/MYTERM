@@ -19,18 +19,30 @@
 **********/
 package org.olanto.myterm.parsetbx;
 
-import org.olanto.myterm.coredb.ManageResource;
 
+/**
+ *
+ * @author simple
+ */
+public class LanguageCode {
 
-public class RemoveRessources {
-
-
-    public static void main(String[] args) {
-        String resourceName = "XDXF_fr_en2";       
-        ManageResource.remove(resourceName);
-        
-        System.out.println("removed Ressource: "+resourceName);
-    }
-
-  
+   
+ 
+   public static String getISO2From3(String iso3){
+       iso3=iso3.toUpperCase();
+       if (iso3.length()!=3) {
+               System.out.println("Fatal Error code ISO 3 not on 3 chars: "+iso3);
+                      System.exit(0);}
+              switch (iso3) {
+            case "ENG":
+                return "en";
+           case "FRE":
+                return "fr";
+            default:
+                System.out.println("ISO2 Conversion not implemented for: "+iso3);
+                      System.exit(0);
+       return null;
+   }
+   }
+    
 }

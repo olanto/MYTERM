@@ -19,18 +19,10 @@
 **********/
 package org.olanto.myterm.parsetbx;
 
-import org.olanto.myterm.coredb.ManageResource;
 
+public interface Loader {
+    
+    public void loadAFileIntoTBXDB(String fileName, String _resourceName);
 
-public class RemoveRessources {
-
-
-    public static void main(String[] args) {
-        String resourceName = "XDXF_fr_en2";       
-        ManageResource.remove(resourceName);
-        
-        System.out.println("removed Ressource: "+resourceName);
-    }
-
-  
+    
 }

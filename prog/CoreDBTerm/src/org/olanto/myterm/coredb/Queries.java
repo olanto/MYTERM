@@ -98,7 +98,7 @@ public class Queries {
             System.out.println("NO RETURNED VALUES for :" + resourceName);
             if (auto==AutoCreate.YES) {
                 System.out.println("CREATE NEW VALUE :" + result.size() + ", for :" + resourceName);
-                return ManageResource.create(resourceName,"PUBLIC","???");
+                return ManageResource.create(resourceName,"PUBLIC","???","");
             } else {
                 return null;
             }

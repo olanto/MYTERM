@@ -46,6 +46,11 @@ public class ManageConcept {
         TermDB.conceptsJC.create(con);
         return con;
    }
+   public static Concepts addConceptToResource(Resources res, Concepts con) {
+         con.setIdResource(res);
+        TermDB.conceptsJC.create(con);
+        return con;
+   }
       public static void remove(Collection<Concepts> listOfConcept) {
           for (Concepts con: listOfConcept ){
               try {
