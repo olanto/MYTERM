@@ -108,6 +108,7 @@ insert into languages values ('AR','Arab');
 insert into languages values ('RU','Russian');
 insert into languages values ('DE','German');
 insert into languages values ('ZH','Chinese');
+insert into languages values ('LA','Latina');
 commit; 
 select * from languages; 
 
@@ -416,4 +417,9 @@ insert into descriptors values ('T',4,
 null);
 commit; 
 select * from descriptors; 
+
+-- indexes
+
+create index terms_index_custo2 on terms(id_language,term_form(16));
+
 
