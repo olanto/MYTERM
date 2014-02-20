@@ -1,6 +1,6 @@
 /**
  * ********
- * Copyright © 2013-2014 Olanto Foundation Geneva
+ * Copyright  2013-2014 Olanto Foundation Geneva
  *
  * This file is part of myTERM.
  *
@@ -19,40 +19,37 @@
  *
  *********
  */
-package org.olanto.myterm.parsetbx;
+package org.olanto.myterm.extractor;
 
 import org.olanto.myterm.coredb.ManageResource;
+
 
 /**
  *
  * @author jg
  */
-public class LoadInToDB {
+public class ConvertAndLoadIntoDB {
     
     public static void main(String[] args) {
-        loadAFile("C:/MYTERM/tests/TBX-basic-samples.tbx", "TESTTBX", "TBX-BASIC");
-         // loadAFile("C:/MYTERM/tests/XDXF/dict_fr_en.xdxf", "XDXF_fr_en2", "XDXF");
-       // loadAFile("C:/MYTERM/private/dict_en_ru.xdxf","XDXF_en_ru2", "XDXF");
-        // loadAFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC");
-    }
+
+        ConvertAFile("C:/MYTERM/private/glossaries/Names of fish [EFSL] FAO 1997_EN_FR_ES.doc.txt","FISH_NAME", "PREFIX","C:/MYTERM/models/prefix_model.xml");
+       // ConvertAFile("C:/MYTERM/private/glossaries/Database 4 [EFG] ESA 1999_EN_FR.doc.txt","ESA", "PREFIX","C:/MYTERM/models/prefix_model2.xml");
+     }
     
-    public static void loadAFile(String fileName, String resourceName, String format) {
-        Loader loader;
+    public static void ConvertAFile(String fileName,String resourceName, String format, String modelfile) {
+        Converter converter;
             switch (format) {
-            case "TBX-BASIC":
-                loader = new TBX_Loader();
-                break;
-           case "XDXF":
-                loader = new XDXF_Loader();
+            case "PREFIX":
+                converter = new ConverterPrefix();
                 break;
             default:
                 System.out.println("Format:" + format + " not implemented ...");
                 return;
         }
-  System.out.println("-------- try to remove Resource if exist : " + resourceName);
+   System.out.println("-------- try to remove Resource if exist : " + resourceName);
         ManageResource.remove(resourceName);
-        System.out.println("-------- start loading file : " + fileName + ", format:" + format);        
-        loader.loadAFileIntoTBXDB(fileName, resourceName);
+       System.out.println("-------- start converting file : " + fileName + ", format:" + format);        
+        converter.convertAFileIntoTBX(fileName, "UTF-8", resourceName, modelfile);
         System.out.println("-------- end loading file : " + fileName);
         
     }

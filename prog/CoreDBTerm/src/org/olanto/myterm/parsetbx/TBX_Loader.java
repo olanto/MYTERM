@@ -28,6 +28,7 @@ import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.olanto.myterm.coredb.ManageResource;
+import org.olanto.myterm.coredb.entityclasses.Resources;
 
 /**
  *
@@ -43,7 +44,8 @@ public class TBX_Loader implements Loader{
     static Namespace xmlNS = Namespace.XML_NAMESPACE;
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = true;
-
+   static Resources resource;
+ 
      
      public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
         resourceName = _resourceName;
@@ -175,10 +177,7 @@ public class TBX_Loader implements Loader{
 
     static String getTermEntry(Element e) {
         boolean localverbose = true;
-  //      courantEntry = new Entry(resourceName, true);
-        
-        
- /// !!!!
+        courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
         totEntries++;
         if (localverbose) {
@@ -280,7 +279,7 @@ public class TBX_Loader implements Loader{
         List listNode = element.getChildren();
 
         //On crée un Iterator sur notre liste
-
+resource = ManageResource.create(resourceName, "PUBLIC", "???", "");
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element courant = (Element) i.next();

@@ -1,0 +1,27 @@
+﻿<model>
+   <separator>EMPTY_LINE</separator>
+   <language>
+        <code>en</code>
+		<prefix>English:</prefix>
+		<prefix>English syn.</prefix>
+		<prefix>English_syn.</prefix>
+	</language>
+    <language>
+        <code>fr</code>
+		<prefix>French:</prefix>
+		<prefix>French syn.</prefix>
+		<prefix>French_syn.</prefix>
+	</language>
+    <language>
+        <code>es</code>
+		<prefix>Spanish:</prefix>
+		<prefix>Spanish syn.</prefix>
+		<prefix>Spanish_syn.</prefix>
+	</language>
+	<language>
+        <code>la</code>
+		<prefix>Latin:</prefix>
+		<prefix>Latin syn.</prefix>
+		<prefix>Latin_syn.</prefix>
+	</language>
+</model>

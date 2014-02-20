@@ -36,7 +36,6 @@ import static org.olanto.myterm.parsetbx.MyTermConstant.*;
  */
 public class Entry {
 
-    private String resourceName;
     private Resources resource;
     private Concepts concept;
     private Langsets langset;
@@ -58,6 +57,8 @@ public class Entry {
         prepareConcept();
     }
 
+ 
+    
     public void prepareConcept() {
         concept = new Concepts();
     }
@@ -97,7 +98,7 @@ public class Entry {
     }
 
     public void dump() {
-        System.out.println(resourceName + ";");
+        System.out.println(resource.getResourceName() + ";");
     }
 
     /**
@@ -125,16 +126,10 @@ public class Entry {
      * @return the resourceName
      */
     public String getResourceName() {
-        return resourceName;
+        return resource.getResourceName();
     }
 
-    /**
-     * @param resourceName the resourceName to set
-     */
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
-
+ 
     /**
      * @return the extraRessources
      */
