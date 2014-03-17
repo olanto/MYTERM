@@ -1,22 +1,24 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/**
+ * ********
+ * Copyright © 2013-2014 Olanto Foundation Geneva
+ *
+ * This file is part of myTERM.
+ *
+ * myCAT is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * myCAT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with myCAT. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *********
+ */
 package org.olanto.myterm.parsetbx;
 
 import java.io.*;
@@ -34,7 +36,7 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
  *
  * @author jg
  */
-public class TBX_Loader implements Loader{
+public class TBX_Loader implements Loader {
 
     static org.jdom2.Document document;
     static long totEntries;
@@ -44,19 +46,17 @@ public class TBX_Loader implements Loader{
     static Namespace xmlNS = Namespace.XML_NAMESPACE;
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = true;
-   static Resources resource;
- 
-     
-     public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
+    static Resources resource;
+
+    public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
         resourceName = _resourceName;
-         totEntries=0;
-         processAFile(fileName);
+        totEntries = 0;
+        processAFile(fileName);
         System.out.println(fileName + "; " + totEntries + "; ");
-        
-     }
-   
-    
-     static void processAFile(String fileName) {
+
+    }
+
+    static void processAFile(String fileName) {
         //On crï¿½e une instance de SAXBuilder
         SAXBuilder sxb = new SAXBuilder();
         try {
@@ -95,6 +95,7 @@ public class TBX_Loader implements Loader{
             System.out.println("--- process:" + e.getName());
         }
         courantEntry.setExtraTerms("");
+        courantEntry.setTermNote("");
         List listNode = e.getChildren();
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
@@ -130,9 +131,12 @@ public class TBX_Loader implements Loader{
                     && info.getAttributeValue("type").equals("source")) {
                 courantEntry.getTerm().setTermSource(getText(info, localverbose));
                 termFormExist = true;
+            } else if (info.getName().equals("note")) {
+                courantEntry.setTermNote(courantEntry.getTermNote() + getText(info, localverbose) + "\n");
+                termFormExist = true;
             } else {
                 String extra = getExtraElement(info);
-                courantEntry.setExtraTerms(courantEntry.getExtraTerms() +extra+"\n");
+                courantEntry.setExtraTerms(courantEntry.getExtraTerms() + extra + "\n");
                 if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
                     System.out.println(extra);
@@ -150,11 +154,12 @@ public class TBX_Loader implements Loader{
     static String getLangSet(Element e) {
         boolean localverbose = true;
         boolean attributeverbose = false;
-        
+
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
         courantEntry.setExtraLangsets("");
+        courantEntry.setLangsetNote("");
         courantEntry.addLangSet(getAtt(e, "lang", xmlNS, attributeverbose));
         List listNode = e.getChildren();
         Iterator i = listNode.iterator();
@@ -162,23 +167,26 @@ public class TBX_Loader implements Loader{
             Element info = (Element) i.next();
             if (info.getName().equals("tig")) {
                 getTig(info);
+            } else if (info.getName().equals("note")) {
+                courantEntry.setLangsetNote(courantEntry.getLangsetNote() + getText(info, localverbose) + "\n");
             } else {
                 String extra = getExtraElement(info);
-                courantEntry.setExtraLangsets(courantEntry.getExtraLangsets() +extra+"\n");
-                 if (skipverbose) {
+                courantEntry.setExtraLangsets(courantEntry.getExtraLangsets() + extra + "\n");
+                if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
                     System.out.println(extra);
                 }
             }
         }
         courantEntry.addExtraLangSet();
-         return "";
+        return "";
     }
 
     static String getTermEntry(Element e) {
         boolean localverbose = true;
         courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
+        courantEntry.setConceptNote("");
         totEntries++;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
@@ -194,10 +202,12 @@ public class TBX_Loader implements Loader{
                 getDescripGrpConcept(info);
             } else if (info.getName().equals("langSet")) {
                 ; // process in next loop
+            } else if (info.getName().equals("note")) {
+                courantEntry.setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
             } else {
                 String extra = getExtraElement(info);
-                  courantEntry.setExtraConcepts(courantEntry.getExtraConcepts()+extra+"\n");
-              if (skipverbose) {
+                courantEntry.setExtraConcepts(courantEntry.getExtraConcepts() + extra + "\n");
+                if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
                     System.out.println(extra);
                 }
@@ -246,7 +256,7 @@ public class TBX_Loader implements Loader{
 
     static String getDescripGrpConcept(Element e) {
         boolean localverbose = true;
-         if (localverbose) {
+        if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
         List listNode = e.getChildren();
@@ -261,8 +271,8 @@ public class TBX_Loader implements Loader{
                 courantEntry.getConcept().setConceptSourceDefinition(getText(info, localverbose));
             } else {
                 String extra = getExtraElement(info);
-                   courantEntry.setExtraConcepts(courantEntry.getExtraConcepts()+extra+"\n");
-             if (skipverbose) {
+                courantEntry.setExtraConcepts(courantEntry.getExtraConcepts() + extra + "\n");
+                if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
                     System.out.println(extra);
                 }
@@ -279,7 +289,7 @@ public class TBX_Loader implements Loader{
         List listNode = element.getChildren();
 
         //On crée un Iterator sur notre liste
-resource = ManageResource.create(resourceName, "PUBLIC", "???", "");
+        resource = ManageResource.create(resourceName, "PUBLIC", "???", "");
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element courant = (Element) i.next();

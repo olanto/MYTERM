@@ -2,15 +2,15 @@
    <separator>SPECIAL_LINE</separator>
    <specialLine>**</specialLine>
    <language>
-        <code>en</code>
+        <code>EN</code>
 		<prefix>&lt;English&gt;</prefix>
 	</language>
     <language>
-        <code>fr</code>
+        <code>FR</code>
 		<prefix>&lt;French&gt;</prefix>
 	</language>
     <language>
-        <code>de</code>
+        <code>DE</code>
 		<prefix>&lt;German&gt;</prefix>
 	</language>
 </model>

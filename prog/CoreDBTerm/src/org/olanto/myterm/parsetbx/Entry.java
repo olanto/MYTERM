@@ -44,6 +44,10 @@ public class Entry {
     private String extraConcepts;
     private String extraLangsets;
     private String extraTerms;
+    private String resourceNote;
+    private String conceptNote;
+    private String langsetNote;
+    private String termNote;
     private boolean createInDB = false;
 
 //    public Entry(String resourceName, boolean createInDB) {
@@ -89,6 +93,7 @@ public class Entry {
     public void addTerm() {
         if (createInDB) {
             term.setExtra(extraTerms);
+            term.setTermNote(getTermNote());
             if (TERM_FORM_MAX_LENGTH < term.getTermForm().length()) {
                  System.out.println("TRUNCATED FORM (too long):"+term.getTermForm().length()+" ,"+term.getTermForm());
                term.setTermForm(term.getTermForm().substring(1, TERM_FORM_MAX_LENGTH));
@@ -184,5 +189,61 @@ public class Entry {
      */
     public void setExtraTerms(String extraTerms) {
         this.extraTerms = extraTerms;
+    }
+
+    /**
+     * @return the termNote
+     */
+    public String getTermNote() {
+        return termNote;
+    }
+
+    /**
+     * @param termNote the termNote to set
+     */
+    public void setTermNote(String termNote) {
+        this.termNote = termNote;
+    }
+
+    /**
+     * @return the langsetNote
+     */
+    public String getLangsetNote() {
+        return langsetNote;
+    }
+
+    /**
+     * @param langsetNote the langsetNote to set
+     */
+    public void setLangsetNote(String langsetNote) {
+        this.langsetNote = langsetNote;
+    }
+
+    /**
+     * @return the resourceNote
+     */
+    public String getResourceNote() {
+        return resourceNote;
+    }
+
+    /**
+     * @param resourceNote the resourceNote to set
+     */
+    public void setResourceNote(String resourceNote) {
+        this.resourceNote = resourceNote;
+    }
+
+    /**
+     * @return the conceptNote
+     */
+    public String getConceptNote() {
+        return conceptNote;
+    }
+
+    /**
+     * @param conceptNote the conceptNote to set
+     */
+    public void setConceptNote(String conceptNote) {
+        this.conceptNote = conceptNote;
     }
 }

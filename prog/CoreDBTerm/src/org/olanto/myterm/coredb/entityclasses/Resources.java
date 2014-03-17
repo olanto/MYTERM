@@ -46,6 +46,8 @@ public class Resources implements Serializable {
     @Basic(optional = false)
     @Column(name = "resource_privacy")
     private String resourcePrivacy;
+    @Column(name = "resource_note")
+    private String resourceNote;
     @Column(name = "extra")
     private String extra;
 
@@ -132,6 +134,20 @@ public class Resources implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Resources[ idResource=" + idResource + " ]";
+    }
+
+    /**
+     * @return the resourceNote
+     */
+    public String getResourceNote() {
+        return resourceNote;
+    }
+
+    /**
+     * @param resourceNote the resourceNote to set
+     */
+    public void setResourceNote(String resourceNote) {
+        this.resourceNote = resourceNote;
     }
     
 }

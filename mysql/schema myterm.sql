@@ -13,9 +13,12 @@ drop table resources_domains;
 drop table domains;
 drop table resources;
 drop table owners;
+drop table dummy;
 
 -- --------------------------------- 
 
+create table dummy(x varchar(1));
+insert into dummy values('X');
 
 create table owners
  (id_owner bigint not null auto_increment,
@@ -102,6 +105,7 @@ create table languages
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into languages values ('EN','English');
+insert into languages values ('EN-GB','English-GB');
 insert into languages values ('FR','French');
 insert into languages values ('ES','Spanish');
 insert into languages values ('AR','Arab');
@@ -222,7 +226,7 @@ create table terms
   term_definition varchar(512),
   term_source_definition varchar(512),
   term_usage varchar(512),
-  term_context varchar(512), -- example
+  term_context varchar(2048), -- example
   term_source_context varchar(512),
   term_note varchar(512),
   term_type varchar(16), -- fullForm, acronym, abbreviation, shortForm, variant, phrase

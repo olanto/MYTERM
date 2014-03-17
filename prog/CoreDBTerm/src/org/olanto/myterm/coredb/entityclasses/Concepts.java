@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Concepts.findByConceptSourceDefinition", query = "SELECT c FROM Concepts c WHERE c.conceptSourceDefinition = :conceptSourceDefinition"),
     @NamedQuery(name = "Concepts.findByExtra", query = "SELECT c FROM Concepts c WHERE c.extra = :extra")})
 public class Concepts implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +48,8 @@ public class Concepts implements Serializable {
     private String conceptDefinition;
     @Column(name = "concept_source_definition")
     private String conceptSourceDefinition;
+    @Column(name = "concept_note")
+    private String conceptNote;
     @Column(name = "extra")
     private String extra;
 
@@ -134,5 +137,18 @@ public class Concepts implements Serializable {
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Concepts[ idConcept=" + idConcept + " ]";
     }
-    
+
+    /**
+     * @return the conceptNote
+     */
+    public String getConceptNote() {
+        return conceptNote;
+    }
+
+    /**
+     * @param conceptNote the conceptNote to set
+     */
+    public void setConceptNote(String conceptNote) {
+        this.conceptNote = conceptNote;
+    }
 }

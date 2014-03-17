@@ -1,25 +1,25 @@
 ﻿<model>
    <separator>EMPTY_LINE</separator>
    <language>
-        <code>en</code>
+        <code>EN</code>
 		<prefix>English:</prefix>
 		<prefix>English syn.</prefix>
 		<prefix>English_syn.</prefix>
 	</language>
     <language>
-        <code>fr</code>
+        <code>FR</code>
 		<prefix>French:</prefix>
 		<prefix>French syn.</prefix>
 		<prefix>French_syn.</prefix>
 	</language>
     <language>
-        <code>es</code>
+        <code>ES</code>
 		<prefix>Spanish:</prefix>
 		<prefix>Spanish syn.</prefix>
 		<prefix>Spanish_syn.</prefix>
 	</language>
 	<language>
-        <code>la</code>
+        <code>LA</code>
 		<prefix>Latin:</prefix>
 		<prefix>Latin syn.</prefix>
 		<prefix>Latin_syn.</prefix>

@@ -33,7 +33,7 @@ public class ConvertAndLoadIntoDB {
     public static void main(String[] args) {
 
         ConvertAFile("C:/MYTERM/private/glossaries/Names of fish [EFSL] FAO 1997_EN_FR_ES.doc.txt","FISH_NAME", "PREFIX","C:/MYTERM/models/prefix_model.xml");
-       // ConvertAFile("C:/MYTERM/private/glossaries/Database 4 [EFG] ESA 1999_EN_FR.doc.txt","ESA", "PREFIX","C:/MYTERM/models/prefix_model2.xml");
+        ConvertAFile("C:/MYTERM/private/glossaries/Database 4 [EFG] ESA 1999_EN_FR.doc.txt","ESA", "PREFIX","C:/MYTERM/models/prefix_model2.xml");
      }
     
     public static void ConvertAFile(String fileName,String resourceName, String format, String modelfile) {

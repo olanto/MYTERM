@@ -43,6 +43,8 @@ public class Langsets implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_concept")
     private long idConcept;
+    @Column(name = "langset_note")
+    private String langsetNote;
     @Column(name = "seq")
     private Integer seq;
     @Column(name = "extra")
@@ -124,6 +126,20 @@ public class Langsets implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Langsets[ idLangset=" + idLangset + " ]";
+    }
+
+    /**
+     * @return the langsetNote
+     */
+    public String getLangsetNote() {
+        return langsetNote;
+    }
+
+    /**
+     * @param langsetNote the langsetNote to set
+     */
+    public void setLangsetNote(String langsetNote) {
+        this.langsetNote = langsetNote;
     }
     
 }

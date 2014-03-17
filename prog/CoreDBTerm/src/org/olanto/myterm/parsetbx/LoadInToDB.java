@@ -30,10 +30,11 @@ import org.olanto.myterm.coredb.ManageResource;
 public class LoadInToDB {
     
     public static void main(String[] args) {
-        loadAFile("C:/MYTERM/tests/TBX-basic-samples.tbx", "TESTTBX", "TBX-BASIC");
+       //loadAFile("C:/MYTERM/tests/TBX-basic-samples.tbx", "TESTTBX", "TBX-BASIC");
          // loadAFile("C:/MYTERM/tests/XDXF/dict_fr_en.xdxf", "XDXF_fr_en2", "XDXF");
        // loadAFile("C:/MYTERM/private/dict_en_ru.xdxf","XDXF_en_ru2", "XDXF");
         // loadAFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC");
+         loadAFile("C:/MYTERM/private/CERN_from_MELBY.tbx","TESTCERN","TBX-BASIC");
     }
     
     public static void loadAFile(String fileName, String resourceName, String format) {

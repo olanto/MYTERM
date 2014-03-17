@@ -49,3 +49,5 @@ where
    t1.term_form = 'horse'
    and t1.id_language='EN';
 
+select * from terms where id_term<1100;
+
