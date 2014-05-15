@@ -5,6 +5,8 @@
 package org.olanto.myterm.coredb.entityclasses;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -50,6 +54,16 @@ public class Concepts implements Serializable {
     private String conceptSourceDefinition;
     @Column(name = "concept_note")
     private String conceptNote;
+    @Column(name = "creation")
+    @Temporal(TemporalType.DATE)
+    private Date creation;
+    @Column(name = "create_by")
+    private BigInteger createBy;
+    @Column(name = "lastmodified")
+    @Temporal(TemporalType.DATE)
+    private Date lastmodified;
+    @Column(name = "lastmodified_by")
+    private BigInteger lastmodifiedBy;
     @Column(name = "extra")
     private String extra;
 
@@ -150,5 +164,61 @@ public class Concepts implements Serializable {
      */
     public void setConceptNote(String conceptNote) {
         this.conceptNote = conceptNote;
+    }
+
+    /**
+     * @return the creation
+     */
+    public Date getCreation() {
+        return creation;
+    }
+
+    /**
+     * @param creation the creation to set
+     */
+    public void setCreation(Date creation) {
+        this.creation = creation;
+    }
+
+    /**
+     * @return the createBy
+     */
+    public BigInteger getCreateBy() {
+        return createBy;
+    }
+
+    /**
+     * @param createBy the createBy to set
+     */
+    public void setCreateBy(BigInteger createBy) {
+        this.createBy = createBy;
+    }
+
+    /**
+     * @return the lastmodified
+     */
+    public Date getLastmodified() {
+        return lastmodified;
+    }
+
+    /**
+     * @param lastmodified the lastmodified to set
+     */
+    public void setLastmodified(Date lastmodified) {
+        this.lastmodified = lastmodified;
+    }
+
+    /**
+     * @return the lastmodifiedBy
+     */
+    public BigInteger getLastmodifiedBy() {
+        return lastmodifiedBy;
+    }
+
+    /**
+     * @param lastmodifiedBy the lastmodifiedBy to set
+     */
+    public void setLastmodifiedBy(BigInteger lastmodifiedBy) {
+        this.lastmodifiedBy = lastmodifiedBy;
     }
 }

@@ -22,14 +22,22 @@
 package org.olanto.myterm.parsetbx;
 
 import java.io.*;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
 import org.jdom2.input.SAXBuilder;
 import org.olanto.myterm.coredb.ManageResource;
+import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.TermEnum;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 
 /**
@@ -47,6 +55,7 @@ public class TBX_Loader implements Loader {
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = true;
     static Resources resource;
+    static SimpleDateFormat convertDate = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
 
     public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
         resourceName = _resourceName;
@@ -204,6 +213,8 @@ public class TBX_Loader implements Loader {
                 ; // process in next loop
             } else if (info.getName().equals("note")) {
                 courantEntry.setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
+            } else if (info.getName().equals("transacGrp")) {
+                getConceptTransacGrp(info);
             } else {
                 String extra = getExtraElement(info);
                 courantEntry.setExtraConcepts(courantEntry.getExtraConcepts() + extra + "\n");
@@ -219,6 +230,70 @@ public class TBX_Loader implements Loader {
             Element info = (Element) i.next();
             if (info.getName().equals("langSet")) {
                 getLangSet(info);
+            }
+        }
+        return "";
+    }
+
+    static String getConceptTransacGrp(Element e) {
+        boolean localverbose = true;
+        boolean attributeverbose = false;
+        String transactionType = "";
+
+        if (localverbose) {
+            System.out.println("--- process:" + e.getName());
+        }
+        List listNode = e.getChildren();
+        Iterator i = listNode.iterator();
+        while (i.hasNext()) {
+            Element info = (Element) i.next();
+            if (info.getName().equals("transac")
+                    && info.getAttributeValue("type").equals("transactionType")) {
+                transactionType = getText(info, localverbose);
+            } else if (info.getName().equals("transacNote")
+                    && info.getAttributeValue("type").equals("responsibility")) {
+                String user = getText(info, localverbose);
+                //System.out.println("user:" + user);
+                switch (transactionType) {
+                    case "origination":
+                        //System.out.println("created by user:" + user);                      
+                        courantEntry.getConcept().setCreateBy(new BigInteger(Queries.getOwnerID(user, TermEnum.AutoCreate.YES).getIdOwner().toString()));
+                        break;
+                    case "modification":
+                        //System.out.println("modified by user:" + user);
+                        courantEntry.getConcept().setLastmodifiedBy(new BigInteger(Queries.getOwnerID(user, TermEnum.AutoCreate.YES).getIdOwner().toString()));
+                        break;
+                    default:
+                        System.out.println("ERROR transactionType unknown:" + transactionType);
+                }
+                courantEntry.getConcept().setCreateBy(new BigInteger(Queries.getOwnerID(getText(info, localverbose), TermEnum.AutoCreate.NO).getIdOwner().toString()));
+            } else if (info.getName().equals("date")) {
+                String sdate = getText(info, localverbose).replace('T', ' ');
+                Date date = null;
+                try {
+                    date = convertDate.parse(sdate);
+                } catch (ParseException ex) {
+                    System.out.println("ERROR date format unknown:" + sdate);
+                    //Logger.getLogger(TBX_Loader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("date:" + sdate);
+                switch (transactionType) {
+                    case "origination":
+                        courantEntry.getConcept().setCreation(date);
+                        break;
+                    case "modification":
+                        courantEntry.getConcept().setLastmodified(date);
+                        break;
+                    default:
+                        System.out.println("ERROR transactionType unknown:" + transactionType);
+                }
+            } else {
+                String extra = getExtraElement(info);
+                courantEntry.setExtraLangsets(courantEntry.getExtraLangsets() + extra + "\n");
+                if (skipverbose) {
+                    System.out.println("--skip element:" + info.getName());
+                    System.out.println(extra);
+                }
             }
         }
         return "";
@@ -289,7 +364,9 @@ public class TBX_Loader implements Loader {
         List listNode = element.getChildren();
 
         //On crée un Iterator sur notre liste
-        resource = ManageResource.create(resourceName, "PUBLIC", "???", "");
+        if (resource == null) { // only the first time
+            resource = ManageResource.create(resourceName, "PUBLIC", "???", "");
+        }
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element courant = (Element) i.next();

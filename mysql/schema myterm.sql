@@ -2,18 +2,19 @@
 -- 
 -- created 10.1.2014 by Jacques Guyot 
 -- modified   by 
-drop table descriptors;
-drop table terms;
-drop table langsets;
-drop table concepts_domains;
-drop table concepts;
-drop table translations;
-drop table languages;
-drop table resources_domains;
-drop table domains;
-drop table resources;
-drop table owners;
-drop table dummy;
+
+drop table if exists descriptors;
+drop table if exists terms;
+drop table if exists langsets;
+drop table if exists concepts_domains;
+drop table if exists concepts;
+drop table if exists translations;
+drop table if exists languages;
+drop table if exists resources_domains;
+drop table if exists domains;
+drop table if exists resources;
+drop table if exists owners;
+drop table if exists dummy;
 
 -- --------------------------------- 
 
@@ -27,13 +28,16 @@ create table owners
   owner_mailing varchar(255) not null,
   owner_hash varchar(255),
   owner_status varchar(16) not null, -- ACTIVE, INACTIVE, DORMANT
+  owner_roles varchar(16)  default 'READER', -- ADMIN, REVISOR, REDACTOR, READER
   PRIMARY KEY (id_owner))
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into owners
-  values (1,'jacques','guyot','jacques@olanto.org','aaaabbbb','ACTIVE');
+  values (0,'anonymous','not defined','','','INACTIVE',null);
 insert into owners
-  values (null,'nizar','ghoula','nizar@olanto.org','fasdfasdfsadf','ACTIVE');
+  values (1,'jacques','guyot','jacques@olanto.org','aaaabbbb','ACTIVE','ADMIN');
+insert into owners
+  values (null,'nizar','ghoula','nizar@olanto.org','fasdfasdfsadf','ACTIVE','ADMIN');
 commit; 
 select * from owners;   
 
@@ -45,6 +49,7 @@ create table resources
   id_owner bigint  not null,
   resource_name varchar(32)  not null,
   resource_privacy varchar(16)  not null, -- PRIVATE, PUBLIC
+  resource_note varchar(512),
   extra varchar(1024),
 PRIMARY KEY (id_resource),
 CONSTRAINT resources_FK1_owners
@@ -54,7 +59,7 @@ ON DELETE NO ACTION ON UPDATE CASCADE)
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into resources
-  values (1,1,'INSERTED WITH SQL','PUBLIC',null);
+  values (1,1,'INSERTED WITH SQL','PUBLIC',null,null);
 commit; 
 select * from resources;   
 
@@ -150,17 +155,29 @@ create table concepts
   subject_field varchar(128),
   concept_definition varchar(512),
   concept_source_definition varchar(512),
-  extra varchar(1024),
+  concept_note varchar(512),
+  creation date,
+  create_by bigint,
+  lastmodified date,
+  lastmodified_by bigint,
+ extra varchar(1024),
 PRIMARY KEY (id_concept),
 CONSTRAINT concepts_FK1_resources
    FOREIGN KEY (id_resource)
-   REFERENCES resources (id_resource)
+   REFERENCES resources (id_resource),
+CONSTRAINT concepts_FK2_create_by
+   FOREIGN KEY (create_by)
+   REFERENCES owners (id_owner)
+ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT concepts_FK3_lastmodified_by
+   FOREIGN KEY (lastmodified_by)
+   REFERENCES owners (id_owner)
 ON DELETE NO ACTION ON UPDATE CASCADE
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
-insert into concepts values (1,1,null,null,null,null);
-insert into concepts values (2,1,null,null,null,null);
+insert into concepts values (1,1,null,null,null,null,null,null,null,null,null);
+insert into concepts values (2,1,null,null,null,null,null,null,null,null,null);
 commit; 
 select * from concepts; 
 
@@ -192,6 +209,7 @@ create table langsets
  (id_langset bigint not null auto_increment,
   id_language varchar(5)  not null,
   id_concept bigint not null,
+  langset_note varchar(512),
   seq int default 0,
   extra varchar(1024),
 PRIMARY KEY (id_langset),
@@ -207,10 +225,10 @@ ON DELETE NO ACTION ON UPDATE CASCADE
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
-insert into langsets values (1,'EN',1,1,null);
-insert into langsets values (2,'EN',2,1,null);
-insert into langsets values (3,'FR',1,1,null);
-insert into langsets values (4,'FR',2,1,null);
+insert into langsets values (1,'EN',1,null,1,null);
+insert into langsets values (2,'EN',2,null,1,null);
+insert into langsets values (3,'FR',1,null,1,null);
+insert into langsets values (4,'FR',2,null,1,null);
 commit; 
 select * from langsets; 
 
@@ -228,7 +246,7 @@ create table terms
   term_usage varchar(512),
   term_context varchar(2048), -- example
   term_source_context varchar(512),
-  term_note varchar(512),
+  term_note varchar(2048),
   term_type varchar(16), -- fullForm, acronym, abbreviation, shortForm, variant, phrase
   term_partofspeech varchar(16), -- noun, verb, adjective, adverb, properNoun,other
   term_gender varchar(16), -- masculine, feminine, neuter, other

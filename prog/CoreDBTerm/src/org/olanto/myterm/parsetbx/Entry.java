@@ -48,6 +48,7 @@ public class Entry {
     private String conceptNote;
     private String langsetNote;
     private String termNote;
+ 
     private boolean createInDB = false;
 
 //    public Entry(String resourceName, boolean createInDB) {

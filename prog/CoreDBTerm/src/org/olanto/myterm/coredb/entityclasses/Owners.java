@@ -52,6 +52,8 @@ public class Owners implements Serializable {
     @Basic(optional = false)
     @Column(name = "owner_status")
     private String ownerStatus;
+    @Column(name = "owner_roles")
+    private String ownerRoles;
 
     public Owners() {
     }
@@ -139,6 +141,20 @@ public class Owners implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Owners[ idOwner=" + idOwner + " ]";
+    }
+
+    /**
+     * @return the ownerRoles
+     */
+    public String getOwnerRoles() {
+        return ownerRoles;
+    }
+
+    /**
+     * @param ownerRoles the ownerRoles to set
+     */
+    public void setOwnerRoles(String ownerRoles) {
+        this.ownerRoles = ownerRoles;
     }
     
 }
