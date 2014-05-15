@@ -26,6 +26,9 @@ import org.olanto.myterm.coredb.ManageResource;
 /**
  *
  * @author jg
+ * 
+ * 
+ * 
  */
 public class LoadInToDB {
     

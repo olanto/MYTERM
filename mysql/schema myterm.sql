@@ -241,7 +241,7 @@ create table terms
   id_langset bigint  not null,
   term_form varchar(8000)  not null,
   term_source varchar(512),
-  term_definition varchar(512),
+  term_definition varchar(2048),
   term_source_definition varchar(512),
   term_usage varchar(512),
   term_context varchar(2048), -- example

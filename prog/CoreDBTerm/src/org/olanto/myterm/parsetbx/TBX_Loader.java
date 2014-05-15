@@ -43,6 +43,9 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
 /**
  *
  * @author jg
+ * 
+ * compatible with TBXBasiccoreStructV02.dtd
+ * compatible with TBXcoreStructV02.dtd
  */
 public class TBX_Loader implements Loader {
 
@@ -135,6 +138,10 @@ public class TBX_Loader implements Loader {
             } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("context")) {
                 courantEntry.getTerm().setTermContext(getText(info, localverbose));
+                termFormExist = true;
+            }  else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("definition")) {
+                courantEntry.getTerm().setTermDefinition(getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("admin")
                     && info.getAttributeValue("type").equals("source")) {
