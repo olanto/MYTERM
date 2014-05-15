@@ -19,7 +19,7 @@
  *
  *********
  */
-package org.olanto.myterm.extractor.model;
+package org.olanto.myterm.extractor.model.posfix;
 
 import java.io.*;
 import java.util.List;
@@ -33,18 +33,18 @@ import org.jdom2.input.SAXBuilder;
  *
  * @author jg
  */
-public class LoadModelPrefix {
+public class LoadModelPosfix {
 
     static org.jdom2.Document document;
     //   static long totEntries;
     static Namespace xmlNS = Namespace.XML_NAMESPACE;
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = true;
-    static ModelPrefix model;
+    static ModelPosfix model;
     static long timer = System.currentTimeMillis();
 
-    public static ModelPrefix loadAFileIntoModel(String fileName) {
-        model = new ModelPrefix();
+    public static ModelPosfix loadAFileIntoModel(String fileName) {
+        model = new ModelPosfix();
         processAFile(fileName);
         System.out.println("-------------- " + fileName);
         model.dump();
@@ -87,17 +87,24 @@ public class LoadModelPrefix {
         if (localverbose) {
             System.out.println("--- process from getLanguage:" + e.getName());
         }
-        String lang="??";
+        String lang = "??";
+        Langdef currentLang=null;
         List listNode = e.getChildren();
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
             if (info.getName().equals("code")) {
-                lang=getText(info, localverbose);
-            } else if (info.getName().equals("prefix")) {
-                model.addPrefix(getText(info, localverbose), lang);
-            } 
-            else {
+                lang = getText(info, localverbose);
+                currentLang = model.addPosfix(lang);
+            } else if (info.getName().equals("position")) {
+                String def = getText(info, localverbose);
+                String[] parts = def.split(";");
+                if (parts.length != 2) {
+                    System.out.println("FATAL ERROR: Not formated like 'nnn;Definiion' :" + def);
+                    System.exit(0);
+                }
+                currentLang.posdef.add(new Posdef(Integer.parseInt(parts[0]),parts[1]));
+            } else {
                 String extra = getExtraElement(info);
                 if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
@@ -150,16 +157,18 @@ public class LoadModelPrefix {
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element courant = (Element) i.next();
-             if (courant.getName().equals("separator")) {
+            if (courant.getName().equals("separator")) {
                 model.setSeparator(getText(courant, localverbose));
-            } else if (courant.getName().equals("specialLine")) {
-                model.setSpecialLine(getText(courant, localverbose));
+            } else if (courant.getName().equals("nbcolumns")) {
+                model.setNbcolumns(Integer.parseInt(getText(courant, localverbose)));
+            } else if (courant.getName().equals("skipline")) {
+                model.setSkipline(Integer.parseInt(getText(courant, localverbose)));
             } else if (courant.getName().equals("language")) {
                 getLanguage(courant);
             } else {
                 extra = extra + getExtraElement(courant) + "\n";
                 if (skipverbose) {
-                    System.out.println("--skip element from header:" + courant.getName());
+                    System.out.println("--skip element:" + courant.getName());
                     System.out.println(extra);
                 }
             }

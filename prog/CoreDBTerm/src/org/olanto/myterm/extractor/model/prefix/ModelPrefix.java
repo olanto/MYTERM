@@ -19,7 +19,7 @@
  *
  *********
  */
-package org.olanto.myterm.extractor.model;
+package org.olanto.myterm.extractor.model.prefix;
 
 import java.util.Vector;
 

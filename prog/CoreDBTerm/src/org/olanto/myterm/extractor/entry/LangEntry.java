@@ -42,6 +42,10 @@ public class LangEntry {
         Terms term = new Terms(null, term_form, 'p'); // minimal information
         listterm.add(term);
     }
+   
+    public Terms getTerm(int i) {
+        return listterm.get(i);
+    }
 
     public void addLangToDB(Concepts concept) {
         lan.setIdConcept(concept.getIdConcept());

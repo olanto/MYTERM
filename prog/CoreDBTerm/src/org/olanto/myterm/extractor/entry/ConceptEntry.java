@@ -24,8 +24,8 @@ package org.olanto.myterm.extractor.entry;
 import java.util.Vector;
 import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
-import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
+import org.olanto.myterm.coredb.entityclasses.Terms;
 
 public class ConceptEntry {
 
@@ -77,4 +77,15 @@ public class ConceptEntry {
         lan.addTerm(term_form);
         listlang.add(lan);
     }
+    
+    public Terms getTerm(String lang,int position) {
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            if (lan.lan.getIdLanguage().equals(lang)) {        
+                return lan.getTerm(position);
+            }
+        }
+        return null;
+    }
+   
 }

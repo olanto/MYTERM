@@ -21,7 +21,7 @@
  */
 package org.olanto.myterm.extractor;
 
-import org.olanto.myterm.extractor.separator.SeparatorChooser;
+import org.olanto.myterm.extractor.separator.LineSeparatorChooser;
 import org.olanto.myterm.extractor.separator.Separator;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -29,8 +29,8 @@ import java.io.InputStreamReader;
 import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
-import org.olanto.myterm.extractor.model.LoadModelPrefix;
-import org.olanto.myterm.extractor.model.ModelPrefix;
+import org.olanto.myterm.extractor.model.prefix.LoadModelPrefix;
+import org.olanto.myterm.extractor.model.prefix.ModelPrefix;
 
 public class ConverterPrefix implements Converter {
 
@@ -41,7 +41,7 @@ public class ConverterPrefix implements Converter {
 
     public void convertAFileIntoTBX(String fname, String encoding, String resourceName, String modelfile) {
         model = LoadModelPrefix.loadAFileIntoModel(modelfile);
-        separator = SeparatorChooser.select(model);
+        separator = LineSeparatorChooser.select(model);
         resource = ManageResource.create(resourceName, "PUBLIC", "???", "info");
         StringBuffer b = new StringBuffer("");
         boolean InsideConcept = false;

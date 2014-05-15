@@ -1,0 +1,19 @@
+﻿<model>
+   <separator>TAB</separator>
+   <nbcolumns>3</nbcolumns><!--minimum-->
+   <skipline>3</skipline>
+   <language>
+        <code>EN</code>
+		<position>0;termForm</position>
+		<position>2;termPartofspeech</position>
+	</language>
+    <language>
+        <code>JA</code>
+		<position>1;termForm</position>
+	</language>
+<!--
+    <concept>
+		<position>3;conceptNote</position>
+	</concept>
+-->
+</model>

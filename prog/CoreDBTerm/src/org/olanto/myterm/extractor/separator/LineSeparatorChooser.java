@@ -1,6 +1,6 @@
 package org.olanto.myterm.extractor.separator;
 
-import org.olanto.myterm.extractor.model.ModelPrefix;
+import org.olanto.myterm.extractor.model.prefix.ModelPrefix;
 
 /**********
     Copyright � 2013-2014 Olanto Foundation Geneva
@@ -24,7 +24,7 @@ import org.olanto.myterm.extractor.model.ModelPrefix;
 
 
 
-public class SeparatorChooser {
+public class LineSeparatorChooser {
     
     public static Separator select(ModelPrefix model){
                   switch (model.getSeparator()) {

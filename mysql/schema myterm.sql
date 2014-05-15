@@ -49,8 +49,8 @@ create table resources
   id_owner bigint  not null,
   resource_name varchar(32)  not null,
   resource_privacy varchar(16)  not null, -- PRIVATE, PUBLIC
-  resource_note varchar(512),
-  extra varchar(1024),
+  resource_note text,
+  extra text,
 PRIMARY KEY (id_resource),
 CONSTRAINT resources_FK1_owners
    FOREIGN KEY (id_owner)
@@ -118,7 +118,8 @@ insert into languages values ('RU','Russian');
 insert into languages values ('DE','German');
 insert into languages values ('ZH','Chinese');
 insert into languages values ('LA','Latina');
-commit; 
+insert into languages values ('JA','Japonese');
+cotermsmmit; 
 select * from languages; 
 
 -- --------------------------------- 
@@ -153,14 +154,14 @@ create table concepts
  (id_concept bigint not null auto_increment,
   id_resource bigint not null,
   subject_field varchar(128),
-  concept_definition varchar(512),
-  concept_source_definition varchar(512),
-  concept_note varchar(512),
+  concept_definition text,
+  concept_source_definition text,
+  concept_note text,
   creation date,
   create_by bigint,
   lastmodified date,
   lastmodified_by bigint,
- extra varchar(1024),
+ extra text,
 PRIMARY KEY (id_concept),
 CONSTRAINT concepts_FK1_resources
    FOREIGN KEY (id_resource)
@@ -211,7 +212,7 @@ create table langsets
   id_concept bigint not null,
   langset_note varchar(512),
   seq int default 0,
-  extra varchar(1024),
+  extra text,
 PRIMARY KEY (id_langset),
 CONSTRAINT langsets_FK1_concept
    FOREIGN KEY (id_concept)
@@ -240,13 +241,13 @@ create table terms
   id_language varchar(5)  not null,
   id_langset bigint  not null,
   term_form varchar(8000)  not null,
-  term_source varchar(512),
-  term_definition varchar(2048),
-  term_source_definition varchar(512),
-  term_usage varchar(512),
-  term_context varchar(2048), -- example
-  term_source_context varchar(512),
-  term_note varchar(2048),
+  term_source text,
+  term_definition text,
+  term_source_definition text,
+  term_usage text,
+  term_context text, -- example
+  term_source_context text,
+  term_note text,
   term_type varchar(16), -- fullForm, acronym, abbreviation, shortForm, variant, phrase
   term_partofspeech varchar(16), -- noun, verb, adjective, adverb, properNoun,other
   term_gender varchar(16), -- masculine, feminine, neuter, other
@@ -258,7 +259,7 @@ create table terms
   lastmodified_by bigint,
   status char(1)  not null, -- published, revised, edited
   seq int default 0,
-  extra varchar(4096),
+  extra text,
 PRIMARY KEY (id_term),
 CONSTRAINT terms_FK1_langset
    FOREIGN KEY (id_langset)

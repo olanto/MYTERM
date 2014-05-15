@@ -19,22 +19,25 @@
  *
  *********
  */
-package org.olanto.myterm.extractor.model;
+package org.olanto.myterm.extractor.model.posfix;
+
+import java.util.Vector;
+import org.olanto.myterm.extractor.model.prefix.*;
 
 
 /**
  *
  * @author jg
  */
-public class Prefix  {
+public class Posdef  {
 
-   public String lang;
-   public String prefix;
+   public int position;
+   public String definition;
    
    
-public Prefix(String prefix, String lang){
-    this.prefix=prefix;
-    this.lang=lang;
+public Posdef(int position,String definition){
+    this.position=position;
+    this.definition=definition;
 }
    
    
