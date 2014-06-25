@@ -87,5 +87,14 @@ public class ConceptEntry {
         }
         return null;
     }
-   
+      public Terms getTermLast(String lang) {
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            if (lan.lan.getIdLanguage().equals(lang)) {
+                return lan.getTermLast();
+            }
+        }
+        return null;
+    }
+ 
 }

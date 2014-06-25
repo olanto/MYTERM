@@ -11,6 +11,10 @@
         <code>JA</code>
 		<position>1;termForm</position>
 	</language>
+   <language>
+        <code>YOMI</code>
+		<position>3;termForm</position>
+	</language>
 <!--
     <concept>
 		<position>3;conceptNote</position>

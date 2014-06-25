@@ -1,0 +1,21 @@
+﻿<model>
+   <separator>TAB</separator>
+   <nbcolumns>22</nbcolumns><!--minimum-->
+   <skipline>4</skipline>
+   <skipcol>17</skipcol>
+   <language>
+        <code>0</code>
+		<position>1;termForm</position>
+		<position>7;termSource</position>
+		<position>8;termNote</position>
+		<position>9;termContext</position>
+		<position>10;termUsage</position>
+		<position>11;termSourceContext</position>
+	</language>
+ <!--
+    <concept>
+		<position>3;conceptNote</position>
+		<position>2;termPartofspeech</position>
+	</concept>
+-->
+</model>

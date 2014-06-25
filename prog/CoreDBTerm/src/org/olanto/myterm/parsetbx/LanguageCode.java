@@ -28,13 +28,39 @@ public class LanguageCode {
 
    
  
+   public static String getISO2FromText(String text){
+       text=text.toUpperCase();
+ 
+              switch (text) {
+           case "ENGLISH":
+                return "en";
+           case "FRENCH":
+                return "fr";
+          case "RUSSIAN":
+                return "ru";
+          case "CHINESE":
+                return "zh";
+          case "ARABIC":
+                return "ar";
+          case "GERMAN":
+                return "de";
+          case "PORTUGUESE":
+                return "pt";
+          case "SPANISH; CASTILIAN":
+                return "es";
+            default:
+                System.out.println("text Conversion not implemented for: "+text);
+                      System.exit(0);
+       return null;
+   }
+   }          
    public static String getISO2From3(String iso3){
        iso3=iso3.toUpperCase();
        if (iso3.length()!=3) {
                System.out.println("Fatal Error code ISO 3 not on 3 chars: "+iso3);
                       System.exit(0);}
               switch (iso3) {
-            case "ENG":
+           case "ENG":
                 return "en";
            case "FRE":
                 return "fr";

@@ -1,0 +1,618 @@
+﻿FR	SWAHILI	note	
+Le plus tôt possible	Tena Upesi iwezekanavyo		
+Tout de suite	Mara moja		
+Mauvais, pire que...	Mbaya, mbaya zaidi kuliko...		
+Pouvez-vous m'aider ?	Unaweza kunisaidia ?		
+Pouvez-vous me dire ?	Unaweza kuniambia ?		
+Venez ici	Njoo hapa. Karibu.		
+Parlez-vous anglais ?	Unasema kiingereza		
+Voulez-vous...	Unataka...		
+Excusez-moi	Pole, nisamehe, samahani		
+Bon, meilleur que...	Njema, njema zaidi kuliko...		
+Ici. là	Hapa. Pale		
+Il vient de...	Anatoka...		
+Au secours ! au feu ! au voleur !	Saidia ! moto ! mwizi !		
+Combien ? combien de temps ?	Namna gani ? Muda gani ?		
+Comment dites-vous...	Unasemaje...		
+"Comment épelez-vous ""jamaa"" ?"	"Unnaandikaje "" jamaa "" ?"		
+Combien est-ce ?	Kiasi gani ?		
+Je suis occupé	Nina kazi.		
+Je viens d'Europe	Natoka  Ulaya		
+J'ai faim . (soif) .,	Naona njaa (kiu)		
+(suis endormi)	(usingizi)		
+Je suis malade	Nina ugonjwa (Siwezi). Niko mgonjwa		
+Je suis pressé	Nina haraka		
+Je suis à la recherche de	Natafuta...		
+Je ne suis pas pressé	Sina haraka		
+je suis désolé	Nina sikitiko. Nasikitika		
+Je suis fatigué	Nimechoka		
+Je suis très content	Nina furaha sana. Ninafurahi sana		
+J'ai chaud. j'ai froid	Nina joto (baridi).Naona joto (baridi)		
+Je ne sais pas	Sijui		
+Je ne pense pas	Sidhani		
+Je ne comprends pas	Sifahamu		
+Je sais	Najua		
+J’aimerais bien	Ningependa...		
+Je parle seulement anglais	Nasema kiingereza tu		
+Je pense aussi	Nadhani		
+Je comprends	Nafahamu		
+C'est d'accord	Ni sawa		
+C'est tôt	Ni mapema		
+C'est vide	Hakuna kitu ndani		
+C'est plein	Imejaa		
+C'est de ma faute	Ni kosa langu		
+C'est nouveau	Ni mpya		
+Je ne suis pas d'accord	Si sawa		
+Ce n'est pas ma faute	Si kosa langu		
+C'est vieux	Ni kuukuu. Imechakaa		
+C'est trop tard	Saa imekwisha		
+Les toilettes des dames	Choo cha wanawake		
+Écoutez. Regardez ici	Sikia. Tazama		
+Regardez ailleurs	Angolia !		
+Les toilettes des hommes	Choo cha wanaume		
+Mon adresse est ...	Anwani yangu ni ...		
+Maintenant. Immédiatement	Sasa, sasa hivi		
+SVP, parlez plus lentement	Tafadhali useme polepole		
+S'il vous plaît ...	Tafadhali...		
+Rapidement, plus rapide	Upesi, upesi zaidi		
+Répétez cela, s'il vous plaît	Naomba, useme tena		
+Doucement, plus doucement	Pole, polepole		
+Bientôt, plus tard	Bado kidogo, halafu		
+Merci (beaucoup)	Asante (sana)		
+Attendez un instant	Ngoja kidogo		
+Que désirez-vous ?	Unataka nini ?		
+Qu'est-ce qui ne va pas ici ?	Kuna nini hapa		
+Ou est ...	...ni wapi ?		
+Qui ? quoi ?	Nani ? nini ?		
+A qui est la faute ?	Ni kosa la nani ?Kwa nini ? Lini ?		
+Pourquoi ? Quand ?	Tafadhali uandike		
+Écrivez-le en bas, SVP	Ndiyo. Hapana. Labda		
+Oui non peut-être	Karibu		
+J'ai perdu mes amis.	Rafiki zangu wamenpotea.		
+Je suis perdu.	Nimepotea.		
+Je suis à ... Hôtel.	Nakaa katika...hoteli.		
+J'ai laissé mon argent dans...	Nimeacha mapesa yangu katika...		
+J'ai perdu mon argent dans...	Nimepoteza mapesa yangu.		
+J'ai oublié mon argent (ma clé).	Nimesahau mapesa (ufunguo).		
+J'ai raté mon train (avion).	Nimechelewa gari moshi (ndege).		
+Que dois-je faire ?	Nifanyeje ?		
+Vous avez dit que ça coûterait...	Ulisema bei ni ...		
+Je (nous) m'inquiète pour eux.	Wananisumbua (wanatusu-mbua).		
+Partez.	Nenda zako.		
+Je vais appeler un policier.	Nitamwita polisi.		
+On m'a volé ...	Nimeibiwa...		
+Comment appelle-t-on ça en swahili ?	Hii inaitwaje kwa kiswahili ?		
+Où est le commissariat ?	Kituo cha polisi ni wapi ?		
+Bonne journée.	Jambo. Shikamoo	 (utilisé par le subordonné envers le supérieur qui répond marahaba).	
+Bon après-midi.	Jambo. Shikamoo 	(utilisé par le subordonné).	
+Bonne soirée.	Jambo. Shikamoo 	(utilisé par le subordonné).	
+Bonne nuit.	Ulale salama. Usiku mwema.		
+Au revoir. A la prochaine fois.	Kwa heri. Kwa heri ya kuonana.		
+Mon nom est ...	Jina langu ni ...		
+Quel est votre nom ?	Jina lako nani ?		
+Puis-je vous présenter Mr... Mme... Mlle ?	Nikujulishe bwana... Bibi..., Bi... ?		
+Ma femme, mon mari.	Mke wangu, mume wangu.		
+Ma fille, mon fils.	Binti wangu, mtoto wangu.		
+Mon ami(e).	Rafiki yangu.		
+Ma sœur, mes frères.	Dada yangu, kaka zangu.		
+Je suis très heureux de vous voir.	Ninafurahi kukuona.		
+Comment allez-vous ?	Habari gani ?		
+Bien, merci. Et comment allez-vous ?	Nzuri, asante. Na habari za kwako ?		
+Comment va votre famille ?	Hawajambo nyumbani ? Mama na watoto hawajambo ?		
+Pas très bien.	Si wazima sana wanaumwa.		
+Très bien, merci.	Ni wazima tu. Hawajambo sana.		
+Veuillez vous asseoir.	Kalia kiti, tafadhali. Kaa kitako, tafadhali.		
+Je me suis beaucoup réjoui.	Nimependezwa sana.		
+J'espère vous revoir (bientôt).	Natumaini tutaonana tena (mapema).		
+Venez nous voir.	Njoo kutuamkia.		
+Êtes-vous libre cet après-midi (ce soir) ?	Una nafasi mchana huu (jioni hii) ?		
+Donnez-moi votre adresse, Svp.	Unipe anwani yako.		
+Donnez mes salutations à...	Umsalimie...		
+Je vais au magasin.	Nakwenda dukani.		
+Je vais manger.	Nakwenda kula.		
+Je veux aller au bureau des lignes aériennes.........	Nataka kwenda kwa ofisi ya ndege.		
+Où est...?	... Ni wapi ?		
+L'aéroport	Kiwanja cha ndege		
+La gare de bus	Kituo cha mabasi		
+Le port	Bandari		
+La gare de trains	Stesheni, kituo cha gari la Moshi		
+Le guichet	Wanapouza tikiti		
+Un ticket, les horaires	Tikiti, orodha ya saa		
+Un porteur	Mpagazi		
+La salle des bagages	Chumba cha luweka mizigo		
+Quand arriverons-nous...?	Tutafika...lini ?		
+Svp, appelez-moi un taxi	Tafadhali uniitie taxi		
+La place est-elle prise ?	Kuna mtu hapa ?		
+Puis-je réserver une place devant ?	Naweza kupata kiti cha mbele		
+Une place près de la fenêtre	Kiti karibu na dirisha		
+Est-ce la route (directe) pour...?	Hii ni njia (fupi) kwenda... ?		
+Comment de temps cela va prendre pour arriver ?	Mpaka tufike itachukua muda gani ?		
+Où vais-je ?	Niende upande gani ?		
+Au nord, sud	Kaskazini, kusini		
+De l'est, ouest	Toka mashariki, magharibi		
+Tout droit	Moja kwa moja		
+A gauche (droite)	Kushoto (kulia)		
+En avant (en arrière)	Mbele, nyuma		
+Quelle rue est-ce ?	Huu ni mtaa gani ?		
+Cercle, place, square	Kiwanja		
+Svp, indiquez	Onyesha tafadhali		
+Avez-vous de la monnaie ?	Lazima nibadili ?		
+Svp, dites-moi où descendre	Uniambie nitelemke wapi		
+A combien est le ticket pour...?	Tikiti kwa kwenda... Ni kiasi gani ?		
+Un billet aller simple.	Kwenda tu		
+Un billet aller-retour.	Kwenda na kurudi		
+Première classe, seconde classe, troisième classe.	Daraje la kwanza, la pili, la tatu		
+Combien de temps doit-on compter ?	Tikiti ni halali kwa muda gani ?		
+Puis-je trouver quelque chose à manger sur le trajet ?	Naweza kupata chakula njiani ?		
+Combien de kilos de bagage puis-je avoir ?	Naweza kuchukua kilo ngapi ?		
+Combien est-ce pour un kilo d'excès ?	Kilo zikizidi, bei itakuwaje 		
+Je veux voir les danses typiques	Nataka kuona ngoma za utamaduni		
+Que pourrais-je porter ?	Nivae nini ?		
+Pour aller nager ?	Kwenda kuongelea		
+Quand est-ce que le spectacle commence ?	Inaanza saa ngapi ?		
+Le ticket d'entrée.	Ada ya kuingilia		
+Pour aller chasser.	Kwenda kuwinda		
+Pour aller pêcher ?	Kwenda kuvua samaki		
+Pas trop près.	Tusiwe karibu mno		
+Pas trop loin.	Tusiwe mbali mno		
+Ai-je des lettres ou des messages?	Kuna posta ?		
+Quand est-ce que le courrier arrive ?	Posta inafika saa ngapi ?		
+Je pars à... heures	Nitatoka saa...		
+Envoyez mon courrier à...	Peleka barua zangu kwa...		
+Pourrais-je avoir du linge propre ?	Nguo zinaweza kufuliwa hapa ?		
+Je veux des choses repassées.	Nataka upige pasi nguo zangu chache		
+Ma clé, Svp.	Naomba funguo		
+Svp, changez les draps aujourd’hui.	Tafadhali leo badili shuka za kitanda		
+Apportez-moi un autre oreiller (une couverture).	Niletee mto mwingine (blanketi)		
+Une taie d'oreiller, un tapis de bain.	Foronya, kirago		
+Un cintre, un verre.	Kiango, bilauri		
+Un savon, des serviettes, une bougie.	Sabuni, taulo, mshumaa		
+"Eau à boire, papier toilette;"	Maji, ya kunywa, karatasi ya choo		
+Est-ce de l'eau chaude ?	Kuna maji ya moto ?		
+Svp pulvérisez pour les moustiques.	Unyunyizie dawa ya mbu		
+Svp, revenez plus tard.	Tafadhali urudi baadaye		
+Un salon, une chambres à coucher.	Sebule, vyumba vya kulala		
+Une salle de dîner, une cuisine.	Chumba cha kulia, jiko		
+Un patio, une baignoire personnelle.	Behewa, chumba cha kuogea		
+Est-ce que le linge est fourni?	Wanatoa vitambaa ?		
+Combien est-ce au mois ?	Ni bei gani kwa mwezi ?		
+Les couvertures, l'argent et les plats	Mablanketi, vyombo vyo kulia		
+Pouvez-vous me faire parvenir une employée de maison ?	Naweza kupata kijakazi ? (mtumishi)		
+Connaissez-vous un bon cuisinier ?	Unamjua mpishi mzuri ?		
+Ou puis-je louer une voiture ?	Naweza kukodisha wapi ? Nyumba ya kuweka motokaa ?		
+Il sera de retour à 12h30	Atarudi saa sita na nusu		
+Une baby-sitter.	Mtoto wa kulinda watoto Yaya wa kulinda watoto		
+Où est le restaurant ?	Kuna nyumba ya kulia wapi ?		
+Pour le petit déjeuner, déjeuner.	Kwa chakula cha asubuhi, cha saa sita		
+Dîner.	Chakula cha jioni		
+A quels horaires est servi le dîner?	Tunaweza kupata chakula cha jioni saa ngapi ?		
+Puis-je déjeuner (dîner) ici ?	Tunaweza kula hapa ?		
+Deux (cinq) d'entre nous.	Tupo wawili (watano)		
+Le serveur.	Steward. Mkuu wa maweita		
+Garçon.	Mwandishi. Weita		
+Donnez-moi une table près de la fenêtre.	Nipatie meza karibu na dirisha		
+Sur le côté, dans le coin.	Upande, pembeni		
+Garçon !	Mwandishi Weita		
+Svp servez nous rapidement.	Utuletee chakula upesi		
+Une serviette, une verre.	Kitambaa, bilauri		
+Une plateau, une couteau.	Sahani, kisu		
+Une fourchette, une grande cuillère.	Uma, kijiko kikubwa		
+Une petite cuillère.	Kijiko		
+Le pain, beurre.	Mkate, siagi		
+La crème, le sucre.	Maziwa mazito, sukari		
+Le sel, le poivre	Chumvi, pilipili		
+La sauce, la vinaigrette.	Mchuzi, siki, mafuta yo saladi		
+J'ai eu assez, merci.	Nimetosheka, asante		
+Cela n'est pas propre.	Si safi		
+C'est sale.	Ni chafu		
+Encore un peu de cela.	Ongeza kidogo		
+C'est trop cuit.	Kimepikwa mno		
+Ca n'est pas assez cuit.	Hakikupikwa ya kutosha		
+C'est trop dur (doux, pourri)	Ni ngumu mno (tamu, chungu)		
+C'est froid.	Ni baridi		
+Reprenez-le.	Ondoa		
+Je ne paie pas cela.	Sikuagiza hii		
+Demandez au serveur de venir ici.	Umwambie weita mkubwa aje hapa		
+Gardez la monnaie.	Uchukue inayozidi		
+Il y a une erreur dans la note.	Kuna kosa katika hesabu		
+Le service est-il inclus ?	Bakshishi imo ndani ?		
+Mesdames, messieurs.	Akinamama, akinababa		
+J'en reprendrai un autre.	Tunywe tena		
+Une bouteille de...	Chupa ya...		
+Un verre de...	Bilauri ya ...		
+Une boisson douce.	Sharabeti. Kinywaji baridi		
+Un jus de fruit.	Kinywaji cha matunda		
+Bacon	Bekoni		
+Banane	Ndizi		
+Haricots	Maharagwe		
+Biscuit	Biskuti		
+Café noir	Kawaha nyeusi		
+Cervelle	Ubongo		
+Pain	Mkate		
+Manioc	Kasaba		
+Poulet grillé	Kuku iliyokaangwa		
+Viande cuite avec des légumes	Nyama iliyotokoshwa pamoja na mboga		
+Chou	Kabeji		
+Gâteau	Mmkate mtamu , keki		
+Carottes	Karoti		
+Chou-fleur	Koliflaa		
+Fromage	Jibini		
+Poulet	Kuku		
+Bouillon de poulet	Mchuzi wa kuku		
+Petits pois	Njegere		
+Café (au lait, crème)	Kahawa (na maziwa, na maziwa mazito)		
+Maïs	Mahindi		
+Concombres	Matango		
+Dessert	Chakula cha kumalizia		
+Oeufs	Mayai		
+Figues	Tini		
+Poisson	Samaki		
+Oeufs frits	Mayai macho ya ng’ombe		
+Poisson frit	Samaki iliyokaangwa		
+Pamplemousse	Balungi		
+Raisins	Zabibu mbichi		
+Légumes verts	Mboga		
+Jambon	Kiga cha nguruwe		
+Oeufs durs	Mayai yaliyotokoseka		
+Lièvre	Sungura		
+Hachis	Nyama iliyosagwa		
+Eau glacée	Maji ya barafu, (baridi)		
+Glaçons	Barafu		
+Confiture	Mraba		
+Rognons	Figo, (ma...)		
+Foie	Maini		
+Citron	Limau		
+Limonade	Maji ya limau		
+Laitue	Saladi		
+Lentilles	Dengu		
+Mangue	Embe		
+Marmelade	Mraba wa machungwa		
+Purée de pommes de terre	Viazi vilivyosagwa		
+Viande	Nyama		
+Tarte	Sambusa		
+Melon	Tikiti		
+Lait (concentré)	Maziwa (ya kopo)		
+Champignons	Uyoga		
+Moutarde	Haradali		
+Mouton	Nyama ya kondoo		
+Noix	Kokwa		
+Olives	Zeituni		
+Oignons	Kitunguu		
+Orange	Chungwa, (ma...)		
+Orangeade	Maji ya machungwa		
+Perdrix	Kwale		
+Arachides	Karnga		
+Pois	Dengu		
+Poivre	Pilipili		
+Condiments	Achali		
+Ananas	Nanasi		
+Oeufs pochés	Ute na kiini yanayotoko seka		
+Cochon	Nyama ya nguruwe		
+Pommes de terre	Viazi mviringo		
+Pudding	Pudingi		
+Potiron ou courge	Boga, (ma...)		
+Lapin	Sungura		
+Radis	(mboga kama) figili		
+Raisins	Zabidu kavu		
+Rosbif	Nyama iliyokaangwa		
+Salade	Saladi		
+Sauce	Mchuzi		
+Sardine	Samaki mdogo		
+Œufs brouillés	Mayai yanayovurugwa		
+Fruit cuit	Tunda lililopikwa		
+Chapelet d’haricots	Maharagwe yasiyoiva		
+Pomme de terre douce	Kiazi kitamu		
+Sucre de cane	Muwa		
+Thé			
+Toast	Chai		
+Tomate	Mkate uliochomwa		
+Navet	Nyanya		
+Côtelette de veau	Mboga		
+Légumes	Nyama ya ndama		
+Soupe de légumes	Mboga		
+Pastèque	Supu ya mboga		
+Je veux faire des achats.	Nataka kwenda madukani (dukani)		
+Où y a-t-il une boulangerie ?	Naweza kununua mkate wapi ?		
+Un tabac	Duka la sigara		
+Un magasin de vêtements	Duka la nguo		
+Une épicerie	Duka la vyakula		
+Une pharmacie	Duka la dawa		
+Un magasin de matériel	Duka la vyuma		
+Un marché, un magasin de chaussures	Soko, duka la viatu		
+Un atelier de tailleur	Fundi cherehani		
+Réparateur de montre	Fundi wa saa		
+Cordonnier	Fundi wa viatu		
+La vente, négocier la vente	Bei rahisi		
+Je veux acheter ...	Nataka kununua...		
+Je veux une pellicule photo (couleur)	Nataka filamu (ya rangi)		
+La taille est ...	Kipimo ni ...		
+Je (n') aime (pas) cela.	Napenda (sipendi) hii		
+Combien est-ce ?	Ni ngapi ? Bei gani ?		
+Je préfère quelque chose de mieux (moins cher)	Nataka kitu kizuri zaidi (rahisi zaidi)		
+Cela n'est pas juste	Haifi. Si kipimo changu		
+Svp, montrez-moi d’autres échantillons.	Unionyeshe mifano		
+C'est trop large (petit)	Ni kubwa mno (dogo mno)		
+Montrez m'en d'autres	Unionyeshe zingine		
+Puis-je en commander un ?	Naweza kuagiza moja ?		
+Combien de temps cela prendra-t-il ?	Itachukua muda mrefu ?		
+Svp, prenez mes mensurations.	Unipime		
+Puis-je essayer celui-ci ?	Naweza kujaribu ?		
+Pouvez-vous l'emballer, Svp ?	Tafadhali ufunge hii		
+Qui dois-je payer ?	Nimlipe nani ?		
+Emballez-le pour le chargement.	Funga kwa kupeleka kwa...		
+Poste	Posta		
+Ou est la poste ?	Posta iko wapi ?		
+Une lettre de ...?	Barua kwa... ?		
+Je veux cinq dix cent timbres	Nataka stempu tano za senti kumi.		
+De combien de timbres ai-je besoin ?	Zinatakiwa stempu ngapi ?		
+Est-ce que ça partira aujourd'hui ?	Itaondoka leo ?		
+Donnez-moi un reçu, Svp.	Tafadhali unipe stakabadhi		
+Je veux envoyer un mandat.	Nataka kupeleka mapesa kwa posta		
+A quel guichet dois-je aller ?	Niende kwa dirisha gani ?		
+Par air.	Kwa ndege		
+Banque	Banki		
+Ou est la banque la plus proche ?	Banki iliyo karibu ni wapi ?		
+Quel guichet fait les espèces ?	Niende kwa dirisha gani kwa kupata mapesa		
+Pour vous-me le changer ?	Unaweza kunivunjia hii ?		
+(ne) donnez (pas) moi de gros billets.	Tafadhali (usinipe) unipe noti kubwa		
+Puis-je avoir de la petite monnaie ?	Nataka shilingishilingi na sentisenti ?		
+Quel est le taux de change en dollars ?	Naweza kupata shilingi ngapi kwa dolla moja ?		
+Où y a-t-il une librairie ?	Duka la vitabu ni wapi ?		
+Journal, magazines	Gazeti		
+Dictionnaire	Kamusi		
+Cartes à jouer.	Karata		
+Une carte de...	Ramani ya...		
+Papier carbone	Karatasi ya kufanyia nakala		
+Papier pour écrire.	Karatasi ya kuandikia		
+Encre	Wino		
+Enveloppe	Bahasha (ya ndege)		
+Crayon	Kalamu		
+Ruban de machine à écrire	Utepe wa mashine ya kuandikia. Utepe wa taipureta		
+Un stylo encre	Kalamu ya wino		
+Effaceur	Raba. Kifutio		
+Papier cadeau	Karatasi ya kufunga mizigo		
+Artère	Mshipa		
+Cheville	Kifundo cha mguu		
+Bras	Mkono		
+Bras (avant-)	Kilimbili		
+Sang	Damu		
+Os	Mfupa		
+Ventre	Tumbo		
+Seins	Maziwa		
+Fesses	Tako, (matako)		
+Joue	Shavu		
+Poitrine	Kifua		
+Menton	Kidevu		
+Crevasse du palais	Kaakaa lenye mpasuko		
+Clavicule	Mtulinga (mi...)		
+Oreille	Sikio		
+Coude	Kiwiko		
+Œil	Jicho		
+Sourcil	Unyushi, (nyushi)		
+Cil (paupière)	Ukope		
+Figure	Uso		
+Organe féminin	Uke		
+Doigt	Kidole		
+Pied	Mguu		
+Front	Paji la uso		
+Cheveux	Nywele		
+Aine	Manema		
+Bec de lièvre	Mdomo wa pande		
+Main	Mkono		
+Tête	Kichwa		
+Cœur	Moyo		
+Talon	Kisigino		
+Hanche	Nyonga		
+Intestins	Matumbo		
+Mâchoire	Taya		
+Articulation	Kiungo		
+Rein	Nso. Figo		
+Genou	Goti. (magoti)		
+Jambe	Mguu		
+Lèvre (bouche)	Mdomo		
+Foie	Maini		
+Poumon	Pafu		
+Bouche	Mdomo		
+Organe masculin	Uume		
+Muscle	Musuli		
+Ongle (doigt, orteil)	Ukucha. (kidole, kidole cha mguu)		
+Cou	Shingo		
+Nerf	Neva		
+Nez	Pua		
+Côte	Ubavu		
+L'épaule, les épaules côté (gauche, droit)	Bega, mabega. Ubavu (wa kushoti wa kulia)		
+Peau	Ngozi		
+Cuir chevelu	Ngozi ya kichwa		
+Crâne	Bupuru la kichwa. Fuvu		
+Estomac	Tumbo		
+Dent	Jino		
+Tendon	Ukano		
+Cuisse	Paja		
+Gorge	Koo		
+Pouce	Kidole gumba		
+Orteil	Kidole cha mguu		
+Langue	Ulimi		
+Veines	Vena au mshipa wa damu		
+Taille	Kiuno		
+Poignet	Kifundo cha mkono		
+Lundi	Jumatatu		
+Mardi	Jumanne		
+Mercredi	Jumatano		
+Jeudi	Alhamisi		
+Vendredi	Ijumaa		
+Samedi	Jumamosi		
+Dimanche	Jumapili, siku ya Mungu		
+Janvier	Januari		
+Février	Februari		
+Mars	Machi		
+Avril	Aprili		
+Mai	Mei		
+Juin	Juni		
+Juillet	Julai		
+Août	Agosti		
+Septembre	Septemba		
+Octobre	Oktoba		
+Novembre	Novemba		
+Décembre	Desemba		
+La saison des pluies	Masika		
+La saison sèche	Kiangazi		
+Il fait (chaud) (froid).	Ni (jua kali) (baridi).		
+Il fait mauvais.	Ni kubaya.		
+Il pleut.	Mvua inanyesha.		
+Comment est le temps (dehors) ?	Kunakuweje (nje) ?		
+Le soleil.	Jua.		
+Le soleil est couché.	Jua limetoka.		
+Le soleil brille.	Jua linang’ara.		
+Quelle heure est-il ?	Ni saa ngapi ?		
+Il est une heure	Ni saa saba		
+Il est cinq heures et demi	Ni saa kumi na moja unusu		
+Il est cinq heures et quart	Ni saa kumi na moja na robo		
+Il est six heures moins le quart.	Ni saa kumi na mbili kasa robo		
+A sept heures dix (le matin)	Saa moja na dakika kumi (asubuhi)		
+A neuf heures moins dix (le soir)	Saa mbili na dakika hamsini (jioni). (Saa tatu kasoro dakika kumi)		
+Il est  tard	Saa imekwisha		
+Dans l'après-midi	Saa za jioni (alasiri)		
+Dans la  matinée (soirée)	Asubuhi (jioni)		
+Jour, nuit	Mchana, usiku		
+A midi, au minuit	Saa sita mchana, usiku katikati		
+Hier, la nuit dernière	Jana, jana jioni		
+Aujourd'hui, cette nuit.	Leo, leo jioni		
+Demain	Kesho		
+Avant-hier	Juzi		
+L'année dernière (mois)	Mwaka (mwezi) jana		
+Lundi dernier	Jumatatu iliyopita		
+La semaine prochaine	Juma ijayo		
+Il y a deux semaines	Juma mbili zilizopita		
+Un, deux, trois	Moja, mbili, tatu		
+Quarte, cinq, six	Nne, tano, sita		
+Sept, huit	Saba, nane		
+Neuf, dix	Tisa, kumi		
+Onze, douze, quinze	Kumi na moja, kumi na mbili, kumi, na tisa		
+Vingt, vingt et un	Ishirini, ishirini na moja		
+Vingt huit	Ishirini na nane		
+Trente, trente et un	Thelathini, thelathini na moja		
+Quarante, cinquante, soixante	Arobaini, hamsini, sitini		
+Soixante dix, quatre vingt, quatre vingt dix	Sabini, themanini, tisini		
+Cent	Mia		
+Cent un	Mia na moja		
+Deux cent	Mia mbili		
+Trois cent	Mia tatu		
+Mille, deux mille	Elfu, elfu mbili		
+Premier, second	Ya kwanza, ya pili		
+Sixième, huitième	Ya sita, ya nane		
+Dixième, cinquantième	Ya kumi, ya hamsini		
+Centième	Ya mia		
+Millième	Ya elfu		
+Cendrier	Sahani ya kuwekea majivu		
+Sac	Mfuko		
+Planche	Mbao		
+Boîte	Sanduku		
+Ouvre-boîte	Chuma cha kufungua kopo		
+Tissu (vêtements)	Nguo		
+Tire-bouchon	Kizibuo		
+Bouchon	Kizibo		
+Coussin	Mto		
+Poupée	Mwanasesere		
+Boucle d'oreille	Kipuli		
+Bois de chauffage	Kuni		
+Lunettes (de soleil)	Miwani (ya jua)		
+Or (objet en)	Dhahabu		
+Fer à repasser	Pasi		
+Lacet	Ukanda wa viatu		
+Cuir	Ngozi		
+Linge	Kitani		
+Serrure	Kufuli		
+Coton pour blessures	Kiraka		
+Moustiquaire	Chandulua		
+Lime à ongles	Tupa ya kucha		
+Aiguille	Sindano		
+Cahier	Daftari		
+Cadenas	Kufuli		
+Seau	Ndoo		
+Canif	Kisu cha kukunja		
+Épingle (de sûreté ou droite)	Sazia, pini, spengi		
+Corde (n'importe quel genre)	Kamba		
+Corde	Katani		
+Radio	Radio		
+Anneau	Pete		
+Ciseaux	Makasi		
+Soie	Hariri		
+Argent	Fedha		
+Pierre	Jiwe		
+Bouchon	Kizibo		
+Sangle	Mkanda		
+Téléphone	Simu		
+Tulipe	Kastabini		
+Fil	Uzi		
+Serviette	Kitambaa		
+Machine à écrire	Mashine ya kuandikia (tapureta)		
+Parapluie	Mwavuli		
+Vase	Chombo		
+Lavabo	Bakuli la kunawia		
+Lessive	Kitambaa kidogo		
+Personne qui fait le lavage	Dobi		
+Montre (poignet)	Saa (ya mkono)		
+Fil (métallique)	Uzi wa chuma		
+Bois	Mbao		
+Laine	Majoho		
+Oiseau	Ndege		
+Babouin	Nyani		
+Buffle	Nyati		
+Crocodile	Mamba		
+Chat	Paka		
+Vache	Ng’ombe		
+Chien	Mbwa		
+Âne	Punda		
+Éléphant	Tembo		
+Grenouille	Chura		
+Poisson	Samaki		
+Chèvre	Mbuzi		
+Girafe	Twiga		
+Gnou	Nyumbu, (mbushi)		
+Cheval	Farasi		
+Hippopotame	Kiboko		
+Poule (poulet)	Kuku		
+Hyène	Fisi		
+Lièvre	Sungura		
+Léopard	Chui		
+Lion	Simba		
+Mule	Nyumbu		
+Rat	Panya		
+Rhinocéros	Kifaru		
+Mouton	Kondoo		
+Serpent	Nyoka		
+Zèbre	Punda milia		
+Armoire	Kabati		
+Lit	Kitanda		
+Chaise	Kiti		
+Lit	Meza		
+Autel	Altare		
+Étagères	Kabati ya vitabu		
+Bureaux	Madeski		
+Noir, bleu, blanc	Nyeusi, buluu, nyeupe		
+Marron	Rangi ya majani makavu		
+Crème, rouge	Rangi ya mtindi, nyekundu		
+Gris	Rangi ya majivu		
+Vert	Rangi ya majani		
+Jaune	Rangi ya manjano		
+Je veux une nuance plus claire (sombre)	Nataka rangi nyeupe (nyeusi) zaidi		
+Peignoir	Nguo ya kuogea		
+Chemisier	Shati la kike		
+Manteau	Koti (kisua)		
+Col	Kala		
+Robe	Gauni		
+Chapeau	Kofia		
+Veste	Koti		
+Cravate	Utepe wa shingoni. (tai)		
+Pardessus	Koti la juu		
+Slip	Chupi		
+Chemise	Shati		
+Imperméable	Koti la mvua		
+Vêtements de voyage	Nguo za safari		
+Short	Kaputula		
+Jupe	Marinda (sketi)		
+Pantoufles	Viatu (kanda mbili)		
+Chaussettes, bas	Soksi, soksi ndefu		
+Pull	Sweta		
+Pantalon	Suruali		
+Jupon, sous-vêtements	Nguo za ndani		

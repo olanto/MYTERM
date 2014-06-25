@@ -32,6 +32,7 @@ public class ModelPosfix {
     public static String ERROR = "??";
     private String separator;
     private int skipline;
+    private int skipcol;
     private int nbcolumns;
     private Vector<Langdef> langdef;
 
@@ -56,8 +57,9 @@ public class ModelPosfix {
     public void dump() {
         System.out.println("Model:");
         System.out.println("  Separaror:" + separator);
-        System.out.println("  Nb. columns:" + skipline);
+        System.out.println("  Nb. columns:" + nbcolumns);
         System.out.println("  Skip line:" + skipline);
+        System.out.println("  Skip column:" + skipcol);
         System.out.println("  Langdef:");
         for (int i = 0; i < langdef.size(); i++) {
             System.out.println("     lang:" + langdef.get(i).lang);
@@ -109,5 +111,19 @@ public class ModelPosfix {
      */
     public void setNbcolumns(int nbcolumns) {
         this.nbcolumns = nbcolumns;
+    }
+
+    /**
+     * @return the skipcol
+     */
+    public int getSkipcol() {
+        return skipcol;
+    }
+
+    /**
+     * @param skipcol the skipcol to set
+     */
+    public void setSkipcol(int skipcol) {
+        this.skipcol = skipcol;
     }
 }

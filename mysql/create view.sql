@@ -45,7 +45,13 @@ where t1.id_langset=l1.id_langset
 
 create or replace view v_conceptres as
 select 
-       r.resource_name, c.id_concept
+       r.resource_name,
+       c.id_concept, c.subject_field,
+       c.concept_definition,  c.concept_source_definition,
+       c.concept_note,
+       c.creation, c.create_by,
+       c.lastmodified, c.lastmodified_by,
+       c.extra
  from 
  	  concepts c,
       resources r

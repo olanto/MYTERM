@@ -35,6 +35,8 @@ public class ModelEnum {
         PREFIX,
         /**model colomn positiontal*/
         POSFIX,
+       /**model colomn positiontal repeat*/
+        POSFIXREP,
     };
 
  

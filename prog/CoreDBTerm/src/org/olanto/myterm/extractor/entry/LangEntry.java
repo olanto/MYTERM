@@ -46,6 +46,10 @@ public class LangEntry {
     public Terms getTerm(int i) {
         return listterm.get(i);
     }
+    
+    public Terms getTermLast() {
+        return listterm.get(listterm.size()-1);
+    }
 
     public void addLangToDB(Concepts concept) {
         lan.setIdConcept(concept.getIdConcept());

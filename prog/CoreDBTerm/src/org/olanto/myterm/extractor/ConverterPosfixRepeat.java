@@ -33,14 +33,15 @@ import org.olanto.myterm.extractor.model.posfix.LoadModelPosfix;
 import org.olanto.myterm.extractor.model.posfix.ModelPosfix;
 import org.olanto.myterm.extractor.model.posfix.Posdef;
 import org.olanto.myterm.extractor.separator.CharSeparatorChooser;
+import org.olanto.myterm.parsetbx.LanguageCode;
 
-public class ConverterPosfix implements Converter {
+public class ConverterPosfixRepeat implements Converter {
 
     private static String separator;
     private ModelPosfix model;
     ConceptEntry concept;
     Resources resource;
-   static long timer=System.currentTimeMillis();
+    static long timer = System.currentTimeMillis();
 
     public void convertAFileIntoTBX(String fname, String encoding, String resourceName, String modelfile) {
         model = LoadModelPosfix.loadAFileIntoModel(modelfile);
@@ -65,23 +66,41 @@ public class ConverterPosfix implements Converter {
             while (w != null) {
                 countline++;
                 String[] parts = w.split(separator);
-                if (parts.length < model.getNbcolumns()) {
+                int nbTerm = (parts.length - model.getSkipcol() - 1) / model.getNbcolumns() + 1;
+                System.out.println("part of w:" + parts.length + ". nb terms:" + nbTerm);
+                if (nbTerm < 1) {
                     System.out.println("FATAL ERROR: not enough columns  at line:" + countline);
+                    System.out.println("read:" + w);
+                    System.out.println("part of w:" + parts.length);
+                    System.out.println("nb terms:" + nbTerm);
                     for (int i = 0; i < parts.length; i++) {
                         System.out.println("part:" + i + "-->" + parts[i] + "<--");
                     }
                     System.exit(0);
                 }
                 countconcept++;
-                       if (countconcept % 100 == 0) {
-            timer=System.currentTimeMillis()-timer;
-            System.out.println("processed:" + countconcept+", "+timer+" [ms]");
-            timer=System.currentTimeMillis();
-        }
+                if (countconcept % 100 == 0) {
+                    timer = System.currentTimeMillis() - timer;
+                    System.out.println("processed:" + countconcept + ", " + timer + " [ms]");
+                    timer = System.currentTimeMillis();
+                }
 
                 // open part
                 concept = new ConceptEntry(resource, true);
-                process(parts);
+                for (int i = 0; i < nbTerm; i++) {
+                    String[] subpart = new String[model.getNbcolumns()];
+                    for (int j = 0; j < model.getNbcolumns(); j++) {
+                        int partmap = model.getSkipcol() + i * model.getNbcolumns() + j;
+                        if (partmap < parts.length) {
+                            subpart[j] = parts[partmap];
+                        } else {
+                            subpart[j] = "";
+                        }
+                    }
+                    System.out.println("subpart[0]" + subpart[0]);
+                    process(subpart);
+
+                }
                 concept.flush();
                 concept = null;
                 w = in.readLine();
@@ -95,26 +114,28 @@ public class ConverterPosfix implements Converter {
     }
 
     private void process(String[] parts) {
-        for (int i = 0; i < model.nbLanguage(); i++) {
-            Langdef langdef = model.getLanguage(i);
-            String lang = langdef.lang;
-            if (!lang.equals(ModelPosfix.ERROR)) {
-                concept.addTerm(lang, "???????");
-                Terms currentTerm = concept.getTerm(lang, 0);
-                for (int j = 0; j < langdef.posdef.size(); j++) {
-                    Posdef def = langdef.posdef.get(j);
-                    addDefinition(currentTerm, def.position, def.definition, parts);
-                }
-            } else {
-                //  System.out.println("skip :" + w);
-            }
+        Langdef langdef = model.getLanguage(0);
+        String lang = parts[Integer.parseInt(langdef.lang)];
+        lang=lang.replace("\"", "");
+        lang=LanguageCode.getISO2FromText(lang);
+        concept.addTerm(lang, "???????");
+   //     Terms currentTerm = concept.getTerm(lang, 0);
+       Terms currentTerm = concept.getTermLast(lang);
+        for (int j = 0; j < langdef.posdef.size(); j++) {
+            Posdef def = langdef.posdef.get(j);
+            addDefinition(currentTerm, def.position, def.definition, parts);
         }
-    }
+
+        }
+
+    
 
     private void addDefinition(Terms term, int position, String definition, String[] parts) {
         if (position >= parts.length) {
             System.out.println("position:" + position + " too large ...");
             return;
+        } else{
+            System.out.println("position:" + position + " -> "+parts[position]);
         }
         switch (definition) {
             case "termForm":
@@ -122,6 +143,21 @@ public class ConverterPosfix implements Converter {
                 break;
             case "termPartofspeech":
                 term.setTermPartofspeech(parts[position]);
+                break;
+            case "termSource":
+                term.setTermSource(parts[position]);
+                break;
+            case "termNote":
+                term.setTermNote(parts[position]);
+                break;
+            case "termContext":
+                term.setTermContext(parts[position]);
+                break;
+            case "termUsage":
+                term.setTermUsage(parts[position]);
+                break;
+            case "termSourceContext":
+                term.setTermSourceContext(parts[position]);
                 break;
             default:
                 System.out.println("Definition:" + definition + " not implemented ...");

@@ -163,6 +163,8 @@ public class LoadModelPosfix {
                 model.setNbcolumns(Integer.parseInt(getText(courant, localverbose)));
             } else if (courant.getName().equals("skipline")) {
                 model.setSkipline(Integer.parseInt(getText(courant, localverbose)));
+            }else if (courant.getName().equals("skipcol")) {
+                model.setSkipcol(Integer.parseInt(getText(courant, localverbose)));
             } else if (courant.getName().equals("language")) {
                 getLanguage(courant);
             } else {

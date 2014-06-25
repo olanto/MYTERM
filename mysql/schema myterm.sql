@@ -119,12 +119,15 @@ insert into languages values ('DE','German');
 insert into languages values ('ZH','Chinese');
 insert into languages values ('LA','Latina');
 insert into languages values ('JA','Japonese');
-cotermsmmit; 
+insert into languages values ('YOMI','Japonese-phonetic');
+insert into languages values ('PT','Portuguese');
+insert into languages values ('SW','Swahili');
+commit; 
 select * from languages; 
 
 -- --------------------------------- 
 
-
+translations
 create table translations
  (id_language varchar(5)  not null,
   type_obj varchar(32) not null, -- DOMAINS, ...
@@ -144,6 +147,8 @@ insert into translations values ('EN','DOMAINS',3,'Painting');
 insert into translations values ('FR','DOMAINS',1,'Ordinateur');
 insert into translations values ('FR','DOMAINS',2,'Astronomie');
 insert into translations values ('FR','DOMAINS',3,'Peinture');
+insert into translations values ('EN','LOV_PRIVACY',1,'PUBLIC');
+insert into translations values ('EN','LOV_PRIVACY',2,'PRIVATE');
 commit; 
 select * from translations; 
 
