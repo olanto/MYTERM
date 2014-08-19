@@ -37,6 +37,9 @@ where t1.id_langset=l1.id_langset
    and c.id_resource=r.id_resource
    and l1.id_langset!=l2.id_langset
 ;
+create or replace view vj_sourcetarget as
+SELECT uuid()  uuid,
+v_sourcetarget.* FROM v_sourcetarget;
 
 
 select * from v_sourcetarget where source like 'mye' and solang='FR';
