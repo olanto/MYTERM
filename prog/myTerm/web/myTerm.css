@@ -1,0 +1,25 @@
+/* 
+    Document   : myTerm
+    Created on : 1 sept. 2014, 00:57:30
+    Author     : simple
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+h1 {color: blue;}
+th {border:1px dotted #6495ed;padding:5px;background-color:#EFF6FF;width:25%}
+td {border:1px solid #6495ed;padding:5px; text-align:left;}
+.gwt-Tree .gwt-TreeItem {
+  padding: 1px 0px;
+  margin: 0px;
+  white-space: nowrap;
+  cursor: hand;
+  cursor: pointer;
+}
+.gwt-Tree .gwt-TreeItem-selected {
+  background: #ebeff9;
+}
+.gwt-TreeItem .gwt-RadioButton input,
+.gwt-TreeItem .gwt-CheckBox input {
+  margin-left: 0px;
+}

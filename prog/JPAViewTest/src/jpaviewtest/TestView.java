@@ -24,8 +24,8 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        System.out.println(getTargetForThis("tunas","EN","FR"));
-        System.out.println(getTargetForThis("tuna%","EN","FR"));
+        System.out.println(getTargetForThis("tunas", "EN", "FR"));
+        System.out.println(getTargetForThis("tuna%", "EN", "FR"));
 
     }
 
@@ -38,7 +38,7 @@ public class TestView {
     }
 
     public static String getTargetForThis(String term, String solang, String talang) {
-        System.out.println("param:"+term);
+        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
         Query query = em.createNamedQuery("VjSourcetarget.findBySource");
@@ -46,15 +46,15 @@ public class TestView {
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
         List<VjSourcetarget> resultQ = query.getResultList();
+
         res.append("<table>");
-        /*
-         res.append("<caption>"+ "Inventory"  + "</caption>");
-         res.append("<tr>");
-         res.append("<th>" + "ressource:"  + "</th>");
-         res.append("<th>" + "language:"  + "</th>");
-         res.append("<th>" + "nb:"  + "</td>");
-         res.append("</tr>");
-         */
+        res.append("<tr>");
+        res.append("<th>" + "Source" + "</th>");
+        res.append("<th>" + "Target" + "</th>");
+        res.append("<th>" + "Lang. Src" + "</th>");
+        res.append("<th>" + "Lang Tgt" + "</td>");
+        res.append("</tr>");
+
         for (VjSourcetarget result : resultQ) {
 
             res.append("<tr>");
@@ -71,8 +71,8 @@ public class TestView {
         return res.toString();
     }
 
-      public static Vector<String> getListForThis(String term, String solang, String talang) {
-        System.out.println("param:"+term);
+    public static Vector<String> getListForThis(String term, String solang, String talang) {
+        System.out.println("param:" + term);
         init();
         Vector<String> res = new Vector<>();
         Query query = em.createNamedQuery("VjSourcetarget.findBySource");
@@ -80,13 +80,12 @@ public class TestView {
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
         List<VjSourcetarget> resultQ = query.getResultList();
-         for (VjSourcetarget result : resultQ) {
-           res.add(result.getSource());
-         }
+        for (VjSourcetarget result : resultQ) {
+            res.add(result.getSource());
+        }
         return res;
     }
 
-    
     public static String getReslang() {
         init();
         StringBuilder res = new StringBuilder("");
@@ -97,9 +96,9 @@ public class TestView {
         res.append("<table>");
         res.append("<caption>" + "Inventory" + "</caption>");
         res.append("<tr>");
-        res.append("<th>" + "ressource:" + "</th>");
-        res.append("<th>" + "language:" + "</th>");
-        res.append("<th>" + "nb:" + "</td>");
+        res.append("<th>" + "Resource" + "</th>");
+        res.append("<th>" + "Language" + "</th>");
+        res.append("<th>" + "Number" + "</th>");
         res.append("</tr>");
         for (VjReslang result : resultQ) {
 
