@@ -15,6 +15,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.HTML;
@@ -87,6 +90,7 @@ public class myTermSearch extends VerticalPanel {
                 termsPan.clear();
                 res.clear();
                 createSourceTree(result);
+                getService().getSearchResult(searchField.getText(), langSrc.getText(), langTgt.getText(), termCallback);
             }
 
             @Override
@@ -114,14 +118,17 @@ public class myTermSearch extends VerticalPanel {
                 getService().getInventory(termCallback);
             }
         });
+        searchField.addKeyPressHandler(new KeyPressHandler() {
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
+                    getService().getResults(searchField.getText(), langSrc.getText(), langTgt.getText(), termListCallback);
+                }
+            }
+        });
     }
 
     public static myTermServiceAsync getService() {
-        // Create the client proxy. Note that although you are creating the
-        // service interface proper, you cast the result to the asynchronous
-        // version of the interface. The cast is always safe because the
-        // generated proxy implements the asynchronous interface automatically.
-
         return GWT.create(myTermService.class);
     }
 
