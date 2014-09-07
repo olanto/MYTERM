@@ -22,9 +22,6 @@
 package simple.myTerm.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
@@ -37,12 +34,10 @@ import java.util.ArrayList;
 public class LangList extends ListBox {
 
     private static AsyncCallback<ArrayList<String>> langCallback;
-    private String type;
     private ArrayList<String> langs;
 
-    public LangList(String tp) {
+    public LangList() {
         initCookies();
-        this.type = tp;
         langCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -58,22 +53,6 @@ public class LangList extends ListBox {
             }
         };
         getService().getLanguages(langCallback);
-        if (type.equalsIgnoreCase("source")) {
-            setSelectedIndex(getlangIndex(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS)));
-        } else {
-            setSelectedIndex(getlangIndex(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT)));
-        }
-
-        addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                if (type.equals("source")) {
-                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangS, getItemText(getSelectedIndex()));
-                } else {
-                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangT, getItemText(getSelectedIndex()));
-                }
-            }
-        });
     }
 
     private static myTermServiceAsync getService() {
@@ -85,7 +64,7 @@ public class LangList extends ListBox {
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "FR");
     }
 
-    private int getlangIndex(String cookie) {
+    public int getlangIndex(String cookie) {
         return langs.indexOf(cookie);
     }
 }
