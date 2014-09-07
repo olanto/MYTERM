@@ -22,6 +22,7 @@
 package simple.myTerm.client;
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -43,7 +44,7 @@ public class MainEntryPoint implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        MyTermSearch vpan = new MyTermSearch();
-        RootPanel.get().add(vpan);
+        MyTermSearchWidget vpan = new MyTermSearchWidget();
+        RootPanel.get().add((IsWidget) vpan);
     }
 }

@@ -22,8 +22,6 @@
 package simple.myTerm.client;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -53,7 +51,7 @@ import java.util.ArrayList;
  *
  * @author nizar ghoula - simple
  */
-public class MyTermSearch extends VerticalPanel {
+public class MyTermSearchWidget extends VerticalPanel {
 
     private Label termLabel = new Label("Input your search expression: ");
     private TextBox searchField = new TextBox();
@@ -69,7 +67,7 @@ public class MyTermSearch extends VerticalPanel {
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<ArrayList<String>> termListCallback;
 
-    public MyTermSearch() {
+    public MyTermSearchWidget() {
         add(searchMenu);
         searchMenu.add(termLabel);
         searchMenu.add(new HTML("&nbsp;"));
