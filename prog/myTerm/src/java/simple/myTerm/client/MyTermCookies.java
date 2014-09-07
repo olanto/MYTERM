@@ -21,29 +21,27 @@
  */
 package simple.myTerm.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.Cookies;
+import java.util.Date;
 
 /**
- * Main entry point.
  *
  * @author nizar ghoula - simple
  */
-public class MainEntryPoint implements EntryPoint {
-
-    /**
-     * Creates a new instance of MainEntryPoint
-     */
-    public MainEntryPoint() {
+public class MyTermCookies {
+    public MyTermCookies() {
     }
 
-    /**
-     * The entry point method, called automatically by loading a module that
-     * declares an implementing class as an entry-point
-     */
-    @Override
-    public void onModuleLoad() {
-        MyTermSearch vpan = new MyTermSearch();
-        RootPanel.get().add(vpan);
+    public static void initCookie(String name, String value) {
+        Date expires = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * (long) GuiConstant.EXP_DAYS));
+        if ((Cookies.getCookie(name) == null) || (Cookies.getCookie(name).equalsIgnoreCase("null"))) {
+            Cookies.setCookie(name, value, expires);
+        }
+    }
+
+    public static void updateCookie(String name, String value) {
+        Date expires = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * (long) GuiConstant.EXP_DAYS));
+        Cookies.removeCookie(name);
+        Cookies.setCookie(name, value, expires);
     }
 }

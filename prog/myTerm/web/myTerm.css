@@ -5,21 +5,47 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
-h1 {color: blue;}
-th {border:1px dotted #6495ed;padding:5px;background-color:#EFF6FF;width:25%}
-td {border:1px solid #6495ed;padding:5px; text-align:left;}
+.searchMenu{
+    margin-top: 10px;
+    background-color:#EFF6FF;
+    margin-bottom: 20px;
+}
+.panel{
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.panel p {
+    color: blue;
+}
+.panel th {
+    border:1px dotted #6495ed;
+    padding:5px;
+    background-color:#EFF6FF;
+    width:25%
+}
+.panel td {
+    border:1px solid #6495ed;
+    padding:5px;
+    text-align:left;
+}
+.gwt-Tree{
+    margin-top: 10px;
+}
 .gwt-Tree .gwt-TreeItem {
-  padding: 1px 0px;
-  margin: 0px;
-  white-space: nowrap;
-  cursor: hand;
-  cursor: pointer;
+    padding: 1px 0px;
+    white-space: nowrap;
+    cursor: hand;
+    cursor: pointer;
+}
+.gwt-TreeItem {
+    color: blue;
 }
 .gwt-Tree .gwt-TreeItem-selected {
-  background: #ebeff9;
+    background: #ebeff9;
 }
 .gwt-TreeItem .gwt-RadioButton input,
 .gwt-TreeItem .gwt-CheckBox input {
-  margin-left: 0px;
+    margin-left: 0px;
 }

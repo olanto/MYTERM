@@ -1,22 +1,24 @@
-/**********
-    Copyright © 2013-2014 Olanto Foundation Geneva
-
-   This file is part of myTERM.
-
-   myCAT is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as
-    published by the Free Software Foundation, either version 3 of
-    the License, or (at your option) any later version.
-
-    myCAT is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-    See the GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with myCAT.  If not, see <http://www.gnu.org/licenses/>.
-
-**********/
+/**
+ * ********
+ * Copyright © 2013-2014 Olanto Foundation Geneva
+ *
+ * This file is part of myTERM.
+ *
+ * myCAT is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * myCAT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with myCAT. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *********
+ */
 package org.olanto.myterm.coredb;
 
 import java.util.List;
@@ -46,11 +48,11 @@ public class Queries {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + domain_default_name);
             return null;
         }
-        if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + domain_default_name);
-            if (auto==AutoCreate.YES) {
+            if (auto == AutoCreate.YES) {
                 System.out.println("CREATE NEW VALUE :" + result.size() + ", for :" + domain_default_name);
-                 Domains obj = new Domains(null,domain_default_name);
+                Domains obj = new Domains(null, domain_default_name);
                 TermDB.domainsJC.create(obj);
                 return obj;
             } else {
@@ -60,8 +62,7 @@ public class Queries {
         }
         return result.get(0);
     }
-    
-    
+
     // create sur le nom !!! pas très bon mais suffisant pour les premiers import
     public static Owners getOwnerID(String ownerLastName, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Owners.findByOwnerLastName");
@@ -72,11 +73,11 @@ public class Queries {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + ownerLastName);
             return null;
         }
-        if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + ownerLastName);
-            if (auto==AutoCreate.YES) {
+            if (auto == AutoCreate.YES) {
                 System.out.println("CREATE NEW VALUE :" + result.size() + ", for :" + ownerLastName);
-                return ManageOwner.create("???",ownerLastName,"???","DORMANT","???");
+                return ManageOwner.create("???", ownerLastName, "???", "DORMANT", "???");
             } else {
                 return null;
             }
@@ -84,8 +85,8 @@ public class Queries {
         }
         return result.get(0);
     }
-    
-   public static Resources getResourceID(String resourceName, AutoCreate auto) {
+
+    public static Resources getResourceID(String resourceName, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Resources.findByResourceName");
         query.setParameter("resourceName", resourceName);
         List<Resources> result = query.getResultList();
@@ -94,11 +95,11 @@ public class Queries {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + resourceName);
             return null;
         }
-        if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + resourceName);
-            if (auto==AutoCreate.YES) {
+            if (auto == AutoCreate.YES) {
                 System.out.println("CREATE NEW VALUE :" + result.size() + ", for :" + resourceName);
-                return ManageResource.create(resourceName,"PUBLIC","???","");
+                return ManageResource.create(resourceName, "PUBLIC", "???", "");
             } else {
                 return null;
             }
@@ -106,7 +107,14 @@ public class Queries {
         }
         return result.get(0);
     }
-      public static Languages getLanguageID(String idLanguage, AutoCreate auto) {
+
+    public static List<Languages> getLanguages() {
+        Query query = TermDB.em.createNamedQuery("Languages.findAll");
+        List<Languages> result = query.getResultList();
+        return result;
+    }
+
+    public static Languages getLanguageID(String idLanguage, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");
         query.setParameter("idLanguage", idLanguage);
         List<Languages> result = query.getResultList();
@@ -115,11 +123,11 @@ public class Queries {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idLanguage);
             return null;
         }
-        if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + idLanguage);
-            if (auto==AutoCreate.YES) {
+            if (auto == AutoCreate.YES) {
                 System.out.println("CREATE NEW VALUE :" + result.size() + ", for :" + idLanguage);
-                Languages obj = new Languages(idLanguage, "??? "+idLanguage);
+                Languages obj = new Languages(idLanguage, "??? " + idLanguage);
                 try {
                     TermDB.languagesJC.create(obj);
                 } catch (PreexistingEntityException ex) {
@@ -128,7 +136,7 @@ public class Queries {
                     Logger.getLogger(Queries.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return obj;
- 
+
             } else {
                 return null;
             }
@@ -136,29 +144,26 @@ public class Queries {
         }
         return result.get(0);
     }
-  
-      
-     public static Langsets getIdLangset(Long idLangset) {
+
+    public static Langsets getIdLangset(Long idLangset) {
         Query query = TermDB.em.createNamedQuery("Langsets.findByIdLangset");
         query.setParameter("idLangset", idLangset);
         List<Langsets> result = query.getResultList();
-         if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + idLangset);
-                    return null;
+            return null;
         }
         return result.get(0);
     }
 
-    public static  Resources getIdResources(Long idResource) {
+    public static Resources getIdResources(Long idResource) {
         Query query = TermDB.em.createNamedQuery("Resources.findByIdResource");
         query.setParameter("idResource", idResource);
         List<Resources> result = query.getResultList();
-         if (result.size() == 0) {
+        if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + idResource);
-                    return null;
+            return null;
         }
         return result.get(0);
     }
-
-
 }

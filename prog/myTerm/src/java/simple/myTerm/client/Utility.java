@@ -21,29 +21,11 @@
  */
 package simple.myTerm.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
-
 /**
- * Main entry point.
  *
  * @author nizar ghoula - simple
  */
-public class MainEntryPoint implements EntryPoint {
+public class Utility {
 
-    /**
-     * Creates a new instance of MainEntryPoint
-     */
-    public MainEntryPoint() {
-    }
-
-    /**
-     * The entry point method, called automatically by loading a module that
-     * declares an implementing class as an entry-point
-     */
-    @Override
-    public void onModuleLoad() {
-        MyTermSearch vpan = new MyTermSearch();
-        RootPanel.get().add(vpan);
-    }
+    
 }

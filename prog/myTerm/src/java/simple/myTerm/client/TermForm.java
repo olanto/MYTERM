@@ -21,29 +21,13 @@
  */
 package simple.myTerm.client;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
- * Main entry point.
- *
+ * Form for adding a new term in a given lanSet of a given concept
+ * 
  * @author nizar ghoula - simple
  */
-public class MainEntryPoint implements EntryPoint {
-
-    /**
-     * Creates a new instance of MainEntryPoint
-     */
-    public MainEntryPoint() {
-    }
-
-    /**
-     * The entry point method, called automatically by loading a module that
-     * declares an implementing class as an entry-point
-     */
-    @Override
-    public void onModuleLoad() {
-        MyTermSearch vpan = new MyTermSearch();
-        RootPanel.get().add(vpan);
-    }
+public class TermForm extends VerticalPanel{
+    
 }
