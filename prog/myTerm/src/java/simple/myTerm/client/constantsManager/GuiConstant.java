@@ -19,33 +19,12 @@
  *
  *********
  */
-package simple.myTerm.client;
-
-import simple.myTerm.client.searchWidget.MyTermSearchWidget;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
+package simple.myTerm.client.constantsManager;
 
 /**
- * Main entry point.
  *
  * @author nizar ghoula - simple
  */
-public class MainEntryPoint implements EntryPoint {
-
-    /**
-     * Creates a new instance of MainEntryPoint
-     */
-    public MainEntryPoint() {
-    }
-
-    /**
-     * The entry point method, called automatically by loading a module that
-     * declares an implementing class as an entry-point
-     */
-    @Override
-    public void onModuleLoad() {
-        MyTermSearchWidget vpan = new MyTermSearchWidget();
-        RootPanel.get().add((IsWidget) vpan);
-    }
+public class GuiConstant {
+        public static final int EXP_DAYS = 24;
 }
