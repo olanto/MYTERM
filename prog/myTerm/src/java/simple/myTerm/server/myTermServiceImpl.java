@@ -28,7 +28,7 @@ import jpaviewtest.TestView;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Languages;
 
-import simple.myTerm.client.myTermService;
+import simple.myTerm.client.Main.request.myTermService;
 
 /**
  *

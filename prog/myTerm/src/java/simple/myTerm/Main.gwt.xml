@@ -12,7 +12,9 @@
     <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
     <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
 
-    <entry-point class="simple.myTerm.client.MainEntryPoint"/>
+    <entry-point class="simple.myTerm.client.Main.MyTermInterface"/>
 
+    <source path='client'/>
+    <source path='shared'/>
     <!-- Do not define servlets here, use web.xml -->
 </module>

@@ -5,22 +5,31 @@
         <servlet-class>simple.myTerm.server.myTermServiceImpl</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>userLoginCheck</servlet-name>
-        <servlet-class>simple.myTerm.server.userLoginCheck</servlet-class>
+        <servlet-name>LoginService</servlet-name>
+        <servlet-class>simple.myTerm.server.LoginServiceImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>myTermServlet</servlet-name>
+        <servlet-class>simple.myTerm.server.myTermServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>myTermService</servlet-name>
         <url-pattern>/simple.myTerm.Main/mytermservice</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>userLoginCheck</servlet-name>
-        <url-pattern>/userLoginCheck</url-pattern>
+        <servlet-name>LoginService</servlet-name>
+        <url-pattern>/simple.myTerm.Login/loginservice</url-pattern>
     </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    <servlet-mapping>
+        <servlet-name>myTermServlet</servlet-name>
+        <url-pattern>/simple.myTerm.Main/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginService</servlet-name>
+        <url-pattern>/simple.myTerm.Main/loginservice</url-pattern>
+    </servlet-mapping>
+   
     <welcome-file-list>
         <welcome-file>myTerm.html</welcome-file>
     </welcome-file-list>
