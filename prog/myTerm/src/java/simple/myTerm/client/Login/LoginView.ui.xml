@@ -7,7 +7,7 @@
 
     </ui:style>
     <g:HTMLPanel>
-        <h1>Advanced Login</h1>
+        <h1>Terminology Manager's Login</h1>
         <g:SimplePanel ui:field="message"></g:SimplePanel>
         <table>
             <tr>
