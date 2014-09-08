@@ -14,8 +14,10 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Login.requests.LoginService;
 import simple.myTerm.client.Login.requests.LoginServiceAsync;
 import simple.myTerm.shared.UserDto;
@@ -26,6 +28,7 @@ import simple.myTerm.shared.UserDto;
  */
 public class MainLogin implements EntryPoint {
 
+    private VerticalPanel vp = new VerticalPanel();
     private LoginView view = GWT.create(LoginView.class);
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
@@ -33,7 +36,6 @@ public class MainLogin implements EntryPoint {
     public void onModuleLoad() {
         // quick check  if this user is
         // already authenticated
-        
         loginService.isAuthenticated(new AsyncCallback<UserDto>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -44,7 +46,7 @@ public class MainLogin implements EntryPoint {
                 if (user == null) {
                     showLogin();
                 } else {
-                        Window.Location.assign("/simple.myTerm.Main/");
+                     Window.Location.replace(GWT.getHostPageBaseURL()+"/myTermLoginCtrl");
                 }
             }
         });
@@ -67,7 +69,11 @@ public class MainLogin implements EntryPoint {
         });
 
         RootLayoutPanel.get().clear();
-        RootLayoutPanel.get().add(view);
+        RootLayoutPanel.get().add(vp);
+        vp.setPixelSize(Window.getClientWidth(), Window.getClientHeight());
+        vp.add(view);
+        vp.setCellHorizontalAlignment(view, HorizontalPanel.ALIGN_CENTER);
+        vp.setCellVerticalAlignment(view, VerticalPanel.ALIGN_TOP);
     }
 
     // Declare a Handler for either the Submi Button Click
@@ -103,16 +109,11 @@ public class MainLogin implements EntryPoint {
                     view.getMessage().setWidget(new HTML("Wrong! try Email: go"));
                     enableLogin();
                 } else {
-                        Window.Location.assign("/simple.myTerm.Main/");
+                     Window.Location.assign(GWT.getHostPageBaseURL()+"myTermLoginCtrl");
                 }
             }
         });
 
-    }
-
-    //helper to see if we are in main
-    public boolean isMainModule() {
-        return Window.Location.getHref().contains("/Main/");
     }
 
     public void disableLogin() {

@@ -16,7 +16,7 @@ public class LoginServiceImpl extends LoginCheckServlet implements LoginService 
 
     @Override
     public UserDto isAuthenticated() {
-        return getUser(); //helper method from AdvancedServlet
+        return getUser(); //helper method from LoginCheckServlet
     }
 
     @Override
@@ -31,7 +31,7 @@ public class LoginServiceImpl extends LoginCheckServlet implements LoginService 
             user.setName("NameFromDb");
 
             //set the current_user for this session
-            setUser(user);//see AdvncedServlet (Parent Class)
+            setUser(user);//see LoginCheckServlet (Parent Class)
 
         } else {
             user = null;//force showLogin

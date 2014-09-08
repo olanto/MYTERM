@@ -10,6 +10,10 @@
     background-color:#EFF6FF;
     margin-bottom: 20px;
 }
+.gwt-Anchor{
+    cursor: pointer;
+    cursor: hand;
+}
 .panel{
     margin-top: 5px;
     margin-left: 20px;

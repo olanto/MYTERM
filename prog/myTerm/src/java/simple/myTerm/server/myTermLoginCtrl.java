@@ -14,7 +14,7 @@ import simple.myTerm.shared.UserDto;
  *
  * @author simple
  */
-public class myTermServlet extends LoginCheckServlet {
+public class myTermLoginCtrl extends LoginCheckServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -45,7 +45,7 @@ public class myTermServlet extends LoginCheckServlet {
                     + "</html>");
         } else {
             //the user is authenticated
-            //respond with the host page (Main.js) for module a
+            //respond with the host page (Main.js) for module main
             page.append("<html>\n"
                     + "    <head>\n"
                     + "        <meta name='gwt:module' content='simple.myTerm.Main=simple.myTerm.Main'>\n"
