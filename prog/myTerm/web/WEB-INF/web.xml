@@ -4,9 +4,17 @@
         <servlet-name>myTermService</servlet-name>
         <servlet-class>simple.myTerm.server.myTermServiceImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userLoginCheck</servlet-name>
+        <servlet-class>simple.myTerm.server.userLoginCheck</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>myTermService</servlet-name>
         <url-pattern>/simple.myTerm.Main/mytermservice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userLoginCheck</servlet-name>
+        <url-pattern>/userLoginCheck</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>welcomeGWT.html</welcome-file>
+        <welcome-file>myTerm.html</welcome-file>
     </welcome-file-list>
 </web-app>
