@@ -4,6 +4,7 @@
  */
 package simple.myTerm.client.Login;
 
+import simple.myTerm.client.Login.View.LoginView;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -20,6 +21,8 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Login.requests.LoginService;
 import simple.myTerm.client.Login.requests.LoginServiceAsync;
+import simple.myTerm.client.Main.cookiesManager.MyTermCookies;
+import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
 import simple.myTerm.shared.UserDto;
 
 /**
@@ -36,6 +39,7 @@ public class MainLogin implements EntryPoint {
     public void onModuleLoad() {
         // quick check  if this user is
         // already authenticated
+        MyTermCookies.initCookie(MyTermCookiesNamespace.UserProfile, "public");
         loginService.isAuthenticated(new AsyncCallback<UserDto>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -46,7 +50,9 @@ public class MainLogin implements EntryPoint {
                 if (user == null) {
                     showLogin();
                 } else {
-                     Window.Location.replace(GWT.getHostPageBaseURL()+"/myTermLoginCtrl");
+//                    Window.alert(user.getRole());
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.UserProfile, user.getRole());
+                    Window.Location.replace(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
                 }
             }
         });
@@ -106,14 +112,15 @@ public class MainLogin implements EntryPoint {
                     //we can take this as a bad attempt
                     //add exceptions or other checks for better UX
                     //we will just enable the form for another try..
-                    view.getMessage().setWidget(new HTML("Wrong! try Email: go"));
+                    view.getMessage().setWidget(new HTML("Wrong! you have x trials left"));
                     enableLogin();
                 } else {
-                     Window.Location.assign(GWT.getHostPageBaseURL()+"myTermLoginCtrl");
+//                    Window.alert(user.getRole());
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.UserProfile, user.getRole());
+                    Window.Location.assign(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
                 }
             }
         });
-
     }
 
     public void disableLogin() {

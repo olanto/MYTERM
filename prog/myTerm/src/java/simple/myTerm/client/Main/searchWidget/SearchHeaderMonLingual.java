@@ -39,31 +39,24 @@ import simple.myTerm.client.Main.langWidget.LangList;
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderBasic extends HorizontalPanel {
+public class SearchHeaderMonLingual extends HorizontalPanel {
 
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
-    public LangList langSrc = new LangList("source");
-    public LangList langTgt = new LangList("target");
+    public LangList lang = new LangList();
     public Button btnSend = new Button("Search");
-    public Button inventory = new Button("Inventory");
     public Button logout = new Button("Logout");
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
-    public SearchHeaderBasic() {
+    public SearchHeaderMonLingual() {
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
-        add(new Label("Source Lang. "));
-        add(langSrc);
-        add(new HTML("&nbsp;"));
-        add(new Label("Target Lang. "));
-        add(langTgt);
+        add(new Label("Language "));
+        add(lang);
         add(new HTML("&nbsp;"));
         add(btnSend);
-        add(new HTML("&nbsp;"));
-        add(inventory);
         add(new HTML("&nbsp;"));
         add(logout);
         setStyleName("searchMenu");

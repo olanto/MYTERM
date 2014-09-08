@@ -30,4 +30,5 @@ public class MyTermCookiesNamespace {
     public static String MyTermlangS = "MyTermlangS";
     public static String MyTermlangT = "MyTermlangT";
     public static String InterfaceLanguage = "InterfaceLanguage";
+    public static String UserProfile = "UserProfile";
 }

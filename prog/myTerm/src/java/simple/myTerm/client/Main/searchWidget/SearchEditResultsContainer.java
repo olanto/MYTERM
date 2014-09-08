@@ -22,21 +22,22 @@
 package simple.myTerm.client.Main.searchWidget;
 
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import simple.myTerm.client.Main.termEditWidget.TermForm;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchResultsContainer extends HorizontalPanel {
+public class SearchEditResultsContainer extends HorizontalPanel {
 
     public ScrollPanel termsPan = new ScrollPanel();
     public ScrollPanel resultsPan = new ScrollPanel();
-    public HTMLPanel res = new HTMLPanel("");
+    public TermForm res = new TermForm();
 
-    public SearchResultsContainer() {
+    public SearchEditResultsContainer() {
         add(termsPan);
         add(resultsPan);
         resultsPan.add(res);

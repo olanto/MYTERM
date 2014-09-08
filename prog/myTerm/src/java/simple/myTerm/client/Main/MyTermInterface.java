@@ -23,8 +23,15 @@ package simple.myTerm.client.Main;
 
 import simple.myTerm.client.Main.searchWidget.MyTermSearchWidget;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import simple.myTerm.client.Main.EditorWidget.EditorInterfaceWidget;
+import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
 
 /**
  * Main entry point.
@@ -33,6 +40,7 @@ import com.google.gwt.user.client.ui.RootPanel;
  */
 public class MyTermInterface implements EntryPoint {
 
+    public String UserProfile = Cookies.getCookie(MyTermCookiesNamespace.UserProfile);
     /**
      * Creates a new instance of MyTermInterface
      */
@@ -45,7 +53,12 @@ public class MyTermInterface implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        MyTermSearchWidget vpan = new MyTermSearchWidget();
-        RootPanel.get().add((IsWidget) vpan);
+        VerticalPanel vpan = null;
+        if (UserProfile.contains("public")) {
+            vpan = new MyTermSearchWidget();
+        } else if (UserProfile.contains("inputter")) {
+            vpan = new EditorInterfaceWidget();
+        }
+        RootLayoutPanel.get().add(vpan);
     }
 }

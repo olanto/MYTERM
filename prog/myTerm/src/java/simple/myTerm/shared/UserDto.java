@@ -46,6 +46,10 @@ public class UserDto implements IsSerializable {
         return email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -56,5 +60,9 @@ public class UserDto implements IsSerializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

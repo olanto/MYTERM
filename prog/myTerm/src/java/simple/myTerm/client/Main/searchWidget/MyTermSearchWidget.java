@@ -54,7 +54,6 @@ public class MyTermSearchWidget extends VerticalPanel {
     public MyTermSearchWidget() {
         add(searchMenu);
         add(resultsPanel);
-
         // Create an asynchronous callback to handle the result.
         termCallback = new AsyncCallback<String>() {
             @Override
