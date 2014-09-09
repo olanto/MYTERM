@@ -71,4 +71,9 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return languages;
     }
+
+    @Override
+    public ArrayList<String> getResources() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -35,5 +35,6 @@ public interface myTermService extends RemoteService {
     public String getSearchResult(String s, String ls, String lt);
     public ArrayList<String> getResults(String s, String ls, String lt);
     public ArrayList<String> getLanguages();
+    public ArrayList<String> getResources();
     public String getInventory();
 }

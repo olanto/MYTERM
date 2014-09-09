@@ -34,4 +34,5 @@ public interface myTermServiceAsync {
     public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
     public void getInventory(AsyncCallback<String> callback);
     public void getLanguages(AsyncCallback<ArrayList<String>> asyncCallback);
+    public void getResources(AsyncCallback<ArrayList<String>> asyncCallback);
 }

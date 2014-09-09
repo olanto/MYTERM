@@ -21,7 +21,7 @@
  */
 package simple.myTerm.client.Main;
 
-import simple.myTerm.client.Main.searchWidget.MyTermSearchWidget;
+import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Window;

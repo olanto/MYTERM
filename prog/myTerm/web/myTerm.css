@@ -9,11 +9,63 @@
     margin-top: 10px;
     background-color:#EFF6FF;
     margin-bottom: 20px;
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border:1px dashed black;
+}
+.langSetForm{
+    margin-top: 10px;
+    background-color: floralwhite;
+    margin-bottom: 20px;
+}
+.conceptForm{
+    margin-top: 10px;
+    background-color: beige;
+    margin-bottom: 20px;
 }
 .termForm{
     margin-top: 10px;
-    background-color:#EFF6FF;
+    background-color: honeydew;
     margin-bottom: 20px;
+}
+.ccontainerForm{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:2px dashed black;
+    alignment-adjust: central;
+}
+.lscontainerForm{
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:2px dotted red;
+    alignment-adjust: central;
+
+}
+.tcontainerForm{
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:1px solid blue;
+    alignment-adjust: central;
+
 }
 .gwt-Anchor{
     cursor: pointer;
@@ -35,6 +87,46 @@
     width:25%
 }
 .panel td {
+    border:1px solid #6495ed;
+    padding:5px;
+    text-align:left;
+}
+.cpanel{
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.cpanel p {
+    color: blue;
+}
+.cpanel th {
+    border:1px dotted green;
+    padding:5px;
+    background-color: beige;
+    width:50%
+}
+.cpanel td {
+    border:1px solid #6495ed;
+    padding:5px;
+    text-align:left;
+}
+.lspanel{
+    margin-top: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.lspanel p {
+    color: blue;
+}
+.lspanel th {
+    border:1px dotted green;
+    padding:5px;
+    background-color: beige;
+    width:35%
+}
+.lspanel td {
     border:1px solid #6495ed;
     padding:5px;
     text-align:left;
