@@ -65,7 +65,43 @@
     padding-bottom: 20px;
     border:1px solid blue;
     alignment-adjust: central;
+}
+.cexpcontainerForm{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:2px dashed red;
+    alignment-adjust: central;
+}
+.lsexpcontainerForm{
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:2px dotted greenyellow;
+    alignment-adjust: central;
 
+}
+.texpcontainerForm{
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    border:1px solid green;
+    alignment-adjust: central;
 }
 .gwt-Anchor{
     cursor: pointer;

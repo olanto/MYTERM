@@ -19,31 +19,30 @@
  *
  *********
  */
-package simple.myTerm.client.Main.searchWidget;
+package simple.myTerm.client.Main.ValidatorWidget;
 
+import simple.myTerm.client.Main.EditorWidget.*;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import simple.myTerm.client.Main.termEditWidget.TermForm;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchEditResultsContainer extends HorizontalPanel {
+public class ExpSearchResultsContainer extends HorizontalPanel {
 
     public ScrollPanel termsPan = new ScrollPanel();
     public ScrollPanel resultsPan = new ScrollPanel();
-    public TermForm res = new TermForm();
+    public ExpConceptPanel res = new ExpConceptPanel();
 
-    public SearchEditResultsContainer() {
+    public ExpSearchResultsContainer() {
         add(termsPan);
         add(resultsPan);
         resultsPan.add(res);
-        resultsPan.setPixelSize(Window.getClientWidth() / 2, (Window.getClientHeight() - 90));
+        resultsPan.setPixelSize(Window.getClientWidth() * 3 / 4, (Window.getClientHeight() - 90));
         termsPan.setPixelSize(Window.getClientWidth() / 4, (Window.getClientHeight() - 90));
         setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);
-        setCellHorizontalAlignment(resultsPan, HorizontalPanel.ALIGN_RIGHT);
+        setCellHorizontalAlignment(resultsPan, HorizontalPanel.ALIGN_CENTER);
     }
 }

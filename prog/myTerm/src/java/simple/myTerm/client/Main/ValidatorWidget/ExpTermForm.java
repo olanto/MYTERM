@@ -19,7 +19,7 @@
  *
  *********
  */
-package simple.myTerm.client.Main.termEditWidget;
+package simple.myTerm.client.Main.ValidatorWidget;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -28,7 +28,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
@@ -36,7 +35,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  * @author nizar ghoula - simple
  */
-public class TermForm extends VerticalPanel {
+public class ExpTermForm extends VerticalPanel {
 
     private boolean expanded = false;
     private HorizontalPanel desc = new HorizontalPanel();
@@ -44,38 +43,41 @@ public class TermForm extends VerticalPanel {
     private Grid rst = new Grid(8, 2);
     private Anchor more = new Anchor("Expand this...");
     private Label label_frm = new Label("Term's form:");
-    private TextBox text_frm = new TextBox();
+    private Label text_frm = new Label();
     private Label label_src = new Label("Term's fource:");
-    private TextBox text_src = new TextBox();
+    private Label text_src = new Label();
     private Label label_def = new Label("Term's definition:");
-    private TextBox text_def = new TextBox();
+    private Label text_def = new Label();
     private Label label_sdef = new Label("Definition's source:");
-    private TextBox text_sdef = new TextBox();
+    private Label text_sdef = new Label();
     private Label label_usg = new Label("Term's usage:");
-    private TextBox text_usg = new TextBox();
+    private Label text_usg = new Label();
     private Label label_ctxt = new Label("Term's context:");
-    private TextBox text_ctxt = new TextBox();
+    private Label text_ctxt = new Label();
     private Label label_sctxt = new Label("Context's source:");
-    private TextBox text_sctxt = new TextBox();
+    private Label text_sctxt = new Label();
     private Label label_nt = new Label("Note:");
-    private TextBox text_nt = new TextBox();
+    private Label text_nt = new Label();
     private Label label_tp = new Label("Type:");
-    private TextBox text_tp = new TextBox();
+    private Label text_tp = new Label();
     private Label label_pos = new Label("Part of speech:");
-    private TextBox text_pos = new TextBox();
+    private Label text_pos = new Label();
     private Label label_gdr = new Label("Gender:");
-    private TextBox text_gdr = new TextBox();
+    private Label text_gdr = new Label();
     private Label label_st = new Label("Status:");
-    private TextBox text_st = new TextBox();
-    private Button submit = new Button("Submit");
+    private Label text_st = new Label();
+    private HorizontalPanel controls = new HorizontalPanel();
+    public Button hide = new Button("Hide");
 
-    public TermForm() {
+    public ExpTermForm() {
         this.setStyleName("termForm");
         add(desc);
         add(impt);
         add(more);
+        setCellHorizontalAlignment(more, ALIGN_RIGHT);
         add(rst);
-        add(submit);
+        add(controls);
+        controls.add(hide);
         impt.setStyleName("panel");
         rst.setStyleName("panel");
         impt.setCellSpacing(6);
@@ -106,7 +108,8 @@ public class TermForm extends VerticalPanel {
         rst.setWidget(6, 1, text_gdr);
         rst.setWidget(7, 0, label_st);
         rst.setWidget(7, 1, text_st);
-        setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
+        controls.setCellHorizontalAlignment(hide, HorizontalPanel.ALIGN_CENTER);
+
         rst.setVisible(false);
 
         more.addClickHandler(new ClickHandler() {
@@ -122,37 +125,6 @@ public class TermForm extends VerticalPanel {
                     expanded = false;
                 }
             }
-        });
-    }
-
-    public void setReadOnly(boolean editable) {
-        text_frm.setReadOnly(editable);
-        text_src.setReadOnly(editable);
-        text_def.setReadOnly(editable);
-        text_sdef.setReadOnly(editable);
-        text_usg.setReadOnly(editable);
-        text_ctxt.setReadOnly(editable);
-        text_sctxt.setReadOnly(editable);
-        text_nt.setReadOnly(editable);
-        text_tp.setReadOnly(editable);
-        text_pos.setReadOnly(editable);
-        text_gdr.setReadOnly(editable);
-        text_st.setReadOnly(editable);
-    }
-
-    @Override
-    public void clear() {
-        text_frm.setText("");
-        text_src.setText("");
-        text_def.setText("");
-        text_sdef.setText("");
-        text_usg.setText("");
-        text_ctxt.setText("");
-        text_sctxt.setText("");
-        text_nt.setText("");
-        text_tp.setText("");
-        text_pos.setText("");
-        text_gdr.setText("");
-        text_st.setText("");
+        });   
     }
 }

@@ -99,6 +99,14 @@ public class LoginServiceImpl extends LoginCheckServlet implements LoginService 
             //set the current_user for this session
             setUser(user);//see LoginCheckServlet (Parent Class)
 
+        } else if (email.contains("approver")) {
+            user.setEmail(email);
+            user.setId(13);
+            user.setName("valid");
+            user.setRole("approver");
+            //set the current_user for this session
+            setUser(user);//see LoginCheckServlet (Parent Class)
+
         } else {
             user = null;//force showLogin
         }

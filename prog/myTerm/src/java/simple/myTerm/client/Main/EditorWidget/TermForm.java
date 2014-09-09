@@ -138,22 +138,7 @@ public class TermForm extends VerticalPanel {
             }
         });
     }
-
-    public void setReadOnly(boolean editable) {
-        text_frm.setReadOnly(editable);
-        text_src.setReadOnly(editable);
-        text_def.setReadOnly(editable);
-        text_sdef.setReadOnly(editable);
-        text_usg.setReadOnly(editable);
-        text_ctxt.setReadOnly(editable);
-        text_sctxt.setReadOnly(editable);
-        text_nt.setReadOnly(editable);
-        text_tp.setReadOnly(editable);
-        text_pos.setReadOnly(editable);
-        text_gdr.setReadOnly(editable);
-        text_st.setReadOnly(editable);
-    }
-
+    
     public void clearAllText() {
         text_frm.setText("");
         text_src.setText("");

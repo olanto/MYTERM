@@ -19,8 +19,9 @@
  *
  *********
  */
-package simple.myTerm.client.Main.searchWidget;
+package simple.myTerm.client.Main.ValidatorWidget;
 
+import simple.myTerm.client.Main.EditorWidget.*;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -28,18 +29,20 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
+import static com.google.gwt.user.client.ui.HasHorizontalAlignment.ALIGN_JUSTIFY;
+import static com.google.gwt.user.client.ui.HasVerticalAlignment.ALIGN_MIDDLE;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import simple.myTerm.client.Login.requests.LoginService;
 import simple.myTerm.client.Login.requests.LoginServiceAsync;
-import simple.myTerm.client.Main.langWidget.LangList;
+import simple.myTerm.client.Main.languages.LangList;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderMonLingual extends HorizontalPanel {
+public class ExpSearchHeaderMonoLingual extends HorizontalPanel {
 
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
@@ -48,7 +51,10 @@ public class SearchHeaderMonLingual extends HorizontalPanel {
     public Button logout = new Button("Logout");
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
-    public SearchHeaderMonLingual() {
+    public ExpSearchHeaderMonoLingual() {
+        setWidth(Window.getClientWidth() + "px");
+        setVerticalAlignment(ALIGN_MIDDLE);
+        setHorizontalAlignment(ALIGN_JUSTIFY);
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);

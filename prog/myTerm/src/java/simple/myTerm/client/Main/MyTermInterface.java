@@ -24,13 +24,10 @@ package simple.myTerm.client.Main;
 import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Main.EditorWidget.EditorInterfaceWidget;
+import simple.myTerm.client.Main.ValidatorWidget.ApproverInterfaceWidget;
 import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
 
 /**
@@ -58,6 +55,8 @@ public class MyTermInterface implements EntryPoint {
             vpan = new MyTermSearchWidget();
         } else if (UserProfile.contains("inputter")) {
             vpan = new EditorInterfaceWidget();
+        }else if (UserProfile.contains("approver")) {
+            vpan = new ApproverInterfaceWidget();
         }
         RootLayoutPanel.get().add(vpan);
     }
