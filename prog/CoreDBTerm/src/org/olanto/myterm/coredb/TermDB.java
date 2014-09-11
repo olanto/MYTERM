@@ -37,8 +37,9 @@ import org.olanto.myterm.coredb.jpacontroller.TermsJpaController;
  * @author Jacques Guyot
  */
 public class TermDB {
-
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CoreDBTermPU");
+    
+    static String PU="CoreDBTermPU";
+    static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
     static EntityManager em = emf.createEntityManager();
     static DomainsJpaController domainsJC = new DomainsJpaController(TermDB.emf);
     static OwnersJpaController ownersJC = new OwnersJpaController(TermDB.emf);
@@ -47,4 +48,18 @@ public class TermDB {
     static LangsetsJpaController langsetsJC = new LangsetsJpaController(TermDB.emf);
     static LanguagesJpaController languagesJC = new LanguagesJpaController(TermDB.emf);
     static TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
+    
+    public static void restart(){
+        emf=null;
+        emf = Persistence.createEntityManagerFactory(PU);
+      em = emf.createEntityManager();
+      domainsJC = new DomainsJpaController(TermDB.emf);
+      ownersJC = new OwnersJpaController(TermDB.emf);
+      resourcesJC = new ResourcesJpaController(TermDB.emf);
+      conceptsJC = new ConceptsJpaController(TermDB.emf);
+      langsetsJC = new LangsetsJpaController(TermDB.emf);
+      languagesJC = new LanguagesJpaController(TermDB.emf);
+      termsJC = new TermsJpaController(TermDB.emf);
+     
+    }
 }
