@@ -19,24 +19,17 @@
  *
  *********
  */
-package simple.myTerm.client.Main.request;
-
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import java.util.ArrayList;
-import simple.myTerm.client.Main.Langs.Language;
-import simple.myTerm.client.Main.Resources.Resource;
+package simple.myTerm.client.Main.Resources;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-@RemoteServiceRelativePath("mytermservice")
-public interface myTermService extends RemoteService {
-
-    public String getSearchResult(String s, String ls, String lt);
-    public ArrayList<String> getResults(String s, String ls, String lt);
-    public ArrayList<Language> getLanguages();
-    public ArrayList<Resource> getResources();
-    public String getInventory();
+public class Resource {
+    public String id;
+    public String name;
+    public Resource(String id, String name){
+        this.id = id;
+        this.name= name;
+    }
 }

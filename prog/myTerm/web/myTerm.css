@@ -5,6 +5,12 @@
     Description:
         Purpose of the stylesheet follows.
 */
+.sideWidget{
+    background-color: #EFF6FF;
+}
+.containerWidget{
+    background-color: whitesmoke;
+}
 .searchMenu{
     margin-top: 10px;
     background-color:#EFF6FF;

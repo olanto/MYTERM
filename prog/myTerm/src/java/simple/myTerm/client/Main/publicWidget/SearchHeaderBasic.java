@@ -35,7 +35,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import simple.myTerm.client.Login.requests.LoginService;
 import simple.myTerm.client.Login.requests.LoginServiceAsync;
-import simple.myTerm.client.Main.languages.LangList;
+import simple.myTerm.client.Main.Langs.LangList;
+import simple.myTerm.client.Main.Resources.ResourceList;
 
 /**
  *
@@ -47,8 +48,8 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public TextBox searchField = new TextBox();
     public LangList langSrc = new LangList("source");
     public LangList langTgt = new LangList("target");
+    public ResourceList rsrc = new ResourceList();
     public Button btnSend = new Button("Search");
-    public Button inventory = new Button("Inventory");
     public Button logout = new Button("Logout");
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
@@ -61,14 +62,19 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(searchField);
         add(new HTML("&nbsp;"));
         add(new Label("Source Lang. "));
+        add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
         add(new Label("Target Lang. "));
+        add(new HTML("&nbsp;"));
         add(langTgt);
+        add(new HTML("&nbsp;"));
+        add(new Label("Resource "));
+        add(new HTML("&nbsp;"));
+        add(rsrc);
         add(new HTML("&nbsp;"));
         add(btnSend);
         add(new HTML("&nbsp;"));
-        add(inventory);
         add(new HTML("&nbsp;"));
         add(logout);
         setStyleName("searchMenu");

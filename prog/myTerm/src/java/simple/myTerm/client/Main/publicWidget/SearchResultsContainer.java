@@ -39,6 +39,8 @@ public class SearchResultsContainer extends HorizontalPanel {
     public SearchResultsContainer() {
         add(termsPan);
         add(resultsPan);
+        termsPan.setStyleName("sideWidget");
+        resultsPan.setStyleName("containerWidget");
         resultsPan.add(res);
         resultsPan.setPixelSize(Window.getClientWidth() * 3 / 4, (Window.getClientHeight() - 90));
         termsPan.setPixelSize(Window.getClientWidth() / 4, (Window.getClientHeight() - 90));

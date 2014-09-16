@@ -27,6 +27,9 @@ import java.util.List;
 import jpaviewtest.TestView;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Languages;
+import org.olanto.myterm.coredb.entityclasses.Resources;
+import simple.myTerm.client.Main.Langs.Language;
+import simple.myTerm.client.Main.Resources.Resource;
 
 import simple.myTerm.client.Main.request.myTermService;
 
@@ -63,17 +66,22 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<String> getLanguages() {
+    public ArrayList<Language> getLanguages() {
         List<Languages> l = Queries.getLanguages();
-        ArrayList<String> languages = new ArrayList<String>();
+        ArrayList<Language> languages = new ArrayList<Language>();
         for (Languages lang : l) {
-            languages.add(lang.getIdLanguage());
+            languages.add(new Language(lang.getIdLanguage(),lang.getLanguageDefaultName()));
         }
         return languages;
     }
 
     @Override
-    public ArrayList<String> getResources() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Resource> getResources() {
+        List<Resources> l = Queries.getResources();
+        ArrayList<Resource> resources = new ArrayList<Resource>();
+        for (Resources res : l) {
+            resources.add(new Resource(res.getIdResource().toString(),res.getResourceName()));
+        }
+        return resources;
     }
 }

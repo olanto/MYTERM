@@ -21,10 +21,11 @@
  */
 package simple.myTerm.client.Main.ValidatorWidget;
 
-import simple.myTerm.client.Main.EditorWidget.*;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 /**
  *
@@ -34,12 +35,18 @@ public class ExpSearchResultsContainer extends HorizontalPanel {
 
     public ScrollPanel termsPan = new ScrollPanel();
     public ScrollPanel resultsPan = new ScrollPanel();
-    public ExpConceptPanel res = new ExpConceptPanel();
-
+    public ExpConceptPanel expres = new ExpConceptPanel();
+    public VerticalPanel vp = new VerticalPanel();
+    public HTMLPanel res = new HTMLPanel("");
+    
     public ExpSearchResultsContainer() {
         add(termsPan);
         add(resultsPan);
-        resultsPan.add(res);
+        termsPan.setStyleName("sideWidget");
+        resultsPan.setStyleName("containerWidget");
+        resultsPan.add(vp);
+        vp.add(expres);
+        vp.add(res);
         resultsPan.setPixelSize(Window.getClientWidth() * 3 / 4, (Window.getClientHeight() - 90));
         termsPan.setPixelSize(Window.getClientWidth() / 4, (Window.getClientHeight() - 90));
         setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);

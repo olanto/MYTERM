@@ -113,6 +113,13 @@ public class Queries {
         List<Languages> result = query.getResultList();
         return result;
     }
+    
+      public static List<Resources> getResources(){
+        Query query = TermDB.em.createNamedQuery("Resources.findAll");
+        List<Resources> result = query.getResultList();
+        return result;
+    }
+
 
     public static Languages getLanguageID(String idLanguage, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");

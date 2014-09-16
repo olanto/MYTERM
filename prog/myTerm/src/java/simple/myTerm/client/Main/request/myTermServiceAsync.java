@@ -23,6 +23,8 @@ package simple.myTerm.client.Main.request;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import simple.myTerm.client.Main.Langs.Language;
+import simple.myTerm.client.Main.Resources.Resource;
 
 /**
  *
@@ -33,6 +35,6 @@ public interface myTermServiceAsync {
     public void getSearchResult(String s, String ls, String lt, AsyncCallback<String> callback);
     public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
     public void getInventory(AsyncCallback<String> callback);
-    public void getLanguages(AsyncCallback<ArrayList<String>> asyncCallback);
-    public void getResources(AsyncCallback<ArrayList<String>> asyncCallback);
+    public void getLanguages(AsyncCallback<ArrayList<Language>> asyncCallback);
+    public void getResources(AsyncCallback<ArrayList<Resource>> asyncCallback);
 }

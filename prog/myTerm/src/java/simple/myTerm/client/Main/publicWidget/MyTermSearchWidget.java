@@ -70,7 +70,7 @@ public class MyTermSearchWidget extends VerticalPanel {
             @Override
             public void onSuccess(ArrayList<String> result) {
                 createSourceTree(result);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
 
             @Override
@@ -86,27 +86,17 @@ public class MyTermSearchWidget extends VerticalPanel {
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
                 resultsPanel.res.clear();
-                getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termListCallback);
+                getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termListCallback);
             }
         });
         // Listen for the button clicks
-        searchMenu.inventory.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                // Make remote call. Control flow will continue immediately and later
-                // 'callback' will be invoked when the RPC completes.
-                resultsPanel.termsPan.clear();
-                resultsPanel.res.clear();
-                getService().getInventory(termCallback);
-            }
-        });
         searchMenu.searchField.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
                     resultsPanel.res.clear();
-                    getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termListCallback);
+                    getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termListCallback);
                 }
             }
         });
@@ -134,7 +124,7 @@ public class MyTermSearchWidget extends VerticalPanel {
             public void onSelection(SelectionEvent<TreeItem> event) {
                 if (event.getSelectedItem().getText() != null) {
                     resultsPanel.res.clear();
-                    getService().getSearchResult(event.getSelectedItem().getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(event.getSelectedItem().getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
             }
         });

@@ -19,12 +19,15 @@
  *
  *********
  */
-package simple.myTerm.client.Main.ValidatorWidget;
+package simple.myTerm.client.Main.EditorWidget.Add;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Main.Langs.LangList;
 
@@ -33,27 +36,29 @@ import simple.myTerm.client.Main.Langs.LangList;
  *
  * @author nizar ghoula - simple
  */
-public class ExpLangSetForm extends VerticalPanel {
+public class LangSetForm extends VerticalPanel {
 
     private HorizontalPanel desc = new HorizontalPanel();
     private Grid impt = new Grid(3, 2);
     private Label label_lng = new Label("Language:");
     private LangList lang = new LangList();
     private Label label_nt = new Label("Note:");
-    private Label text_nt = new Label();
+    private TextBox text_nt = new TextBox();
     private Label label_sq = new Label("Sequence:");
-    private Label text_sq = new Label();
+    private TextBox text_sq = new TextBox();
     private HorizontalPanel controls = new HorizontalPanel();
-    public Button hide = new Button("Hide");
-    private ExpTermPanel addTerm = new ExpTermPanel();
+    private Button clear = new Button("Clear All");
+    public Button cancel = new Button("Cancel");
+    private AddTermPanel addTerm = new AddTermPanel();
 
-    public ExpLangSetForm() {
+    public LangSetForm() {
         this.setStyleName("langSetForm");
         add(desc);
         add(impt);
         add(controls);
         add(addTerm);
-        controls.add(hide);
+        controls.add(clear);
+        controls.add(cancel);
         impt.setStyleName("lspanel");
         impt.setCellSpacing(6);
         impt.setWidget(0, 0, label_lng);
@@ -62,6 +67,18 @@ public class ExpLangSetForm extends VerticalPanel {
         impt.setWidget(1, 1, text_nt);
         impt.setWidget(2, 0, label_sq);
         impt.setWidget(2, 1, text_sq);
-        controls.setCellHorizontalAlignment(hide, HorizontalPanel.ALIGN_CENTER);
+        controls.setCellHorizontalAlignment(clear, HorizontalPanel.ALIGN_RIGHT);
+        controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
+        clear.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                clearAllText();
+            }
+        });
+    }
+
+    public void clearAllText() {
+        text_nt.setText("");
+        text_sq.setText("");
     }
 }
