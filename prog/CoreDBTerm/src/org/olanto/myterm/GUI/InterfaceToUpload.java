@@ -4,6 +4,11 @@
  */
 package org.olanto.myterm.GUI;
 
+import java.io.PrintStream;
+import javax.swing.JFileChooser;
+import org.olanto.myterm.coredb.TermDB;
+import org.olanto.myterm.parsetbx.LoadInToDB;
+
 /**
  *
  * @author simple
@@ -15,8 +20,17 @@ public class InterfaceToUpload extends javax.swing.JFrame {
      */
     public InterfaceToUpload() {
         initComponents();
+        myInit();
     }
 
+    private  void myInit(){
+ 
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logArea)); 
+        System.setOut(logStream);
+       System.setErr(logStream);
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +40,162 @@ public class InterfaceToUpload extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        XML = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fileName = new javax.swing.JTextField();
+        resourceName = new javax.swing.JTextField();
+        fileChoose = new javax.swing.JButton();
+        startUpload = new javax.swing.JButton();
+        typeChooser = new javax.swing.JComboBox();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        logArea = new javax.swing.JTextArea();
+        Others = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jLabel1.setText("myTerm Upload Manager");
+        jSplitPane1.setTopComponent(jLabel1);
+
+        jLabel2.setText("file Name");
+
+        jLabel3.setText("resource Name");
+
+        fileName.setText("C:/MYTERM/tests/TBX-basic-samples.tbx");
+
+        resourceName.setText("TESTTBX");
+        resourceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameActionPerformed(evt);
+            }
+        });
+
+        fileChoose.setText("...");
+        fileChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseActionPerformed(evt);
+            }
+        });
+
+        startUpload.setText("Start Upload");
+        startUpload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startUploadActionPerformed(evt);
+            }
+        });
+
+        typeChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TBX-BASIC", "XDXF" }));
+
+        logArea.setColumns(20);
+        logArea.setRows(5);
+        jScrollPane3.setViewportView(logArea);
+
+        javax.swing.GroupLayout XMLLayout = new javax.swing.GroupLayout(XML);
+        XML.setLayout(XMLLayout);
+        XMLLayout.setHorizontalGroup(
+            XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(XMLLayout.createSequentialGroup()
+                .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(startUpload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(XMLLayout.createSequentialGroup()
+                        .addComponent(resourceName, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(typeChooser, 0, 197, Short.MAX_VALUE))
+                    .addComponent(fileName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fileChoose))
+            .addGroup(XMLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3))
+        );
+        XMLLayout.setVerticalGroup(
+            XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(XMLLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileChoose))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(resourceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(typeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startUpload)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("XML type", XML);
+
+        javax.swing.GroupLayout OthersLayout = new javax.swing.GroupLayout(Others);
+        Others.setLayout(OthersLayout);
+        OthersLayout.setHorizontalGroup(
+            OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 697, Short.MAX_VALUE)
+        );
+        OthersLayout.setVerticalGroup(
+            OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 275, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Others", Others);
+
+        jSplitPane1.setRightComponent(jTabbedPane1);
+
+        jScrollPane1.setViewportView(jSplitPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fileChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseActionPerformed
+        JFileChooser fileOpen=new JFileChooser();
+        int ret=fileOpen.showDialog(null,"Open File");
+        if (ret==JFileChooser.APPROVE_OPTION){
+            fileName.setText(""+fileOpen.getSelectedFile());
+        }
+    }//GEN-LAST:event_fileChooseActionPerformed
+
+    private void resourceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameActionPerformed
+
+    private void startUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startUploadActionPerformed
+        // TODO add your handling code here:
+  TermDB.restart();
+        String fname=fileName.getText();
+        String resource=resourceName.getText();
+        String type=(String)typeChooser.getSelectedItem();
+        System.out.println("Upload:");
+       System.out.println("   File Name: "+fname);
+        System.out.println("   Resource Name: "+resource);
+        System.out.println("   type: "+type);
+        System.out.println("------------------------------------------------");
+        LoadInToDB.loadAFile(fname,resource,type);
+    }//GEN-LAST:event_startUploadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +232,20 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Others;
+    private javax.swing.JPanel XML;
+    private javax.swing.JButton fileChoose;
+    private javax.swing.JTextField fileName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea logArea;
+    private javax.swing.JTextField resourceName;
+    private javax.swing.JButton startUpload;
+    private javax.swing.JComboBox typeChooser;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,9 +9,11 @@ drop table if exists langsets;
 drop table if exists concepts_domains;
 drop table if exists concepts;
 drop table if exists translations;
+drop table if exists users_languages;
 drop table if exists languages;
 drop table if exists resources_domains;
 drop table if exists domains;
+drop table if exists users_resources;
 drop table if exists resources;
 drop table if exists owners;
 drop table if exists dummy;
@@ -33,11 +35,11 @@ create table owners
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into owners
-  values (0,'anonymous','not defined','','','INACTIVE',null);
+  values (1,'anonymous','not defined','','','INACTIVE',null);
 insert into owners
-  values (1,'jacques','guyot','jacques@olanto.org','aaaabbbb','ACTIVE','ADMIN');
+  values (2,'jacques','guyot','jacques@olanto.org','aaaabbbb','ACTIVE','ADMIN');
 insert into owners
-  values (null,'nizar','ghoula','nizar@olanto.org','fasdfasdfsadf','ACTIVE','ADMIN');
+  values (3,'nizar','ghoula','nizar@olanto.org','fasdfasdfsadf','ACTIVE','ADMIN');
 commit; 
 select * from owners;   
 
@@ -64,6 +66,32 @@ commit;
 select * from resources;   
 
 -- --------------------------------- 
+
+create table users_resources
+ (id_link bigint not null auto_increment,
+  id_resource bigint not null,
+  id_owner bigint  not null,
+  owner_roles varchar(16)  default 'HERITED_BY_OWNER', -- ADMIN, REVISOR, REDACTOR, READER
+  default_resource varchar(16) , -- DEFAULT
+  extra text,
+PRIMARY KEY (id_link),
+CONSTRAINT users_resources_FK1_owners
+   FOREIGN KEY (id_owner)
+   REFERENCES owners (id_owner),
+CONSTRAINT users_resources_FK2_resources
+   FOREIGN KEY (id_resource)
+   REFERENCES resources (id_resource)
+ON DELETE NO ACTION ON UPDATE CASCADE)
+AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
+
+-- --------------------------------- 
+
+
+insert into users_resources values (1,1,1,'HERITED_BY_OWNER','DEFAULT',null);
+insert into users_resources values (2,1,2,'HERITED_BY_OWNER','DEFAULT',null);
+insert into users_resources values (3,1,3,'HERITED_BY_OWNER','DEFAULT',null);
+commit; 
+select * from users_resources; 
 
 create table domains
  (id_domain bigint not null auto_increment,
@@ -125,9 +153,36 @@ insert into languages values ('SW','Swahili');
 commit; 
 select * from languages; 
 
+
+create table users_languages
+ (id_link bigint not null auto_increment,
+  id_language varchar(5)  not null,
+  id_owner bigint  not null,
+   extra text,
+PRIMARY KEY (id_link),
+CONSTRAINT users_languages_FK1_owners
+   FOREIGN KEY (id_owner)
+   REFERENCES owners (id_owner),
+CONSTRAINT users_languages_FK2_languages
+   FOREIGN KEY (id_language)
+   REFERENCES languages (id_language)
+ON DELETE NO ACTION ON UPDATE CASCADE)
+AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
+
+insert into users_languages values (null,'EN',1,null);
+insert into users_languages values (null,'EN',2,null);
+insert into users_languages values (null,'EN',3,null);
+insert into users_languages values (null,'FR',1,null);
+insert into users_languages values (null,'FR',2,null);
+insert into users_languages values (null,'FR',3,null);
+insert into users_languages values (null,'AR',3,null);
+commit; 
+select * from users_languages; 
+
+
 -- --------------------------------- 
 
-translations
+
 create table translations
  (id_language varchar(5)  not null,
   type_obj varchar(32) not null, -- DOMAINS, ...
@@ -450,4 +505,12 @@ select * from descriptors;
 
 create index terms_index_custo2 on terms(id_language,term_form(16));
 
+-- set owners default
 
+update concepts set create_by=1 where create_by is null;
+update concepts set lastmodified_by=1 where lastmodified_by is null;
+
+update terms set create_by=1 where create_by is null;
+update terms set lastmodified_by=1 where lastmodified_by is null;
+
+commit;
