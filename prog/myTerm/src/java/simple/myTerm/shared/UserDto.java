@@ -29,17 +29,22 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class UserDto implements IsSerializable {
 
-    private int id;
-    private String name;
+    private long id;
+    private String firstname;
+    private String lastname;
     private String email;
     private String role;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstname;
+    }
+
+    public String getLastName() {
+        return lastname;
     }
 
     public String getEmail() {
@@ -50,12 +55,16 @@ public class UserDto implements IsSerializable {
         return role;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String fname) {
+        this.firstname = fname;
+    }
+
+    public void setLastName(String lname) {
+        this.lastname = lname;
     }
 
     public void setEmail(String email) {

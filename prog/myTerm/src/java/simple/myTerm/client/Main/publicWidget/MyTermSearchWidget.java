@@ -33,7 +33,6 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import simple.myTerm.client.Main.request.myTermService;
 import simple.myTerm.client.Main.request.myTermServiceAsync;
@@ -112,6 +111,10 @@ public class MyTermSearchWidget extends VerticalPanel {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    public void adjustSize(int height) {
+        resultsPanel.adjustHeight(height - searchMenu.getOffsetHeight());
     }
 
     public static native void fixGwtNav() /*-{

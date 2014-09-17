@@ -19,7 +19,6 @@
 **********/
 package org.olanto.myterm.coredb;
 
-import org.olanto.myterm.coredb.TermEnum.AutoCreate;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 
 /**

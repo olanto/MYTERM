@@ -21,11 +21,7 @@
  */
 package simple.myTerm.client.Main.publicWidget;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import static com.google.gwt.user.client.ui.HasHorizontalAlignment.ALIGN_JUSTIFY;
@@ -33,8 +29,6 @@ import static com.google.gwt.user.client.ui.HasVerticalAlignment.ALIGN_MIDDLE;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import simple.myTerm.client.Login.requests.LoginService;
-import simple.myTerm.client.Login.requests.LoginServiceAsync;
 import simple.myTerm.client.Main.Langs.LangList;
 import simple.myTerm.client.Main.Resources.ResourceList;
 
@@ -50,8 +44,6 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public LangList langTgt = new LangList("target");
     public ResourceList rsrc = new ResourceList();
     public Button btnSend = new Button("Search");
-    public Button logout = new Button("Logout");
-    final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
     public SearchHeaderBasic() {
         setWidth(Window.getClientWidth() + "px");
@@ -75,24 +67,6 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(rsrc);
         add(new HTML("&nbsp;"));
-        add(new HTML("&nbsp;"));
-        add(logout);
         setStyleName("searchMenu");
-        logout.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                loginService.logout(new AsyncCallback() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        Window.alert("Failed to logout user");
-                    }
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        Window.Location.replace(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
-                    }
-                });
-            }
-        });
     }
 }

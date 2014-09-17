@@ -19,17 +19,23 @@
  *
  *********
  */
-package simple.myTerm.client.Main.cookiesManager;
+package simple.myTerm.client.Main.StatusPanels;
+
+import com.google.gwt.user.client.Window;
+import static com.google.gwt.user.client.ui.HasHorizontalAlignment.ALIGN_JUSTIFY;
+import static com.google.gwt.user.client.ui.HasVerticalAlignment.ALIGN_MIDDLE;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class MyTermCookiesNamespace {
+public class FooterStatusPanel extends HorizontalPanel {
 
-    public static String MyTermlangS = "MyTermlangS";
-    public static String MyTermlangT = "MyTermlangT";
-    public static String InterfaceLanguage = "InterfaceLanguage";
-//    public static String UserID = "UserID";
-//    public static String UserName = "UserName";
+    public FooterStatusPanel() {
+        setPixelSize(Window.getClientWidth(), 30);
+        setVerticalAlignment(ALIGN_MIDDLE);
+        setHorizontalAlignment(ALIGN_JUSTIFY);        
+        setStyleName("headerPanel");
+    }
 }

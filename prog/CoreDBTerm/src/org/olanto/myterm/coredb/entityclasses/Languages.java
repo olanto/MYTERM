@@ -87,5 +87,5 @@ public class Languages implements Serializable {
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Languages[ idLanguage=" + idLanguage + " ]";
     }
-    
-}
+
+    }

@@ -85,6 +85,24 @@ public class Queries {
         }
         return result.get(0);
     }
+    
+     public static Owners getOwner(String ownermail, String hash) {
+        Query query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingAndHash");
+        query.setParameter("ownerMailing", ownermail);
+        query.setParameter("ownerHash", hash);
+        List<Owners> result = query.getResultList();
+        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + ownermail);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + ownermail);
+            return null;
+        }
+        return result.get(0);
+    }
+
 
     public static Resources getResourceID(String resourceName, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Resources.findByResourceName");
@@ -127,7 +145,7 @@ public class Queries {
             System.out.println("NO RETURNED VALUES for :" + langID);
             return null;
         }
-        return (Languages) result.get(0);
+        return result.get(0);
     }
 
     public static List<Resources> getResources() {

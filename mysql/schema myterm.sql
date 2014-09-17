@@ -514,3 +514,7 @@ update terms set create_by=1 where create_by is null;
 update terms set lastmodified_by=1 where lastmodified_by is null;
 
 commit;
+
+SET foreign_key_checks = 0; 
+DELETE FROM `myterm`.`owners` WHERE `id_owner`='1001';
+SET foreign_key_checks = 1;

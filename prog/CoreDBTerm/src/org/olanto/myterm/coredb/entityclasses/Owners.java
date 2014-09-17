@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Owners.findByOwnerFirstName", query = "SELECT o FROM Owners o WHERE o.ownerFirstName = :ownerFirstName"),
     @NamedQuery(name = "Owners.findByOwnerLastName", query = "SELECT o FROM Owners o WHERE o.ownerLastName = :ownerLastName"),
     @NamedQuery(name = "Owners.findByOwnerMailing", query = "SELECT o FROM Owners o WHERE o.ownerMailing = :ownerMailing"),
+    @NamedQuery(name = "Owners.findByOwnerMailingAndHash", query = "SELECT o FROM Owners o WHERE o.ownerMailing = :ownerMailing AND o.ownerHash = :ownerHash"),
     @NamedQuery(name = "Owners.findByOwnerHash", query = "SELECT o FROM Owners o WHERE o.ownerHash = :ownerHash"),
     @NamedQuery(name = "Owners.findByOwnerStatus", query = "SELECT o FROM Owners o WHERE o.ownerStatus = :ownerStatus")})
 public class Owners implements Serializable {
@@ -156,5 +157,4 @@ public class Owners implements Serializable {
     public void setOwnerRoles(String ownerRoles) {
         this.ownerRoles = ownerRoles;
     }
-    
 }

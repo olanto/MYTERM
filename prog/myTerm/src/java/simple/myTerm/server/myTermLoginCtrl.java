@@ -73,7 +73,10 @@ public class myTermLoginCtrl extends LoginCheckServlet {
                     + "    </head>\n"
                     + "    <body>\n"
                     + "        <iframe src=\"javascript:''\" id=\"__gwt_historyFrame\" style=\"width:0;height:0;border:0\"></iframe>\n"
-                    + "    </body>\n"
+                    + "    <div id = \"header\"></div>"
+                    + "    <div id = \"main\"></div>"
+                    + "    <div id = \"footer\"></div>"
+                    + "</body>\n"
                     + "</html>");
         }
     }

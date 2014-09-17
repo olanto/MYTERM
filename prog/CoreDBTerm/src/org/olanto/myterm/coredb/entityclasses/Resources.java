@@ -149,5 +149,5 @@ public class Resources implements Serializable {
     public void setResourceNote(String resourceNote) {
         this.resourceNote = resourceNote;
     }
-    
-}
+
+    }

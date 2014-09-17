@@ -5,6 +5,20 @@
     Description:
         Purpose of the stylesheet follows.
 */
+
+.headerPanel{
+    background-color: #4058A1;
+}
+.headerPanel p{
+    color: white;
+    font-size: 18px;
+}
+.headerPanel a{
+    color: white;
+}
+.headerPanel a:hover{
+    color: red;
+}
 .sideWidget{
     background-color: #EFF6FF;
 }
@@ -12,9 +26,9 @@
     background-color: whitesmoke;
 }
 .searchMenu{
-    margin-top: 10px;
+    margin-top: 5px;
     background-color:#EFF6FF;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     height: 50px;
     padding-left: 20px;
     padding-right: 20px;
@@ -174,7 +188,7 @@
     text-align:left;
 }
 .gwt-Tree{
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: aliceblue;
 }
 .gwt-Tree .gwt-TreeItem {

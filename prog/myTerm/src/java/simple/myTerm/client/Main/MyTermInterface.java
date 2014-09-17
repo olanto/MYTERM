@@ -21,14 +21,20 @@
  */
 package simple.myTerm.client.Main;
 
-import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import simple.myTerm.client.Main.EditorWidget.EditorInterfaceWidget;
-import simple.myTerm.client.Main.ValidatorWidget.ApproverInterfaceWidget;
-import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
+import simple.myTerm.client.Login.requests.LoginService;
+import simple.myTerm.client.Login.requests.LoginServiceAsync;
+import simple.myTerm.client.Main.AdminInterface.AdminInterface;
+import simple.myTerm.client.Main.ReaderInterface.ReaderInterface;
+import simple.myTerm.client.Main.RedactorInterface.RedactorInterface;
+import simple.myTerm.client.Main.RevisorInterface.RevisorInterface;
+import simple.myTerm.client.Main.StatusPanels.FooterStatusPanel;
+import simple.myTerm.client.Main.StatusPanels.HeaderStatusPanel;
+import simple.myTerm.shared.UserDto;
 
 /**
  * Main entry point.
@@ -37,10 +43,11 @@ import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
  */
 public class MyTermInterface implements EntryPoint {
 
-    public String UserProfile = Cookies.getCookie(MyTermCookiesNamespace.UserProfile);
     /**
      * Creates a new instance of MyTermInterface
      */
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+
     public MyTermInterface() {
     }
 
@@ -50,14 +57,47 @@ public class MyTermInterface implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-        VerticalPanel vpan = null;
-        if (UserProfile.contains("public")) {
-            vpan = new MyTermSearchWidget();
-        } else if (UserProfile.contains("inputter")) {
-            vpan = new EditorInterfaceWidget();
-        }else if (UserProfile.contains("approver")) {
-            vpan = new ApproverInterfaceWidget();
+        loginService.isAuthenticated(new AsyncCallback<UserDto>() {
+            @Override
+            public void onFailure(Throwable caught) {
+            }
+
+            @Override
+            public void onSuccess(UserDto user) {
+                if (user == null) {
+                    Window.alert("User is lost or session is lost: reload");
+                    Window.Location.assign(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
+                } else {
+                    showMain(user);
+                }
+            }
+        });
+    }
+
+    public void showMain(UserDto user) {
+        HeaderStatusPanel headerPanel = new HeaderStatusPanel(user);
+        RootPanel.get("header").add(headerPanel);
+        switch (user.getRole()) {
+            case "ADMIN":
+                AdminInterface vpan = new AdminInterface(user);
+                RootPanel.get("main").add(vpan);
+                break;
+            case "READER":
+                ReaderInterface rpan = new ReaderInterface();
+                RootPanel.get("main").add(rpan);
+                break;
+            case "REVISOR":
+                RevisorInterface rvpan = new RevisorInterface();
+                RootPanel.get("main").add(rvpan);
+                break;
+            case "REDACTOR":
+                RedactorInterface vdpan = new RedactorInterface();
+                RootPanel.get("main").add(vdpan);
+                break;
         }
-        RootLayoutPanel.get().add(vpan);
+
+        FooterStatusPanel statusPanel = new FooterStatusPanel();
+        RootPanel.get("footer").add(statusPanel);
+
     }
 }
