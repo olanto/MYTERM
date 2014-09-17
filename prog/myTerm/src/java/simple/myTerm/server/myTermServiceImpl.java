@@ -41,21 +41,27 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getSearchResult(String s, String ls, String lt) {
-        String result = "<div class =\"panel\">"
-                + "<p>Results for query</p>"
-                + TestView.getTargetForThis(s, ls, lt)
-                + "</div>";
-        return result;
+        StringBuilder result = new StringBuilder("");
+        result.append("<div class =\"panel\">");
+        result.append("<table>");
+        result.append("<tr>");
+        result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+        result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
+        result.append("<th>Details</th>");
+        result.append("</tr>");
+        result.append(TestView.getTargetForThis(s, ls, lt));
+        result.append("</table>");
+        result.append("</div>");
+        return result.toString();
     }
 
     @Override
     public String getInventory() {
-
-        String result = "<div class =\"panel\">"
-                + "<P>Terminology Manager's Statistics</p>"
-                + TestView.getReslang()
-                + "</div>";
-        return result;
+        StringBuilder result = new StringBuilder("");
+        result.append("<div class =\"panel\">");
+        result.append(TestView.getReslang());
+        result.append("</div>");
+        return result.toString();
     }
 
     @Override
@@ -70,7 +76,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         List<Languages> l = Queries.getLanguages();
         ArrayList<Language> languages = new ArrayList<Language>();
         for (Languages lang : l) {
-            languages.add(new Language(lang.getIdLanguage(),lang.getLanguageDefaultName()));
+            Language li = new Language();
+            li.id = lang.getIdLanguage();
+            li.language = lang.getLanguageDefaultName();
+            languages.add(li);
         }
         return languages;
     }
@@ -80,7 +89,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         List<Resources> l = Queries.getResources();
         ArrayList<Resource> resources = new ArrayList<Resource>();
         for (Resources res : l) {
-            resources.add(new Resource(res.getIdResource().toString(),res.getResourceName()));
+            Resource r = new Resource();
+            r.id = res.getIdResource().toString();
+            r.name = res.getResourceName();
+            resources.add(r);
         }
         return resources;
     }

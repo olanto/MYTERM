@@ -32,6 +32,10 @@ import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
@@ -52,6 +56,7 @@ public class MyTermSearchWidget extends VerticalPanel {
     private static AsyncCallback<ArrayList<String>> termListCallback;
 
     public MyTermSearchWidget() {
+        fixGwtNav();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
@@ -100,6 +105,12 @@ public class MyTermSearchWidget extends VerticalPanel {
                 }
             }
         });
+         History.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                Window.alert("History item :" + event.getValue());
+            }
+        });
     }
 
     private static myTermServiceAsync getService() {
@@ -130,4 +141,13 @@ public class MyTermSearchWidget extends VerticalPanel {
         });
         resultsPanel.termsPan.add(staticTree);
     }
+
+    public static native void fixGwtNav() /*-{
+     $wnd.gwtnav = function(a) {
+     var realhref = decodeURI(a.href.split("#")[1].split("?")[0]);
+     @com.google.gwt.user.client.History::newItem(Ljava/lang/String;)(realhref);
+     return false;
+     }
+     }-*/;
+    
 }

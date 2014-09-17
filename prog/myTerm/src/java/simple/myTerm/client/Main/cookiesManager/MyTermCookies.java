@@ -30,6 +30,7 @@ import simple.myTerm.client.Main.constantsManager.GuiConstant;
  * @author nizar ghoula - simple
  */
 public class MyTermCookies {
+
     public MyTermCookies() {
     }
 

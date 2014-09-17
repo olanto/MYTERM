@@ -21,15 +21,17 @@
  */
 package simple.myTerm.client.Main.Resources;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  *
  * @author nizar ghoula - simple
  */
-public class Resource {
+public class Resource implements IsSerializable {
+
     public String id;
     public String name;
-    public Resource(String id, String name){
-        this.id = id;
-        this.name= name;
+
+    public Resource() {
     }
 }

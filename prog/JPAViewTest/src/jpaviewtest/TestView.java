@@ -38,7 +38,7 @@ public class TestView {
     }
 
     public static String getTargetForThis(String term, String solang, String talang) {
-        System.out.println("param:" + term);
+//        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
         Query query = em.createNamedQuery("VjSourcetarget.findBySource");
@@ -46,28 +46,14 @@ public class TestView {
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
         List<VjSourcetarget> resultQ = query.getResultList();
-
-        res.append("<table>");
-        res.append("<tr>");
-        res.append("<th>" + "Source" + "</th>");
-        res.append("<th>" + "Target" + "</th>");
-        res.append("<th>" + "Lang. Src" + "</th>");
-        res.append("<th>" + "Lang Tgt" + "</td>");
-        res.append("</tr>");
-
+        
         for (VjSourcetarget result : resultQ) {
-
             res.append("<tr>");
-
-            res.append("<td>" + result.getSource() + "</td>");
-            res.append("<td>" + result.getTarget() + "</td>");
-            res.append("<td>" + result.getSolang() + "</td>");
-            res.append("<td>" + result.getTalang() + "</td>");
+            res.append("<td>").append(result.getSource()).append("</td>");
+            res.append("<td>").append(result.getTarget()).append("</td>");
+            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" id=\"ref").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append("Expand for details</a></td>");
             res.append("</tr>");
         }
-        res.append("</table>");
-
-
         return res.toString();
     }
 
@@ -96,17 +82,15 @@ public class TestView {
         res.append("<table>");
         res.append("<caption>" + "Inventory" + "</caption>");
         res.append("<tr>");
-        res.append("<th>" + "Resource" + "</th>");
-        res.append("<th>" + "Language" + "</th>");
-        res.append("<th>" + "Number" + "</th>");
+        res.append("<th>Resource</th>");
+        res.append("<th>Language</th>");
+        res.append("<th>Number</th>");
         res.append("</tr>");
         for (VjReslang result : resultQ) {
-
             res.append("<tr>");
-
-            res.append("<td>" + result.getResourceName() + "</td>");
-            res.append("<td>" + result.getIdLanguage() + "</td>");
-            res.append("<td>" + Long.toString(result.getNbTerms()) + "</td>");
+            res.append("<td>").append(result.getResourceName()).append("</td>");
+            res.append("<td>").append(result.getIdLanguage()).append("</td>");
+            res.append("<td>").append(Long.toString(result.getNbTerms())).append("</td>");
             res.append("</tr>");
         }
         res.append("</table>");

@@ -23,21 +23,9 @@
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>LoginService</servlet-name>
-        <url-pattern>/simple.myTerm.Main/loginservice</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
         <servlet-name>myTermLoginCtrl</servlet-name>
         <url-pattern>/myTermLoginCtrl</url-pattern>
     </servlet-mapping>
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>myTermService</web-resource-name>
-            <url-pattern>/simple.myTerm.Main/*</url-pattern>
-        </web-resource-collection>
-    </security-constraint>
     
     <welcome-file-list>
         <welcome-file>myTerm.html</welcome-file>

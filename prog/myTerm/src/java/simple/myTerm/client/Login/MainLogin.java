@@ -1,6 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********
+ * Copyright © 2013-2014 Olanto Foundation Geneva
+ *
+ * This file is part of myTERM.
+ *
+ * myTERM is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * myCAT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with myTERM. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *********
  */
 package simple.myTerm.client.Login;
 
@@ -50,7 +67,6 @@ public class MainLogin implements EntryPoint {
                 if (user == null) {
                     showLogin();
                 } else {
-//                    Window.alert(user.getRole());
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.UserProfile, user.getRole());
                     Window.Location.replace(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
                 }
@@ -74,7 +90,6 @@ public class MainLogin implements EntryPoint {
             }
         });
 
-        RootLayoutPanel.get().clear();
         RootLayoutPanel.get().add(vp);
         vp.setPixelSize(Window.getClientWidth(), Window.getClientHeight());
         vp.add(view);
@@ -115,7 +130,6 @@ public class MainLogin implements EntryPoint {
                     view.getMessage().setWidget(new HTML("Wrong! you have x trials left"));
                     enableLogin();
                 } else {
-//                    Window.alert(user.getRole());
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.UserProfile, user.getRole());
                     Window.Location.assign(GWT.getHostPageBaseURL() + "myTermLoginCtrl");
                 }

@@ -52,17 +52,26 @@ public class LangList extends ListBox {
 
             @Override
             public void onSuccess(ArrayList<Language> result) {
+                int i = 0, j = 0;
                 for (Language s : result) {
                     addItem(s.language, s.id);
+                    if (s.language.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
+                        i = result.indexOf(s);
+                    }
+                    if (s.language.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT))) {
+                        j = result.indexOf(s);
+                    }
                 }
                 if (type.equals("source")) {
-                    setSelectedIndex(result.indexOf(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS)));
+                    setSelectedIndex(i);
                 } else {
-                    setSelectedIndex(result.indexOf(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT)));
+                    setSelectedIndex(j);
                 }
+
             }
         };
-        this.addChangeHandler(new ChangeHandler() {
+        this.addChangeHandler(
+                new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
                 if (type.equals("source")) {
@@ -72,7 +81,8 @@ public class LangList extends ListBox {
                 }
             }
         });
-        getService().getLanguages(langCallback);
+        getService()
+                .getLanguages(langCallback);
     }
 
     public LangList() {

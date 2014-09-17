@@ -113,13 +113,28 @@ public class Queries {
         List<Languages> result = query.getResultList();
         return result;
     }
-    
-      public static List<Resources> getResources(){
+
+    public static Languages getLanguageByID(String langID) {
+        Query query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");
+        query.setParameter("idLanguage", langID);
+        List<Languages> result = query.getResultList();
+//        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + langID);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + langID);
+            return null;
+        }
+        return (Languages) result.get(0);
+    }
+
+    public static List<Resources> getResources() {
         Query query = TermDB.em.createNamedQuery("Resources.findAll");
         List<Resources> result = query.getResultList();
         return result;
     }
-
 
     public static Languages getLanguageID(String idLanguage, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");
@@ -143,11 +158,9 @@ public class Queries {
                     Logger.getLogger(Queries.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return obj;
-
             } else {
                 return null;
             }
-
         }
         return result.get(0);
     }

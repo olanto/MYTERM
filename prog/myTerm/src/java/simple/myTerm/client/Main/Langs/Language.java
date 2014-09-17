@@ -21,15 +21,17 @@
  */
 package simple.myTerm.client.Main.Langs;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  *
  * @author nizar ghoula - simple
  */
-public class Language {
+public class Language implements IsSerializable {
+
     public String id;
     public String language;
-    public Language(String id, String language){
-        this.id = id;
-        this.language= language;
+
+    public Language() {
     }
 }
