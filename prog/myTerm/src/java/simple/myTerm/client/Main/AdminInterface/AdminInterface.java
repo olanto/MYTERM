@@ -4,35 +4,35 @@
  */
 package simple.myTerm.client.Main.AdminInterface;
 
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.TabPanel;
 import simple.myTerm.client.Main.EditorWidget.WorkspaceWidget;
 import simple.myTerm.client.Main.ValidatorWidget.ApproveWidget;
 import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
-import simple.myTerm.shared.UserDto;
 
 /**
  *
  * @author simple
  */
-public class AdminInterface extends VerticalPanel {
+public class AdminInterface extends TabPanel {
 
     private MyTermSearchWidget bpan = new MyTermSearchWidget();
-//    private WorkspaceWidget wpan = new WorkspaceWidget();
-//    private ApproveWidget apan = new ApproveWidget();
-    TabLayoutPanel tpanel = new TabLayoutPanel(1.5, Unit.EM);
-    public AdminInterface(UserDto user){
-        add(bpan);
-        tpanel.add(bpan, "Browse your Resources");
-//        tpanel.add(wpan, "Workspace");
-//        tpanel.add(apan, "To approve");
-        tpanel.add(new HTML("Under construction!!!"), "System Administration");
+    private WorkspaceWidget wpan = new WorkspaceWidget();
+    private ApproveWidget apan = new ApproveWidget();
+
+    public AdminInterface() {
+        add(bpan, "Browse your Resources");
+        add(wpan, "Workspace");
+        add(apan, "To approve");
+        add(new HTML("Under construction!!!"), "System Administration");
+        selectTab(0);
+        setSize((bpan.getOffsetWidth() - 50) + "px", (bpan.getOffsetHeight() - 100) + "px");
+        setStyleName("tabPanel");
     }
+
     public void adjustSize(int height) {
-        bpan.adjustSize(height);
-//        wpan.adjustSize(height);
-//        apan.adjustSize(height);
+        bpan.adjustSize(height - 100);
+        wpan.adjustSize(height - 150);
+        apan.adjustSize(height - 150);
     }
 }

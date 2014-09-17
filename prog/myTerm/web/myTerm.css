@@ -5,13 +5,15 @@
     Description:
         Purpose of the stylesheet follows.
 */
+.tabPanel{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
 
 .headerPanel{
-    background-color: #4058A1;
-}
-.headerPanel p{
+    background-color: #4058A1;  
     color: white;
-    font-size: 18px;
+    font-size: 14px
 }
 .headerPanel a{
     color: white;

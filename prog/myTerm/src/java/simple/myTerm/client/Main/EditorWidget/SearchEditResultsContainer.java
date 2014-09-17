@@ -51,8 +51,8 @@ public class SearchEditResultsContainer extends HorizontalPanel {
         vp.add(addres);
         vp.add(editres);
         vp.add(res);
-        resultsPan.setPixelSize(Window.getClientWidth() * 3 / 5, (Window.getClientHeight() - 200));
-        termsPan.setPixelSize(Window.getClientWidth() * 2 / 5, (Window.getClientHeight() - 200));
+        resultsPan.setPixelSize((Window.getClientWidth() - 40) * 3 / 5, (Window.getClientHeight() - 250));
+        termsPan.setPixelSize((Window.getClientWidth() - 40) * 2 / 5, (Window.getClientHeight() - 250));
         setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);
         setCellHorizontalAlignment(resultsPan, HorizontalPanel.ALIGN_CENTER);
     }

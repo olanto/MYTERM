@@ -42,7 +42,7 @@ import simple.myTerm.shared.UserDto;
  */
 public class HeaderStatusPanel extends HorizontalPanel {
 
-    public Image logo = new Image("img/olanto-logo.png");
+    public Image logo = new Image("img/olanto.jpg");
     public Anchor logout = new Anchor("Logout");
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
@@ -56,10 +56,10 @@ public class HeaderStatusPanel extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
-        add(new HTML("<p>Welcome to olanto's Terminology Manager</p>"));
+        add(new HTML("Welcome to olanto's Terminology Manager"));
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
-        add(new HTML("<p>User: " + user.getFirstName()+"</p>"));
+        add(new HTML("User: " + user.getFirstName()));
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
         add(logout);

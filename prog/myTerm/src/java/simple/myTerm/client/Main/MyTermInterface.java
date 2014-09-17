@@ -76,28 +76,31 @@ public class MyTermInterface implements EntryPoint {
 
     public void showMain(UserDto user) {
         HeaderStatusPanel headerPanel = new HeaderStatusPanel(user);
+        FooterStatusPanel statusPanel = new FooterStatusPanel();
+
         RootPanel.get("header").add(headerPanel);
         switch (user.getRole()) {
             case "ADMIN":
-                AdminInterface vpan = new AdminInterface(user);
+                AdminInterface vpan = new AdminInterface();
                 RootPanel.get("main").add(vpan);
+                vpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
                 break;
             case "READER":
                 ReaderInterface rpan = new ReaderInterface();
                 RootPanel.get("main").add(rpan);
+                rpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
                 break;
             case "REVISOR":
                 RevisorInterface rvpan = new RevisorInterface();
                 RootPanel.get("main").add(rvpan);
+                rvpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
                 break;
             case "REDACTOR":
                 RedactorInterface vdpan = new RedactorInterface();
                 RootPanel.get("main").add(vdpan);
+                vdpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
                 break;
         }
-
-        FooterStatusPanel statusPanel = new FooterStatusPanel();
         RootPanel.get("footer").add(statusPanel);
-
     }
 }
