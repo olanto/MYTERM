@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSourcetarget;
+import org.olanto.myterm.coredb.Queries;
 
 /**
  *
@@ -46,12 +48,12 @@ public class TestView {
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
         List<VjSourcetarget> resultQ = query.getResultList();
-        
+
         for (VjSourcetarget result : resultQ) {
             res.append("<tr>");
             res.append("<td>").append(result.getSource()).append("</td>");
             res.append("<td>").append(result.getTarget()).append("</td>");
-            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" id=\"ref").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append("Expand for details</a></td>");
+            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append("Expand for details</a></td>");
             res.append("</tr>");
         }
         return res.toString();
@@ -95,6 +97,36 @@ public class TestView {
         }
         res.append("</table>");
 
+        return res.toString();
+    }
+
+    public static String getTargetForThis(long conceptID) {
+//        System.out.println("param:" + term);
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query = em.createNamedQuery("VjConceptdetail.findByIdConcept");
+        query.setParameter("idConcept", conceptID);
+        List<VjConceptdetail> resultQ = query.getResultList();
+
+        res.append("<table>");
+        res.append("<caption>" + "Details" + "</caption>");
+        res.append("<tr>");
+        res.append("<th>Language</th>");
+        res.append("<th>Term</th>");
+        res.append("<th>Source</th>");
+        res.append("<th>Definition</th>");
+        res.append("<th>Note</th>");
+        res.append("</tr>");
+        for (VjConceptdetail result : resultQ) {
+            res.append("<tr>");
+            res.append("<td>").append("&nbsp").append(Queries.getLanguageByID(result.getIdLanguage()).getLanguageDefaultName()).append("</td>");
+            res.append("<td>").append("&nbsp").append(result.getTermForm()).append("</td>");
+            res.append("<td>").append("&nbsp").append(result.getTermSource()).append("</td>");
+            res.append("<td>").append("&nbsp").append(result.getTermDefinition()).append("</td>");
+            res.append("<td>").append("&nbsp").append(result.getTermNote()).append("</td>");
+            res.append("</tr>");
+        }
+        res.append("</table>");
         return res.toString();
     }
 }

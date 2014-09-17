@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VjSourcetarget.findAll", query = "SELECT v FROM VjSourcetarget v"),
     @NamedQuery(name = "VjSourcetarget.findByUuid", query = "SELECT v FROM VjSourcetarget v WHERE v.uuid = :uuid"),
-    @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang"),
+    @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang"),
     @NamedQuery(name = "VjSourcetarget.findByIdTermSource", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermSource = :idTermSource"),
     @NamedQuery(name = "VjSourcetarget.findBySolang", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang"),
     @NamedQuery(name = "VjSourcetarget.findByTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.target = :target"),

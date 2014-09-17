@@ -34,6 +34,7 @@ import simple.myTerm.client.Main.Resources.Resource;
 @RemoteServiceRelativePath("mytermservice")
 public interface myTermService extends RemoteService {
 
+    public String getdetailsForConcept(long conceptID);
     public String getSearchResult(String s, String ls, String lt);
     public ArrayList<String> getResults(String s, String ls, String lt);
     public ArrayList<Language> getLanguages();

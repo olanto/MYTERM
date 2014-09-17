@@ -33,6 +33,7 @@ import simple.myTerm.client.Main.Resources.Resource;
 public interface myTermServiceAsync {
 
     public void getSearchResult(String s, String ls, String lt, AsyncCallback<String> callback);
+    public void getdetailsForConcept(long concept, AsyncCallback<String> callback);
     public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
     public void getInventory(AsyncCallback<String> callback);
     public void getLanguages(AsyncCallback<ArrayList<Language>> asyncCallback);

@@ -5,6 +5,7 @@
     <class>jpaviewtest.entities.VReslang</class>
     <class>jpaviewtest.entities.VjReslang</class>
     <class>jpaviewtest.entities.VjSourcetarget</class>
+    <class>jpaviewtest.entities.VjConceptdetail</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/myterm?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="x"/>

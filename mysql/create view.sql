@@ -14,6 +14,7 @@ where t1.id_langset=l1.id_langset
    and l2.id_concept=c.id_concept
    and c.id_resource=r.id_resource
    and l1.id_langset!=l2.id_langset
+   and t1.id_term!=t2.id_term
 ;
 
 

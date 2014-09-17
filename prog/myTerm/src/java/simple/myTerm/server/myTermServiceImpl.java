@@ -38,7 +38,7 @@ import simple.myTerm.client.Main.request.myTermService;
  * @author nizar ghoula - simple
  */
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
-
+    
     @Override
     public String getSearchResult(String s, String ls, String lt) {
         StringBuilder result = new StringBuilder("");
@@ -54,7 +54,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</div>");
         return result.toString();
     }
-
+    
     @Override
     public String getInventory() {
         StringBuilder result = new StringBuilder("");
@@ -63,14 +63,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</div>");
         return result.toString();
     }
-
+    
     @Override
     public ArrayList<String> getResults(String s, String ls, String lt) {
         ArrayList<String> termsList = new ArrayList<String>();
         termsList.addAll(TestView.getListForThis(s, ls, lt));
         return termsList;
     }
-
+    
     @Override
     public ArrayList<Language> getLanguages() {
         List<Languages> l = Queries.getLanguages();
@@ -83,7 +83,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return languages;
     }
-
+    
     @Override
     public ArrayList<Resource> getResources() {
         List<Resources> l = Queries.getResources();
@@ -95,5 +95,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             resources.add(r);
         }
         return resources;
+    }
+    
+    @Override
+    public String getdetailsForConcept(long conceptID) {
+        StringBuilder result = new StringBuilder("");
+        result.append("<div class =\"panel\">");
+        result.append(TestView.getTargetForThis(conceptID));
+        result.append("</div>");
+        return result.toString();
     }
 }

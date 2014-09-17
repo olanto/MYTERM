@@ -61,6 +61,8 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
+        add(btnSend);
+        add(new HTML("&nbsp;"));
         add(new Label("Source Lang. "));
         add(new HTML("&nbsp;"));
         add(langSrc);
@@ -69,11 +71,9 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(langTgt);
         add(new HTML("&nbsp;"));
-        add(new Label("Resource "));
+        add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
         add(rsrc);
-        add(new HTML("&nbsp;"));
-        add(btnSend);
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
         add(logout);

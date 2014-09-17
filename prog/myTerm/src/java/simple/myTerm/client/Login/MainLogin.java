@@ -152,5 +152,6 @@ public class MainLogin implements EntryPoint {
         view.getEmailBox().setEnabled(true);
         view.getPasswordBox().setEnabled(true);
         view.getRegisterLink().setEnabled(true);
+        view.getEmailBox().setFocus(true);
     }
 }
