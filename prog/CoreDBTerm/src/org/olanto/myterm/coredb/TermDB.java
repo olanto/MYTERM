@@ -31,6 +31,8 @@ import org.olanto.myterm.coredb.jpacontroller.LanguagesJpaController;
 import org.olanto.myterm.coredb.jpacontroller.OwnersJpaController;
 import org.olanto.myterm.coredb.jpacontroller.ResourcesJpaController;
 import org.olanto.myterm.coredb.jpacontroller.TermsJpaController;
+import org.olanto.myterm.coredb.jpacontroller.UsersLanguagesJpaController;
+import org.olanto.myterm.coredb.jpacontroller.UsersResourcesJpaController;
 
 /**
  *
@@ -48,6 +50,8 @@ public class TermDB {
     static LangsetsJpaController langsetsJC = new LangsetsJpaController(TermDB.emf);
     static LanguagesJpaController languagesJC = new LanguagesJpaController(TermDB.emf);
     static TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
+    static UsersLanguagesJpaController usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
+    static UsersResourcesJpaController usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
     
     public static void restart(){
         emf=null;

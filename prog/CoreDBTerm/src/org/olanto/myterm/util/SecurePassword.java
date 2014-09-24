@@ -36,9 +36,7 @@ class SecurePassword {
         System.out.println("test =" + checkPassword(pwd, hash) + " pwd= " + pwd + " hash= " + hash);
         pwd = "PASSWORD";
         System.out.println("test =" + checkPassword(pwd, hash) + " pwd= " + pwd + " hash= " + hash);
-
-
-    }
+   }
 
     public static String encryptPassword(String pwd) {
         try {
