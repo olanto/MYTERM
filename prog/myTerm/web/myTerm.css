@@ -6,7 +6,7 @@
         Purpose of the stylesheet follows.
 */
 .tabPanel{
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -32,96 +32,96 @@
     background-color:#EFF6FF;
     margin-bottom: 5px;
     height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
     border:1px dashed black;
 }
 .langSetForm{
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: floralwhite;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .conceptForm{
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: beige;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .termForm{
-    margin-top: 10px;
+    margin-top: 5px;
     background-color: honeydew;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .ccontainerForm{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    border:2px dashed black;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border:1px dashed black;
     alignment-adjust: central;
 }
 .lscontainerForm{
-    margin-top: 20px;
-    margin-left: 100px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    border:2px dotted red;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border:1px dotted red;
     alignment-adjust: central;
 
 }
 .tcontainerForm{
-    margin-top: 20px;
-    margin-left: 200px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
     border:1px solid blue;
     alignment-adjust: central;
 }
 .cexpcontainerForm{
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    border:2px dashed red;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border:1px dashed red;
     alignment-adjust: central;
 }
 .lsexpcontainerForm{
-    margin-top: 20px;
-    margin-left: 100px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    border:2px dotted greenyellow;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border:1px dotted greenyellow;
     alignment-adjust: central;
 
 }
 .texpcontainerForm{
-    margin-top: 20px;
-    margin-left: 200px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
     border:1px solid green;
     alignment-adjust: central;
 }
@@ -131,9 +131,9 @@
 }
 .panel{
     margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 .panel p {
     color: blue;
@@ -151,9 +151,9 @@
 }
 .cpanel{
     margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 .cpanel p {
     color: blue;
@@ -171,9 +171,9 @@
 }
 .lspanel{
     margin-top: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
 }
 .lspanel p {
     color: blue;

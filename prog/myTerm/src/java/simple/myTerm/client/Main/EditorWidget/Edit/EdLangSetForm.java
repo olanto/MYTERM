@@ -21,8 +21,6 @@
  */
 package simple.myTerm.client.Main.EditorWidget.Edit;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -47,17 +45,13 @@ public class EdLangSetForm extends VerticalPanel {
     private Label label_sq = new Label("Sequence:");
     private TextBox text_sq = new TextBox();
     private HorizontalPanel controls = new HorizontalPanel();
-    private Button clear = new Button("Clear All");
     public Button cancel = new Button("Cancel");
-    private EditTermPanel addTerm = new EditTermPanel();
 
     public EdLangSetForm() {
         this.setStyleName("langSetForm");
         add(desc);
         add(impt);
         add(controls);
-        add(addTerm);
-        controls.add(clear);
         controls.add(cancel);
         impt.setStyleName("lspanel");
         impt.setCellSpacing(6);
@@ -67,14 +61,7 @@ public class EdLangSetForm extends VerticalPanel {
         impt.setWidget(1, 1, text_nt);
         impt.setWidget(2, 0, label_sq);
         impt.setWidget(2, 1, text_sq);
-        controls.setCellHorizontalAlignment(clear, HorizontalPanel.ALIGN_RIGHT);
         controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
-        clear.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                clearAllText();
-            }
-        });
     }
 
     public void clearAllText() {

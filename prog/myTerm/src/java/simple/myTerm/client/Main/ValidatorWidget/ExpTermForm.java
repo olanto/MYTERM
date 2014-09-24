@@ -44,7 +44,7 @@ public class ExpTermForm extends VerticalPanel {
     private Anchor more = new Anchor("Expand this...");
     private Label label_frm = new Label("Term's form:");
     private Label text_frm = new Label();
-    private Label label_src = new Label("Term's fource:");
+    private Label label_src = new Label("Term's source:");
     private Label text_src = new Label();
     private Label label_def = new Label("Term's definition:");
     private Label text_def = new Label();

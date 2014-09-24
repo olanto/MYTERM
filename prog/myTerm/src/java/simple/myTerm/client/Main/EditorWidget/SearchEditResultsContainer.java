@@ -22,12 +22,9 @@
 package simple.myTerm.client.Main.EditorWidget;
 
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import simple.myTerm.client.Main.EditorWidget.Add.AddConceptPanel;
-import simple.myTerm.client.Main.EditorWidget.Edit.EditConceptPanel;
 
 /**
  *
@@ -37,27 +34,26 @@ public class SearchEditResultsContainer extends HorizontalPanel {
 
     public ScrollPanel termsPan = new ScrollPanel();
     public ScrollPanel resultsPan = new ScrollPanel();
-    public AddConceptPanel addres = new AddConceptPanel();
-    public EditConceptPanel editres = new EditConceptPanel();
-    public HTMLPanel res = new HTMLPanel("");
     public VerticalPanel vp = new VerticalPanel();
+    public VerticalPanel vptop = new VerticalPanel();
 
     public SearchEditResultsContainer() {
         add(termsPan);
-        add(resultsPan);
+        add(vp);
+        vp.add(vptop);
+        vp.add(resultsPan);
         termsPan.setStyleName("sideWidget");
         resultsPan.setStyleName("containerWidget");
-        resultsPan.add(vp);
-        vp.add(addres);
-        vp.add(editres);
-        vp.add(res);
         resultsPan.setPixelSize((Window.getClientWidth() - 40) * 3 / 5, (Window.getClientHeight() - 250));
         termsPan.setPixelSize((Window.getClientWidth() - 40) * 2 / 5, (Window.getClientHeight() - 250));
+        vptop.setWidth(((Window.getClientWidth() - 40) * 3 / 5) + "px");
+
         setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);
         setCellHorizontalAlignment(resultsPan, HorizontalPanel.ALIGN_CENTER);
     }
+
     public void adjustHeight(int height) {
-        resultsPan.setHeight(height+"px");
-        termsPan.setHeight(height+"px");
+        resultsPan.setHeight(height + "px");
+        termsPan.setHeight(height + "px");
     }
 }

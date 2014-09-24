@@ -21,14 +21,12 @@
  */
 package simple.myTerm.client.Main.EditorWidget.Edit;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import simple.myTerm.client.Main.Types.Concept;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -37,8 +35,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class EdConceptForm extends VerticalPanel {
 
-    private HorizontalPanel desc = new HorizontalPanel();
-    private Grid impt = new Grid(4, 2);
     private Label label_sfd = new Label("Concept's subject field:");
     private TextBox text_sfd = new TextBox();
     private Label label_def = new Label("Concept's definition:");
@@ -47,37 +43,36 @@ public class EdConceptForm extends VerticalPanel {
     private TextBox text_sdef = new TextBox();
     private Label label_nt = new Label("Note:");
     private TextBox text_nt = new TextBox();
-    private HorizontalPanel controls = new HorizontalPanel();
-    private Button clear = new Button("Clear All");
+    private HorizontalPanel ctrl1 = new HorizontalPanel();
+    private HorizontalPanel ctrl2 = new HorizontalPanel();
     public Button cancel = new Button("Cancel");
-    private EditLangSetPanel addLS = new EditLangSetPanel();
+    public Button submit = new Button("Cancel");
 
     public EdConceptForm() {
         setStyleName("conceptForm");
-        add(desc);
-        add(impt);
-        add(controls);
-        add(addLS);
-        controls.add(clear);
-        controls.add(cancel);
-        impt.setStyleName("cpanel");
-        impt.setCellSpacing(6);
-        impt.setWidget(0, 0, label_sfd);
-        impt.setWidget(0, 1, text_sfd);
-        impt.setWidget(1, 0, label_def);
-        impt.setWidget(1, 1, text_def);
-        impt.setWidget(2, 0, label_sdef);
-        impt.setWidget(2, 1, text_sdef);
-        impt.setWidget(3, 0, label_nt);
-        impt.setWidget(3, 1, text_nt);
-        controls.setCellHorizontalAlignment(clear, HorizontalPanel.ALIGN_RIGHT);
-        controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
-        clear.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                clearAllText();
-            }
-        });
+        add(ctrl1);
+        add(ctrl2);
+        ctrl1.setStyleName("cpanel");
+        ctrl2.setStyleName("cpanel");
+        ctrl1.add(label_sfd);
+        ctrl1.add(text_sfd);
+        ctrl1.add(label_def);
+        ctrl1.add(text_def);
+        ctrl1.add(cancel);
+        ctrl2.add(label_sdef);
+        ctrl2.add(text_sdef);
+        ctrl2.add(label_nt);
+        ctrl2.add(text_nt);
+        ctrl2.add(submit);
+        ctrl1.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
+        ctrl2.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
+    }
+    
+    public void InitFromVariable(Concept c){
+        this.text_sfd.setText(c.subject_field);
+        this.text_def.setText(c.definition);
+        this.text_sdef.setText(c.defintion_source);
+        this.text_nt.setText(c.note);
     }
 
     public void clearAllText() {

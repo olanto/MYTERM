@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import simple.myTerm.client.Main.Types.Term;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -45,7 +46,7 @@ public class EdTermForm extends VerticalPanel {
     private Anchor more = new Anchor("Expand this...");
     private Label label_frm = new Label("Term's form:");
     private TextBox text_frm = new TextBox();
-    private Label label_src = new Label("Term's fource:");
+    private Label label_src = new Label("Term's source:");
     private TextBox text_src = new TextBox();
     private Label label_def = new Label("Term's definition:");
     private TextBox text_def = new TextBox();
@@ -68,8 +69,8 @@ public class EdTermForm extends VerticalPanel {
     private Label label_st = new Label("Status:");
     private TextBox text_st = new TextBox();
     private HorizontalPanel controls = new HorizontalPanel();
-    private Button clear = new Button("Clear All");
     public Button cancel = new Button("Cancel");
+    public Button submit = new Button("Submit");
 
     public EdTermForm() {
         this.setStyleName("termForm");
@@ -79,8 +80,8 @@ public class EdTermForm extends VerticalPanel {
         setCellHorizontalAlignment(more, ALIGN_RIGHT);
         add(rst);
         add(controls);
-        controls.add(clear);
         controls.add(cancel);
+        controls.add(submit);
         impt.setStyleName("panel");
         rst.setStyleName("panel");
         impt.setCellSpacing(6);
@@ -111,7 +112,6 @@ public class EdTermForm extends VerticalPanel {
         rst.setWidget(6, 1, text_gdr);
         rst.setWidget(7, 0, label_st);
         rst.setWidget(7, 1, text_st);
-        controls.setCellHorizontalAlignment(clear, HorizontalPanel.ALIGN_RIGHT);
         controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
 
         rst.setVisible(false);
@@ -130,13 +130,21 @@ public class EdTermForm extends VerticalPanel {
                 }
             }
         });
-        clear.addClickHandler(new ClickHandler() {
+    }
 
-            @Override
-            public void onClick(ClickEvent event) {
-                clearAllText();
-            }
-        });
+    public void initFormVariable(Term t) {
+        text_frm.setText(t.form);
+        text_src.setText(t.source);
+        text_def.setText(t.definition);
+        text_sdef.setText(t.definition_source);
+        text_usg.setText(t.usage);
+        text_ctxt.setText(t.context);
+        text_sctxt.setText(t.context_source);
+        text_nt.setText(t.note);
+        text_tp.setText(t.type);
+        text_pos.setText(t.part_of_speech);
+        text_gdr.setText(t.gender);
+        text_st.setText(t.status);
     }
     
     public void clearAllText() {

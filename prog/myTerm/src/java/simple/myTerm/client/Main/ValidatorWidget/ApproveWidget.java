@@ -10,15 +10,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Tree;
-import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import java.util.ArrayList;
+import static simple.myTerm.client.Main.publicWidget.MyTermSearchWidget.fixGwtNav;
 import simple.myTerm.client.Main.publicWidget.SearchHeaderBasic;
 import simple.myTerm.client.Main.request.myTermService;
 import simple.myTerm.client.Main.request.myTermServiceAsync;
@@ -32,13 +31,26 @@ public class ApproveWidget extends VerticalPanel {
     private SearchHeaderBasic searchMenu = new SearchHeaderBasic();
     private ExpSearchResultsContainer resultsPanel = new ExpSearchResultsContainer();
     private static AsyncCallback<String> termCallback;
-    private static AsyncCallback<ArrayList<String>> termListCallback;
+    private static AsyncCallback<String> conceptCallback;
 
     public ApproveWidget() {
+
+        fixGwtNav();
         add(searchMenu);
         add(resultsPanel);
-
+        // Create an asynchronous callback to handle the result.
         termCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                resultsPanel.termsPan.add(new HTML(result));
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                resultsPanel.termsPan.add(new Label("Communication failed"));
+            }
+        };
+        conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 resultsPanel.res.add(new HTML(result));
@@ -49,18 +61,6 @@ public class ApproveWidget extends VerticalPanel {
                 resultsPanel.res.add(new Label("Communication failed"));
             }
         };
-        termListCallback = new AsyncCallback<ArrayList<String>>() {
-            @Override
-            public void onSuccess(ArrayList<String> result) {
-                createSourceTree(result);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termCallback);
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                resultsPanel.termsPan.add(new Label("Communication failed"));
-            }
-        };
         // Listen for the button clicks
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
@@ -69,17 +69,27 @@ public class ApproveWidget extends VerticalPanel {
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
                 resultsPanel.res.clear();
-                getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termListCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
         });
+        // Listen for the button clicks
         searchMenu.searchField.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
                     resultsPanel.res.clear();
-                    getService().getResults(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termListCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
+            }
+        });
+        searchMenu.searchField.setFocus(true);
+        History.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                resultsPanel.res.clear();
+                getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
+
             }
         });
     }
@@ -92,28 +102,11 @@ public class ApproveWidget extends VerticalPanel {
         resultsPanel.adjustHeight(height - searchMenu.getOffsetHeight());
     }
 
-    private void createSourceTree(ArrayList<String> terms) {
-// Create the tree
-        Tree staticTree = new Tree();
-        staticTree.setStyleName("gwt-Tree");
-        for (int i = 0; i < terms.size(); i++) {
-            String termdetails = terms.get(i);
-            TreeItem docItem = new TreeItem();
-            docItem.setStyleName("gwt-TreeItem");
-            docItem.setTitle(termdetails);
-            docItem.setText(termdetails);
-            docItem.setHTML(termdetails);
-            staticTree.addItem(docItem);
-        }
-        staticTree.addSelectionHandler(new SelectionHandler<TreeItem>() {
-            @Override
-            public void onSelection(SelectionEvent<TreeItem> event) {
-                if (event.getSelectedItem().getText() != null) {
-                    resultsPanel.res.clear();
-                    getService().getSearchResult(event.getSelectedItem().getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getItemText(searchMenu.langTgt.getSelectedIndex()), termCallback);
-                }
-            }
-        });
-        resultsPanel.termsPan.add(staticTree);
-    }
+    public static native void fixGwtNav() /*-{
+     $wnd.gwtnav = function(a) {
+     var realhref = decodeURI(a.href.split("#")[1].split("?")[0]);
+     @com.google.gwt.user.client.History::newItem(Ljava/lang/String;)(realhref);
+     return false;
+     }
+     }-*/;
 }

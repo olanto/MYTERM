@@ -4,9 +4,7 @@
  */
 package simple.myTerm.client.Main.RevisorInterface;
 
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TabPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Main.EditorWidget.WorkspaceWidget;
 import simple.myTerm.client.Main.ValidatorWidget.ApproveWidget;
 import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
