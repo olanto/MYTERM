@@ -109,6 +109,10 @@ public class Terms implements Serializable {
     private Integer seq;
     @Column(name = "extra")
     private String extra;
+    @Column(name = "extcrossref")
+    private String extcrossref;
+    @Column(name = "crossref")
+    private String crossref;
 
     public Terms() {
     }
@@ -340,6 +344,34 @@ public class Terms implements Serializable {
     @Override
     public String toString() {
         return "org.olanto.myterm.coredb.entityclasses.Terms[ idTerm=" + idTerm + " ]";
+    }
+
+    /**
+     * @return the extcrossref
+     */
+    public String getExtcrossref() {
+        return extcrossref;
+    }
+
+    /**
+     * @param extcrossref the extcrossref to set
+     */
+    public void setExtcrossref(String extcrossref) {
+        this.extcrossref = extcrossref;
+    }
+
+    /**
+     * @return the crossref
+     */
+    public String getCrossref() {
+        return crossref;
+    }
+
+    /**
+     * @param crossref the crossref to set
+     */
+    public void setCrossref(String crossref) {
+        this.crossref = crossref;
     }
     
 }

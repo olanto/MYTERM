@@ -209,6 +209,10 @@ select * from translations;
 
 
 -- --------------------------------- 
+alter table concepts add image text;
+alter table concepts add  extcrossref text;
+alter table concepts add  crossref text;
+
 
 create table concepts
  (id_concept bigint not null auto_increment,
@@ -222,6 +226,9 @@ create table concepts
   lastmodified date,
   lastmodified_by bigint,
  extra text,
+ image text,
+ extcrossref text,
+crossref text,
 PRIMARY KEY (id_concept),
 CONSTRAINT concepts_FK1_resources
    FOREIGN KEY (id_resource)
@@ -237,8 +244,8 @@ ON DELETE NO ACTION ON UPDATE CASCADE
 )
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
-insert into concepts values (1,1,null,null,null,null,null,null,null,null,null);
-insert into concepts values (2,1,null,null,null,null,null,null,null,null,null);
+insert into concepts values (1,1,null,null,null,null,null,null,null,null,null,null,null,null);
+insert into concepts values (2,1,null,null,null,null,null,null,null,null,null,null,null,null);
 commit; 
 select * from concepts; 
 
@@ -295,6 +302,9 @@ select * from langsets;
 
 -- --------------------------------- 
 
+alter table terms add  extcrossref text;
+alter table terms add  crossref text;
+
 
 create table terms
  (id_term bigint not null auto_increment,
@@ -320,6 +330,8 @@ create table terms
   status char(1)  not null, -- published, revised, edited
   seq int default 0,
   extra text,
+ extcrossref text,
+crossref text,
 PRIMARY KEY (id_term),
 CONSTRAINT terms_FK1_langset
    FOREIGN KEY (id_langset)
@@ -345,22 +357,22 @@ insert into terms values (1,'EN',1,
  'star','encyclodia ..',
   'a star is ','from dictionary ..','used to ...',
  'a new star in the sky','from book...','here a note','fullForm','noun','neuter','admittedTerm-admn-sts',null,
-  '31.12.2000',1,null,null,'P',1,null);
+  '31.12.2000',1,null,null,'P',1,null,null,null);
 insert into terms values (2,'EN',2,
  'moon','encyclodia ..',
   'a moon is ','from dictionary ..','used to ...',
  'a new moon in the night','from book...','here a note','fullForm','noun','neuter','admittedTerm-admn-sts',null,
-  '31.12.2000',1,null,null,'P',1,null);
+  '31.12.2000',1,null,null,'P',1,null,null,null);
 insert into terms values (3,'FR',3,
  'étoile','encyclodie ..',
   'une étoile est ....','du dictionnaire ..','utilisé ...',
  'une nouvelle étoile dans le ciel','du roman ...','ici une note','fullForm','noun','feminine','admittedTerm-admn-sts',null,
-  '31.12.2000',1,null,null,'P',1,null);
+  '31.12.2000',1,null,null,'P',1,null,null,null);
 insert into terms values (4,'FR',4,
  'lune','encyclodie ..',
   'la lune est le satellite ...','du dictionnaire ..','utilisé ...',
  'la lune est pleine ce soir','du roman ...','ici une note','fullForm','noun','feminine','admittedTerm-admn-sts',null,
-  '31.12.2000',1,null,null,'P',1,null);
+  '31.12.2000',1,null,null,'P',1,null,null,null);
 commit; 
 select * from terms; 
 

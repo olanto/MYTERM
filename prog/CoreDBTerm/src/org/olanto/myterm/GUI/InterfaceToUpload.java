@@ -25,7 +25,7 @@ public class InterfaceToUpload extends javax.swing.JFrame {
 
     private  void myInit(){
  
-        PrintStream logStream = new PrintStream(new OutputStreamForLog(logArea)); 
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logArea,100)); 
         System.setOut(logStream);
        System.setErr(logStream);
 

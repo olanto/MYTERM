@@ -66,6 +66,12 @@ public class Concepts implements Serializable {
     private BigInteger lastmodifiedBy;
     @Column(name = "extra")
     private String extra;
+    @Column(name = "image")
+    private String image;
+    @Column(name = "extcrossref")
+    private String extcrossref;
+    @Column(name = "crossref")
+    private String crossref;
 
     public Concepts() {
     }
@@ -220,5 +226,47 @@ public class Concepts implements Serializable {
      */
     public void setLastmodifiedBy(BigInteger lastmodifiedBy) {
         this.lastmodifiedBy = lastmodifiedBy;
+    }
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the extcrossref
+     */
+    public String getExtcrossref() {
+        return extcrossref;
+    }
+
+    /**
+     * @param extcrossref the extcrossref to set
+     */
+    public void setExtcrossref(String extcrossref) {
+        this.extcrossref = extcrossref;
+    }
+
+    /**
+     * @return the crossref
+     */
+    public String getCrossref() {
+        return crossref;
+    }
+
+    /**
+     * @param crossref the crossref to set
+     */
+    public void setCrossref(String crossref) {
+        this.crossref = crossref;
     }
 }
