@@ -86,6 +86,6 @@ public class EdLangSetForm extends VerticalPanel {
 
     public void initfromvar(Term t) {
         ter.initFormVariable(t);
-
+        lang.selectlanguage(t.language);
     }
 }

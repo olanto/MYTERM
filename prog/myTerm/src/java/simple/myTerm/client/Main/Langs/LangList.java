@@ -41,6 +41,7 @@ import simple.myTerm.client.Main.request.myTermServiceAsync;
 public class LangList extends ListBox {
 
     private static AsyncCallback<ArrayList<Language>> langCallback;
+    private static ArrayList<String> langlist = new ArrayList<String>();
 
     public LangList(final String type) {
         langCallback = new AsyncCallback<ArrayList<Language>>() {
@@ -53,6 +54,7 @@ public class LangList extends ListBox {
             public void onSuccess(ArrayList<Language> result) {
                 int i = 0, j = 0;
                 for (Language s : result) {
+                    langlist.add(s.language);
                     addItem(s.language, s.id);
                     if (s.language.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
                         i = result.indexOf(s);
@@ -93,6 +95,7 @@ public class LangList extends ListBox {
             @Override
             public void onSuccess(ArrayList<Language> result) {
                 for (Language s : result) {
+                    langlist.add(s.language);
                     addItem(s.language, s.id);
                 }
             }
@@ -102,5 +105,16 @@ public class LangList extends ListBox {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    public void selectlanguage(String language) {
+        int i = 0;
+        for (String s : langlist) {
+            if (s.equalsIgnoreCase(language)) {
+                setSelectedIndex(i);
+                break;
+            }
+            i++;
+        }
     }
 }
