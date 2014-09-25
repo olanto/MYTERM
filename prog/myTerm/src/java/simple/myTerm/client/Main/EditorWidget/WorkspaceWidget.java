@@ -42,6 +42,9 @@ public class WorkspaceWidget extends VerticalPanel {
     private VerticalPanel res = new VerticalPanel();
     private Concept c = new Concept();
     private Term t = new Term();
+    private Tree staticTree = new Tree();
+    private EdConceptForm addcpt = new EdConceptForm();
+    private EdLangSetForm addterm = new EdLangSetForm();
 
     public WorkspaceWidget() {
         add(searchMenu);
@@ -54,23 +57,27 @@ public class WorkspaceWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 resultsPanel.termsPan.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
+                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 resultsPanel.termsPan.add(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 res.add(new HTML(result));
                 resultsPanel.add(res);
             }
 
             @Override
             public void onFailure(Throwable caught) {
+                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 res.add(new Label("Communication failed"));
                 resultsPanel.add(res);
             }
@@ -82,6 +89,8 @@ public class WorkspaceWidget extends VerticalPanel {
                 // Make remote call. Control flow will continue immediately and later
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
+                resultsPanel.resultsPan.clear();
+                resultsPanel.vptop.clear();
                 res.clear();
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
@@ -90,8 +99,12 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 resultsPanel.termsPan.clear();
+                resultsPanel.termsPan.add(staticTree);
+                resultsPanel.resultsPan.clear();
+                resultsPanel.vptop.clear();
                 res.clear();
                 createSourceTree(searchMenu.searchField.getText());
+                resultsPanel.resultsPan.setHeight((resultsPanel.termsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
             }
         });
         // Listen for the button clicks
@@ -100,6 +113,8 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
+                    resultsPanel.resultsPan.clear();
+                    resultsPanel.vptop.clear();
                     res.clear();
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
@@ -123,33 +138,31 @@ public class WorkspaceWidget extends VerticalPanel {
     private void createSourceTree(String term) {
 // Create the tree
         String language = searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex());
-        Tree staticTree = new Tree();
         staticTree.setStyleName("gwt-Tree");
         TreeItem docItem = new TreeItem();
         docItem.setStyleName("gwt-TreeItem");
-        docItem.setTitle(term + " : " + language);
-        docItem.setText(term + " : " + language);
-        docItem.setHTML(term + " : " + language);
+        docItem.setTitle(term + ":" + language);
+        docItem.setText(term + ":" + language);
+        docItem.setHTML(term + ":" + language);
         staticTree.addItem(docItem);
-        t.form = term;
-        c.subject_field = "Empty";
 
         staticTree.addSelectionHandler(new SelectionHandler<TreeItem>() {
             @Override
             public void onSelection(SelectionEvent<TreeItem> event) {
-                if (event.getSelectedItem().getText() != null) {
-                    resultsPanel.vptop.clear();
-                    EdConceptForm addcpt = new EdConceptForm();
-                    addcpt.InitFromVariable(c);
-                    resultsPanel.vptop.add(addcpt);
-                    EdLangSetForm addterm = new EdLangSetForm();
-                    resultsPanel.resultsPan.add(addterm);
-                    addterm.initfromvar(t);
-                    resultsPanel.resultsPan.setHeight((resultsPanel.resultsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
-                }
+                int index = event.getSelectedItem().getText().indexOf(":");
+                String term = event.getSelectedItem().getText().substring(0, index);
+                String language = event.getSelectedItem().getText().substring(index+1);
+                t.form = term;
+                t.language=language;
+                c.subject_field = "Empty";
+                resultsPanel.vptop.clear();
+                resultsPanel.resultsPan.clear();
+                resultsPanel.vptop.add(addcpt);
+                addcpt.InitFromVariable(c);
+                resultsPanel.resultsPan.add(addterm);
+                addterm.initfromvar(t);
             }
         });
-        resultsPanel.termsPan.add(staticTree);
     }
 
     public void adjustSize(int height) {
