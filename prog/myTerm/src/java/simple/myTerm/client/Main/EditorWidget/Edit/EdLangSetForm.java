@@ -72,7 +72,7 @@ public class EdLangSetForm extends VerticalPanel {
         cancel.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                clear();
+                setVisible(false);
             }
         });
         addLang.addClickHandler(new ClickHandler() {
