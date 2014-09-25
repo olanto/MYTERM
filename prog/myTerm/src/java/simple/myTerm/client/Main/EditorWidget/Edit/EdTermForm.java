@@ -128,6 +128,12 @@ public class EdTermForm extends VerticalPanel {
                 }
             }
         });
+        cancel.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                setVisible(false);
+            }
+        });
     }
 
     public void initFormVariable(Term t) {
