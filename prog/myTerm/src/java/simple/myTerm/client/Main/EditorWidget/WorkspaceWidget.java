@@ -104,7 +104,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.vptop.clear();
                 res.clear();
                 createSourceTree(searchMenu.searchField.getText());
-                resultsPanel.resultsPan.setHeight((resultsPanel.termsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
             }
         });
         // Listen for the button clicks
@@ -151,16 +150,20 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSelection(SelectionEvent<TreeItem> event) {
                 int index = event.getSelectedItem().getText().indexOf(":");
                 String term = event.getSelectedItem().getText().substring(0, index);
-                String language = event.getSelectedItem().getText().substring(index+1);
+                String language = event.getSelectedItem().getText().substring(index + 1);
                 t.form = term;
-                t.language=language;
+                t.language = language;
                 c.subject_field = "Empty";
                 resultsPanel.vptop.clear();
                 resultsPanel.resultsPan.clear();
                 resultsPanel.vptop.add(addcpt);
+                addcpt.setVisible(true);
                 addcpt.InitFromVariable(c);
                 resultsPanel.resultsPan.add(addterm);
+                addterm.setVisible(true);
                 addterm.initfromvar(t);
+                resultsPanel.resultsPan.setHeight((resultsPanel.termsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
+
             }
         });
     }
