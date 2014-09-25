@@ -21,13 +21,14 @@
  */
 package simple.myTerm.client.Main.EditorWidget.Edit;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Main.Langs.LangList;
+import simple.myTerm.client.Main.Types.Term;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -36,36 +37,55 @@ import simple.myTerm.client.Main.Langs.LangList;
  */
 public class EdLangSetForm extends VerticalPanel {
 
-    private HorizontalPanel desc = new HorizontalPanel();
-    private Grid impt = new Grid(3, 2);
+    private VerticalPanel desc = new VerticalPanel();
+    private HorizontalPanel langs = new HorizontalPanel();
     private Label label_lng = new Label("Language:");
     private LangList lang = new LangList();
-    private Label label_nt = new Label("Note:");
-    private TextBox text_nt = new TextBox();
-    private Label label_sq = new Label("Sequence:");
-    private TextBox text_sq = new TextBox();
     private HorizontalPanel controls = new HorizontalPanel();
-    public Button cancel = new Button("Cancel");
+    public Button addTerm = new Button("Add Term");
+    public Button addLang = new Button("Add Language");
+    public Button cancel = new Button("cancel");
+    EdTermForm ter = new EdTermForm();
 
     public EdLangSetForm() {
         this.setStyleName("langSetForm");
+        add(langs);
         add(desc);
-        add(impt);
+        desc.add(ter);
         add(controls);
+        controls.add(addTerm);
+        controls.add(addLang);
         controls.add(cancel);
-        impt.setStyleName("lspanel");
-        impt.setCellSpacing(6);
-        impt.setWidget(0, 0, label_lng);
-        impt.setWidget(0, 1, lang);
-        impt.setWidget(1, 0, label_nt);
-        impt.setWidget(1, 1, text_nt);
-        impt.setWidget(2, 0, label_sq);
-        impt.setWidget(2, 1, text_sq);
+        langs.setStyleName("lspanel");
+        langs.add(label_lng);
+        langs.add(lang);
+        controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_LEFT);
         controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
+        controls.setCellHorizontalAlignment(addLang, HorizontalPanel.ALIGN_RIGHT);
+        addTerm.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                final EdTermForm tr = new EdTermForm();
+                desc.add(tr);
+            }
+        });
+        cancel.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                clear();
+            }
+        });
+        addLang.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                EdLangSetForm addt = new EdLangSetForm();
+                add(addt);
+            }
+        });
     }
 
-    public void clearAllText() {
-        text_nt.setText("");
-        text_sq.setText("");
+    public void initfromvar(Term t) {
+        ter.initFormVariable(t);
+
     }
 }

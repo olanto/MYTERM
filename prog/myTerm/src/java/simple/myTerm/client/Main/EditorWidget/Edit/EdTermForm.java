@@ -40,7 +40,6 @@ import simple.myTerm.client.Main.Types.Term;
 public class EdTermForm extends VerticalPanel {
 
     private boolean expanded = false;
-    private HorizontalPanel desc = new HorizontalPanel();
     private Grid impt = new Grid(4, 2);
     private Grid rst = new Grid(8, 2);
     private Anchor more = new Anchor("Expand this...");
@@ -74,7 +73,6 @@ public class EdTermForm extends VerticalPanel {
 
     public EdTermForm() {
         this.setStyleName("termForm");
-        add(desc);
         add(impt);
         add(more);
         setCellHorizontalAlignment(more, ALIGN_RIGHT);
@@ -130,6 +128,12 @@ public class EdTermForm extends VerticalPanel {
                 }
             }
         });
+        cancel.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                clear();
+            }
+        });
     }
 
     public void initFormVariable(Term t) {
@@ -146,7 +150,7 @@ public class EdTermForm extends VerticalPanel {
         text_gdr.setText(t.gender);
         text_st.setText(t.status);
     }
-    
+
     public void clearAllText() {
         text_frm.setText("");
         text_src.setText("");

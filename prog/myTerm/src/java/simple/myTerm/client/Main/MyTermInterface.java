@@ -34,6 +34,8 @@ import simple.myTerm.client.Main.RedactorInterface.RedactorInterface;
 import simple.myTerm.client.Main.RevisorInterface.RevisorInterface;
 import simple.myTerm.client.Main.StatusPanels.FooterStatusPanel;
 import simple.myTerm.client.Main.StatusPanels.HeaderStatusPanel;
+import simple.myTerm.client.Main.cookiesManager.MyTermCookies;
+import simple.myTerm.client.Main.cookiesManager.MyTermCookiesNamespace;
 import simple.myTerm.shared.UserDto;
 
 /**
@@ -75,6 +77,7 @@ public class MyTermInterface implements EntryPoint {
     }
 
     public void showMain(UserDto user) {
+        initCookies();
         HeaderStatusPanel headerPanel = new HeaderStatusPanel(user);
         FooterStatusPanel statusPanel = new FooterStatusPanel();
 
@@ -102,5 +105,9 @@ public class MyTermInterface implements EntryPoint {
                 break;
         }
         RootPanel.get("footer").add(statusPanel);
+    }
+    private void initCookies() {
+        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangS, "English");
+        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
     }
 }

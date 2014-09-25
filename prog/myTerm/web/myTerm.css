@@ -13,7 +13,10 @@
 .headerPanel{
     background-color: #4058A1;  
     color: white;
-    font-size: 14px
+    font-size: 14px;
+}
+.gwt-image{
+    height:40px;
 }
 .headerPanel a{
     color: white;

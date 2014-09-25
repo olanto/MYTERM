@@ -31,7 +31,4 @@ public class Language implements IsSerializable {
 
     public String id;
     public String language;
-
-    public Language() {
-    }
 }

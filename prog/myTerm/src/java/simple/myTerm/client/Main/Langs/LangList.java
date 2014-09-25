@@ -43,7 +43,6 @@ public class LangList extends ListBox {
     private static AsyncCallback<ArrayList<Language>> langCallback;
 
     public LangList(final String type) {
-        initCookies();
         langCallback = new AsyncCallback<ArrayList<Language>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -81,8 +80,7 @@ public class LangList extends ListBox {
                 }
             }
         });
-        getService()
-                .getLanguages(langCallback);
+        getService().getLanguages(langCallback);
     }
 
     public LangList() {
@@ -104,10 +102,5 @@ public class LangList extends ListBox {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
-    }
-
-    private void initCookies() {
-        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangS, "English");
-        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
     }
 }

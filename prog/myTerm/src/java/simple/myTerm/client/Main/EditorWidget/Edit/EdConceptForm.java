@@ -46,7 +46,7 @@ public class EdConceptForm extends VerticalPanel {
     private HorizontalPanel ctrl1 = new HorizontalPanel();
     private HorizontalPanel ctrl2 = new HorizontalPanel();
     public Button cancel = new Button("Cancel");
-    public Button submit = new Button("Cancel");
+    public Button submit = new Button("Submit");
 
     public EdConceptForm() {
         setStyleName("conceptForm");
@@ -58,17 +58,17 @@ public class EdConceptForm extends VerticalPanel {
         ctrl1.add(text_sfd);
         ctrl1.add(label_def);
         ctrl1.add(text_def);
-        ctrl1.add(cancel);
         ctrl2.add(label_sdef);
         ctrl2.add(text_sdef);
         ctrl2.add(label_nt);
         ctrl2.add(text_nt);
+        ctrl2.add(cancel);
         ctrl2.add(submit);
-        ctrl1.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
         ctrl2.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
+        ctrl2.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
     }
-    
-    public void InitFromVariable(Concept c){
+
+    public void InitFromVariable(Concept c) {
         this.text_sfd.setText(c.subject_field);
         this.text_def.setText(c.definition);
         this.text_sdef.setText(c.defintion_source);

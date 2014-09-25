@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import simple.myTerm.client.Main.EditorWidget.Edit.EdConceptForm;
-import simple.myTerm.client.Main.EditorWidget.Edit.EdTermForm;
+import simple.myTerm.client.Main.EditorWidget.Edit.EdLangSetForm;
 import simple.myTerm.client.Main.Types.Concept;
 import simple.myTerm.client.Main.Types.Term;
 import static simple.myTerm.client.Main.publicWidget.MyTermSearchWidget.fixGwtNav;
@@ -91,7 +91,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onClick(ClickEvent event) {
                 resultsPanel.termsPan.clear();
                 res.clear();
-                createSourceTree(searchMenu.searchField.getText(), searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex()));
+                createSourceTree(searchMenu.searchField.getText());
             }
         });
         // Listen for the button clicks
@@ -120,8 +120,9 @@ public class WorkspaceWidget extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    private void createSourceTree(String term, String language) {
+    private void createSourceTree(String term) {
 // Create the tree
+        String language = searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex());
         Tree staticTree = new Tree();
         staticTree.setStyleName("gwt-Tree");
         TreeItem docItem = new TreeItem();
@@ -130,7 +131,6 @@ public class WorkspaceWidget extends VerticalPanel {
         docItem.setText(term + " : " + language);
         docItem.setHTML(term + " : " + language);
         staticTree.addItem(docItem);
-        t.language = language;
         t.form = term;
         c.subject_field = "Empty";
 
@@ -142,9 +142,10 @@ public class WorkspaceWidget extends VerticalPanel {
                     EdConceptForm addcpt = new EdConceptForm();
                     addcpt.InitFromVariable(c);
                     resultsPanel.vptop.add(addcpt);
-                    EdTermForm addterm = new EdTermForm();
-                    addterm.initFormVariable(t);
+                    EdLangSetForm addterm = new EdLangSetForm();
                     resultsPanel.resultsPan.add(addterm);
+                    addterm.initfromvar(t);
+                    resultsPanel.resultsPan.setHeight((resultsPanel.resultsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
                 }
             }
         });
