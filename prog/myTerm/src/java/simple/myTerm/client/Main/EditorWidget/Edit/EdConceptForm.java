@@ -21,8 +21,6 @@
  */
 package simple.myTerm.client.Main.EditorWidget.Edit;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -68,12 +66,6 @@ public class EdConceptForm extends VerticalPanel {
         ctrl2.add(submit);
         ctrl2.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
         ctrl2.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
-        cancel.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                setVisible(false);
-            }
-        });
     }
 
     public void InitFromVariable(Concept c) {
