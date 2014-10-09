@@ -40,7 +40,7 @@ public class ConverterPosfix implements Converter {
     private ModelPosfix model;
     ConceptEntry concept;
     Resources resource;
-   static long timer=System.currentTimeMillis();
+    static long timer = System.currentTimeMillis();
 
     public void convertAFileIntoTBX(String fname, String encoding, String resourceName, String modelfile) {
         model = LoadModelPosfix.loadAFileIntoModel(modelfile);
@@ -73,11 +73,11 @@ public class ConverterPosfix implements Converter {
                     System.exit(0);
                 }
                 countconcept++;
-                       if (countconcept % 100 == 0) {
-            timer=System.currentTimeMillis()-timer;
-            System.out.println("processed:" + countconcept+", "+timer+" [ms]");
-            timer=System.currentTimeMillis();
-        }
+                if (countconcept % 100 == 0) {
+                    timer = System.currentTimeMillis() - timer;
+                    System.out.println("processed:" + countconcept + ", " + timer + " [ms]");
+                    timer = System.currentTimeMillis();
+                }
 
                 // open part
                 concept = new ConceptEntry(resource, true);

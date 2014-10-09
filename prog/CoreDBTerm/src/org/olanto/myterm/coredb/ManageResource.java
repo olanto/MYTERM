@@ -46,7 +46,10 @@ public class ManageResource {
                          System.out.println("This ressource doesnt exist :" + resourceName);
                          return;
          }
-         ManageConcept.remove(res);
+         ManageConcept.remove(res); 
+                 
+                 //  ajouter les removes pour les droits des ressources;
+                 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         try {
             TermDB.resourcesJC.destroy(res.getIdResource());
         } catch (NonexistentEntityException ex) {
