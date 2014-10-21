@@ -44,6 +44,6 @@ public class MyTermCookies {
     public static void updateCookie(String name, String value) {
         Date expires = new Date(System.currentTimeMillis() + (1000L * 3600L * 24L * (long) GuiConstant.EXP_DAYS));
         Cookies.removeCookie(name);
-        Cookies.setCookie(name, value, expires);
+        Cookies.setCookie(name, value, expires , null, "/", false);
     }
 }

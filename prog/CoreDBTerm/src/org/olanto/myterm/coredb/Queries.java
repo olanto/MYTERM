@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Query;
 import org.olanto.myterm.coredb.TermEnum.AutoCreate;
+import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
@@ -143,6 +144,22 @@ public class Queries {
         }
         if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + langID);
+            return null;
+        }
+        return result.get(0);
+    }
+    
+     public static Concepts getConceptByID(long ConceptID) {
+        Query query = TermDB.em.createNamedQuery("Concepts.findByIdConcept");
+        query.setParameter("idConcept", ConceptID);
+        List<Concepts> result = query.getResultList();
+//        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + ConceptID);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + ConceptID);
             return null;
         }
         return result.get(0);

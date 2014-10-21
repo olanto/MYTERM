@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjConceptdetail.findByIdLanguage", query = "SELECT v FROM VjConceptdetail v WHERE v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjConceptdetail.findByTermForm", query = "SELECT v FROM VjConceptdetail v WHERE v.termForm = :termForm"),
     @NamedQuery(name = "VjConceptdetail.findByIdConcept", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept")})
+
 public class VjConceptdetail implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")

@@ -6,8 +6,8 @@
         Purpose of the stylesheet follows.
 */
 .tabPanel{
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 .headerPanel{
@@ -16,7 +16,7 @@
     font-size: 14px;
 }
 .gwt-image{
-    height:40px;
+    height:30px;
 }
 .headerPanel a{
     color: white;
@@ -31,100 +31,100 @@
     background-color: whitesmoke;
 }
 .searchMenu{
-    margin-top: 5px;
+    margin-top: 1px;
     background-color:#EFF6FF;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     height: 50px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 1px;
+    padding-right: 1px;
     border:1px dashed black;
 }
 .langSetForm{
-    margin-top: 5px;
+    margin-top: 1px;
     background-color: floralwhite;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
 }
 .conceptForm{
-    margin-top: 5px;
+    margin-top: 1px;
     background-color: beige;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
 }
 .termForm{
-    margin-top: 5px;
+    margin-top: 1px;
     background-color: honeydew;
-    margin-bottom: 5px;
+    margin-bottom: 1px;
 }
 .ccontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px dashed black;
     alignment-adjust: central;
 }
 .lscontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px dotted red;
     alignment-adjust: central;
 
 }
 .tcontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px solid blue;
     alignment-adjust: central;
 }
 .cexpcontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px dashed red;
     alignment-adjust: central;
 }
 .lsexpcontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px dotted greenyellow;
     alignment-adjust: central;
 
 }
 .texpcontainerForm{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
     border:1px solid green;
     alignment-adjust: central;
 }
@@ -133,67 +133,67 @@
     cursor: hand;
 }
 .panel{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
 }
 .panel p {
     color: blue;
 }
 .panel th {
     border:1px dotted #6495ed;
-    padding:5px;
+    padding:1px;
     background-color:#EFF6FF;
     width:25%
 }
 .panel td {
     border:1px solid #6495ed;
-    padding:5px;
+    padding:1px;
     text-align:left;
 }
 .cpanel{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
 }
 .cpanel p {
     color: blue;
 }
 .cpanel th {
     border:1px dotted green;
-    padding:5px;
+    padding:1px;
     background-color: beige;
     width:50%
 }
 .cpanel td {
     border:1px solid #6495ed;
-    padding:5px;
+    padding:1px;
     text-align:left;
 }
 .lspanel{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
 }
 .lspanel p {
     color: blue;
 }
 .lspanel th {
     border:1px dotted green;
-    padding:5px;
+    padding:1px;
     background-color: beige;
     width:35%
 }
 .lspanel td {
     border:1px solid #6495ed;
-    padding:5px;
+    padding:1px;
     text-align:left;
 }
 .gwt-Tree{
-    margin-top: 5px;
+    margin-top: 1px;
     background-color: aliceblue;
 }
 .gwt-Tree .gwt-TreeItem {

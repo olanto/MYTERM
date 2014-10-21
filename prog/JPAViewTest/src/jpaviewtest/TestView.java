@@ -51,9 +51,8 @@ public class TestView {
 
         for (VjSourcetarget result : resultQ) {
             res.append("<tr>");
-            res.append("<td>").append(result.getSource()).append("</td>");
+            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
             res.append("<td>").append(result.getTarget()).append("</td>");
-            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append("...</a></td>");
             res.append("</tr>");
         }
         return res.toString();
