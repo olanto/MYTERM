@@ -45,7 +45,7 @@ import simple.myTerm.client.Main.request.myTermServiceAsync;
 public class MyTermSearchWidget extends VerticalPanel {
 
     private SearchHeaderBasic searchMenu = new SearchHeaderBasic();
-    private SearchResultsContainer resultsPanel = new SearchResultsContainer();
+    private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
 
@@ -68,12 +68,12 @@ public class MyTermSearchWidget extends VerticalPanel {
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.res.add(new HTML(result));
+                resultsPanel.termsDetails.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.res.add(new Label("Communication failed"));
+                resultsPanel.termsDetails.add(new Label("Communication failed"));
             }
         };
         // Listen for the button clicks
@@ -83,7 +83,7 @@ public class MyTermSearchWidget extends VerticalPanel {
                 // Make remote call. Control flow will continue immediately and later
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
-                resultsPanel.res.clear();
+                resultsPanel.termsDetails.clear();
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
         });
@@ -93,7 +93,7 @@ public class MyTermSearchWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
-                    resultsPanel.res.clear();
+                    resultsPanel.termsDetails.clear();
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
             }
@@ -102,7 +102,7 @@ public class MyTermSearchWidget extends VerticalPanel {
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
-                resultsPanel.res.clear();
+                resultsPanel.termsDetails.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
 
             }
@@ -113,8 +113,8 @@ public class MyTermSearchWidget extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    public void adjustSize(int height) {
-        resultsPanel.adjustHeight(height - searchMenu.getOffsetHeight());
+    public void adjustSize(int w, int h) {
+        resultsPanel.adjustSize(w, h - searchMenu.getOffsetHeight());
     }
 
     public static native void fixGwtNav() /*-{

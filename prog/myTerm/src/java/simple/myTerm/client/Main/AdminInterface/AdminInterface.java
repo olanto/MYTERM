@@ -21,18 +21,18 @@ public class AdminInterface extends TabPanel {
     private ApproveWidget apan = new ApproveWidget();
 
     public AdminInterface() {
-        add(bpan, "Browse your Resources");
+        add(bpan, "Term Search");
         add(wpan, "Workspace");
         add(apan, "To approve");
         add(new HTML("Under construction!!!"), "System Administration");
         selectTab(0);
-        setSize((bpan.getOffsetWidth() - 50) + "px", (bpan.getOffsetHeight() - 100) + "px");
         setStyleName("tabPanel");
     }
 
-    public void adjustSize(int height) {
-        bpan.adjustSize(height - 100);
-        wpan.adjustSize(height - 150);
-        apan.adjustSize(height - 150);
+    public void adjustSize(int w, int h) {
+        setSize((w - 20) + "px", (h - 20) + "px");
+        bpan.adjustSize(w, h);
+        wpan.adjustSize(w, h);
+        apan.adjustSize(w, h);
     }
 }

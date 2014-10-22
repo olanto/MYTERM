@@ -4,6 +4,7 @@
  */
 package simple.myTerm.client.Main.EditorWidget;
 
+import simple.myTerm.client.Main.publicWidget.ResultsContainer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -36,7 +37,7 @@ import simple.myTerm.client.Main.request.myTermServiceAsync;
 public class WorkspaceWidget extends VerticalPanel {
 
     private SearchHeaderWorkspace searchMenu = new SearchHeaderWorkspace();
-    private SearchEditResultsContainer resultsPanel = new SearchEditResultsContainer();
+    private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private VerticalPanel res = new VerticalPanel();
@@ -47,9 +48,6 @@ public class WorkspaceWidget extends VerticalPanel {
     private EdLangSetForm addterm = new EdLangSetForm();
 
     public WorkspaceWidget() {
-        add(searchMenu);
-        add(resultsPanel);
-
         fixGwtNav();
         add(searchMenu);
         add(resultsPanel);
@@ -57,27 +55,23 @@ public class WorkspaceWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 resultsPanel.termsPan.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 resultsPanel.termsPan.add(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 res.add(new HTML(result));
                 resultsPanel.add(res);
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.resultsPan.setHeight(resultsPanel.termsPan.getOffsetHeight() + "px");
                 res.add(new Label("Communication failed"));
                 resultsPanel.add(res);
             }
@@ -89,8 +83,8 @@ public class WorkspaceWidget extends VerticalPanel {
                 // Make remote call. Control flow will continue immediately and later
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
-                resultsPanel.resultsPan.clear();
-                resultsPanel.vptop.clear();
+                resultsPanel.termsDetails.clear();
+                resultsPanel.conceptDetails.clear();
                 res.clear();
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
@@ -100,8 +94,8 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onClick(ClickEvent event) {
                 resultsPanel.termsPan.clear();
                 resultsPanel.termsPan.add(staticTree);
-                resultsPanel.resultsPan.clear();
-                resultsPanel.vptop.clear();
+                resultsPanel.termsDetails.clear();
+                resultsPanel.conceptDetails.clear();
                 res.clear();
                 createSourceTree(searchMenu.searchField.getText());
             }
@@ -112,8 +106,8 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
-                    resultsPanel.resultsPan.clear();
-                    resultsPanel.vptop.clear();
+                    resultsPanel.termsDetails.clear();
+                    resultsPanel.conceptDetails.clear();
                     res.clear();
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
@@ -154,22 +148,21 @@ public class WorkspaceWidget extends VerticalPanel {
                 t.form = term;
                 t.language = language;
                 c.subject_field = "Empty";
-                resultsPanel.vptop.clear();
-                resultsPanel.resultsPan.clear();
-                resultsPanel.vptop.add(addcpt);
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
+                resultsPanel.conceptDetails.add(addcpt);
                 addcpt.setVisible(true);
                 addcpt.InitFromVariable(c);
-                resultsPanel.resultsPan.add(addterm);
+                resultsPanel.termsDetails.add(addterm);
                 addterm.setVisible(true);
                 addterm.initfromvar(t);
-                resultsPanel.resultsPan.setHeight((resultsPanel.termsPan.getOffsetHeight() - resultsPanel.vptop.getOffsetHeight()) + "px");
 
             }
         });
     }
 
-    public void adjustSize(int height) {
-        resultsPanel.adjustHeight(height - searchMenu.getOffsetHeight());
+    public void adjustSize(int w, int h) {
+        resultsPanel.adjustSize(w, h - searchMenu.getOffsetHeight());
     }
 
     public static native void fixGwtNav() /*-{

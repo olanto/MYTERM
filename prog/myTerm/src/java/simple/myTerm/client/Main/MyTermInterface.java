@@ -86,26 +86,28 @@ public class MyTermInterface implements EntryPoint {
             case "ADMIN":
                 AdminInterface vpan = new AdminInterface();
                 RootPanel.get("main").add(vpan);
-                vpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
+                vpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
                 break;
             case "READER":
                 ReaderInterface rpan = new ReaderInterface();
                 RootPanel.get("main").add(rpan);
-                rpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
+                rpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
                 break;
             case "REVISOR":
                 RevisorInterface rvpan = new RevisorInterface();
                 RootPanel.get("main").add(rvpan);
-                rvpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
+                rvpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
+
                 break;
             case "REDACTOR":
                 RedactorInterface vdpan = new RedactorInterface();
                 RootPanel.get("main").add(vdpan);
-                vdpan.adjustSize(Window.getClientHeight() - headerPanel.getOffsetHeight() - statusPanel.getOffsetHeight());
+                vdpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
                 break;
         }
         RootPanel.get("footer").add(statusPanel);
     }
+
     private void initCookies() {
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangS, "English");
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
