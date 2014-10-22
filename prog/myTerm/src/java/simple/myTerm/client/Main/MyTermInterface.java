@@ -86,23 +86,23 @@ public class MyTermInterface implements EntryPoint {
             case "ADMIN":
                 AdminInterface vpan = new AdminInterface();
                 RootPanel.get("main").add(vpan);
-                vpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
+                vpan.adjustSize(Window.getClientHeight() - 80);
                 break;
             case "READER":
                 ReaderInterface rpan = new ReaderInterface();
                 RootPanel.get("main").add(rpan);
-                rpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
+                rpan.adjustSize(Window.getClientHeight() - 80);
                 break;
             case "REVISOR":
                 RevisorInterface rvpan = new RevisorInterface();
                 RootPanel.get("main").add(rvpan);
-                rvpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
+                rvpan.adjustSize(Window.getClientHeight() - 80);
 
                 break;
             case "REDACTOR":
                 RedactorInterface vdpan = new RedactorInterface();
                 RootPanel.get("main").add(vdpan);
-                vdpan.adjustSize(Window.getClientWidth() - 50, Window.getClientHeight() - 100);
+                vdpan.adjustSize(Window.getClientHeight() - 80);
                 break;
         }
         RootPanel.get("footer").add(statusPanel);

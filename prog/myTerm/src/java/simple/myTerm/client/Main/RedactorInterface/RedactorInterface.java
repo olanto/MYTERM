@@ -27,10 +27,9 @@ public class RedactorInterface extends TabPanel {
         setStyleName("tabPanel");
     }
 
-    public void adjustSize(int w, int h) {
-        setSize((w - 20) + "px", (h - 20) + "px");
-        bpan.adjustSize(w, h);
-        wpan.adjustSize(w, h);
-        apan.adjustSize(w, h);
+    public void adjustSize(int h) {
+        bpan.adjustSize(getOffsetHeight());
+        wpan.adjustSize(getOffsetHeight());
+        apan.adjustSize(getOffsetHeight());
     }
 }

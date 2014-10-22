@@ -161,8 +161,8 @@ public class WorkspaceWidget extends VerticalPanel {
         });
     }
 
-    public void adjustSize(int w, int h) {
-        resultsPanel.adjustSize(w, h - searchMenu.getOffsetHeight());
+    public void adjustSize(int h) {
+        resultsPanel.adjustSize(searchMenu.getOffsetWidth(), h - searchMenu.getOffsetHeight() - 50);
     }
 
     public static native void fixGwtNav() /*-{
