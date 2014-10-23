@@ -44,7 +44,6 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public Button btnSend = new Button("Search");
 
     public SearchHeaderBasic() {
-        setWidth((Window.getClientWidth() - 30) + "px");
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);

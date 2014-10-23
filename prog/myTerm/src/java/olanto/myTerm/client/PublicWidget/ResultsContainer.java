@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.PublicWidget;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -43,11 +44,13 @@ public class ResultsContainer extends HorizontalPanel {
         vp.add(termsDetails);
         termsPan.setStyleName("sideWidget");
         vp.setStyleName("containerWidget");
+        setStyleName("resContainer");
     }
 
-    public void adjustSize(int w, int h) {
-        termsPan.setPixelSize(w * 1 / 5, h);
-        termsDetails.setPixelSize(w * 4 / 5, h * 3 / 4);
-        conceptDetails.setPixelSize(w * 4 / 5, h * 1 / 4);
+    public void adjustSize() {
+        int h = Window.getClientHeight() - 150;
+        termsPan.setHeight(h + "px");
+        termsDetails.setHeight(h * 3 / 4 + "px");
+        conceptDetails.setHeight(h * 1 / 4 + "px");
     }
 }
