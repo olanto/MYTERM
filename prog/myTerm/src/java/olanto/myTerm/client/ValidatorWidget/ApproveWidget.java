@@ -93,7 +93,7 @@ public class ApproveWidget extends VerticalPanel {
 
             }
         });
-        resultsPanel.adjustSize(Window.getClientWidth() - 20, Window.getClientHeight() - 150);
+        resultsPanel.adjustSize(searchMenu.getOffsetWidth(), Window.getClientHeight() - 150);
     }
 
     private static myTermServiceAsync getService() {

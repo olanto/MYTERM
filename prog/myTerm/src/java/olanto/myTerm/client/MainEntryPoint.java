@@ -59,7 +59,6 @@ public class MainEntryPoint implements EntryPoint {
             if (user == null) {
                 showLogin();
             } else {
-                Window.alert("User logged in!!!:"+user.getEmail()+user.getSessionID());
                 showMain(user);
             }
         }
@@ -96,6 +95,13 @@ public class MainEntryPoint implements EntryPoint {
     }
 
     public void showLogin() {
+        RootPanel.get("login").clear();
+        RootPanel.get("header").clear();
+        RootPanel.get("main").clear();
+        RootPanel.get("footer").clear();
+        RootPanel.get("header").setVisible(false);
+        RootPanel.get("main").setVisible(false);
+        RootPanel.get("footer").setVisible(false);
         SubmitHandler handler = new SubmitHandler();
 
         view.getSubmitButton().addClickHandler(handler);
@@ -110,7 +116,8 @@ public class MainEntryPoint implements EntryPoint {
                 pop.center();
             }
         });
-        RootPanel.get().add(vp);
+        RootPanel.get("login").add(vp);
+        RootPanel.get("login").setVisible(true);
         vp.setPixelSize(Window.getClientWidth(), Window.getClientHeight());
         vp.add(view);
         vp.setCellHorizontalAlignment(view, HorizontalPanel.ALIGN_CENTER);
@@ -159,30 +166,40 @@ public class MainEntryPoint implements EntryPoint {
     }
 
     public void showMain(UserDTO user) {
-        vp.clear();
+        RootPanel.get("login").clear();
+        RootPanel.get("header").clear();
+        RootPanel.get("main").clear();
+        RootPanel.get("footer").clear();
+
+        RootPanel.get("login").setVisible(false);
         HeaderStatusPanel headerPanel = new HeaderStatusPanel(user);
         FooterStatusPanel statusPanel = new FooterStatusPanel();
-        vp.add(headerPanel);
-
+        RootPanel.get("header").add(headerPanel);
+        RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {
             case "ADMIN":
                 AdminInterface vpan = new AdminInterface();
-                vp.add(vpan);
+                RootPanel.get("main").add(vpan);
+                RootPanel.get("main").setVisible(true);
                 break;
             case "READER":
                 ReaderInterface rpan = new ReaderInterface();
-                vp.add(rpan);
+                RootPanel.get("main").add(rpan);
+                RootPanel.get("main").setVisible(true);
                 break;
             case "REVISOR":
                 RevisorInterface rvpan = new RevisorInterface();
-                vp.add(rvpan);
+                RootPanel.get("main").add(rvpan);
+                RootPanel.get("main").setVisible(true);
                 break;
             case "REDACTOR":
                 RedactorInterface vdpan = new RedactorInterface();
-                vp.add(vdpan);
+                RootPanel.get("main").add(vdpan);
+                RootPanel.get("main").setVisible(true);
                 break;
         }
-        vp.add(statusPanel);
+        RootPanel.get("footer").add(statusPanel);
+        RootPanel.get("footer").setVisible(true);
     }
 
     private void initCookies() {

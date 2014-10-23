@@ -45,7 +45,7 @@ public class HeaderStatusPanel extends HorizontalPanel {
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
     public HeaderStatusPanel(final UserDTO user) {
-        setWidth(Window.getClientWidth() + "px");
+        setWidth(Window.getClientWidth() - 20 + "px");
         add(logo);
         logo.setPixelSize(30, 32);
         add(new HTML("&nbsp;"));

@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 public class FooterStatusPanel extends HorizontalPanel {
 
     public FooterStatusPanel() {
-        setPixelSize(Window.getClientWidth(), 30);
+        setPixelSize(Window.getClientWidth() - 20, 30);
         setStyleName("headerPanel");
     }
 }

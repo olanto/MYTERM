@@ -45,7 +45,7 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
     public Button btnAdd = new Button("Add");
 
     public SearchHeaderWorkspace() {
-        setWidth((Window.getClientWidth() - 20) + "px");
+        setWidth((Window.getClientWidth() - 30) + "px");
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);
