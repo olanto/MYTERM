@@ -28,10 +28,4 @@ public class AdminInterface extends TabPanel {
         selectTab(0);
         setStyleName("tabPanel");
     }
-
-    public void adjustSize(int h) {
-        bpan.adjustSize(getOffsetHeight());
-        wpan.adjustSize(getOffsetHeight());
-        apan.adjustSize(getOffsetHeight());
-    }
 }

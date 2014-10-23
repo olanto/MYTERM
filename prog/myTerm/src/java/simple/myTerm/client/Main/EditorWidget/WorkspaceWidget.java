@@ -16,6 +16,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
@@ -122,6 +123,7 @@ public class WorkspaceWidget extends VerticalPanel {
 
             }
         });
+        resultsPanel.adjustSize(Window.getClientWidth() - 20, Window.getClientHeight() - 150);
     }
 
     private static myTermServiceAsync getService() {
@@ -159,10 +161,6 @@ public class WorkspaceWidget extends VerticalPanel {
 
             }
         });
-    }
-
-    public void adjustSize(int h) {
-        resultsPanel.adjustSize(searchMenu.getOffsetWidth(), h - searchMenu.getOffsetHeight() - 50);
     }
 
     public static native void fixGwtNav() /*-{

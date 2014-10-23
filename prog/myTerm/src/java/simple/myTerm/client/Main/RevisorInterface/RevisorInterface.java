@@ -5,7 +5,6 @@
 package simple.myTerm.client.Main.RevisorInterface;
 
 import com.google.gwt.user.client.ui.TabPanel;
-import simple.myTerm.client.Main.EditorWidget.WorkspaceWidget;
 import simple.myTerm.client.Main.ValidatorWidget.ApproveWidget;
 import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
 
@@ -16,7 +15,6 @@ import simple.myTerm.client.Main.publicWidget.MyTermSearchWidget;
 public class RevisorInterface extends TabPanel {
 
     private MyTermSearchWidget bpan = new MyTermSearchWidget();
-    private WorkspaceWidget wpan = new WorkspaceWidget();
     private ApproveWidget apan = new ApproveWidget();
 
     public RevisorInterface() {
@@ -25,10 +23,4 @@ public class RevisorInterface extends TabPanel {
         selectTab(0);
         setStyleName("tabPanel");
     }
-
-    public void adjustSize(int h) {
-        bpan.adjustSize(getOffsetHeight());
-        wpan.adjustSize(getOffsetHeight());
-        apan.adjustSize(getOffsetHeight());
-    }
-}
+   }

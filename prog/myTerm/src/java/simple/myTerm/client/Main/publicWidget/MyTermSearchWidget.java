@@ -33,6 +33,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import simple.myTerm.client.Main.request.myTermService;
 import simple.myTerm.client.Main.request.myTermServiceAsync;
@@ -80,6 +81,7 @@ public class MyTermSearchWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                Window.alert("Hi!!!");
                 // Make remote call. Control flow will continue immediately and later
                 // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
@@ -107,14 +109,11 @@ public class MyTermSearchWidget extends VerticalPanel {
 
             }
         });
+        resultsPanel.adjustSize(Window.getClientWidth() - 20, Window.getClientHeight() - 150);
     }
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
-    }
-
-    public void adjustSize(int h) {
-        resultsPanel.adjustSize(searchMenu.getOffsetWidth(), h - searchMenu.getOffsetHeight() - 50);
     }
 
     public static native void fixGwtNav() /*-{

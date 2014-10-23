@@ -43,15 +43,11 @@ public class ResultsContainer extends HorizontalPanel {
         vp.add(termsDetails);
         termsPan.setStyleName("sideWidget");
         vp.setStyleName("containerWidget");
-
-        setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);
-        setCellHorizontalAlignment(termsDetails, HorizontalPanel.ALIGN_CENTER);
     }
 
     public void adjustSize(int w, int h) {
-        vp.setPixelSize(w * 4 / 5, h);
-        termsDetails.setPixelSize(w, h * 3 / 4);
         termsPan.setPixelSize(w * 1 / 5, h);
-        conceptDetails.setPixelSize(w, h * 1 / 4);
+        termsDetails.setPixelSize(w * 4 / 5, h * 3 / 4);
+        conceptDetails.setPixelSize(w * 4 / 5, h * 1 / 4);
     }
 }
