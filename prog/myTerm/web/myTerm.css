@@ -28,15 +28,11 @@ body{
 .headerPanel a:hover{
     color: red;
 }
-.resContainer{
-    width:100%;
-}
+
 .sideWidget{
-    width:20%;
     background-color: #EFF6FF;
 }
 .containerWidget{
-    width:80%;
     background-color: whitesmoke;
 }
 .searchMenu{
