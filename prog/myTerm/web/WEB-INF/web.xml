@@ -1,38 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
-        <servlet-name>myTermService</servlet-name>
-        <servlet-class>simple.myTerm.server.myTermServiceImpl</servlet-class>
+        <servlet-name>LoginService</servlet-name>
+        <servlet-class>olanto.myTerm.server.LoginServiceImpl</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>myTermService</servlet-name>
+        <servlet-class>olanto.myTerm.server.myTermServiceImpl</servlet-class>
+    </servlet>
+    <servlet-mapping>
         <servlet-name>LoginService</servlet-name>
-        <servlet-class>simple.myTerm.server.LoginServiceImpl</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>myTermLoginCtrl</servlet-name>
-        <servlet-class>simple.myTerm.server.myTermLoginCtrl</servlet-class>
-    </servlet>
+        <url-pattern>/olanto.myTerm.Main/loginservice</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>myTermService</servlet-name>
-        <url-pattern>/simple.myTerm.Main/mytermservice</url-pattern>
+        <url-pattern>/olanto.myTerm.Main/mytermservice</url-pattern>
     </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>LoginService</servlet-name>
-        <url-pattern>/simple.myTerm.Login/loginservice</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>LoginService</servlet-name>
-        <url-pattern>/simple.myTerm.Main/loginservice</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>myTermLoginCtrl</servlet-name>
-        <url-pattern>/myTermLoginCtrl</url-pattern>
-    </servlet-mapping>
-    
-       <welcome-file-list>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
         <welcome-file>myTerm.html</welcome-file>
     </welcome-file-list>
 </web-app>
