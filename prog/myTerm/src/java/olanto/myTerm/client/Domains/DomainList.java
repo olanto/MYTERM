@@ -54,7 +54,6 @@ public class DomainList extends ListBox {
                 int i = 0;
                 for (Domain s : result) {
                     addItem(s.name, s.id);
-                    addItem(s.name, s.id);
                     if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                         i = result.indexOf(s);
                     }

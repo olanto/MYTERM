@@ -139,3 +139,5 @@ v_reslang.* FROM v_reslang;
 
 
 select  resource_name, id_language, count(*) nbterms from v_reslang group by resource_name, id_language; 
+
+commit;

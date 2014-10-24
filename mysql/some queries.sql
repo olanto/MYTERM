@@ -54,3 +54,5 @@ select * from terms where id_term<1100;
 select * from concepts where id_resource=1000;
 
 select distinct subject_field from concepts where id_resource=1000;
+
+select distinct subject_field from concepts;

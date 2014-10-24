@@ -19,6 +19,7 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
@@ -42,7 +43,6 @@ public class WorkspaceWidget extends VerticalPanel {
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
-    private VerticalPanel res = new VerticalPanel();
     private Concept c = new Concept();
     private Term t = new Term();
     private Tree staticTree = new Tree();
@@ -92,15 +92,11 @@ public class WorkspaceWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                // Make remote call. Control flow will continue immediately and later
-                // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
-                resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
-                res.clear();
+                resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
-                        ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
@@ -110,7 +106,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsPan.add(staticTree);
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
-                res.clear();
                 createSourceTree(searchMenu.searchField.getText());
             }
         });
@@ -120,12 +115,10 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
-                    resultsPanel.termsDetails.clear();
                     resultsPanel.conceptDetails.clear();
-                    res.clear();
+                    resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
-                            ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
         });
@@ -135,7 +128,6 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                res.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
                 getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
 
