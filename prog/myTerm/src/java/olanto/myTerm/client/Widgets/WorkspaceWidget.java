@@ -41,6 +41,7 @@ public class WorkspaceWidget extends VerticalPanel {
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
+    private static AsyncCallback<String> termsCallback;
     private VerticalPanel res = new VerticalPanel();
     private Concept c = new Concept();
     private Term t = new Term();
@@ -56,6 +57,7 @@ public class WorkspaceWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                searchMenu.btnSend.setEnabled(true);
                 resultsPanel.termsPan.add(new HTML(result));
             }
 
@@ -67,14 +69,23 @@ public class WorkspaceWidget extends VerticalPanel {
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                res.add(new HTML(result));
-                resultsPanel.conceptDetails.add(res);
+                resultsPanel.conceptDetails.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                res.add(new Label("Communication failed"));
-                resultsPanel.conceptDetails.add(res);
+                resultsPanel.conceptDetails.add(new Label("Communication failed"));
+            }
+        };
+        termsCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                resultsPanel.termsDetails.add(new HTML(result));
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                resultsPanel.termsDetails.add(new Label("Communication failed"));
             }
         };
         // Listen for the button clicks
@@ -87,6 +98,7 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
                 res.clear();
+                searchMenu.btnSend.setEnabled(false);
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
         });
@@ -110,16 +122,20 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.termsDetails.clear();
                     resultsPanel.conceptDetails.clear();
                     res.clear();
+                    searchMenu.btnSend.setEnabled(false);
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
             }
         });
-
+        searchMenu.searchField.setFocus(true);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
                 res.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
+                getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
 
             }
         });

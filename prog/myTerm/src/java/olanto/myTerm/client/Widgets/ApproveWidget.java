@@ -33,6 +33,7 @@ public class ApproveWidget extends VerticalPanel {
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
+    private static AsyncCallback<String> termsCallback;
 
     public ApproveWidget() {
         fixGwtNav();
@@ -42,6 +43,7 @@ public class ApproveWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                searchMenu.btnSend.setEnabled(true);
                 resultsPanel.termsPan.add(new HTML(result));
             }
 
@@ -61,15 +63,25 @@ public class ApproveWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
             }
         };
+        termsCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                resultsPanel.termsDetails.add(new HTML(result));
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                resultsPanel.termsDetails.add(new Label("Communication failed"));
+            }
+        };
         // Listen for the button clicks
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                // Make remote call. Control flow will continue immediately and later
-                // 'callback' will be invoked when the RPC completes.
                 resultsPanel.termsPan.clear();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
+                searchMenu.btnSend.setEnabled(false);
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
         });
@@ -81,6 +93,7 @@ public class ApproveWidget extends VerticalPanel {
                     resultsPanel.termsPan.clear();
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
+                    searchMenu.btnSend.setEnabled(false);
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
             }
@@ -92,6 +105,7 @@ public class ApproveWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
+                getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
 
             }
         });
