@@ -8,7 +8,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import olanto.myTerm.client.LoginService;
+import olanto.myTerm.client.ServiceCalls.LoginService;
 import olanto.myTerm.shared.UserDTO;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Owners;

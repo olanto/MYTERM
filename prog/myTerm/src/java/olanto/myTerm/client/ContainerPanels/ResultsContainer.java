@@ -19,10 +19,9 @@
  *
  *********
  */
-package olanto.myTerm.client.ValidatorWidget;
+package olanto.myTerm.client.ContainerPanels;
 
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -31,30 +30,30 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  * @author nizar ghoula - simple
  */
-public class ExpSearchResultsContainer extends HorizontalPanel {
+public class ResultsContainer extends HorizontalPanel {
 
     public ScrollPanel termsPan = new ScrollPanel();
-    public ScrollPanel resultsPan = new ScrollPanel();
-    public ExpConceptPanel expres = new ExpConceptPanel();
+    public ScrollPanel termsDetails = new ScrollPanel();
     public VerticalPanel vp = new VerticalPanel();
-    public HTMLPanel res = new HTMLPanel("");
+    public ScrollPanel conceptDetails = new ScrollPanel();
 
-    public ExpSearchResultsContainer() {
+    public ResultsContainer() {
         add(termsPan);
-        add(resultsPan);
+        add(vp);
+        vp.add(conceptDetails);
+        vp.add(termsDetails);
         termsPan.setStyleName("sideWidget");
-        resultsPan.setStyleName("containerWidget");
-        resultsPan.add(vp);
-        vp.add(expres);
-        vp.add(res);
-        resultsPan.setPixelSize((Window.getClientWidth() - 40) * 3 / 5, (Window.getClientHeight() - 250));
-        termsPan.setPixelSize((Window.getClientWidth() - 40) * 2 / 5, (Window.getClientHeight() - 250));
-        setCellHorizontalAlignment(termsPan, HorizontalPanel.ALIGN_LEFT);
-        setCellHorizontalAlignment(resultsPan, HorizontalPanel.ALIGN_CENTER);
+        vp.setStyleName("containerWidget");
+        conceptDetails.setStyleName("conceptContainer");
+        termsDetails.setStyleName("termsContainer");
+        setStyleName("resultsContainer");
     }
 
-    public void adjustHeight(int height) {
-        resultsPan.setHeight(height + "px");
-        termsPan.setHeight(height + "px");
+    public void adjustSize() {
+        int h = Window.getClientHeight() - 150;
+        int w = Window.getClientWidth() - 15;
+        termsPan.setPixelSize(w * 1 / 5, h);
+        termsDetails.setPixelSize(w * 4 / 5, h * 3 / 4);
+        conceptDetails.setPixelSize(w * 4 / 5, h * 1 / 4);
     }
 }

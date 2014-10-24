@@ -31,8 +31,8 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import olanto.myTerm.client.myTermService;
-import olanto.myTerm.client.myTermServiceAsync;
+import olanto.myTerm.client.ServiceCalls.myTermService;
+import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
 /**
  *

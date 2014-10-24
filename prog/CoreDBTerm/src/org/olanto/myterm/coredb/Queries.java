@@ -32,6 +32,7 @@ import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 import org.olanto.myterm.coredb.entityclasses.Resources;
+import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.PreexistingEntityException;
 
 /**
@@ -86,8 +87,8 @@ public class Queries {
         }
         return result.get(0);
     }
-    
-     public static Owners getOwner(String ownermail, String hash) {
+
+    public static Owners getOwner(String ownermail, String hash) {
         Query query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingAndHash");
         query.setParameter("ownerMailing", ownermail);
         query.setParameter("ownerHash", hash);
@@ -103,7 +104,55 @@ public class Queries {
         }
         return result.get(0);
     }
+    
+    public static Owners getOwnerbyID(long IDowner) {
+        Query query = TermDB.em.createNamedQuery("Owners.findByIdOwner");
+        query.setParameter("idOwner", IDowner);
+        List<Owners> result = query.getResultList();
+        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + IDowner);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + IDowner);
+            return null;
+        }
+        return result.get(0);
+    }
 
+     public static String getOwnerFullNamebyID(long IDowner) {
+        Query query = TermDB.em.createNamedQuery("Owners.findByIdOwner");
+        query.setParameter("idOwner", IDowner);
+        List<Owners> result = query.getResultList();
+        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + IDowner);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + IDowner);
+            return null;
+        }
+        return (result.get(0).getOwnerFirstName() + result.get(0).getOwnerLastName());
+    }
+
+     
+    public static Terms getTermByID(long idTerm) {
+        Query query = TermDB.em.createNamedQuery("Terms.findByIdTerm");
+        query.setParameter("idTerm", idTerm);
+        List<Terms> result = query.getResultList();
+        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idTerm);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + idTerm);
+            return null;
+        }
+        return result.get(0);
+    }
 
     public static Resources getResourceID(String resourceName, AutoCreate auto) {
         Query query = TermDB.em.createNamedQuery("Resources.findByResourceName");
@@ -149,7 +198,7 @@ public class Queries {
         return result.get(0);
     }
     
-     public static Concepts getConceptByID(long ConceptID) {
+    public static Concepts getConceptByID(long ConceptID) {
         Query query = TermDB.em.createNamedQuery("Concepts.findByIdConcept");
         query.setParameter("idConcept", ConceptID);
         List<Concepts> result = query.getResultList();

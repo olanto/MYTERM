@@ -4,6 +4,8 @@
  */
 package olanto.myTerm.client;
 
+import olanto.myTerm.client.ServiceCalls.LoginService;
+import olanto.myTerm.client.ServiceCalls.LoginServiceAsync;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,14 +21,14 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.AdminInterface.AdminInterface;
+import olanto.myTerm.client.Interfaces.AdminInterface;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
-import olanto.myTerm.client.ReaderInterface.ReaderInterface;
-import olanto.myTerm.client.RedactorInterface.RedactorInterface;
-import olanto.myTerm.client.RevisorInterface.RevisorInterface;
-import olanto.myTerm.client.StatusPanels.FooterStatusPanel;
-import olanto.myTerm.client.StatusPanels.HeaderStatusPanel;
+import olanto.myTerm.client.Interfaces.ReaderInterface;
+import olanto.myTerm.client.Interfaces.RedactorInterface;
+import olanto.myTerm.client.Interfaces.RevisorInterface;
+import olanto.myTerm.client.ContainerPanels.FooterStatusPanel;
+import olanto.myTerm.client.ContainerPanels.HeaderStatusPanel;
 import olanto.myTerm.shared.UserDTO;
 
 /**

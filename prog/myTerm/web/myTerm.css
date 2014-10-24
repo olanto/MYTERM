@@ -5,6 +5,27 @@
     Description:
         Purpose of the stylesheet follows.
 */
+
+.sfield{
+    color:red;
+    font-weight: bold;
+}
+.note{
+    color:blue;
+    font-weight: bold;
+}
+.def{
+    font-weight: bold;
+    color:green;
+}
+.defsrc{
+    font-weight: bold;
+    color:black;
+}
+.extrainfo{
+    color: blueviolet;
+    font-style: italic;
+}
 body{
     vertical-align: middle;
 }
@@ -40,10 +61,9 @@ body{
     margin-top: 1px;
     background-color:#EFF6FF;
     margin-bottom: 1px;
-    height: 40px;
+    height: 30px;
     padding-left: 1px;
     padding-right: 1px;
-    border:1px dashed black;
 }
 .resultsContainer{
     width: 100%;
@@ -124,7 +144,6 @@ body{
     padding-bottom: 1px;
     border:1px dotted greenyellow;
     alignment-adjust: central;
-
 }
 .texpcontainerForm{
     margin-top: 1px;
@@ -142,15 +161,23 @@ body{
     cursor: pointer;
     cursor: hand;
 }
+.conceptContainer{
+    width:99%;
+    border-bottom:1px dashed black;
+}
+.termsContainer{
+    width:99%;
+}
 .panel{
     margin-top: 1px;
     margin-left: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
-    width:100%;
 }
 .panel p {
-    color: blue;
+    padding:1px;
+    background-color:#EFF6FF;
+    font-weight: bold;
 }
 .panel th {
     border:1px dotted #6495ed;
@@ -161,6 +188,7 @@ body{
     border:1px solid #6495ed;
     padding:1px;
     text-align:left;
+    width:1%;
 }
 .cpanel{
     margin-top: 1px;
@@ -278,7 +306,7 @@ select {
 
 .gwt-Button {
     margin: 0;
-    padding: 5px 7px;
+    padding: 2px 3px;
     text-decoration: none;
     cursor: pointer;
     cursor: hand;
@@ -655,7 +683,7 @@ select {
 }
 
 .gwt-PasswordTextBox {
-    padding: 5px 4px;
+    padding: 2px 2px;
     border: 1px solid #ccc;
     border-top: 1px solid #999;
     font-size: 100%;
@@ -1221,7 +1249,7 @@ select {
 }
 
 .gwt-TextBox {
-    padding: 5px 4px;
+    padding: 2px 2px;
     border: 1px solid #ccc;
     border-top: 1px solid #999;
     font-size: small;
