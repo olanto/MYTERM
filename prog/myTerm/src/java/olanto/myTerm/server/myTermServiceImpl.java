@@ -89,6 +89,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("<tr>");
         result.append("<th>").append("Details for concept: ").append(c.getIdConcept()).append("</th>");
         result.append("<th>").append("From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+        result.append("<th>").append("Other details").append("</th>");
+        result.append("<th>").append("Extra information").append("</th>");
         result.append("</tr>");
         result.append("<tr>");
         result.append("<td>")

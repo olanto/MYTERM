@@ -53,9 +53,6 @@ body{
 .sideWidget{
     background-color: #EFF6FF;
 }
-.containerWidget{
-    background-color: whitesmoke;
-}
 .searchMenu{
     width: 100%;
     margin-top: 1px;
@@ -162,11 +159,14 @@ body{
     cursor: hand;
 }
 .conceptContainer{
-    width:99%;
-    border-bottom:1px dashed black;
+    width:90%;
+    background-color: beige;
+    border-bottom: 3px solid black;
 }
 .termsContainer{
-    width:99%;
+    margin-top: 2px;
+    padding-top: 2px;
+    width:90%;
 }
 .panel{
     margin-top: 1px;

@@ -43,7 +43,6 @@ public class ResultsContainer extends HorizontalPanel {
         vp.add(conceptDetails);
         vp.add(termsDetails);
         termsPan.setStyleName("sideWidget");
-        vp.setStyleName("containerWidget");
         conceptDetails.setStyleName("conceptContainer");
         termsDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
@@ -52,8 +51,8 @@ public class ResultsContainer extends HorizontalPanel {
     public void adjustSize() {
         int h = Window.getClientHeight() - 150;
         int w = Window.getClientWidth() - 15;
-        termsPan.setPixelSize(w * 1 / 5, h);
-        termsDetails.setPixelSize(w * 4 / 5, h * 3 / 4);
-        conceptDetails.setPixelSize(w * 4 / 5, h * 1 / 4);
+        termsPan.setPixelSize(w * 1 / 4, h);
+        termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
+        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
     }
 }

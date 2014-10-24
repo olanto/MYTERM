@@ -134,7 +134,7 @@ public class Queries {
             System.out.println("NO RETURNED VALUES for :" + IDowner);
             return null;
         }
-        return (result.get(0).getOwnerFirstName() + result.get(0).getOwnerLastName());
+        return (result.get(0).getOwnerFirstName() +" "+ result.get(0).getOwnerLastName());
     }
 
      
