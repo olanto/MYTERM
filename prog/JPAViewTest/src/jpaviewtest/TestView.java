@@ -27,8 +27,8 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        System.out.println(getTargetForThis("tunas", "EN", "FR"));
-        System.out.println(getTargetForThis("tuna%", "EN", "FR"));
+        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "-1"));
+        System.out.println(getTargetForThis("tuna%", "EN", "FR", "-1", "-1"));
 
     }
 
@@ -122,7 +122,7 @@ public class TestView {
         return result.toString();
     }
 
-    public static String getTargetForThis(String term, String solang, String talang) {
+    public static String getTargetForThis(String term, String solang, String talang, String resID, String domID) {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");

@@ -99,7 +99,8 @@ public class MyTermSearchWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
+                        ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
         // Listen for the button clicks
@@ -111,7 +112,8 @@ public class MyTermSearchWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
+                            ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
         });
@@ -121,9 +123,10 @@ public class MyTermSearchWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
-                getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
-
+                if (!event.getValue().contains("page")) {
+                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
+                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
+                }
             }
         });
         resultsPanel.adjustSize();

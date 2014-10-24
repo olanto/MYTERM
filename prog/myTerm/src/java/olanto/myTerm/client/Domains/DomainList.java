@@ -69,7 +69,7 @@ public class DomainList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
             }
         });
-        addItem("ANY", "%");
+        addItem("ANY", "-1");
         getService().getDomains(domCallback);
     }
 

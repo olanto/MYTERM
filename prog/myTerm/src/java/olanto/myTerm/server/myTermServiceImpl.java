@@ -26,7 +26,7 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
 
     @Override
-    public String getSearchResult(String s, String ls, String lt) {
+    public String getSearchResult(String s, String ls, String lt, String resID, String domID) {
         StringBuilder result = new StringBuilder("");
         result.append("<div class =\"panel\">");
         result.append("<table>");
@@ -34,7 +34,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
         result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
         result.append("</tr>");
-        result.append(TestView.getTargetForThis(s, ls, lt));
+        result.append(TestView.getTargetForThis(s, ls, lt, resID, domID));
         result.append("</table>");
         result.append("</div>");
         return result.toString();

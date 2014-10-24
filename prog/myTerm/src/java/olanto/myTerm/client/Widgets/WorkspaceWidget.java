@@ -99,7 +99,8 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 res.clear();
                 searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
+                        ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
@@ -123,7 +124,8 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     res.clear();
                     searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
+                            ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
         });

@@ -16,7 +16,7 @@ import olanto.myTerm.client.Resources.Resource;
  */
 public interface myTermServiceAsync {
 
-    public void getSearchResult(String s, String ls, String lt, AsyncCallback<String> callback);
+    public void getSearchResult(String s, String ls, String lt, String resID, String domID, AsyncCallback<String> callback);
 
     public void getdetailsForConcept(long concept, AsyncCallback<String> callback);
 

@@ -4,6 +4,9 @@
  */
 package olanto.myTerm.client.Interfaces;
 
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TabPanel;
 import olanto.myTerm.client.Widgets.WorkspaceWidget;
@@ -27,5 +30,12 @@ public class AdminInterface extends TabPanel {
         add(new HTML("Under construction!!!"), "System Administration");
         selectTab(0);
         setStyleName("tabPanel");
+        addSelectionHandler(new SelectionHandler<Integer>() {
+            @Override
+            public void onSelection(SelectionEvent<Integer> event) {
+                History.newItem("page" + event.getSelectedItem());
+
+            }
+        });
     }
 }
