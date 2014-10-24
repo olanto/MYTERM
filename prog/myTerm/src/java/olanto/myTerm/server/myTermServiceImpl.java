@@ -81,7 +81,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return resources;
     }
-    
+
     @Override
     public ArrayList<Domain> getDomains() {
         List<Domains> l = Queries.getDomains();
@@ -109,23 +109,23 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</tr>");
         result.append("<tr>");
         result.append("<td>");
-        if ((!c.getSubjectField().isEmpty()) && (c.getSubjectField().equalsIgnoreCase("null")) && (c.getSubjectField() != null)) {
+        if ((!c.getSubjectField().isEmpty()) && (!c.getSubjectField().equalsIgnoreCase("null")) && (c.getSubjectField() != null)) {
             result.append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>");
         }
-        if ((!c.getConceptDefinition().isEmpty()) && (c.getConceptDefinition().equalsIgnoreCase("null")) && (c.getConceptDefinition() != null)) {
+        if ((!c.getConceptDefinition().isEmpty()) && (!c.getConceptDefinition().equalsIgnoreCase("null")) && (c.getConceptDefinition() != null)) {
             result.append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>");
         }
-        if ((!c.getConceptSourceDefinition().isEmpty()) && (c.getConceptSourceDefinition().equalsIgnoreCase("null")) && (c.getConceptSourceDefinition() != null)) {
+        if ((!c.getConceptSourceDefinition().isEmpty()) && (!c.getConceptSourceDefinition().equalsIgnoreCase("null")) && (c.getConceptSourceDefinition() != null)) {
             result.append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>");
         }
         result.append("</td>").append("<td>");
-        if ((!c.getConceptNote().isEmpty()) && (c.getConceptNote().equalsIgnoreCase("null")) && (c.getConceptNote() != null)) {
+        if ((!c.getConceptNote().isEmpty()) && (!c.getConceptNote().equalsIgnoreCase("null")) && (c.getConceptNote() != null)) {
             result.append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>");
         }
-        if ((!c.getCrossref().isEmpty()) && (c.getCrossref().equalsIgnoreCase("null")) && (c.getCrossref() != null)) {
+        if ((!c.getCrossref().isEmpty()) && (!c.getCrossref().equalsIgnoreCase("null")) && (c.getCrossref() != null)) {
             result.append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>");
         }
-        if ((!c.getExtcrossref().isEmpty()) && (c.getExtcrossref().equalsIgnoreCase("null")) && (c.getExtcrossref() != null)) {
+        if ((!c.getExtcrossref().isEmpty()) && (!c.getExtcrossref().equalsIgnoreCase("null")) && (c.getExtcrossref() != null)) {
             result.append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>");
         }
         result.append("</td>").append("<td>");
@@ -142,10 +142,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         if (c.getLastmodified() != null) {
             result.append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>");
         }
-        if ((!c.getImage().isEmpty()) && (c.getImage().equalsIgnoreCase("null")) && (c.getImage() != null)) {
+        if ((!c.getImage().isEmpty()) && (!c.getImage().equalsIgnoreCase("null")) && (c.getImage() != null)) {
             result.append("&nbsp").append("<span class = \"extrainfo\">Image: </span>").append(c.getImage()).append("<br/>");
         }
-        if ((!c.getExtra().isEmpty()) && (c.getExtra().equalsIgnoreCase("null")) && (c.getExtra() != null)) {
+        if ((!c.getExtra().isEmpty()) && (!c.getExtra().equalsIgnoreCase("null")) && (c.getExtra() != null)) {
             result.append("&nbsp").append("<span class = \"extrainfo\">Extra information: </span>").append(c.getExtra()).append("<br/>");
         }
         result.append("</td>").append("</tr>");
