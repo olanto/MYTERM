@@ -54,34 +54,34 @@ public class TestView {
             result.append("<table>");
             result.append("<tr>");
             result.append("<td>");
-            if ((!t.getTermForm().isEmpty()) && (!t.getTermForm().equalsIgnoreCase("null")) && (t.getTermForm() != null)) {
+            if ((t.getTermForm() != null)) {
                 result.append("&nbsp").append("<span class = \"tform\">Form: </span>").append(t.getTermForm()).append("<br/>");
             }
-            if ((!t.getTermDefinition().isEmpty()) && (!t.getTermDefinition().equalsIgnoreCase("null")) && (t.getTermDefinition() != null)) {
+            if ((t.getTermDefinition() != null)) {
                 result.append("&nbsp").append("<span class = \"def\">Definition: </span>").append(t.getTermDefinition()).append("<br/>");
             }
-            if ((!t.getTermSource().isEmpty()) && (!t.getTermSource().equalsIgnoreCase("null")) && (t.getTermSource() != null)) {
+            if ((t.getTermSource() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Source: </span>").append(t.getTermSource()).append("<br/>");
             }
-            if ((!t.getTermSourceDefinition().isEmpty()) && (!t.getTermSourceDefinition().equalsIgnoreCase("null")) && (t.getTermSourceDefinition() != null)) {
+            if ((t.getTermSourceDefinition() != null)) {
                 result.append("&nbsp").append("<span class = \"defsrc\">Source Definition: </span>").append(t.getTermSourceDefinition()).append("<br/>");
             }
-            if ((!t.getTermSourceContext().isEmpty()) && (!t.getTermSourceContext().equalsIgnoreCase("null")) && (t.getTermSourceContext() != null)) {
+            if ((t.getTermSourceContext() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Source Context: </span>").append(t.getTermSourceContext()).append("<br/>");
             }
-            if ((!t.getTermNote().isEmpty()) && (!t.getTermNote().equalsIgnoreCase("null")) && (t.getTermNote() != null)) {
+            if ((t.getTermNote() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Note: </span>").append(t.getTermNote()).append("<br/>");
             }
-            if ((!t.getTermPartofspeech().isEmpty()) && (!t.getTermPartofspeech().equalsIgnoreCase("null")) && (t.getTermPartofspeech() != null)) {
+            if ((t.getTermPartofspeech() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Part of Speech: </span>").append(t.getTermPartofspeech()).append("<br/>");
             }
-            if ((!t.getTermType().isEmpty()) && (!t.getTermType().equalsIgnoreCase("null")) && (t.getTermType() != null)) {
+            if ((t.getTermType() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Type: </span>").append(t.getTermType()).append("<br/>");
             }
-            if ((!t.getTermUsage().isEmpty()) && (!t.getTermUsage().equalsIgnoreCase("null")) && (t.getTermUsage() != null)) {
+            if ((t.getTermUsage() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Usage: </span>").append(t.getTermUsage()).append("<br/>");
             }
-            if ((!t.getTermContext().isEmpty()) && (!t.getTermContext().equalsIgnoreCase("null")) && (t.getTermContext() != null)) {
+            if ((t.getTermContext() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Context: </span>").append(t.getTermContext()).append("<br/>");
             }
             result.append("</td>").append("<td>");
@@ -97,22 +97,22 @@ public class TestView {
             if ((t.getLastmodified() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(t.getLastmodified()).append("<br/>");
             }
-            if ((!t.getCrossref().isEmpty()) && (!t.getCrossref().equalsIgnoreCase("null")) && (t.getCrossref() != null)) {
+            if ((t.getCrossref() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Cross Reference: </span>").append(t.getCrossref()).append("<br/>");
             }
-            if ((!t.getExtcrossref().isEmpty()) && (!t.getExtcrossref().equalsIgnoreCase("null")) && (t.getExtcrossref() != null)) {
+            if ((t.getExtcrossref() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Extra Cross Reference: </span>").append(t.getExtcrossref()).append("<br/>");
             }
             if (t.getStatus() != ' ') {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Status: </span>").append(t.getStatus()).append("<br/>");
             }
-            if ((!t.getTermAdminStatus().isEmpty()) && (!t.getTermAdminStatus().equalsIgnoreCase("null")) && (t.getTermAdminStatus() != null)) {
+            if ((t.getTermAdminStatus() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Admin Status: </span>").append(t.getTermAdminStatus()).append("<br/>");
             }
-            if ((!t.getTermGender().isEmpty()) && (!t.getTermGender().equalsIgnoreCase("null")) && (t.getTermGender() != null)) {
+            if ((t.getTermGender() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Gender: </span>").append(t.getTermGender()).append("<br/>");
             }
-            if ((!t.getTermGeoUsage().isEmpty()) && (!t.getTermGeoUsage().equalsIgnoreCase("null")) && (t.getTermGeoUsage() != null)) {
+            if ((t.getTermGeoUsage() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Gero Usage: </span>").append(t.getTermGeoUsage()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
