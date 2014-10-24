@@ -25,6 +25,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSourcetarget.findAll", query = "SELECT v FROM VjSourcetarget v"),
     @NamedQuery(name = "VjSourcetarget.findByUuid", query = "SELECT v FROM VjSourcetarget v WHERE v.uuid = :uuid"),
     @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang"),
+    @NamedQuery(name = "VjSourcetarget.findBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField"),
+    @NamedQuery(name = "VjSourcetarget.findBySourceResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource"),
+    @NamedQuery(name = "VjSourcetarget.findBySourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.subjectField LIKE :subjectField"),
     @NamedQuery(name = "VjSourcetarget.findByIdTermSource", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermSource = :idTermSource"),
     @NamedQuery(name = "VjSourcetarget.findBySolang", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang"),
     @NamedQuery(name = "VjSourcetarget.findByTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.target = :target"),
@@ -32,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSourcetarget.findByTalang", query = "SELECT v FROM VjSourcetarget v WHERE v.talang = :talang"),
     @NamedQuery(name = "VjSourcetarget.findByIdConcept", query = "SELECT v FROM VjSourcetarget v WHERE v.idConcept = :idConcept"),
     @NamedQuery(name = "VjSourcetarget.findByResourceName", query = "SELECT v FROM VjSourcetarget v WHERE v.resourceName = :resourceName")})
+
 public class VjSourcetarget implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,6 +65,12 @@ public class VjSourcetarget implements Serializable {
     @Basic(optional = false)
     @Column(name = "resource_name")
     private String resourceName;
+    @Basic(optional = false)
+    @Column(name = "id_resource")
+    private long idResource;
+    @Basic(optional = false)
+    @Column(name = "subject_field")
+    private String subjectField;
 
     public VjSourcetarget() {
     }
@@ -136,5 +146,19 @@ public class VjSourcetarget implements Serializable {
     public void setResourceName(String resourceName) {
         this.resourceName = resourceName;
     }
-    
+    public String getSubjectField() {
+        return subjectField;
+    }
+
+    public void setSubjectField(String subjectField) {
+        this.subjectField = subjectField;
+    }
+
+     public long getIdResource() {
+        return idResource;
+    }
+
+    public void setIdResource(long idResource) {
+        this.idResource = idResource;
+    }
 }

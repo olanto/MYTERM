@@ -100,7 +100,7 @@ public class MyTermSearchWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex())
-                        ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
+                        ,searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
         // Listen for the button clicks

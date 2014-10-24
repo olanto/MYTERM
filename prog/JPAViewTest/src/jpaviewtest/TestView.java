@@ -27,8 +27,8 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "-1"));
-        System.out.println(getTargetForThis("tuna%", "EN", "FR", "-1", "-1"));
+        System.out.println(getTargetForThis("tuna%", "EN", "FR", "1007", "ANY"));
+        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
 
     }
 
@@ -126,7 +126,24 @@ public class TestView {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
-        Query query = em.createNamedQuery("VjSourcetarget.findBySource");
+        Query query;
+        if (resID.contains("-1")) {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSourcetarget.findBySource");
+            } else {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceSubjectField");
+                query.setParameter("subjectField", domID);
+            }
+        } else {           
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceResource");
+                query.setParameter("idResource", Long.parseLong(resID));
+            } else {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceResourceSubjectField");
+                query.setParameter("idResource",  Long.parseLong(resID));
+                query.setParameter("subjectField", domID);
+            }
+        }
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
