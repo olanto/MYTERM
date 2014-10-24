@@ -49,7 +49,7 @@ public class ResultsContainer extends HorizontalPanel {
     }
 
     public void adjustSize() {
-        int h = Window.getClientHeight() - 150;
+        int h = Window.getClientHeight() - 145;
         int w = Window.getClientWidth() - 15;
         termsPan.setPixelSize(w * 1 / 4, h);
         termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
