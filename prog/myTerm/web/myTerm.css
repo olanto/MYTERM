@@ -11,7 +11,7 @@
     font-weight: bold;
 }
 .note{
-    color:blue;
+    color:black;
     font-weight: bold;
 }
 .def{
@@ -56,7 +56,7 @@ body{
 .searchMenu{
     width: 100%;
     margin-top: 1px;
-    background-color:#EFF6FF;
+    background-color:#ccf;
     margin-bottom: 1px;
     height: 30px;
     padding-left: 1px;
@@ -1111,8 +1111,8 @@ select {
 }
 
 .gwt-TabBar {
-    background: #ccc;
-    padding-top: 6px;
+    background-color: #6666ff;
+    padding-top: 3px;
 }
 .gwt-TabBar .gwt-TabBarFirst {
     width: 5px;  /* first tab distance from the left */
@@ -1148,11 +1148,11 @@ select {
     border-style: solid;
     border-width: 0px 1px 1px;
     overflow: hidden;
-    padding: 4px;
+    padding: 1px;
 }
 .gwt-DecoratedTabBar {
     background: #ccc;
-    padding-top: 6px;
+    padding-top: 4px;
 }
 .gwt-DecoratedTabBar .gwt-TabBarFirst {
     width: 5px;  /* first tab distance from the left */
