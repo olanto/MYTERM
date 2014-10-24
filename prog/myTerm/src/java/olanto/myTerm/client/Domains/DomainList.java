@@ -19,8 +19,10 @@
  *
  *********
  */
-package olanto.myTerm.client.Resources;
+package olanto.myTerm.client.Domains;
 
+import olanto.myTerm.client.CookiesManager.MyTermCookies;
+import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -29,8 +31,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import olanto.myTerm.client.CookiesManager.MyTermCookies;
-import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -38,23 +38,24 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  *
  * @author nizar ghoula - simple
  */
-public class ResourceList extends ListBox {
+public class DomainList extends ListBox {
 
-    private static AsyncCallback<ArrayList<Resource>> RsrcCallback;
+    private static AsyncCallback<ArrayList<Domain>> domCallback;
 
-    public ResourceList() {
-        RsrcCallback = new AsyncCallback<ArrayList<Resource>>() {
+    public DomainList() {
+        domCallback = new AsyncCallback<ArrayList<Domain>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of resources");
+                Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<Resource> result) {
+            public void onSuccess(ArrayList<Domain> result) {
                 int i = 0;
-                for (Resource s : result) {
+                for (Domain s : result) {
                     addItem(s.name, s.id);
-                    if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
+                    addItem(s.name, s.id);
+                    if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                         i = result.indexOf(s);
                     }
                 }
@@ -65,11 +66,11 @@ public class ResourceList extends ListBox {
                 new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
-                MyTermCookies.updateCookie(MyTermCookiesNamespace.Resource, getItemText(getSelectedIndex()));
+                MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
             }
         });
-        addItem("ALL", "-1");
-        getService().getResources(RsrcCallback);
+        addItem("ANY", "%");
+        getService().getDomains(domCallback);
     }
 
     private static myTermServiceAsync getService() {

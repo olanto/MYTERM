@@ -4,10 +4,10 @@
  */
 package olanto.myTerm.client.ServiceCalls;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
+import olanto.myTerm.client.Domains.Domain;
 import olanto.myTerm.client.Langs.Language;
 import olanto.myTerm.client.Resources.Resource;
 
@@ -27,6 +27,8 @@ public interface myTermService extends RemoteService {
     public ArrayList<String> getResults(String s, String ls, String lt);
 
     public ArrayList<Language> getLanguages();
+
+    public ArrayList<Domain> getDomains();
 
     public ArrayList<Resource> getResources();
 

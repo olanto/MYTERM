@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Langs.LangList;
 import olanto.myTerm.client.Resources.ResourceList;
 
@@ -41,6 +42,7 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public LangList langSrc = new LangList("source");
     public LangList langTgt = new LangList("target");
     public ResourceList rsrc = new ResourceList();
+    public DomainList dom = new DomainList();
     public Button btnSend = new Button("Search");
 
     public SearchHeaderBasic() {
@@ -62,6 +64,10 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
         add(rsrc);
+        add(new HTML("&nbsp;"));
+        add(new Label("Domain: "));
+        add(new HTML("&nbsp;"));
+        add(dom);
         add(new HTML("&nbsp;"));
         setStyleName("searchMenu");
     }

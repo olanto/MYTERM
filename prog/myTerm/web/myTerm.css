@@ -6,21 +6,26 @@
         Purpose of the stylesheet follows.
 */
 
+.tform{
+    color:green;
+    font-weight: bold;
+}
 .sfield{
-    color:red;
-    font-weight: bold;
-}
-.note{
-    color:black;
-    font-weight: bold;
-}
-.def{
     font-weight: bold;
     color:green;
+    font-style: italic;
+}
+.note{
+    color:blue;
+    font-style: italic;
+}
+.def{
+    color:blue;
+    font-style: italic;
 }
 .defsrc{
-    font-weight: bold;
-    color:black;
+    color:blue;
+    font-style: italic;
 }
 .extrainfo{
     color: blueviolet;

@@ -270,4 +270,9 @@ public class Queries {
         }
         return result.get(0);
     }
+    public static List<Domains> getDomains() {
+        Query query = TermDB.em.createNamedQuery("Domains.findAll");
+        List<Domains> result = query.getResultList();
+        return result;
+    }
 }

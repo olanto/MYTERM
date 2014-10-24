@@ -19,18 +19,16 @@
  *
  *********
  */
-package olanto.myTerm.client.CookiesManager;
+package olanto.myTerm.client.Domains;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class MyTermCookiesNamespace {
+public class Domain implements IsSerializable {
 
-    public static String MyTermlangS = "MyTermlangS";
-    public static String MyTermlangT = "MyTermlangT";
-    public static String InterfaceLanguage = "InterfaceLanguage";
-    public static String Resource = "Resource";
-    public static String Domain = "Domain";
-    public static String SessionID = "SessionID";
+    public String id;
+    public String name;
 }

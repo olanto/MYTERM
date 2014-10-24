@@ -68,7 +68,6 @@ public class LangList extends ListBox {
                 } else {
                     setSelectedIndex(j);
                 }
-
             }
         };
         this.addChangeHandler(
