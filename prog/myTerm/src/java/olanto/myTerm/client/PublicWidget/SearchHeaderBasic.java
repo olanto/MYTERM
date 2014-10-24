@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Langs.LangList;
 import olanto.myTerm.client.Resources.ResourceList;
 
@@ -43,6 +44,7 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public Button btnSend = new Button("Search");
 
     public SearchHeaderBasic() {
+        setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);

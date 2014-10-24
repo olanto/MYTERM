@@ -67,13 +67,13 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 res.add(new HTML(result));
-                resultsPanel.add(res);
+                resultsPanel.conceptDetails.add(res);
             }
 
             @Override
             public void onFailure(Throwable caught) {
                 res.add(new Label("Communication failed"));
-                resultsPanel.add(res);
+                resultsPanel.conceptDetails.add(res);
             }
         };
         // Listen for the button clicks

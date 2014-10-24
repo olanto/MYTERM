@@ -45,6 +45,10 @@ body{
     padding-right: 1px;
     border:1px dashed black;
 }
+.resultsContainer{
+    width: 100%;
+    border:1px dashed black;
+}
 .langSetForm{
     margin-top: 1px;
     background-color: floralwhite;

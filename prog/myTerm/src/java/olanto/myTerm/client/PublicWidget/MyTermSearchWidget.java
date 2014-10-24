@@ -68,12 +68,12 @@ public class MyTermSearchWidget extends VerticalPanel {
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.termsDetails.add(new HTML(result));
+                resultsPanel.conceptDetails.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsDetails.add(new Label("Communication failed"));
+                resultsPanel.conceptDetails.add(new Label("Communication failed"));
             }
         };
         // Listen for the button clicks
@@ -81,6 +81,7 @@ public class MyTermSearchWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 resultsPanel.termsPan.clear();
+                resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
@@ -91,6 +92,7 @@ public class MyTermSearchWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     resultsPanel.termsPan.clear();
+                    resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
@@ -100,6 +102,7 @@ public class MyTermSearchWidget extends VerticalPanel {
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
+                resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
 
