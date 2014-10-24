@@ -60,6 +60,7 @@ public class MyTermSearchWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                searchMenu.btnSend.setEnabled(true);
                 resultsPanel.termsPan.add(new HTML(result));
             }
 
@@ -97,6 +98,7 @@ public class MyTermSearchWidget extends VerticalPanel {
                 resultsPanel.termsPan.clear();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
+                searchMenu.btnSend.setEnabled(false);
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
             }
         });
@@ -108,6 +110,7 @@ public class MyTermSearchWidget extends VerticalPanel {
                     resultsPanel.termsPan.clear();
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
+                    searchMenu.btnSend.setEnabled(false);
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termCallback);
                 }
             }
