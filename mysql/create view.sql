@@ -3,11 +3,15 @@ create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
        t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
 	   c.id_concept,
-       r.resource_name
+       r.resource_name,
+	   r.id_resource,
+	   c.subject_field
+
  from terms t1, langsets l1,
       terms t2, langsets l2,
 	  concepts c,
       resources r
+
 where t1.id_langset=l1.id_langset
    and l1.id_concept=c.id_concept
    and t2.id_langset=l2.id_langset
