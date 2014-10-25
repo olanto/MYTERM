@@ -19,7 +19,8 @@ public class ReaderInterface extends TabPanel {
     private MyTermSearchWidget bpan = new MyTermSearchWidget();
 
     public ReaderInterface() {
-        add(bpan, "Browse your Resources");
+        add(bpan, "Term Search");
+        selectTab(0);
         setStyleName("tabPanel");
         addSelectionHandler(new SelectionHandler<Integer>() {
             @Override

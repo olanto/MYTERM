@@ -24,11 +24,11 @@ public class AdminInterface extends TabPanel {
     private ApproveWidget apan = new ApproveWidget();
 
     public AdminInterface() {
-        add(bpan, "Term Search");
+        add(bpan, "Term Search");        selectTab(0);
+
         add(wpan, "Workspace");
         add(apan, "To approve");
         add(new HTML("Under construction!!!"), "System Administration");
-        selectTab(0);
         setStyleName("tabPanel");
         addSelectionHandler(new SelectionHandler<Integer>() {
             @Override

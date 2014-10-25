@@ -21,7 +21,7 @@ public class RevisorInterface extends TabPanel {
     private ApproveWidget apan = new ApproveWidget();
 
     public RevisorInterface() {
-        add(bpan, "Browse your Resources");
+        add(bpan, "Term Search");
         add(apan, "To approve");
         selectTab(0);
         setStyleName("tabPanel");

@@ -23,7 +23,7 @@ public class RedactorInterface extends TabPanel {
     private ApproveWidget apan = new ApproveWidget();
 
     public RedactorInterface() {
-        add(bpan, "Browse your Resources");
+        add(bpan, "Term Search");
         add(wpan, "Workspace");
         add(apan, "To approve");
         selectTab(0);
