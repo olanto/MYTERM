@@ -27,4 +27,6 @@ package olanto.myTerm.client.ConstantsManager;
  */
 public class GuiConstant {
         public static final int EXP_DAYS = 24;
+        public static final String OLANTO_URL = "Powered by Olanto|http://olanto.org|_blank";
+        public static final String FEEDBACK_MAIL = "Feedback|info@olanto.org";
 }

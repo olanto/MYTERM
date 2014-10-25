@@ -5,7 +5,12 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+.contactInfo{
+    font-weight: bold;
+    font-family: arial;
+    font-size: 12px;
+    text-align: center;
+}
 .tform{
     color:green;
     font-weight: bold;
@@ -51,10 +56,13 @@ body{
 .headerPanel a{
     color: white;
 }
-.headerPanel a:hover{
-    color: red;
-}
 
+.headerPanel a:visited{
+    color: aliceblue;
+}
+.headerPanel a:hover{
+    color: bisque;
+}
 .sideWidget{
     background-color: #EFF6FF;
     border-right: 1px solid black;
