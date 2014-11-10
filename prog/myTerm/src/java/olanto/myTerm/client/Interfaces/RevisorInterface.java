@@ -17,10 +17,12 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class RevisorInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan = new MyTermSearchWidget();
-    private ApproveWidget apan = new ApproveWidget();
+    private MyTermSearchWidget bpan;
+    private ApproveWidget apan;
 
-    public RevisorInterface() {
+    public RevisorInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
+        apan = new ApproveWidget(ownerID);
         add(bpan, "Term Search");
         add(apan, "To approve");
         selectTab(0);

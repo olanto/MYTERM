@@ -26,7 +26,6 @@
                 <td></td>
                 <td>
                     <g:Button ui:field="submit_button"></g:Button>
-                    <g:Anchor ui:field="register_link"></g:Anchor>
                 </td>
             </tr>
         </table>

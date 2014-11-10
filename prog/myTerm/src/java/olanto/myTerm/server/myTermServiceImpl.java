@@ -8,6 +8,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import java.util.List;
 import jpaviewtest.TestView;
+import jpaviewtest.entities.VjUsersResources;
 import olanto.myTerm.client.Domains.Domain;
 import olanto.myTerm.client.Langs.Language;
 import olanto.myTerm.client.Resources.Resource;
@@ -17,7 +18,6 @@ import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Languages;
-import org.olanto.myterm.coredb.entityclasses.Resources;
 
 /**
  *
@@ -70,12 +70,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<Resource> getResources() {
-        List<Resources> l = Queries.getResources();
+    public ArrayList<Resource> getResources(long ownerID) {
+        List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
         ArrayList<Resource> resources = new ArrayList<Resource>();
-        for (Resources res : l) {
+        for (VjUsersResources res : l) {
             Resource r = new Resource();
-            r.id = res.getIdResource().toString();
+            r.id = "" + res.getIdResource();
             r.name = res.getResourceName();
             resources.add(r);
         }
@@ -98,16 +98,17 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public String getdetailsForConcept(long conceptID) {
         StringBuilder result = new StringBuilder("");
-        result.append("<div class =\"panel\">");
         Concepts c = Queries.getConceptByID(conceptID);
-        result.append("<table>");
-        result.append("<tr>");
-        result.append("<th>").append("Details for concept: ").append(c.getIdConcept()).append("</th>");
-        result.append("<th>").append("From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
-        result.append("<th>").append("Other details").append("</th>");
-        result.append("<th>").append("Extra information").append("</th>");
-        result.append("</tr>");
-        result.append("<tr>");
+        if (c != null) {
+            result.append("<div class =\"panel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append("Details for concept: ").append(c.getIdConcept()).append("</th>");
+            result.append("<th>").append("From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+            result.append("<th>").append("Other details").append("</th>");
+            result.append("<th>").append("Extra information").append("</th>");
+            result.append("</tr>");
+            result.append("<tr>");
 //        result.append("<td>");
 //        if ((c.getSubjectField() != null)) {
 //            result.append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>");
@@ -148,31 +149,34 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 //        if ((c.getExtra() != null)) {
 //            result.append("&nbsp").append("<span class = \"extrainfo\">Other information: </span>").append(c.getExtra()).append("<br/>");
 //        }
-        result.append("<td>")
-                .append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>")
-                .append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>")
-                .append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>")
-                .append("</td>");
-        result.append("<td>")
-                .append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>")
-                .append("</td>");
-        result.append("<td>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(c.getCreation()).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>")
-                .append("</td>");
-        result.append("<td>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Image: </span>").append(c.getImage()).append("<br/>")
-                .append("&nbsp").append("<span class = \"extrainfo\">Extra information: </span>").append(c.getExtra()).append("<br/>")
-                .append("</td>");
-        result.append("</tr>");
-        result.append("</td>").append("</tr>");
-        result.append("</table>");
-        result.append("</div>");
-        return result.toString();
+            result.append("<td>")
+                    .append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>")
+                    .append("</td>");
+            result.append("<td>")
+                    .append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>")
+                    .append("</td>");
+            result.append("<td>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(c.getCreation()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>")
+                    .append("</td>");
+            result.append("<td>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Image: </span>").append(c.getImage()).append("<br/>")
+                    .append("&nbsp").append("<span class = \"extrainfo\">Extra information: </span>").append(c.getExtra()).append("<br/>")
+                    .append("</td>");
+            result.append("</tr>");
+            result.append("</td>").append("</tr>");
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        } else {
+            return "empty concept!";
+        }
     }
 
     @Override

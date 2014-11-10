@@ -140,4 +140,22 @@ v_reslang.* FROM v_reslang;
 
 select  resource_name, id_language, count(*) nbterms from v_reslang group by resource_name, id_language; 
 
+create or replace view v_users_resources as
+select o.id_owner, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note
+
+ from resources r, owners o, users_resources ur
+
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+;
+
+
+create or replace view vj_users_resources as
+SELECT uuid()  uuid,
+v_users_resources.* FROM v_users_resources;
+
+select v_users_resources.* FROM v_users_resources; 
+
 commit;

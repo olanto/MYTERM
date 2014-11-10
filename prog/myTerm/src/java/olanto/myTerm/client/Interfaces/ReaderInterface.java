@@ -16,9 +16,10 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class ReaderInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan = new MyTermSearchWidget();
+    private MyTermSearchWidget bpan;
 
-    public ReaderInterface() {
+    public ReaderInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
         add(bpan, "Term Search");
         selectTab(0);
         setStyleName("tabPanel");

@@ -80,8 +80,8 @@ public class EdTermForm extends VerticalPanel {
         add(controls);
         controls.add(cancel);
         controls.add(submit);
-        impt.setStyleName("panel");
-        rst.setStyleName("panel");
+        impt.setStyleName("cpanel");
+        rst.setStyleName("cpanel");
         impt.setCellSpacing(6);
         rst.setCellSpacing(6);
 

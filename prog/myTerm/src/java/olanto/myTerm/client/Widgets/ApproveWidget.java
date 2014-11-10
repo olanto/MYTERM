@@ -15,15 +15,12 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import static olanto.myTerm.client.Widgets.MyTermSearchWidget.fixGwtNav;
 import olanto.myTerm.client.ContainerPanels.ResultsContainer;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderBasic;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
-import static olanto.myTerm.client.Widgets.MyTermSearchWidget.fixGwtNav;
 
 /**
  *
@@ -31,14 +28,15 @@ import static olanto.myTerm.client.Widgets.MyTermSearchWidget.fixGwtNav;
  */
 public class ApproveWidget extends VerticalPanel {
 
-    private SearchHeaderBasic searchMenu = new SearchHeaderBasic();
+    private SearchHeaderBasic searchMenu;
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
 
-    public ApproveWidget() {
+    public ApproveWidget(long ownerID) {
         fixGwtNav();
+        searchMenu = new SearchHeaderBasic(ownerID);
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.

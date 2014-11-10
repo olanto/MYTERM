@@ -18,11 +18,14 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class RedactorInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan = new MyTermSearchWidget();
-    private WorkspaceWidget wpan = new WorkspaceWidget();
-    private ApproveWidget apan = new ApproveWidget();
+    private MyTermSearchWidget bpan;
+    private WorkspaceWidget wpan;
+    private ApproveWidget apan;
 
-    public RedactorInterface() {
+    public RedactorInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
+        wpan = new WorkspaceWidget(ownerID);
+        apan = new ApproveWidget(ownerID);
         add(bpan, "Term Search");
         add(wpan, "Workspace");
         add(apan, "To approve");
@@ -32,7 +35,6 @@ public class RedactorInterface extends TabPanel {
             @Override
             public void onSelection(SelectionEvent<Integer> event) {
                 History.newItem("page" + event.getSelectedItem());
-
             }
         });
     }

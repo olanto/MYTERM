@@ -36,7 +36,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -47,14 +46,15 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class MyTermSearchWidget extends VerticalPanel {
 
-    private SearchHeaderBasic searchMenu = new SearchHeaderBasic();
+    private SearchHeaderBasic searchMenu;
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
 
-    public MyTermSearchWidget() {
+    public MyTermSearchWidget(long ownerID) {
         fixGwtNav();
+        searchMenu = new SearchHeaderBasic(ownerID);
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.

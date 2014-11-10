@@ -5,6 +5,11 @@
     Description:
         Purpose of the stylesheet follows.
 */
+.tainput{
+    font-family: arial;
+    font-size: 12px;
+    text-align: left;
+}
 .contactInfo{
     font-weight: bold;
     font-family: arial;
@@ -188,6 +193,7 @@ body{
     margin-left: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
+    vertical-align: top;
 }
 .panel p {
     padding:1px;
@@ -203,46 +209,24 @@ body{
     border:1px solid #6495ed;
     padding:1px;
     text-align:left;
+    vertical-align: top;
     width:1%;
 }
 .cpanel{
+    border:1px solid #6495ed;
     margin-top: 1px;
     margin-left: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
-}
-.cpanel p {
-    color: blue;
-}
-.cpanel th {
-    border:1px dotted green;
-    padding:1px;
-    background-color: beige;
-}
-.cpanel td {
-    border:1px solid #6495ed;
-    padding:1px;
-    text-align:left;
 }
 .lspanel{
     margin-top: 1px;
     margin-left: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
-}
-.lspanel p {
-    color: blue;
-}
-.lspanel th {
     border:1px dotted green;
-    padding:1px;
-    background-color: beige;
 }
-.lspanel td {
-    border:1px solid #6495ed;
-    padding:1px;
-    text-align:left;
-}
+
 .gwt-Tree{
     margin-top: 1px;
     background-color: aliceblue;

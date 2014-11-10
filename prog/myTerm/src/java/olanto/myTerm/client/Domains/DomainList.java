@@ -41,6 +41,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class DomainList extends ListBox {
 
     private static AsyncCallback<ArrayList<Domain>> domCallback;
+    private static ArrayList<String> domlist = new ArrayList<String>();
 
     public DomainList() {
         domCallback = new AsyncCallback<ArrayList<Domain>>() {
@@ -53,6 +54,7 @@ public class DomainList extends ListBox {
             public void onSuccess(ArrayList<Domain> result) {
                 int i = 0;
                 for (Domain s : result) {
+                    domlist.add(s.name);
                     addItem(s.name, s.id);
                     if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                         i = result.indexOf(s);
@@ -70,6 +72,17 @@ public class DomainList extends ListBox {
         });
         addItem("ANY", "-1");
         getService().getDomains(domCallback);
+    }
+    
+    public void selectdomain(String domain) {
+        int i = 0;
+        for (String s : domlist) {
+            if (s.equalsIgnoreCase(domain)) {
+                setSelectedIndex(i);
+                break;
+            }
+            i++;
+        }
     }
 
     private static myTermServiceAsync getService() {

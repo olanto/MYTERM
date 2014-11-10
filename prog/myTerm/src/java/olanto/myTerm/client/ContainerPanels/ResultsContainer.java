@@ -55,4 +55,12 @@ public class ResultsContainer extends HorizontalPanel {
         termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
     }
+
+    public void adjustSize(float s_widthper, float s_heightper) {
+        int h = Window.getClientHeight() - 140;
+        int w = Window.getClientWidth() - 15;
+        termsPan.setPixelSize((int) (w * s_widthper), h);
+        termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
+        conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
+    }
 }

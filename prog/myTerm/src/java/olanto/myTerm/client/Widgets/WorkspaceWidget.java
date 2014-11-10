@@ -19,16 +19,14 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.Forms.EdConceptForm;
+import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.EdLangSetForm;
 import olanto.myTerm.client.Types.Concept;
 import olanto.myTerm.client.Types.Term;
-import static olanto.myTerm.client.Widgets.MyTermSearchWidget.fixGwtNav;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -38,7 +36,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class WorkspaceWidget extends VerticalPanel {
 
-    private SearchHeaderWorkspace searchMenu = new SearchHeaderWorkspace();
+    private SearchHeaderWorkspace searchMenu;
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
@@ -46,11 +44,12 @@ public class WorkspaceWidget extends VerticalPanel {
     private Concept c = new Concept();
     private Term t = new Term();
     private Tree staticTree = new Tree();
-    private EdConceptForm addcpt = new EdConceptForm();
+    private ConceptForm addcpt = new ConceptForm();
     private EdLangSetForm addterm = new EdLangSetForm();
 
-    public WorkspaceWidget() {
+    public WorkspaceWidget(long ownerID) {
         fixGwtNav();
+        searchMenu = new SearchHeaderWorkspace(ownerID);
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
@@ -159,12 +158,12 @@ public class WorkspaceWidget extends VerticalPanel {
                 String language = event.getSelectedItem().getText().substring(index + 1);
                 t.form = term;
                 t.language = language;
-                c.subject_field = "Empty";
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.add(addcpt);
                 addcpt.setVisible(true);
                 addcpt.InitFromVariable(c);
+                addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 90);
                 resultsPanel.termsDetails.add(addterm);
                 addterm.setVisible(true);
                 addterm.initfromvar(t);

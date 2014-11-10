@@ -34,9 +34,9 @@ public class ConvertAndLoadIntoDB {
     
     public static void main(String[] args) {
 
-   //     ConvertAFile("C:/MYTERM/private/glossaries/Names of fish [EFSL] FAO 1997_EN_FR_ES.doc.txt","FISH_NAME", Model.PREFIX,"C:/MYTERM/models/prefix_model.xml");
+       ConvertAFile("C:/MYTERM/private/glossaries/Names of fish [EFSL] FAO 1997_EN_FR_ES.doc.txt","FISH_NAME", Model.PREFIX,"C:/MYTERM/models/prefix_model.xml");
   //      ConvertAFile("C:/MYTERM/private/glossaries/Database 4 [EFG] ESA 1999_EN_FR.doc.txt","ESA", "PREFIX","C:/MYTERM/models/prefix_model2.xml");
-       ConvertAFile("C:/MYTERM/tests/UTX/medutx1.01/medutx1.01.utx","MED-UTX", Model.POSFIX,"C:/MYTERM/models/posfix_model_utx1.xml");
+    //    ConvertAFile("C:/MYTERM/tests/UTX/medutx1.01/medutx1.01.utx","MED-UTX", Model.POSFIX,"C:/MYTERM/models/posfix_model_utx1.xml");
    //    ConvertAFile("C:/MYTERM/tests/UTX/legutx1.01/legutx1.01.utx","LEG-UTX", Model.POSFIX,"C:/MYTERM/models/posfix_model_utx2.xml");
   //     ConvertAFile("C:/MYTERM/private/WIPO/WIPONewCompleteExport04022014-UTF8.txt","WIPO-TEST", Model.POSFIXREP,"C:/MYTERM/models/posfix_model_repeat.xml");
      }

@@ -42,7 +42,7 @@ public class ResourceList extends ListBox {
 
     private static AsyncCallback<ArrayList<Resource>> RsrcCallback;
 
-    public ResourceList() {
+    public ResourceList(long ownerID) {
         RsrcCallback = new AsyncCallback<ArrayList<Resource>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -69,7 +69,7 @@ public class ResourceList extends ListBox {
             }
         });
         addItem("ALL", "-1");
-        getService().getResources(RsrcCallback);
+        getService().getResources(ownerID, RsrcCallback);
     }
 
     private static myTermServiceAsync getService() {

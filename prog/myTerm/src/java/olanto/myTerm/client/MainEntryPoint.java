@@ -18,7 +18,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Interfaces.AdminInterface;
@@ -110,14 +109,6 @@ public class MainEntryPoint implements EntryPoint {
         view.getEmailBox().addKeyUpHandler(handler);
         view.getPasswordBox().addKeyUpHandler(handler);
 
-        view.getRegisterLink().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                PopupPanel pop = new PopupPanel(true);
-                pop.setWidget(new HTML("Please register here..."));
-                pop.center();
-            }
-        });
         RootPanel.get("login").add(vp);
         RootPanel.get("login").setVisible(true);
         vp.setPixelSize(Window.getClientWidth(), Window.getClientHeight());
@@ -155,7 +146,6 @@ public class MainEntryPoint implements EntryPoint {
         view.getSubmitButton().setEnabled(false);
         view.getEmailBox().setEnabled(false);
         view.getPasswordBox().setEnabled(false);
-        view.getRegisterLink().setEnabled(false);
     }
 
     public void enableLogin() {
@@ -163,7 +153,6 @@ public class MainEntryPoint implements EntryPoint {
         view.getSubmitButton().setEnabled(true);
         view.getEmailBox().setEnabled(true);
         view.getPasswordBox().setEnabled(true);
-        view.getRegisterLink().setEnabled(true);
         view.getEmailBox().setFocus(true);
     }
 
@@ -180,22 +169,22 @@ public class MainEntryPoint implements EntryPoint {
         RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {
             case "ADMIN":
-                AdminInterface vpan = new AdminInterface();
+                AdminInterface vpan = new AdminInterface(user.getId());
                 RootPanel.get("main").add(vpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "READER":
-                ReaderInterface rpan = new ReaderInterface();
+                ReaderInterface rpan = new ReaderInterface(user.getId());
                 RootPanel.get("main").add(rpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REVISOR":
-                RevisorInterface rvpan = new RevisorInterface();
+                RevisorInterface rvpan = new RevisorInterface(user.getId());
                 RootPanel.get("main").add(rvpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REDACTOR":
-                RedactorInterface vdpan = new RedactorInterface();
+                RedactorInterface vdpan = new RedactorInterface(user.getId());
                 RootPanel.get("main").add(vdpan);
                 RootPanel.get("main").setVisible(true);
                 break;

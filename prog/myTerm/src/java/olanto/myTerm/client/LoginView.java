@@ -47,13 +47,11 @@ public class LoginView extends Composite {
 	@UiField TextBox email;
 	@UiField PasswordTextBox password;
 	@UiField Button submit_button;
-	@UiField Anchor register_link;
 	@UiField SimplePanel message;
 	
 	public LoginView() {
 		initWidget(uiBinder.createAndBindUi(this));
 		submit_button.setText("Login");
-		register_link.setText("Register");
 	}
 	
 	public String getEmailValue(){
@@ -67,11 +65,6 @@ public class LoginView extends Composite {
 	public Button getSubmitButton(){
 		return submit_button;
 	}
-	
-	public Anchor getRegisterLink(){
-		return register_link;
-	}
-
 	
 	public TextBox getEmailBox(){
 		return email;

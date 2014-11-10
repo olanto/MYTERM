@@ -30,7 +30,7 @@ public interface myTermService extends RemoteService {
 
     public ArrayList<Domain> getDomains();
 
-    public ArrayList<Resource> getResources();
+    public ArrayList<Resource> getResources(long ownerID);
 
     public String getInventory();
 }

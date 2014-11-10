@@ -30,5 +30,5 @@ public interface myTermServiceAsync {
 
     public void getDomains(AsyncCallback<ArrayList<Domain>> asyncCallback);
 
-    public void getResources(AsyncCallback<ArrayList<Resource>> asyncCallback);
+    public void getResources(long ownerID, AsyncCallback<ArrayList<Resource>> asyncCallback);
 }

@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSourcetarget;
+import jpaviewtest.entities.VjUsersResources;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 
@@ -27,8 +28,9 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        System.out.println(getTargetForThis("tuna%", "EN", "FR", "1007", "ANY"));
-        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
+        getResourcesByOwner(1);
+//        System.out.println(getTargetForThis("tuna%", "EN", "FR", "1007", "ANY"));
+//        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
 
     }
 
@@ -134,13 +136,13 @@ public class TestView {
                 query = em.createNamedQuery("VjSourcetarget.findBySourceSubjectField");
                 query.setParameter("subjectField", domID);
             }
-        } else {           
+        } else {
             if (domID.equalsIgnoreCase("ANY")) {
                 query = em.createNamedQuery("VjSourcetarget.findBySourceResource");
                 query.setParameter("idResource", Long.parseLong(resID));
             } else {
                 query = em.createNamedQuery("VjSourcetarget.findBySourceResourceSubjectField");
-                query.setParameter("idResource",  Long.parseLong(resID));
+                query.setParameter("idResource", Long.parseLong(resID));
                 query.setParameter("subjectField", domID);
             }
         }
@@ -171,6 +173,14 @@ public class TestView {
             res.add(result.getSource());
         }
         return res;
+    }
+
+    public static List<VjUsersResources> getResourcesByOwner(long ownerID) {
+        init();
+        Query query = em.createNamedQuery("VjUsersResources.findByIdOwner");
+        query.setParameter("idOwner", ownerID);
+        List<VjUsersResources> result = query.getResultList();
+        return result;
     }
 
     public static String getReslang() {
