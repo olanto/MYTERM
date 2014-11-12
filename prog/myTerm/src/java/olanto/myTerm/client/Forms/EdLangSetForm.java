@@ -38,54 +38,27 @@ import olanto.myTerm.client.Types.Term;
 public class EdLangSetForm extends VerticalPanel {
 
     private VerticalPanel desc = new VerticalPanel();
-    private HorizontalPanel langs = new HorizontalPanel();
-    private Label label_lng = new Label("Language:");
-    private LangList lang = new LangList();
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
-    public Button addLang = new Button("Add Language");
-    public Button cancel = new Button("cancel");
-    EdTermForm ter = new EdTermForm();
+    TermForm ter = new TermForm();
 
     public EdLangSetForm() {
         this.setStyleName("langSetForm");
-        add(langs);
         add(desc);
         desc.add(ter);
         add(controls);
         controls.add(addTerm);
-        controls.add(addLang);
-        controls.add(cancel);
-        langs.setStyleName("lspanel");
-        langs.add(label_lng);
-        langs.add(lang);
-        controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_LEFT);
-        controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_CENTER);
-        controls.setCellHorizontalAlignment(addLang, HorizontalPanel.ALIGN_RIGHT);
+        controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
         addTerm.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final EdTermForm tr = new EdTermForm();
+                final TermForm tr = new TermForm();
                 desc.add(tr);
-            }
-        });
-        cancel.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                setVisible(false);
-            }
-        });
-        addLang.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                EdLangSetForm addt = new EdLangSetForm();
-                add(addt);
             }
         });
     }
 
     public void initfromvar(Term t) {
         ter.initFormVariable(t);
-        lang.selectlanguage(t.language);
     }
 }

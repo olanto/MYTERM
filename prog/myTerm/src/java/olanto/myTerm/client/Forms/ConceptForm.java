@@ -96,9 +96,9 @@ public class ConceptForm extends HorizontalPanel {
         defPAnel.setWidth(w * 1 / 3 + "px");
         defsPanel.setWidth(w * 1 / 3 + "px");
         ntPanel.setWidth(w * 1 / 3 + "px");
-        text_def.setPixelSize(w * 1 / 3, GuiConstant.TEXTAREA_HEIGHT);
-        text_sdef.setPixelSize(w * 1 / 3, GuiConstant.TEXTAREA_HEIGHT);
-        text_nt.setPixelSize(w * 1 / 3, GuiConstant.TEXTAREA_HEIGHT);
+        text_def.setWidth(w * 1 / 3 + "px");
+        text_sdef.setWidth(w * 1 / 3 + "px");
+        text_nt.setWidth(w * 1 / 3 + "px");
     }
 
     public void InitFromVariable(Concept c) {
@@ -114,10 +114,10 @@ public class ConceptForm extends HorizontalPanel {
         text_nt.setText("");
     }
 
-    public void setEditable(Boolean edit) {
-        text_def.setEnabled(edit);
-        text_sdef.setEnabled(edit);
-        text_nt.setEnabled(edit);
+    public void setReadOnly(Boolean edit) {
+        text_def.setReadOnly(edit);
+        text_sdef.setReadOnly(edit);
+        text_nt.setReadOnly(edit);
         sf.setEnabled(edit);
     }
 }

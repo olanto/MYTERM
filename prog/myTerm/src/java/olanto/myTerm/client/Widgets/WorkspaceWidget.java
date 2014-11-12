@@ -132,7 +132,7 @@ public class WorkspaceWidget extends VerticalPanel {
 
             }
         });
-        resultsPanel.adjustSize();
+        resultsPanel.adjustSize(0.25f, 0.4f);
     }
 
     private static myTermServiceAsync getService() {
@@ -167,7 +167,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.add(addterm);
                 addterm.setVisible(true);
                 addterm.initfromvar(t);
-
             }
         });
     }
