@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
-import olanto.myTerm.client.Forms.EdLangSetForm;
+import olanto.myTerm.client.Forms.LangSetForm;
 import olanto.myTerm.client.Types.Concept;
 import olanto.myTerm.client.Types.Term;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -35,7 +35,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  * @author simple
  */
 public class WorkspaceWidget extends VerticalPanel {
-
+    
     private SearchHeaderWorkspace searchMenu;
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
@@ -45,8 +45,8 @@ public class WorkspaceWidget extends VerticalPanel {
     private Term t = new Term();
     private Tree staticTree = new Tree();
     private ConceptForm addcpt = new ConceptForm();
-    private EdLangSetForm addterm = new EdLangSetForm();
-
+    private LangSetForm addterm = new LangSetForm();
+    
     public WorkspaceWidget(long ownerID) {
         fixGwtNav();
         searchMenu = new SearchHeaderWorkspace(ownerID);
@@ -59,7 +59,7 @@ public class WorkspaceWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(true);
                 resultsPanel.termsPan.add(new HTML(result));
             }
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsPan.add(new Label("Communication failed"));
@@ -70,7 +70,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 resultsPanel.conceptDetails.add(new HTML(result));
             }
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
@@ -81,7 +81,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 resultsPanel.termsDetails.add(new HTML(result));
             }
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
@@ -129,16 +129,16 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
                 getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
-
+                
             }
         });
-        resultsPanel.adjustSize(0.25f, 0.4f);
+        resultsPanel.adjustSize(0.25f, 0.3f);
     }
-
+    
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
     }
-
+    
     private void createSourceTree(String term) {
 // Create the tree
         String language = searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex());
@@ -149,7 +149,7 @@ public class WorkspaceWidget extends VerticalPanel {
         docItem.setText(term + ":" + language);
         docItem.setHTML(term + ":" + language);
         staticTree.addItem(docItem);
-
+        
         staticTree.addSelectionHandler(new SelectionHandler<TreeItem>() {
             @Override
             public void onSelection(SelectionEvent<TreeItem> event) {
@@ -167,10 +167,11 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.add(addterm);
                 addterm.setVisible(true);
                 addterm.initfromvar(t);
+                addterm.adjustSize(addcpt.getOffsetWidth() - 5);
             }
         });
     }
-
+    
     public static native void fixGwtNav() /*-{
      $wnd.gwtnav = function(a) {
      var realhref = decodeURI(a.href.split("#")[1].split("?")[0]);

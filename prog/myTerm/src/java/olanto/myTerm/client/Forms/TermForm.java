@@ -118,7 +118,7 @@ public class TermForm extends VerticalPanel {
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
         form3.setWidget(4, 0, cancel);
-        form3.setWidget(4, 0, delete);
+        form3.setWidget(4, 1, delete);
 
 //        more.addClickHandler(new ClickHandler() {
 //            @Override
@@ -134,7 +134,7 @@ public class TermForm extends VerticalPanel {
 //                }
 //            }
 //        });
-        
+
         delete.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -171,6 +171,20 @@ public class TermForm extends VerticalPanel {
         form1.setWidth(w * 1 / 3 + "px");
         form2.setWidth(w * 1 / 3 + "px");
         form3.setWidth(w * 1 / 3 + "px");
+        lang.setWidth(w * 1 / 5 + "px");
+        text_frm.setWidth(w * 1 / 5 + "px");
+        text_src.setWidth(w * 1 / 5 + "px");
+        text_def.setWidth(w * 1 / 5 + "px");
+        text_tp.setWidth(w * 1 / 5 + "px");
+        text_pos.setWidth(w * 1 / 5 + "px");
+        text_gdr.setWidth(w * 1 / 5 + "px");
+        text_st.setWidth(w * 1 / 5 + "px");
+        text_def.setWidth(w * 1 / 5 + "px");
+        text_sdef.setWidth(w * 1 / 5 + "px");
+        text_nt.setWidth(w * 1 / 5 + "px");
+        text_ctxt.setWidth(w * 1 / 5 + "px");
+        text_sctxt.setWidth(w * 1 / 5 + "px");
+        text_usg.setWidth(w * 1 / 5 + "px");
     }
 
     public void clearAllText() {
