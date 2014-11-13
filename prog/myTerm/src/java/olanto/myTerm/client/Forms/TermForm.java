@@ -41,14 +41,14 @@ import olanto.myTerm.client.Types.Term;
 public class TermForm extends VerticalPanel {
 
     private Grid form1 = new Grid(5, 2);
-    private Grid form2 = new Grid(4, 2);
-    private Grid form3 = new Grid(5, 2);
+    private Grid form2 = new Grid(5, 2);
+    private Grid form3 = new Grid(6, 2);
     private Label label_lng = new Label("Language:");
     private LangList lang = new LangList();
     private Label label_frm = new Label("Term's form:");
-    private TextBox text_frm = new TextBox();
+    private TextArea text_frm = new TextArea();
     private Label label_src = new Label("Term's source:");
-    private TextBox text_src = new TextBox();
+    private TextArea text_src = new TextArea();
     private Label label_def = new Label("Term's definition:");
     private TextArea text_def = new TextArea();
     private Label label_sdef = new Label("Definition's source:");
@@ -59,10 +59,10 @@ public class TermForm extends VerticalPanel {
     private TextArea text_ctxt = new TextArea();
     private Label label_sctxt = new Label("Context's source:");
     private TextArea text_sctxt = new TextArea();
-    private Label label_nt = new Label(" Term's Note:");
+    private Label label_nt = new Label("Term's Note:");
     private TextArea text_nt = new TextArea();
     private Label label_tp = new Label("Type:");
-    private TextBox text_tp = new TextBox();
+    private TextArea text_tp = new TextArea();
     private Label label_pos = new Label("Part of speech:");
     private TextBox text_pos = new TextBox();
     private Label label_gdr = new Label("Gender:");
@@ -71,8 +71,10 @@ public class TermForm extends VerticalPanel {
     private TextBox text_st = new TextBox();
     private HorizontalPanel form = new HorizontalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
+    private Label label_ext = new Label("Extra:");
+    private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
-    private Label cancel = new Label("Cancel:");
+    private Label cancel = new Label(" ");
 
     public TermForm() {
         this.setStyleName("termForm");
@@ -104,21 +106,25 @@ public class TermForm extends VerticalPanel {
         form2.setWidget(0, 1, text_gdr);
         form2.setWidget(1, 0, label_pos);
         form2.setWidget(1, 1, text_pos);
-        form2.setWidget(2, 0, label_nt);
-        form2.setWidget(2, 1, text_nt);
-        form2.setWidget(3, 0, label_usg);
-        form2.setWidget(3, 1, text_usg);
+        form2.setWidget(2, 0, label_tp);
+        form2.setWidget(2, 1, text_tp);
+        form2.setWidget(3, 0, label_nt);
+        form2.setWidget(3, 1, text_nt);
+        form2.setWidget(4, 0, label_usg);
+        form2.setWidget(4, 1, text_usg);
 
-        form3.setWidget(0, 0, label_tp);
-        form3.setWidget(0, 1, text_tp);
-        form3.setWidget(1, 0, label_st);
-        form3.setWidget(1, 1, text_st);
+        form3.setWidget(0, 0, label_st);
+        form3.setWidget(0, 1, text_st);
+        form3.setWidget(1, 0, label_ctxt);
+        form3.setWidget(1, 1, text_ctxt);
         form3.setWidget(2, 0, label_ctxt);
         form3.setWidget(2, 1, text_ctxt);
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
-        form3.setWidget(4, 0, cancel);
-        form3.setWidget(4, 1, delete);
+        form3.setWidget(4, 0, label_ext);
+        form3.setWidget(4, 1, text_ext);
+        form3.setWidget(5, 0, cancel);
+        form3.setWidget(5, 1, delete);
 
 //        more.addClickHandler(new ClickHandler() {
 //            @Override
@@ -185,6 +191,7 @@ public class TermForm extends VerticalPanel {
         text_ctxt.setWidth(w * 1 / 5 + "px");
         text_sctxt.setWidth(w * 1 / 5 + "px");
         text_usg.setWidth(w * 1 / 5 + "px");
+        text_ext.setWidth(w * 1 / 5 + "px");
     }
 
     public void clearAllText() {
