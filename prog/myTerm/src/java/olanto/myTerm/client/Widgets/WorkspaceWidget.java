@@ -29,16 +29,13 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Tree;
-import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.LangSetForm;
@@ -62,7 +59,6 @@ public class WorkspaceWidget extends VerticalPanel {
     private static AsyncCallback<String> termsCallback;
     private Concept c;
     private LangSet ls;
-    private Tree staticTree = new Tree();
     private ConceptForm addcpt = new ConceptForm();
     private LangSetForm addterms = new LangSetForm();
 
@@ -122,9 +118,9 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 resultsPanel.termsPan.clear();
-                resultsPanel.termsPan.add(staticTree);
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
+                Window.alert("Adding a new concept");
 //                createNewEntry(searchMenu.searchField.getText());
                 searchMenu.btnAdd.setEnabled(false);
                 getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
@@ -166,6 +162,8 @@ public class WorkspaceWidget extends VerticalPanel {
     }
 
     private void createNewEntry(String term) {
+        ls = new LangSet();
+        c = new Concept();
         Term t = new Term();
         t.form = term;
         ls.termList.add(t);
@@ -207,7 +205,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 addcpt.clearAllText();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                staticTree.remove(staticTree.getSelectedItem().getWidget());
             }
         });
     }
