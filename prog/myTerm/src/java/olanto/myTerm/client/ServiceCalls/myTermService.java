@@ -20,9 +20,11 @@ public interface myTermService extends RemoteService {
 
     public String getdetailsForConcept(long conceptID);
 
-    public String getdetailsForTerms(long concept, String langS, String langT);
+    public String getdetailsForTerms(long conceptID, String langS, String langT);
 
     public String getSearchResult(String s, String ls, String lt, String resID, String domID);
+
+    public String getAddResult(String s, String ls, String lt, String resID, String domID);
 
     public ArrayList<String> getResults(String s, String ls, String lt);
 

@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjReslang;
+import jpaviewtest.entities.VjSource;
 import jpaviewtest.entities.VjSourcetarget;
 import jpaviewtest.entities.VjUsersResources;
 import org.olanto.myterm.coredb.Queries;
@@ -28,8 +29,7 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        getResourcesByOwner(1);
-//        System.out.println(getTargetForThis("tuna%", "EN", "FR", "1007", "ANY"));
+        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
 //        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
 
     }
@@ -156,6 +156,89 @@ public class TestView {
             res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
             res.append("<td>").append(result.getTarget()).append("</td>");
             res.append("</tr>");
+        }
+        return res.toString();
+    }
+
+    public static String getTargetsForThis(long conceptID, String term, String solang, String talang, String resID, String domID) {
+//        System.out.println("param:" + term);
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        if (resID.contains("-1")) {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSourcetarget.findBySource");
+            } else {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceSubjectField");
+                query.setParameter("subjectField", domID);
+            }
+        } else {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceResource");
+                query.setParameter("idResource", Long.parseLong(resID));
+            } else {
+                query = em.createNamedQuery("VjSourcetarget.findBySourceResourceSubjectField");
+                query.setParameter("idResource", Long.parseLong(resID));
+                query.setParameter("subjectField", domID);
+            }
+        }
+        query.setParameter("source", term);
+        query.setParameter("solang", solang);
+        query.setParameter("talang", talang);
+        List<VjSourcetarget> resultQ = query.getResultList();
+
+        if (!resultQ.isEmpty()) {
+            res.append("<table>");
+            for (VjSourcetarget result : resultQ) {
+                if (result.getIdConcept() == conceptID) {
+                    res.append("<tr>");
+                    res.append("<td>").append(result.getTarget()).append("</td>");
+                    res.append("</tr>");
+                }
+            }
+            res.append("</table>");
+        }
+        return res.toString();
+    }
+
+    public static String getSourceForThis(String term, String solang, String talang, String resID, String domID) {
+//        System.out.println("param:" + term);
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        if (resID.contains("-1")) {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSource.findBySource");
+            } else {
+                query = em.createNamedQuery("VjSource.findBysourceSubjectField");
+                query.setParameter("subjectField", domID);
+            }
+        } else {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSource.findBysourceIdResource");
+                query.setParameter("idResource", Long.parseLong(resID));
+            } else {
+                query = em.createNamedQuery("VjSource.findBySourceResourceSubjectField");
+                query.setParameter("idResource", Long.parseLong(resID));
+                query.setParameter("subjectField", domID);
+            }
+        }
+        query.setParameter("source", term);
+        query.setParameter("solang", solang);
+        List<VjSource> resultQ = query.getResultList();
+
+        if (resultQ.isEmpty()) {
+            res.append("<tr>");
+            res.append("<td><a href=\"#new").append(term).append("\" onClick=\"return gwtnav(this);\">").append(term).append("</a></td>").append("</td>");
+            res.append("<td>").append(" ").append("</td>");
+            res.append("</tr>");
+        } else {
+            for (VjSource result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), term, solang, talang, resID, domID)).append("</td>");
+                res.append("</tr>");
+            }
         }
         return res.toString();
     }

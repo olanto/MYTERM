@@ -60,7 +60,9 @@ select * from v_conceptdetail where  id_concept=108300;
 create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	   c.id_concept,
-       r.resource_name
+       r.resource_name,
+	   r.id_resource,
+	   c.subject_field
  from terms t1, langsets l1,
 	  concepts c,
       resources r
@@ -68,6 +70,10 @@ where t1.id_langset=l1.id_langset
    and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource
  ;
+
+create or replace view vj_source as
+SELECT uuid()  uuid,
+v_source.* FROM v_source;
 
 create or replace view v_source_lang as
 select distinct t1.id_language solang,
@@ -156,6 +162,7 @@ create or replace view vj_users_resources as
 SELECT uuid()  uuid,
 v_users_resources.* FROM v_users_resources;
 
-select v_users_resources.* FROM v_users_resources; 
+select vj_users_resources.* FROM vj_users_resources; 
+select * from vj_source;
 
 commit;

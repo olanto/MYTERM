@@ -18,9 +18,11 @@ public interface myTermServiceAsync {
 
     public void getSearchResult(String s, String ls, String lt, String resID, String domID, AsyncCallback<String> callback);
 
-    public void getdetailsForConcept(long concept, AsyncCallback<String> callback);
+    public void getAddResult(String s, String ls, String lt, String resID, String domID, AsyncCallback<String> callback);
 
-    public void getdetailsForTerms(long concept, String langS, String langT, AsyncCallback<String> callback);
+    public void getdetailsForConcept(long conceptID, AsyncCallback<String> callback);
+
+    public void getdetailsForTerms(long conceptID, String langS, String langT, AsyncCallback<String> callback);
 
     public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
 
