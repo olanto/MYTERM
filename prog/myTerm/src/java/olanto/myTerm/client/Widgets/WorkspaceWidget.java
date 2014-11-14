@@ -1,6 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * ********
+ * Copyright © 2013-2014 Olanto Foundation Geneva
+ *
+ * This file is part of myTERM.
+ *
+ * myTERM is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * myCAT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with myTERM. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *********
  */
 package olanto.myTerm.client.Widgets;
 
@@ -25,28 +42,30 @@ import com.google.gwt.user.client.ui.TreeItem;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.LangSetForm;
+import olanto.myTerm.client.Forms.TermForm;
 import olanto.myTerm.client.Types.Concept;
-import olanto.myTerm.client.Types.Term;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.client.Types.LangSet;
+import olanto.myTerm.client.Types.Term;
 
 /**
  *
  * @author simple
  */
 public class WorkspaceWidget extends VerticalPanel {
-    
+
     private SearchHeaderWorkspace searchMenu;
     private ResultsContainer resultsPanel = new ResultsContainer();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
-    private Concept c = new Concept();
-    private Term t = new Term();
+    private Concept c;
+    private LangSet ls;
     private Tree staticTree = new Tree();
     private ConceptForm addcpt = new ConceptForm();
-    private LangSetForm addterm = new LangSetForm();
-    
+    private LangSetForm addterms = new LangSetForm();
+
     public WorkspaceWidget(long ownerID) {
         fixGwtNav();
         searchMenu = new SearchHeaderWorkspace(ownerID);
@@ -57,9 +76,10 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnSend.setEnabled(true);
+                searchMenu.btnAdd.setEnabled(true);
                 resultsPanel.termsPan.add(new HTML(result));
             }
-            
+
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsPan.add(new Label("Communication failed"));
@@ -70,7 +90,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 resultsPanel.conceptDetails.add(new HTML(result));
             }
-            
+
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
@@ -81,7 +101,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 resultsPanel.termsDetails.add(new HTML(result));
             }
-            
+
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
@@ -105,7 +125,10 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsPan.add(staticTree);
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
-                createSourceTree(searchMenu.searchField.getText());
+//                createNewEntry(searchMenu.searchField.getText());
+                searchMenu.btnAdd.setEnabled(false);
+                getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+
             }
         });
         // Listen for the button clicks
@@ -127,51 +150,68 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
-                getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
-                
+                if (event.getValue().contains("new")) {
+                    createNewEntry(searchMenu.searchField.getText());
+                } else {
+                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
+                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
+                }
             }
         });
         resultsPanel.adjustSize(0.25f, 0.3f);
     }
-    
+
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
     }
-    
-    private void createSourceTree(String term) {
-// Create the tree
-        String language = searchMenu.langSrc.getItemText(searchMenu.langSrc.getSelectedIndex());
-        staticTree.setStyleName("gwt-Tree");
-        TreeItem docItem = new TreeItem();
-        docItem.setStyleName("gwt-TreeItem");
-        docItem.setTitle(term + ":" + language);
-        docItem.setText(term + ":" + language);
-        docItem.setHTML(term + ":" + language);
-        staticTree.addItem(docItem);
-        
-        staticTree.addSelectionHandler(new SelectionHandler<TreeItem>() {
+
+    private void createNewEntry(String term) {
+        Term t = new Term();
+        t.form = term;
+        ls.termList.add(t);
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        resultsPanel.conceptDetails.add(addcpt);
+        addcpt.setVisible(true);
+        addcpt.InitFromVariable(c);
+        addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
+        resultsPanel.termsDetails.add(addterms);
+        addterms.setVisible(true);
+        addterms.adjustSize(addcpt.getOffsetWidth() - 5);
+        addterms.initfromvar(ls);
+        addterms.addTerm.addClickHandler(new ClickHandler() {
             @Override
-            public void onSelection(SelectionEvent<TreeItem> event) {
-                int index = event.getSelectedItem().getText().indexOf(":");
-                String term = event.getSelectedItem().getText().substring(0, index);
-                String language = event.getSelectedItem().getText().substring(index + 1);
-                t.form = term;
-                t.language = language;
+            public void onClick(ClickEvent event) {
+                final TermForm ter = new TermForm();
+                addterms.desc.add(ter);
+                ter.adjustSize(addterms.getOffsetWidth() - 5);
+                final Term t = new Term();
+                t.form = "";
+                t.language = "";
+                ls.termList.add(t);
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        ls.termList.remove(t);
+                        addterms.desc.remove(ter);
+                    }
+                });
+            }
+        });
+        addcpt.delete.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                ls.termList.clear();
+                ls = null;
+                c = null;
+                addcpt.clearAllText();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                resultsPanel.conceptDetails.add(addcpt);
-                addcpt.setVisible(true);
-                addcpt.InitFromVariable(c);
-                addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 90);
-                resultsPanel.termsDetails.add(addterm);
-                addterm.setVisible(true);
-                addterm.initfromvar(t);
-                addterm.adjustSize(addcpt.getOffsetWidth() - 5);
+                staticTree.remove(staticTree.getSelectedItem().getWidget());
             }
         });
     }
-    
+
     public static native void fixGwtNav() /*-{
      $wnd.gwtnav = function(a) {
      var realhref = decodeURI(a.href.split("#")[1].split("?")[0]);

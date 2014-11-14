@@ -23,6 +23,7 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -42,7 +43,7 @@ public class TermForm extends VerticalPanel {
 
     private Grid form1 = new Grid(5, 2);
     private Grid form2 = new Grid(5, 2);
-    private Grid form3 = new Grid(6, 2);
+    public Grid form3 = new Grid(5, 2);
     private Label label_lng = new Label("Language:");
     private LangList lang = new LangList();
     private Label label_frm = new Label("Term's form:");
@@ -74,7 +75,6 @@ public class TermForm extends VerticalPanel {
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
-    private Label cancel = new Label(" ");
 
     public TermForm() {
         this.setStyleName("termForm");
@@ -82,8 +82,6 @@ public class TermForm extends VerticalPanel {
         form.add(form1);
         form.add(form2);
         form.add(form3);
-        add(controls);
-        controls.add(delete);
         form1.setStyleName("cpanel");
         form2.setStyleName("cpanel");
         form3.setStyleName("cpanel");
@@ -102,29 +100,27 @@ public class TermForm extends VerticalPanel {
         form1.setWidget(4, 0, label_sdef);
         form1.setWidget(4, 1, text_sdef);
 
-        form2.setWidget(0, 0, label_gdr);
-        form2.setWidget(0, 1, text_gdr);
-        form2.setWidget(1, 0, label_pos);
-        form2.setWidget(1, 1, text_pos);
-        form2.setWidget(2, 0, label_tp);
-        form2.setWidget(2, 1, text_tp);
-        form2.setWidget(3, 0, label_nt);
-        form2.setWidget(3, 1, text_nt);
-        form2.setWidget(4, 0, label_usg);
-        form2.setWidget(4, 1, text_usg);
+        form2.setWidget(0, 0, label_st);
+        form2.setWidget(0, 1, text_st);
+        form2.setWidget(1, 0, label_tp);
+        form2.setWidget(1, 1, text_tp);
+        form2.setWidget(2, 0, label_nt);
+        form2.setWidget(2, 1, text_nt);
+        form2.setWidget(3, 0, label_usg);
+        form2.setWidget(3, 1, text_usg);
+        form2.setWidget(4, 0, label_ext);
+        form2.setWidget(4, 1, text_ext);
 
-        form3.setWidget(0, 0, label_st);
-        form3.setWidget(0, 1, text_st);
-        form3.setWidget(1, 0, label_ctxt);
-        form3.setWidget(1, 1, text_ctxt);
+        form3.setWidget(0, 0, label_gdr);
+        form3.setWidget(0, 1, text_gdr);
+        form3.setWidget(1, 0, label_pos);
+        form3.setWidget(1, 1, text_pos);
         form3.setWidget(2, 0, label_ctxt);
         form3.setWidget(2, 1, text_ctxt);
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
-        form3.setWidget(4, 0, label_ext);
-        form3.setWidget(4, 1, text_ext);
-        form3.setWidget(5, 0, cancel);
-        form3.setWidget(5, 1, delete);
+        form3.setWidget(4, 1, controls);
+        controls.add(delete);
 
 //        more.addClickHandler(new ClickHandler() {
 //            @Override
@@ -140,15 +136,7 @@ public class TermForm extends VerticalPanel {
 //                }
 //            }
 //        });
-
-        delete.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                clearAllText();
-                setVisible(false);
-                removeFromParent();
-            }
-        });
+        delete.setTitle("Delete the current term");
     }
 
     public void initFormVariable(Term t) {
@@ -164,16 +152,15 @@ public class TermForm extends VerticalPanel {
         text_pos.setText(t.part_of_speech);
         text_gdr.setText(t.gender);
         text_st.setText(t.status);
-        lang.selectlanguage(t.language);
     }
 
     public void adjustSize(int w) {
-        controls.setWidth(w * 1 / 3 + "px");
+        controls.setWidth(w * 1 / 5 + "px");
         controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
         form.setWidth(w + "px");
         form.setCellHorizontalAlignment(form1, HorizontalPanel.ALIGN_LEFT);
         form.setCellHorizontalAlignment(form2, HorizontalPanel.ALIGN_CENTER);
-        form.setCellHorizontalAlignment(form3, HorizontalPanel.ALIGN_LEFT);
+        form.setCellHorizontalAlignment(form3, HorizontalPanel.ALIGN_RIGHT);
         form1.setWidth(w * 1 / 3 + "px");
         form2.setWidth(w * 1 / 3 + "px");
         form3.setWidth(w * 1 / 3 + "px");
@@ -207,6 +194,7 @@ public class TermForm extends VerticalPanel {
         text_pos.setText("");
         text_gdr.setText("");
         text_st.setText("");
+        text_ext.setText("");
     }
 
     public void setReadOnly(Boolean edit) {
@@ -222,5 +210,6 @@ public class TermForm extends VerticalPanel {
         text_pos.setReadOnly(edit);
         text_gdr.setReadOnly(edit);
         text_st.setReadOnly(edit);
+        text_ext.setReadOnly(edit);
     }
 }

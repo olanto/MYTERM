@@ -27,7 +27,6 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.ConstantsManager.GuiConstant;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Types.Concept;
 
@@ -54,7 +53,7 @@ public class ConceptForm extends HorizontalPanel {
     private VerticalPanel defsPanel = new VerticalPanel();
     private VerticalPanel ntPanel = new VerticalPanel();
     public Button save = new Button("SAVE");
-    public Button submit = new Button("SUBMIT");
+    public Button submit = new Button("SUBMIT FOR REVIEW");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
 
@@ -81,6 +80,10 @@ public class ConceptForm extends HorizontalPanel {
         defsPanel.add(text_sdef);
         ntPanel.add(label_nt);
         ntPanel.add(text_nt);
+        delete.setTitle("Delete the current concept");
+        escape.setTitle("Abort all modifications");
+        submit.setTitle("Submit changes (updates in database)");
+        delete.setTitle("Save changes without submit");
     }
 
     public void adjustSize(int w) {

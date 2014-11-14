@@ -24,8 +24,10 @@ package olanto.myTerm.client.Forms;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import olanto.myTerm.client.Types.LangSet;
 import olanto.myTerm.client.Types.Term;
 
 /**
@@ -35,34 +37,40 @@ import olanto.myTerm.client.Types.Term;
  */
 public class LangSetForm extends VerticalPanel {
 
-    private VerticalPanel desc = new VerticalPanel();
+    public VerticalPanel desc = new VerticalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
-    TermForm ter = new TermForm();
 
     public LangSetForm() {
         this.setStyleName("langSetForm");
         add(desc);
-        desc.add(ter);
         add(controls);
         controls.add(addTerm);
-        addTerm.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                final TermForm tr = new TermForm();
-                desc.add(tr);
-                tr.adjustSize(ter.getOffsetWidth() - 5);
-            }
-        });
     }
 
-    public void initfromvar(Term t) {
-        ter.initFormVariable(t);
+    public void initfromvar(final LangSet ls) {
+        if (!ls.termList.isEmpty()) {
+            int i = 0;
+            for (final Term t : ls.termList) {
+                final TermForm ter = new TermForm();
+                desc.add(ter);
+                ter.initFormVariable(t);
+                ter.adjustSize(getOffsetWidth() - 5);
+                ter.form3.setWidget(4, 0, new HTML("Term number: "+i));
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        ls.termList.remove(t);
+                        desc.remove(ter);
+                    }
+                });
+            }
+        }
     }
 
     public void adjustSize(int w) {
+        setWidth(w + "px");
         controls.setWidth(w + "px");
         controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
-        ter.adjustSize(w);
     }
 }

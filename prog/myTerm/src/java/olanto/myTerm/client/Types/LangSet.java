@@ -22,27 +22,15 @@
 package olanto.myTerm.client.Types;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.util.ArrayList;
 
 /**
  *
- * @author simple
+ * @author nizar ghoula - 
+ * simple
  */
-public class Term implements IsSerializable {
+public class LangSet implements IsSerializable {
 
-    public long ID;
-    public long Concept_ID;
-    public String language;
-    public String form;
-    public String source;
-    public String definition;
-    public String definition_source;
-    public String usage;
-    public String context;
-    public String context_source;
-    public String note;
-    public String type;
-    public String part_of_speech;
-    public String gender;
-    public String status;
-    public String extra;
+    public long langSetID;
+    public ArrayList<Term> termList = new ArrayList<Term>();
 }
