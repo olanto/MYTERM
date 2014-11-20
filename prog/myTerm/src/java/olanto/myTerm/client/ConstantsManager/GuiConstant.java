@@ -21,6 +21,8 @@
  */
 package olanto.myTerm.client.ConstantsManager;
 
+import olanto.myTerm.shared.UserDTO;
+
 /**
  *
  * @author nizar ghoula - simple

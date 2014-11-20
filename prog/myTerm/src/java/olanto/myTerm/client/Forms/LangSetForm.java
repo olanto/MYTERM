@@ -27,8 +27,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.Types.LangSet;
-import olanto.myTerm.client.Types.Term;
+import java.util.ArrayList;
+import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.TermDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -40,30 +41,62 @@ public class LangSetForm extends VerticalPanel {
     public VerticalPanel desc = new VerticalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
+    public LangEntryDTO langEntryDTO;
+    private ArrayList<TermForm> terms;
 
     public LangSetForm() {
+        this.terms = new ArrayList<>();
         this.setStyleName("langSetForm");
         add(desc);
         add(controls);
         controls.add(addTerm);
-    }
-
-    public void initfromvar(final LangSet ls) {
-        if (!ls.termList.isEmpty()) {
-            int i = 0;
-            for (final Term t : ls.termList) {
+        addTerm.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
                 final TermForm ter = new TermForm();
+                terms.add(ter);
                 desc.add(ter);
-                ter.initFormVariable(t);
                 ter.adjustSize(getOffsetWidth() - 5);
-                ter.form3.setWidget(4, 0, new HTML("Term number: "+i));
+                final TermDTO tDTO = new TermDTO();
+                tDTO.setIdLangset(langEntryDTO.lan.getIdLangset());
+                tDTO.setIdLanguage(langEntryDTO.lan.getIdLanguage());
+                langEntryDTO.listterm.add(tDTO);
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + (langEntryDTO.listterm.size() - 1)));
+                ter.refreshContentFromTermDTO();
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        ls.termList.remove(t);
+                        langEntryDTO.listterm.remove(tDTO);
+                        terms.remove(ter);
                         desc.remove(ter);
                     }
                 });
+            }
+        });
+    }
+
+    public void refreshContentFromLangEntryDTO() {
+        desc.clear();
+        if (!langEntryDTO.listterm.isEmpty()) {
+            int i = 0;
+            for (final TermDTO tDTO : langEntryDTO.listterm) {
+                final TermForm ter = new TermForm();
+                terms.add(ter);
+                desc.add(ter);
+                ter.termDTO = tDTO;
+                ter.refreshContentFromTermDTO();
+                ter.adjustSize(getOffsetWidth() - 5);
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        langEntryDTO.listterm.remove(tDTO);
+                        terms.remove(ter);
+                        desc.remove(ter);
+                    }
+                });
+                ter.selectAndDisableLanguage();
+                i++;
             }
         }
     }

@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.Langs;
 
+import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import com.google.gwt.core.client.GWT;
@@ -40,26 +41,28 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class LangList extends ListBox {
 
-    private static AsyncCallback<ArrayList<Language>> langCallback;
-    private static ArrayList<String> langlist = new ArrayList<String>();
+    private static AsyncCallback<ArrayList<LanguageDTO>> langCallback;
+    private static ArrayList<String> langlist = new ArrayList<>();
+    private static ArrayList<String> langIDlist = new ArrayList<>();
 
     public LangList(final String type) {
-        langCallback = new AsyncCallback<ArrayList<Language>>() {
+        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<Language> result) {
+            public void onSuccess(ArrayList<LanguageDTO> result) {
                 int i = 0, j = 0;
-                for (Language s : result) {
-                    langlist.add(s.language);
-                    addItem(s.language, s.id);
-                    if (s.language.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
+                for (LanguageDTO s : result) {
+                    langlist.add(s.getLanguageDefaultName());
+                    langIDlist.add(s.getIdLanguage());
+                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
                         i = result.indexOf(s);
                     }
-                    if (s.language.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT))) {
+                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT))) {
                         j = result.indexOf(s);
                     }
                 }
@@ -85,18 +88,20 @@ public class LangList extends ListBox {
     }
 
     public LangList() {
-        langCallback = new AsyncCallback<ArrayList<Language>>() {
+        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<Language> result) {
-                for (Language s : result) {
-                    langlist.add(s.language);
-                    addItem(s.language, s.id);
+            public void onSuccess(ArrayList<LanguageDTO> result) {
+                for (LanguageDTO s : result) {
+                    langlist.add(s.getLanguageDefaultName());
+                    langIDlist.add(s.getIdLanguage());
+                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
                 }
+                setSelectedIndex(0);
             }
         };
         getService().getLanguages(langCallback);
@@ -110,7 +115,18 @@ public class LangList extends ListBox {
         int i = 0;
         for (String s : langlist) {
             if (s.equalsIgnoreCase(language)) {
-                setSelectedIndex(i);
+                this.setSelectedIndex(i);
+                break;
+            }
+            i++;
+        }
+    }
+
+    public void setSelectedIndexByLangID(String IDlang) {
+        int i = 0;
+        for (String s : langIDlist) {
+            if (s.equalsIgnoreCase(IDlang)) {
+                this.setSelectedIndex(i);
                 break;
             }
             i++;

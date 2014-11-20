@@ -78,7 +78,9 @@ public class MainEntryPoint implements EntryPoint {
                 enableLogin();
             } else {
                 String sessionID = user.getSessionID();
+                String ownerID = user.getId() + "";
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
+                MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
                 showMain(user);
             }
         }
@@ -169,22 +171,22 @@ public class MainEntryPoint implements EntryPoint {
         RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {
             case "ADMIN":
-                AdminInterface vpan = new AdminInterface(user.getId());
+                AdminInterface vpan = new AdminInterface();
                 RootPanel.get("main").add(vpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "READER":
-                ReaderInterface rpan = new ReaderInterface(user.getId());
+                ReaderInterface rpan = new ReaderInterface();
                 RootPanel.get("main").add(rpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REVISOR":
-                RevisorInterface rvpan = new RevisorInterface(user.getId());
+                RevisorInterface rvpan = new RevisorInterface();
                 RootPanel.get("main").add(rvpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REDACTOR":
-                RedactorInterface vdpan = new RedactorInterface(user.getId());
+                RedactorInterface vdpan = new RedactorInterface();
                 RootPanel.get("main").add(vdpan);
                 RootPanel.get("main").setVisible(true);
                 break;
@@ -200,5 +202,6 @@ public class MainEntryPoint implements EntryPoint {
         MyTermCookies.initCookie(MyTermCookiesNamespace.Resource, "ALL");
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
         MyTermCookies.initCookie(MyTermCookiesNamespace.SessionID, null);
+        MyTermCookies.initCookie(MyTermCookiesNamespace.ownerID, null);
     }
 }

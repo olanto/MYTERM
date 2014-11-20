@@ -22,10 +22,10 @@ public class RedactorInterface extends TabPanel {
     private WorkspaceWidget wpan;
     private ApproveWidget apan;
 
-    public RedactorInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
-        wpan = new WorkspaceWidget(ownerID);
-        apan = new ApproveWidget(ownerID);
+    public RedactorInterface() {
+        bpan = new MyTermSearchWidget();
+        wpan = new WorkspaceWidget();
+        apan = new ApproveWidget();
         add(bpan, "Term Search");
         add(wpan, "Workspace");
         add(apan, "To approve");

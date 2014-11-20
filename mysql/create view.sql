@@ -42,7 +42,8 @@ select
        t1.term_source,
        t1.term_definition,
        t1.term_note,
-	   c.id_concept
+	   c.id_concept,
+	   l1.id_langset
   from terms t1, langsets l1,
 	  concepts c
 where t1.id_langset=l1.id_langset

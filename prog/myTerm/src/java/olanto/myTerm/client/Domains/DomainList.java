@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.Domains;
 
+import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import com.google.gwt.core.client.GWT;
@@ -40,31 +41,30 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class DomainList extends ListBox {
 
-    private static AsyncCallback<ArrayList<Domain>> domCallback;
-    private static ArrayList<String> domlist = new ArrayList<String>();
+    private static AsyncCallback<ArrayList<DomainDTO>> domCallback;
+    private static ArrayList<String> domlist = new ArrayList<>();
 
     public DomainList() {
-        domCallback = new AsyncCallback<ArrayList<Domain>>() {
+        domCallback = new AsyncCallback<ArrayList<DomainDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<Domain> result) {
+            public void onSuccess(ArrayList<DomainDTO> result) {
                 int i = 0;
-                for (Domain s : result) {
-                    domlist.add(s.name);
-                    addItem(s.name, s.id);
-                    if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
+                for (DomainDTO s : result) {
+                    domlist.add(s.getDomainDefaultName());
+                    addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                    if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                         i = result.indexOf(s);
                     }
                 }
                 setSelectedIndex(i);
             }
         };
-        this.addChangeHandler(
-                new ChangeHandler() {
+        this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
@@ -73,7 +73,7 @@ public class DomainList extends ListBox {
         addItem("ANY", "-1");
         getService().getDomains(domCallback);
     }
-    
+
     public void selectdomain(String domain) {
         int i = 0;
         for (String s : domlist) {

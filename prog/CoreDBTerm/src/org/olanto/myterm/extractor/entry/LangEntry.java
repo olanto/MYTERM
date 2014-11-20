@@ -33,6 +33,9 @@ public class LangEntry {
     public Langsets lan;
     public Vector<Terms> listterm = new Vector<>();
 
+    public LangEntry() {
+    }
+
     public LangEntry(String lang) {
         lan = new Langsets();
         lan.setIdLanguage(lang);
@@ -42,13 +45,13 @@ public class LangEntry {
         Terms term = new Terms(null, term_form, 'p'); // minimal information
         listterm.add(term);
     }
-   
+
     public Terms getTerm(int i) {
         return listterm.get(i);
     }
-    
+
     public Terms getTermLast() {
-        return listterm.get(listterm.size()-1);
+        return listterm.get(listterm.size() - 1);
     }
 
     public void addLangToDB(Concepts concept) {
@@ -56,7 +59,7 @@ public class LangEntry {
         lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
         for (int i = 0; i < listterm.size(); i++) {
             Terms term = listterm.get(i);
-             term = ManageTerm.addTermToLangset(lan, term);
+            term = ManageTerm.addTermToLangset(lan, term);
         }
 
     }

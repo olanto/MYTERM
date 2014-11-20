@@ -21,6 +21,8 @@
  */
 package olanto.myTerm.client.Forms;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -28,7 +30,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Domains.DomainList;
-import olanto.myTerm.client.Types.Concept;
+import olanto.myTerm.client.Resources.ResourceList;
+import olanto.myTerm.shared.ConceptDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -40,6 +43,8 @@ public class ConceptForm extends HorizontalPanel {
     private Grid cform = new Grid(2, 3);
     private Label label_sf = new Label("Subject field:");
     public DomainList sf = new DomainList();
+    private Label label_rsrc = new Label("Add to resource:");
+    private ResourceList rsrc = new ResourceList();
     private Label label_def = new Label("Definition:");
     private TextArea text_def = new TextArea();
     private Label label_sdef = new Label("Definition's source:");
@@ -47,15 +52,16 @@ public class ConceptForm extends HorizontalPanel {
     private Label label_nt = new Label("Note:");
     private TextArea text_nt = new TextArea();
     private HorizontalPanel sfPanel = new HorizontalPanel();
-    private HorizontalPanel savePanel = new HorizontalPanel();
-    private HorizontalPanel escapePanel = new HorizontalPanel();
+    private HorizontalPanel rsrcPanel = new HorizontalPanel();
+    private HorizontalPanel ctrlPanel = new HorizontalPanel();
     private VerticalPanel defPAnel = new VerticalPanel();
     private VerticalPanel defsPanel = new VerticalPanel();
     private VerticalPanel ntPanel = new VerticalPanel();
     public Button save = new Button("SAVE");
-    public Button submit = new Button("SUBMIT FOR REVIEW");
+    public Button submit = new Button("SUBMIT");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
+    public ConceptDTO conceptDTO;
 
     public ConceptForm() {
         setStyleName("conceptForm");
@@ -63,17 +69,19 @@ public class ConceptForm extends HorizontalPanel {
         cform.setStyleName("cpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);
-        cform.setWidget(0, 1, savePanel);
-        cform.setWidget(0, 2, escapePanel);
+        cform.setWidget(0, 1, rsrcPanel);
+        cform.setWidget(0, 2, ctrlPanel);
         cform.setWidget(1, 0, defPAnel);
         cform.setWidget(1, 1, defsPanel);
         cform.setWidget(1, 2, ntPanel);
         sfPanel.add(label_sf);
         sfPanel.add(sf);
-        savePanel.add(save);
-        savePanel.add(submit);
-        escapePanel.add(delete);
-        escapePanel.add(escape);
+        rsrcPanel.add(label_rsrc);
+        rsrcPanel.add(rsrc);
+        ctrlPanel.add(save);
+        ctrlPanel.add(submit);
+        ctrlPanel.add(delete);
+        ctrlPanel.add(escape);
         defPAnel.add(label_def);
         defPAnel.add(text_def);
         defsPanel.add(label_sdef);
@@ -84,18 +92,25 @@ public class ConceptForm extends HorizontalPanel {
         escape.setTitle("Abort all modifications");
         submit.setTitle("Submit changes (updates in database)");
         delete.setTitle("Save changes without submit");
+        delete.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+//                conceptDTO = null;??
+                removeFromParent();
+           }
+        });
     }
 
     public void adjustSize(int w) {
         sfPanel.setWidth(w * 1 / 3 + "px");
         sfPanel.setCellHorizontalAlignment(label_sf, HorizontalPanel.ALIGN_LEFT);
         sfPanel.setCellHorizontalAlignment(sf, HorizontalPanel.ALIGN_RIGHT);
-        savePanel.setWidth(w * 1 / 3 + "px");
-        savePanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
-        savePanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
-        escapePanel.setWidth(w * 1 / 3 + "px");
-        escapePanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_LEFT);
-        escapePanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_RIGHT);
+        rsrcPanel.setWidth(w * 1 / 3 + "px");
+        rsrcPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
+        rsrcPanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
+        ctrlPanel.setWidth(w * 1 / 3 + "px");
+        ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_LEFT);
+        ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_RIGHT);
         defPAnel.setWidth(w * 1 / 3 + "px");
         defsPanel.setWidth(w * 1 / 3 + "px");
         ntPanel.setWidth(w * 1 / 3 + "px");
@@ -104,11 +119,11 @@ public class ConceptForm extends HorizontalPanel {
         text_nt.setWidth(w * 1 / 3 + "px");
     }
 
-    public void InitFromVariable(Concept c) {
-        this.text_def.setText(c.definition);
-        this.text_sdef.setText(c.defintion_source);
-        this.text_nt.setText(c.note);
-        sf.selectdomain(c.subject_field);
+    public void refreshContentFromConceptEntryDTO() {
+        this.text_def.setText(conceptDTO.getConceptDefinition());
+        this.text_sdef.setText(conceptDTO.getConceptSourceDefinition());
+        this.text_nt.setText(conceptDTO.getConceptNote());
+        sf.selectdomain(conceptDTO.getSubjectField());
     }
 
     public void clearAllText() {

@@ -6,9 +6,10 @@ package olanto.myTerm.client.ServiceCalls;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import olanto.myTerm.client.Domains.Domain;
-import olanto.myTerm.client.Langs.Language;
-import olanto.myTerm.client.Resources.Resource;
+import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.DomainDTO;
+import olanto.myTerm.shared.LanguageDTO;
+import olanto.myTerm.shared.ResourceDTO;
 
 /**
  *
@@ -24,13 +25,15 @@ public interface myTermServiceAsync {
 
     public void getdetailsForTerms(long conceptID, String langS, String langT, AsyncCallback<String> callback);
 
+    public void getAddDetailsForConcept(long conceptID, AsyncCallback<ConceptEntryDTO> callback);
+
     public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
 
     public void getInventory(AsyncCallback<String> callback);
 
-    public void getLanguages(AsyncCallback<ArrayList<Language>> asyncCallback);
+    public void getLanguages(AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
 
-    public void getDomains(AsyncCallback<ArrayList<Domain>> asyncCallback);
+    public void getDomains(AsyncCallback<ArrayList<DomainDTO>> asyncCallback);
 
-    public void getResources(long ownerID, AsyncCallback<ArrayList<Resource>> asyncCallback);
+    public void getResources(long ownerID, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
 }

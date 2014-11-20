@@ -34,9 +34,9 @@ public class ApproveWidget extends VerticalPanel {
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
 
-    public ApproveWidget(long ownerID) {
+    public ApproveWidget() {
         fixGwtNav();
-        searchMenu = new SearchHeaderBasic(ownerID);
+        searchMenu = new SearchHeaderBasic();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.

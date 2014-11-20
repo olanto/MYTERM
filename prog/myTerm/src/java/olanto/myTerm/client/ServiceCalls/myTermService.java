@@ -7,9 +7,10 @@ package olanto.myTerm.client.ServiceCalls;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import olanto.myTerm.client.Domains.Domain;
-import olanto.myTerm.client.Langs.Language;
-import olanto.myTerm.client.Resources.Resource;
+import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.DomainDTO;
+import olanto.myTerm.shared.LanguageDTO;
+import olanto.myTerm.shared.ResourceDTO;
 
 /**
  *
@@ -23,16 +24,18 @@ public interface myTermService extends RemoteService {
     public String getdetailsForTerms(long conceptID, String langS, String langT);
 
     public String getSearchResult(String s, String ls, String lt, String resID, String domID);
+    
+    public ConceptEntryDTO getAddDetailsForConcept(long conceptID);
 
     public String getAddResult(String s, String ls, String lt, String resID, String domID);
 
     public ArrayList<String> getResults(String s, String ls, String lt);
 
-    public ArrayList<Language> getLanguages();
+    public ArrayList<LanguageDTO> getLanguages();
 
-    public ArrayList<Domain> getDomains();
+    public ArrayList<DomainDTO> getDomains();
 
-    public ArrayList<Resource> getResources(long ownerID);
+    public ArrayList<ResourceDTO> getResources(long ownerID);
 
     public String getInventory();
 }

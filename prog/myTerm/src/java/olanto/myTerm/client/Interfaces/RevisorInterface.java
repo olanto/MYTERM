@@ -20,9 +20,9 @@ public class RevisorInterface extends TabPanel {
     private MyTermSearchWidget bpan;
     private ApproveWidget apan;
 
-    public RevisorInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
-        apan = new ApproveWidget(ownerID);
+    public RevisorInterface() {
+        bpan = new MyTermSearchWidget();
+        apan = new ApproveWidget();
         add(bpan, "Term Search");
         add(apan, "To approve");
         selectTab(0);

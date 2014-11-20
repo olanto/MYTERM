@@ -23,7 +23,6 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -32,7 +31,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Langs.LangList;
-import olanto.myTerm.client.Types.Term;
+import olanto.myTerm.shared.TermDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -75,6 +74,7 @@ public class TermForm extends VerticalPanel {
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
+    public TermDTO termDTO;
 
     public TermForm() {
         this.setStyleName("termForm");
@@ -139,19 +139,24 @@ public class TermForm extends VerticalPanel {
         delete.setTitle("Delete the current term");
     }
 
-    public void initFormVariable(Term t) {
-        text_frm.setText(t.form);
-        text_src.setText(t.source);
-        text_def.setText(t.definition);
-        text_sdef.setText(t.definition_source);
-        text_usg.setText(t.usage);
-        text_ctxt.setText(t.context);
-        text_sctxt.setText(t.context_source);
-        text_nt.setText(t.note);
-        text_tp.setText(t.type);
-        text_pos.setText(t.part_of_speech);
-        text_gdr.setText(t.gender);
-        text_st.setText(t.status);
+    public void refreshContentFromTermDTO() {
+        text_frm.setText(termDTO.getTermForm());
+        text_src.setText(termDTO.getTermSource());
+        text_def.setText(termDTO.getTermDefinition());
+        text_sdef.setText(termDTO.getTermSourceDefinition());
+        text_usg.setText(termDTO.getTermUsage());
+        text_ctxt.setText(termDTO.getTermContext());
+        text_sctxt.setText(termDTO.getTermSourceContext());
+        text_nt.setText(termDTO.getTermSource());
+        text_tp.setText(termDTO.getTermType());
+        text_pos.setText(termDTO.getTermPartofspeech());
+        text_gdr.setText(termDTO.getTermGender());
+        text_st.setText(termDTO.getStatus() + "");
+    }
+
+    public void selectAndDisableLanguage() {
+        lang.setSelectedIndexByLangID(termDTO.getIdLanguage());
+        lang.setEnabled(false);
     }
 
     public void adjustSize(int w) {

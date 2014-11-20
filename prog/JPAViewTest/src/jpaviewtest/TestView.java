@@ -15,8 +15,13 @@ import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSource;
 import jpaviewtest.entities.VjSourcetarget;
 import jpaviewtest.entities.VjUsersResources;
+import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.entityclasses.Concepts;
+import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Terms;
+import org.olanto.myterm.extractor.entry.ConceptEntry;
+import org.olanto.myterm.extractor.entry.LangEntry;
 
 /**
  *
@@ -29,9 +34,9 @@ public class TestView {
 
     public static void main(String[] args) {
 
-        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
+//        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
 //        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
-
+        getConceptAndAssociatedTerms(2525);
     }
 
     public static void init() {
@@ -124,6 +129,35 @@ public class TestView {
         return result.toString();
     }
 
+    public static ConceptEntry getConceptAndAssociatedTerms(long conceptID) {
+        init();
+        Concepts cpt = Queries.getConceptByID(conceptID);
+        if (cpt != null) {
+            ConceptEntry conceptEntry = new ConceptEntry(cpt, false);
+            System.out.println(conceptEntry.getConcept().getIdConcept());
+            List<Langsets> langsets = Queries.getLangSetByConcept(conceptID);
+            if (!langsets.isEmpty()) {
+                for (Langsets ls : langsets) {
+                    LangEntry langE = new LangEntry();
+                    langE.lan = ls;
+                    Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLangSet");
+                    query.setParameter("idConcept", conceptID);
+                    query.setParameter("idLangset", ls.getIdLangset());
+                    List<VjConceptdetail> resultQ = query.getResultList();
+                    if (!resultQ.isEmpty()) {
+                        for (VjConceptdetail res : resultQ) {
+                            Terms t = Queries.getTermByID(res.getIdTerm());
+                            langE.listterm.add(t);
+                        }
+                    }
+                    conceptEntry.listlang.add(langE);
+                }
+            }
+            return conceptEntry;
+        }
+        return null;
+    }
+
     public static String getTargetForThis(String term, String solang, String talang, String resID, String domID) {
 //        System.out.println("param:" + term);
         init();
@@ -188,7 +222,7 @@ public class TestView {
         List<VjSourcetarget> resultQ = query.getResultList();
 
         if (!resultQ.isEmpty()) {
-            res.append("<table>");
+            res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
                 if (result.getIdConcept() == conceptID) {
                     res.append("<tr>");
@@ -228,14 +262,15 @@ public class TestView {
         List<VjSource> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
+            Concepts c = ManageConcept.addNewConcept();
             res.append("<tr>");
-            res.append("<td><a href=\"#new").append(term).append("\" onClick=\"return gwtnav(this);\">").append(term).append("</a></td>").append("</td>");
+            res.append("<td><a href=\"#new").append(c.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(term).append("</a></td>").append("</td>");
             res.append("<td>").append(" ").append("</td>");
             res.append("</tr>");
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result.getIdConcept(), term, solang, talang, resID, domID)).append("</td>");
                 res.append("</tr>");
             }

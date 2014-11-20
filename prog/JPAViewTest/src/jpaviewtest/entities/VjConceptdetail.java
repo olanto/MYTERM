@@ -29,9 +29,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjConceptdetail.findByIdLanguage", query = "SELECT v FROM VjConceptdetail v WHERE v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjConceptdetail.findByTermForm", query = "SELECT v FROM VjConceptdetail v WHERE v.termForm = :termForm"),
     @NamedQuery(name = "VjConceptdetail.findByIdConcept", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept"),
+    @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLangSet", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLangset = :idLangset"),
     @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLanguage", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLanguage = :idLanguage")})
 
 public class VjConceptdetail implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "id_langset")
+    private long idLangset;
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")
     @Id
@@ -123,6 +127,14 @@ public class VjConceptdetail implements Serializable {
 
     public void setIdConcept(long idConcept) {
         this.idConcept = idConcept;
+    }
+
+    public long getIdLangset() {
+        return idLangset;
+    }
+
+    public void setIdLangset(long idLangset) {
+        this.idLangset = idLangset;
     }
     
 }

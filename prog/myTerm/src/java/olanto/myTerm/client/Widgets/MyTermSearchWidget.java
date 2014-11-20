@@ -52,9 +52,9 @@ public class MyTermSearchWidget extends VerticalPanel {
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
 
-    public MyTermSearchWidget(long ownerID) {
+    public MyTermSearchWidget(){
         fixGwtNav();
-        searchMenu = new SearchHeaderBasic(ownerID);
+        searchMenu = new SearchHeaderBasic();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.

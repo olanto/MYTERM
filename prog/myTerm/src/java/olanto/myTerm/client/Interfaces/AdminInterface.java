@@ -23,10 +23,10 @@ public class AdminInterface extends TabPanel {
     private WorkspaceWidget wpan;
     private ApproveWidget apan;
 
-    public AdminInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
-        wpan = new WorkspaceWidget(ownerID);
-        apan = new ApproveWidget(ownerID);
+    public AdminInterface() {
+        bpan = new MyTermSearchWidget();
+        wpan = new WorkspaceWidget();
+        apan = new ApproveWidget();
         add(bpan, "Term Search");
         selectTab(0);
 

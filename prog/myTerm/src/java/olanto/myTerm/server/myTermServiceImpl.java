@@ -4,20 +4,31 @@
  */
 package olanto.myTerm.server;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import java.util.List;
 import jpaviewtest.TestView;
+import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjUsersResources;
-import olanto.myTerm.client.Domains.Domain;
-import olanto.myTerm.client.Langs.Language;
-import olanto.myTerm.client.Resources.Resource;
+import olanto.myTerm.shared.DomainDTO;
+import olanto.myTerm.shared.LanguageDTO;
+import olanto.myTerm.shared.ResourceDTO;
 
 import olanto.myTerm.client.ServiceCalls.myTermService;
+import olanto.myTerm.shared.ConceptDTO;
+import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.LangSetDTO;
+import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
+import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
+import org.olanto.myterm.coredb.entityclasses.Terms;
+import org.olanto.myterm.extractor.entry.ConceptEntry;
+import org.olanto.myterm.extractor.entry.LangEntry;
 
 /**
  *
@@ -51,45 +62,45 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public ArrayList<String> getResults(String s, String ls, String lt) {
-        ArrayList<String> termsList = new ArrayList<String>();
+        ArrayList<String> termsList = new ArrayList<>();
         termsList.addAll(TestView.getListForThis(s, ls, lt));
         return termsList;
     }
 
     @Override
-    public ArrayList<Language> getLanguages() {
+    public ArrayList<LanguageDTO> getLanguages() {
         List<Languages> l = Queries.getLanguages();
-        ArrayList<Language> languages = new ArrayList<Language>();
+        ArrayList<LanguageDTO> languages = new ArrayList<>();
         for (Languages lang : l) {
-            Language li = new Language();
-            li.id = lang.getIdLanguage();
-            li.language = lang.getLanguageDefaultName();
+            LanguageDTO li = new LanguageDTO();
+            li.setIdLanguage(lang.getIdLanguage());
+            li.setLanguageDefaultName(lang.getLanguageDefaultName());
             languages.add(li);
         }
         return languages;
     }
 
     @Override
-    public ArrayList<Resource> getResources(long ownerID) {
+    public ArrayList<ResourceDTO> getResources(long ownerID) {
         List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
-        ArrayList<Resource> resources = new ArrayList<Resource>();
+        ArrayList<ResourceDTO> resources = new ArrayList<>();
         for (VjUsersResources res : l) {
-            Resource r = new Resource();
-            r.id = "" + res.getIdResource();
-            r.name = res.getResourceName();
+            ResourceDTO r = new ResourceDTO();
+            r.setIdResource(res.getIdResource());
+            r.setResourceName(res.getResourceName());
             resources.add(r);
         }
         return resources;
     }
 
     @Override
-    public ArrayList<Domain> getDomains() {
+    public ArrayList<DomainDTO> getDomains() {
         List<Domains> l = Queries.getDomains();
-        ArrayList<Domain> domains = new ArrayList<Domain>();
+        ArrayList<DomainDTO> domains = new ArrayList<>();
         for (Domains res : l) {
-            Domain d = new Domain();
-            d.id = res.getIdDomain().toString();
-            d.name = res.getDomainDefaultName();
+            DomainDTO d = new DomainDTO();
+            d.setIdDomain(res.getIdDomain());
+            d.setDomainDefaultName(res.getDomainDefaultName());
             domains.add(d);
         }
         return domains;
@@ -214,5 +225,93 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</table>");
         result.append("</div>");
         return result.toString();
+    }
+
+    @Override
+    public ConceptEntryDTO getAddDetailsForConcept(long conceptID) {
+        ConceptEntryDTO conceptDTO = new ConceptEntryDTO();
+        ConceptEntry c = TestView.getConceptAndAssociatedTerms(conceptID);
+        copyConceptEntry(conceptDTO, c);
+        return conceptDTO;
+    }
+
+    private void copyConceptEntry(ConceptEntryDTO conceptDTO, ConceptEntry concept) {
+        copyConcept(conceptDTO.concept, concept.getConcept());
+        if (!concept.listlang.isEmpty()) {
+            for (LangEntry ls : concept.listlang) {
+                LangEntryDTO langE = new LangEntryDTO();
+                langE.lan = copyLangSet(ls.lan);
+                if (!ls.listterm.isEmpty()) {
+                    for (Terms t : ls.listterm) {
+                        langE.listterm.add(copyTerm(t));
+                    }
+                }
+                conceptDTO.listlang.add(langE);
+            }
+        }
+    }
+
+    private void copyConcept(ConceptDTO cDTO, Concepts c) {
+        cDTO.setConceptDefinition(c.getConceptDefinition());
+        cDTO.setConceptNote(c.getConceptNote());
+        cDTO.setConceptSourceDefinition(c.getConceptDefinition());
+        cDTO.setCreateBy(c.getCreateBy());
+        cDTO.setCreation(c.getCreation());
+        cDTO.setCrossref(c.getCrossref());
+        cDTO.setExtcrossref(c.getExtcrossref());
+        cDTO.setExtra(c.getExtra());
+        cDTO.setIdConcept(c.getIdConcept());
+        cDTO.setIdResource(c.getIdResource());
+        cDTO.setImage(c.getImage());
+        cDTO.setLastmodified(c.getLastmodified());
+        cDTO.setLastmodifiedBy(c.getLastmodifiedBy());
+        cDTO.setSubjectField(c.getSubjectField());
+    }
+
+    private LangSetDTO copyLangSet(Langsets ls) {
+        if (ls != null) {
+            LangSetDTO lsDTO = new LangSetDTO();
+            lsDTO.setExtra(ls.getExtra());
+            lsDTO.setIdConcept(ls.getIdConcept());
+            lsDTO.setIdLangset(ls.getIdLangset());
+            lsDTO.setIdLanguage(ls.getIdLanguage());
+            lsDTO.setLangsetNote(ls.getLangsetNote());
+            lsDTO.setSeq(ls.getSeq());
+            return lsDTO;
+        }
+        return null;
+    }
+
+    private TermDTO copyTerm(Terms t) {
+        if (t != null) {
+            TermDTO tDTO = new TermDTO();
+            tDTO.setCreateBy(t.getCreateBy());
+            tDTO.setCreation(t.getCreation());
+            tDTO.setCrossref(t.getCrossref());
+            tDTO.setExtcrossref(t.getExtcrossref());
+            tDTO.setExtra(t.getExtra());
+            tDTO.setIdLangset(t.getIdLangset());
+            tDTO.setIdLanguage(t.getIdLanguage());
+            tDTO.setIdTerm(t.getIdTerm());
+            tDTO.setLastmodified(t.getLastmodified());
+            tDTO.setLastmodifiedBy(t.getLastmodifiedBy());
+            tDTO.setSeq(t.getSeq());
+            tDTO.setStatus(t.getStatus());
+            tDTO.setTermAdminStatus(t.getTermAdminStatus());
+            tDTO.setTermContext(t.getTermContext());
+            tDTO.setTermContext(t.getTermDefinition());
+            tDTO.setTermForm(t.getTermForm());
+            tDTO.setTermGender(t.getTermGender());
+            tDTO.setTermGeoUsage(t.getTermGeoUsage());
+            tDTO.setTermNote(t.getTermNote());
+            tDTO.setTermPartofspeech(t.getTermPartofspeech());
+            tDTO.setTermSource(t.getTermSource());
+            tDTO.setTermSourceContext(t.getTermSourceContext());
+            tDTO.setTermSourceDefinition(t.getTermSourceDefinition());
+            tDTO.setTermType(t.getTermType());
+            tDTO.setTermUsage(t.getTermUsage());
+            return tDTO;
+        }
+        return null;
     }
 }

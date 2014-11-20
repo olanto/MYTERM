@@ -101,79 +101,6 @@ body{
     background-color: honeydew;
     margin-bottom: 1px;
 }
-.ccontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px dashed black;
-    alignment-adjust: central;
-}
-.lscontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px dotted red;
-    alignment-adjust: central;
-
-}
-.tcontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px solid blue;
-    alignment-adjust: central;
-}
-.cexpcontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px dashed red;
-    alignment-adjust: central;
-}
-.lsexpcontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px dotted greenyellow;
-    alignment-adjust: central;
-}
-.texpcontainerForm{
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    margin-bottom: 1px;
-    padding-top: 1px;
-    padding-left: 1px;
-    padding-right: 1px;
-    padding-bottom: 1px;
-    border:1px solid green;
-    alignment-adjust: central;
-}
 .gwt-Anchor{
     cursor: pointer;
     cursor: hand;
@@ -211,6 +138,9 @@ body{
     text-align:left;
     vertical-align: top;
     width:1%;
+}
+.nost td {
+    border: none;
 }
 .cpanel{
     border:1px solid #6495ed;

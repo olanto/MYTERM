@@ -93,7 +93,7 @@ public class Queries {
         query.setParameter("ownerMailing", ownermail);
         query.setParameter("ownerHash", hash);
         List<Owners> result = query.getResultList();
-        System.out.println("result size:" + result.size());
+//        System.out.println("result size:" + result.size());
         if (result.size() > 1) {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + ownermail);
             return null;
@@ -104,12 +104,12 @@ public class Queries {
         }
         return result.get(0);
     }
-    
+
     public static Owners getOwnerbyID(long IDowner) {
         Query query = TermDB.em.createNamedQuery("Owners.findByIdOwner");
         query.setParameter("idOwner", IDowner);
         List<Owners> result = query.getResultList();
-        System.out.println("result size:" + result.size());
+//        System.out.println("result size:" + result.size());
         if (result.size() > 1) {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + IDowner);
             return null;
@@ -121,11 +121,11 @@ public class Queries {
         return result.get(0);
     }
 
-     public static String getOwnerFullNamebyID(long IDowner) {
+    public static String getOwnerFullNamebyID(long IDowner) {
         Query query = TermDB.em.createNamedQuery("Owners.findByIdOwner");
         query.setParameter("idOwner", IDowner);
         List<Owners> result = query.getResultList();
-        System.out.println("result size:" + result.size());
+//        System.out.println("result size:" + result.size());
         if (result.size() > 1) {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + IDowner);
             return null;
@@ -134,15 +134,14 @@ public class Queries {
             System.out.println("NO RETURNED VALUES for :" + IDowner);
             return null;
         }
-        return (result.get(0).getOwnerFirstName() +" "+ result.get(0).getOwnerLastName());
+        return (result.get(0).getOwnerFirstName() + " " + result.get(0).getOwnerLastName());
     }
 
-     
     public static Terms getTermByID(long idTerm) {
         Query query = TermDB.em.createNamedQuery("Terms.findByIdTerm");
         query.setParameter("idTerm", idTerm);
         List<Terms> result = query.getResultList();
-        System.out.println("result size:" + result.size());
+//        System.out.println("result size:" + result.size());
         if (result.size() > 1) {
             System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idTerm);
             return null;
@@ -197,7 +196,7 @@ public class Queries {
         }
         return result.get(0);
     }
-    
+
     public static Concepts getConceptByID(long ConceptID) {
         Query query = TermDB.em.createNamedQuery("Concepts.findByIdConcept");
         query.setParameter("idConcept", ConceptID);
@@ -212,6 +211,18 @@ public class Queries {
             return null;
         }
         return result.get(0);
+    }
+
+    public static List<Langsets> getLangSetByConcept(long conceptID) {
+        Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
+        query.setParameter("idConcept", conceptID);
+        List<Langsets> result = query.getResultList();
+//        System.out.println("result size:" + result.size());
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + conceptID);
+            return null;
+        }
+        return result;
     }
 
     public static List<Resources> getResources() {
@@ -270,6 +281,7 @@ public class Queries {
         }
         return result.get(0);
     }
+
     public static List<Domains> getDomains() {
         Query query = TermDB.em.createNamedQuery("Domains.findAll");
         List<Domains> result = query.getResultList();

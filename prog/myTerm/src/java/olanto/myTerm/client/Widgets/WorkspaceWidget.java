@@ -37,14 +37,13 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.ArrayList;
 import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.LangSetForm;
-import olanto.myTerm.client.Forms.TermForm;
-import olanto.myTerm.client.Types.Concept;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
-import olanto.myTerm.client.Types.LangSet;
-import olanto.myTerm.client.Types.Term;
+import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.LangEntryDTO;
 
 /**
  *
@@ -57,14 +56,15 @@ public class WorkspaceWidget extends VerticalPanel {
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
-    private Concept c;
-    private LangSet ls;
-    private ConceptForm addcpt = new ConceptForm();
-    private LangSetForm addterms = new LangSetForm();
+    private static AsyncCallback<ConceptEntryDTO> addTermsCallback;
+    private ConceptEntryDTO conceptEntryDTO;
+    private ConceptForm addcpt;
+    private ArrayList<LangSetForm> addterms;
 
-    public WorkspaceWidget(long ownerID) {
+    public WorkspaceWidget() {
         fixGwtNav();
-        searchMenu = new SearchHeaderWorkspace(ownerID);
+        searchMenu = new SearchHeaderWorkspace();
+        addterms = new ArrayList<>();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
@@ -73,34 +73,48 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 searchMenu.btnSend.setEnabled(true);
                 searchMenu.btnAdd.setEnabled(true);
-                resultsPanel.termsPan.add(new HTML(result));
+                resultsPanel.termsPan.setWidget(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsPan.add(new Label("Communication failed"));
+                resultsPanel.termsPan.setWidget(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.conceptDetails.add(new HTML(result));
+                resultsPanel.conceptDetails.setWidget(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.conceptDetails.add(new Label("Communication failed"));
+                resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
             }
         };
         termsCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.termsDetails.add(new HTML(result));
+                resultsPanel.termsDetails.setWidget(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsDetails.add(new Label("Communication failed"));
+                resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
+            }
+        };
+        addTermsCallback = new AsyncCallback<ConceptEntryDTO>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
+            }
+
+            @Override
+            public void onSuccess(ConceptEntryDTO result) {
+                conceptEntryDTO = result;
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
+                refreshContentFromConceptEntryDTO();
             }
         };
         // Listen for the button clicks
@@ -120,11 +134,13 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsPan.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
-                Window.alert("Adding a new concept");
-//                createNewEntry(searchMenu.searchField.getText());
                 searchMenu.btnAdd.setEnabled(false);
-                getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
-
+                if ((searchMenu.searchField.getText().isEmpty()) || (searchMenu.searchField.getText().equals("%"))) {
+                    Window.alert("Please indicate the term's form");
+                    searchMenu.btnAdd.setEnabled(true);
+                } else {
+                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                }
             }
         });
         // Listen for the button clicks
@@ -147,7 +163,8 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("new")) {
-                    createNewEntry(searchMenu.searchField.getText());
+                    long conceptID = Long.parseLong(event.getValue().substring(3));
+                    getService().getAddDetailsForConcept(conceptID, addTermsCallback);
                 } else {
                     getService().getdetailsForConcept(Long.parseLong(event.getValue()), conceptCallback);
                     getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), termsCallback);
@@ -157,56 +174,31 @@ public class WorkspaceWidget extends VerticalPanel {
         resultsPanel.adjustSize(0.25f, 0.3f);
     }
 
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
+    public void refreshContentFromConceptEntryDTO() {
+        if (conceptEntryDTO != null) {
+            addcpt = new ConceptForm();
+            addcpt.conceptDTO = conceptEntryDTO.concept;
+            resultsPanel.conceptDetails.setWidget(addcpt);
+            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
+            addcpt.refreshContentFromConceptEntryDTO();
+            if (!conceptEntryDTO.listlang.isEmpty()) {
+                for (final LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
+                    final LangSetForm lset = new LangSetForm();
+                    addterms.add(lset);
+                    resultsPanel.termsDetails.setWidget(lset);
+                    lset.adjustSize(addcpt.getOffsetWidth() - 5);
+                    lset.langEntryDTO = langEntryDTO;
+                    lset.refreshContentFromLangEntryDTO();
+                    lset.adjustSize(addcpt.getOffsetWidth() - 5);
+                }
+            }
+        } else {
+            resultsPanel.termsDetails.setWidget(new Label("Concept details object is null, something is worng"));
+        }
     }
 
-    private void createNewEntry(String term) {
-        ls = new LangSet();
-        c = new Concept();
-        Term t = new Term();
-        t.form = term;
-        ls.termList.add(t);
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
-        resultsPanel.conceptDetails.add(addcpt);
-        addcpt.setVisible(true);
-        addcpt.InitFromVariable(c);
-        addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
-        resultsPanel.termsDetails.add(addterms);
-        addterms.setVisible(true);
-        addterms.adjustSize(addcpt.getOffsetWidth() - 5);
-        addterms.initfromvar(ls);
-        addterms.addTerm.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                final TermForm ter = new TermForm();
-                addterms.desc.add(ter);
-                ter.adjustSize(addterms.getOffsetWidth() - 5);
-                final Term t = new Term();
-                t.form = "";
-                t.language = "";
-                ls.termList.add(t);
-                ter.delete.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        ls.termList.remove(t);
-                        addterms.desc.remove(ter);
-                    }
-                });
-            }
-        });
-        addcpt.delete.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                ls.termList.clear();
-                ls = null;
-                c = null;
-                addcpt.clearAllText();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
-            }
-        });
+    private static myTermServiceAsync getService() {
+        return GWT.create(myTermService.class);
     }
 
     public static native void fixGwtNav() /*-{

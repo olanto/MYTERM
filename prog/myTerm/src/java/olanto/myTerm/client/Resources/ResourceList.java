@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.Resources;
 
+import olanto.myTerm.shared.ResourceDTO;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -40,36 +41,48 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class ResourceList extends ListBox {
 
-    private static AsyncCallback<ArrayList<Resource>> RsrcCallback;
+    private static AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
+    private static ArrayList<String> rsrclist = new ArrayList<>();
 
-    public ResourceList(long ownerID) {
-        RsrcCallback = new AsyncCallback<ArrayList<Resource>>() {
+    public ResourceList() {
+        RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of resources");
             }
 
             @Override
-            public void onSuccess(ArrayList<Resource> result) {
+            public void onSuccess(ArrayList<ResourceDTO> result) {
                 int i = 0;
-                for (Resource s : result) {
-                    addItem(s.name, s.id);
-                    if (s.name.equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
+                for (ResourceDTO s : result) {
+                    rsrclist.add(s.getResourceName());
+                    addItem(s.getResourceName(), s.getIdResource().toString());
+                    if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
                         i = result.indexOf(s);
                     }
                 }
                 setSelectedIndex(i);
             }
         };
-        this.addChangeHandler(
-                new ChangeHandler() {
+        this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Resource, getItemText(getSelectedIndex()));
             }
         });
         addItem("ALL", "-1");
-        getService().getResources(ownerID, RsrcCallback);
+        getService().getResources(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID)), RsrcCallback);
+    }
+
+    public void selectResource(String resource) {
+        int i = 0;
+        for (String s : rsrclist) {
+            if (s.equalsIgnoreCase(resource)) {
+                setSelectedIndex(i);
+                break;
+            }
+            i++;
+        }
     }
 
     private static myTermServiceAsync getService() {

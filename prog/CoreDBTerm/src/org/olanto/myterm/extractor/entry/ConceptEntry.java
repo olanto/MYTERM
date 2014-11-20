@@ -42,6 +42,13 @@ public class ConceptEntry {
         prepareConcept();
     }
 
+    public ConceptEntry(Concepts c, Boolean createInDB) {
+        this.concept = c;
+        this.createInDB = createInDB;
+        listlang = new Vector<>();
+        extraConcepts = "";
+    }
+
     public void prepareConcept() {
         concept = new Concepts();
         extraConcepts = "";
@@ -77,17 +84,18 @@ public class ConceptEntry {
         lan.addTerm(term_form);
         listlang.add(lan);
     }
-    
-    public Terms getTerm(String lang,int position) {
+
+    public Terms getTerm(String lang, int position) {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntry lan = listlang.get(i);
-            if (lan.lan.getIdLanguage().equals(lang)) {        
+            if (lan.lan.getIdLanguage().equals(lang)) {
                 return lan.getTerm(position);
             }
         }
         return null;
     }
-      public Terms getTermLast(String lang) {
+
+    public Terms getTermLast(String lang) {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntry lan = listlang.get(i);
             if (lan.lan.getIdLanguage().equals(lang)) {
@@ -96,5 +104,8 @@ public class ConceptEntry {
         }
         return null;
     }
- 
+
+    public Concepts getConcept() {
+        return this.concept;
+    }
 }
