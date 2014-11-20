@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
@@ -152,11 +153,7 @@ public class TermForm extends VerticalPanel {
         text_pos.setText(termDTO.getTermPartofspeech());
         text_gdr.setText(termDTO.getTermGender());
         text_st.setText(termDTO.getStatus() + "");
-    }
-
-    public void selectAndDisableLanguage() {
-        lang.setSelectedIndexByLangID(termDTO.getIdLanguage());
-        lang.setEnabled(false);
+        form1.setWidget(0, 1, new HTML(lang.getLangName(termDTO.getIdLanguage())));
     }
 
     public void adjustSize(int w) {

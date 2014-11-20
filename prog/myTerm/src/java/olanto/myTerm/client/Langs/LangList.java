@@ -132,4 +132,15 @@ public class LangList extends ListBox {
             i++;
         }
     }
+    
+    public String getLangName(String IDlang) {
+        int i = 0;
+        for (String s : langIDlist) {
+            if (s.equalsIgnoreCase(IDlang)) {
+                return langlist.get(i);
+            }
+            i++;
+        }
+        return "";
+    }
 }

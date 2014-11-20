@@ -95,7 +95,6 @@ public class LangSetForm extends VerticalPanel {
                         desc.remove(ter);
                     }
                 });
-                ter.selectAndDisableLanguage();
                 i++;
             }
         }
