@@ -23,11 +23,13 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
+import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -95,6 +97,10 @@ public class LangSetForm extends VerticalPanel {
                         desc.remove(ter);
                     }
                 });
+                String oWnerID = Cookies.getCookie(MyTermCookiesNamespace.ownerID);
+                if ((!oWnerID.equals(tDTO.getCreateBy().toString())) && (!oWnerID.equals(tDTO.getLastmodifiedBy().toString()))) {
+                    ter.setReadOnly(true);
+                }
                 i++;
             }
         }

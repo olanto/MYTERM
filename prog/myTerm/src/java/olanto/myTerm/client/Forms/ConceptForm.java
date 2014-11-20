@@ -23,12 +23,14 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
@@ -97,7 +99,7 @@ public class ConceptForm extends HorizontalPanel {
             public void onClick(ClickEvent event) {
 //                conceptDTO = null;??
                 removeFromParent();
-           }
+            }
         });
     }
 
@@ -124,6 +126,10 @@ public class ConceptForm extends HorizontalPanel {
         this.text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         this.text_nt.setText(conceptDTO.getConceptNote());
         sf.selectdomain(conceptDTO.getSubjectField());
+        String oWnerID = Cookies.getCookie(MyTermCookiesNamespace.ownerID);
+        if ((!oWnerID.equals(conceptDTO.getCreateBy().toString())) && (!oWnerID.equals(conceptDTO.getLastmodifiedBy().toString()))) {
+            setReadOnly(true);
+        }
     }
 
     public void clearAllText() {

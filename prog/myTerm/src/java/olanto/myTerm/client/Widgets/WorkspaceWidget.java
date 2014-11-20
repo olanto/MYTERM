@@ -181,6 +181,7 @@ public class WorkspaceWidget extends VerticalPanel {
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.refreshContentFromConceptEntryDTO();
+            
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 for (final LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
                     final LangSetForm lset = new LangSetForm();

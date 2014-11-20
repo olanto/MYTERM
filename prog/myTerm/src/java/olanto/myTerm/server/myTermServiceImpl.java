@@ -4,12 +4,10 @@
  */
 package olanto.myTerm.server;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import java.util.List;
 import jpaviewtest.TestView;
-import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjUsersResources;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
