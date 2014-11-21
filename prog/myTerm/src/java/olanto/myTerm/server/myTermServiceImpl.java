@@ -36,17 +36,21 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getSearchResult(String s, String ls, String lt, String resID, String domID) {
-        StringBuilder result = new StringBuilder("");
-        result.append("<div class =\"panel\">");
-        result.append("<table>");
-        result.append("<tr>");
-        result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-        result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
-        result.append("</tr>");
-        result.append(TestView.getTargetForThis(s, ls, lt, resID, domID));
-        result.append("</table>");
-        result.append("</div>");
-        return result.toString();
+        String response = TestView.getTargetForThis(s, ls, lt, resID, domID);
+        if (response != null) {
+            StringBuilder result = new StringBuilder("");
+            result.append("<div class =\"rpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
+            result.append("</tr>");
+            result.append(TestView.getTargetForThis(s, ls, lt, resID, domID));
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override
@@ -80,15 +84,19 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public ArrayList<ResourceDTO> getResources(long ownerID) {
+        // try and catch, problem with the ownerID
         List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
-        ArrayList<ResourceDTO> resources = new ArrayList<>();
-        for (VjUsersResources res : l) {
-            ResourceDTO r = new ResourceDTO();
-            r.setIdResource(res.getIdResource());
-            r.setResourceName(res.getResourceName());
-            resources.add(r);
+        if (!l.isEmpty()) {
+            ArrayList<ResourceDTO> resources = new ArrayList<>();
+            for (VjUsersResources res : l) {
+                ResourceDTO r = new ResourceDTO();
+                r.setIdResource(res.getIdResource());
+                r.setResourceName(res.getResourceName());
+                resources.add(r);
+            }
+            return resources;
         }
-        return resources;
+        return null;
     }
 
     @Override
@@ -109,7 +117,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         StringBuilder result = new StringBuilder("");
         Concepts c = Queries.getConceptByID(conceptID);
         if (c != null) {
-            result.append("<div class =\"panel\">");
+            result.append("<div class =\"cpanel\">");
             result.append("<table>");
             result.append("<tr>");
             result.append("<th>").append("Details for concept: ").append(c.getIdConcept()).append("</th>");
@@ -183,15 +191,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</table>");
             result.append("</div>");
             return result.toString();
-        } else {
-            return "empty concept!";
         }
+        return null;
     }
 
     @Override
     public String getdetailsForTerms(long conceptID, String langS, String langT) {
         StringBuilder result = new StringBuilder("");
-        result.append("<div class =\"panel\">");
+        result.append("<div class =\"tpanel\">");
         result.append("<table>");
         result.append("<tr>");
         result.append("<th>").append(Queries.getLanguageByID(langS).getLanguageDefaultName()).append("</th>");
@@ -212,17 +219,21 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getAddResult(String s, String ls, String lt, String resID, String domID) {
-        StringBuilder result = new StringBuilder("");
-        result.append("<div class =\"panel\">");
-        result.append("<table>");
-        result.append("<tr>");
-        result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-        result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
-        result.append("</tr>");
-        result.append(TestView.getSourceForThis(s, ls, lt, resID, domID));
-        result.append("</table>");
-        result.append("</div>");
-        return result.toString();
+        String response = TestView.getSourceForThis(s, ls, lt, resID, domID);
+        if (response != null) {
+            StringBuilder result = new StringBuilder("");
+            result.append("<div class =\"rpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
+            result.append("</tr>");
+            result.append(TestView.getSourceForThis(s, ls, lt, resID, domID));
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override

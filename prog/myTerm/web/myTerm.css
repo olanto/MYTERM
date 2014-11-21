@@ -41,6 +41,11 @@
     color: blueviolet;
     font-style: italic;
 }
+.warning{
+    color: orange;
+    font-size: 18px;
+    font-weight: bold;
+}
 body{
     vertical-align: middle;
 }
@@ -72,6 +77,15 @@ body{
     background-color: #EFF6FF;
     border-right: 1px solid black;
     width: 100%;
+}
+.sideCurrent{
+    background-color: floralwhite;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    width: 100%;
+}
+.side{
+    background-color: #EFF6FF;
 }
 .searchMenu{
     width: 100%;
@@ -115,6 +129,13 @@ body{
     padding-top: 2px;
     width:99%;
 }
+.edpanel{
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    vertical-align: top;
+}
 .panel{
     margin-top: 1px;
     margin-left: 1px;
@@ -137,17 +158,82 @@ body{
     padding:1px;
     text-align:left;
     vertical-align: top;
-    width:1%;
 }
-.nost td {
-    border: none;
-}
-.cpanel{
-    border:1px solid #6495ed;
+.rpanel{
     margin-top: 1px;
     margin-left: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
+    vertical-align: top;
+}
+.rpanel p {
+    padding:1px;
+    background-color:#EFF6FF;
+    font-weight: bold;
+}
+.rpanel th {
+    border:1px dotted #6495ed;
+    padding:1px;
+    background-color:#EFF6FF;
+}
+.rpanel td {
+    border:1px solid #6495ed;
+    padding:1px;
+    text-align:left;
+    vertical-align: top;
+    width: 50%;
+}
+.cpanel{
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    vertical-align: top;
+}
+.cpanel p {
+    padding:1px;
+    background-color:#EFF6FF;
+    font-weight: bold;
+}
+.cpanel th {
+    border:1px dotted #6495ed;
+    padding:1px;
+    background-color:#EFF6FF;
+}
+.cpanel td {
+    border:1px solid #6495ed;
+    padding:1px;
+    text-align:left;
+    vertical-align: top;
+    width:25%;
+}
+.nost td {
+    border: none;
+}
+.tpanel{
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    vertical-align: top;
+    width:99%;
+}
+.tpanel p {
+    padding:1px;
+    background-color:#EFF6FF;
+    font-weight: bold;
+}
+.tpanel th {
+    border:1px dotted #6495ed;
+    padding:1px;
+    background-color:#EFF6FF;
+}
+.tpanel td {
+    border:1px solid #6495ed;
+    padding:1px;
+    text-align:left;
+    vertical-align: top;
+    width:50%;
 }
 
 .gwt-Tree{

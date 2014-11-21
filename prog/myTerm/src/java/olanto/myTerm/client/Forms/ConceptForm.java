@@ -68,7 +68,7 @@ public class ConceptForm extends HorizontalPanel {
     public ConceptForm() {
         setStyleName("conceptForm");
         add(cform);
-        cform.setStyleName("cpanel");
+        cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);
         cform.setWidget(0, 1, rsrcPanel);

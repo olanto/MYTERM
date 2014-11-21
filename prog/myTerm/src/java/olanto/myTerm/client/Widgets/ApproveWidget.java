@@ -17,7 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.ContainerPanels.ResultsContainer;
+import olanto.myTerm.client.ContainerPanels.ResultsContainerBasic;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderBasic;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -29,7 +29,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class ApproveWidget extends VerticalPanel {
 
     private SearchHeaderBasic searchMenu;
-    private ResultsContainer resultsPanel = new ResultsContainer();
+    private ResultsContainerBasic resultsPanel = new ResultsContainerBasic();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
@@ -44,12 +44,12 @@ public class ApproveWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnSend.setEnabled(true);
-                resultsPanel.termsPan.add(new HTML(result));
+                resultsPanel.sideRes.add(new HTML(result));
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsPan.add(new Label("Communication failed"));
+                resultsPanel.sideRes.add(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
@@ -78,7 +78,7 @@ public class ApproveWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.termsPan.clear();
+                resultsPanel.sideRes.clear();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
@@ -90,7 +90,7 @@ public class ApproveWidget extends VerticalPanel {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-                    resultsPanel.termsPan.clear();
+                    resultsPanel.sideRes.clear();
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);

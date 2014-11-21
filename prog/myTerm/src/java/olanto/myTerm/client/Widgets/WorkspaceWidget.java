@@ -22,7 +22,6 @@
 package olanto.myTerm.client.Widgets;
 
 import olanto.myTerm.client.ContainerPanels.SearchHeaderWorkspace;
-import olanto.myTerm.client.ContainerPanels.ResultsContainer;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -34,10 +33,15 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
+import olanto.myTerm.client.ContainerPanels.ResultsContainerWorkspace;
+import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.LangSetForm;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -52,8 +56,9 @@ import olanto.myTerm.shared.LangEntryDTO;
 public class WorkspaceWidget extends VerticalPanel {
 
     private SearchHeaderWorkspace searchMenu;
-    private ResultsContainer resultsPanel = new ResultsContainer();
-    private static AsyncCallback<String> termCallback;
+    private ResultsContainerWorkspace resultsPanel = new ResultsContainerWorkspace();
+    private static AsyncCallback<String> termSearchCallback;
+    private static AsyncCallback<String> termAddCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
     private static AsyncCallback<ConceptEntryDTO> addTermsCallback;
@@ -68,23 +73,50 @@ public class WorkspaceWidget extends VerticalPanel {
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
-        termCallback = new AsyncCallback<String>() {
+        termSearchCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnSend.setEnabled(true);
-                searchMenu.btnAdd.setEnabled(true);
-                resultsPanel.termsPan.setWidget(new HTML(result));
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                } else {
+                    StatusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
+                }
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsPan.setWidget(new Label("Communication failed"));
+                searchMenu.btnSend.setEnabled(true);
+                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+            }
+        };
+        termAddCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                searchMenu.btnAdd.setEnabled(true);
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                    resultsPanel.addnewcpt.setVisible(true);
+                } else {
+                    new MyDialog("Concept not found would you like to create a new concept?", 0).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                searchMenu.btnAdd.setEnabled(true);
+                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                resultsPanel.conceptDetails.setWidget(new HTML(result));
+                searchMenu.btnAdd.setEnabled(true);
+                if (result != null) {
+                    resultsPanel.conceptDetails.setWidget(new HTML(result));
+                } else {
+                    resultsPanel.conceptDetails.setWidget(new HTML("Concept details not found"));
+                }
             }
 
             @Override
@@ -121,17 +153,20 @@ public class WorkspaceWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.termsPan.clear();
+                StatusPanel.clearMessages();
+                resultsPanel.addnewcpt.setVisible(false);
+                resultsPanel.sideRes.clear();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termSearchCallback);
             }
         });
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.termsPan.clear();
+                StatusPanel.clearMessages();
+                resultsPanel.sideRes.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
                 searchMenu.btnAdd.setEnabled(false);
@@ -139,7 +174,7 @@ public class WorkspaceWidget extends VerticalPanel {
                     Window.alert("Please indicate the term's form");
                     searchMenu.btnAdd.setEnabled(true);
                 } else {
-                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termAddCallback);
                 }
             }
         });
@@ -148,11 +183,13 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-                    resultsPanel.termsPan.clear();
+                    StatusPanel.clearMessages();
+                    resultsPanel.addnewcpt.setVisible(false);
+                    resultsPanel.sideRes.clear();
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termSearchCallback);
                 }
             }
         });
@@ -160,6 +197,7 @@ public class WorkspaceWidget extends VerticalPanel {
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
+                StatusPanel.clearMessages();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("new")) {
@@ -181,7 +219,7 @@ public class WorkspaceWidget extends VerticalPanel {
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.refreshContentFromConceptEntryDTO();
-            
+
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 for (final LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
                     final LangSetForm lset = new LangSetForm();
@@ -200,6 +238,45 @@ public class WorkspaceWidget extends VerticalPanel {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    private static class MyDialog extends DialogBox {
+
+        public MyDialog(String text, int call) {
+            // Set the dialog box's caption.
+            setText(text);
+
+            // Enable animation.
+            setAnimationEnabled(true);
+
+            // Enable glass background.
+            setGlassEnabled(true);
+
+            HorizontalPanel controls = new HorizontalPanel();
+            // DialogBox is a SimplePanel, so you have to set its widget property to
+            // whatever you want its contents to be.
+            Button create = new Button("Create");
+            create.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    MyDialog.this.hide();
+                }
+            });
+            Button cancel = new Button("Cancel");
+            cancel.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    MyDialog.this.hide();
+                }
+            });
+            setPopupPosition(100, 100);
+            controls.add(cancel);
+            controls.add(create);
+            setWidget(controls);
+            controls.setWidth(getOffsetWidth() + "px");
+            controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
+            controls.setCellHorizontalAlignment(create, HorizontalPanel.ALIGN_RIGHT);
+        }
     }
 
     public static native void fixGwtNav() /*-{

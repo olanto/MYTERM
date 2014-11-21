@@ -26,8 +26,8 @@ import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Interfaces.ReaderInterface;
 import olanto.myTerm.client.Interfaces.RedactorInterface;
 import olanto.myTerm.client.Interfaces.RevisorInterface;
-import olanto.myTerm.client.ContainerPanels.FooterStatusPanel;
-import olanto.myTerm.client.ContainerPanels.HeaderStatusPanel;
+import olanto.myTerm.client.ContainerPanels.StatusPanel;
+import olanto.myTerm.client.ContainerPanels.HeaderPanel;
 import olanto.myTerm.shared.UserDTO;
 
 /**
@@ -60,6 +60,10 @@ public class MainEntryPoint implements EntryPoint {
             if (user == null) {
                 showLogin();
             } else {
+                String sessionID = user.getSessionID();
+                String ownerID = Long.toString(user.getId());
+                MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
+                MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
                 showMain(user);
             }
         }
@@ -78,7 +82,7 @@ public class MainEntryPoint implements EntryPoint {
                 enableLogin();
             } else {
                 String sessionID = user.getSessionID();
-                String ownerID = user.getId() + "";
+                String ownerID = Long.toString(user.getId());
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
                 showMain(user);
@@ -159,14 +163,19 @@ public class MainEntryPoint implements EntryPoint {
     }
 
     public void showMain(UserDTO user) {
+        String sessionID = user.getSessionID();
+        String ownerID = Long.toString(user.getId());
+        
+        MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
+        MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
         RootPanel.get("login").clear();
         RootPanel.get("header").clear();
         RootPanel.get("main").clear();
         RootPanel.get("footer").clear();
 
         RootPanel.get("login").setVisible(false);
-        HeaderStatusPanel headerPanel = new HeaderStatusPanel(user);
-        FooterStatusPanel statusPanel = new FooterStatusPanel();
+        HeaderPanel headerPanel = new HeaderPanel(user);
+        StatusPanel statusPanel = new StatusPanel();
         RootPanel.get("header").add(headerPanel);
         RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {

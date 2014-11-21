@@ -21,8 +21,6 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
@@ -83,9 +81,9 @@ public class TermForm extends VerticalPanel {
         form.add(form1);
         form.add(form2);
         form.add(form3);
-        form1.setStyleName("cpanel");
-        form2.setStyleName("cpanel");
-        form3.setStyleName("cpanel");
+        form1.setStyleName("edpanel");
+        form2.setStyleName("edpanel");
+        form3.setStyleName("edpanel");
         form1.setCellSpacing(6);
         form2.setCellSpacing(6);
         form3.setCellSpacing(6);

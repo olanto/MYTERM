@@ -21,7 +21,7 @@
  */
 package olanto.myTerm.client.Widgets;
 
-import olanto.myTerm.client.ContainerPanels.ResultsContainer;
+import olanto.myTerm.client.ContainerPanels.ResultsContainerBasic;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderBasic;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -36,6 +36,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
+import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -47,12 +48,12 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class MyTermSearchWidget extends VerticalPanel {
 
     private SearchHeaderBasic searchMenu;
-    private ResultsContainer resultsPanel = new ResultsContainer();
+    private ResultsContainerBasic resultsPanel = new ResultsContainerBasic();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
 
-    public MyTermSearchWidget(){
+    public MyTermSearchWidget() {
         fixGwtNav();
         searchMenu = new SearchHeaderBasic();
         add(searchMenu);
@@ -62,12 +63,17 @@ public class MyTermSearchWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnSend.setEnabled(true);
-                resultsPanel.termsPan.add(new HTML(result));
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                } else {
+                    StatusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
+                }
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.termsPan.add(new Label("Communication failed"));
+                searchMenu.btnSend.setEnabled(true);
+                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
         conceptCallback = new AsyncCallback<String>() {
@@ -96,7 +102,8 @@ public class MyTermSearchWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.termsPan.clear();
+                StatusPanel.clearMessages();
+                resultsPanel.sideRes.clear();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
@@ -107,8 +114,9 @@ public class MyTermSearchWidget extends VerticalPanel {
         searchMenu.searchField.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
+                StatusPanel.clearMessages();
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-                    resultsPanel.termsPan.clear();
+                    resultsPanel.sideRes.clear();
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
@@ -120,6 +128,7 @@ public class MyTermSearchWidget extends VerticalPanel {
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
+                StatusPanel.clearMessages();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 if (!event.getValue().contains("page")) {

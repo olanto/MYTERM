@@ -184,14 +184,16 @@ public class TestView {
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
         List<VjSourcetarget> resultQ = query.getResultList();
-
-        for (VjSourcetarget result : resultQ) {
-            res.append("<tr>");
-            res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
-            res.append("<td>").append(result.getTarget()).append("</td>");
-            res.append("</tr>");
+        if (!resultQ.isEmpty()) {
+            for (VjSourcetarget result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td>").append(result.getTarget()).append("</td>");
+                res.append("</tr>");
+            }
+            return res.toString();
         }
-        return res.toString();
+        return null;
     }
 
     public static String getTargetsForThis(long conceptID, String term, String solang, String talang, String resID, String domID) {
@@ -262,11 +264,7 @@ public class TestView {
         List<VjSource> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
-            Concepts c = ManageConcept.addNewConcept();
-            res.append("<tr>");
-            res.append("<td><a href=\"#new").append(c.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(term).append("</a></td>").append("</td>");
-            res.append("<td>").append(" ").append("</td>");
-            res.append("</tr>");
+            return null;
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");

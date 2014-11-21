@@ -53,6 +53,7 @@ public class ResourceList extends ListBox {
 
             @Override
             public void onSuccess(ArrayList<ResourceDTO> result) {
+                if(result!=null){
                 int i = 0;
                 for (ResourceDTO s : result) {
                     rsrclist.add(s.getResourceName());
@@ -62,6 +63,7 @@ public class ResourceList extends ListBox {
                     }
                 }
                 setSelectedIndex(i);
+                }
             }
         };
         this.addChangeHandler(new ChangeHandler() {
