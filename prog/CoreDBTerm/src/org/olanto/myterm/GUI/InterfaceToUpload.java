@@ -7,6 +7,8 @@ package org.olanto.myterm.GUI;
 import java.io.PrintStream;
 import javax.swing.JFileChooser;
 import org.olanto.myterm.coredb.TermDB;
+import org.olanto.myterm.extractor.ConvertAndLoadIntoDB;
+import org.olanto.myterm.extractor.ModelEnum;
 import org.olanto.myterm.parsetbx.LoadInToDB;
 
 /**
@@ -20,17 +22,21 @@ public class InterfaceToUpload extends javax.swing.JFrame {
      */
     public InterfaceToUpload() {
         initComponents();
-        myInit();
     }
 
-    private  void myInit(){
- 
-        PrintStream logStream = new PrintStream(new OutputStreamForLog(logArea,100)); 
+    private void myInitXLM() {
+
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaXML, 100));
         System.setOut(logStream);
-       System.setErr(logStream);
-
+        System.setErr(logStream);
     }
-    
+   private void myInitOthers() {
+
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaOthers, 100));
+        System.setOut(logStream);
+        System.setErr(logStream);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,14 +53,27 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         XML = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        fileName = new javax.swing.JTextField();
-        resourceName = new javax.swing.JTextField();
-        fileChoose = new javax.swing.JButton();
-        startUpload = new javax.swing.JButton();
-        typeChooser = new javax.swing.JComboBox();
+        fileNameXML = new javax.swing.JTextField();
+        resourceNameXML = new javax.swing.JTextField();
+        fileChooseXML = new javax.swing.JButton();
+        startUploadXML = new javax.swing.JButton();
+        typeChooserXML = new javax.swing.JComboBox();
         jScrollPane3 = new javax.swing.JScrollPane();
-        logArea = new javax.swing.JTextArea();
+        logAreaXML = new javax.swing.JTextArea();
         Others = new javax.swing.JPanel();
+        XML1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fileNameOthers = new javax.swing.JTextField();
+        resourceNameOthers = new javax.swing.JTextField();
+        fileChooseOthers = new javax.swing.JButton();
+        startUploadOthers = new javax.swing.JButton();
+        typeChooserOthers = new javax.swing.JComboBox();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        logAreaOthers = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
+        fileNameModel = new javax.swing.JTextField();
+        fileChooseModel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,34 +86,34 @@ public class InterfaceToUpload extends javax.swing.JFrame {
 
         jLabel3.setText("resource Name");
 
-        fileName.setText("C:/MYTERM/tests/TBX-basic-samples.tbx");
+        fileNameXML.setText("C:/MYTERM/tests/TBX-basic-samples.tbx");
 
-        resourceName.setText("TESTTBX");
-        resourceName.addActionListener(new java.awt.event.ActionListener() {
+        resourceNameXML.setText("TESTTBX");
+        resourceNameXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resourceNameActionPerformed(evt);
+                resourceNameXMLActionPerformed(evt);
             }
         });
 
-        fileChoose.setText("...");
-        fileChoose.addActionListener(new java.awt.event.ActionListener() {
+        fileChooseXML.setText("...");
+        fileChooseXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fileChooseActionPerformed(evt);
+                fileChooseXMLActionPerformed(evt);
             }
         });
 
-        startUpload.setText("Start Upload");
-        startUpload.addActionListener(new java.awt.event.ActionListener() {
+        startUploadXML.setText("Start Upload");
+        startUploadXML.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startUploadActionPerformed(evt);
+                startUploadXMLActionPerformed(evt);
             }
         });
 
-        typeChooser.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TBX-BASIC", "XDXF" }));
+        typeChooserXML.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TBX-BASIC", "XDXF" }));
 
-        logArea.setColumns(20);
-        logArea.setRows(5);
-        jScrollPane3.setViewportView(logArea);
+        logAreaXML.setColumns(20);
+        logAreaXML.setRows(5);
+        jScrollPane3.setViewportView(logAreaXML);
 
         javax.swing.GroupLayout XMLLayout = new javax.swing.GroupLayout(XML);
         XML.setLayout(XMLLayout);
@@ -102,18 +121,18 @@ public class InterfaceToUpload extends javax.swing.JFrame {
             XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(XMLLayout.createSequentialGroup()
                 .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(startUpload, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(startUploadXML, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(XMLLayout.createSequentialGroup()
-                        .addComponent(resourceName, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(resourceNameXML, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(typeChooser, 0, 197, Short.MAX_VALUE))
-                    .addComponent(fileName))
+                        .addComponent(typeChooserXML, 0, 354, Short.MAX_VALUE))
+                    .addComponent(fileNameXML))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileChoose))
+                .addComponent(fileChooseXML))
             .addGroup(XMLLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3))
@@ -124,31 +143,145 @@ public class InterfaceToUpload extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fileName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fileChoose))
+                    .addComponent(fileNameXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileChooseXML))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(XMLLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(resourceName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(resourceNameXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(typeChooserXML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(startUpload)
+                .addComponent(startUploadXML)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("XML type", XML);
 
+        jLabel4.setText("file Name");
+
+        jLabel5.setText("resource Name");
+
+        fileNameOthers.setText("C:/MYTERM/private/glossaries/Names of fish [EFSL] FAO 1997_EN_FR_ES.doc.txt");
+
+        resourceNameOthers.setText("FISH_NAME");
+        resourceNameOthers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameOthersActionPerformed(evt);
+            }
+        });
+
+        fileChooseOthers.setText("...");
+        fileChooseOthers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseOthersActionPerformed(evt);
+            }
+        });
+
+        startUploadOthers.setText("Start Upload");
+        startUploadOthers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startUploadOthersActionPerformed(evt);
+            }
+        });
+
+        typeChooserOthers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PREFIX", "POSFIX", "POSFIXREP" }));
+
+        logAreaOthers.setColumns(20);
+        logAreaOthers.setRows(5);
+        jScrollPane4.setViewportView(logAreaOthers);
+
+        jLabel6.setText("model Name");
+
+        fileNameModel.setText("C:/MYTERM/models/prefix_model.xml");
+        fileNameModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileNameModelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout XML1Layout = new javax.swing.GroupLayout(XML1);
+        XML1.setLayout(XML1Layout);
+        XML1Layout.setHorizontalGroup(
+            XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, XML1Layout.createSequentialGroup()
+                .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(XML1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane4))
+                    .addGroup(XML1Layout.createSequentialGroup()
+                        .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(startUploadOthers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fileNameModel)
+                            .addGroup(XML1Layout.createSequentialGroup()
+                                .addComponent(resourceNameOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(typeChooserOthers, 0, 354, Short.MAX_VALUE))
+                            .addComponent(fileNameOthers))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fileChooseOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        XML1Layout.setVerticalGroup(
+            XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(XML1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(fileNameOthers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileChooseOthers))
+                .addGap(5, 5, 5)
+                .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(fileNameModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(XML1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(resourceNameOthers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(typeChooserOthers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startUploadOthers)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        fileChooseModel.setText("...");
+        fileChooseModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseModelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout OthersLayout = new javax.swing.GroupLayout(Others);
         Others.setLayout(OthersLayout);
         OthersLayout.setHorizontalGroup(
             OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OthersLayout.createSequentialGroup()
+                .addContainerGap(809, Short.MAX_VALUE)
+                .addComponent(fileChooseModel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(XML1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         OthersLayout.setVerticalGroup(
             OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(OthersLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(fileChooseModel)
+                .addContainerGap(321, Short.MAX_VALUE))
+            .addGroup(OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OthersLayout.createSequentialGroup()
+                    .addContainerGap(15, Short.MAX_VALUE)
+                    .addComponent(XML1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         jTabbedPane1.addTab("Others", Others);
@@ -161,7 +294,7 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 706, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,31 +304,73 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fileChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseActionPerformed
-        JFileChooser fileOpen=new JFileChooser();
-        int ret=fileOpen.showDialog(null,"Open File");
-        if (ret==JFileChooser.APPROVE_OPTION){
-            fileName.setText(""+fileOpen.getSelectedFile());
+    private void fileChooseXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseXMLActionPerformed
+        JFileChooser fileOpen = new JFileChooser();
+        int ret = fileOpen.showDialog(null, "Open File");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            fileNameXML.setText("" + fileOpen.getSelectedFile());
         }
-    }//GEN-LAST:event_fileChooseActionPerformed
+    }//GEN-LAST:event_fileChooseXMLActionPerformed
 
-    private void resourceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameActionPerformed
+    private void resourceNameXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameXMLActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_resourceNameActionPerformed
+    }//GEN-LAST:event_resourceNameXMLActionPerformed
 
-    private void startUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startUploadActionPerformed
+    private void startUploadXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startUploadXMLActionPerformed
         // TODO add your handling code here:
-  TermDB.restart();
-        String fname=fileName.getText();
-        String resource=resourceName.getText();
-        String type=(String)typeChooser.getSelectedItem();
+        TermDB.restart();
+        myInitXLM();
+        String fname = fileNameXML.getText();
+        String resource = resourceNameXML.getText();
+        String type = (String) typeChooserXML.getSelectedItem();
         System.out.println("Upload:");
-       System.out.println("   File Name: "+fname);
-        System.out.println("   Resource Name: "+resource);
-        System.out.println("   type: "+type);
+        System.out.println("   File Name: " + fname);
+        System.out.println("   Resource Name: " + resource);
+        System.out.println("   type: " + type);
         System.out.println("------------------------------------------------");
-        LoadInToDB.loadAFile(fname,resource,type);
-    }//GEN-LAST:event_startUploadActionPerformed
+        LoadInToDB.loadAFile(fname, resource, type);
+    }//GEN-LAST:event_startUploadXMLActionPerformed
+
+    private void resourceNameOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameOthersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameOthersActionPerformed
+
+    private void fileChooseOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseOthersActionPerformed
+        JFileChooser fileOpen = new JFileChooser();
+        int ret = fileOpen.showDialog(null, "Open File");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            fileNameOthers.setText("" + fileOpen.getSelectedFile());
+        }
+    }//GEN-LAST:event_fileChooseOthersActionPerformed
+
+    private void startUploadOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startUploadOthersActionPerformed
+             TermDB.restart();
+             myInitOthers();
+        String fname = fileNameOthers.getText();
+        String modelname = fileNameModel.getText();
+        String resource = resourceNameOthers.getText();
+        String type = (String) typeChooserOthers.getSelectedItem();
+        System.out.println("Upload:");
+        System.out.println("   File Name: " + fname);
+        System.out.println("   Model Name: " + modelname);
+        System.out.println("   Resource Name: " + resource);
+        System.out.println("   type: " + type);
+        System.out.println("------------------------------------------------");
+        ConvertAndLoadIntoDB.ConvertAFile(fname,resource, ModelEnum.Model.valueOf(type), modelname);
+    }//GEN-LAST:event_startUploadOthersActionPerformed
+
+    private void fileChooseModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseModelActionPerformed
+        JFileChooser fileOpen = new JFileChooser();
+        int ret = fileOpen.showDialog(null, "Open File");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            fileNameModel.setText("" + fileOpen.getSelectedFile());
+        }
+
+    }//GEN-LAST:event_fileChooseModelActionPerformed
+
+    private void fileNameModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameModelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileNameModelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,18 +409,31 @@ public class InterfaceToUpload extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Others;
     private javax.swing.JPanel XML;
-    private javax.swing.JButton fileChoose;
-    private javax.swing.JTextField fileName;
+    private javax.swing.JPanel XML1;
+    private javax.swing.JButton fileChooseModel;
+    private javax.swing.JButton fileChooseOthers;
+    private javax.swing.JButton fileChooseXML;
+    private javax.swing.JTextField fileNameModel;
+    private javax.swing.JTextField fileNameOthers;
+    private javax.swing.JTextField fileNameXML;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea logArea;
-    private javax.swing.JTextField resourceName;
-    private javax.swing.JButton startUpload;
-    private javax.swing.JComboBox typeChooser;
+    private javax.swing.JTextArea logAreaOthers;
+    private javax.swing.JTextArea logAreaXML;
+    private javax.swing.JTextField resourceNameOthers;
+    private javax.swing.JTextField resourceNameXML;
+    private javax.swing.JButton startUploadOthers;
+    private javax.swing.JButton startUploadXML;
+    private javax.swing.JComboBox typeChooserOthers;
+    private javax.swing.JComboBox typeChooserXML;
     // End of variables declaration//GEN-END:variables
 }
