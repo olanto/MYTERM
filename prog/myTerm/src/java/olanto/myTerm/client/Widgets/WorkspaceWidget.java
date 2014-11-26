@@ -270,10 +270,11 @@ public class WorkspaceWidget extends VerticalPanel {
                 }
             });
             setPopupPosition(100, 100);
+            setWidth("400px");
             controls.add(cancel);
             controls.add(create);
             setWidget(controls);
-            controls.setWidth(getOffsetWidth() + "px");
+            controls.setWidth("400px");
             controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
             controls.setCellHorizontalAlignment(create, HorizontalPanel.ALIGN_RIGHT);
         }

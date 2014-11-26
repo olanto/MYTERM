@@ -211,6 +211,6 @@ public class MainEntryPoint implements EntryPoint {
         MyTermCookies.initCookie(MyTermCookiesNamespace.Resource, "ALL");
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
         MyTermCookies.initCookie(MyTermCookiesNamespace.SessionID, null);
-        MyTermCookies.initCookie(MyTermCookiesNamespace.ownerID, null);
+        MyTermCookies.initCookie(MyTermCookiesNamespace.ownerID, "0");
     }
 }

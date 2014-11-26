@@ -40,6 +40,7 @@ public class ResultsContainerWorkspace extends HorizontalPanel {
     private VerticalPanel sideVP = new VerticalPanel();
     public ScrollPanel conceptDetails = new ScrollPanel();
     public Button addnewcpt = new Button("Create New Concept");
+    public HorizontalPanel buttonsPanel = new HorizontalPanel();
 
     public ResultsContainerWorkspace() {
         add(sideVP);
@@ -47,7 +48,9 @@ public class ResultsContainerWorkspace extends HorizontalPanel {
         resVP.add(conceptDetails);
         resVP.add(termsDetails);
         sideVP.add(sideRes);
-        sideVP.add(addnewcpt);
+        sideVP.add(buttonsPanel);
+        buttonsPanel.add(addnewcpt);
+        buttonsPanel.setStyleName("sideWidget");
         sideVP.add(sideCurrent);
         sideVP.setStyleName("side");
         sideRes.setStyleName("sideWidget");
@@ -61,20 +64,23 @@ public class ResultsContainerWorkspace extends HorizontalPanel {
     public void adjustSize() {
         int h = Window.getClientHeight() - 140;
         int w = Window.getClientWidth() - 15;
-        sideRes.setPixelSize((int) (w * 1/4), (h / 2 - 40));
-        sideCurrent.setPixelSize((int) (w * 1/4), h / 2);
+        sideRes.setPixelSize((int) (w * 1 / 4), (h / 2 - 30));
+        buttonsPanel.setPixelSize((int) (w * 1 / 4) + 1, 30);
+        sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
         termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
-        sideVP.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_CENTER);
+        buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
         int h = Window.getClientHeight() - 140;
         int w = Window.getClientWidth() - 15;
-        sideRes.setPixelSize((int) (w * s_widthper), (h / 2 - 40));
+        sideRes.setPixelSize((int) (w * s_widthper), (h / 2 - 30));
+        buttonsPanel.setPixelSize((int) (w * 1 / 4) + 1, 30);
         sideCurrent.setPixelSize((int) (w * s_widthper), h / 2);
         sideVP.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_CENTER);
         termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
         conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
+        buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 }
