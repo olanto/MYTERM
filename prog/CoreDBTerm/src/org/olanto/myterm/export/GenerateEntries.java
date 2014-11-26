@@ -22,23 +22,18 @@
 package org.olanto.myterm.export;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Query;
 import static org.olanto.myterm.export.ExportTBXFromDB.*;
 import static org.olanto.myterm.export.JdomUtilities.*;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;
-import org.olanto.myterm.coredb.ManageConcept;
-import org.olanto.myterm.coredb.ManageLangsets;
-import org.olanto.myterm.coredb.ManageTerm;
+import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
-import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
 /**
  * génére la partie fixe de l'entête du fichier.
@@ -58,7 +53,6 @@ public class GenerateEntries {
         Element res = makeElem("text");
         Element body = makeElem("body");
         res.addContent(body);
-        body.addContent(getEntry("1", "en", "e-mail", "fr", "couriel"));
         addConcept(body, resource);
 
         return res;
@@ -88,7 +82,27 @@ public class GenerateEntries {
                 descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
             }
         }
-        if (con.getConceptNote() != null) {
+         if (con.getCreateBy() != null) {
+            Element transgrp = makeElem("transacGrp");
+            termentry.addContent(transgrp);
+            String user =Queries.getOwnerbyID(con.getCreateBy().longValue()).getOwnerLastName();
+            transgrp.addContent(makeElem("transac", "origination").setAttribute("type", "transactionType"));
+            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+            if (con.getCreation() != null) {               
+                transgrp.addContent(makeElem("date", getFormattedDate(con.getCreation())));
+            }
+        }
+         if (con.getLastmodifiedBy() != null) {
+            Element transgrp = makeElem("transacGrp");
+            termentry.addContent(transgrp);
+            String user =Queries.getOwnerbyID(con.getLastmodifiedBy().longValue()).getOwnerLastName();
+            transgrp.addContent(makeElem("transac", "modification").setAttribute("type", "transactionType"));
+            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+            if (con.getLastmodified() != null) {               
+                transgrp.addContent(makeElem("date", getFormattedDate(con.getLastmodified())));
+            }
+        }
+      if (con.getConceptNote() != null) {
             termentry.addContent(makeElem("note", con.getConceptNote()));
         }
 //            if (lan.getExtra()!=null){
@@ -127,18 +141,51 @@ public class GenerateEntries {
             Element tig = makeElem("tig");
             langset.addContent(tig);
             tig.addContent(makeElem("term", ter.getTermForm()));
+            addTermsetElem(tig, ter);
+
         }
     }
 
-    public static Element getEntry(String id, String lang1, String t1, String lang2, String t2) {
-        Element res = makeElem("termEntry").setAttribute("id", id);
+      public static void addTermsetElem(Element tig, Terms ter) {
+        if (ter.getTermPartofspeech() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+        }
+//        if (con.getConceptDefinition() != null) {
+//            Element descgrp = makeElem("descripGrp");
+//            termentry.addContent(descgrp);
+//            descgrp.addContent(makeElem("descrip", con.getConceptDefinition()).setAttribute("type", "definition"));
+//            if (con.getConceptSourceDefinition() != null) {
+//                descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
+//            }
+//        }
+//         if (con.getCreateBy() != null) {
+//            Element transgrp = makeElem("transacGrp");
+//            termentry.addContent(transgrp);
+//            String user =Queries.getOwnerbyID(con.getCreateBy().longValue()).getOwnerLastName();
+//            transgrp.addContent(makeElem("transac", "origination").setAttribute("type", "transactionType"));
+//            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+//            if (con.getCreation() != null) {               
+//                transgrp.addContent(makeElem("date", getFormattedDate(con.getCreation())));
+//            }
+//        }
+//         if (con.getLastmodifiedBy() != null) {
+//            Element transgrp = makeElem("transacGrp");
+//            termentry.addContent(transgrp);
+//            String user =Queries.getOwnerbyID(con.getLastmodifiedBy().longValue()).getOwnerLastName();
+//            transgrp.addContent(makeElem("transac", "modification").setAttribute("type", "transactionType"));
+//            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+//            if (con.getLastmodified() != null) {               
+//                transgrp.addContent(makeElem("date", getFormattedDate(con.getLastmodified())));
+//            }
+//        }
+     if (ter.getTermNote()!= null) {
+            tig.addContent(makeElem("note", ter.getTermNote()));
+        }
+//            if (lan.getExtra()!=null){
+//                langset.addContent(makeElem("descrip",lan.getExtra()).setAttribute("type", "definition"));              
+//            }
 
-        Element lset1 = makeElem("langSet").setAttribute("lang", lang1, Namespace.XML_NAMESPACE);
-        res.addContent(lset1);
-        Element tig1 = makeElem("tig");
-        lset1.addContent(tig1);
-        tig1.addContent(makeElem("term", t1));
-
-        return res;
     }
-}
+ 
+    
+ }

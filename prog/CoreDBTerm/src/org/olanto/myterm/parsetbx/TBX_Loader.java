@@ -274,7 +274,6 @@ public class TBX_Loader implements Loader {
                     default:
                         System.out.println("ERROR transactionType unknown:" + transactionType);
                 }
-           //     courantEntry.getConcept().setCreateBy(new BigInteger(Queries.getOwnerID(getText(info, localverbose), TermEnum.AutoCreate.YES).getIdOwner().toString()));
             } else if (info.getName().equals("date")) {
                 String sdate = getText(info, localverbose).replace('T', ' ');
                 Date date = null;

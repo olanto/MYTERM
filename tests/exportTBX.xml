@@ -8,96 +8,123 @@
         <note />
       </titleStmt>
       <sourceDesc>
-        <p>exported from myTerm (olanto.org) date: 2014-51-26 14:51:25</p>
+        <p>exported from myTerm (olanto.org) date: 2014-15-26 16:15:03</p>
       </sourceDesc>
     </fileDesc>
     <encodingDesc type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs</encodingDesc>
   </martifHeader>
   <text>
     <body>
-      <termEntry id="1">
-        <langSet xml:lang="en">
-          <tig>
-            <term>e-mail</term>
-          </tig>
-        </langSet>
-      </termEntry>
-      <termEntry id="121208">
+      <termEntry id="121223">
         <langSet xml:lang="EN">
           <tig>
             <term>e-mail</term>
+            <note />
           </tig>
         </langSet>
         <langSet xml:lang="FR">
           <tig>
             <term>courriel</term>
+            <note />
           </tig>
         </langSet>
       </termEntry>
-      <termEntry id="121209">
+      <termEntry id="121224">
         <langSet xml:lang="EN">
           <tig>
             <term>federated database</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
         </langSet>
         <langSet xml:lang="FR">
           <tig>
             <term>base de données fédérée</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
         </langSet>
       </termEntry>
-      <termEntry id="121210">
+      <termEntry id="121225">
         <descripGrp>
           <descrip type="definition">corrective lenses used in eyeglasses to correct presbyopia and other disorders of accommodation, characterised by a gradient of increasing lens power, added to the wearer's correction for the other refractive errors.</descrip>
-          <descrip type="source">Wikipedia</descrip>
+          <admin type="source">Wikipedia</admin>
         </descripGrp>
         <langSet xml:lang="EN">
           <tig>
             <term>progressive lens</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
           <tig>
             <term>progressive addition lens</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
           <tig>
             <term>PAL</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
           <tig>
             <term>progressive power lens</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
           <tig>
             <term>graduated lens</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
         </langSet>
         <langSet xml:lang="FR">
           <tig>
             <term>lentille progressive</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
         </langSet>
         <langSet xml:lang="DE">
           <tig>
             <term>Gleitsichtglas</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note />
           </tig>
         </langSet>
       </termEntry>
-      <termEntry id="121211">
+      <termEntry id="121226">
         <descrip type="subjectField">manufacturing</descrip>
         <descripGrp>
           <descrip type="definition">This is a sample definition at the entry level.</descrip>
-          <descrip type="source">Terminology SIG</descrip>
+          <admin type="source">Terminology SIG</admin>
         </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Jane</transacNote>
+          <date>2005-00-19T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">John</transacNote>
+          <date>2007-00-19T00:00:00</date>
+        </transacGrp>
         <note>This is a sample entry with some data categories at the entry level.</note>
         <langSet xml:lang="EN">
           <tig>
             <term>scheduled operation</term>
+            <termNote type="partOfSpeech">verb</termNote>
+            <note />
           </tig>
         </langSet>
       </termEntry>
-      <termEntry id="121212">
+      <termEntry id="121227">
         <descrip type="subjectField">manufacturing</descrip>
         <langSet xml:lang="EN">
           <descrip type="definition">This is a sample definition at the language level. This one has no source information required therefore it is not embedded in a descripGrp.</descrip>
           <tig>
             <term>unscheduled operation</term>
+            <termNote type="partOfSpeech">noun</termNote>
+            <note>This is a sample entry with some data categories at the term or language level</note>
           </tig>
         </langSet>
       </termEntry>

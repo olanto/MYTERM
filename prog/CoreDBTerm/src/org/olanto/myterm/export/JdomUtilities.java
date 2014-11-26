@@ -173,5 +173,9 @@ public class JdomUtilities {
 Date dateobj = new Date();
 return df.format(dateobj);
 }
- 
+     public static String getFormattedDate(Date d){
+    DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+return df.format(d).replace(" ", "T");
+}
+
 }
