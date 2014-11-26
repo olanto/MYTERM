@@ -145,12 +145,12 @@ a cross reference between them. The first entry contains a link to a graphic fil
 				<transacGrp>
 					<transac type="transactionType">origination</transac>
 					<transacNote type="responsibility" target="US5001">Jane</transacNote>
-					<date>2005-07-19T14:30:30</date>
+					<date>2007-07-22</date>
 				</transacGrp>
 				<transacGrp>
 					<transac type="transactionType">modification</transac>
 					<transacNote type="responsibility" target="US5002">John</transacNote>
-					<date>2007-07-19T14:30:30</date>
+					<date>2007-07-23</date>
 				</transacGrp>
 				<note>This is a sample entry with some data categories at the entry level. </note>
 				<ref type="crossReference" target="c2">unscheduled operation</ref>

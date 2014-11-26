@@ -86,6 +86,11 @@ public class Entry {
             langset = ManageLangsets.updateExtra(langset.getIdLangset(), extraLangsets);
         }
     }
+   public void addNoteLangSet() {
+        if (createInDB) {
+            langset = ManageLangsets.updateNote(langset.getIdLangset(), langsetNote);
+        }
+    }
 
     public void prepareTerm(String termForm) {
         term = new Terms(null, termForm, 'p'); // minimal information

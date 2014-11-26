@@ -43,9 +43,9 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
 /**
  *
  * @author jg
- * 
- * compatible with TBXBasiccoreStructV02.dtd
- * compatible with TBXcoreStructV02.dtd
+ *
+ * compatible with TBXBasiccoreStructV02.dtd compatible with
+ * TBXcoreStructV02.dtd
  */
 public class TBX_Loader implements Loader {
 
@@ -139,7 +139,7 @@ public class TBX_Loader implements Loader {
                     && info.getAttributeValue("type").equals("context")) {
                 courantEntry.getTerm().setTermContext(getText(info, localverbose));
                 termFormExist = true;
-            }  else if (info.getName().equals("descrip")
+            } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("definition")) {
                 courantEntry.getTerm().setTermDefinition(getText(info, localverbose));
                 termFormExist = true;
@@ -183,8 +183,9 @@ public class TBX_Loader implements Loader {
             Element info = (Element) i.next();
             if (info.getName().equals("tig")) {
                 getTig(info);
-            } else if (info.getName().equals("note")) {
+            } else if (info.getName().equals("descrip")) {
                 courantEntry.setLangsetNote(courantEntry.getLangsetNote() + getText(info, localverbose) + "\n");
+                courantEntry.addNoteLangSet();
             } else {
                 String extra = getExtraElement(info);
                 courantEntry.setExtraLangsets(courantEntry.getExtraLangsets() + extra + "\n");
@@ -219,7 +220,7 @@ public class TBX_Loader implements Loader {
             } else if (info.getName().equals("langSet")) {
                 ; // process in next loop
             } else if (info.getName().equals("note")) {
-                courantEntry.setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
+                courantEntry.getConcept().setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
             } else if (info.getName().equals("transacGrp")) {
                 getConceptTransacGrp(info);
             } else {
@@ -273,7 +274,7 @@ public class TBX_Loader implements Loader {
                     default:
                         System.out.println("ERROR transactionType unknown:" + transactionType);
                 }
-                courantEntry.getConcept().setCreateBy(new BigInteger(Queries.getOwnerID(getText(info, localverbose), TermEnum.AutoCreate.YES).getIdOwner().toString()));
+           //     courantEntry.getConcept().setCreateBy(new BigInteger(Queries.getOwnerID(getText(info, localverbose), TermEnum.AutoCreate.YES).getIdOwner().toString()));
             } else if (info.getName().equals("date")) {
                 String sdate = getText(info, localverbose).replace('T', ' ');
                 Date date = null;

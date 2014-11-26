@@ -42,16 +42,16 @@ public class TermDB {
     
     static String PU="CoreDBTermPU";
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
-    static EntityManager em = emf.createEntityManager();
-    static DomainsJpaController domainsJC = new DomainsJpaController(TermDB.emf);
-    static OwnersJpaController ownersJC = new OwnersJpaController(TermDB.emf);
-    static ResourcesJpaController resourcesJC = new ResourcesJpaController(TermDB.emf);
-    static ConceptsJpaController conceptsJC = new ConceptsJpaController(TermDB.emf);
-    static LangsetsJpaController langsetsJC = new LangsetsJpaController(TermDB.emf);
-    static LanguagesJpaController languagesJC = new LanguagesJpaController(TermDB.emf);
-    static TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
-    static UsersLanguagesJpaController usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
-    static UsersResourcesJpaController usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
+    static public EntityManager em = emf.createEntityManager();
+    static public DomainsJpaController domainsJC = new DomainsJpaController(TermDB.emf);
+    static public OwnersJpaController ownersJC = new OwnersJpaController(TermDB.emf);
+    static public ResourcesJpaController resourcesJC = new ResourcesJpaController(TermDB.emf);
+    static public ConceptsJpaController conceptsJC = new ConceptsJpaController(TermDB.emf);
+    static public LangsetsJpaController langsetsJC = new LangsetsJpaController(TermDB.emf);
+    static public LanguagesJpaController languagesJC = new LanguagesJpaController(TermDB.emf);
+    static public TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
+    static public UsersLanguagesJpaController usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
+    static public UsersResourcesJpaController usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
     
     public static void restart(){
         emf=null;

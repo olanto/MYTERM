@@ -81,5 +81,25 @@ public class ManageLangsets {
         }
         return lan;
     }
-    // public long AddOw("")
+    public static Langsets updateNote(Long idLangset, String note) {
+        Langsets lan = Queries.getIdLangset(idLangset);
+        if (lan == null) {
+            return null;
+        }
+        lan.setLangsetNote(note);
+        try {
+            TermDB.langsetsJC.edit(lan);
+        } catch (IllegalOrphanException ex) {
+            Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return lan;
+    }
+   // public long AddOw("")
 }
