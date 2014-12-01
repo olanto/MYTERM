@@ -7,6 +7,7 @@ package org.olanto.myterm.GUI;
 import java.io.PrintStream;
 import javax.swing.JFileChooser;
 import org.olanto.myterm.coredb.TermDB;
+import org.olanto.myterm.export.ExportTBXFromDB;
 import org.olanto.myterm.extractor.ConvertAndLoadIntoDB;
 import org.olanto.myterm.extractor.ModelEnum;
 import org.olanto.myterm.parsetbx.LoadInToDB;
@@ -33,6 +34,12 @@ public class InterfaceToUpload extends javax.swing.JFrame {
    private void myInitOthers() {
 
         PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaOthers, 100));
+        System.setOut(logStream);
+        System.setErr(logStream);
+    }
+  private void myInitEXPORT() {
+
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaEXPORT, 100));
         System.setOut(logStream);
         System.setErr(logStream);
     }
@@ -74,6 +81,15 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         fileNameModel = new javax.swing.JTextField();
         fileChooseModel = new javax.swing.JButton();
+        EXPORT = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        fileNameEXPORT = new javax.swing.JTextField();
+        resourceNameEXPORT = new javax.swing.JTextField();
+        fileChooseEXPORT = new javax.swing.JButton();
+        startEXPORT = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        logAreaEXPORT = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,7 +173,7 @@ public class InterfaceToUpload extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("XML type", XML);
+        jTabbedPane1.addTab("IMPORT XML type", XML);
 
         jLabel4.setText("file Name");
 
@@ -284,9 +300,84 @@ public class InterfaceToUpload extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        jTabbedPane1.addTab("Others", Others);
+        jTabbedPane1.addTab("IMPORT Others", Others);
+
+        jLabel7.setText("file Name");
+
+        jLabel8.setText("resource Name");
+
+        fileNameEXPORT.setText("C:/MYTERM/tests/Exported-TBX.xml");
+
+        resourceNameEXPORT.setText("TESTTBX");
+        resourceNameEXPORT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameEXPORTActionPerformed(evt);
+            }
+        });
+
+        fileChooseEXPORT.setText("...");
+        fileChooseEXPORT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseEXPORTActionPerformed(evt);
+            }
+        });
+
+        startEXPORT.setText("Start Export");
+        startEXPORT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startEXPORTActionPerformed(evt);
+            }
+        });
+
+        logAreaEXPORT.setColumns(20);
+        logAreaEXPORT.setRows(5);
+        jScrollPane5.setViewportView(logAreaEXPORT);
+
+        javax.swing.GroupLayout EXPORTLayout = new javax.swing.GroupLayout(EXPORT);
+        EXPORT.setLayout(EXPORTLayout);
+        EXPORTLayout.setHorizontalGroup(
+            EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EXPORTLayout.createSequentialGroup()
+                .addGroup(EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(startEXPORT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EXPORTLayout.createSequentialGroup()
+                        .addComponent(resourceNameEXPORT, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 362, Short.MAX_VALUE))
+                    .addComponent(fileNameEXPORT))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fileChooseEXPORT))
+            .addGroup(EXPORTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5))
+        );
+        EXPORTLayout.setVerticalGroup(
+            EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EXPORTLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(fileNameEXPORT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileChooseEXPORT))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(resourceNameEXPORT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startEXPORT)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("EXPORT", EXPORT);
 
         jSplitPane1.setRightComponent(jTabbedPane1);
+        jTabbedPane1.getAccessibleContext().setAccessibleName("IMPORT XML type");
+        jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
 
         jScrollPane1.setViewportView(jSplitPane1);
 
@@ -372,6 +463,32 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fileNameModelActionPerformed
 
+    private void resourceNameEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameEXPORTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameEXPORTActionPerformed
+
+    private void fileChooseEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseEXPORTActionPerformed
+            JFileChooser fileOpen = new JFileChooser();
+        int ret = fileOpen.showDialog(null, "Open File");
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            fileNameEXPORT.setText("" + fileOpen.getSelectedFile());
+        }
+
+    }//GEN-LAST:event_fileChooseEXPORTActionPerformed
+
+    private void startEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startEXPORTActionPerformed
+                   TermDB.restart();
+             myInitOthers();
+        String fname = fileNameEXPORT.getText();
+        String resource = resourceNameEXPORT.getText();
+        System.out.println("Export:");
+        System.out.println("   File Name: " + fname);
+        System.out.println("   Resource Name: " + resource);
+        System.out.println("------------------------------------------------");
+        ExportTBXFromDB.doIt(logAreaEXPORT, fname, resource,false);
+   
+    }//GEN-LAST:event_startEXPORTActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -407,12 +524,15 @@ public class InterfaceToUpload extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel EXPORT;
     private javax.swing.JPanel Others;
     private javax.swing.JPanel XML;
     private javax.swing.JPanel XML1;
+    private javax.swing.JButton fileChooseEXPORT;
     private javax.swing.JButton fileChooseModel;
     private javax.swing.JButton fileChooseOthers;
     private javax.swing.JButton fileChooseXML;
+    private javax.swing.JTextField fileNameEXPORT;
     private javax.swing.JTextField fileNameModel;
     private javax.swing.JTextField fileNameOthers;
     private javax.swing.JTextField fileNameXML;
@@ -422,15 +542,21 @@ public class InterfaceToUpload extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea logAreaEXPORT;
     private javax.swing.JTextArea logAreaOthers;
     private javax.swing.JTextArea logAreaXML;
+    private javax.swing.JTextField resourceNameEXPORT;
     private javax.swing.JTextField resourceNameOthers;
     private javax.swing.JTextField resourceNameXML;
+    private javax.swing.JButton startEXPORT;
     private javax.swing.JButton startUploadOthers;
     private javax.swing.JButton startUploadXML;
     private javax.swing.JComboBox typeChooserOthers;

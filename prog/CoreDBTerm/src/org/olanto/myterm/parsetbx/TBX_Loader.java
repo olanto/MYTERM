@@ -115,6 +115,8 @@ public class TBX_Loader implements Loader {
             if (info.getName().equals("term")) {
                 courantEntry.prepareTerm(getText(info, localverbose));
                 termFormExist = true;
+            } else if (info.getName().equals("descripGrp")) {
+                getDescripGrpTerm(info);
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("partOfSpeech")) {
                 courantEntry.getTerm().setTermPartofspeech(getText(info, localverbose));
@@ -135,6 +137,10 @@ public class TBX_Loader implements Loader {
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
                 courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
                 termFormExist = true;
+            }else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("geographicalUsage")) {
+                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
+                termFormExist = true;
             } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("context")) {
                 courantEntry.getTerm().setTermContext(getText(info, localverbose));
@@ -148,8 +154,28 @@ public class TBX_Loader implements Loader {
                 courantEntry.getTerm().setTermSource(getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("note")) {
-                courantEntry.setTermNote(courantEntry.getTermNote() + getText(info, localverbose) + "\n");
+                courantEntry.getTerm().setTermNote(courantEntry.getTerm().getTermNote() + getText(info, localverbose) + "\n");
                 termFormExist = true;
+            } else if (info.getName().equals("ref")
+                    && info.getAttributeValue("type").equals("crossReference")) {
+                courantEntry.getTerm().setCrossref(  "\n"+
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                termFormExist = true;
+            } else if (info.getName().equals("xref")
+                    && info.getAttributeValue("type").equals("externalCrossReference")) {
+                courantEntry.getTerm().setExtcrossref(  "\n"+
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                termFormExist = true;
+            }else if (info.getName().equals("xref")
+                    && info.getAttributeValue("type").equals("xGraphic")) {
+                courantEntry.getTerm().setImage("\n" + 
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                termFormExist = true;
+            } else if (info.getName().equals("transacGrp")) {
+                getConceptTransacGrp(info);
             } else {
                 String extra = getExtraElement(info);
                 courantEntry.setExtraTerms(courantEntry.getExtraTerms() + extra + "\n");
@@ -204,6 +230,7 @@ public class TBX_Loader implements Loader {
         courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
         courantEntry.setConceptNote("");
+        courantEntry.setImportedRefConcepts(e.getAttributeValue("id"));
         totEntries++;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
@@ -221,7 +248,22 @@ public class TBX_Loader implements Loader {
                 ; // process in next loop
             } else if (info.getName().equals("note")) {
                 courantEntry.getConcept().setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
-            } else if (info.getName().equals("transacGrp")) {
+            }  else if (info.getName().equals("ref")
+                    && info.getAttributeValue("type").equals("crossReference")) {
+                courantEntry.getConcept().setCrossref(  "\n"+
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+            } else if (info.getName().equals("xref")
+                    && info.getAttributeValue("type").equals("externalCrossReference")) {
+                courantEntry.getConcept().setExtcrossref(  "\n"+
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+            }else if (info.getName().equals("xref")
+                    && info.getAttributeValue("type").equals("xGraphic")) {
+                courantEntry.getConcept().setImage("\n" + 
+                        info.getAttributeValue("type")+";"+
+                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+            }else if (info.getName().equals("transacGrp")) {
                 getConceptTransacGrp(info);
             } else {
                 String extra = getExtraElement(info);
@@ -243,6 +285,70 @@ public class TBX_Loader implements Loader {
         return "";
     }
 
+       static String getTermTransacGrp(Element e) {
+        boolean localverbose = true;
+        boolean attributeverbose = false;
+        String transactionType = "";
+
+        if (localverbose) {
+            System.out.println("--- process:" + e.getName());
+        }
+        List listNode = e.getChildren();
+        Iterator i = listNode.iterator();
+        while (i.hasNext()) {
+            Element info = (Element) i.next();
+            if (info.getName().equals("transac")
+                    && info.getAttributeValue("type").equals("transactionType")) {
+                transactionType = getText(info, localverbose);
+            } else if (info.getName().equals("transacNote")
+                    && info.getAttributeValue("type").equals("responsibility")) {
+                String user = getText(info, localverbose);
+                //System.out.println("user:" + user);
+                switch (transactionType) {
+                    case "origination":
+                        //System.out.println("created by user:" + user);                      
+                        courantEntry.getTerm().setCreateBy(new BigInteger(Queries.getOwnerID(user, TermEnum.AutoCreate.YES).getIdOwner().toString()));
+                        break;
+                    case "modification":
+                        //System.out.println("modified by user:" + user);
+                        courantEntry.getTerm().setLastmodifiedBy(new BigInteger(Queries.getOwnerID(user, TermEnum.AutoCreate.YES).getIdOwner().toString()));
+                        break;
+                    default:
+                        System.out.println("ERROR transactionType unknown:" + transactionType);
+                }
+            } else if (info.getName().equals("date")) {
+                String sdate = getText(info, localverbose).replace('T', ' ');
+                Date date = null;
+                try {
+                    date = convertDate.parse(sdate);
+                } catch (ParseException ex) {
+                    System.out.println("ERROR date format unknown:" + sdate);
+                    //Logger.getLogger(TBX_Loader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println("date:" + sdate);
+                switch (transactionType) {
+                    case "origination":
+                        courantEntry.getTerm().setCreation(date);
+                        break;
+                    case "modification":
+                        courantEntry.getTerm().setLastmodified(date);
+                        break;
+                    default:
+                        System.out.println("ERROR transactionType unknown:" + transactionType);
+                }
+            } else {
+                String extra = getExtraElement(info);
+                courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
+                if (skipverbose) {
+                    System.out.println("--skip element:" + info.getName());
+                    System.out.println(extra);
+                }
+            }
+        }
+        return "";
+    }
+
+    
     static String getConceptTransacGrp(Element e) {
         boolean localverbose = true;
         boolean attributeverbose = false;
@@ -336,6 +442,34 @@ public class TBX_Loader implements Loader {
         return res;
     }
 
+      static String getDescripGrpTerm(Element e) {
+        boolean localverbose = true;
+        if (localverbose) {
+            System.out.println("--- process:" + e.getName());
+        }
+        List listNode = e.getChildren();
+        Iterator i = listNode.iterator();
+        while (i.hasNext()) {
+            Element info = (Element) i.next();
+            if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("context")) {
+                courantEntry.getTerm().setTermContext(getText(info, localverbose));
+            } else if (info.getName().equals("admin")
+                    && info.getAttributeValue("type").equals("source")) {
+                courantEntry.getTerm().setTermSourceContext(getText(info, localverbose));
+            } else {
+                String extra = getExtraElement(info);
+                  courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
+              if (skipverbose) {
+                    System.out.println("--skip element:" + info.getName());
+                    System.out.println(extra);
+                }
+            }
+        }
+        return "";
+    }
+  
+    
     static String getDescripGrpConcept(Element e) {
         boolean localverbose = true;
         if (localverbose) {

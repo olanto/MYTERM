@@ -42,6 +42,7 @@ public class Entry {
     private Terms term;
     private String extraRessources;
     private String extraConcepts;
+    private String importedRefConcepts;
     private String extraLangsets;
     private String extraTerms;
     private String resourceNote;
@@ -71,6 +72,7 @@ public class Entry {
     public void addConcept() {
         if (createInDB) {
             concept.setExtra(extraConcepts);
+            concept.setImportedref(importedRefConcepts);
             concept = ManageConcept.addConceptToResource(resource, concept);
         }
     }
@@ -251,5 +253,19 @@ public class Entry {
      */
     public void setConceptNote(String conceptNote) {
         this.conceptNote = conceptNote;
+    }
+
+    /**
+     * @return the importedRefConcepts
+     */
+    public String getImportedRefConcepts() {
+        return importedRefConcepts;
+    }
+
+    /**
+     * @param importedRefConcepts the importedRefConcepts to set
+     */
+    public void setImportedRefConcepts(String importedRefConcepts) {
+        this.importedRefConcepts = importedRefConcepts;
     }
 }

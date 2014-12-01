@@ -72,6 +72,8 @@ public class Concepts implements Serializable {
     private String extcrossref;
     @Column(name = "crossref")
     private String crossref;
+   @Column(name = "importedref")
+    private String importedref;
 
     public Concepts() {
     }
@@ -268,5 +270,19 @@ public class Concepts implements Serializable {
      */
     public void setCrossref(String crossref) {
         this.crossref = crossref;
+    }
+
+    /**
+     * @return the importedref
+     */
+    public String getImportedref() {
+        return importedref;
+    }
+
+    /**
+     * @param importedref the importedref to set
+     */
+    public void setImportedref(String importedref) {
+        this.importedref = importedref;
     }
 }

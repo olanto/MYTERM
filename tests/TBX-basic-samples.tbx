@@ -200,12 +200,12 @@ a cross reference between them. The first entry contains a link to a graphic fil
 						<transacGrp>
 							<transac type="transactionType">origination</transac>
 							<transacNote type="responsibility" target="US5001">Jane</transacNote>
-							<date>2007-07-22</date>
+							<date>2007-07-22T14:30:30</date>
 						</transacGrp>
 						<transacGrp>
 							<transac type="transactionType">modification</transac>
 							<transacNote type="responsibility" target="US5002">John</transacNote>
-							<date>2007-07-23</date>
+							<date>2007-07-23T14:30:30</date>
 						</transacGrp>
 						<note>This is a sample entry with some data categories at the term or
 							language level</note>

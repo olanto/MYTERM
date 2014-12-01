@@ -212,6 +212,7 @@ select * from translations;
 alter table concepts add image text;
 alter table concepts add  extcrossref text;
 alter table concepts add  crossref text;
+alter table concepts add  importedref text;
 
 
 create table concepts
@@ -304,6 +305,8 @@ select * from langsets;
 
 alter table terms add  extcrossref text;
 alter table terms add  crossref text;
+alter table terms add  importedref text;
+alter table terms add  image text;
 
 
 create table terms

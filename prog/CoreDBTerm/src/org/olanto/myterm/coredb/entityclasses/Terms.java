@@ -53,6 +53,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Terms.findBySeq", query = "SELECT t FROM Terms t WHERE t.seq = :seq"),
     @NamedQuery(name = "Terms.findByExtra", query = "SELECT t FROM Terms t WHERE t.extra = :extra")})
 public class Terms implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -113,6 +114,10 @@ public class Terms implements Serializable {
     private String extcrossref;
     @Column(name = "crossref")
     private String crossref;
+    @Column(name = "image")
+    private String image;
+    @Column(name = "importedref")
+    private String importedref;
 
     public Terms() {
     }
@@ -121,7 +126,7 @@ public class Terms implements Serializable {
         this.idTerm = idTerm;
     }
 
-      public Terms(Long idTerm, String idLanguage, long idLangset, String termForm, char status) {
+    public Terms(Long idTerm, String idLanguage, long idLangset, String termForm, char status) {
         this.idTerm = idTerm;
         this.idLanguage = idLanguage;
         this.idLangset = idLangset;
@@ -373,5 +378,32 @@ public class Terms implements Serializable {
     public void setCrossref(String crossref) {
         this.crossref = crossref;
     }
-    
+
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the importedref
+     */
+    public String getImportedref() {
+        return importedref;
+    }
+
+    /**
+     * @param importedref the importedref to set
+     */
+    public void setImportedref(String importedref) {
+        this.importedref = importedref;
+    }
 }

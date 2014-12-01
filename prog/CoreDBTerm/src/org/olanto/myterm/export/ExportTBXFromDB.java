@@ -42,40 +42,33 @@ public class ExportTBXFromDB {
 
     static Element racine;
     static org.jdom2.Document document;
-    static final String NAME_SPACE_2 = "XX_2";
-    static final String URI_NS_2 = "http://.../schema/2";
-    static final String NAME_SPACE_1 = "XX_1";
-    static final String URI_NS_1 = "http://.../schema/1";
-    public static Namespace espaceNom_2;
-    public static Namespace espaceNom_1;
     public static String outFileName;
     public static String resourceName;
     static String encoding = "UTF-8";
-    static String dtdName;
-    static String rootName;
+    static String dtdName="TBXBasiccoreStructV02.dtd";
+    static String rootName="martif";
     static Resources resource;
     public static JTextArea logArea;
 
     public static void main(String[] args) {
         init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\export.properties");
-        doIt(null, null, "TESTTBX");
+        doIt(null, "C:\\MYTERM\\tests\\exportTBX.xml", "TESTTBX",true);
     }
 
     public static void init(String propertiesFile) {
         getProperties(propertiesFile);
     }
 
-    public static void doIt(JTextArea _logArea, String propertiesFile, String _resourceName) {
+    public static void doIt(JTextArea _logArea, String _outFileName, String _resourceName, boolean show) {
         resourceName = _resourceName;
+        outFileName = _outFileName;
         logArea = _logArea;
-        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\export.properties");
+//        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\export.properties");
         msg("File Generation TBX\n");
         msg("TBX version: " + dtdName);
         msg("rootName: " + rootName);
         msg("exported file: " + outFileName + "\n");
-        espaceNom_2 = Namespace.getNamespace(NAME_SPACE_2, URI_NS_2);
-        espaceNom_1 = Namespace.getNamespace(NAME_SPACE_1, URI_NS_1);
-        initRoot(rootName);
+         initRoot(rootName);
         racine = getRacine();
         DocType doctype = new DocType("TBXBasiccoreStructV02.dtd");
         document = new Document(racine, doctype);
@@ -85,7 +78,7 @@ public class ExportTBXFromDB {
         racine.addContent(GenerateEntries.getTermsFromDB());
 
 
-        showXML(document);
+        if (show)showXML(document);
         saveXML(document, outFileName);
         msg("\n end of export");
 

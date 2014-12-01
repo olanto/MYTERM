@@ -63,7 +63,10 @@ public class GenerateEntries {
         query.setParameter("idResource", res.getIdResource());
         List<Concepts> listOfConcept = query.getResultList();
         for (Concepts con : listOfConcept) {
-            Element termentry = makeElem("termEntry").setAttribute("id", con.getIdConcept().toString());
+            Element termentry = makeElem("termEntry");
+            if (con.getImportedref() == null) {
+                termentry.setAttribute("id", con.getIdConcept().toString());
+            } else termentry.setAttribute("id", con.getImportedref());
             addConceptElem(termentry, con);
             body.addContent(termentry);
             addLangset(termentry, con);
@@ -82,28 +85,43 @@ public class GenerateEntries {
                 descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
             }
         }
-         if (con.getCreateBy() != null) {
+        if (con.getCreateBy() != null) {
             Element transgrp = makeElem("transacGrp");
             termentry.addContent(transgrp);
-            String user =Queries.getOwnerbyID(con.getCreateBy().longValue()).getOwnerLastName();
+            String user = Queries.getOwnerbyID(con.getCreateBy().longValue()).getOwnerLastName();
             transgrp.addContent(makeElem("transac", "origination").setAttribute("type", "transactionType"));
             transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
-            if (con.getCreation() != null) {               
+            if (con.getCreation() != null) {
                 transgrp.addContent(makeElem("date", getFormattedDate(con.getCreation())));
             }
         }
-         if (con.getLastmodifiedBy() != null) {
+        if (con.getLastmodifiedBy() != null) {
             Element transgrp = makeElem("transacGrp");
             termentry.addContent(transgrp);
-            String user =Queries.getOwnerbyID(con.getLastmodifiedBy().longValue()).getOwnerLastName();
+            String user = Queries.getOwnerbyID(con.getLastmodifiedBy().longValue()).getOwnerLastName();
             transgrp.addContent(makeElem("transac", "modification").setAttribute("type", "transactionType"));
             transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
-            if (con.getLastmodified() != null) {               
+            if (con.getLastmodified() != null) {
                 transgrp.addContent(makeElem("date", getFormattedDate(con.getLastmodified())));
             }
         }
-      if (con.getConceptNote() != null) {
+        if (con.getConceptNote() != null) {
             termentry.addContent(makeElem("note", con.getConceptNote()));
+        }  
+        if (con.getCrossref()!= null) {
+            String ref=con.getCrossref().replace("\n", "");
+            String[] part=ref.split(";");
+            termentry.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        }
+       if (con.getExtcrossref()!= null) {
+            String ref=con.getExtcrossref().replace("\n", "");
+            String[] part=ref.split(";");
+            termentry.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        }
+     if (con.getImage()!= null) {
+            String ref=con.getImage().replace("\n", "");
+            String[] part=ref.split(";");
+            termentry.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
         }
 //            if (lan.getExtra()!=null){
 //                langset.addContent(makeElem("descrip",lan.getExtra()).setAttribute("type", "definition"));              
@@ -146,46 +164,81 @@ public class GenerateEntries {
         }
     }
 
-      public static void addTermsetElem(Element tig, Terms ter) {
-        if (ter.getTermPartofspeech() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+    public static void addTermsetElem(Element tig, Terms ter) {
+     
+        if (ter.getTermContext() != null && ter.getTermSourceContext() != null) {
+            Element descgrp = makeElem("descripGrp");
+            tig.addContent(descgrp);
+            descgrp.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
+            descgrp.addContent(makeElem("admin", ter.getTermSourceContext()).setAttribute("type", "source"));
         }
-//        if (con.getConceptDefinition() != null) {
-//            Element descgrp = makeElem("descripGrp");
-//            termentry.addContent(descgrp);
-//            descgrp.addContent(makeElem("descrip", con.getConceptDefinition()).setAttribute("type", "definition"));
-//            if (con.getConceptSourceDefinition() != null) {
-//                descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
-//            }
-//        }
-//         if (con.getCreateBy() != null) {
-//            Element transgrp = makeElem("transacGrp");
-//            termentry.addContent(transgrp);
-//            String user =Queries.getOwnerbyID(con.getCreateBy().longValue()).getOwnerLastName();
-//            transgrp.addContent(makeElem("transac", "origination").setAttribute("type", "transactionType"));
-//            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
-//            if (con.getCreation() != null) {               
-//                transgrp.addContent(makeElem("date", getFormattedDate(con.getCreation())));
-//            }
-//        }
-//         if (con.getLastmodifiedBy() != null) {
-//            Element transgrp = makeElem("transacGrp");
-//            termentry.addContent(transgrp);
-//            String user =Queries.getOwnerbyID(con.getLastmodifiedBy().longValue()).getOwnerLastName();
-//            transgrp.addContent(makeElem("transac", "modification").setAttribute("type", "transactionType"));
-//            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
-//            if (con.getLastmodified() != null) {               
-//                transgrp.addContent(makeElem("date", getFormattedDate(con.getLastmodified())));
-//            }
-//        }
-     if (ter.getTermNote()!= null) {
+        if (ter.getTermContext() != null && ter.getTermSourceContext() == null) {
+            tig.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
+        }
+        if (ter.getCreateBy() != null) {
+            Element transgrp = makeElem("transacGrp");
+            tig.addContent(transgrp);
+            String user = Queries.getOwnerbyID(ter.getCreateBy().longValue()).getOwnerLastName();
+            transgrp.addContent(makeElem("transac", "origination").setAttribute("type", "transactionType"));
+            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+            if (ter.getCreation() != null) {
+                transgrp.addContent(makeElem("date", getFormattedDate(ter.getCreation())));
+            }
+        }
+        if (ter.getLastmodifiedBy() != null) {
+            Element transgrp = makeElem("transacGrp");
+            tig.addContent(transgrp);
+            String user = Queries.getOwnerbyID(ter.getLastmodifiedBy().longValue()).getOwnerLastName();
+            transgrp.addContent(makeElem("transac", "modification").setAttribute("type", "transactionType"));
+            transgrp.addContent(makeElem("transacNote", user).setAttribute("type", "responsibility"));
+            if (ter.getLastmodified() != null) {
+                transgrp.addContent(makeElem("date", getFormattedDate(ter.getLastmodified())));
+            }
+        }
+        if (ter.getTermNote() != null) {
             tig.addContent(makeElem("note", ter.getTermNote()));
         }
+        if (ter.getTermPartofspeech() != null) {
+            //System.out.println("partOfSpeech"+ter.getTermPartofspeech());
+            tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+        }
+        if (ter.getTermAdminStatus() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermAdminStatus()).setAttribute("type", "administrativeStatus"));
+        }
+        if (ter.getTermGender() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermGender()).setAttribute("type", "grammaticalGender"));
+        }
+        if (ter.getTermType() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermType()).setAttribute("type", "termType"));
+        }
+        if (ter.getTermGeoUsage() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
+        }
+        if (ter.getTermDefinition() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermDefinition()).setAttribute("type", "definition"));
+        }
+        if (ter.getTermSource() != null) {
+            tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
+        }
+      if (ter.getCrossref()!= null) {
+            String ref=ter.getCrossref().replace("\n", "");
+            String[] part=ref.split(";");
+            tig.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        }
+       if (ter.getExtcrossref()!= null) {
+            String ref=ter.getExtcrossref().replace("\n", "");
+            String[] part=ref.split(";");
+            tig.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        }
+     if (ter.getImage()!= null) {
+            String ref=ter.getImage().replace("\n", "");
+            String[] part=ref.split(";");
+            tig.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        }
+
 //            if (lan.getExtra()!=null){
 //                langset.addContent(makeElem("descrip",lan.getExtra()).setAttribute("type", "definition"));              
 //            }
 
     }
- 
-    
- }
+}
