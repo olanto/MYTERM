@@ -39,9 +39,9 @@ import org.olanto.myterm.coredb.jpacontroller.UsersResourcesJpaController;
  * @author Jacques Guyot
  */
 public class TermDB {
-    
-    static String PU="CoreDBTermPU";
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
+
+    static public String PU = "CoreDBTermPU";
+    static public EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU);
     static public EntityManager em = emf.createEntityManager();
     static public DomainsJpaController domainsJC = new DomainsJpaController(TermDB.emf);
     static public OwnersJpaController ownersJC = new OwnersJpaController(TermDB.emf);
@@ -52,18 +52,18 @@ public class TermDB {
     static public TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
     static public UsersLanguagesJpaController usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
     static public UsersResourcesJpaController usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
-    
-    public static void restart(){
-        emf=null;
+
+    public static void restart() {
+        emf = null;
         emf = Persistence.createEntityManagerFactory(PU);
-      em = emf.createEntityManager();
-      domainsJC = new DomainsJpaController(TermDB.emf);
-      ownersJC = new OwnersJpaController(TermDB.emf);
-      resourcesJC = new ResourcesJpaController(TermDB.emf);
-      conceptsJC = new ConceptsJpaController(TermDB.emf);
-      langsetsJC = new LangsetsJpaController(TermDB.emf);
-      languagesJC = new LanguagesJpaController(TermDB.emf);
-      termsJC = new TermsJpaController(TermDB.emf);
-     
+        em = emf.createEntityManager();
+        domainsJC = new DomainsJpaController(TermDB.emf);
+        ownersJC = new OwnersJpaController(TermDB.emf);
+        resourcesJC = new ResourcesJpaController(TermDB.emf);
+        conceptsJC = new ConceptsJpaController(TermDB.emf);
+        langsetsJC = new LangsetsJpaController(TermDB.emf);
+        languagesJC = new LanguagesJpaController(TermDB.emf);
+        termsJC = new TermsJpaController(TermDB.emf);
+
     }
 }

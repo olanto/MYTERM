@@ -30,6 +30,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.math.BigInteger;
+import java.util.Date;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Resources.ResourceList;
@@ -93,14 +95,7 @@ public class ConceptForm extends HorizontalPanel {
         delete.setTitle("Delete the current concept");
         escape.setTitle("Abort all modifications");
         submit.setTitle("Submit changes (updates in database)");
-        delete.setTitle("Save changes without submit");
-        delete.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-//                conceptDTO = null;??
-                removeFromParent();
-            }
-        });
+        delete.setTitle("Save changes without submit");        
     }
 
     public void adjustSize(int w) {
@@ -122,10 +117,11 @@ public class ConceptForm extends HorizontalPanel {
     }
 
     public void refreshContentFromConceptEntryDTO() {
-        this.text_def.setText(conceptDTO.getConceptDefinition());
-        this.text_sdef.setText(conceptDTO.getConceptSourceDefinition());
-        this.text_nt.setText(conceptDTO.getConceptNote());
+        text_def.setText(conceptDTO.getConceptDefinition());
+        text_sdef.setText(conceptDTO.getConceptSourceDefinition());
+        text_nt.setText(conceptDTO.getConceptNote());
         sf.selectdomain(conceptDTO.getSubjectField());
+        rsrc.selectResourcebyID(conceptDTO.getIdResource());
         String oWnerID = Cookies.getCookie(MyTermCookiesNamespace.ownerID);
         if ((!oWnerID.equals(conceptDTO.getCreateBy().toString())) && (!oWnerID.equals(conceptDTO.getLastmodifiedBy().toString()))) {
             setReadOnly(true);
@@ -143,5 +139,17 @@ public class ConceptForm extends HorizontalPanel {
         text_sdef.setReadOnly(edit);
         text_nt.setReadOnly(edit);
         sf.setEnabled(edit);
+    }
+    
+    public void setConcept() {
+        conceptDTO.setConceptDefinition(text_def.getText());
+        conceptDTO.setConceptNote(text_nt.getText());
+        conceptDTO.setConceptSourceDefinition(text_sdef.getText());
+        conceptDTO.setCreateBy(BigInteger.valueOf(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID))));
+        conceptDTO.setCreation(new Date(System.currentTimeMillis()));
+        conceptDTO.setIdResource(rsrc.getIDResource(rsrc.getSelectedIndex()));
+        conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
+        conceptDTO.setLastmodifiedBy(BigInteger.valueOf(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID))));
+        conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
     }
 }

@@ -43,6 +43,7 @@ public class ResourceList extends ListBox {
 
     private static AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
     private static ArrayList<String> rsrclist = new ArrayList<>();
+    private static ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
     public ResourceList() {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
@@ -53,16 +54,17 @@ public class ResourceList extends ListBox {
 
             @Override
             public void onSuccess(ArrayList<ResourceDTO> result) {
-                if(result!=null){
-                int i = 0;
-                for (ResourceDTO s : result) {
-                    rsrclist.add(s.getResourceName());
-                    addItem(s.getResourceName(), s.getIdResource().toString());
-                    if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
-                        i = result.indexOf(s);
+                if (result != null) {
+                    int i = 0;
+                    for (ResourceDTO s : result) {
+                        rsrclist.add(s.getResourceName());
+                        rsrcIDlist.add(s.getIdResource());
+                        addItem(s.getResourceName(), s.getIdResource().toString());
+                        if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
+                            i = result.indexOf(s);
+                        }
                     }
-                }
-                setSelectedIndex(i);
+                    setSelectedIndex(i);
                 }
             }
         };
@@ -85,6 +87,21 @@ public class ResourceList extends ListBox {
             }
             i++;
         }
+    }
+
+    public void selectResourcebyID(long resourceID) {
+        int i = 0;
+        for (Long s : rsrcIDlist) {
+            if (s.equals(resourceID)) {
+                setSelectedIndex(i);
+                break;
+            }
+            i++;
+        }
+    }
+
+    public long getIDResource(int i) {
+        return rsrcIDlist.get(i);
     }
 
     private static myTermServiceAsync getService() {
