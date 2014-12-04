@@ -47,7 +47,7 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
  * compatible with TBXBasiccoreStructV02.dtd compatible with
  * TBXcoreStructV02.dtd
  */
-public class TBX_Loader implements Loader {
+public class MTF_Loader implements Loader {
 
     static org.jdom2.Document document;
     static long totEntries;
@@ -117,64 +117,7 @@ public class TBX_Loader implements Loader {
                 termFormExist = true;
             } else if (info.getName().equals("descripGrp")) {
                 getDescripGrpTerm(info);
-            } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("partOfSpeech")) {
-                courantEntry.getTerm().setTermPartofspeech(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("administrativeStatus")) {
-                courantEntry.getTerm().setTermAdminStatus(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("grammaticalGender")) {
-                courantEntry.getTerm().setTermGender(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("termType")) {
-                courantEntry.getTerm().setTermType(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("geographicalUsage")) {
-                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
-                termFormExist = true;
-            }else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("geographicalUsage")) {
-                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("descrip")
-                    && info.getAttributeValue("type").equals("context")) {
-                courantEntry.getTerm().setTermContext(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("descrip")
-                    && info.getAttributeValue("type").equals("definition")) {
-                courantEntry.getTerm().setTermDefinition(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("admin")
-                    && info.getAttributeValue("type").equals("source")) {
-                courantEntry.getTerm().setTermSource(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("note")) {
-                courantEntry.getTerm().setTermNote(courantEntry.getTerm().getTermNote() + getText(info, localverbose) + "\n");
-                termFormExist = true;
-            } else if (info.getName().equals("ref")
-                    && info.getAttributeValue("type").equals("crossReference")) {
-                courantEntry.getTerm().setCrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-                termFormExist = true;
-            } else if (info.getName().equals("xref")
-                    && info.getAttributeValue("type").equals("externalCrossReference")) {
-                courantEntry.getTerm().setExtcrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-                termFormExist = true;
-            }else if (info.getName().equals("xref")
-                    && info.getAttributeValue("type").equals("xGraphic")) {
-                courantEntry.getTerm().setImage("\n" + 
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-                termFormExist = true;
-            } else if (info.getName().equals("transacGrp")) {
+                    } else if (info.getName().equals("transacGrp")) {
                 getTermTransacGrp(info);
             } else {
                 String extra = getExtraElement(info);
@@ -202,16 +145,14 @@ public class TBX_Loader implements Loader {
         }
         courantEntry.setExtraLangsets("");
         courantEntry.setLangsetNote("");
-        courantEntry.addLangSet(getAtt(e, "lang", xmlNS, attributeverbose));
-        List listNode = e.getChildren();
+                List listNode = e.getChildren();
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
-            if (info.getName().equals("tig")) {
+            if (info.getName().equals("language")) {
+                courantEntry.addLangSet(info.getAttributeValue("lang"));
+            } else if (info.getName().equals("termGrp")) {
                 getTig(info);
-            } else if (info.getName().equals("descrip")) {
-                courantEntry.setLangsetNote(courantEntry.getLangsetNote() + getText(info, localverbose) + "\n");
-                courantEntry.addNoteLangSet();
             } else {
                 String extra = getExtraElement(info);
                 courantEntry.setExtraLangsets(courantEntry.getExtraLangsets() + extra + "\n");
@@ -239,30 +180,15 @@ public class TBX_Loader implements Loader {
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
-            if (info.getName().equals("descrip")
-                    && info.getAttributeValue("type").equals("subjectField")) {
-                courantEntry.getConcept().setSubjectField(getText(info, localverbose));
-            } else if (info.getName().equals("descripGrp")) {
+            if (info.getName().equals("descripGrp")) {
                 getDescripGrpConcept(info);
-            } else if (info.getName().equals("langSet")) {
+            } else if (info.getName().equals("languageGrp")) {
                 ; // process in next loop
-            } else if (info.getName().equals("note")) {
-                courantEntry.getConcept().setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
-            }  else if (info.getName().equals("ref")
-                    && info.getAttributeValue("type").equals("crossReference")) {
-                courantEntry.getConcept().setCrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-            } else if (info.getName().equals("xref")
-                    && info.getAttributeValue("type").equals("externalCrossReference")) {
-                courantEntry.getConcept().setExtcrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-            }else if (info.getName().equals("xref")
-                    && info.getAttributeValue("type").equals("xGraphic")) {
-                courantEntry.getConcept().setImage("\n" + 
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+            } else if (info.getName().equals("concept")) {
+                courantEntry.setImportedRefConcepts(getText(info, localverbose) + "\n");
+            }  else if (info.getName().equals("system")
+                    && info.getAttributeValue("type").equals("entryClass")) {
+                courantEntry.setConceptNote(getText(info, localverbose) );
             }else if (info.getName().equals("transacGrp")) {
                 getConceptTransacGrp(info);
             } else {
@@ -278,7 +204,7 @@ public class TBX_Loader implements Loader {
         i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
-            if (info.getName().equals("langSet")) {
+            if (info.getName().equals("languageGrp")) {
                 getLangSet(info);
             }
         }
@@ -287,7 +213,6 @@ public class TBX_Loader implements Loader {
 
        static String getTermTransacGrp(Element e) {
         boolean localverbose = true;
-        boolean attributeverbose = false;
         String transactionType = "";
 
         if (localverbose) {
@@ -297,12 +222,8 @@ public class TBX_Loader implements Loader {
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
-            if (info.getName().equals("transac")
-                    && (info.getAttributeValue("type").equals("transactionType")
-                    ||info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
-                transactionType = getText(info, localverbose);
-            } else if (info.getName().equals("transacNote")
-                    && info.getAttributeValue("type").equals("responsibility")) {
+            if (info.getName().equals("transac")) {
+                transactionType = info.getAttributeValue("type");
                 String user = getText(info, localverbose);
                 //System.out.println("user:" + user);
                 switch (transactionType) {
@@ -352,8 +273,7 @@ public class TBX_Loader implements Loader {
     
     static String getConceptTransacGrp(Element e) {
         boolean localverbose = true;
-        boolean attributeverbose = false;
-        String transactionType = "";
+         String transactionType = "";
 
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
@@ -362,14 +282,9 @@ public class TBX_Loader implements Loader {
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element info = (Element) i.next();
-            if (info.getName().equals("transac")
-                    && (info.getAttributeValue("type").equals("transactionType")
-                    ||info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
-                transactionType = getText(info, localverbose);
-            } else if (info.getName().equals("transacNote")
-                    && info.getAttributeValue("type").equals("responsibility")) {
-                String user = getText(info, localverbose);
-                //System.out.println("user:" + user);
+            if (info.getName().equals("transac")){
+                transactionType = info.getAttributeValue("type");
+                String user = getText(info, localverbose);           
                 switch (transactionType) {
                     case "origination":
                         //System.out.println("created by user:" + user);                      
@@ -454,11 +369,17 @@ public class TBX_Loader implements Loader {
         while (i.hasNext()) {
             Element info = (Element) i.next();
             if (info.getName().equals("descrip")
-                    && info.getAttributeValue("type").equals("context")) {
-                courantEntry.getTerm().setTermContext(getText(info, localverbose));
-            } else if (info.getName().equals("admin")
-                    && info.getAttributeValue("type").equals("source")) {
+                    && info.getAttributeValue("type").equals("Category")) {
+                courantEntry.getTerm().setTermType(getText(info, localverbose));
+            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Status")) {
+                courantEntry.getTerm().setTermAdminStatus(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Source")) {
                 courantEntry.getTerm().setTermSourceContext(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Usage")) {
+                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
             } else {
                 String extra = getExtraElement(info);
                   courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
@@ -484,9 +405,17 @@ public class TBX_Loader implements Loader {
             if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("definition")) {
                 courantEntry.getConcept().setConceptDefinition(getText(info, localverbose));
+            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Collection")) {
+                courantEntry.getConcept().setConceptSourceDefinition(getText(info, localverbose));
+            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Domain")) {
+                courantEntry.getConcept().setSubjectField(getText(info, localverbose));
             } else if (info.getName().equals("admin")
                     && info.getAttributeValue("type").equals("source")) {
                 courantEntry.getConcept().setConceptSourceDefinition(getText(info, localverbose));
+            }else if (info.getName().equals("transacGrp")) {
+                ;// skip transacGrp into DescripGrp
             } else {
                 String extra = getExtraElement(info);
                 courantEntry.setExtraConcepts(courantEntry.getExtraConcepts() + extra + "\n");
@@ -513,7 +442,7 @@ public class TBX_Loader implements Loader {
         Iterator i = listNode.iterator();
         while (i.hasNext()) {
             Element courant = (Element) i.next();
-            if (courant.getName().equals("termEntry")) {
+            if (courant.getName().equals("conceptGrp")) {
                 getTermEntry(courant);
             } else {
                 if (skipverbose && localverbose) {
