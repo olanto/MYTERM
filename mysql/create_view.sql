@@ -151,12 +151,18 @@ create or replace view v_users_resources as
 select o.id_owner, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note
-
  from resources r, owners o, users_resources ur
-
 where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
+union 
+  select o.id_owner, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note
+ from resources r, owners o, users_resources ur
+where r.resource_privacy="PUBLIC"
 ;
+
+select * from v_users_resources;
 
 
 create or replace view vj_users_resources as

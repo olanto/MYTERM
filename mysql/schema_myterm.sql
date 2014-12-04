@@ -17,7 +17,7 @@ drop table if exists users_resources;
 drop table if exists resources;
 drop table if exists owners;
 drop table if exists dummy;
-drop table if exists version;
+drop table if exists versionDB;
 
 -- --------------------------------- 
 
@@ -257,9 +257,6 @@ commit;
 select * from concepts; 
 
 
-alter table concepts add image text;
-alter table concepts add  extcrossref text;
-alter table concepts add  crossref text;
 alter table concepts add  importedref text;
 
 alter table concepts add  sup0 text;
@@ -392,8 +389,6 @@ insert into terms values (4,'FR',4,
 commit; 
 select * from terms; 
 
-alter table terms add  extcrossref text;
-alter table terms add  crossref text;
 alter table terms add  importedref text;
 alter table terms add  image text;
 
