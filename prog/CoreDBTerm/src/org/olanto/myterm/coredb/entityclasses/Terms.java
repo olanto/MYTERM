@@ -118,6 +118,16 @@ public class Terms implements Serializable {
     private String image;
     @Column(name = "importedref")
     private String importedref;
+    @Column(name = "sup0")
+    private String sup0;
+    @Column(name = "sup1")
+    private String sup1;
+    @Column(name = "sup2")
+    private String sup2;
+    @Column(name = "sup3")
+    private String sup3;
+    @Column(name = "sup4")
+    private String sup4;
 
     public Terms() {
     }
@@ -405,5 +415,75 @@ public class Terms implements Serializable {
      */
     public void setImportedref(String importedref) {
         this.importedref = importedref;
+    }
+
+    /**
+     * @return the sup0
+     */
+    public String getSup0() {
+        return sup0;
+    }
+
+    /**
+     * @param sup0 the sup0 to set
+     */
+    public void setSup0(String sup0) {
+        this.sup0 = sup0;
+    }
+
+    /**
+     * @return the sup1
+     */
+    public String getSup1() {
+        return sup1;
+    }
+
+    /**
+     * @param sup1 the sup1 to set
+     */
+    public void setSup1(String sup1) {
+        this.sup1 = sup1;
+    }
+
+    /**
+     * @return the sup2
+     */
+    public String getSup2() {
+        return sup2;
+    }
+
+    /**
+     * @param sup2 the sup2 to set
+     */
+    public void setSup2(String sup2) {
+        this.sup2 = sup2;
+    }
+
+    /**
+     * @return the sup3
+     */
+    public String getSup3() {
+        return sup3;
+    }
+
+    /**
+     * @param sup3 the sup3 to set
+     */
+    public void setSup3(String sup3) {
+        this.sup3 = sup3;
+    }
+
+    /**
+     * @return the sup4
+     */
+    public String getSup4() {
+        return sup4;
+    }
+
+    /**
+     * @param sup4 the sup4 to set
+     */
+    public void setSup4(String sup4) {
+        this.sup4 = sup4;
     }
 }
