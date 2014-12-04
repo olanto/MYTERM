@@ -293,10 +293,13 @@ public class TestView {
 
     public static List<VjUsersResources> getResourcesByOwner(long ownerID) {
         init();
-        Query query = em.createNamedQuery("VjUsersResources.findByIdOwner");
-        query.setParameter("idOwner", ownerID);
-        List<VjUsersResources> result = query.getResultList();
-        return result;
+        if (ownerID > 0) {
+            Query query = em.createNamedQuery("VjUsersResources.findByIdOwner");
+            query.setParameter("idOwner", ownerID);
+            List<VjUsersResources> result = query.getResultList();
+            return result;
+        }
+        return null;
     }
 
     public static String getReslang() {

@@ -60,11 +60,8 @@ public class LangSetForm extends VerticalPanel {
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 5);
                 final TermDTO tDTO = new TermDTO();
-                tDTO.setIdLangset(langEntryDTO.lan.getIdLangset());
-                tDTO.setIdLanguage(langEntryDTO.lan.getIdLanguage());
                 langEntryDTO.listterm.add(tDTO);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + (langEntryDTO.listterm.size() - 1)));
-                ter.refreshContentFromTermDTO();
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + (langEntryDTO.listterm.size())));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {

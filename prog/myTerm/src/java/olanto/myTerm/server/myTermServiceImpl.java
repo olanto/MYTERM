@@ -85,16 +85,19 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public ArrayList<ResourceDTO> getResources(long ownerID) {
         // try and catch, problem with the ownerID
-        List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
-        if (!l.isEmpty()) {
-            ArrayList<ResourceDTO> resources = new ArrayList<>();
-            for (VjUsersResources res : l) {
-                ResourceDTO r = new ResourceDTO();
-                r.setIdResource(res.getIdResource());
-                r.setResourceName(res.getResourceName());
-                resources.add(r);
+        if (ownerID > 0) {
+            List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
+            if (!l.isEmpty()) {
+                ArrayList<ResourceDTO> resources = new ArrayList<>();
+                for (VjUsersResources res : l) {
+                    ResourceDTO r = new ResourceDTO();
+                    r.setIdResource(res.getIdResource());
+                    r.setResourceName(res.getResourceName());
+                    resources.add(r);
+                }
+                return resources;
             }
-            return resources;
+            return null;
         }
         return null;
     }
