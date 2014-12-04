@@ -169,27 +169,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             if ((c.getExtra() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Other information: </span>").append(c.getExtra()).append("<br/>");
             }
-//            result.append("<td>")
-//                    .append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>")
-//                    .append("</td>");
-//            result.append("<td>")
-//                    .append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>")
-//                    .append("</td>");
-//            result.append("<td>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(c.getCreation()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>")
-//                    .append("</td>");
-//            result.append("<td>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Image: </span>").append(c.getImage()).append("<br/>")
-//                    .append("&nbsp").append("<span class = \"extrainfo\">Extra information: </span>").append(c.getExtra()).append("<br/>")
-//                    .append("</td>");
-            result.append("</tr>");
             result.append("</td>").append("</tr>");
             result.append("</table>");
             result.append("</div>");
