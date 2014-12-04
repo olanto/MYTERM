@@ -15,7 +15,6 @@ import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSource;
 import jpaviewtest.entities.VjSourcetarget;
 import jpaviewtest.entities.VjUsersResources;
-import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;

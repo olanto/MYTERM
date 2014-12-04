@@ -5,7 +5,6 @@ corpus/*
 template/data_empty/*
 TEMP/*
 SAVE/*
-GWT/*
 logs/*
 private/*
 private/*
