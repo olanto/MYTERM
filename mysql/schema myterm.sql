@@ -17,8 +17,17 @@ drop table if exists users_resources;
 drop table if exists resources;
 drop table if exists owners;
 drop table if exists dummy;
+drop table if exists version;
 
 -- --------------------------------- 
+
+create table versionDB(id_version bigint not null auto_increment,
+  version varchar(32) not null,
+  version_note varchar(255),
+   PRIMARY KEY (id_version))
+AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
+
+insert into versionDB values(1,'1','initial creation');
 
 create table dummy(x varchar(1));
 insert into dummy values('X');
@@ -209,10 +218,7 @@ select * from translations;
 
 
 -- --------------------------------- 
-alter table concepts add image text;
-alter table concepts add  extcrossref text;
-alter table concepts add  crossref text;
-alter table concepts add  importedref text;
+
 
 
 create table concepts
@@ -249,6 +255,18 @@ insert into concepts values (1,1,null,null,null,null,null,null,null,null,null,nu
 insert into concepts values (2,1,null,null,null,null,null,null,null,null,null,null,null,null);
 commit; 
 select * from concepts; 
+
+
+alter table concepts add image text;
+alter table concepts add  extcrossref text;
+alter table concepts add  crossref text;
+alter table concepts add  importedref text;
+
+alter table concepts add  sup0 text;
+alter table concepts add  sup1 text;
+alter table concepts add  sup2 text;
+alter table concepts add  sup3 text;
+alter table concepts add  sup4 text;
 
 -- --------------------------------- 
 
@@ -302,11 +320,6 @@ commit;
 select * from langsets; 
 
 -- --------------------------------- 
-
-alter table terms add  extcrossref text;
-alter table terms add  crossref text;
-alter table terms add  importedref text;
-alter table terms add  image text;
 
 
 create table terms
@@ -378,6 +391,18 @@ insert into terms values (4,'FR',4,
   '31.12.2000',1,null,null,'P',1,null,null,null);
 commit; 
 select * from terms; 
+
+alter table terms add  extcrossref text;
+alter table terms add  crossref text;
+alter table terms add  importedref text;
+alter table terms add  image text;
+
+
+alter table terms add  sup0 text;
+alter table terms add  sup1 text;
+alter table terms add  sup2 text;
+alter table terms add  sup3 text;
+alter table terms add  sup4 text;
 
 -- --------------------------------- 
 
