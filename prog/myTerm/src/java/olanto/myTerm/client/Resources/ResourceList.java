@@ -26,12 +26,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -49,7 +49,7 @@ public class ResourceList extends ListBox {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of resources");
+//                Window.alert("Failed to get list of resources");
             }
 
             @Override
@@ -75,7 +75,7 @@ public class ResourceList extends ListBox {
             }
         });
         addItem("ALL", "-1");
-        getService().getResources(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID)), RsrcCallback);
+        getService().getResources(MainEntryPoint.userDTO.getId(), RsrcCallback);
     }
 
     public void selectResource(String resource) {

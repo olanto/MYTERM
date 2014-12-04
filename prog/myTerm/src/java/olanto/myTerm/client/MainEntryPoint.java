@@ -49,6 +49,7 @@ public class MainEntryPoint implements EntryPoint {
     private VerticalPanel vp = new VerticalPanel();
     private LoginView view = GWT.create(LoginView.class);
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    public static UserDTO userDTO;
     AsyncCallback<UserDTO> login = new AsyncCallback<UserDTO>() {
         @Override
         public void onFailure(Throwable caught) {
@@ -64,6 +65,7 @@ public class MainEntryPoint implements EntryPoint {
                 String ownerID = Long.toString(user.getId());
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
+                userDTO = user;
                 showMain(user);
             }
         }
@@ -85,6 +87,7 @@ public class MainEntryPoint implements EntryPoint {
                 String ownerID = Long.toString(user.getId());
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
+                userDTO = user;
                 showMain(user);
             }
         }
@@ -165,7 +168,7 @@ public class MainEntryPoint implements EntryPoint {
     public void showMain(UserDTO user) {
         String sessionID = user.getSessionID();
         String ownerID = Long.toString(user.getId());
-        
+
         MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
         MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
         RootPanel.get("login").clear();
