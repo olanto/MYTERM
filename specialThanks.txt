@@ -1,0 +1,12 @@
+Many persons contributed actively to the creation and improvement of myCAT. Among them Olanto would like to thank some of the developers for their outstanding contribution.
+
+  -  Nizar Ghoula for developing most of the GUIs of myCAT with GWT
+
+  -  Jacques Guyot for developing most of the DB and TBX converter
+
+
+We would like also to thank the Free IT Foundation in Geneva, Switzerland (http://free-it-foundation.org/) for helping so much in bringing Olanto to light and in organizing the distribution of its software.
+
+To all of you, a warm thank you for your professional attitude and your kindness.
+
+The Olanto Team.
