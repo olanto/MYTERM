@@ -72,6 +72,26 @@ public class ConceptEntry {
         }
     }
 
+    public String flushFromInterface() {
+        if (createInDB) {
+            addConceptToDBFromInterface();
+            for (int i = 0; i < listlang.size(); i++) {
+                LangEntry lan = listlang.get(i);
+                lan.addLangToDB(concept);
+            }
+        }
+        extraConcepts = "";
+        return "Successfully done!";
+
+    }
+
+    public void addConceptToDBFromInterface() {
+        if (createInDB) {
+            concept.setExtra(extraConcepts);
+            concept = ManageConcept.addConceptToResource(resource, concept);
+        }
+    }
+
     public void addTerm(String lang, String term_form) {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntry lan = listlang.get(i);

@@ -137,6 +137,7 @@ public class TermForm extends VerticalPanel {
 //            }
 //        });
         delete.setTitle("Delete the current term");
+        termDTO = new TermDTO();
     }
 
     public void refreshContentFromTermDTO() {

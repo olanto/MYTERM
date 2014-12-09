@@ -104,6 +104,7 @@ public class ConceptForm extends HorizontalPanel {
                 clearAllText();
             }
         });
+        conceptDTO = new ConceptDTO();
     }
 
     public void adjustSize(int w) {
@@ -151,7 +152,7 @@ public class ConceptForm extends HorizontalPanel {
         sf.setEnabled(edit);
     }
 
-    public void getConceptDTOFromContent() {
+    public ConceptDTO getConceptDTOFromContent() {
         if (conceptDTO == null) {
             conceptDTO = new ConceptDTO();
         }
@@ -164,5 +165,6 @@ public class ConceptForm extends HorizontalPanel {
         conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
         conceptDTO.setLastmodifiedBy(BigInteger.valueOf(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID))));
         conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
+        return conceptDTO;
     }
 }

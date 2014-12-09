@@ -62,6 +62,7 @@ public class WorkspaceWidget extends VerticalPanel {
     private static AsyncCallback<String> termAddCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
+    private static AsyncCallback<String> addCallback;
     private static AsyncCallback<ConceptEntryDTO> addTermsCallback;
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptForm addcpt;
@@ -250,9 +251,7 @@ public class WorkspaceWidget extends VerticalPanel {
     public static void createNewEntry() {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
-        conceptEntryDTO = new ConceptEntryDTO();
         addcpt = new ConceptForm();
-        addcpt.conceptDTO = conceptEntryDTO.concept;
         resultsPanel.conceptDetails.setWidget(addcpt);
         addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
         LangSetForm lset = new LangSetForm();
@@ -267,10 +266,56 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
             }
         });
+        addcpt.save.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                getConcetEntryDTOFromWidgets();
+                getService().SubmitConceptEntry(conceptEntryDTO, MainEntryPoint.userDTO.getId(), addCallback);
+            }
+        });
     }
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    private static void getConcetEntryDTOFromWidgets() {
+        conceptEntryDTO = new ConceptEntryDTO();
+        conceptEntryDTO.concept = addcpt.getConceptDTOFromContent();
+        if (addterms.size() == 1) {
+            addterms.get(0).sortTermsDTOByLangSet();
+            conceptEntryDTO.listlang.addAll(addterms.get(0).listlang);
+        } else {
+            if (!addterms.isEmpty()) {
+                addterms.get(0).sortTermsDTOByLangSet();
+                conceptEntryDTO.listlang.addAll(addterms.get(0).listlang);
+                addterms.remove(0);
+                for (LangSetForm lsf : addterms) {
+                    lsf.sortTermsDTOByLangSet();
+                    for (LangEntryDTO lse : lsf.listlang) {
+                        int i = getLangEntryIdx(lse.lan.getIdLanguage());
+                        if (i > -1) {
+                            conceptEntryDTO.listlang.get(i).listterm.addAll(lse.listterm);
+                        } else {
+                            conceptEntryDTO.listlang.add(lse);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static int getLangEntryIdx(String langID) {
+        if (!conceptEntryDTO.listlang.isEmpty()) {
+            int i = 0;
+            for (LangEntryDTO lE : conceptEntryDTO.listlang) {
+                if (lE.lan.getIdLanguage().equalsIgnoreCase(langID)) {
+                    return i;
+                }
+                i++;
+            }
+        }
+        return -1;
     }
 
     private static class MyDialog extends DialogBox {

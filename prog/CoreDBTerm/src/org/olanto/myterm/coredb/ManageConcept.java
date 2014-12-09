@@ -64,6 +64,11 @@ public class ManageConcept {
         TermDB.conceptsJC.create(con);
         return con;
     }
+    
+    public static Concepts addConceptToResource(Concepts con) {
+        TermDB.conceptsJC.create(con);
+        return con;
+    }
 
     public static void remove(Resources res) {
         Query query = TermDB.em.createNamedQuery("Concepts.findByIdResource");

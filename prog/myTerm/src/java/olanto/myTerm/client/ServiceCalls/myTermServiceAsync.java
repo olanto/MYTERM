@@ -36,4 +36,7 @@ public interface myTermServiceAsync {
     public void getDomains(AsyncCallback<ArrayList<DomainDTO>> asyncCallback);
 
     public void getResources(long ownerID, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
+
+    public void SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+
 }

@@ -24,6 +24,7 @@ import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
+import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
@@ -123,10 +124,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"cpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append("Details for concept: ").append(c.getIdConcept()).append("</th>");
-            result.append("<th>").append("From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
-            result.append("<th>").append("Other details").append("</th>");
-            result.append("<th>").append("Extra information").append("</th>");
+            result.append("<th>").append("Definition for concept: ").append(c.getIdConcept()).append("</th>");
+            result.append("<th>").append("Details From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+            result.append("<th>").append("Creation details").append("</th>");
+            result.append("<th>").append("Other information").append("</th>");
             result.append("</tr>");
             result.append("<tr>");
             result.append("<td>");
@@ -136,30 +137,30 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             if ((c.getConceptDefinition() != null)) {
                 result.append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>");
             }
+            result.append("</td>").append("<td>");
             if ((c.getConceptSourceDefinition() != null)) {
                 result.append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>");
             }
-            result.append("</td>").append("<td>");
             if ((c.getConceptNote() != null)) {
                 result.append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>");
             }
             if ((c.getCrossref() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>");
             }
+            result.append("</td>").append("<td>");
             if ((c.getExtcrossref() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>");
             }
-            result.append("</td>").append("<td>");
             if ((c.getCreateBy() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
             }
             if (c.getCreation() != null) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(c.getCreation()).append("<br/>");
             }
+            result.append("</td>").append("<td>");
             if (c.getLastmodifiedBy() != null) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
             }
-            result.append("</td>").append("<td>");
             if (c.getLastmodified() != null) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>");
             }
@@ -222,7 +223,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID) {
         ConceptEntryDTO conceptDTO = new ConceptEntryDTO();
         ConceptEntry c = TestView.getConceptAndAssociatedTerms(conceptID);
-        copyConceptEntry(conceptDTO, c);
+        copyFromConceptEntry(conceptDTO, c);
         return conceptDTO;
     }
 
@@ -247,7 +248,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         return null;
     }
 
-    private void copyConceptEntry(ConceptEntryDTO conceptDTO, ConceptEntry concept) {
+    private void copyFromConceptEntry(ConceptEntryDTO conceptDTO, ConceptEntry concept) {
         copyFormConcept(conceptDTO.concept, concept.getConcept());
         if (!concept.listlang.isEmpty()) {
             for (LangEntry ls : concept.listlang) {
@@ -261,6 +262,27 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 conceptDTO.listlang.add(langE);
             }
         }
+    }
+
+    private ConceptEntry copyFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
+        Concepts c = copyFromConceptDTO(conceptEntryDTO.concept);
+        ConceptEntry conceptEntry = new ConceptEntry(c, true);
+        if (!conceptEntryDTO.listlang.isEmpty()) {
+            for (LangEntryDTO ls : conceptEntryDTO.listlang) {
+                LangEntry langE = new LangEntry();
+                langE.lan = copyFromLangSetDTO(ls.lan);
+                if (!ls.listterm.isEmpty()) {
+                    for (TermDTO tDTO : ls.listterm) {
+                        Terms t = copyFromTermDTO(tDTO);
+                        if (t != null) {
+                            langE.listterm.add(t);
+                        }
+                    }
+                }
+                conceptEntry.listlang.add(langE);
+            }
+        }
+        return conceptEntry;
     }
 
     private void copyFormConcept(ConceptDTO cDTO, Concepts c) {
@@ -394,5 +416,11 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             return t;
         }
         return null;
+    }
+
+    @Override
+    public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = copyFromConceptEntryDTO(conceptEntryDTO);
+        return cEntry.flushFromInterface();
     }
 }

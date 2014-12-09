@@ -44,7 +44,7 @@ public class LangSetForm extends VerticalPanel {
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
     private ArrayList<TermForm> terms;
-    private ArrayList<TermDTO> termsDTO;
+    public ArrayList<LangEntryDTO> listlang;
 
     public LangSetForm() {
         this.terms = new ArrayList<>();
@@ -59,7 +59,6 @@ public class LangSetForm extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 5);
-                ter.termDTO = new TermDTO();
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + (terms.size())));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
@@ -107,12 +106,31 @@ public class LangSetForm extends VerticalPanel {
         controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
     }
 
-    public void getTermsDTOFromContent() {
+    public void sortTermsDTOByLangSet() {
         if (!terms.isEmpty()) {
-            termsDTO = new ArrayList<>();
-            for(TermForm tf : terms){
-                termsDTO.add(tf.termDTO);
+            listlang = new ArrayList<>();
+            for (TermForm tf : terms) {
+                int i = getLangEntryIdx(tf.termDTO.getIdLanguage());
+                if (i > -1) {
+                    listlang.get(i).listterm.add(tf.termDTO);
+                } else {
+                    LangEntryDTO lsDTO = new LangEntryDTO(tf.termDTO.getIdLanguage());
+                    lsDTO.listterm.add(tf.termDTO);
+                }
             }
         }
+    }
+
+    private int getLangEntryIdx(String langID) {
+        if (!listlang.isEmpty()) {
+            int i = 0;
+            for (LangEntryDTO lE : listlang) {
+                if (lE.lan.getIdLanguage().equalsIgnoreCase(langID)) {
+                    return i;
+                }
+                i++;
+            }
+        }
+        return -1;
     }
 }
