@@ -1,16 +1,43 @@
+create or replace view v_users_resources as
+select o.id_owner, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+union 
+  select o.id_owner, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note
+ from resources r, owners o, users_resources ur
+where r.resource_privacy="PUBLIC"
+;
+
+select * from v_users_resources;
+
+
+create or replace view vj_users_resources as
+SELECT uuid()  uuid,
+v_users_resources.* FROM v_users_resources;
+
+select vj_users_resources.* FROM vj_users_resources; 
 
 create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
        t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
+	   t1.status status_source,
+	   t2.status status_target,
 	   c.id_concept,
-       r.resource_name,
+	   c.subject_field,
 	   r.id_resource,
-	   c.subject_field
+	   r.resource_name,
+	   vur.id_owner
 
  from terms t1, langsets l1,
       terms t2, langsets l2,
 	  concepts c,
-      resources r
+      resources r,
+	  v_users_resources vur
 
 where t1.id_langset=l1.id_langset
    and l1.id_concept=c.id_concept
@@ -19,6 +46,7 @@ where t1.id_langset=l1.id_langset
    and c.id_resource=r.id_resource
    and l1.id_langset!=l2.id_langset
    and t1.id_term!=t2.id_term
+   and r.id_resource=vur.id_resource
 ;
 
 
@@ -26,8 +54,8 @@ create or replace view vj_sourcetarget as
 SELECT uuid()  uuid,
 v_sourcetarget.* FROM v_sourcetarget;
 
-
-select * from v_sourcetarget where source like 'mye' and solang='FR';
+select * from v_sourcetarget;
+select * from v_sourcetarget where source like 'mye' and solang='FR' and status_source like 'p';
 select * from v_sourcetarget where source like 'tuna%' and solang='EN';
 select * from v_sourcetarget where source like 'sand%' and solang='EN';
 select * from v_sourcetarget where source like 'CESAP' and solang='FR';
@@ -60,16 +88,22 @@ select * from v_conceptdetail where  id_concept=108300;
 
 create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
+	   t1.status status,
 	   c.id_concept,
        r.resource_name,
 	   r.id_resource,
-	   c.subject_field
+	   c.subject_field,
+	   vur.id_owner
+
  from terms t1, langsets l1,
 	  concepts c,
-      resources r
+      resources r,
+	  v_users_resources vur
+
 where t1.id_langset=l1.id_langset
-   and l1.id_concept=c.id_concept
+	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource
+    and vur.id_resource=r.id_resource
  ;
 
 create or replace view vj_source as
@@ -147,29 +181,6 @@ v_reslang.* FROM v_reslang;
 
 select  resource_name, id_language, count(*) nbterms from v_reslang group by resource_name, id_language; 
 
-create or replace view v_users_resources as
-select o.id_owner, 
-	   r.id_resource, r.resource_name,
-	   r.resource_privacy, r.resource_note
- from resources r, owners o, users_resources ur
-where r.id_resource = ur.id_resource
-   and o.id_owner=ur.id_owner
-union 
-  select o.id_owner, 
-	   r.id_resource, r.resource_name,
-	   r.resource_privacy, r.resource_note
- from resources r, owners o, users_resources ur
-where r.resource_privacy="PUBLIC"
-;
-
-select * from v_users_resources;
-
-
-create or replace view vj_users_resources as
-SELECT uuid()  uuid,
-v_users_resources.* FROM v_users_resources;
-
-select vj_users_resources.* FROM vj_users_resources; 
 select * from vj_source;
 
 commit;

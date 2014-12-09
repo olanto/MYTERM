@@ -1,6 +1,7 @@
 drop index  terms_index_custo2 on terms;
 create index terms_index_custo2 on terms(id_language,term_form(16));
 
+
 select t1.term_form, t1.id_language,
        t2.term_form, t2.id_language,
        r.resource_name
