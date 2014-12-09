@@ -119,6 +119,7 @@ public class TermForm extends VerticalPanel {
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
         form3.setWidget(4, 1, controls);
+        text_st.setReadOnly(true);
         controls.add(delete);
 
 //        more.addClickHandler(new ClickHandler() {
@@ -146,10 +147,11 @@ public class TermForm extends VerticalPanel {
         text_usg.setText(termDTO.getTermUsage());
         text_ctxt.setText(termDTO.getTermContext());
         text_sctxt.setText(termDTO.getTermSourceContext());
-        text_nt.setText(termDTO.getTermSource());
+        text_nt.setText(termDTO.getTermNote());
         text_tp.setText(termDTO.getTermType());
         text_pos.setText(termDTO.getTermPartofspeech());
         text_gdr.setText(termDTO.getTermGender());
+        text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
         form1.setWidget(0, 1, new HTML(lang.getLangName(termDTO.getIdLanguage())));
     }
@@ -172,7 +174,6 @@ public class TermForm extends VerticalPanel {
         text_pos.setWidth(w * 1 / 5 + "px");
         text_gdr.setWidth(w * 1 / 5 + "px");
         text_st.setWidth(w * 1 / 5 + "px");
-        text_def.setWidth(w * 1 / 5 + "px");
         text_sdef.setWidth(w * 1 / 5 + "px");
         text_nt.setWidth(w * 1 / 5 + "px");
         text_ctxt.setWidth(w * 1 / 5 + "px");
@@ -185,15 +186,15 @@ public class TermForm extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_sdef.setText("");
-        text_usg.setText("");
-        text_ctxt.setText("");
-        text_sctxt.setText("");
-        text_nt.setText("");
         text_tp.setText("");
         text_pos.setText("");
         text_gdr.setText("");
         text_st.setText("");
+        text_sdef.setText("");
+        text_nt.setText("");
+        text_ctxt.setText("");
+        text_sctxt.setText("");
+        text_usg.setText("");
         text_ext.setText("");
     }
 
@@ -209,7 +210,26 @@ public class TermForm extends VerticalPanel {
         text_tp.setReadOnly(edit);
         text_pos.setReadOnly(edit);
         text_gdr.setReadOnly(edit);
-        text_st.setReadOnly(edit);
+        text_st.setReadOnly(true);
         text_ext.setReadOnly(edit);
+    }
+    public void gettTermDTOFromContent() {
+        if (termDTO == null) {
+            termDTO = new TermDTO();
+        }
+        termDTO.setTermForm(text_frm.getText());
+        termDTO.setTermSource(text_src.getText());
+        termDTO.setTermDefinition(text_def.getText());
+        termDTO.setTermSourceDefinition(text_sdef.getText());
+        termDTO.setTermUsage(text_usg.getText());
+        termDTO.setTermContext(text_ctxt.getText());
+        termDTO.setTermSourceContext(text_sctxt.getText());
+        termDTO.setTermNote(text_nt.getText());
+        termDTO.setTermType(text_tp.getText());
+        termDTO.setTermPartofspeech(text_pos.getText());
+        termDTO.setExtra(text_ext.getText());
+        termDTO.setTermGender(text_gdr.getText());
+        termDTO.setStatus('p');
+        termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
     }
 }

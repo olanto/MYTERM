@@ -19,17 +19,17 @@ import olanto.myTerm.shared.ResourceDTO;
 @RemoteServiceRelativePath("mytermservice")
 public interface myTermService extends RemoteService {
 
-    public String getdetailsForConcept(long conceptID);
+    public String getdetailsForConcept(long conceptID, long ownerID);
 
-    public String getdetailsForTerms(long conceptID, String langS, String langT);
+    public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID);
 
-    public String getSearchResult(String s, String ls, String lt, String resID, String domID);
+    public String getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID);
     
-    public ConceptEntryDTO getAddDetailsForConcept(long conceptID);
+    public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID);
 
-    public String getAddResult(String s, String ls, String lt, String resID, String domID);
+    public String getAddResult(String s, String ls, String lt, String resID, String domID, long ownerID);
 
-    public ArrayList<String> getResults(String s, String ls, String lt);
+    public ArrayList<String> getResults(String s, String ls, String lt, long ownerID);
 
     public ArrayList<LanguageDTO> getLanguages();
 

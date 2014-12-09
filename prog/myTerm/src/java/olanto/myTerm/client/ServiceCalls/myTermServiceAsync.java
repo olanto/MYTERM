@@ -17,17 +17,17 @@ import olanto.myTerm.shared.ResourceDTO;
  */
 public interface myTermServiceAsync {
 
-    public void getSearchResult(String s, String ls, String lt, String resID, String domID, AsyncCallback<String> callback);
+    public void getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID, AsyncCallback<String> callback);
 
-    public void getAddResult(String s, String ls, String lt, String resID, String domID, AsyncCallback<String> callback);
+    public void getAddResult(String s, String ls, String lt, String resID, String domID, long ownerID, AsyncCallback<String> callback);
 
-    public void getdetailsForConcept(long conceptID, AsyncCallback<String> callback);
+    public void getdetailsForConcept(long conceptID, long ownerID, AsyncCallback<String> callback);
 
-    public void getdetailsForTerms(long conceptID, String langS, String langT, AsyncCallback<String> callback);
+    public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, AsyncCallback<String> callback);
 
-    public void getAddDetailsForConcept(long conceptID, AsyncCallback<ConceptEntryDTO> callback);
+    public void getAddDetailsForConcept(long conceptID, long ownerID, AsyncCallback<ConceptEntryDTO> callback);
 
-    public void getResults(String s, String ls, String lt, AsyncCallback<ArrayList<String>> callback);
+    public void getResults(String s, String ls, String lt, long ownerID, AsyncCallback<ArrayList<String>> callback);
 
     public void getInventory(AsyncCallback<String> callback);
 

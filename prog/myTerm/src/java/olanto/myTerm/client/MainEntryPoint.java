@@ -166,6 +166,7 @@ public class MainEntryPoint implements EntryPoint {
     }
 
     public void showMain(UserDTO user) {
+        userDTO = user;
         String sessionID = user.getSessionID();
         String ownerID = Long.toString(user.getId());
 

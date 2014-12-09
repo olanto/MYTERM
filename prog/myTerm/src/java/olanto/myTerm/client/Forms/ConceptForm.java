@@ -31,11 +31,13 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
+import olanto.myTerm.shared.ConceptEntryDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -95,7 +97,13 @@ public class ConceptForm extends HorizontalPanel {
         delete.setTitle("Delete the current concept");
         escape.setTitle("Abort all modifications");
         submit.setTitle("Submit changes (updates in database)");
-        delete.setTitle("Save changes without submit");        
+        delete.setTitle("Save changes without submit");
+        escape.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                clearAllText();
+            }
+        });
     }
 
     public void adjustSize(int w) {
@@ -132,6 +140,8 @@ public class ConceptForm extends HorizontalPanel {
         text_def.setText("");
         text_sdef.setText("");
         text_nt.setText("");
+        sf.setSelectedIndex(0);
+        rsrc.setSelectedIndex(0);
     }
 
     public void setReadOnly(Boolean edit) {
@@ -140,8 +150,11 @@ public class ConceptForm extends HorizontalPanel {
         text_nt.setReadOnly(edit);
         sf.setEnabled(edit);
     }
-    
-    public void setConcept() {
+
+    public void getConceptDTOFromContent() {
+        if (conceptDTO == null) {
+            conceptDTO = new ConceptDTO();
+        }
         conceptDTO.setConceptDefinition(text_def.getText());
         conceptDTO.setConceptNote(text_nt.getText());
         conceptDTO.setConceptSourceDefinition(text_sdef.getText());

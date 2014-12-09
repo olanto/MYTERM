@@ -43,8 +43,8 @@ public class LangSetForm extends VerticalPanel {
     public VerticalPanel desc = new VerticalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
-    public LangEntryDTO langEntryDTO;
     private ArrayList<TermForm> terms;
+    private ArrayList<TermDTO> termsDTO;
 
     public LangSetForm() {
         this.terms = new ArrayList<>();
@@ -59,13 +59,11 @@ public class LangSetForm extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 5);
-                final TermDTO tDTO = new TermDTO();
-                langEntryDTO.listterm.add(tDTO);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + (langEntryDTO.listterm.size())));
+                ter.termDTO = new TermDTO();
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + (terms.size())));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        langEntryDTO.listterm.remove(tDTO);
                         terms.remove(ter);
                         desc.remove(ter);
                     }
@@ -74,7 +72,7 @@ public class LangSetForm extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromLangEntryDTO() {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO) {
         desc.clear();
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
@@ -107,5 +105,14 @@ public class LangSetForm extends VerticalPanel {
         setWidth(w + "px");
         controls.setWidth(w + "px");
         controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
+    }
+
+    public void getTermsDTOFromContent() {
+        if (!terms.isEmpty()) {
+            termsDTO = new ArrayList<>();
+            for(TermForm tf : terms){
+                termsDTO.add(tf.termDTO);
+            }
+        }
     }
 }
