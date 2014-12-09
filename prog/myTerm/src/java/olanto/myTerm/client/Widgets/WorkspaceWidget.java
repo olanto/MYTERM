@@ -75,6 +75,23 @@ public class WorkspaceWidget extends VerticalPanel {
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
+        addCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                addcpt.save.setEnabled(true);
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                } else {
+                    StatusPanel.setMessage("warning", "Could not add concept!!!!");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                searchMenu.btnSend.setEnabled(true);
+                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+            }
+        };
         termSearchCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -269,7 +286,10 @@ public class WorkspaceWidget extends VerticalPanel {
         addcpt.save.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                addcpt.save.setEnabled(false);
                 getConcetEntryDTOFromWidgets();
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
                 getService().SubmitConceptEntry(conceptEntryDTO, MainEntryPoint.userDTO.getId(), addCallback);
             }
         });

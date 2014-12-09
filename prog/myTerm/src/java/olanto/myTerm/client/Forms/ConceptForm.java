@@ -31,13 +31,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
-import olanto.myTerm.shared.ConceptEntryDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept

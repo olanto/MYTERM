@@ -183,7 +183,7 @@ body{
     padding:1px;
     text-align:left;
     vertical-align: top;
-    width: 50%;
+    width: 1%;
 }
 .cpanel{
     margin-top: 1px;
@@ -207,7 +207,7 @@ body{
     padding:1px;
     text-align:left;
     vertical-align: top;
-    width:25%;
+    width:1%;
 }
 .nost td {
     border: none;
@@ -235,7 +235,7 @@ body{
     padding:1px;
     text-align:left;
     vertical-align: top;
-    width:50%;
+    width:1%;
 }
 
 .gwt-Tree{
