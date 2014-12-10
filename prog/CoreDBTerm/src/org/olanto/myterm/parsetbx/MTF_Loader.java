@@ -101,7 +101,7 @@ public class MTF_Loader implements Loader {
     }
 
     static String getTig(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         boolean termFormExist = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
@@ -137,7 +137,7 @@ public class MTF_Loader implements Loader {
     }
 
     static String getLangSet(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         boolean attributeverbose = false;
 
         if (localverbose) {
@@ -167,7 +167,7 @@ public class MTF_Loader implements Loader {
     }
 
     static String getTermEntry(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
         courantEntry.setConceptNote("");
@@ -212,7 +212,7 @@ public class MTF_Loader implements Loader {
     }
 
        static String getTermTransacGrp(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         String transactionType = "";
 
         if (localverbose) {
@@ -247,8 +247,8 @@ public class MTF_Loader implements Loader {
                     System.out.println("ERROR date format unknown:" + sdate);
                     //Logger.getLogger(TBX_Loader.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("date:" + sdate);
-                switch (transactionType) {
+                    if(localverbose) System.out.println("date:" + sdate);
+                  switch (transactionType) {
                     case "origination":
                         courantEntry.getTerm().setCreation(date);
                         break;
@@ -272,7 +272,7 @@ public class MTF_Loader implements Loader {
 
     
     static String getConceptTransacGrp(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
          String transactionType = "";
 
         if (localverbose) {
@@ -306,7 +306,7 @@ public class MTF_Loader implements Loader {
                     System.out.println("ERROR date format unknown:" + sdate);
                     //Logger.getLogger(TBX_Loader.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("date:" + sdate);
+                if(localverbose) System.out.println("date:" + sdate);
                 switch (transactionType) {
                     case "origination":
                         courantEntry.getConcept().setCreation(date);
@@ -360,7 +360,7 @@ public class MTF_Loader implements Loader {
     }
 
       static String getDescripGrpTerm(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
@@ -379,7 +379,27 @@ public class MTF_Loader implements Loader {
                 courantEntry.getTerm().setTermSourceContext(getText(info, localverbose));
             }else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("Usage")) {
-                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
+                courantEntry.getTerm().setTermUsage(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Country")) {
+                String geoUsage=getText(info, localverbose);
+                if (geoUsage.length()>=24){
+                    System.out.println("truncate geoUsage:"+geoUsage);
+                    geoUsage=geoUsage.substring(0, 24);
+                }
+                courantEntry.getTerm().setTermGeoUsage(geoUsage);
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Notes")) {
+                courantEntry.getTerm().setTermNote(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Context")) {
+                courantEntry.getTerm().setTermContext(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Abbreviation")) {
+                courantEntry.getTerm().setSup0(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Explanation")) {
+                courantEntry.getTerm().setSup1(getText(info, localverbose));
             } else {
                 String extra = getExtraElement(info);
                   courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
@@ -394,7 +414,7 @@ public class MTF_Loader implements Loader {
   
     
     static String getDescripGrpConcept(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
@@ -414,6 +434,9 @@ public class MTF_Loader implements Loader {
             } else if (info.getName().equals("admin")
                     && info.getAttributeValue("type").equals("source")) {
                 courantEntry.getConcept().setConceptSourceDefinition(getText(info, localverbose));
+            }else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("Originator")) {
+                courantEntry.getConcept().setSup0(getText(info, localverbose));
             }else if (info.getName().equals("transacGrp")) {
                 ;// skip transacGrp into DescripGrp
             } else {
