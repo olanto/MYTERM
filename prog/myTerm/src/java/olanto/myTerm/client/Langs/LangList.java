@@ -91,7 +91,6 @@ public class LangList extends ListBox {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of languages");
             }
 
             @Override
