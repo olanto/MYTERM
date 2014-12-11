@@ -21,6 +21,7 @@ package org.olanto.myterm.extractor.entry;
  *
  *********
  */
+import java.util.Date;
 import java.util.Vector;
 import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
@@ -87,8 +88,9 @@ public class ConceptEntry {
 
     public void addConceptToDBFromInterface() {
         if (createInDB) {
+            concept.setCreation(new Date(System.currentTimeMillis()));
             concept.setExtra(extraConcepts);
-            concept = ManageConcept.addConceptToResource(resource, concept);
+            concept = ManageConcept.addConcept(concept);
         }
     }
 

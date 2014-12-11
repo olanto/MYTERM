@@ -23,16 +23,15 @@ public class AdminInterface extends TabPanel {
     private WorkspaceWidget wpan;
     private ApproveWidget apan;
 
-    public AdminInterface() {
-        bpan = new MyTermSearchWidget();
-        wpan = new WorkspaceWidget();
-        apan = new ApproveWidget();
+    public AdminInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
+        wpan = new WorkspaceWidget(ownerID);
+        apan = new ApproveWidget(ownerID);
         add(bpan, "Term Search");
-        selectTab(0);
-
         add(wpan, "Workspace");
         add(apan, "To approve");
         add(new HTML("Under construction!!!"), "System Administration");
+
         setStyleName("tabPanel");
         addSelectionHandler(new SelectionHandler<Integer>() {
             @Override
@@ -41,5 +40,6 @@ public class AdminInterface extends TabPanel {
 
             }
         });
+        selectTab(0);
     }
 }

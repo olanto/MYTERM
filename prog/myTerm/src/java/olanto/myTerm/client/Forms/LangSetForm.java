@@ -45,8 +45,10 @@ public class LangSetForm extends VerticalPanel {
     public Button addTerm = new Button("Add Term");
     private ArrayList<TermForm> terms;
     public ArrayList<LangEntryDTO> listlang;
+    private long ownerID;
 
-    public LangSetForm() {
+    public LangSetForm(long idOwner) {
+        ownerID = idOwner;
         this.terms = new ArrayList<>();
         this.setStyleName("langSetForm");
         add(desc);
@@ -55,7 +57,7 @@ public class LangSetForm extends VerticalPanel {
         addTerm.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final TermForm ter = new TermForm();
+                final TermForm ter = new TermForm(ownerID);
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 5);
@@ -76,7 +78,7 @@ public class LangSetForm extends VerticalPanel {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermForm ter = new TermForm();
+                final TermForm ter = new TermForm(ownerID);
                 terms.add(ter);
                 desc.add(ter);
                 ter.termDTO = tDTO;
@@ -107,15 +109,17 @@ public class LangSetForm extends VerticalPanel {
     }
 
     public void sortTermsDTOByLangSet() {
+        listlang = new ArrayList<>();
         if (!terms.isEmpty()) {
-            listlang = new ArrayList<>();
             for (TermForm tf : terms) {
+                tf.gettTermDTOFromContent();
                 int i = getLangEntryIdx(tf.termDTO.getIdLanguage());
                 if (i > -1) {
                     listlang.get(i).listterm.add(tf.termDTO);
                 } else {
                     LangEntryDTO lsDTO = new LangEntryDTO(tf.termDTO.getIdLanguage());
                     lsDTO.listterm.add(tf.termDTO);
+                    listlang.add(lsDTO);
                 }
             }
         }

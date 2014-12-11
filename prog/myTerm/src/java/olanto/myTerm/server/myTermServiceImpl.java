@@ -8,6 +8,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
 import java.util.List;
 import jpaviewtest.TestView;
+import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
@@ -24,7 +25,6 @@ import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
-import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
@@ -84,16 +84,32 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<ResourceDTO> getResources(long ownerID) {
+    public ArrayList<LanguageDTO> getLanguagesByOwner(long ownerID) {
+        // try and catch, problem with the ownerID
+        if (ownerID > 0) {
+            List<VjUsersLanguages> l = TestView.getLanguagesByOwner(ownerID);
+            if (!l.isEmpty()) {
+                ArrayList<LanguageDTO> languages = new ArrayList<>();
+                for (VjUsersLanguages res : l) {
+                    LanguageDTO r = new LanguageDTO(res.getIdLanguage(), res.getLanguageDefaultName());
+                    languages.add(r);
+                }
+                return languages;
+            }
+            return null;
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<ResourceDTO> getResourcesByOwner(long ownerID) {
         // try and catch, problem with the ownerID
         if (ownerID > 0) {
             List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
             if (!l.isEmpty()) {
                 ArrayList<ResourceDTO> resources = new ArrayList<>();
                 for (VjUsersResources res : l) {
-                    ResourceDTO r = new ResourceDTO();
-                    r.setIdResource(res.getIdResource());
-                    r.setResourceName(res.getResourceName());
+                    ResourceDTO r = new ResourceDTO(res.getIdResource(), ownerID, res.getResourceName(), res.getResourcePrivacy());
                     resources.add(r);
                 }
                 return resources;
@@ -227,27 +243,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         return conceptDTO;
     }
 
-    private ConceptEntry copyConceptEntryDTO(ConceptEntryDTO cDTO, long ownerID) {
-        if (cDTO != null) {
-            ConceptEntry conceptEntry = new ConceptEntry(copyFromConceptDTO(cDTO.concept), true);
-            if (!cDTO.listlang.isEmpty()) {
-                for (LangEntryDTO ls : cDTO.listlang) {
-                    LangEntry langE = new LangEntry();
-                    langE.lan = copyFromLangSetDTO(ls.lan);
-                    if (!ls.listterm.isEmpty()) {
-                        for (TermDTO tDTO : ls.listterm) {
-                            Terms t = copyFromTermDTO(tDTO);
-                            langE.listterm.add(t);
-                        }
-                    }
-                    conceptEntry.listlang.add(langE);
-                }
-            }
-            return conceptEntry;
-        }
-        return null;
-    }
-
     private void copyFromConceptEntry(ConceptEntryDTO conceptDTO, ConceptEntry concept) {
         copyFormConcept(conceptDTO.concept, concept.getConcept());
         if (!concept.listlang.isEmpty()) {
@@ -265,24 +260,28 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     private ConceptEntry copyFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
-        Concepts c = copyFromConceptDTO(conceptEntryDTO.concept);
-        ConceptEntry conceptEntry = new ConceptEntry(c, true);
-        if (!conceptEntryDTO.listlang.isEmpty()) {
-            for (LangEntryDTO ls : conceptEntryDTO.listlang) {
-                LangEntry langE = new LangEntry();
-                langE.lan = copyFromLangSetDTO(ls.lan);
-                if (!ls.listterm.isEmpty()) {
-                    for (TermDTO tDTO : ls.listterm) {
-                        Terms t = copyFromTermDTO(tDTO);
-                        if (t != null) {
-                            langE.listterm.add(t);
+        if (conceptEntryDTO != null) {
+
+            Concepts c = copyFromConceptDTO(conceptEntryDTO.concept);
+            ConceptEntry conceptEntry = new ConceptEntry(c, true);
+            if (!conceptEntryDTO.listlang.isEmpty()) {
+                for (LangEntryDTO ls : conceptEntryDTO.listlang) {
+                    LangEntry langE = new LangEntry();
+                    langE.lan = copyFromLangSetDTO(ls.lan);
+                    if (!ls.listterm.isEmpty()) {
+                        for (TermDTO tDTO : ls.listterm) {
+                            Terms t = copyFromTermDTO(tDTO);
+                            if (t != null) {
+                                langE.listterm.add(t);
+                            }
                         }
                     }
+                    conceptEntry.listlang.add(langE);
                 }
-                conceptEntry.listlang.add(langE);
             }
+            return conceptEntry;
         }
-        return conceptEntry;
+        return null;
     }
 
     private void copyFormConcept(ConceptDTO cDTO, Concepts c) {

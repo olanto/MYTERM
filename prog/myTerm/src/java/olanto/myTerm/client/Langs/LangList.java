@@ -86,8 +86,8 @@ public class LangList extends ListBox {
         });
         getService().getLanguages(langCallback);
     }
-
-    public LangList() {
+    
+    public LangList(long ownerID) {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -104,7 +104,7 @@ public class LangList extends ListBox {
                 setSelectedIndex(0);
             }
         };
-        getService().getLanguages(langCallback);
+        getService().getLanguagesByOwner(ownerID, langCallback);
     }
 
     private static myTermServiceAsync getService() {

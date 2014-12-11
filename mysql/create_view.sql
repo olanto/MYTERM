@@ -15,7 +15,6 @@ where r.resource_privacy="PUBLIC"
 
 select * from v_users_resources;
 
-
 create or replace view vj_users_resources as
 SELECT uuid()  uuid,
 v_users_resources.* FROM v_users_resources;
@@ -177,6 +176,20 @@ create or replace view vj_reslang as
 SELECT uuid()  uuid,
 v_reslang.* FROM v_reslang;
 
+create or replace view v_users_languages as
+select o.id_owner, 
+	   l.id_language, l.language_default_name
+
+ from languages l, owners o, users_languages ul
+where l.id_language = ul.id_language
+   and o.id_owner=ul.id_owner
+;
+
+select * from v_users_languages;
+
+create or replace view vj_users_languages as
+SELECT uuid()  uuid,
+vj_users_languages.* FROM vj_users_languages;
 
 
 select  resource_name, id_language, count(*) nbterms from v_reslang group by resource_name, id_language; 

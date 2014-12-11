@@ -14,6 +14,7 @@ import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSource;
 import jpaviewtest.entities.VjSourcetarget;
+import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
@@ -165,7 +166,6 @@ public class TestView {
         if (resID.contains("-1")) {
             if (domID.equalsIgnoreCase("ANY")) {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySource");
-                query.setParameter("idOwner", ownerID);
             } else {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySourceSubjectField");
                 query.setParameter("subjectField", domID);
@@ -180,6 +180,7 @@ public class TestView {
                 query.setParameter("subjectField", domID);
             }
         }
+        query.setParameter("idOwner", ownerID);
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
@@ -196,6 +197,17 @@ public class TestView {
         return null;
     }
 
+    public static List<VjUsersLanguages> getLanguagesByOwner(long ownerID) {
+        init();
+        if (ownerID > 0) {
+            Query query = em.createNamedQuery("VjUsersLanguages.findByIdOwner");
+            query.setParameter("idOwner", ownerID);
+            List<VjUsersLanguages> result = query.getResultList();
+            return result;
+        }
+        return null;
+    }
+
     public static String getTargetsForThis(long conceptID, String term, String solang, String talang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -204,7 +216,6 @@ public class TestView {
         if (resID.contains("-1")) {
             if (domID.equalsIgnoreCase("ANY")) {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySource");
-                query.setParameter("idOwner", ownerID);
             } else {
                 query = em.createNamedQuery("VjSourcetarget.findPubicBySourceSubjectField");
                 query.setParameter("subjectField", domID);
@@ -219,6 +230,7 @@ public class TestView {
                 query.setParameter("subjectField", domID);
             }
         }
+        query.setParameter("idOwner", ownerID);
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
@@ -246,7 +258,6 @@ public class TestView {
         if (resID.contains("-1")) {
             if (domID.equalsIgnoreCase("ANY")) {
                 query = em.createNamedQuery("VjSource.findPublicBySource");
-                query.setParameter("idOwner", ownerID);
             } else {
                 query = em.createNamedQuery("VjSource.findPublicBysourceSubjectField");
                 query.setParameter("subjectField", domID);
@@ -261,6 +272,7 @@ public class TestView {
                 query.setParameter("subjectField", domID);
             }
         }
+        query.setParameter("idOwner", ownerID);
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();

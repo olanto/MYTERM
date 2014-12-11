@@ -65,7 +65,7 @@ public class ManageConcept {
         return con;
     }
     
-    public static Concepts addConceptToResource(Concepts con) {
+    public static Concepts addConcept(Concepts con) {
         TermDB.conceptsJC.create(con);
         return con;
     }

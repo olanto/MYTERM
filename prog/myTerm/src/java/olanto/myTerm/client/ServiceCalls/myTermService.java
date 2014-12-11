@@ -35,7 +35,9 @@ public interface myTermService extends RemoteService {
 
     public ArrayList<DomainDTO> getDomains();
 
-    public ArrayList<ResourceDTO> getResources(long ownerID);
+    public ArrayList<ResourceDTO> getResourcesByOwner(long ownerID);
+
+    public ArrayList<LanguageDTO> getLanguagesByOwner(long ownerID);
 
     public String getInventory();
 

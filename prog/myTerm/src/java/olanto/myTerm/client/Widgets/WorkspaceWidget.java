@@ -67,10 +67,12 @@ public class WorkspaceWidget extends VerticalPanel {
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptForm addcpt;
     private static ArrayList<LangSetForm> addterms;
+    private long ownerID;
 
-    public WorkspaceWidget() {
+    public WorkspaceWidget(long idOwner) {
+        ownerID = idOwner;
         fixGwtNav();
-        searchMenu = new SearchHeaderWorkspace();
+        searchMenu = new SearchHeaderWorkspace(ownerID);
         addterms = new ArrayList<>();
         add(searchMenu);
         add(resultsPanel);
@@ -176,7 +178,7 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), MainEntryPoint.userDTO.getId(), termSearchCallback);
+                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termSearchCallback);
             }
         });
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
@@ -191,7 +193,7 @@ public class WorkspaceWidget extends VerticalPanel {
                     Window.alert("Please indicate the term's form");
                     searchMenu.btnAdd.setEnabled(true);
                 } else {
-                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), MainEntryPoint.userDTO.getId(), termAddCallback);
+                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
                 }
             }
         });
@@ -206,7 +208,7 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), MainEntryPoint.userDTO.getId(), termSearchCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termSearchCallback);
                 }
             }
         });
@@ -219,10 +221,10 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("new")) {
                     long conceptID = Long.parseLong(event.getValue().substring(3));
-                    getService().getAddDetailsForConcept(conceptID, MainEntryPoint.userDTO.getId(), addTermsCallback);
+                    getService().getAddDetailsForConcept(conceptID, ownerID, addTermsCallback);
                 } else {
-                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), MainEntryPoint.userDTO.getId(), conceptCallback);
-                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), MainEntryPoint.userDTO.getId(), termsCallback);
+                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), ownerID, conceptCallback);
+                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
                 }
             }
         });
@@ -239,7 +241,7 @@ public class WorkspaceWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
-            addcpt = new ConceptForm();
+            addcpt = new ConceptForm(ownerID);
             addcpt.conceptDTO = conceptEntryDTO.concept;
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
@@ -253,7 +255,7 @@ public class WorkspaceWidget extends VerticalPanel {
             });
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 for (final LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    final LangSetForm lset = new LangSetForm();
+                    final LangSetForm lset = new LangSetForm(ownerID);
                     addterms.add(lset);
                     resultsPanel.termsDetails.setWidget(lset);
                     lset.refreshContentFromLangEntryDTO(langEntryDTO);
@@ -265,13 +267,13 @@ public class WorkspaceWidget extends VerticalPanel {
         }
     }
 
-    public static void createNewEntry() {
+    public void createNewEntry() {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
-        addcpt = new ConceptForm();
+        addcpt = new ConceptForm(ownerID);
         resultsPanel.conceptDetails.setWidget(addcpt);
         addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
-        LangSetForm lset = new LangSetForm();
+        LangSetForm lset = new LangSetForm(ownerID);
         addterms.add(lset);
         resultsPanel.termsDetails.setWidget(lset);
         lset.adjustSize(addcpt.getOffsetWidth() - 5);
@@ -290,7 +292,8 @@ public class WorkspaceWidget extends VerticalPanel {
                 getConcetEntryDTOFromWidgets();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                getService().SubmitConceptEntry(conceptEntryDTO, MainEntryPoint.userDTO.getId(), addCallback);
+                Window.alert(conceptEntryDTO.toStringDTO());
+                getService().SubmitConceptEntry(conceptEntryDTO, ownerID, addCallback);
             }
         });
     }
@@ -338,7 +341,7 @@ public class WorkspaceWidget extends VerticalPanel {
         return -1;
     }
 
-    private static class MyDialog extends DialogBox {
+    private class MyDialog extends DialogBox {
 
         public MyDialog(String text, int call) {
             // Set the dialog box's caption.

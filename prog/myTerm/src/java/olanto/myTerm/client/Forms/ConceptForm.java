@@ -34,6 +34,7 @@ import java.math.BigInteger;
 import java.util.Date;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
 
@@ -48,7 +49,7 @@ public class ConceptForm extends HorizontalPanel {
     private Label label_sf = new Label("Subject field:");
     public DomainList sf = new DomainList();
     private Label label_rsrc = new Label("Add to resource:");
-    private ResourceList rsrc = new ResourceList();
+    private ResourceList rsrc;
     private Label label_def = new Label("Definition:");
     private TextArea text_def = new TextArea();
     private Label label_sdef = new Label("Definition's source:");
@@ -66,8 +67,11 @@ public class ConceptForm extends HorizontalPanel {
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
     public ConceptDTO conceptDTO;
+    private long ownerID;
 
-    public ConceptForm() {
+    public ConceptForm(long idOwner) {
+        ownerID = idOwner;
+        rsrc = new ResourceList(ownerID);
         setStyleName("conceptForm");
         add(cform);
         cform.setStyleName("edpanel");
@@ -157,11 +161,11 @@ public class ConceptForm extends HorizontalPanel {
         conceptDTO.setConceptDefinition(text_def.getText());
         conceptDTO.setConceptNote(text_nt.getText());
         conceptDTO.setConceptSourceDefinition(text_sdef.getText());
-        conceptDTO.setCreateBy(BigInteger.valueOf(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID))));
+        conceptDTO.setCreateBy(BigInteger.valueOf(ownerID));
         conceptDTO.setCreation(new Date(System.currentTimeMillis()));
         conceptDTO.setIdResource(rsrc.getIDResource(rsrc.getSelectedIndex()));
         conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
-        conceptDTO.setLastmodifiedBy(BigInteger.valueOf(Long.parseLong(Cookies.getCookie(MyTermCookiesNamespace.ownerID))));
+        conceptDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
         return conceptDTO;
     }

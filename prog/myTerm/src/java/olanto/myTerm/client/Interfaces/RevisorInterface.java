@@ -20,12 +20,11 @@ public class RevisorInterface extends TabPanel {
     private MyTermSearchWidget bpan;
     private ApproveWidget apan;
 
-    public RevisorInterface() {
-        bpan = new MyTermSearchWidget();
-        apan = new ApproveWidget();
+    public RevisorInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
+        apan = new ApproveWidget(ownerID);
         add(bpan, "Term Search");
         add(apan, "To approve");
-        selectTab(0);
         setStyleName("tabPanel");
         addSelectionHandler(new SelectionHandler<Integer>() {
             @Override
@@ -34,5 +33,6 @@ public class RevisorInterface extends TabPanel {
 
             }
         });
+        selectTab(0);
     }
 }

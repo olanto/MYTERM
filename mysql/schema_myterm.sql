@@ -340,7 +340,7 @@ create table terms
   create_by bigint,
   lastmodified date,
   lastmodified_by bigint,
-  status char(1)  not null, -- published p, revised r, edited e
+  status char(1)  not null, -- published p, to be revised r, draft e
   seq int default 0,
   extra text,
  extcrossref text,

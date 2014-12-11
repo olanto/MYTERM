@@ -43,7 +43,7 @@ public class TermForm extends VerticalPanel {
     private Grid form2 = new Grid(5, 2);
     public Grid form3 = new Grid(5, 2);
     private Label label_lng = new Label("Language:");
-    private LangList lang = new LangList();
+    private LangList lang;
     private Label label_frm = new Label("Term's form:");
     private TextArea text_frm = new TextArea();
     private Label label_src = new Label("Term's source:");
@@ -75,7 +75,8 @@ public class TermForm extends VerticalPanel {
     public Button delete = new Button("Delete");
     public TermDTO termDTO;
 
-    public TermForm() {
+    public TermForm(long ownerID) {
+        lang = new LangList(ownerID);
         this.setStyleName("termForm");
         add(form);
         form.add(form1);
@@ -230,7 +231,7 @@ public class TermForm extends VerticalPanel {
         termDTO.setTermPartofspeech(text_pos.getText());
         termDTO.setExtra(text_ext.getText());
         termDTO.setTermGender(text_gdr.getText());
-        termDTO.setStatus('p');
+        termDTO.setStatus('e');
         termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
     }
 }

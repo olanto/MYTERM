@@ -45,7 +45,7 @@ public class ResourceList extends ListBox {
     private static ArrayList<String> rsrclist = new ArrayList<>();
     private static ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
-    public ResourceList() {
+    public ResourceList(long ownerID) {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -75,7 +75,7 @@ public class ResourceList extends ListBox {
             }
         });
         addItem("ALL", "-1");
-        getService().getResources(MainEntryPoint.userDTO.getId(), RsrcCallback);
+        getService().getResourcesByOwner(ownerID, RsrcCallback);
     }
 
     public void selectResource(String resource) {

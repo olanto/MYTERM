@@ -18,10 +18,9 @@ public class ReaderInterface extends TabPanel {
 
     private MyTermSearchWidget bpan;
 
-    public ReaderInterface() {
-        bpan = new MyTermSearchWidget();
+    public ReaderInterface(long ownerID) {
+        bpan = new MyTermSearchWidget(ownerID);
         add(bpan, "Term Search");
-        selectTab(0);
         setStyleName("tabPanel");
         addSelectionHandler(new SelectionHandler<Integer>() {
             @Override
@@ -30,5 +29,6 @@ public class ReaderInterface extends TabPanel {
 
             }
         });
+        selectTab(0);
     }
 }

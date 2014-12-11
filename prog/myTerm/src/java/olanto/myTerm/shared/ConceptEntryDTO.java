@@ -86,4 +86,20 @@ public class ConceptEntryDTO implements IsSerializable {
         }
         return null;
     }
+
+    public String toStringDTO() {
+        String conceptEntry = "----Concept Details----\n";
+        conceptEntry += "Subject Field: " + this.concept.getSubjectField() + "\n";
+        conceptEntry += "Ressource: " + this.concept.getIdResource() + "\n";
+        for (LangEntryDTO lan : listlang) {
+            conceptEntry += "----Language Details----\n";
+            conceptEntry += "Lang Set: " + lan.lan.getIdLanguage() + "\n";
+            for (TermDTO t : lan.listterm) {
+                conceptEntry += "----Term Details----\n";
+                conceptEntry += "Lang ID: " + t.getIdLanguage() + "\n";
+                conceptEntry += "Term Form: " + t.getTermForm() + "\n";
+            }
+        }
+        return conceptEntry;
+    }
 }
