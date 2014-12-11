@@ -39,14 +39,17 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
 
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
-    public LangList langSrc = new LangList("source");
-    public LangList langTgt = new LangList("target");
-    public ResourceList rsrc = new ResourceList();
+    public LangList langSrc;
+    public LangList langTgt;
+    public ResourceList rsrc;
     public DomainList dom = new DomainList();
     public Button btnSend = new Button("Search");
     public Button btnAdd = new Button("Add");
 
-    public SearchHeaderWorkspace() {
+    public SearchHeaderWorkspace(long ownerID) {
+        rsrc = new ResourceList(ownerID);
+        langSrc = new LangList(ownerID);
+        LangList langTgt = new LangList(ownerID);
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));

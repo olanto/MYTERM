@@ -184,22 +184,22 @@ public class MainEntryPoint implements EntryPoint {
         RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {
             case "ADMIN":
-                AdminInterface vpan = new AdminInterface();
+                AdminInterface vpan = new AdminInterface(user.getId());
                 RootPanel.get("main").add(vpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "READER":
-                ReaderInterface rpan = new ReaderInterface();
+                ReaderInterface rpan = new ReaderInterface(user.getId());
                 RootPanel.get("main").add(rpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REVISOR":
-                RevisorInterface rvpan = new RevisorInterface();
+                RevisorInterface rvpan = new RevisorInterface(user.getId());
                 RootPanel.get("main").add(rvpan);
                 RootPanel.get("main").setVisible(true);
                 break;
             case "REDACTOR":
-                RedactorInterface vdpan = new RedactorInterface();
+                RedactorInterface vdpan = new RedactorInterface(user.getId());
                 RootPanel.get("main").add(vdpan);
                 RootPanel.get("main").setVisible(true);
                 break;

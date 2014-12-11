@@ -41,11 +41,12 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public TextBox searchField = new TextBox();
     public LangList langSrc = new LangList("source");
     public LangList langTgt = new LangList("target");
-    public ResourceList rsrc = new ResourceList();
+    public ResourceList rsrc;
     public DomainList dom = new DomainList();
     public Button btnSend = new Button("Search");
 
-    public SearchHeaderBasic() {
+    public SearchHeaderBasic(long ownerID) {
+        rsrc = new ResourceList(ownerID);
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));

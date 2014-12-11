@@ -133,7 +133,7 @@ public class ConceptForm extends HorizontalPanel {
         text_nt.setText(conceptDTO.getConceptNote());
         sf.selectdomain(conceptDTO.getSubjectField());
         rsrc.selectResourcebyID(conceptDTO.getIdResource());
-        String oWnerID = Cookies.getCookie(MyTermCookiesNamespace.ownerID);
+        String oWnerID = ownerID + "";
         if ((!oWnerID.equals(conceptDTO.getCreateBy().toString())) && (!oWnerID.equals(conceptDTO.getLastmodifiedBy().toString()))) {
             setReadOnly(true);
         }

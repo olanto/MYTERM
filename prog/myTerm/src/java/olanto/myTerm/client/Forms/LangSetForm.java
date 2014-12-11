@@ -93,7 +93,7 @@ public class LangSetForm extends VerticalPanel {
                         desc.remove(ter);
                     }
                 });
-                String oWnerID = Cookies.getCookie(MyTermCookiesNamespace.ownerID);
+                String oWnerID = ownerID + "";
                 if ((!oWnerID.equals(tDTO.getCreateBy().toString())) && (!oWnerID.equals(tDTO.getLastmodifiedBy().toString()))) {
                     ter.setReadOnly(true);
                 }
