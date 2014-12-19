@@ -39,7 +39,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import java.util.ArrayList;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerWorkspace;
 import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
@@ -57,10 +56,7 @@ public class WorkspaceWidget extends VerticalPanel {
 
     private static SearchHeaderWorkspace searchMenu;
     private static ResultsContainerWorkspace resultsPanel = new ResultsContainerWorkspace();
-    private static AsyncCallback<String> termSearchCallback;
     private static AsyncCallback<String> termAddCallback;
-    private static AsyncCallback<String> conceptCallback;
-    private static AsyncCallback<String> termsCallback;
     private static AsyncCallback<String> addCallback;
     private static AsyncCallback<ConceptEntryDTO> addTermsCallback;
     private static ConceptEntryDTO conceptEntryDTO;
@@ -88,24 +84,6 @@ public class WorkspaceWidget extends VerticalPanel {
 
             @Override
             public void onFailure(Throwable caught) {
-                searchMenu.btnSend.setEnabled(true);
-                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
-            }
-        };
-        termSearchCallback = new AsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                searchMenu.btnSend.setEnabled(true);
-                if (result != null) {
-                    resultsPanel.sideRes.setWidget(new HTML(result));
-                } else {
-                    StatusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
@@ -127,33 +105,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
-        conceptCallback = new AsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                searchMenu.btnAdd.setEnabled(true);
-                if (result != null) {
-                    resultsPanel.conceptDetails.setWidget(new HTML(result));
-                } else {
-                    resultsPanel.conceptDetails.setWidget(new HTML("Concept details not found"));
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
-            }
-        };
-        termsCallback = new AsyncCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                resultsPanel.termsDetails.setWidget(new HTML(result));
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
-            }
-        };
         addTermsCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -163,23 +114,11 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onSuccess(ConceptEntryDTO result) {
                 conceptEntryDTO = result;
+//                Window.alert(conceptEntryDTO.toStringDTO());
                 refreshContentFromConceptEntryDTO();
             }
         };
-        // Listen for the button clicks
-        searchMenu.btnSend.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                History.newItem("page1");
-                StatusPanel.clearMessages();
-                resultsPanel.addnewcpt.setVisible(false);
-                resultsPanel.sideRes.clear();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
-                searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termSearchCallback);
-            }
-        });
+
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -193,7 +132,7 @@ public class WorkspaceWidget extends VerticalPanel {
                     Window.alert("Please indicate the term's form");
                     searchMenu.btnAdd.setEnabled(true);
                 } else {
-                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
                 }
             }
         });
@@ -204,12 +143,16 @@ public class WorkspaceWidget extends VerticalPanel {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     History.newItem("page1");
                     StatusPanel.clearMessages();
-                    resultsPanel.addnewcpt.setVisible(false);
                     resultsPanel.sideRes.clear();
-                    resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
-                    searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termSearchCallback);
+                    resultsPanel.conceptDetails.clear();
+                    searchMenu.btnAdd.setEnabled(false);
+                    if ((searchMenu.searchField.getText().isEmpty()) || (searchMenu.searchField.getText().contains("%"))) {
+                        Window.alert("Please indicate the term's form");
+                        searchMenu.btnAdd.setEnabled(true);
+                    } else {
+                        getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+                    }
                 }
             }
         });
@@ -223,11 +166,6 @@ public class WorkspaceWidget extends VerticalPanel {
                 if (event.getValue().contains("new")) {
                     long conceptID = Long.parseLong(event.getValue().substring(3));
                     getService().getAddDetailsForConcept(conceptID, ownerID, addTermsCallback);
-                } else {
-                    if (!event.getValue().contains("page")) {
-                        getService().getdetailsForConcept(Long.parseLong(event.getValue()), ownerID, conceptCallback);
-                        getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
-                    }
                 }
             }
         });
@@ -244,24 +182,15 @@ public class WorkspaceWidget extends VerticalPanel {
     public void refreshContentFromConceptEntryDTO() {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
-//        Window.alert(conceptEntryDTO.toStringDTO());
         if (conceptEntryDTO != null) {
             addcpt = new ConceptForm(ownerID);
             addcpt.conceptDTO = conceptEntryDTO.concept;
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.refreshContentFromConceptEntryDTO();
-            addcpt.delete.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    History.newItem("page1");
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
-                }
-            });
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetForm(ownerID);
-                addterms.adjustSize(addcpt.getOffsetWidth() - 5);
+                addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
                     addterms.refreshContentFromLangEntryDTO(langEntryDTO);
@@ -276,6 +205,14 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.termsDetails.clear();
                     Window.alert(conceptEntryDTO.toStringDTO());
                     getService().SubmitConceptEntry(conceptEntryDTO, ownerID, addCallback);
+                }
+            });
+            addcpt.delete.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    History.newItem("page1");
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
                 }
             });
         } else {

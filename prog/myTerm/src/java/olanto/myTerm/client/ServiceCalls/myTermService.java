@@ -27,7 +27,7 @@ public interface myTermService extends RemoteService {
 
     public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID);
 
-    public String getAddResult(String s, String ls, String lt, String resID, String domID, long ownerID);
+    public String getAddResult(String s, String ls, String resID, String domID, long ownerID);
 
     public ArrayList<String> getResults(String s, String ls, String lt, long ownerID);
 

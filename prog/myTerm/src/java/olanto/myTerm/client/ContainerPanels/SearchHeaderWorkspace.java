@@ -40,10 +40,9 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
     public LangList langSrc;
-    public LangList langTgt;
+//    public LangList langTgt;
     public ResourceList rsrc;
     public DomainList dom = new DomainList();
-    public Button btnSend = new Button("Search");
     public Button btnAdd = new Button("Add");
 
     public SearchHeaderWorkspace(long ownerID) {
@@ -52,7 +51,6 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
-        add(btnSend);
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle("Click to add a new entry");
@@ -61,11 +59,11 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
         add(new Label("Source Lang. "));
         add(new HTML("&nbsp;"));
         add(langSrc);
-        add(new HTML("&nbsp;"));
-        langTgt = new LangList(ownerID, "target");
-        add(new Label("Target Lang. "));
-        add(new HTML("&nbsp;"));
-        add(langTgt);
+//        add(new HTML("&nbsp;"));
+//        langTgt = new LangList(ownerID, "target");
+//        add(new Label("Target Lang. "));
+//        add(new HTML("&nbsp;"));
+//        add(langTgt);
         add(new HTML("&nbsp;"));
         rsrc = new ResourceList(ownerID, "workspace");
         add(new Label("Resource: "));

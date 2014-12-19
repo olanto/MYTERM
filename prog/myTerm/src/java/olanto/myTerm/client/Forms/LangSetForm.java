@@ -58,7 +58,7 @@ public class LangSetForm extends VerticalPanel {
                 final TermForm ter = new TermForm(ownerID, 1);
                 terms.add(ter);
                 desc.add(ter);
-                ter.adjustSize(getOffsetWidth() - 5);
+                ter.adjustSize(getOffsetWidth() - 10);
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + (terms.size())));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
@@ -79,6 +79,7 @@ public class LangSetForm extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.termDTO = tDTO;
+                ter.adjustSize(getOffsetWidth() - 10);
                 ter.refreshContentFromTermDTO();
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                 ter.delete.addClickHandler(new ClickHandler() {
@@ -89,12 +90,10 @@ public class LangSetForm extends VerticalPanel {
                         desc.remove(ter);
                     }
                 });
-//                String oWnerID = ownerID + "";
-//                if ((!oWnerID.equals(tDTO.getCreateBy().toString())) && (!oWnerID.equals(tDTO.getLastmodifiedBy().toString()))) {
-//                    ter.setReadOnly(true);
-//                }
+//        if ((ownerID == termDTO.getCreateBy().longValue()) && (ownerID == termDTO.getLastmodifiedBy().longValue())) {
+//            setReadOnly(true);
+//        }
                 i++;
-                ter.adjustSize(getOffsetWidth() - 5);
             }
         }
     }

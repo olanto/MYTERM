@@ -129,14 +129,15 @@ public class ConceptForm extends HorizontalPanel {
         text_def.setText(conceptDTO.getConceptDefinition());
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
-        sfPanel.remove(sf);
-        sfPanel.add(new HTML(conceptDTO.getSubjectField()));
+        if (!conceptDTO.getSubjectField().isEmpty()) {
+            sfPanel.remove(sf);
+            sfPanel.add(new HTML(conceptDTO.getSubjectField()));
+        }
         rsrcPanel.remove(rsrc);
         rsrcPanel.add(new HTML(rsrc.getResName(conceptDTO.getIdResource())));
-        String oWnerID = ownerID + "";
-        if ((!oWnerID.equals(conceptDTO.getCreateBy().toString())) && (!oWnerID.equals(conceptDTO.getLastmodifiedBy().toString()))) {
-            setReadOnly(true);
-        }
+//        if ((ownerID == conceptDTO.getCreateBy().longValue()) && (ownerID == conceptDTO.getLastmodifiedBy().longValue())) {
+//            setReadOnly(true);
+//        }
     }
 
     public void clearAllText() {

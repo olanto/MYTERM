@@ -45,7 +45,6 @@ public class ApproveWidget extends VerticalPanel {
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.add(new HTML(result));
             }
 
@@ -76,42 +75,7 @@ public class ApproveWidget extends VerticalPanel {
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
             }
         };
-        // Listen for the button clicks
-        searchMenu.btnSend.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                resultsPanel.sideRes.clear();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
-                searchMenu.btnSend.setEnabled(false);
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termCallback);
-            }
-        });
-        // Listen for the button clicks
-        searchMenu.searchField.addKeyPressHandler(new KeyPressHandler() {
-            @Override
-            public void onKeyPress(KeyPressEvent event) {
-                if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-                    resultsPanel.sideRes.clear();
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
-                    searchMenu.btnSend.setEnabled(false);
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termCallback);
-                }
-            }
-        });
-        searchMenu.searchField.setFocus(true);
-        History.addValueChangeHandler(new ValueChangeHandler<String>() {
-            @Override
-            public void onValueChange(ValueChangeEvent<String> event) {
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
-                if (!event.getValue().contains("page")) {
-                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), ownerID, conceptCallback);
-                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
-                }
-            }
-        });
+       
         resultsPanel.adjustSize();
     }
 

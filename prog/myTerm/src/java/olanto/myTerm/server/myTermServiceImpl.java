@@ -217,17 +217,17 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String getAddResult(String s, String ls, String lt, String resID, String domID, long ownerID) {
-        String response = TestView.getSourceForThis(s, ls, lt, resID, domID, ownerID);
+    public String getAddResult(String s, String ls, String resID, String domID, long ownerID) {
+        String response = TestView.getSourceForThis(s, ls, resID, domID, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
             result.append("<table>");
             result.append("<tr>");
             result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append("Targets").append("</th>");
             result.append("</tr>");
-            result.append(TestView.getSourceForThis(s, ls, lt, resID, domID, ownerID));
+            result.append(response);
             result.append("</table>");
             result.append("</div>");
             return result.toString();

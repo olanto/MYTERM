@@ -111,11 +111,13 @@ body{
     margin-top: 1px;
     background-color: beige;
     margin-bottom: 1px;
+    border: 1px solid blueviolet;
 }
 .termForm{
     margin-top: 1px;
     background-color: honeydew;
     margin-bottom: 1px;
+    border: 1px solid blueviolet;
 }
 .gwt-Anchor{
     cursor: pointer;
