@@ -23,18 +23,16 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
-import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Domains.DomainList;
-import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
 
@@ -114,8 +112,8 @@ public class ConceptForm extends HorizontalPanel {
         sfPanel.setCellHorizontalAlignment(label_sf, HorizontalPanel.ALIGN_LEFT);
         sfPanel.setCellHorizontalAlignment(sf, HorizontalPanel.ALIGN_RIGHT);
         rsrcPanel.setWidth(w * 1 / 3 + "px");
-        rsrcPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
-        rsrcPanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
+        ctrlPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
+        ctrlPanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
         ctrlPanel.setWidth(w * 1 / 3 + "px");
         ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_LEFT);
         ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_RIGHT);
@@ -131,8 +129,10 @@ public class ConceptForm extends HorizontalPanel {
         text_def.setText(conceptDTO.getConceptDefinition());
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
-        sf.selectdomain(conceptDTO.getSubjectField());
-        rsrc.selectResourcebyID(conceptDTO.getIdResource());
+        sfPanel.remove(sf);
+        sfPanel.add(new HTML(conceptDTO.getSubjectField()));
+        rsrcPanel.remove(rsrc);
+        rsrcPanel.add(new HTML(rsrc.getResName(conceptDTO.getIdResource())));
         String oWnerID = ownerID + "";
         if ((!oWnerID.equals(conceptDTO.getCreateBy().toString())) && (!oWnerID.equals(conceptDTO.getLastmodifiedBy().toString()))) {
             setReadOnly(true);

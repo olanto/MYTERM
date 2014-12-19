@@ -21,17 +21,17 @@
  */
 package olanto.myTerm.client.Resources;
 
-import olanto.myTerm.shared.ResourceDTO;
 import com.google.gwt.core.client.GWT;
+import olanto.myTerm.shared.ResourceDTO;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
-import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -41,20 +41,24 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class ResourceList extends ListBox {
 
-    private static AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
+    private final myTermServiceAsync rsrcService = GWT.create(myTermService.class);
+    public AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
     private static ArrayList<String> rsrclist = new ArrayList<>();
     private static ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
-    public ResourceList(long ownerID) {
+    public ResourceList(long ownerID, final String type) {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-//                Window.alert("Failed to get list of resources");
+                StatusPanel.setMessage("warning", "Failed to get list of resources");
             }
 
             @Override
             public void onSuccess(ArrayList<ResourceDTO> result) {
                 if (result != null) {
+                    if (type.equalsIgnoreCase("basic")) {
+                        addItem("ALL", "-1");
+                    }
                     int i = 0;
                     for (ResourceDTO s : result) {
                         rsrclist.add(s.getResourceName());
@@ -74,8 +78,28 @@ public class ResourceList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Resource, getItemText(getSelectedIndex()));
             }
         });
-        addItem("ALL", "-1");
-        getService().getResourcesByOwner(ownerID, RsrcCallback);
+        rsrcService.getResourcesByOwner(ownerID, RsrcCallback);
+    }
+
+    public ResourceList(long ownerID) {
+        RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                StatusPanel.setMessage("warning", "Failed to get list of resources");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<ResourceDTO> result) {
+                if (result != null) {
+                    for (ResourceDTO s : result) {
+                        rsrclist.add(s.getResourceName());
+                        rsrcIDlist.add(s.getIdResource());
+                        addItem(s.getResourceName(), s.getIdResource().toString());
+                    }
+                }
+            }
+        };
+        rsrcService.getResourcesByOwner(ownerID, RsrcCallback);
     }
 
     public void selectResource(String resource) {
@@ -104,7 +128,18 @@ public class ResourceList extends ListBox {
         return rsrcIDlist.get(i);
     }
 
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
+    public String getResName(long IDRes) {
+        int i = 0;
+        for (long s : rsrcIDlist) {
+            if (s == IDRes) {
+                return rsrclist.get(i);
+            }
+            i++;
+        }
+        return "";
+    }
+
+    public String getSelectedValue() {
+        return this.getValue(this.getSelectedIndex());
     }
 }

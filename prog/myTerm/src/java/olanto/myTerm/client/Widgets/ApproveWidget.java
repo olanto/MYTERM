@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerBasic;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderBasic;
+import olanto.myTerm.client.ContainerPanels.SearchHeaderWorkspace;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -28,7 +28,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class ApproveWidget extends VerticalPanel {
 
-    private SearchHeaderBasic searchMenu;
+    private SearchHeaderWorkspace searchMenu;
     private ResultsContainerBasic resultsPanel = new ResultsContainerBasic();
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
@@ -38,7 +38,7 @@ public class ApproveWidget extends VerticalPanel {
     public ApproveWidget(long idOwner) {
         ownerID = idOwner;
         fixGwtNav();
-        searchMenu = new SearchHeaderBasic(ownerID);
+        searchMenu = new SearchHeaderWorkspace(ownerID);
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.

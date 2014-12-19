@@ -22,13 +22,6 @@ public class ReaderInterface extends TabPanel {
         bpan = new MyTermSearchWidget(ownerID);
         add(bpan, "Term Search");
         setStyleName("tabPanel");
-        addSelectionHandler(new SelectionHandler<Integer>() {
-            @Override
-            public void onSelection(SelectionEvent<Integer> event) {
-                History.newItem("page" + event.getSelectedItem());
-
-            }
-        });
         selectTab(0);
     }
 }

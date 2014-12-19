@@ -13,7 +13,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
@@ -187,21 +190,45 @@ public class MainEntryPoint implements EntryPoint {
                 AdminInterface vpan = new AdminInterface(user.getId());
                 RootPanel.get("main").add(vpan);
                 RootPanel.get("main").setVisible(true);
+                vpan.addSelectionHandler(new SelectionHandler<Integer>() {
+                    @Override
+                    public void onSelection(SelectionEvent<Integer> event) {
+                        History.newItem("page" + event.getSelectedItem());
+                    }
+                });
                 break;
             case "READER":
                 ReaderInterface rpan = new ReaderInterface(user.getId());
                 RootPanel.get("main").add(rpan);
                 RootPanel.get("main").setVisible(true);
+                rpan.addSelectionHandler(new SelectionHandler<Integer>() {
+                    @Override
+                    public void onSelection(SelectionEvent<Integer> event) {
+                        History.newItem("page" + event.getSelectedItem());
+                    }
+                });
                 break;
             case "REVISOR":
                 RevisorInterface rvpan = new RevisorInterface(user.getId());
                 RootPanel.get("main").add(rvpan);
                 RootPanel.get("main").setVisible(true);
+                rvpan.addSelectionHandler(new SelectionHandler<Integer>() {
+                    @Override
+                    public void onSelection(SelectionEvent<Integer> event) {
+                        History.newItem("page" + event.getSelectedItem());
+                    }
+                });
                 break;
             case "REDACTOR":
                 RedactorInterface vdpan = new RedactorInterface(user.getId());
                 RootPanel.get("main").add(vdpan);
                 RootPanel.get("main").setVisible(true);
+                vdpan.addSelectionHandler(new SelectionHandler<Integer>() {
+                    @Override
+                    public void onSelection(SelectionEvent<Integer> event) {
+                        History.newItem("page" + event.getSelectedItem());
+                    }
+                });
                 break;
         }
         RootPanel.get("footer").add(statusPanel);
@@ -211,9 +238,10 @@ public class MainEntryPoint implements EntryPoint {
     private void initCookies() {
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangS, "English");
         MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
+        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangSrc, "English");
+        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangTgt, "French");
         MyTermCookies.initCookie(MyTermCookiesNamespace.Domain, "%");
         MyTermCookies.initCookie(MyTermCookiesNamespace.Resource, "ALL");
-        MyTermCookies.initCookie(MyTermCookiesNamespace.MyTermlangT, "French");
         MyTermCookies.initCookie(MyTermCookiesNamespace.SessionID, null);
         MyTermCookies.initCookie(MyTermCookiesNamespace.ownerID, "0");
     }

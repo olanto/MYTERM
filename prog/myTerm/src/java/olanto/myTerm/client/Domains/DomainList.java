@@ -41,6 +41,7 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class DomainList extends ListBox {
 
+    private final myTermServiceAsync domService = GWT.create(myTermService.class);
     private static AsyncCallback<ArrayList<DomainDTO>> domCallback;
     private static ArrayList<String> domlist = new ArrayList<>();
 
@@ -71,7 +72,7 @@ public class DomainList extends ListBox {
             }
         });
         addItem("ANY", "-1");
-        getService().getDomains(domCallback);
+        domService.getDomains(domCallback);
     }
 
     public void selectdomain(String domain) {
@@ -84,8 +85,8 @@ public class DomainList extends ListBox {
             i++;
         }
     }
-
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
+    
+    public String getSelectedValue(){
+        return this.getValue(this.getSelectedIndex());
     }
 }

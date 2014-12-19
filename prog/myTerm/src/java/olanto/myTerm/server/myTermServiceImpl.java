@@ -91,8 +91,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             if (!l.isEmpty()) {
                 ArrayList<LanguageDTO> languages = new ArrayList<>();
                 for (VjUsersLanguages res : l) {
-                    LanguageDTO r = new LanguageDTO(res.getIdLanguage(), res.getLanguageDefaultName());
-                    languages.add(r);
+                    LanguageDTO ln = new LanguageDTO(res.getIdLanguage(), res.getLanguageDefaultName());
+                    languages.add(ln);
                 }
                 return languages;
             }
@@ -237,16 +237,16 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID) {
-        ConceptEntryDTO conceptDTO = new ConceptEntryDTO();
+        ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
         ConceptEntry c = TestView.getConceptAndAssociatedTerms(conceptID);
-        copyFromConceptEntry(conceptDTO, c);
-        return conceptDTO;
+        copyFromConceptEntry(conceptEntryDTO, c);
+        return conceptEntryDTO;
     }
 
-    private void copyFromConceptEntry(ConceptEntryDTO conceptDTO, ConceptEntry concept) {
-        copyFormConcept(conceptDTO.concept, concept.getConcept());
-        if (!concept.listlang.isEmpty()) {
-            for (LangEntry ls : concept.listlang) {
+    private void copyFromConceptEntry(ConceptEntryDTO concepEntrytDTO, ConceptEntry conceptEntry) {
+        copyFormConcept(concepEntrytDTO.concept, conceptEntry.getConcept());
+        if (!conceptEntry.listlang.isEmpty()) {
+            for (LangEntry ls : conceptEntry.listlang) {
                 LangEntryDTO langE = new LangEntryDTO();
                 langE.lan = copyFromLangSet(ls.lan);
                 if (!ls.listterm.isEmpty()) {
@@ -254,14 +254,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                         langE.listterm.add(copyFromTerm(t));
                     }
                 }
-                conceptDTO.listlang.add(langE);
+                concepEntrytDTO.listlang.add(langE);
             }
         }
     }
 
     private ConceptEntry copyFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
         if (conceptEntryDTO != null) {
-
             Concepts c = copyFromConceptDTO(conceptEntryDTO.concept);
             ConceptEntry conceptEntry = new ConceptEntry(c, true);
             if (!conceptEntryDTO.listlang.isEmpty()) {

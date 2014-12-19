@@ -33,13 +33,6 @@ public class AdminInterface extends TabPanel {
         add(new HTML("Under construction!!!"), "System Administration");
 
         setStyleName("tabPanel");
-        addSelectionHandler(new SelectionHandler<Integer>() {
-            @Override
-            public void onSelection(SelectionEvent<Integer> event) {
-                History.newItem("page" + event.getSelectedItem());
-
-            }
-        });
         selectTab(0);
     }
 }

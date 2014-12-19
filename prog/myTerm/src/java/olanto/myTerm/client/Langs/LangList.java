@@ -28,10 +28,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -41,7 +41,8 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class LangList extends ListBox {
 
-    private static AsyncCallback<ArrayList<LanguageDTO>> langCallback;
+    private static final myTermServiceAsync langService = GWT.create(myTermService.class);
+    private AsyncCallback<ArrayList<LanguageDTO>> langCallback;
     private static ArrayList<String> langlist = new ArrayList<>();
     private static ArrayList<String> langIDlist = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class LangList extends ListBox {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of languages");
+                StatusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
@@ -84,13 +85,56 @@ public class LangList extends ListBox {
                 }
             }
         });
-        getService().getLanguages(langCallback);
+        langService.getLanguages(langCallback);
     }
-    
+
+    public LangList(long ownerID, final String type) {
+        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                StatusPanel.setMessage("warning", "Failed to get list of languages");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<LanguageDTO> result) {
+                int i = 0, j = 0;
+                for (LanguageDTO s : result) {
+                    langlist.add(s.getLanguageDefaultName());
+                    langIDlist.add(s.getIdLanguage());
+                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangSrc))) {
+                        i = result.indexOf(s);
+                    }
+                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangTgt))) {
+                        j = result.indexOf(s);
+                    }
+                }
+                if (type.equals("source")) {
+                    setSelectedIndex(i);
+                } else {
+                    setSelectedIndex(j);
+                }
+            }
+        };
+        this.addChangeHandler(
+                new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                if (type.equals("source")) {
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangSrc, getItemText(getSelectedIndex()));
+                } else {
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangTgt, getItemText(getSelectedIndex()));
+                }
+            }
+        });
+        langService.getLanguagesByOwner(ownerID, langCallback);
+    }
+
     public LangList(long ownerID) {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
+                StatusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
@@ -100,14 +144,9 @@ public class LangList extends ListBox {
                     langIDlist.add(s.getIdLanguage());
                     addItem(s.getLanguageDefaultName(), s.getIdLanguage());
                 }
-                setSelectedIndex(0);
             }
         };
-        getService().getLanguagesByOwner(ownerID, langCallback);
-    }
-
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
+        langService.getLanguagesByOwner(ownerID, langCallback);
     }
 
     public void selectlanguage(String language) {
@@ -131,7 +170,7 @@ public class LangList extends ListBox {
             i++;
         }
     }
-    
+
     public String getLangName(String IDlang) {
         int i = 0;
         for (String s : langIDlist) {
@@ -141,5 +180,20 @@ public class LangList extends ListBox {
             i++;
         }
         return "";
+    }
+
+    public String getLangID(String langName) {
+        int i = 0;
+        for (String s : langlist) {
+            if (s.equalsIgnoreCase(langName)) {
+                return langIDlist.get(i);
+            }
+            i++;
+        }
+        return "";
+    }
+
+    public String getSelectedValue() {
+        return this.getValue(this.getSelectedIndex());
     }
 }

@@ -26,12 +26,6 @@ public class RedactorInterface extends TabPanel {
         add(bpan, "Term Search");
         add(wpan, "Workspace");
         setStyleName("tabPanel");
-        addSelectionHandler(new SelectionHandler<Integer>() {
-            @Override
-            public void onSelection(SelectionEvent<Integer> event) {
-                History.newItem("page" + event.getSelectedItem());
-            }
-        });
         selectTab(0);
     }
 }

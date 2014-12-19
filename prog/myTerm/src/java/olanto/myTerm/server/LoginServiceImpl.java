@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import olanto.myTerm.client.ServiceCalls.LoginService;
 import olanto.myTerm.shared.UserDTO;
 import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 
 /**
@@ -29,6 +30,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     public UserDTO loginCheck(String name, String password) {
         //check to see if the email exist in the datastore
         //check passwords
+        TermDB.restart();
         name = escapeHtml(name);
         password = escapeHtml(password);
         UserDTO user = new UserDTO();

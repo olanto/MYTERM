@@ -36,6 +36,12 @@ public class LangEntryDTO implements IsSerializable {
         lan = new LangSetDTO();
         lan.setIdLanguage(lang);
     }
+    
+    public LangEntryDTO(String lang, long idLangset) {
+        lan = new LangSetDTO();
+        lan.setIdLanguage(lang);
+        lan.setIdLangset(idLangset);
+    }
 
     public void addTerm(String term_form) {
         TermDTO term = new TermDTO(null, term_form, 'p'); // minimal information

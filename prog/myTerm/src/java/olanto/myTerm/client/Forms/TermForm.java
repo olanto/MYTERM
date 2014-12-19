@@ -63,6 +63,7 @@ public class TermForm extends VerticalPanel {
     private Label label_tp = new Label("Type:");
     private TextArea text_tp = new TextArea();
     private Label label_pos = new Label("Part of speech:");
+    private Label lang_lbl = new Label("");
     private TextBox text_pos = new TextBox();
     private Label label_gdr = new Label("Gender:");
     private TextBox text_gdr = new TextBox();
@@ -74,8 +75,9 @@ public class TermForm extends VerticalPanel {
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
     public TermDTO termDTO;
+    public int type;
 
-    public TermForm(long ownerID) {
+    public TermForm(long ownerID, int type) {
         lang = new LangList(ownerID);
         this.setStyleName("termForm");
         add(form);
@@ -155,7 +157,8 @@ public class TermForm extends VerticalPanel {
         text_gdr.setText(termDTO.getTermGender());
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
-        form1.setWidget(0, 1, new HTML(lang.getLangName(termDTO.getIdLanguage())));
+        lang_lbl.setText(lang.getLangName(termDTO.getIdLanguage()));
+        form1.setWidget(0, 1, lang_lbl);
     }
 
     public void adjustSize(int w) {
@@ -215,6 +218,7 @@ public class TermForm extends VerticalPanel {
         text_st.setReadOnly(true);
         text_ext.setReadOnly(edit);
     }
+
     public void gettTermDTOFromContent() {
         if (termDTO == null) {
             termDTO = new TermDTO();
@@ -232,6 +236,10 @@ public class TermForm extends VerticalPanel {
         termDTO.setExtra(text_ext.getText());
         termDTO.setTermGender(text_gdr.getText());
         termDTO.setStatus('e');
-        termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
+        if (type == 0) {
+            termDTO.setIdLanguage(lang.getLangID(lang_lbl.getText()));
+        } else {
+            termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
+        }
     }
 }

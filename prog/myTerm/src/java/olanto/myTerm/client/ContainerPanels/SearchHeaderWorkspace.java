@@ -47,9 +47,6 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
     public Button btnAdd = new Button("Add");
 
     public SearchHeaderWorkspace(long ownerID) {
-        rsrc = new ResourceList(ownerID);
-        langSrc = new LangList(ownerID);
-        LangList langTgt = new LangList(ownerID);
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
@@ -60,14 +57,17 @@ public class SearchHeaderWorkspace extends HorizontalPanel {
         add(btnAdd);
         btnAdd.setTitle("Click to add a new entry");
         add(new HTML("&nbsp;"));
+        langSrc = new LangList(ownerID, "source");
         add(new Label("Source Lang. "));
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
+        langTgt = new LangList(ownerID, "target");
         add(new Label("Target Lang. "));
         add(new HTML("&nbsp;"));
         add(langTgt);
         add(new HTML("&nbsp;"));
+        rsrc = new ResourceList(ownerID, "workspace");
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
         add(rsrc);

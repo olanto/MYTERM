@@ -26,13 +26,6 @@ public class RevisorInterface extends TabPanel {
         add(bpan, "Term Search");
         add(apan, "To approve");
         setStyleName("tabPanel");
-        addSelectionHandler(new SelectionHandler<Integer>() {
-            @Override
-            public void onSelection(SelectionEvent<Integer> event) {
-                History.newItem("page" + event.getSelectedItem());
-
-            }
-        });
         selectTab(0);
     }
 }

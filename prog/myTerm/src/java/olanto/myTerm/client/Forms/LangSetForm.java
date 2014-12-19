@@ -23,13 +23,11 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
-import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -57,7 +55,7 @@ public class LangSetForm extends VerticalPanel {
         addTerm.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final TermForm ter = new TermForm(ownerID);
+                final TermForm ter = new TermForm(ownerID, 1);
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 5);
@@ -74,16 +72,14 @@ public class LangSetForm extends VerticalPanel {
     }
 
     public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO) {
-        desc.clear();
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermForm ter = new TermForm(ownerID);
+                final TermForm ter = new TermForm(ownerID, 0);
                 terms.add(ter);
                 desc.add(ter);
                 ter.termDTO = tDTO;
                 ter.refreshContentFromTermDTO();
-                ter.adjustSize(getOffsetWidth() - 5);
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
@@ -93,11 +89,12 @@ public class LangSetForm extends VerticalPanel {
                         desc.remove(ter);
                     }
                 });
-                String oWnerID = ownerID + "";
-                if ((!oWnerID.equals(tDTO.getCreateBy().toString())) && (!oWnerID.equals(tDTO.getLastmodifiedBy().toString()))) {
-                    ter.setReadOnly(true);
-                }
+//                String oWnerID = ownerID + "";
+//                if ((!oWnerID.equals(tDTO.getCreateBy().toString())) && (!oWnerID.equals(tDTO.getLastmodifiedBy().toString()))) {
+//                    ter.setReadOnly(true);
+//                }
                 i++;
+                ter.adjustSize(getOffsetWidth() - 5);
             }
         }
     }
@@ -117,7 +114,7 @@ public class LangSetForm extends VerticalPanel {
                 if (i > -1) {
                     listlang.get(i).listterm.add(tf.termDTO);
                 } else {
-                    LangEntryDTO lsDTO = new LangEntryDTO(tf.termDTO.getIdLanguage());
+                    LangEntryDTO lsDTO = new LangEntryDTO(tf.termDTO.getIdLanguage(), tf.termDTO.getIdLangset());
                     lsDTO.listterm.add(tf.termDTO);
                     listlang.add(lsDTO);
                 }

@@ -29,6 +29,8 @@ public class MyTermCookiesNamespace {
 
     public static String MyTermlangS = "MyTermlangS";
     public static String MyTermlangT = "MyTermlangT";
+    public static String MyTermlangSrc = "MyTermlangSrc";
+    public static String MyTermlangTgt = "MyTermlangTgt";
     public static String InterfaceLanguage = "InterfaceLanguage";
     public static String Resource = "Resource";
     public static String Domain = "Domain";

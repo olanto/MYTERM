@@ -189,7 +189,7 @@ select * from v_users_languages;
 
 create or replace view vj_users_languages as
 SELECT uuid()  uuid,
-vj_users_languages.* FROM vj_users_languages;
+v_users_languages.* FROM v_users_languages;
 
 
 select  resource_name, id_language, count(*) nbterms from v_reslang group by resource_name, id_language; 

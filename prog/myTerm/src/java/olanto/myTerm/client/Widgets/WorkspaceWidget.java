@@ -65,14 +65,13 @@ public class WorkspaceWidget extends VerticalPanel {
     private static AsyncCallback<ConceptEntryDTO> addTermsCallback;
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptForm addcpt;
-    private static ArrayList<LangSetForm> addterms;
+    private static LangSetForm addterms;
     private long ownerID;
 
     public WorkspaceWidget(long idOwner) {
         ownerID = idOwner;
         fixGwtNav();
         searchMenu = new SearchHeaderWorkspace(ownerID);
-        addterms = new ArrayList<>();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
@@ -171,6 +170,7 @@ public class WorkspaceWidget extends VerticalPanel {
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                History.newItem("page1");
                 StatusPanel.clearMessages();
                 resultsPanel.addnewcpt.setVisible(false);
                 resultsPanel.sideRes.clear();
@@ -183,6 +183,7 @@ public class WorkspaceWidget extends VerticalPanel {
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                History.newItem("page1");
                 StatusPanel.clearMessages();
                 resultsPanel.sideRes.clear();
                 resultsPanel.termsDetails.clear();
@@ -201,6 +202,7 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
+                    History.newItem("page1");
                     StatusPanel.clearMessages();
                     resultsPanel.addnewcpt.setVisible(false);
                     resultsPanel.sideRes.clear();
@@ -222,14 +224,17 @@ public class WorkspaceWidget extends VerticalPanel {
                     long conceptID = Long.parseLong(event.getValue().substring(3));
                     getService().getAddDetailsForConcept(conceptID, ownerID, addTermsCallback);
                 } else {
-                    getService().getdetailsForConcept(Long.parseLong(event.getValue()), ownerID, conceptCallback);
-                    getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
+                    if (!event.getValue().contains("page")) {
+                        getService().getdetailsForConcept(Long.parseLong(event.getValue()), ownerID, conceptCallback);
+                        getService().getdetailsForTerms(Long.parseLong(event.getValue()), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
+                    }
                 }
             }
         });
         resultsPanel.addnewcpt.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                History.newItem("page1");
                 createNewEntry();
             }
         });
@@ -239,6 +244,7 @@ public class WorkspaceWidget extends VerticalPanel {
     public void refreshContentFromConceptEntryDTO() {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
+//        Window.alert(conceptEntryDTO.toStringDTO());
         if (conceptEntryDTO != null) {
             addcpt = new ConceptForm(ownerID);
             addcpt.conceptDTO = conceptEntryDTO.concept;
@@ -248,19 +254,30 @@ public class WorkspaceWidget extends VerticalPanel {
             addcpt.delete.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
+                    History.newItem("page1");
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                 }
             });
             if (!conceptEntryDTO.listlang.isEmpty()) {
-                for (final LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    final LangSetForm lset = new LangSetForm(ownerID);
-                    addterms.add(lset);
-                    resultsPanel.termsDetails.setWidget(lset);
-                    lset.refreshContentFromLangEntryDTO(langEntryDTO);
-                    lset.adjustSize(addcpt.getOffsetWidth() - 5);
+                addterms = new LangSetForm(ownerID);
+                addterms.adjustSize(addcpt.getOffsetWidth() - 5);
+                resultsPanel.termsDetails.setWidget(addterms);
+                for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO);
                 }
             }
+            addcpt.save.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    addcpt.save.setEnabled(false);
+                    getConcetEntryDTOFromWidgets();
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
+                    Window.alert(conceptEntryDTO.toStringDTO());
+                    getService().SubmitConceptEntry(conceptEntryDTO, ownerID, addCallback);
+                }
+            });
         } else {
             resultsPanel.termsDetails.setWidget(new Label("Concept details object is null, something is worng"));
         }
@@ -304,25 +321,13 @@ public class WorkspaceWidget extends VerticalPanel {
     private static void getConcetEntryDTOFromWidgets() {
         conceptEntryDTO = new ConceptEntryDTO();
         conceptEntryDTO.concept = addcpt.getConceptDTOFromContent();
-        if (addterms.size() == 1) {
-            addterms.get(0).sortTermsDTOByLangSet();
-            conceptEntryDTO.listlang.addAll(addterms.get(0).listlang);
-        } else {
-            if (!addterms.isEmpty()) {
-                addterms.get(0).sortTermsDTOByLangSet();
-                conceptEntryDTO.listlang.addAll(addterms.get(0).listlang);
-                addterms.remove(0);
-                for (LangSetForm lsf : addterms) {
-                    lsf.sortTermsDTOByLangSet();
-                    for (LangEntryDTO lse : lsf.listlang) {
-                        int i = getLangEntryIdx(lse.lan.getIdLanguage());
-                        if (i > -1) {
-                            conceptEntryDTO.listlang.get(i).listterm.addAll(lse.listterm);
-                        } else {
-                            conceptEntryDTO.listlang.add(lse);
-                        }
-                    }
-                }
+        addterms.sortTermsDTOByLangSet();
+        for (LangEntryDTO lse : addterms.listlang) {
+            int i = getLangEntryIdx(lse.lan.getIdLanguage());
+            if (i > -1) {
+                conceptEntryDTO.listlang.get(i).listterm.addAll(lse.listterm);
+            } else {
+                conceptEntryDTO.listlang.add(lse);
             }
         }
     }
@@ -345,13 +350,10 @@ public class WorkspaceWidget extends VerticalPanel {
         public MyDialog(String text, int call) {
             // Set the dialog box's caption.
             setText(text);
-
             // Enable animation.
             setAnimationEnabled(true);
-
             // Enable glass background.
             setGlassEnabled(true);
-
             HorizontalPanel controls = new HorizontalPanel();
             // DialogBox is a SimplePanel, so you have to set its widget property to
             // whatever you want its contents to be.

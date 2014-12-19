@@ -46,7 +46,6 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public Button btnSend = new Button("Search");
 
     public SearchHeaderBasic(long ownerID) {
-        rsrc = new ResourceList(ownerID);
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
@@ -64,6 +63,7 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
+        rsrc = new ResourceList(ownerID, "basic");
         add(rsrc);
         add(new HTML("&nbsp;"));
         add(new Label("Domain: "));

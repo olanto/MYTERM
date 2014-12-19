@@ -36,7 +36,7 @@ public class TestView {
 
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
 //        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
-        getConceptAndAssociatedTerms(2525);
+        getConceptAndAssociatedTerms(3534);
     }
 
     public static void init() {
@@ -151,6 +151,7 @@ public class TestView {
                         }
                     }
                     conceptEntry.listlang.add(langE);
+//                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
                 }
             }
             return conceptEntry;
@@ -257,17 +258,17 @@ public class TestView {
         Query query;
         if (resID.contains("-1")) {
             if (domID.equalsIgnoreCase("ANY")) {
-                query = em.createNamedQuery("VjSource.findPublicBySource");
+                query = em.createNamedQuery("VjSource.findAllBySource");
             } else {
-                query = em.createNamedQuery("VjSource.findPublicBysourceSubjectField");
+                query = em.createNamedQuery("VjSource.findALLBysourceSubjectField");
                 query.setParameter("subjectField", domID);
             }
         } else {
             if (domID.equalsIgnoreCase("ANY")) {
-                query = em.createNamedQuery("VjSource.findPublicBysourceIdResource");
+                query = em.createNamedQuery("VjSource.findALLBysourceIdResource");
                 query.setParameter("idResource", Long.parseLong(resID));
             } else {
-                query = em.createNamedQuery("VjSource.findPublicBySourceResourceSubjectField");
+                query = em.createNamedQuery("VjSource.findALLBySourceResourceSubjectField");
                 query.setParameter("idResource", Long.parseLong(resID));
                 query.setParameter("subjectField", domID);
             }
