@@ -42,7 +42,6 @@ public class LangSetForm extends VerticalPanel {
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
     private ArrayList<TermForm> terms;
-    public ArrayList<LangEntryDTO> listlang;
     private long ownerID;
 
     public LangSetForm(long idOwner) {
@@ -78,9 +77,8 @@ public class LangSetForm extends VerticalPanel {
                 final TermForm ter = new TermForm(ownerID, 0);
                 terms.add(ter);
                 desc.add(ter);
-                ter.termDTO = tDTO;
                 ter.adjustSize(getOffsetWidth() - 10);
-                ter.refreshContentFromTermDTO();
+                ter.refreshContentFromTermDTO(tDTO);
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
@@ -104,28 +102,48 @@ public class LangSetForm extends VerticalPanel {
         controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
     }
 
-    public void sortTermsDTOByLangSet() {
-        listlang = new ArrayList<>();
+    public void sortTermDTOByLangSet(ArrayList<LangEntryDTO> listlang) {
         if (!terms.isEmpty()) {
             for (TermForm tf : terms) {
-                tf.gettTermDTOFromContent();
-                int i = getLangEntryIdx(tf.termDTO.getIdLanguage());
+                int i = getLangEntryIdx(tf.getIdLanguage(), listlang);
                 if (i > -1) {
-                    listlang.get(i).listterm.add(tf.termDTO);
+                    if (tf.type == 0) {
+                        int j = getTermDTOIdx(tf.getTermForm(), listlang.get(i).listterm);
+                        tf.updateTermDTOFromContent(listlang.get(i).listterm.get(j));
+                    } else {
+                        TermDTO termDTO = new TermDTO(null);
+                        tf.updateTermDTOFromContent(termDTO);
+                        listlang.get(i).listterm.add(termDTO);
+                    }
                 } else {
-                    LangEntryDTO lsDTO = new LangEntryDTO(tf.termDTO.getIdLanguage(), tf.termDTO.getIdLangset());
-                    lsDTO.listterm.add(tf.termDTO);
+                    TermDTO termDTO = new TermDTO(null);
+                    tf.updateTermDTOFromContent(termDTO);
+                    LangEntryDTO lsDTO = new LangEntryDTO(termDTO.getIdLanguage());
+                    lsDTO.listterm.add(termDTO);
                     listlang.add(lsDTO);
                 }
             }
         }
     }
 
-    private int getLangEntryIdx(String langID) {
+    private int getLangEntryIdx(String langID, ArrayList<LangEntryDTO> listlang) {
         if (!listlang.isEmpty()) {
             int i = 0;
             for (LangEntryDTO lE : listlang) {
                 if (lE.lan.getIdLanguage().equalsIgnoreCase(langID)) {
+                    return i;
+                }
+                i++;
+            }
+        }
+        return -1;
+    }
+
+    private int getTermDTOIdx(String termform, ArrayList<TermDTO> listterm) {
+        if (!listterm.isEmpty()) {
+            int i = 0;
+            for (TermDTO tDTO : listterm) {
+                if (tDTO.getTermForm().equalsIgnoreCase(termform)) {
                     return i;
                 }
                 i++;

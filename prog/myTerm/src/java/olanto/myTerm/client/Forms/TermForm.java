@@ -73,11 +73,11 @@ public class TermForm extends VerticalPanel {
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
-    public TermDTO termDTO;
     public int type;
 
     public TermForm(long ownerID, int type) {
         lang = new LangList(ownerID);
+        this.type = type;
         this.setStyleName("termForm");
         add(form);
         form.add(form1);
@@ -139,10 +139,9 @@ public class TermForm extends VerticalPanel {
 //            }
 //        });
         delete.setTitle("Delete the current term");
-        termDTO = new TermDTO();
     }
 
-    public void refreshContentFromTermDTO() {
+    public void refreshContentFromTermDTO(TermDTO termDTO) {
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
         text_def.setText(termDTO.getTermDefinition());
@@ -156,7 +155,8 @@ public class TermForm extends VerticalPanel {
         text_gdr.setText(termDTO.getTermGender());
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
-        lang_lbl.setText(lang.getLangName(termDTO.getIdLanguage()));
+        lang_lbl.setText(termDTO.getLangName());
+        lang_lbl.setTitle(termDTO.getIdLanguage());
         form1.setWidget(0, 1, lang_lbl);
     }
 
@@ -218,10 +218,19 @@ public class TermForm extends VerticalPanel {
         text_ext.setReadOnly(edit);
     }
 
-    public void gettTermDTOFromContent() {
-        if (termDTO == null) {
-            termDTO = new TermDTO();
+    public String getTermForm() {
+        return text_frm.getText();
+    }
+
+    public String getIdLanguage() {
+        if (type == 0) {
+            return lang_lbl.getTitle();
+        } else {
+            return lang.getValue(lang.getSelectedIndex());
         }
+    }
+
+    public void updateTermDTOFromContent(TermDTO termDTO) {
         termDTO.setTermForm(text_frm.getText());
         termDTO.setTermSource(text_src.getText());
         termDTO.setTermDefinition(text_def.getText());
@@ -236,9 +245,11 @@ public class TermForm extends VerticalPanel {
         termDTO.setTermGender(text_gdr.getText());
         termDTO.setStatus('e');
         if (type == 0) {
-            termDTO.setIdLanguage(lang.getLangID(lang_lbl.getText()));
+            termDTO.setIdLanguage(lang_lbl.getTitle());
+            termDTO.setLangName(lang_lbl.getText());
         } else {
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
+            termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
     }
 }

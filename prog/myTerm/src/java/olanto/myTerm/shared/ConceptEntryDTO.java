@@ -44,7 +44,7 @@ public class ConceptEntryDTO implements IsSerializable {
         this.extraConcepts = "";
     }
 
-    public void addTerm(String lang, String term_form) {
+    public void addTerm(String term_form, String lang, char status) {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntryDTO lan = listlang.get(i);
             if (lan.lan.getIdLanguage().equals(lang)) {
@@ -53,7 +53,7 @@ public class ConceptEntryDTO implements IsSerializable {
             }
         }
         LangEntryDTO lan = new LangEntryDTO(lang);
-        lan.addTerm(term_form);
+        lan.addTerm(term_form, lang, status);
         listlang.add(lan);
     }
 
@@ -91,6 +91,7 @@ public class ConceptEntryDTO implements IsSerializable {
         String conceptEntry = "----Concept Details----\n";
         conceptEntry += "Subject Field: " + this.concept.getSubjectField() + "\n";
         conceptEntry += "Ressource: " + this.concept.getIdResource() + "\n";
+        conceptEntry += "Concept: " + this.concept.getIdConcept() + "\n";
         for (LangEntryDTO lan : listlang) {
             conceptEntry += "----Language Details----\n";
             conceptEntry += "Lang Set: " + lan.lan.getIdLanguage() + "\n";

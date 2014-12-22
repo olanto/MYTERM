@@ -21,14 +21,12 @@
  */
 package org.olanto.myterm.coredb;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Query;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
-import org.olanto.myterm.coredb.entityclasses.Languages;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.IllegalOrphanException;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
@@ -45,7 +43,7 @@ public class ManageLangsets {
         TermDB.langsetsJC.create(lan);
         return lan;
     }
-  
+    
     public static void remove(Concepts con) {
                Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
         query.setParameter("idConcept", con.getIdConcept());

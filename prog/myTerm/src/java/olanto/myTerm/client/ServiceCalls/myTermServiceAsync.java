@@ -36,9 +36,10 @@ public interface myTermServiceAsync {
     public void getDomains(AsyncCallback<ArrayList<DomainDTO>> asyncCallback);
 
     public void getResourcesByOwner(long ownerID, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
-   
+
     public void getLanguagesByOwner(long ownerID, AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
 
-    public void SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+    public void SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> asyncCallback);
 
+    public void UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
 }

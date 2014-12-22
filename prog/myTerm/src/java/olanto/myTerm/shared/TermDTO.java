@@ -34,6 +34,7 @@ public class TermDTO implements IsSerializable {
     private static final long serialVersionUID = 1L;
     private Long idTerm;
     private String idLanguage;
+    private String langName;
     private long idLangset;
     private String termForm;
     private String termSource;
@@ -69,6 +70,13 @@ public class TermDTO implements IsSerializable {
         this.idTerm = idTerm;
         this.idLanguage = idLanguage;
         this.idLangset = idLangset;
+        this.termForm = termForm;
+        this.status = status;
+    }
+
+    public TermDTO(Long idTerm, String idLanguage, String termForm, char status) {
+        this.idTerm = idTerm;
+        this.idLanguage = idLanguage;
         this.termForm = termForm;
         this.status = status;
     }
@@ -137,6 +145,10 @@ public class TermDTO implements IsSerializable {
 
     public String getTermUsage() {
         return termUsage;
+    }
+
+    public String getLangName() {
+        return langName;
     }
 
     public void setTermUsage(String termUsage) {
@@ -261,6 +273,10 @@ public class TermDTO implements IsSerializable {
 
     public void setExtra(String extra) {
         this.extra = extra;
+    }
+
+    public void setLangName(String langName) {
+        this.langName = langName;
     }
 
     @Override

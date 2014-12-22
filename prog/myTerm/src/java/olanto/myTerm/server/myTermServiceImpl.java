@@ -259,10 +259,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
     }
 
-    private ConceptEntry copyFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
+    private ConceptEntry createFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
         if (conceptEntryDTO != null) {
-            Concepts c = copyFromConceptDTO(conceptEntryDTO.concept);
-            ConceptEntry conceptEntry = new ConceptEntry(c, true);
+            ConceptEntry conceptEntry = new ConceptEntry(true);
+            copyFromConceptDTO(conceptEntry.getConcept(), conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 for (LangEntryDTO ls : conceptEntryDTO.listlang) {
                     LangEntry langE = new LangEntry();
@@ -300,9 +300,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         cDTO.setSubjectField(c.getSubjectField());
     }
 
-    private Concepts copyFromConceptDTO(ConceptDTO cDTO) {
+    private void copyFromConceptDTO(Concepts c, ConceptDTO cDTO) {
         if (cDTO != null) {
-            Concepts c = new Concepts();
             c.setConceptDefinition(cDTO.getConceptDefinition());
             c.setConceptNote(cDTO.getConceptNote());
             c.setConceptSourceDefinition(cDTO.getConceptDefinition());
@@ -317,9 +316,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             c.setLastmodified(cDTO.getLastmodified());
             c.setLastmodifiedBy(cDTO.getLastmodifiedBy());
             c.setSubjectField(cDTO.getSubjectField());
-            return c;
         }
-        return null;
     }
 
     private LangSetDTO copyFromLangSet(Langsets ls) {
@@ -359,6 +356,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setExtcrossref(t.getExtcrossref());
             tDTO.setExtra(t.getExtra());
             tDTO.setIdLangset(t.getIdLangset());
+            tDTO.setLangName(Queries.getLanguageByID(t.getIdLanguage()).getLanguageDefaultName());
             tDTO.setIdLanguage(t.getIdLanguage());
             tDTO.setIdTerm(t.getIdTerm());
             tDTO.setLastmodified(t.getLastmodified());
@@ -417,8 +415,16 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
-        ConceptEntry cEntry = copyFromConceptEntryDTO(conceptEntryDTO);
-        return cEntry.flushFromInterface();
+    public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        cEntry.flushFromInterface();
+        return getAddResult(s, ls, resID, domID, ownerID);
+    }
+
+    @Override
+    public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        cEntry.flushFromInterface();
+        return getAddDetailsForConcept(cEntry.getConcept().getIdConcept(), ownerID);
     }
 }

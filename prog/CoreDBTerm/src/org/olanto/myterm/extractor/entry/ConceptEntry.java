@@ -2,7 +2,7 @@ package org.olanto.myterm.extractor.entry;
 
 /**
  * ********
- * Copyright ï¿½ 2013-2014 Olanto Foundation Geneva
+ * Copyright © 2013-2014 Olanto Foundation Geneva
  *
  * This file is part of myTERM.
  *
@@ -43,6 +43,12 @@ public class ConceptEntry {
         prepareConcept();
     }
 
+    public ConceptEntry(boolean createInDB) {
+        this.createInDB = createInDB;
+        listlang = new Vector<>();
+        prepareConcept();
+    }
+
     public ConceptEntry(Concepts c, Boolean createInDB) {
         this.concept = c;
         this.createInDB = createInDB;
@@ -73,7 +79,7 @@ public class ConceptEntry {
         }
     }
 
-    public String flushFromInterface() {
+    public void flushFromInterface() {
         if (createInDB) {
             addConceptToDBFromInterface();
             for (int i = 0; i < listlang.size(); i++) {
@@ -82,8 +88,6 @@ public class ConceptEntry {
             }
         }
         extraConcepts = "";
-        return "Successfully done!";
-
     }
 
     public void addConceptToDBFromInterface() {

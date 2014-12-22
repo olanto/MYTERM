@@ -39,6 +39,8 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.math.BigInteger;
+import java.util.Date;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerWorkspace;
 import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.Forms.ConceptForm;
@@ -76,7 +78,7 @@ public class WorkspaceWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 addcpt.save.setEnabled(true);
                 if (result != null) {
-                    resultsPanel.sideRes.setWidget(new HTML(result));
+                    resultsPanel.sideCurrent.setWidget(new HTML(result));
                 } else {
                     StatusPanel.setMessage("warning", "Could not add concept!!!!");
                 }
@@ -173,7 +175,7 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 History.newItem("page1");
-                createNewEntry();
+                createNewConceptEntry();
             }
         });
         resultsPanel.adjustSize(0.25f, 0.3f);
@@ -184,10 +186,9 @@ public class WorkspaceWidget extends VerticalPanel {
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
             addcpt = new ConceptForm(ownerID);
-            addcpt.conceptDTO = conceptEntryDTO.concept;
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
-            addcpt.refreshContentFromConceptEntryDTO();
+            addcpt.refreshContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetForm(ownerID);
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
@@ -200,11 +201,12 @@ public class WorkspaceWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     addcpt.save.setEnabled(false);
-                    getConcetEntryDTOFromWidgets();
+                    getConceptEntryDTOFromWidget();
+                    Window.alert(conceptEntryDTO.toStringDTO());
+                    getService().UpdateConceptEntry(conceptEntryDTO, ownerID, addTermsCallback);
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
-                    Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().SubmitConceptEntry(conceptEntryDTO, ownerID, addCallback);
+                    History.newItem("page1");
                 }
             });
             addcpt.delete.addClickHandler(new ClickHandler() {
@@ -220,7 +222,28 @@ public class WorkspaceWidget extends VerticalPanel {
         }
     }
 
-    public void createNewEntry() {
+    public void getConceptEntryDTOFromHeader() {
+        conceptEntryDTO = new ConceptEntryDTO();
+        conceptEntryDTO.concept.setCreateBy(BigInteger.valueOf(ownerID));
+        conceptEntryDTO.concept.setCreation(new Date(System.currentTimeMillis()));
+        conceptEntryDTO.concept.setIdResource(searchMenu.rsrc.getIDResource(searchMenu.rsrc.getSelectedIndex()));
+        conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
+        conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
+        conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
+        conceptEntryDTO.addTerm(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e');
+    }
+
+    public void createNewConceptEntry() {
+        getConceptEntryDTOFromHeader();
+//        Window.alert(conceptEntryDTO.toStringDTO());
+        getService().SubmitConceptEntry(conceptEntryDTO, searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+    }
+
+    public void deleteConceptEntry() {
+        getService().SubmitConceptEntry(conceptEntryDTO, searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+    }
+
+    public void updateEntry() {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         addcpt = new ConceptForm(ownerID);
@@ -229,11 +252,11 @@ public class WorkspaceWidget extends VerticalPanel {
         LangSetForm lset = new LangSetForm(ownerID);
         addterms.add(lset);
         resultsPanel.termsDetails.setWidget(lset);
-        lset.adjustSize(addcpt.getOffsetWidth() - 5);
+        lset.adjustSize(addcpt.getOffsetWidth() - 10);
         addcpt.delete.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                conceptEntryDTO = null;
+//              dialog and at confirmation delete from the database
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
             }
@@ -242,11 +265,11 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 addcpt.save.setEnabled(false);
-                getConcetEntryDTOFromWidgets();
+                getConceptEntryDTOFromWidget();
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
-                Window.alert(conceptEntryDTO.toStringDTO());
-                getService().SubmitConceptEntry(conceptEntryDTO, ownerID, addCallback);
+//                Window.alert(conceptEntryDTO.toStringDTO());
+                getService().UpdateConceptEntry(conceptEntryDTO, ownerID, addTermsCallback);
             }
         });
     }
@@ -255,36 +278,14 @@ public class WorkspaceWidget extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    private static void getConcetEntryDTOFromWidgets() {
-        conceptEntryDTO = new ConceptEntryDTO();
-        conceptEntryDTO.concept = addcpt.getConceptDTOFromContent();
-        addterms.sortTermsDTOByLangSet();
-        for (LangEntryDTO lse : addterms.listlang) {
-            int i = getLangEntryIdx(lse.lan.getIdLanguage());
-            if (i > -1) {
-                conceptEntryDTO.listlang.get(i).listterm.addAll(lse.listterm);
-            } else {
-                conceptEntryDTO.listlang.add(lse);
-            }
-        }
-    }
-
-    private static int getLangEntryIdx(String langID) {
-        if (!conceptEntryDTO.listlang.isEmpty()) {
-            int i = 0;
-            for (LangEntryDTO lE : conceptEntryDTO.listlang) {
-                if (lE.lan.getIdLanguage().equalsIgnoreCase(langID)) {
-                    return i;
-                }
-                i++;
-            }
-        }
-        return -1;
+    private static void getConceptEntryDTOFromWidget() {
+        addcpt.updateConceptDTOFromContent(conceptEntryDTO.concept);
+        addterms.sortTermDTOByLangSet(conceptEntryDTO.listlang);
     }
 
     private class MyDialog extends DialogBox {
 
-        public MyDialog(String text, int call) {
+        public MyDialog(String text, final int call) {
             // Set the dialog box's caption.
             setText(text);
             // Enable animation.
@@ -299,7 +300,11 @@ public class WorkspaceWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
-                    createNewEntry();
+                    if (call == 0) {
+                        createNewConceptEntry();
+                    } else {
+                        deleteConceptEntry();
+                    }
                 }
             });
             Button cancel = new Button("Cancel");

@@ -41,5 +41,7 @@ public interface myTermService extends RemoteService {
 
     public String getInventory();
 
-    public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID);
+
+    public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 }

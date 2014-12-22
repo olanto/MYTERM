@@ -64,7 +64,6 @@ public class ConceptForm extends HorizontalPanel {
     public Button submit = new Button("SUBMIT");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
-    public ConceptDTO conceptDTO;
     private long ownerID;
 
     public ConceptForm(long idOwner) {
@@ -104,7 +103,6 @@ public class ConceptForm extends HorizontalPanel {
                 clearAllText();
             }
         });
-        conceptDTO = new ConceptDTO();
     }
 
     public void adjustSize(int w) {
@@ -125,11 +123,11 @@ public class ConceptForm extends HorizontalPanel {
         text_nt.setWidth(w * 1 / 3 + "px");
     }
 
-    public void refreshContentFromConceptEntryDTO() {
+    public void refreshContentFromConceptEntryDTO(ConceptDTO conceptDTO) {
         text_def.setText(conceptDTO.getConceptDefinition());
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
-        if (!conceptDTO.getSubjectField().isEmpty()) {
+        if ((conceptDTO.getSubjectField() != null) && (!conceptDTO.getSubjectField().equalsIgnoreCase("ANY"))) {
             sfPanel.remove(sf);
             sfPanel.add(new HTML(conceptDTO.getSubjectField()));
         }
@@ -155,10 +153,7 @@ public class ConceptForm extends HorizontalPanel {
         sf.setEnabled(edit);
     }
 
-    public ConceptDTO getConceptDTOFromContent() {
-        if (conceptDTO == null) {
-            conceptDTO = new ConceptDTO();
-        }
+    public void updateConceptDTOFromContent(ConceptDTO conceptDTO) {
         conceptDTO.setConceptDefinition(text_def.getText());
         conceptDTO.setConceptNote(text_nt.getText());
         conceptDTO.setConceptSourceDefinition(text_sdef.getText());
@@ -168,6 +163,5 @@ public class ConceptForm extends HorizontalPanel {
         conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
         conceptDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
-        return conceptDTO;
     }
 }

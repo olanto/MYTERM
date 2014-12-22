@@ -21,15 +21,12 @@
  */
 package org.olanto.myterm.coredb;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Query;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
-import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
-import org.olanto.myterm.coredb.jpacontroller.exceptions.IllegalOrphanException;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
 /**
@@ -64,7 +61,7 @@ public class ManageConcept {
         TermDB.conceptsJC.create(con);
         return con;
     }
-    
+
     public static Concepts addConcept(Concepts con) {
         TermDB.conceptsJC.create(con);
         return con;
@@ -82,5 +79,15 @@ public class ManageConcept {
                 Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public static Concepts edit(Concepts con) {
+        try {
+            TermDB.conceptsJC.edit(con);
+            return con;
+        } catch (Exception ex) {
+            Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

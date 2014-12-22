@@ -41,10 +41,10 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  */
 public class LangList extends ListBox {
 
-    private static final myTermServiceAsync langService = GWT.create(myTermService.class);
+    private myTermServiceAsync langService = GWT.create(myTermService.class);
     private AsyncCallback<ArrayList<LanguageDTO>> langCallback;
-    private static ArrayList<String> langlist = new ArrayList<>();
-    private static ArrayList<String> langIDlist = new ArrayList<>();
+    private ArrayList<String> langlist = new ArrayList<>();
+    private ArrayList<String> langIDlist = new ArrayList<>();
 
     public LangList(final String type) {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
@@ -144,6 +144,7 @@ public class LangList extends ListBox {
                     langIDlist.add(s.getIdLanguage());
                     addItem(s.getLanguageDefaultName(), s.getIdLanguage());
                 }
+                setSelectedIndex(0);
             }
         };
         langService.getLanguagesByOwner(ownerID, langCallback);
@@ -169,31 +170,5 @@ public class LangList extends ListBox {
             }
             i++;
         }
-    }
-
-    public String getLangName(String IDlang) {
-        int i = 0;
-        for (String s : langIDlist) {
-            if (s.equalsIgnoreCase(IDlang)) {
-                return langlist.get(i);
-            }
-            i++;
-        }
-        return "";
-    }
-
-    public String getLangID(String langName) {
-        int i = 0;
-        for (String s : langlist) {
-            if (s.equalsIgnoreCase(langName)) {
-                return langIDlist.get(i);
-            }
-            i++;
-        }
-        return "";
-    }
-
-    public String getSelectedValue() {
-        return this.getValue(this.getSelectedIndex());
     }
 }
