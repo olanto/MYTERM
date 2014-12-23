@@ -79,7 +79,7 @@ public class ConceptEntry {
         }
     }
 
-    public void flushFromInterface() {
+    public Concepts flushFromInterface() {
         if (createInDB) {
             addConceptToDBFromInterface();
             for (int i = 0; i < listlang.size(); i++) {
@@ -87,13 +87,25 @@ public class ConceptEntry {
                 lan.addLangToDB(concept);
             }
         }
-        extraConcepts = "";
+        return concept;
+    }
+
+    public Concepts updateFromInterface() {
+        updateConceptInDBFromInterface();
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            lan.updateLangInDB(concept);
+        }
+        return concept;
+    }
+
+    public void updateConceptInDBFromInterface() {
+        concept = ManageConcept.edit(concept);
     }
 
     public void addConceptToDBFromInterface() {
         if (createInDB) {
             concept.setCreation(new Date(System.currentTimeMillis()));
-            concept.setExtra(extraConcepts);
             concept = ManageConcept.addConcept(concept);
         }
     }

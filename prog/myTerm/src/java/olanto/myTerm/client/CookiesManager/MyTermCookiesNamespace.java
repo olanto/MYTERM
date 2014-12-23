@@ -28,9 +28,13 @@ package olanto.myTerm.client.CookiesManager;
 public class MyTermCookiesNamespace {
 
     public static String MyTermlangS = "MyTermlangS";
+    public static String MyTermIDlangS = "MyTermIDlangS";
     public static String MyTermlangT = "MyTermlangT";
+    public static String MyTermIDlangT = "MyTermIDlangT";
     public static String MyTermlangSrc = "MyTermlangSrc";
+    public static String MyTermIDlangSrc = "MyTermIDlangSrc";
     public static String MyTermlangTgt = "MyTermlangTgt";
+    public static String MyTermIDlangTgt = "MyTermIDlangTgt";
     public static String InterfaceLanguage = "InterfaceLanguage";
     public static String Resource = "Resource";
     public static String Domain = "Domain";

@@ -11,6 +11,7 @@ import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
+import olanto.myTerm.shared.TermDTO;
 
 /**
  *
@@ -29,6 +30,8 @@ public interface myTermService extends RemoteService {
 
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID);
 
+    public String getWorkspaceElements(String ls, long ownerID);
+
     public ArrayList<String> getResults(String s, String ls, String lt, long ownerID);
 
     public ArrayList<LanguageDTO> getLanguages();
@@ -44,4 +47,8 @@ public interface myTermService extends RemoteService {
     public String SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID);
 
     public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+
+    public String DeleteConceptEntry(long conceptID, String ls, long ownerID);
+
+    public String DeleteTermEntry(TermDTO termEntryDTO, long ownerID);
 }

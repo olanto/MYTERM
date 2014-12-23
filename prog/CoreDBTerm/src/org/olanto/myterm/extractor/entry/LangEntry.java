@@ -2,7 +2,7 @@ package org.olanto.myterm.extractor.entry;
 
 /**
  * ********
- * Copyright ï¿½ 2013-2014 Olanto Foundation Geneva
+ * Copyright © 2013-2014 Olanto Foundation Geneva
  *
  * This file is part of myTERM.
  *
@@ -61,6 +61,25 @@ public class LangEntry {
             Terms term = listterm.get(i);
             term = ManageTerm.addTermToLangset(lan, term);
         }
+    }
 
+    public void updateLangInDB(Concepts concept) {
+        if (lan.getIdLangset() != null) {
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                if (term.getIdTerm() != null) {
+                    term = ManageTerm.edit(term);
+                } else {
+                    term = ManageTerm.addTermToLangset(lan, term);
+                }
+            }
+        } else {
+            lan.setIdConcept(concept.getIdConcept());
+            lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term = ManageTerm.addTermToLangset(lan, term);
+            }
+        }
     }
 }

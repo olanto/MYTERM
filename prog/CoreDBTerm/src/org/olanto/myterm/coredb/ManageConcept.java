@@ -90,4 +90,15 @@ public class ManageConcept {
         }
         return null;
     }
+
+    public static boolean remove(long con) {
+        ManageLangsets.remove(con);
+        try {
+            TermDB.conceptsJC.destroy(con);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

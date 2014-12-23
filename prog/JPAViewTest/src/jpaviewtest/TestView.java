@@ -17,6 +17,7 @@ import jpaviewtest.entities.VjSourcetarget;
 import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
 import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Terms;
@@ -36,11 +37,13 @@ public class TestView {
 
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
 //        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
-        getConceptAndAssociatedTerms(3534);
+//        getConceptAndAssociatedTerms(3534);
+        getCurrentForThis("EN", 1001);
     }
 
     public static void init() {
         if (emf == null) {
+            TermDB.restart();
             System.out.println("init BD connection");
             emf = Persistence.createEntityManagerFactory("JPAViewTestPU");
             em = emf.createEntityManager();
@@ -250,6 +253,29 @@ public class TestView {
         return res.toString();
     }
 
+    public static String getTargetsForThis(long conceptID, String solang, long ownerID) {
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        query = em.createNamedQuery("VjSourcetarget.findALLByIdOwner");
+        query.setParameter("idOwner", ownerID);
+        query.setParameter("solang", solang);
+        List<VjSourcetarget> resultQ = query.getResultList();
+
+        if (!resultQ.isEmpty()) {
+            res.append("<table class =\"nost\">");
+            for (VjSourcetarget result : resultQ) {
+                if (result.getIdConcept() == conceptID) {
+                    res.append("<tr>");
+                    res.append("<td>").append(result.getTarget()).append("</td>");
+                    res.append("</tr>");
+                }
+            }
+            res.append("</table>");
+        }
+        return res.toString();
+    }
+
     public static String getSourceForThis(String term, String solang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -287,6 +313,29 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        return res.toString();
+    }
+
+    public static String getCurrentForThis(String solang, long ownerID) {
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        query = em.createNamedQuery("VjSource.findCurrentByIdOwner");
+        query.setParameter("idOwner", ownerID);
+        query.setParameter("solang", solang);
+        List<VjSource> resultQ = query.getResultList();
+
+        if (resultQ.isEmpty()) {
+            return null;
+        } else {
+            for (VjSource result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang, ownerID)).append("</td>");
+                res.append("</tr>");
+            }
+        }
+//        System.out.println(res.toString());
         return res.toString();
     }
 

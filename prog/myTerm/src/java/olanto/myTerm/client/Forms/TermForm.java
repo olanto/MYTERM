@@ -28,6 +28,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.math.BigInteger;
+import java.util.Date;
 import olanto.myTerm.client.Langs.LangList;
 import olanto.myTerm.shared.TermDTO;
 
@@ -74,9 +76,11 @@ public class TermForm extends VerticalPanel {
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
     public int type;
+    private long ownerID;
 
     public TermForm(long ownerID, int type) {
         lang = new LangList(ownerID);
+        this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
         add(form);
@@ -123,22 +127,20 @@ public class TermForm extends VerticalPanel {
         form3.setWidget(4, 1, controls);
         text_st.setReadOnly(true);
         controls.add(delete);
-
-//        more.addClickHandler(new ClickHandler() {
-//            @Override
-//            public void onClick(ClickEvent event) {
-//                if (!expanded) {
-//                    rst.setVisible(true);
-//                    more.setText("Less...");
-//                    expanded = true;
-//                } else {
-//                    rst.setVisible(false);
-//                    more.setText("Expand this...");
-//                    expanded = false;
-//                }
-//            }
-//        });
         delete.setTitle("Delete the current term");
+        text_frm.setText("");
+        text_src.setText("");
+        text_def.setText("");
+        text_tp.setText("");
+        text_pos.setText("");
+        text_gdr.setText("");
+        text_st.setText("");
+        text_sdef.setText("");
+        text_nt.setText("");
+        text_ctxt.setText("");
+        text_sctxt.setText("");
+        text_usg.setText("");
+        text_ext.setText("");
     }
 
     public void refreshContentFromTermDTO(TermDTO termDTO) {
@@ -243,6 +245,8 @@ public class TermForm extends VerticalPanel {
         termDTO.setTermPartofspeech(text_pos.getText());
         termDTO.setExtra(text_ext.getText());
         termDTO.setTermGender(text_gdr.getText());
+        termDTO.setLastmodified(new Date(System.currentTimeMillis()));
+        termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         termDTO.setStatus('e');
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());

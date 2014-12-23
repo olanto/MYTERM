@@ -53,6 +53,7 @@ public class ConceptForm extends HorizontalPanel {
     private Label label_sdef = new Label("Definition's source:");
     private TextArea text_sdef = new TextArea();
     private Label label_nt = new Label("Note:");
+    private Label label_dom = new Label("");
     private TextArea text_nt = new TextArea();
     private HorizontalPanel sfPanel = new HorizontalPanel();
     private HorizontalPanel rsrcPanel = new HorizontalPanel();
@@ -65,6 +66,7 @@ public class ConceptForm extends HorizontalPanel {
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
     private long ownerID;
+    public int type = 1;
 
     public ConceptForm(long idOwner) {
         ownerID = idOwner;
@@ -97,6 +99,11 @@ public class ConceptForm extends HorizontalPanel {
         escape.setTitle("Abort all modifications");
         submit.setTitle("Submit changes (updates in database)");
         delete.setTitle("Save changes without submit");
+        text_def.setText("");
+        text_sdef.setText("");
+        text_nt.setText("");
+        sf.setSelectedIndex(0);
+        rsrc.setSelectedIndex(0);
         escape.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -128,8 +135,10 @@ public class ConceptForm extends HorizontalPanel {
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
         if ((conceptDTO.getSubjectField() != null) && (!conceptDTO.getSubjectField().equalsIgnoreCase("ANY"))) {
+            type = 0;
             sfPanel.remove(sf);
-            sfPanel.add(new HTML(conceptDTO.getSubjectField()));
+            label_dom.setText(conceptDTO.getSubjectField());
+            sfPanel.add(label_dom);
         }
         rsrcPanel.remove(rsrc);
         rsrcPanel.add(new HTML(rsrc.getResName(conceptDTO.getIdResource())));
@@ -162,6 +171,10 @@ public class ConceptForm extends HorizontalPanel {
         conceptDTO.setIdResource(rsrc.getIDResource(rsrc.getSelectedIndex()));
         conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
         conceptDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
+        if (type == 0) {
+            conceptDTO.setSubjectField(label_dom.getText());
+        } else {
+            conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
+        }
     }
 }

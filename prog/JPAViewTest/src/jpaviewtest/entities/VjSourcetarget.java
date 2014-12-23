@@ -24,9 +24,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VjSourcetarget.findAll", query = "SELECT v FROM VjSourcetarget v"),
     @NamedQuery(name = "VjSourcetarget.findByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSourcetarget.findALLByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner AND v.solang = :solang"),
+    @NamedQuery(name = "VjSourcetarget.findCurrentByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner AND v.solang = :solang AND v.statusSource like 'e'"),
     @NamedQuery(name = "VjSourcetarget.findByUuid", query = "SELECT v FROM VjSourcetarget v WHERE v.uuid = :uuid AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idOwner = :idOwner AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySource2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSourcetarget.findAllBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSourcetarget.findAllBySource2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner "),
     @NamedQuery(name = "VjSourcetarget.findPublicBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idOwner = :idOwner AND v.statusSource like 'p' AND v.statusTarget like 'p' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSourcetarget.findAllBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSourcetarget.findAllBySourceResourceSubjectField2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),

@@ -43,20 +43,35 @@ public class ManageLangsets {
         TermDB.langsetsJC.create(lan);
         return lan;
     }
-    
-    public static void remove(Concepts con) {
-               Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
-        query.setParameter("idConcept", con.getIdConcept());
-        List<Langsets>  listOfLangsets= query.getResultList();
 
-          for (Langsets lan: listOfLangsets ){
-                  ManageTerm.remove(lan);
-                   try {
-                       TermDB.langsetsJC.destroy(lan.getIdLangset());
-                   } catch (NonexistentEntityException ex) {
-                       Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-       }
+    public static void remove(Concepts con) {
+        Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
+        query.setParameter("idConcept", con.getIdConcept());
+        List<Langsets> listOfLangsets = query.getResultList();
+
+        for (Langsets lan : listOfLangsets) {
+            ManageTerm.remove(lan);
+            try {
+                TermDB.langsetsJC.destroy(lan.getIdLangset());
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public static void remove(long con) {
+        Query query = TermDB.em.createNamedQuery("Langsets.findByIdConcept");
+        query.setParameter("idConcept", con);
+        List<Langsets> listOfLangsets = query.getResultList();
+
+        for (Langsets lan : listOfLangsets) {
+            ManageTerm.remove(lan);
+            try {
+                TermDB.langsetsJC.destroy(lan.getIdLangset());
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(ManageLangsets.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     public static Langsets updateExtra(Long idLangset, String extra) {
@@ -79,6 +94,7 @@ public class ManageLangsets {
         }
         return lan;
     }
+
     public static Langsets updateNote(Long idLangset, String note) {
         Langsets lan = Queries.getIdLangset(idLangset);
         if (lan == null) {
@@ -99,5 +115,4 @@ public class ManageLangsets {
         }
         return lan;
     }
-   // public long AddOw("")
 }

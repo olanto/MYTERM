@@ -80,8 +80,10 @@ public class LangList extends ListBox {
             public void onChange(ChangeEvent event) {
                 if (type.equals("source")) {
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangS, getItemText(getSelectedIndex()));
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermIDlangS, getItemText(getSelectedIndex()));
                 } else {
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangT, getItemText(getSelectedIndex()));
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermIDlangT, getItemText(getSelectedIndex()));
                 }
             }
         });
@@ -122,8 +124,10 @@ public class LangList extends ListBox {
             public void onChange(ChangeEvent event) {
                 if (type.equals("source")) {
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangSrc, getItemText(getSelectedIndex()));
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermIDlangSrc, getValue(getSelectedIndex()));
                 } else {
                     MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermlangTgt, getItemText(getSelectedIndex()));
+                    MyTermCookies.updateCookie(MyTermCookiesNamespace.MyTermIDlangTgt, getValue(getSelectedIndex()));
                 }
             }
         });

@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VjSource.findAll", query = "SELECT v FROM VjSource v"),
     @NamedQuery(name = "VjSource.findByIdOwner", query = "SELECT v FROM VjSource v WHERE v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSource.findCurrentByIdOwner", query = "SELECT v FROM VjSource v WHERE v.solang = :solang AND v.status like 'e' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findByUuid", query = "SELECT v FROM VjSource v WHERE v.uuid = :uuid AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findAllBySource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findPublicBySource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner AND v.status like 'p'"),

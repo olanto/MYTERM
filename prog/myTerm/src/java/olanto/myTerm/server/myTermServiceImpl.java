@@ -20,6 +20,7 @@ import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.LangSetDTO;
 import olanto.myTerm.shared.TermDTO;
+import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
@@ -236,6 +237,25 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
+    public String getWorkspaceElements(String ls, long ownerID) {
+        String response = TestView.getCurrentForThis(ls, ownerID);
+        if (response != null) {
+            StringBuilder result = new StringBuilder("");
+            result.append("<div class =\"rpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append("Targets").append("</th>");
+            result.append("</tr>");
+            result.append(response);
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
+
+    @Override
     public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID) {
         ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
         ConceptEntry c = TestView.getConceptAndAssociatedTerms(conceptID);
@@ -335,10 +355,15 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     private Langsets copyFromLangSetDTO(LangSetDTO lsDTO) {
         if (lsDTO != null) {
-            Langsets ls = new Langsets();
+            Langsets ls;
+            if (lsDTO.getIdLangset() != null) {
+                ls = new Langsets(lsDTO.getIdLangset());
+            } else {
+                ls = new Langsets();
+                ls.setIdLangset(lsDTO.getIdLangset());
+            }
             ls.setExtra(lsDTO.getExtra());
             ls.setIdConcept(lsDTO.getIdConcept());
-            ls.setIdLangset(lsDTO.getIdLangset());
             ls.setIdLanguage(lsDTO.getIdLanguage());
             ls.setLangsetNote(lsDTO.getLangsetNote());
             ls.setSeq(lsDTO.getSeq());
@@ -365,7 +390,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setStatus(t.getStatus());
             tDTO.setTermAdminStatus(t.getTermAdminStatus());
             tDTO.setTermContext(t.getTermContext());
-            tDTO.setTermContext(t.getTermDefinition());
+            tDTO.setTermDefinition(t.getTermDefinition());
             tDTO.setTermForm(t.getTermForm());
             tDTO.setTermGender(t.getTermGender());
             tDTO.setTermGeoUsage(t.getTermGeoUsage());
@@ -384,6 +409,11 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     private Terms copyFromTermDTO(TermDTO tDTO) {
         if (tDTO != null) {
             Terms t = new Terms();
+            if (t.getIdTerm() != null) {
+                t = new Terms(t.getIdTerm());
+            } else {
+                t = new Terms();
+            }
             t.setCreateBy(tDTO.getCreateBy());
             t.setCreation(tDTO.getCreation());
             t.setCrossref(tDTO.getCrossref());
@@ -398,7 +428,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             t.setStatus(tDTO.getStatus());
             t.setTermAdminStatus(tDTO.getTermAdminStatus());
             t.setTermContext(tDTO.getTermContext());
-            t.setTermContext(tDTO.getTermDefinition());
+            t.setTermDefinition(tDTO.getTermDefinition());
             t.setTermForm(tDTO.getTermForm());
             t.setTermGender(tDTO.getTermGender());
             t.setTermGeoUsage(tDTO.getTermGeoUsage());
@@ -424,7 +454,20 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
-        cEntry.flushFromInterface();
+        cEntry.updateFromInterface();
         return getAddDetailsForConcept(cEntry.getConcept().getIdConcept(), ownerID);
+    }
+
+    @Override
+    public String DeleteConceptEntry(long conceptID, String ls, long ownerID) {
+        if (ManageConcept.remove(conceptID)) {
+            return getWorkspaceElements(ls, ownerID);
+        }
+        return "Failed to remove concept";
+    }
+
+    @Override
+    public String DeleteTermEntry(TermDTO termEntryDTO, long ownerID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
