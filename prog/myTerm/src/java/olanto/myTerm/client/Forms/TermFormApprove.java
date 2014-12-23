@@ -46,7 +46,7 @@ import olanto.myTerm.shared.TermDTO;
  *
  * @author nizar ghoula - simple
  */
-public class TermForm extends VerticalPanel {
+public class TermFormApprove extends VerticalPanel {
 
     private Grid form1 = new Grid(5, 2);
     private Grid form2 = new Grid(5, 2);
@@ -82,12 +82,14 @@ public class TermForm extends VerticalPanel {
     private HorizontalPanel controls = new HorizontalPanel();
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
-    public Button delete = new Button("Delete");
+    public Button delete = new Button("Edit");
+    public Button approve = new Button("Approve");
+    public Button disapprove = new Button("Disapprove");
     public int type;
     private long ownerID;
     private long termID = -1;
 
-    public TermForm(long ownerID, int type) {
+    public TermFormApprove(long ownerID, int type) {
         lang = new LangList(ownerID);
         this.ownerID = ownerID;
         this.type = type;
@@ -136,6 +138,8 @@ public class TermForm extends VerticalPanel {
         form3.setWidget(4, 1, controls);
         text_st.setReadOnly(true);
         controls.add(delete);
+        controls.add(approve);
+        controls.add(disapprove);
         delete.setTitle("Delete the current term");
         text_frm.setText("");
         text_src.setText("");

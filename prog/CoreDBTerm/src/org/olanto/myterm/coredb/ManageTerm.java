@@ -72,4 +72,12 @@ public class ManageTerm {
         }
         return null;
     }
+    
+    public static void remove(long termID) {
+        try {
+            TermDB.termsJC.destroy(termID);
+        } catch (Exception ex) {
+            Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

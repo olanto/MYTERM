@@ -38,7 +38,7 @@ public class TestView {
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
 //        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
 //        getConceptAndAssociatedTerms(3534);
-        getCurrentForThis("EN", 1001);
+        getApproveForThis("EN", 1001);
     }
 
     public static void init() {
@@ -336,6 +336,29 @@ public class TestView {
             }
         }
 //        System.out.println(res.toString());
+        return res.toString();
+    }
+
+        public static String getApproveForThis(String solang, long ownerID) {
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        query = em.createNamedQuery("VjSource.findSubmittedByIdOwner");
+        query.setParameter("idOwner", ownerID);
+        query.setParameter("solang", solang);
+        List<VjSource> resultQ = query.getResultList();
+
+        if (resultQ.isEmpty()) {
+            return null;
+        } else {
+            for (VjSource result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang, ownerID)).append("</td>");
+                res.append("</tr>");
+            }
+        }
+        System.out.println(res.toString());
         return res.toString();
     }
 

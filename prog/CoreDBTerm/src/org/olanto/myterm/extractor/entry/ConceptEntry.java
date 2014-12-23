@@ -98,6 +98,15 @@ public class ConceptEntry {
         }
         return concept;
     }
+    
+    public boolean submitFromInterface() {
+        updateConceptInDBFromInterface();
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            lan.submitLangInDB(concept);
+        }
+        return true;
+    }
 
     public void updateConceptInDBFromInterface() {
         concept = ManageConcept.edit(concept);

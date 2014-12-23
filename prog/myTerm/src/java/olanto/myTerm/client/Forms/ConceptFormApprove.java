@@ -21,8 +21,6 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
@@ -41,7 +39,7 @@ import olanto.myTerm.shared.ConceptDTO;
  *
  * @author nizar ghoula - simple
  */
-public class ConceptForm extends HorizontalPanel {
+public class ConceptFormApprove extends HorizontalPanel {
 
     private Grid cform = new Grid(2, 3);
     private Label label_sf = new Label("Subject field:");
@@ -61,14 +59,14 @@ public class ConceptForm extends HorizontalPanel {
     private VerticalPanel defPAnel = new VerticalPanel();
     private VerticalPanel defsPanel = new VerticalPanel();
     private VerticalPanel ntPanel = new VerticalPanel();
-    public Button save = new Button("SAVE");
+    public Button save = new Button("APPROVE");
     public Button submit = new Button("SUBMIT");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
     private long ownerID;
     public int type = 1;
 
-    public ConceptForm(long idOwner) {
+    public ConceptFormApprove(long idOwner) {
         ownerID = idOwner;
         rsrc = new ResourceList(ownerID);
         setStyleName("conceptForm");

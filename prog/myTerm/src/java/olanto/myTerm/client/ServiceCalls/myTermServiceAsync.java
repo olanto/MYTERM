@@ -10,7 +10,6 @@ import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
-import olanto.myTerm.shared.TermDTO;
 
 /**
  *
@@ -32,6 +31,8 @@ public interface myTermServiceAsync {
 
     public void getWorkspaceElements(String ls, long ownerID, AsyncCallback<String> callback);
 
+    public void getApproveElements(String ls, long ownerID, AsyncCallback<String> callback);
+
     public void getInventory(AsyncCallback<String> callback);
 
     public void getLanguages(AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
@@ -42,11 +43,13 @@ public interface myTermServiceAsync {
 
     public void getLanguagesByOwner(long ownerID, AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
 
-    public void SubmitConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> asyncCallback);
+    public void createConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> asyncCallback);
+
+    public void submitConceptEntry(ConceptEntryDTO conceptEntryDTO, String ls, long ownerID, AsyncCallback<String> asyncCallback);
 
     public void UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
 
     public void DeleteConceptEntry(long conceptID, String ls, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void DeleteTermEntry(TermDTO termEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+    public void DeleteTermEntry(long termID, AsyncCallback<String> asyncCallback);
 }

@@ -103,6 +103,7 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnAdd.setEnabled(true);
+                resultsPanel.sideRes.clear();
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
                 } else {
@@ -257,6 +258,17 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.termsDetails.clear();
                 }
             });
+            addcpt.submit.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    addcpt.save.setEnabled(false);
+                    getConceptEntryDTOFromWidget();
+//                    Window.alert(conceptEntryDTO.toStringDTO());
+                    getService().submitConceptEntry(conceptEntryDTO, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), ownerID, deleteWSCallback);
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
+                }
+            });
             addcpt.delete.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -264,6 +276,13 @@ public class WorkspaceWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     History.newItem("page1");
+                }
+            });
+            addcpt.escape.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    addcpt.clearAllText();
+                    addterms.clearAllText();
                 }
             });
         } else {
@@ -285,7 +304,7 @@ public class WorkspaceWidget extends VerticalPanel {
     public void createNewConceptEntry() {
         getConceptEntryDTOFromHeader();
 //        Window.alert(conceptEntryDTO.toStringDTO());
-        getService().SubmitConceptEntry(conceptEntryDTO, searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+        getService().createConceptEntry(conceptEntryDTO, searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
     }
 
     public void deleteConceptEntry() {

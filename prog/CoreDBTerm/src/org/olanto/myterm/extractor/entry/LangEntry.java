@@ -82,4 +82,26 @@ public class LangEntry {
             }
         }
     }
+
+    public void submitLangInDB(Concepts concept) {
+        if (lan.getIdLangset() != null) {
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('r');
+                if (term.getIdTerm() != null) {
+                    term = ManageTerm.edit(term);
+                } else {
+                    term = ManageTerm.addTermToLangset(lan, term);
+                }
+            }
+        } else {
+            lan.setIdConcept(concept.getIdConcept());
+            lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('r');
+                term = ManageTerm.addTermToLangset(lan, term);
+            }
+        }
+    }
 }

@@ -46,6 +46,17 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.error{
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+.message{
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
 body{
     vertical-align: middle;
 }
