@@ -43,13 +43,13 @@ public interface myTermServiceAsync {
 
     public void getLanguagesByOwner(long ownerID, AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
 
-    public void createConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> asyncCallback);
+    public void createConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void submitConceptEntry(ConceptEntryDTO conceptEntryDTO, String ls, long ownerID, AsyncCallback<String> asyncCallback);
+    public void submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
+    public void UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void DeleteConceptEntry(long conceptID, String ls, long ownerID, AsyncCallback<String> asyncCallback);
+    public void DeleteConceptEntry(long conceptID, long ownerID, AsyncCallback<String> asyncCallback);
 
     public void DeleteTermEntry(long termID, AsyncCallback<String> asyncCallback);
 }

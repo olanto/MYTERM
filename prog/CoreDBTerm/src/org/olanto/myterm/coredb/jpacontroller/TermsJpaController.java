@@ -133,5 +133,4 @@ public class TermsJpaController implements Serializable {
             em.close();
         }
     }
-    
 }

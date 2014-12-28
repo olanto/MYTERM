@@ -24,6 +24,7 @@ package olanto.myTerm.client.Forms;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -159,7 +160,6 @@ public class TermForm extends VerticalPanel {
     }
 
     public void deleteTermEntry() {
-        removeFromParent();
         if (termID > -1) {
             getService().DeleteTermEntry(termID, new AsyncCallback<String>() {
                 @Override
@@ -169,7 +169,9 @@ public class TermForm extends VerticalPanel {
 
                 @Override
                 public void onSuccess(String result) {
+                    removeFromParent();
                     StatusPanel.setMessage("message", "Term Deleted successfully");
+                    History.newItem("page1");
                 }
             });
         }

@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSource.findCurrentByIdOwner", query = "SELECT v FROM VjSource v WHERE v.solang = :solang AND v.status like 'e' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findSubmittedByIdOwner", query = "SELECT v FROM VjSource v WHERE v.solang = :solang AND v.status like 'r' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findByUuid", query = "SELECT v FROM VjSource v WHERE v.uuid = :uuid AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSource.findAllByStatusSource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.status like :status AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findAllBySource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findPublicBySource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner AND v.status like 'p'"),
     @NamedQuery(name = "VjSource.findByIdTermSource", query = "SELECT v FROM VjSource v WHERE v.idTermSource = :idTermSource AND v.idOwner = :idOwner"),
@@ -36,14 +37,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSource.findByResourceName", query = "SELECT v FROM VjSource v WHERE v.resourceName LIKE :resourceName AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findPublicBysourceIdResource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.solang = :solang AND v.status like 'p' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findALLBysourceIdResource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.solang = :solang AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSource.findALLBysourceIdResourceStatus", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.solang = :solang AND v.status like :status AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findBysourceIdResource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findByIdResource", query = "SELECT v FROM VjSource v WHERE v.idResource = :idResource AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findBySubjectField", query = "SELECT v FROM VjSource v WHERE v.subjectField LIKE :subjectField AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findBysourceSubjectField", query = "SELECT v FROM VjSource v WHERE  v.source LIKE :source AND v.subjectField LIKE :subjectField AND v.solang = :solang AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findPublicBysourceSubjectField", query = "SELECT v FROM VjSource v WHERE  v.source LIKE :source AND v.subjectField LIKE :subjectField AND v.solang = :solang AND v.status like 'p' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findALLBysourceSubjectField", query = "SELECT v FROM VjSource v WHERE  v.source LIKE :source AND v.subjectField LIKE :subjectField AND v.solang = :solang AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSource.findALLBysourceSubjectFieldStatus", query = "SELECT v FROM VjSource v WHERE  v.source LIKE :source AND v.subjectField LIKE :subjectField AND v.solang = :solang AND v.status like :status AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findPublicBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.status like 'p' AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findALLBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjSource.findALLBySourceResourceSubjectFieldStatus", query = "SELECT DISTINCT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.status like :status AND v.idOwner = :idOwner"),
     @NamedQuery(name = "VjSource.findBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSource v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner")
 })
 public class VjSource implements Serializable {

@@ -29,10 +29,10 @@ import org.olanto.myterm.extractor.entry.LangEntry;
  * @author simple
  */
 public class TestView {
-
+    
     static EntityManagerFactory emf;
     static EntityManager em;
-
+    
     public static void main(String[] args) {
 
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
@@ -40,23 +40,23 @@ public class TestView {
 //        getConceptAndAssociatedTerms(3534);
         getApproveForThis("EN", 1001);
     }
-
+    
     public static void init() {
+        TermDB.restart();
         if (emf == null) {
-            TermDB.restart();
             System.out.println("init BD connection");
             emf = Persistence.createEntityManagerFactory("JPAViewTestPU");
             em = emf.createEntityManager();
         }
     }
-
+    
     public static String getTermsInfo(long conceptID, String lang) {
         init();
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLanguage");
         query.setParameter("idConcept", conceptID);
         query.setParameter("idLanguage", lang);
         List<VjConceptdetail> resultQ = query.getResultList();
-
+        
         StringBuilder result = new StringBuilder("");
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
@@ -131,7 +131,7 @@ public class TestView {
         result.append("</div>");
         return result.toString();
     }
-
+    
     public static ConceptEntry getConceptAndAssociatedTerms(long conceptID) {
         init();
         Concepts cpt = Queries.getConceptByID(conceptID);
@@ -161,7 +161,7 @@ public class TestView {
         }
         return null;
     }
-
+    
     public static String getTargetForThis(String term, String solang, String talang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -200,7 +200,7 @@ public class TestView {
         }
         return null;
     }
-
+    
     public static List<VjUsersLanguages> getLanguagesByOwner(long ownerID) {
         init();
         if (ownerID > 0) {
@@ -211,7 +211,7 @@ public class TestView {
         }
         return null;
     }
-
+    
     public static String getTargetsForThis(long conceptID, String term, String solang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -238,7 +238,7 @@ public class TestView {
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         List<VjSourcetarget> resultQ = query.getResultList();
-
+        
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
@@ -252,7 +252,7 @@ public class TestView {
         }
         return res.toString();
     }
-
+    
     public static String getTargetsForThis(long conceptID, String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -261,7 +261,7 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSourcetarget> resultQ = query.getResultList();
-
+        
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
@@ -275,34 +275,48 @@ public class TestView {
         }
         return res.toString();
     }
-
+    
     public static String getSourceForThis(String term, String solang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
+        Query query1;
         if (resID.contains("-1")) {
             if (domID.equalsIgnoreCase("ANY")) {
-                query = em.createNamedQuery("VjSource.findAllBySource");
+                query = em.createNamedQuery("VjSource.findAllByStatusSource");
+                query1 = em.createNamedQuery("VjSource.findAllByStatusSource");
             } else {
-                query = em.createNamedQuery("VjSource.findALLBysourceSubjectField");
+                query = em.createNamedQuery("VjSource.findALLBysourceSubjectFieldStatus");
+                query1 = em.createNamedQuery("VjSource.findALLBysourceSubjectFieldStatus");
                 query.setParameter("subjectField", domID);
+                query1.setParameter("subjectField", domID);
             }
         } else {
             if (domID.equalsIgnoreCase("ANY")) {
-                query = em.createNamedQuery("VjSource.findALLBysourceIdResource");
+                query = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
+                query1 = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
                 query.setParameter("idResource", Long.parseLong(resID));
+                query1.setParameter("idResource", Long.parseLong(resID));
             } else {
-                query = em.createNamedQuery("VjSource.findALLBySourceResourceSubjectField");
+                query = em.createNamedQuery("VjSource.findALLBySourceResourceSubjectFieldStatus");
+                query1 = em.createNamedQuery("VjSource.findALLBySourceResourceSubjectFieldStatus");
                 query.setParameter("idResource", Long.parseLong(resID));
                 query.setParameter("subjectField", domID);
+                query1.setParameter("idResource", Long.parseLong(resID));
+                query1.setParameter("subjectField", domID);
             }
         }
+        query.setParameter("status", 'e');
         query.setParameter("idOwner", ownerID);
         query.setParameter("source", term);
         query.setParameter("solang", solang);
+        query1.setParameter("status", 'p');
+        query1.setParameter("idOwner", ownerID);
+        query1.setParameter("source", term);
+        query1.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-
+        resultQ.addAll(query1.getResultList());
         if (resultQ.isEmpty()) {
             return null;
         } else {
@@ -315,7 +329,7 @@ public class TestView {
         }
         return res.toString();
     }
-
+    
     public static String getCurrentForThis(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -324,7 +338,7 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-
+        
         if (resultQ.isEmpty()) {
             return null;
         } else {
@@ -338,8 +352,8 @@ public class TestView {
 //        System.out.println(res.toString());
         return res.toString();
     }
-
-        public static String getApproveForThis(String solang, long ownerID) {
+    
+    public static String getApproveForThis(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
@@ -347,7 +361,7 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-
+        
         if (resultQ.isEmpty()) {
             return null;
         } else {
@@ -358,10 +372,10 @@ public class TestView {
                 res.append("</tr>");
             }
         }
-        System.out.println(res.toString());
+//        System.out.println(res.toString());
         return res.toString();
     }
-
+    
     public static Vector<String> getListForThis(String term, String solang, String talang) {
         System.out.println("param:" + term);
         init();
@@ -376,7 +390,7 @@ public class TestView {
         }
         return res;
     }
-
+    
     public static List<VjUsersResources> getResourcesByOwner(long ownerID) {
         init();
         if (ownerID > 0) {
@@ -387,13 +401,11 @@ public class TestView {
         }
         return null;
     }
-
+    
     public static String getReslang() {
         init();
         StringBuilder res = new StringBuilder("");
         Query query = em.createNamedQuery("VjReslang.findAll");
-
-
         List<VjReslang> resultQ = query.getResultList();
         res.append("<table>");
         res.append("<caption>" + "Inventory" + "</caption>");
@@ -410,10 +422,9 @@ public class TestView {
             res.append("</tr>");
         }
         res.append("</table>");
-
         return res.toString();
     }
-
+    
     public static String getTargetForThis(long conceptID) {
 //        System.out.println("param:" + term);
         init();
@@ -421,7 +432,7 @@ public class TestView {
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConcept");
         query.setParameter("idConcept", conceptID);
         List<VjConceptdetail> resultQ = query.getResultList();
-
+        
         res.append("<table>");
         res.append("<caption>" + "Details" + "</caption>");
         res.append("<tr>");

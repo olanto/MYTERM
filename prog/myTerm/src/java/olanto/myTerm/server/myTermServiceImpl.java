@@ -446,25 +446,29 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String createConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID) {
+    public String createConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
-        cEntry.flushFromInterface();
-        return getAddResult(s, ls, resID, domID, ownerID);
-    }
-
-    @Override
-    public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
-        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
-        cEntry.updateFromInterface();
-        return getAddDetailsForConcept(cEntry.getConcept().getIdConcept(), ownerID);
-    }
-
-    @Override
-    public String DeleteConceptEntry(long conceptID, String ls, long ownerID) {
-        if (ManageConcept.remove(conceptID)) {
-            return getWorkspaceElements(ls, ownerID);
+        if (cEntry.flushFromInterface() != null) {
+            return "sucess";
         }
-        return "Failed to remove concept";
+        return null;
+    }
+
+    @Override
+    public String UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        if (cEntry.updateFromInterface() != null) {
+            return "Sucess";
+        }
+        return null;
+    }
+
+    @Override
+    public String DeleteConceptEntry(long conceptID, long ownerID) {
+        if (ManageConcept.remove(conceptID)) {
+            return "Sucess";
+        }
+        return "Failed to remove concept entry";
     }
 
     @Override
@@ -474,10 +478,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, String ls, long ownerID) {
+    public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
-        if (cEntry.submitFromInterface()) {
-            return getWorkspaceElements(ls, ownerID);
+        if (cEntry.submitFromInterface() != null) {
+            return "Sucess";
         }
         return "Failed to submit concept entry";
     }

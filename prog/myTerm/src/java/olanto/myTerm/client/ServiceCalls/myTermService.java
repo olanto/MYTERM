@@ -45,13 +45,13 @@ public interface myTermService extends RemoteService {
 
     public String getInventory();
 
-    public String createConceptEntry(ConceptEntryDTO conceptEntryDTO, String s, String ls, String resID, String domID, long ownerID);
+    public String createConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, String ls, long ownerID);
+    public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public ConceptEntryDTO UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public String UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String DeleteConceptEntry(long conceptID, String ls, long ownerID);
+    public String DeleteConceptEntry(long conceptID, long ownerID);
 
     public String DeleteTermEntry(long termID);
 }
