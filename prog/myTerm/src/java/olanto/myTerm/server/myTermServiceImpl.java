@@ -307,7 +307,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     private void copyFormConcept(ConceptDTO cDTO, Concepts c) {
         cDTO.setConceptDefinition(c.getConceptDefinition());
         cDTO.setConceptNote(c.getConceptNote());
-        cDTO.setConceptSourceDefinition(c.getConceptDefinition());
+        cDTO.setConceptSourceDefinition(c.getConceptSourceDefinition());
         cDTO.setCreateBy(c.getCreateBy());
         cDTO.setCreation(c.getCreation());
         cDTO.setCrossref(c.getCrossref());
@@ -325,7 +325,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         if (cDTO != null) {
             c.setConceptDefinition(cDTO.getConceptDefinition());
             c.setConceptNote(cDTO.getConceptNote());
-            c.setConceptSourceDefinition(cDTO.getConceptDefinition());
+            c.setConceptSourceDefinition(cDTO.getConceptSourceDefinition());
             c.setCreateBy(cDTO.getCreateBy());
             c.setCreation(cDTO.getCreation());
             c.setCrossref(cDTO.getCrossref());
