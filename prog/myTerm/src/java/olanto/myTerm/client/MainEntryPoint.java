@@ -53,6 +53,7 @@ public class MainEntryPoint implements EntryPoint {
     private LoginView view = GWT.create(LoginView.class);
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
     public static UserDTO userDTO;
+    public static StatusPanel statusPanel = new StatusPanel();
     AsyncCallback<UserDTO> login = new AsyncCallback<UserDTO>() {
         @Override
         public void onFailure(Throwable caught) {
@@ -182,7 +183,6 @@ public class MainEntryPoint implements EntryPoint {
 
         RootPanel.get("login").setVisible(false);
         HeaderPanel headerPanel = new HeaderPanel(user);
-        StatusPanel statusPanel = new StatusPanel();
         RootPanel.get("header").add(headerPanel);
         RootPanel.get("header").setVisible(true);
         switch (user.getRole()) {

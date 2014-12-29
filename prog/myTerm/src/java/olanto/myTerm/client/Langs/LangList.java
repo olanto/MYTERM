@@ -31,7 +31,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import olanto.myTerm.client.ContainerPanels.StatusPanel;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -50,7 +50,7 @@ public class LangList extends ListBox {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                StatusPanel.setMessage("warning", "Failed to get list of languages");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages, please RELOAD THE PAGE");
             }
 
             @Override
@@ -94,7 +94,7 @@ public class LangList extends ListBox {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                StatusPanel.setMessage("warning", "Failed to get list of languages");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
@@ -138,7 +138,7 @@ public class LangList extends ListBox {
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                StatusPanel.setMessage("warning", "Failed to get list of languages");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override

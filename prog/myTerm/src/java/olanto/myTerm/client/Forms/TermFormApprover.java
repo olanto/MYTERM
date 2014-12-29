@@ -46,7 +46,7 @@ import olanto.myTerm.shared.TermDTO;
  *
  * @author nizar ghoula - simple
  */
-public class TermForm extends VerticalPanel {
+public class TermFormApprover extends VerticalPanel {
 
     private Grid form1 = new Grid(5, 2);
     private Grid form2 = new Grid(5, 2);
@@ -82,12 +82,13 @@ public class TermForm extends VerticalPanel {
     private HorizontalPanel controls = new HorizontalPanel();
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
-    public Button delete = new Button("Delete");
+    public Button approve = new Button("Approve");
+    public Button disapprove = new Button("Disapprove");
     public int type;
     private long ownerID;
     private long termID = -1;
 
-    public TermForm(long ownerID, int type) {
+    public TermFormApprover(long ownerID, int type) {
         lang = new LangList(ownerID);
         this.ownerID = ownerID;
         this.type = type;
@@ -135,8 +136,10 @@ public class TermForm extends VerticalPanel {
         form3.setWidget(3, 1, text_sctxt);
         form3.setWidget(4, 1, controls);
         text_st.setReadOnly(true);
-        controls.add(delete);
-        delete.setTitle("Delete the current term");
+        controls.add(approve);
+        approve.setTitle("Approve the current term");
+        controls.add(disapprove);
+        disapprove.setTitle("Disapprove the current term");
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
@@ -150,26 +153,49 @@ public class TermForm extends VerticalPanel {
         text_sctxt.setText("");
         text_usg.setText("");
         text_ext.setText("");
-        delete.addClickHandler(new ClickHandler() {
+        approve.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                new MyDialog("Are you sure that you would like to delete this term?").show();
+                new MyDialog("Are you sure that you would like to aprove this term?", 0).show();
+            }
+        });
+        disapprove.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                new MyDialog("Are you sure that you would like to disaprove this term?", 1).show();
             }
         });
     }
 
-    public void deleteTermEntry() {
+    public void disapproveTermEntry() {
         if (termID > -1) {
-            getService().deleteTermEntry(termID, new AsyncCallback<String>() {
+            getService().disapproveTermEntry(termID, new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    MainEntryPoint.statusPanel.setMessage("error", "Could not delete Term");
+                    MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
                 }
 
                 @Override
                 public void onSuccess(String result) {
                     removeFromParent();
-                    MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
+                    MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
+                }
+            });
+        }
+    }
+
+    public void publishTermEntry() {
+        if (termID > -1) {
+            getService().publishTermEntry(termID, new AsyncCallback<String>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    removeFromParent();
+                    MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
                 }
             });
         }
@@ -197,7 +223,8 @@ public class TermForm extends VerticalPanel {
 
     public void adjustSize(int w) {
         controls.setWidth(w * 1 / 5 + "px");
-        controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
+        controls.setCellHorizontalAlignment(approve, HorizontalPanel.ALIGN_LEFT);
+        controls.setCellHorizontalAlignment(disapprove, HorizontalPanel.ALIGN_RIGHT);
         form.setWidth(w + "px");
         form.setCellHorizontalAlignment(form1, HorizontalPanel.ALIGN_LEFT);
         form.setCellHorizontalAlignment(form2, HorizontalPanel.ALIGN_CENTER);
@@ -296,7 +323,7 @@ public class TermForm extends VerticalPanel {
 
     private class MyDialog extends DialogBox {
 
-        public MyDialog(String text) {
+        public MyDialog(String text, final int call) {
             // Set the dialog box's caption.
             setText(text);
             // Enable animation.
@@ -306,13 +333,27 @@ public class TermForm extends VerticalPanel {
             HorizontalPanel controls = new HorizontalPanel();
             // DialogBox is a SimplePanel, so you have to set its widget property to
             // whatever you want its contents to be.
-            final Button submit = new Button("Delete");
-
+            final Button submit = new Button("OK");
+            switch (call) {
+                case 0:
+                    submit.setText("Approve");
+                    break;
+                case 1:
+                    submit.setText("Disapprove");
+                    break;
+            }
             submit.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
-                    deleteTermEntry();
+                    switch (call) {
+                        case 0:
+                            publishTermEntry();
+                            break;
+                        case 1:
+                            disapproveTermEntry();
+                            break;
+                    }
                 }
             });
             Button cancel = new Button("Cancel");

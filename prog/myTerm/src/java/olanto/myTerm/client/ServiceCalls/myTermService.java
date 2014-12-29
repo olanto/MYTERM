@@ -29,6 +29,8 @@ public interface myTermService extends RemoteService {
 
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID);
 
+    public String getApproveResult(String s, String ls, String resID, String domID, long ownerID);
+
     public String getWorkspaceElements(String ls, long ownerID);
 
     public String getApproveElements(String ls, long ownerID);
@@ -49,9 +51,17 @@ public interface myTermService extends RemoteService {
 
     public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public String approveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String DeleteConceptEntry(long conceptID, long ownerID);
+    public String disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String DeleteTermEntry(long termID);
+    public String updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+
+    public String deleteConceptEntry(long conceptID, long ownerID);
+
+    public String deleteTermEntry(long termID);
+
+    public String publishTermEntry(long termID);
+
+    public String disapproveTermEntry(long termID);
 }

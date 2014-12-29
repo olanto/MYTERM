@@ -38,7 +38,6 @@ public class ResultsContainerApprover extends HorizontalPanel {
     private VerticalPanel resVP = new VerticalPanel();
     private VerticalPanel sideVP = new VerticalPanel();
     public ScrollPanel conceptDetails = new ScrollPanel();
-    public Button addnewcpt = new Button("Create New Concept");
 
     public ResultsContainerApprover() {
         add(sideVP);
@@ -50,8 +49,6 @@ public class ResultsContainerApprover extends HorizontalPanel {
         conceptDetails.setStyleName("conceptContainer");
         termsDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
-        addnewcpt.setVisible(false);
-        addnewcpt.setStyleName("addcpt");
     }
 
     public void adjustSize() {

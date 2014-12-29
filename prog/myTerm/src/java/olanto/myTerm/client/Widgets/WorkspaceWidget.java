@@ -45,10 +45,10 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerWorkspace;
-import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptForm;
 import olanto.myTerm.client.Forms.LangSetForm;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
@@ -63,8 +63,11 @@ public class WorkspaceWidget extends VerticalPanel {
     private static SearchHeaderWorkspace searchMenu;
     private static ResultsContainerWorkspace resultsPanel = new ResultsContainerWorkspace();
     private static AsyncCallback<String> termAddCallback;
-    private static AsyncCallback<String> termSearchCallback;
-    private static AsyncCallback<String> updateWSCallback;
+    private static AsyncCallback<String> termAddCallbackWS;
+    private static AsyncCallback<String> termAddedCallback;
+    private static AsyncCallback<String> entrySubmitCallback;
+    private static AsyncCallback<String> entrySaveCallback;
+    private static AsyncCallback<String> entryDeleteCallback;
     private static AsyncCallback<String> workspaceCallback;
     private static AsyncCallback<ConceptEntryDTO> getConceptDetailsCallback;
     private static ConceptEntryDTO conceptEntryDTO;
@@ -82,12 +85,15 @@ public class WorkspaceWidget extends VerticalPanel {
         termAddCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                searchMenu.btnAdd.setEnabled(true);
                 if (result != null) {
+                    searchMenu.btnAdd.setEnabled(true);
                     resultsPanel.addnewcpt.setVisible(true);
-                    getService().getWorkspaceElements(searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), ownerID, workspaceCallback);
+                    MainEntryPoint.statusPanel.setMessage("message", "Found an existing entry of the same form");
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                    History.newItem("found");
                 } else {
-                    new MyDialog("Concept not found would you like to create a new concept?", 0).show();
+                    searchMenu.btnAdd.setEnabled(true);
+                    new MyDialog("Term not found would you like to create a new Entry?", 0).show();
                 }
             }
 
@@ -97,15 +103,33 @@ public class WorkspaceWidget extends VerticalPanel {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
-        termSearchCallback = new AsyncCallback<String>() {
+        termAddCallbackWS = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+                if (result != null) {
+                    searchMenu.btnAdd.setEnabled(true);
+                    resultsPanel.addnewcpt.setVisible(true);
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                } else {
+                    searchMenu.btnAdd.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                searchMenu.btnAdd.setEnabled(true);
+                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+            }
+        };
+        termAddedCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 searchMenu.btnAdd.setEnabled(true);
-                resultsPanel.sideRes.clear();
                 if (result != null) {
-                    resultsPanel.sideRes.setWidget(new HTML(result));
+                    History.newItem("added");
                 } else {
-                    resultsPanel.sideRes.clear();
+                    History.newItem("notadded");
                 }
             }
 
@@ -115,18 +139,47 @@ public class WorkspaceWidget extends VerticalPanel {
             }
         };
         // Create an asynchronous callback to handle the result.
-        updateWSCallback = new AsyncCallback<String>() {
+        entrySaveCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                searchMenu.btnAdd.setEnabled(true);
                 if (result != null) {
-                    StatusPanel.setMessage("message", "Entry updated successfully");
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
-                    History.newItem("page1");
+                    History.newItem("saved");
                 } else {
-                    StatusPanel.setMessage("error", "Entry could not be updated");
-                    resultsPanel.sideCurrent.clear();
+                    History.newItem("notsaved");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                addcpt.save.setEnabled(true);
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
+                resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
+            }
+        };
+        entrySubmitCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result != null) {
+                    History.newItem("submitted");
+                } else {
+                    History.newItem("notsubmitted");
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable caught) {
+                addcpt.submit.setEnabled(true);
+                resultsPanel.sideCurrent.setWidget(new Label("Communication failed"));
+            }
+        };
+        entryDeleteCallback = new AsyncCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
+                if (result != null) {
+                    History.newItem("deleted");
+                } else {
+                    History.newItem("notdeleted");
                 }
             }
 
@@ -138,18 +191,16 @@ public class WorkspaceWidget extends VerticalPanel {
         workspaceCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.setMessage("Message", "Displaying current entries");
                 if (result != null) {
                     resultsPanel.sideCurrent.setWidget(new HTML(result));
-                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termSearchCallback);
                 } else {
-                    searchMenu.btnAdd.setEnabled(true);
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
             }
 
             @Override
             public void onFailure(Throwable caught) {
-                searchMenu.btnAdd.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
             }
         };
@@ -170,17 +221,12 @@ public class WorkspaceWidget extends VerticalPanel {
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                StatusPanel.clearMessages();
+                MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.sideRes.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
                 searchMenu.btnAdd.setEnabled(false);
-                if (searchMenu.searchField.getText().isEmpty()) {
-                    Window.alert("Please indicate the term's form");
-                    searchMenu.btnAdd.setEnabled(true);
-                } else {
-                    getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
-                }
+                History.newItem("add");
             }
         });
         // Listen for the button clicks
@@ -188,42 +234,19 @@ public class WorkspaceWidget extends VerticalPanel {
             @Override
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
-                    StatusPanel.clearMessages();
+                    MainEntryPoint.statusPanel.clearMessages();
                     resultsPanel.sideRes.clear();
                     resultsPanel.termsDetails.clear();
                     resultsPanel.conceptDetails.clear();
                     searchMenu.btnAdd.setEnabled(false);
-                    if (searchMenu.searchField.getText().isEmpty()) {
-                        Window.alert("Please indicate the term's form");
-                        searchMenu.btnAdd.setEnabled(true);
-                    } else {
-                        getService().getAddResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
-                    }
-                }
-            }
-        });
-        searchMenu.searchField.setFocus(true);
-        History.addValueChangeHandler(new ValueChangeHandler<String>() {
-            @Override
-            public void onValueChange(ValueChangeEvent<String> event) {
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
-                if (event.getValue().contains("new")) {
-                    long conceptID = Long.parseLong(event.getValue().substring(3));
-                    getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
-                } else if (event.getValue().contains("page1")) {
-                    String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
-                    if ((lan == null) || (lan.isEmpty())) {
-                        lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
-                    }
-                    getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
+                    History.newItem("add");
                 }
             }
         });
         searchMenu.langSrc.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
-                getService().getWorkspaceElements(searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), ownerID, workspaceCallback);
+                commandPage1();
             }
         });
         resultsPanel.addnewcpt.addClickHandler(new ClickHandler() {
@@ -233,6 +256,53 @@ public class WorkspaceWidget extends VerticalPanel {
             }
         });
         resultsPanel.adjustSize(0.25f, 0.3f);
+        History.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                MainEntryPoint.statusPanel.clearMessages();
+                resultsPanel.conceptDetails.clear();
+                resultsPanel.termsDetails.clear();
+                if (event.getValue().contains("WSnew")) {
+                    searchMenu.btnAdd.setEnabled(true);
+                    long conceptID = Long.parseLong(event.getValue().substring(5));
+                    getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
+                } else {
+                    String command = event.getValue();
+                    switch (command) {
+                        case "page1":
+                            commandPage1();
+                            break;
+                        case "add":
+                            commandAdd();
+                            break;
+                        case "saved":
+                            commandSaved();
+                            break;
+                        case "notsaved":
+                            commandNotSaved();
+                            break;
+                        case "deleted":
+                            commandDeleted();
+                            break;
+                        case "notdeleted":
+                            commandNotDeleted();
+                            break;
+                        case "added":
+                            commandAdded();
+                            break;
+                        case "notadded":
+                            commandNotAdded();
+                            break;
+                        case "submitted":
+                            commandSubmitted();
+                            break;
+                        case "notsubmitted":
+                            commandNotSubmitted();
+                            break;
+                    }
+                }
+            }
+        });
     }
 
     public void refreshContentFromConceptEntryDTO() {
@@ -257,38 +327,28 @@ public class WorkspaceWidget extends VerticalPanel {
                     addcpt.save.setEnabled(false);
                     getConceptEntryDTOFromWidget();
 //                    Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().UpdateConceptEntry(conceptEntryDTO, ownerID, updateWSCallback);
+                    getService().updateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
                 }
             });
             addcpt.submit.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    addcpt.save.setEnabled(false);
+                    addcpt.submit.setEnabled(false);
                     getConceptEntryDTOFromWidget();
 //                    Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().submitConceptEntry(conceptEntryDTO, ownerID, termAddCallback);
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
+                    getService().submitConceptEntry(conceptEntryDTO, ownerID, entrySubmitCallback);
                 }
             });
             addcpt.delete.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
                     new MyDialog("Are you sure that you want to remove this concept and all its associated terms?", 1).show();
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
                 }
             });
             addcpt.escape.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    resultsPanel.conceptDetails.clear();
-                    resultsPanel.termsDetails.clear();
-                    String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
-                    if ((lan == null) || (lan.isEmpty())) {
-                        lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
-                    }
-                    getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
+                    new MyDialog("Are you sure that you want to cancel all the modifications?", 2).show();
                 }
             });
         } else {
@@ -310,11 +370,20 @@ public class WorkspaceWidget extends VerticalPanel {
     public void createNewConceptEntry() {
         getConceptEntryDTOFromHeader();
 //        Window.alert(conceptEntryDTO.toStringDTO());
-        getService().createConceptEntry(conceptEntryDTO, ownerID, termAddCallback);
+        getService().createConceptEntry(conceptEntryDTO, ownerID, termAddedCallback);
     }
 
     public void deleteConceptEntry() {
-        getService().DeleteConceptEntry(conceptEntryDTO.concept.getIdConcept(), ownerID, updateWSCallback);
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        getService().deleteConceptEntry(conceptEntryDTO.concept.getIdConcept(), ownerID, entryDeleteCallback);
+    }
+
+    public void escapeEntry() {
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        MainEntryPoint.statusPanel.setMessage("message", "Cancelled all modifications");
+        History.newItem("escape");
     }
 
     private static myTermServiceAsync getService() {
@@ -339,19 +408,31 @@ public class WorkspaceWidget extends VerticalPanel {
             // DialogBox is a SimplePanel, so you have to set its widget property to
             // whatever you want its contents to be.
             final Button submit = new Button("OK");
-            if (call == 0) {
-                submit.setText("Create");
-            } else {
-                submit.setText("Delete");
+            switch (call) {
+                case 0:
+                    submit.setText("Create");
+                    break;
+                case 1:
+                    submit.setText("Delete");
+                    break;
+                case 2:
+                    submit.setText("Escape modifications");
+                    break;
             }
             submit.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
-                    if (call == 0) {
-                        createNewConceptEntry();
-                    } else {
-                        deleteConceptEntry();
+                    switch (call) {
+                        case 0:
+                            createNewConceptEntry();
+                            break;
+                        case 1:
+                            deleteConceptEntry();
+                            break;
+                        case 2:
+                            escapeEntry();
+                            break;
                     }
                 }
             });
@@ -371,6 +452,83 @@ public class WorkspaceWidget extends VerticalPanel {
             controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
             controls.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
         }
+    }
+
+    private void commandPage1() {
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        resultsPanel.sideRes.clear();
+        searchMenu.btnAdd.setEnabled(true);
+        String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
+        if ((lan == null) || (lan.isEmpty())) {
+            lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
+        }
+        getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
+        getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
+    }
+
+    private void commandAdd() {
+        resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry entry, please wait...");
+        if (searchMenu.searchField.getText().isEmpty()) {
+            Window.alert("Please indicate the term's form");
+            searchMenu.btnAdd.setEnabled(true);
+            MainEntryPoint.statusPanel.setMessage("message", "No entries were added");
+            History.newItem("notadded");
+        } else {
+            String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
+            if ((lan == null) || (lan.isEmpty())) {
+                lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
+            }
+            getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+        }
+    }
+
+    private void commandSaved() {
+        addcpt.save.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+    }
+
+    private void commandNotSaved() {
+        addcpt.save.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("error", "Entry could not be updated");
+    }
+
+    private void commandDeleted() {
+        MainEntryPoint.statusPanel.setMessage("message", "Entry deleted successfully");
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        History.newItem("page1");
+    }
+
+    private void commandNotDeleted() {
+        MainEntryPoint.statusPanel.setMessage("error", "Entry could not be deleted");
+        History.newItem("page1");
+    }
+
+    private void commandAdded() {
+        MainEntryPoint.statusPanel.setMessage("message", "Entry added successfully");
+        History.newItem("page1");
+    }
+
+    private void commandNotAdded() {
+        MainEntryPoint.statusPanel.setMessage("error", "No entry was added");
+        History.newItem("page1");
+    }
+
+    private void commandSubmitted() {
+        addcpt.submit.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("message", "Entry submitted successfully");
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        History.newItem("page1");
+    }
+
+    private void commandNotSubmitted() {
+        addcpt.submit.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("error", "Entry could not be submitted");
+        History.newItem("page1");
     }
 
     public static native void fixGwtNav() /*-{

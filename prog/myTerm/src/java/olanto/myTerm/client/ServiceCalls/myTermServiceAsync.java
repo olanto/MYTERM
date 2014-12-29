@@ -21,6 +21,8 @@ public interface myTermServiceAsync {
 
     public void getAddResult(String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> callback);
 
+    public void getApproveResult(String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> callback);
+
     public void getdetailsForConcept(long conceptID, long ownerID, AsyncCallback<String> callback);
 
     public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, AsyncCallback<String> callback);
@@ -47,9 +49,17 @@ public interface myTermServiceAsync {
 
     public void submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+    public void approveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void DeleteConceptEntry(long conceptID, long ownerID, AsyncCallback<String> asyncCallback);
+    public void disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void DeleteTermEntry(long termID, AsyncCallback<String> asyncCallback);
+    public void updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+
+    public void deleteConceptEntry(long conceptID, long ownerID, AsyncCallback<String> asyncCallback);
+
+    public void deleteTermEntry(long termID, AsyncCallback<String> asyncCallback);
+
+    public void publishTermEntry(long termID, AsyncCallback<String> asyncCallback);
+
+    public void disapproveTermEntry(long termID, AsyncCallback<String> asyncCallback);
 }

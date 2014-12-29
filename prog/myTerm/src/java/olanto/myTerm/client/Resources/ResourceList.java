@@ -29,9 +29,9 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import olanto.myTerm.client.ContainerPanels.StatusPanel;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -50,7 +50,7 @@ public class ResourceList extends ListBox {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                StatusPanel.setMessage("warning", "Failed to get list of resources");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources, please RELOAD THE PAGE");
             }
 
             @Override
@@ -85,7 +85,7 @@ public class ResourceList extends ListBox {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                StatusPanel.setMessage("warning", "Failed to get list of resources");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources");
             }
 
             @Override

@@ -59,9 +59,9 @@ public class ConceptFormApprove extends HorizontalPanel {
     private VerticalPanel defPAnel = new VerticalPanel();
     private VerticalPanel defsPanel = new VerticalPanel();
     private VerticalPanel ntPanel = new VerticalPanel();
-    public Button save = new Button("APPROVE");
-    public Button submit = new Button("SUBMIT");
-    public Button delete = new Button("DELETE");
+    public Button approve = new Button("APPROVE ALL");
+    public Button save = new Button("SAVE");
+    public Button disapprove = new Button("DISAPPROVE ALL");
     public Button escape = new Button("ESCAPE");
     private long ownerID;
     public int type = 1;
@@ -83,9 +83,9 @@ public class ConceptFormApprove extends HorizontalPanel {
         sfPanel.add(sf);
         rsrcPanel.add(label_rsrc);
         rsrcPanel.add(rsrc);
+        ctrlPanel.add(approve);
         ctrlPanel.add(save);
-        ctrlPanel.add(submit);
-        ctrlPanel.add(delete);
+        ctrlPanel.add(disapprove);
         ctrlPanel.add(escape);
         defPAnel.add(label_def);
         defPAnel.add(text_def);
@@ -93,10 +93,10 @@ public class ConceptFormApprove extends HorizontalPanel {
         defsPanel.add(text_sdef);
         ntPanel.add(label_nt);
         ntPanel.add(text_nt);
-        delete.setTitle("Delete the current concept");
+        approve.setTitle("Save and publish all terms of the current entry");
         escape.setTitle("Abort all modifications");
-        submit.setTitle("Submit changes (updates in database)");
-        delete.setTitle("Save changes without submit");
+        save.setTitle("Save changes (updates in database)");
+        disapprove.setTitle("Save and disapprove all terms of the current entry");
         text_def.setText("");
         text_sdef.setText("");
         text_nt.setText("");
@@ -110,9 +110,9 @@ public class ConceptFormApprove extends HorizontalPanel {
         sfPanel.setCellHorizontalAlignment(sf, HorizontalPanel.ALIGN_RIGHT);
         rsrcPanel.setWidth(w * 1 / 3 + "px");
         ctrlPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
-        ctrlPanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
+        ctrlPanel.setCellHorizontalAlignment(approve, HorizontalPanel.ALIGN_RIGHT);
         ctrlPanel.setWidth(w * 1 / 3 + "px");
-        ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_LEFT);
+        ctrlPanel.setCellHorizontalAlignment(disapprove, HorizontalPanel.ALIGN_LEFT);
         ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_RIGHT);
         defPAnel.setWidth(w * 1 / 3 + "px");
         defsPanel.setWidth(w * 1 / 3 + "px");
@@ -134,9 +134,6 @@ public class ConceptFormApprove extends HorizontalPanel {
         }
         rsrcPanel.remove(rsrc);
         rsrcPanel.add(new HTML(rsrc.getResName(conceptDTO.getIdResource())));
-//        if ((ownerID == conceptDTO.getCreateBy().longValue()) && (ownerID == conceptDTO.getLastmodifiedBy().longValue())) {
-//            setReadOnly(true);
-//        }
     }
 
     public void clearAllText() {

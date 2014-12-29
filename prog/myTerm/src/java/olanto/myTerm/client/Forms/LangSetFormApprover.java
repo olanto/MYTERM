@@ -36,15 +36,15 @@ import olanto.myTerm.shared.TermDTO;
  *
  * @author nizar ghoula - simple
  */
-public class LangSetForm extends VerticalPanel {
+public class LangSetFormApprover extends VerticalPanel {
 
     public VerticalPanel desc = new VerticalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
-    private ArrayList<TermForm> terms;
+    private ArrayList<TermFormApprover> terms;
     private long ownerID;
 
-    public LangSetForm(long idOwner) {
+    public LangSetFormApprover(long idOwner) {
         ownerID = idOwner;
         this.terms = new ArrayList<>();
         this.setStyleName("langSetForm");
@@ -54,7 +54,7 @@ public class LangSetForm extends VerticalPanel {
         addTerm.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final TermForm ter = new TermForm(ownerID, 1);
+                final TermFormApprover ter = new TermFormApprover(ownerID, 1);
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
@@ -67,7 +67,7 @@ public class LangSetForm extends VerticalPanel {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermForm ter = new TermForm(ownerID, 0);
+                final TermFormApprover ter = new TermFormApprover(ownerID, 0);
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
@@ -86,7 +86,7 @@ public class LangSetForm extends VerticalPanel {
 
     public void sortTermDTOByLangSet(ArrayList<LangEntryDTO> listlang) {
         if (!terms.isEmpty()) {
-            for (TermForm tf : terms) {
+            for (TermFormApprover tf : terms) {
                 int i = getLangEntryIdx(tf.getIdLanguage(), listlang);
                 if (i > -1) {
                     if (tf.type == 0) {
@@ -135,7 +135,7 @@ public class LangSetForm extends VerticalPanel {
     }
     
     public void clearAllText(){
-        for (TermForm term : terms){
+        for (TermFormApprover term : terms){
             term.clearAllText();
         }
     }

@@ -72,12 +72,34 @@ public class ManageTerm {
         }
         return null;
     }
-    
+
     public static void remove(long termID) {
         try {
             TermDB.termsJC.destroy(termID);
         } catch (Exception ex) {
             Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static Terms approve(long termID) {
+        try {
+            Terms t = TermDB.termsJC.findTerms(termID);
+            t.setStatus('p');
+            return edit(t);
+        } catch (Exception ex) {
+            Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public static Terms disapprove(long termID) {
+        try {
+            Terms t = TermDB.termsJC.findTerms(termID);
+            t.setStatus('e');
+            return edit(t);
+        } catch (Exception ex) {
+            Logger.getLogger(ManageConcept.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

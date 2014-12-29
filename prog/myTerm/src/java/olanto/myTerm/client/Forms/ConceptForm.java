@@ -95,8 +95,8 @@ public class ConceptForm extends HorizontalPanel {
         ntPanel.add(text_nt);
         delete.setTitle("Delete the current concept");
         escape.setTitle("Abort all modifications");
-        submit.setTitle("Submit changes (updates in database)");
-        delete.setTitle("Save changes without submit");
+        submit.setTitle("Submit changes (for review)");
+        save.setTitle("Save changes without submit");
         text_def.setText("");
         text_sdef.setText("");
         text_nt.setText("");

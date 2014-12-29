@@ -74,12 +74,12 @@ public class StatusPanel extends HorizontalPanel {
         Window.open("mailto:" + address + "?subject=" + URL.encode(subject), "_blank", "");
     }
 
-    public static void setMessage(String style, String message) {
+    public void setMessage(String style, String message) {
         msg.setText(message);
         msg.setStyleName(style);
     }
 
-    public static void clearMessages() {
+    public void clearMessages() {
         msg.setText("");
     }
 }

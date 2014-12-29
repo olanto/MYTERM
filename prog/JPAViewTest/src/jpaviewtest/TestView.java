@@ -29,10 +29,10 @@ import org.olanto.myterm.extractor.entry.LangEntry;
  * @author simple
  */
 public class TestView {
-    
+
     static EntityManagerFactory emf;
     static EntityManager em;
-    
+
     public static void main(String[] args) {
 
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
@@ -40,23 +40,22 @@ public class TestView {
 //        getConceptAndAssociatedTerms(3534);
         getApproveForThis("EN", 1001);
     }
-    
+
     public static void init() {
-        TermDB.restart();
         if (emf == null) {
             System.out.println("init BD connection");
             emf = Persistence.createEntityManagerFactory("JPAViewTestPU");
             em = emf.createEntityManager();
         }
     }
-    
+
     public static String getTermsInfo(long conceptID, String lang) {
         init();
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLanguage");
         query.setParameter("idConcept", conceptID);
         query.setParameter("idLanguage", lang);
         List<VjConceptdetail> resultQ = query.getResultList();
-        
+
         StringBuilder result = new StringBuilder("");
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
@@ -131,8 +130,9 @@ public class TestView {
         result.append("</div>");
         return result.toString();
     }
-    
+
     public static ConceptEntry getConceptAndAssociatedTerms(long conceptID) {
+        TermDB.restart();
         init();
         Concepts cpt = Queries.getConceptByID(conceptID);
         if (cpt != null) {
@@ -161,7 +161,7 @@ public class TestView {
         }
         return null;
     }
-    
+
     public static String getTargetForThis(String term, String solang, String talang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -192,7 +192,7 @@ public class TestView {
         if (!resultQ.isEmpty()) {
             for (VjSourcetarget result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#TS").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
                 res.append("<td>").append(result.getTarget()).append("</td>");
                 res.append("</tr>");
             }
@@ -200,7 +200,7 @@ public class TestView {
         }
         return null;
     }
-    
+
     public static List<VjUsersLanguages> getLanguagesByOwner(long ownerID) {
         init();
         if (ownerID > 0) {
@@ -211,7 +211,7 @@ public class TestView {
         }
         return null;
     }
-    
+
     public static String getTargetsForThis(long conceptID, String term, String solang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -238,7 +238,7 @@ public class TestView {
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         List<VjSourcetarget> resultQ = query.getResultList();
-        
+
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
@@ -252,7 +252,7 @@ public class TestView {
         }
         return res.toString();
     }
-    
+
     public static String getTargetsForThis(long conceptID, String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -261,7 +261,7 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSourcetarget> resultQ = query.getResultList();
-        
+
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
@@ -275,7 +275,7 @@ public class TestView {
         }
         return res.toString();
     }
-    
+
     public static String getSourceForThis(String term, String solang, String resID, String domID, long ownerID) {
 //        System.out.println("param:" + term);
         init();
@@ -322,7 +322,7 @@ public class TestView {
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#WSnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result.getIdConcept(), term, solang, resID, domID, ownerID)).append("</td>");
                 res.append("</tr>");
             }
@@ -330,6 +330,46 @@ public class TestView {
         return res.toString();
     }
     
+    public static String getCurrentForThis(String term, String solang, String resID, String domID, long ownerID) {
+//        System.out.println("param:" + term);
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        if (resID.contains("-1")) {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSource.findAllByStatusSource");
+            } else {
+                query = em.createNamedQuery("VjSource.findALLBysourceSubjectFieldStatus");
+                query.setParameter("subjectField", domID);
+            }
+        } else {
+            if (domID.equalsIgnoreCase("ANY")) {
+                query = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
+                query.setParameter("idResource", Long.parseLong(resID));
+            } else {
+                query = em.createNamedQuery("VjSource.findALLBySourceResourceSubjectFieldStatus");
+                query.setParameter("idResource", Long.parseLong(resID));
+                query.setParameter("subjectField", domID);
+            }
+        }
+        query.setParameter("status", 'r');
+        query.setParameter("idOwner", ownerID);
+        query.setParameter("source", term);
+        query.setParameter("solang", solang);
+        List<VjSource> resultQ = query.getResultList();
+        if (resultQ.isEmpty()) {
+            return null;
+        } else {
+            for (VjSource result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#Appnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), term, solang, resID, domID, ownerID)).append("</td>");
+                res.append("</tr>");
+            }
+        }
+        return res.toString();
+    }
+
     public static String getCurrentForThis(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -338,13 +378,13 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-        
+
         if (resultQ.isEmpty()) {
             return null;
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#WSnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang, ownerID)).append("</td>");
                 res.append("</tr>");
             }
@@ -352,7 +392,7 @@ public class TestView {
 //        System.out.println(res.toString());
         return res.toString();
     }
-    
+
     public static String getApproveForThis(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -361,13 +401,13 @@ public class TestView {
         query.setParameter("idOwner", ownerID);
         query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-        
+
         if (resultQ.isEmpty()) {
             return null;
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#new").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#Appnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang, ownerID)).append("</td>");
                 res.append("</tr>");
             }
@@ -375,7 +415,7 @@ public class TestView {
 //        System.out.println(res.toString());
         return res.toString();
     }
-    
+
     public static Vector<String> getListForThis(String term, String solang, String talang) {
         System.out.println("param:" + term);
         init();
@@ -390,7 +430,7 @@ public class TestView {
         }
         return res;
     }
-    
+
     public static List<VjUsersResources> getResourcesByOwner(long ownerID) {
         init();
         if (ownerID > 0) {
@@ -401,7 +441,7 @@ public class TestView {
         }
         return null;
     }
-    
+
     public static String getReslang() {
         init();
         StringBuilder res = new StringBuilder("");
@@ -424,7 +464,7 @@ public class TestView {
         res.append("</table>");
         return res.toString();
     }
-    
+
     public static String getTargetForThis(long conceptID) {
 //        System.out.println("param:" + term);
         init();
@@ -432,7 +472,7 @@ public class TestView {
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConcept");
         query.setParameter("idConcept", conceptID);
         List<VjConceptdetail> resultQ = query.getResultList();
-        
+
         res.append("<table>");
         res.append("<caption>" + "Details" + "</caption>");
         res.append("<tr>");

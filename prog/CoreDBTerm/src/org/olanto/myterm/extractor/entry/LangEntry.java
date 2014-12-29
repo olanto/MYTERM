@@ -104,4 +104,46 @@ public class LangEntry {
             }
         }
     }
+     public void approveLangInDB(Concepts concept) {
+        if (lan.getIdLangset() != null) {
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('p');
+                if (term.getIdTerm() != null) {
+                    term = ManageTerm.edit(term);
+                } else {
+                    term = ManageTerm.addTermToLangset(lan, term);
+                }
+            }
+        } else {
+            lan.setIdConcept(concept.getIdConcept());
+            lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('p');
+                term = ManageTerm.addTermToLangset(lan, term);
+            }
+        }
+    }
+      public void disapproveLangInDB(Concepts concept) {
+        if (lan.getIdLangset() != null) {
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('e');
+                if (term.getIdTerm() != null) {
+                    term = ManageTerm.edit(term);
+                } else {
+                    term = ManageTerm.addTermToLangset(lan, term);
+                }
+            }
+        } else {
+            lan.setIdConcept(concept.getIdConcept());
+            lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
+            for (int i = 0; i < listterm.size(); i++) {
+                Terms term = listterm.get(i);
+                term.setStatus('e');
+                term = ManageTerm.addTermToLangset(lan, term);
+            }
+        }
+    }
 }

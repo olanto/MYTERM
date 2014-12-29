@@ -48,7 +48,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
             result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
             result.append("</tr>");
-            result.append(TestView.getTargetForThis(s, ls, lt, resID, domID, ownerID));
+            result.append(response);
             result.append("</table>");
             result.append("</div>");
             return result.toString();
@@ -455,7 +455,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String UpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+    public String updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         if (cEntry.updateFromInterface() != null) {
             return "Sucess";
@@ -464,7 +464,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String DeleteConceptEntry(long conceptID, long ownerID) {
+    public String deleteConceptEntry(long conceptID, long ownerID) {
         if (ManageConcept.remove(conceptID)) {
             return "Sucess";
         }
@@ -472,7 +472,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String DeleteTermEntry(long term) {
+    public String deleteTermEntry(long term) {
         ManageTerm.remove(term);
         return "Success";
     }
@@ -483,7 +483,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         if (cEntry.submitFromInterface() != null) {
             return "Sucess";
         }
-        return "Failed to submit concept entry";
+        return null;
     }
 
     @Override
@@ -501,6 +501,59 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</table>");
             result.append("</div>");
             return result.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String publishTermEntry(long termID) {
+        if (ManageTerm.approve(termID) != null) {
+            return "Success";
+        }
+        return null;
+    }
+
+    @Override
+    public String disapproveTermEntry(long termID) {
+        if (ManageTerm.disapprove(termID) != null) {
+            return "Success";
+        }
+        return null;
+    }
+
+    @Override
+    public String getApproveResult(String s, String ls, String resID, String domID, long ownerID) {
+        String response = TestView.getCurrentForThis(s, ls, resID, domID, ownerID);
+        if (response != null) {
+            StringBuilder result = new StringBuilder("");
+            result.append("<div class =\"rpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append("Targets").append("</th>");
+            result.append("</tr>");
+            result.append(response);
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String approveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        if (cEntry.approveFromInterface() != null) {
+            return "Sucess";
+        }
+        return null;
+    }
+
+    @Override
+    public String disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        if (cEntry.disapproveFromInterface() != null) {
+            return "Sucess";
         }
         return null;
     }

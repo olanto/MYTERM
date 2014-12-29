@@ -4,13 +4,10 @@
  */
 package olanto.myTerm.client.Interfaces;
 
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TabPanel;
-import olanto.myTerm.client.Widgets.WorkspaceWidget;
 import olanto.myTerm.client.Widgets.ApproveWidget;
+import olanto.myTerm.client.Widgets.WorkspaceWidget;
 import olanto.myTerm.client.Widgets.MyTermSearchWidget;
 
 /**

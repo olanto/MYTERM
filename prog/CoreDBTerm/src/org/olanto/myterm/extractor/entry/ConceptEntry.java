@@ -24,7 +24,6 @@ package org.olanto.myterm.extractor.entry;
 import java.util.Date;
 import java.util.Vector;
 import org.olanto.myterm.coredb.ManageConcept;
-import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
@@ -105,6 +104,24 @@ public class ConceptEntry {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntry lan = listlang.get(i);
             lan.submitLangInDB(concept);
+        }
+        return concept;
+    }
+    
+    public Concepts approveFromInterface() {
+        updateConceptInDBFromInterface();
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            lan.approveLangInDB(concept);
+        }
+        return concept;
+    }
+    
+    public Concepts disapproveFromInterface() {
+        updateConceptInDBFromInterface();
+        for (int i = 0; i < listlang.size(); i++) {
+            LangEntry lan = listlang.get(i);
+            lan.disapproveLangInDB(concept);
         }
         return concept;
     }
