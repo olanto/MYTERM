@@ -370,7 +370,12 @@ public class MTF_Loader implements Loader {
             Element info = (Element) i.next();
             if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("Category")) {
-                courantEntry.getTerm().setTermType(getText(info, localverbose));
+                 String termType=getText(info, localverbose);
+                if (termType.length()>=15){
+                    System.out.println("truncate termType:"+termType);
+                    termType=termType.substring(0, 15);
+                }
+                courantEntry.getTerm().setTermType(termType);
             } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("Status")) {
                 courantEntry.getTerm().setTermAdminStatus(getText(info, localverbose));
@@ -466,6 +471,7 @@ public class MTF_Loader implements Loader {
         while (i.hasNext()) {
             Element courant = (Element) i.next();
             if (courant.getName().equals("conceptGrp")) {
+                if(totEntries%100==0)System.out.println(totEntries);
                 getTermEntry(courant);
             } else {
                 if (skipverbose && localverbose) {
