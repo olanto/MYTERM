@@ -80,8 +80,8 @@ create table users_resources
  (id_link bigint not null auto_increment,
   id_resource bigint not null,
   id_owner bigint  not null,
-  owner_roles varchar(16)  default 'HERITED_BY_OWNER', -- ADMIN, REVISOR, REDACTOR, READER
-  default_resource varchar(16) , -- DEFAULT
+  owner_roles varchar(16)  default 'READER', -- ADMIN, REVISOR, REDACTOR, READER
+  default_resource varchar(16) default 'PUBLIC', 
   extra text,
 PRIMARY KEY (id_link),
 CONSTRAINT users_resources_FK1_owners
@@ -96,9 +96,9 @@ AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 -- --------------------------------- 
 
 
-insert into users_resources values (1,1,1,'HERITED_BY_OWNER','DEFAULT',null);
-insert into users_resources values (2,1,2,'HERITED_BY_OWNER','DEFAULT',null);
-insert into users_resources values (3,1,3,'HERITED_BY_OWNER','DEFAULT',null);
+insert into users_resources values (1,1,1,'READER','PUBLIC',null);
+insert into users_resources values (2,1,2,'READER','PUBLIC',null);
+insert into users_resources values (3,1,3,'READER','PUBLIC',null);
 commit; 
 select * from users_resources; 
 

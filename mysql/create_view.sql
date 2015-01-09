@@ -1,3 +1,4 @@
+ /*
 create or replace view v_users_resources as
 select o.id_owner, 
 	   r.id_resource, r.resource_name,
@@ -12,14 +13,96 @@ union
  from resources r, owners o, users_resources ur
 where r.resource_privacy="PUBLIC"
 ;
+*/
+
+create or replace view v_users_resources as
+select o.id_owner, o.owner_mailing,
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       'ADMIN' owner_roles
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+   and ur.owner_roles='ADMIN'
+union
+select o.id_owner, o.owner_mailing, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       'REVISOR' owner_roles
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+   and ur.owner_roles IN ('ADMIN','REVISOR')
+union
+select o.id_owner, o.owner_mailing, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       'REDACTOR' owner_roles
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+   and ur.owner_roles IN ('ADMIN','REVISOR','REDACTOR')
+union
+select o.id_owner, o.owner_mailing, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       'READER' owner_roles
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+   and ur.owner_roles IN ('ADMIN','REVISOR','REDACTOR','READER')
+union
+select o.id_owner, o.owner_mailing, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       ur.owner_roles
+ from resources r, owners o, users_resources ur
+where r.id_resource = ur.id_resource
+   and o.id_owner=ur.id_owner
+union 
+  select o.id_owner, o.owner_mailing, 
+	   r.id_resource, r.resource_name,
+	   r.resource_privacy, r.resource_note,
+       'READER'
+ from resources r, owners o, users_resources ur
+where r.resource_privacy="PUBLIC"
+;
 
 select * from v_users_resources;
+select * from v_users_resources WHERE  owner_mailing='demo';
+select * from v_users_resources WHERE  owner_mailing='redactor';
+select * from v_users_resources WHERE  owner_mailing='revisor';
+select * from v_users_resources WHERE  owner_mailing='admin';
 
 create or replace view vj_users_resources as
 SELECT uuid()  uuid,
 v_users_resources.* FROM v_users_resources;
 
 select vj_users_resources.* FROM vj_users_resources; 
+
+create or replace view v_sourcetarget_new as
+select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
+       t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
+	   t1.status status_source,
+	   t2.status status_target,
+	   c.id_concept,
+	   c.subject_field,
+	   r.id_resource,
+	   r.resource_name
+ from terms t1, langsets l1,
+      terms t2, langsets l2,
+	  concepts c,
+      resources r
+where t1.id_langset=l1.id_langset
+   and l1.id_concept=c.id_concept
+   and t2.id_langset=l2.id_langset
+   and l2.id_concept=c.id_concept
+   and c.id_resource=r.id_resource
+   and l1.id_langset!=l2.id_langset
+   and t1.id_term!=t2.id_term
+;
+
+
 
 create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
@@ -37,7 +120,6 @@ select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	  concepts c,
       resources r,
 	  v_users_resources vur
-
 where t1.id_langset=l1.id_langset
    and l1.id_concept=c.id_concept
    and t2.id_langset=l2.id_langset
@@ -60,6 +142,10 @@ select * from v_sourcetarget where source like 'sand%' and solang='EN';
 select * from v_sourcetarget where source like 'CESAP' and solang='FR';
 select * from v_sourcetarget where source like 'CESAP' and solang='FR';
 select * from v_sourcetarget where resource_name='WIPO-TEST' and  solang='EN' and talang='FR';
+select * from v_sourcetarget where id_resource in (1,1000)  and  solang='EN' and talang='FR';
+
+select * from v_sourcetarget where id_resource in (1)  and  solang='EN' and talang='FR';
+
 
 create or replace view v_conceptdetail as
 select  
@@ -84,6 +170,23 @@ v_conceptdetail.* FROM v_conceptdetail;
 select * from v_conceptdetail where  id_concept=108300;
 
 
+create or replace view v_source_new as
+select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
+	   t1.status status,
+	   c.id_concept,
+       c.lastmodified_by,
+       r.resource_name,
+	   r.id_resource,
+	   c.subject_field
+ from terms t1, langsets l1,
+	  concepts c,
+      resources r
+where t1.id_langset=l1.id_langset
+	and l1.id_concept=c.id_concept
+    and c.id_resource=r.id_resource ;
+
+select * from v_source_new where status='e';
+
 
 create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
@@ -93,12 +196,10 @@ select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	   r.id_resource,
 	   c.subject_field,
 	   vur.id_owner
-
  from terms t1, langsets l1,
 	  concepts c,
       resources r,
 	  v_users_resources vur
-
 where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource
@@ -196,4 +297,3 @@ select  resource_name, id_language, count(*) nbterms from v_reslang group by res
 
 select * from vj_source;
 
-commit;
