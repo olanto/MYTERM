@@ -5,8 +5,8 @@
 package olanto.myTerm.client.Interfaces;
 
 import com.google.gwt.user.client.ui.TabPanel;
-import olanto.myTerm.client.Widgets.ApproveWidget;
-import olanto.myTerm.client.Widgets.MyTermSearchWidget;
+import olanto.myTerm.client.Widgets.REVISORWidget;
+import olanto.myTerm.client.Widgets.READERWidget;
 
 /**
  *
@@ -14,12 +14,12 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class RevisorInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan;
-    private ApproveWidget apan;
+    private READERWidget bpan;
+    private REVISORWidget apan;
 
     public RevisorInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
-        apan = new ApproveWidget(ownerID);
+        bpan = new READERWidget(ownerID);
+        apan = new REVISORWidget(ownerID);
         add(bpan, "Term Search");
         add(apan, "To approve");
         setStyleName("tabPanel");

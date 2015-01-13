@@ -35,10 +35,10 @@ public class TestView {
 
     public static void main(String[] args) {
 
-//        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "ANY"));
-//        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "ANY"));
+//        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", "-1"));
+//        System.out.println(getTargetForThis("tunas", "EN", "FR", "-1", "-1"));
 //        getConceptAndAssociatedTerms(3534);
-        getApproveForThis("EN", 1001);
+//        getApproveForThis("EN", 1001);
     }
 
     public static void init() {
@@ -168,14 +168,14 @@ public class TestView {
         StringBuilder res = new StringBuilder("");
         Query query;
         if (resID.contains("-1")) {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySource");
             } else {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySourceSubjectField");
                 query.setParameter("subjectField", domID);
             }
         } else {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSourcetarget.findPublicBySourceResource");
                 query.setParameter("idResource", Long.parseLong(resID));
             } else {
@@ -218,14 +218,14 @@ public class TestView {
         StringBuilder res = new StringBuilder("");
         Query query;
         if (resID.contains("-1")) {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSourcetarget.findAllBySource2");
             } else {
                 query = em.createNamedQuery("VjSourcetarget.findAllBySourceSubjectField2");
                 query.setParameter("subjectField", domID);
             }
         } else {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSourcetarget.findAllBySourceResource2");
                 query.setParameter("idResource", Long.parseLong(resID));
             } else {
@@ -283,7 +283,7 @@ public class TestView {
         Query query;
         Query query1;
         if (resID.contains("-1")) {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSource.findAllByStatusSource");
                 query1 = em.createNamedQuery("VjSource.findAllByStatusSource");
             } else {
@@ -293,7 +293,7 @@ public class TestView {
                 query1.setParameter("subjectField", domID);
             }
         } else {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
                 query1 = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
                 query.setParameter("idResource", Long.parseLong(resID));
@@ -336,14 +336,14 @@ public class TestView {
         StringBuilder res = new StringBuilder("");
         Query query;
         if (resID.contains("-1")) {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSource.findAllByStatusSource");
             } else {
                 query = em.createNamedQuery("VjSource.findALLBysourceSubjectFieldStatus");
                 query.setParameter("subjectField", domID);
             }
         } else {
-            if (domID.equalsIgnoreCase("ANY")) {
+            if (domID.contains("-1")) {
                 query = em.createNamedQuery("VjSource.findALLBysourceIdResourceStatus");
                 query.setParameter("idResource", Long.parseLong(resID));
             } else {

@@ -6,9 +6,9 @@ package olanto.myTerm.client.Interfaces;
 
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TabPanel;
-import olanto.myTerm.client.Widgets.ApproveWidget;
-import olanto.myTerm.client.Widgets.WorkspaceWidget;
-import olanto.myTerm.client.Widgets.MyTermSearchWidget;
+import olanto.myTerm.client.Widgets.REVISORWidget;
+import olanto.myTerm.client.Widgets.REDACTORWidget;
+import olanto.myTerm.client.Widgets.READERWidget;
 
 /**
  *
@@ -16,14 +16,14 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class AdminInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan;
-    private WorkspaceWidget wpan;
-    private ApproveWidget apan;
+    private READERWidget bpan;
+    private REDACTORWidget wpan;
+    private REVISORWidget apan;
 
     public AdminInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
-        wpan = new WorkspaceWidget(ownerID);
-        apan = new ApproveWidget(ownerID);
+        bpan = new READERWidget(ownerID);
+        wpan = new REDACTORWidget(ownerID);
+        apan = new REVISORWidget(ownerID);
         add(bpan, "Term Search");
         add(wpan, "Workspace");
         add(apan, "To approve");

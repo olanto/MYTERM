@@ -35,35 +35,34 @@ import olanto.myTerm.client.Resources.ResourceList;
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderBasic extends HorizontalPanel {
+public class SearchHeaderREVISOR extends HorizontalPanel {
 
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
-    public LangList langSrc = new LangList("source");
-    public LangList langTgt = new LangList("target");
+    public LangList langSrc;
+//    public LangList langTgt;
     public ResourceList rsrc;
     public DomainList dom = new DomainList();
-    public Button btnSend = new Button("Search");
+    public Button btnSearch = new Button("Search");
 
-    public SearchHeaderBasic(long ownerID) {
+    public SearchHeaderREVISOR(long ownerID) {
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
-        add(btnSend);
         add(new HTML("&nbsp;"));
+        add(btnSearch);
+        btnSearch.setTitle("Click to retrieve entries");
+        add(new HTML("&nbsp;"));
+        langSrc = new LangList(ownerID, "source");
         add(new Label("Source Lang. "));
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
-        add(new Label("Target Lang. "));
-        add(new HTML("&nbsp;"));
-        add(langTgt);
-        add(new HTML("&nbsp;"));
+        rsrc = new ResourceList(ownerID, "APPROVER");
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
-        rsrc = new ResourceList(ownerID, "READER");
         add(rsrc);
         add(new HTML("&nbsp;"));
         add(new Label("Domain: "));

@@ -5,7 +5,7 @@
 package olanto.myTerm.client.Interfaces;
 
 import com.google.gwt.user.client.ui.TabPanel;
-import olanto.myTerm.client.Widgets.MyTermSearchWidget;
+import olanto.myTerm.client.Widgets.READERWidget;
 
 /**
  *
@@ -13,10 +13,10 @@ import olanto.myTerm.client.Widgets.MyTermSearchWidget;
  */
 public class ReaderInterface extends TabPanel {
 
-    private MyTermSearchWidget bpan;
+    private READERWidget bpan;
 
     public ReaderInterface(long ownerID) {
-        bpan = new MyTermSearchWidget(ownerID);
+        bpan = new READERWidget(ownerID);
         add(bpan, "Term Search");
         setStyleName("tabPanel");
         selectTab(0);

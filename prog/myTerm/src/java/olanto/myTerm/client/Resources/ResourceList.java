@@ -56,7 +56,7 @@ public class ResourceList extends ListBox {
             @Override
             public void onSuccess(ArrayList<ResourceDTO> result) {
                 if (result != null) {
-                    if (type.equalsIgnoreCase("basic")) {
+                    if (type.equalsIgnoreCase("REARDER")) {
                         addItem("ALL", "-1");
                     }
                     int i = 0;
@@ -78,27 +78,6 @@ public class ResourceList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Resource, getItemText(getSelectedIndex()));
             }
         });
-        rsrcService.getResourcesByOwner(ownerID, RsrcCallback);
-    }
-
-    public ResourceList(long ownerID) {
-        RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources");
-            }
-
-            @Override
-            public void onSuccess(ArrayList<ResourceDTO> result) {
-                if (result != null) {
-                    for (ResourceDTO s : result) {
-                        rsrclist.add(s.getResourceName());
-                        rsrcIDlist.add(s.getIdResource());
-                        addItem(s.getResourceName(), s.getIdResource().toString());
-                    }
-                }
-            }
-        };
         rsrcService.getResourcesByOwner(ownerID, RsrcCallback);
     }
 

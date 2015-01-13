@@ -71,7 +71,7 @@ public class DomainList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
             }
         });
-        addItem("ANY", "-1");
+        addItem(" ", "-1");
         domService.getDomains(domCallback);
     }
 
