@@ -14,6 +14,7 @@ union
 where r.resource_privacy="PUBLIC"
 ;
 */
+
 create or replace view v_users_resources as
 select o.id_owner, o.owner_mailing,
 	   r.id_resource, r.resource_name,
@@ -102,8 +103,10 @@ where t1.id_langset=l1.id_langset
 ;
 
 
+select 
 
-/*create or replace view v_sourcetarget as
+/*
+create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
        t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
 	   t1.status status_source,
@@ -127,8 +130,8 @@ where t1.id_langset=l1.id_langset
    and l1.id_langset!=l2.id_langset
    and t1.id_term!=t2.id_term
    and r.id_resource=vur.id_resource
-;*/
-
+;
+*/
 
 create or replace view vj_sourcetarget as
 SELECT uuid()  uuid,
@@ -170,10 +173,12 @@ select * from v_conceptdetail where  id_concept=108300;
 
 
 create or replace view v_source as
-select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
+select t1.term_form source,
+       t1.id_term id_term_source,
+       t1.id_language solang,
 	   t1.status status,
 	   c.id_concept,
-       c.lastmodified_by,
+       t1.lastmodified_by,
        r.resource_name,
 	   r.id_resource,
 	   c.subject_field
@@ -184,10 +189,10 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource ;
 
-select * from v_source where status='e';
+select * from v_source where status='e' and lastmodified_by=1070 and solang='EN' ;
 
-
-/*create or replace view v_source as
+/*
+create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	   t1.status status,
 	   c.id_concept,
@@ -203,7 +208,8 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource
     and vur.id_resource=r.id_resource
- ;*/
+ ;
+*/
 
 create or replace view vj_source as
 SELECT uuid()  uuid,
