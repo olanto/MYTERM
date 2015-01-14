@@ -265,14 +265,14 @@ public class TestView {
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
             query1 = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("idResource", Long.parseLong(resID));
-            query1.setParameter("idResource", Long.parseLong(resID));
+            query.setParameter("idResource", resID);
+            query1.setParameter("idResource", resID);
         } else {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
             query1 = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("idResource", Long.parseLong(resID));
+            query.setParameter("idResource", resID);
             query.setParameter("subjectField", domID);
-            query1.setParameter("idResource", Long.parseLong(resID));
+            query1.setParameter("idResource", resID);
             query1.setParameter("subjectField", domID);
         }
         query.setParameter("status", 'e');
@@ -305,10 +305,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("idResource", Long.parseLong(resID));
+            query.setParameter("idResource", resID);
         } else {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("idResource", Long.parseLong(resID));
+            query.setParameter("idResource", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("status", 'r');

@@ -126,7 +126,7 @@ public class ResourceList extends ListBox {
     private String getAllResources(ArrayList<ResourceDTO> rsrcList) {
         String s = "(";
         for (ResourceDTO r : rsrcList) {
-            s += r.getIdResource().toString() + ",";
+            s += "'"+r.getIdResource().toString()+"'" + ",";
         }
         s = s.substring(0, (s.length() - 1));
         s += ")";
