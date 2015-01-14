@@ -41,7 +41,7 @@ public interface myTermServiceAsync {
 
     public void getDomains(AsyncCallback<ArrayList<DomainDTO>> asyncCallback);
 
-    public void getResourcesByOwner(long ownerID, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
+    public void getResourcesByOwner(String ownerMailing, String role, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
 
     public void getLanguagesByOwner(long ownerID, AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
 

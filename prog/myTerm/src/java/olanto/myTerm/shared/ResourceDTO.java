@@ -28,9 +28,10 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * @author nizar ghoula - simple
  */
 public class ResourceDTO implements IsSerializable {
+
     private static final long serialVersionUID = 1L;
     private Long idResource;
-    private long idOwner;
+    private String ownerMailing;
     private String resourceName;
     private String resourcePrivacy;
     private String resourceNote;
@@ -43,9 +44,9 @@ public class ResourceDTO implements IsSerializable {
         this.idResource = idResource;
     }
 
-    public ResourceDTO(Long idResource, long idOwner, String resourceName, String resourcePrivacy) {
+    public ResourceDTO(Long idResource, String ownerMailing, String resourceName, String resourcePrivacy) {
         this.idResource = idResource;
-        this.idOwner = idOwner;
+        this.ownerMailing = ownerMailing;
         this.resourceName = resourceName;
         this.resourcePrivacy = resourcePrivacy;
     }
@@ -64,12 +65,12 @@ public class ResourceDTO implements IsSerializable {
         this.idResource = idResource;
     }
 
-    public long getIdOwner() {
-        return idOwner;
+    public String getOwnerMailing() {
+        return ownerMailing;
     }
 
-    public void setIdOwner(long idOwner) {
-        this.idOwner = idOwner;
+    public void setOwnerMailing(String ownerMailing) {
+        this.ownerMailing = ownerMailing;
     }
 
     public String getResourceName() {

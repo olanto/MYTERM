@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.ContainerPanels;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -29,6 +30,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Langs.LangList;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Resources.ResourceList;
 
 /**
@@ -36,7 +38,7 @@ import olanto.myTerm.client.Resources.ResourceList;
  * @author nizar ghoula - simple
  */
 public class SearchHeaderREVISOR extends HorizontalPanel {
-
+    
     public Label termLabel = new Label("Input your search expression: ");
     public TextBox searchField = new TextBox();
     public LangList langSrc;
@@ -44,7 +46,7 @@ public class SearchHeaderREVISOR extends HorizontalPanel {
     public ResourceList rsrc;
     public DomainList dom = new DomainList();
     public Button btnSearch = new Button("Search");
-
+    
     public SearchHeaderREVISOR(long ownerID) {
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
@@ -60,7 +62,12 @@ public class SearchHeaderREVISOR extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
-        rsrc = new ResourceList(ownerID, "APPROVER");
+        if (MainEntryPoint.userDTO != null) {
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "REVISOR");
+        } else {
+            Window.alert("The user Id is not set correctly, Try to reload the page");
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "REVISOR");
+        }
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
         add(rsrc);

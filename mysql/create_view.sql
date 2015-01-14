@@ -14,7 +14,6 @@ union
 where r.resource_privacy="PUBLIC"
 ;
 */
-
 create or replace view v_users_resources as
 select o.id_owner, o.owner_mailing,
 	   r.id_resource, r.resource_name,
@@ -80,7 +79,7 @@ v_users_resources.* FROM v_users_resources;
 
 select vj_users_resources.* FROM vj_users_resources; 
 
-create or replace view v_sourcetarget_new as
+create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
        t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
 	   t1.status status_source,
@@ -104,7 +103,7 @@ where t1.id_langset=l1.id_langset
 
 
 
-create or replace view v_sourcetarget as
+/*create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
        t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
 	   t1.status status_source,
@@ -128,7 +127,7 @@ where t1.id_langset=l1.id_langset
    and l1.id_langset!=l2.id_langset
    and t1.id_term!=t2.id_term
    and r.id_resource=vur.id_resource
-;
+;*/
 
 
 create or replace view vj_sourcetarget as
@@ -170,7 +169,7 @@ v_conceptdetail.* FROM v_conceptdetail;
 select * from v_conceptdetail where  id_concept=108300;
 
 
-create or replace view v_source_new as
+create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	   t1.status status,
 	   c.id_concept,
@@ -185,10 +184,10 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource ;
 
-select * from v_source_new where status='e';
+select * from v_source where status='e';
 
 
-create or replace view v_source as
+/*create or replace view v_source as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
 	   t1.status status,
 	   c.id_concept,
@@ -204,7 +203,7 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource
     and vur.id_resource=r.id_resource
- ;
+ ;*/
 
 create or replace view vj_source as
 SELECT uuid()  uuid,

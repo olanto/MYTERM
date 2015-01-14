@@ -39,7 +39,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID) {
-        String response = TestView.getTargetForThis(s, ls, lt, resID, domID, ownerID);
+        String response = TestView.getPublicSearchBySourceTarget(resID, domID, lt, resID, domID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
@@ -104,14 +104,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<ResourceDTO> getResourcesByOwner(long ownerID) {
+    public ArrayList<ResourceDTO> getResourcesByOwner(String ownerMailing, String role) {
         // try and catch, problem with the ownerID
-        if (ownerID > 0) {
-            List<VjUsersResources> l = TestView.getResourcesByOwner(ownerID);
+        if (!ownerMailing.isEmpty()) {
+            List<VjUsersResources> l = TestView.getResourcesByOwner(ownerMailing, role);
             if (!l.isEmpty()) {
                 ArrayList<ResourceDTO> resources = new ArrayList<>();
                 for (VjUsersResources res : l) {
-                    ResourceDTO r = new ResourceDTO(res.getIdResource(), ownerID, res.getResourceName(), res.getResourcePrivacy());
+                    ResourceDTO r = new ResourceDTO(res.getIdResource(), ownerMailing, res.getResourceName(), res.getResourcePrivacy());
                     resources.add(r);
                 }
                 return resources;
@@ -239,7 +239,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getWorkspaceElements(String ls, long ownerID) {
-        String response = TestView.getCurrentForThis(ls, ownerID);
+        String response = TestView.getWorkspaceElementsByLang(ls, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
@@ -488,7 +488,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getApproveElements(String ls, long ownerID) {
-        String response = TestView.getApproveForThis(ls, ownerID);
+        String response = TestView.getApproveElementsByLange(ls, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
@@ -523,7 +523,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getApproveResult(String s, String ls, String resID, String domID, long ownerID) {
-        String response = TestView.getCurrentForThis(s, ls, resID, domID, ownerID);
+        String response = TestView.getSubmittedForThis(s, ls, resID, domID, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");

@@ -41,7 +41,7 @@ public interface myTermService extends RemoteService {
 
     public ArrayList<DomainDTO> getDomains();
 
-    public ArrayList<ResourceDTO> getResourcesByOwner(long ownerID);
+    public ArrayList<ResourceDTO> getResourcesByOwner(String ownerMailing, String role);
 
     public ArrayList<LanguageDTO> getLanguagesByOwner(long ownerID);
 

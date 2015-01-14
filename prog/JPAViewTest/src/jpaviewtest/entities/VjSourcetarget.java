@@ -23,34 +23,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "VjSourcetarget.findAll", query = "SELECT v FROM VjSourcetarget v"),
-    @NamedQuery(name = "VjSourcetarget.findByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findALLByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner AND v.solang = :solang"),
-    @NamedQuery(name = "VjSourcetarget.findCurrentByIdOwner", query = "SELECT v FROM VjSourcetarget v WHERE v.idOwner = :idOwner AND v.solang = :solang AND v.statusSource like 'e'"),
-    @NamedQuery(name = "VjSourcetarget.findByUuid", query = "SELECT v FROM VjSourcetarget v WHERE v.uuid = :uuid AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySource2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idOwner = :idOwner "),
-    @NamedQuery(name = "VjSourcetarget.findPublicBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idOwner = :idOwner AND v.statusSource like 'p' AND v.statusTarget like 'p' AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceResourceSubjectField2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findPublicBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.subjectField LIKE :subjectField AND v.statusSource like 'p' AND v.statusTarget like 'p' AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceResource2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource = :idResource AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findPublicBySourceResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource = :idResource AND v.statusSource like 'p' AND v.statusTarget like 'p' AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findAllBySourceSubjectField2", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.subjectField LIKE :subjectField AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findPublicBySourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.subjectField LIKE :subjectField AND v.statusSource like 'p' AND v.statusTarget like 'p' AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByIdTermSource", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermSource = :idTermSource AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findBySolang", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.target = :target AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByIdTermTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermTarget = :idTermTarget AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByTalang", query = "SELECT v FROM VjSourcetarget v WHERE v.talang = :talang AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByIdConcept", query = "SELECT v FROM VjSourcetarget v WHERE v.idConcept = :idConcept AND v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjSourcetarget.findByResourceName", query = "SELECT v FROM VjSourcetarget v WHERE v.resourceName = :resourceName AND v.idOwner = :idOwner")})
+    @NamedQuery(name = "VjSourcetarget.findPublicBySource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
+    @NamedQuery(name = "VjSourcetarget.findByUuid", query = "SELECT v FROM VjSourcetarget v WHERE v.uuid = :uuid"),
+    @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT v FROM VjSourcetarget v WHERE v.source = :source"),
+    @NamedQuery(name = "VjSourcetarget.findPublicBySourceTargetResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource IN :idResource AND v.subjectField LIKE :subjectField AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
+    @NamedQuery(name = "VjSourcetarget.findPublicBySourceTargetResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.talang = :talang AND v.idResource IN :idResource AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
+    @NamedQuery(name = "VjSourcetarget.findPublicBySourceResourceSubjectField", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource IN :idResource AND v.subjectField LIKE :subjectField AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
+    @NamedQuery(name = "VjSourcetarget.findPublicBySourceResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource IN :idResource AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
+    @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT v FROM VjSourcetarget v WHERE v.source = :source"),
+    @NamedQuery(name = "VjSourcetarget.findByIdTermSource", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermSource = :idTermSource"),
+    @NamedQuery(name = "VjSourcetarget.findBySolang", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang"),
+    @NamedQuery(name = "VjSourcetarget.findByTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.target = :target"),
+    @NamedQuery(name = "VjSourcetarget.findByIdTermTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermTarget = :idTermTarget"),
+    @NamedQuery(name = "VjSourcetarget.findByTalang", query = "SELECT v FROM VjSourcetarget v WHERE v.talang = :talang"),
+    @NamedQuery(name = "VjSourcetarget.findByStatusSource", query = "SELECT v FROM VjSourcetarget v WHERE v.statusSource = :statusSource"),
+    @NamedQuery(name = "VjSourcetarget.findByStatusTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.statusTarget = :statusTarget"),
+    @NamedQuery(name = "VjSourcetarget.findByIdConcept", query = "SELECT v FROM VjSourcetarget v WHERE v.idConcept = :idConcept"),
+    @NamedQuery(name = "VjSourcetarget.findBySubjectField", query = "SELECT v FROM VjSourcetarget v WHERE v.subjectField = :subjectField"),
+    @NamedQuery(name = "VjSourcetarget.findByIdResource", query = "SELECT v FROM VjSourcetarget v WHERE v.idResource = :idResource"),
+    @NamedQuery(name = "VjSourcetarget.findByResourceName", query = "SELECT v FROM VjSourcetarget v WHERE v.resourceName = :resourceName")})
 public class VjSourcetarget implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    @Id
     @Column(name = "uuid")
+    @Id
     private String uuid;
     @Basic(optional = false)
     @Column(name = "source")
@@ -71,26 +67,22 @@ public class VjSourcetarget implements Serializable {
     @Column(name = "talang")
     private String talang;
     @Basic(optional = false)
-    @Column(name = "id_concept")
-    private long idConcept;
-    @Basic(optional = false)
-    @Column(name = "resource_name")
-    private String resourceName;
-    @Basic(optional = false)
-    @Column(name = "id_resource")
-    private long idResource;
-    @Basic(optional = false)
-    @Column(name = "subject_field")
-    private String subjectField;
-    @Basic(optional = false)
     @Column(name = "status_source")
     private char statusSource;
     @Basic(optional = false)
     @Column(name = "status_target")
     private char statusTarget;
     @Basic(optional = false)
-    @Column(name = "id_owner")
-    private long idOwner;
+    @Column(name = "id_concept")
+    private long idConcept;
+    @Column(name = "subject_field")
+    private String subjectField;
+    @Basic(optional = false)
+    @Column(name = "id_resource")
+    private long idResource;
+    @Basic(optional = false)
+    @Column(name = "resource_name")
+    private String resourceName;
 
     public VjSourcetarget() {
     }
@@ -151,20 +143,28 @@ public class VjSourcetarget implements Serializable {
         this.talang = talang;
     }
 
+    public char getStatusSource() {
+        return statusSource;
+    }
+
+    public void setStatusSource(char statusSource) {
+        this.statusSource = statusSource;
+    }
+
+    public char getStatusTarget() {
+        return statusTarget;
+    }
+
+    public void setStatusTarget(char statusTarget) {
+        this.statusTarget = statusTarget;
+    }
+
     public long getIdConcept() {
         return idConcept;
     }
 
     public void setIdConcept(long idConcept) {
         this.idConcept = idConcept;
-    }
-
-    public String getResourceName() {
-        return resourceName;
-    }
-
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
     }
 
     public String getSubjectField() {
@@ -183,27 +183,11 @@ public class VjSourcetarget implements Serializable {
         this.idResource = idResource;
     }
 
-    public char getStatusSource() {
-        return statusSource;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public void setStatusSource(char statusSource) {
-        this.statusSource = statusSource;
-    }
-
-    public char getStatusTarget() {
-        return statusTarget;
-    }
-
-    public void setStatusTarget(char statusTarget) {
-        this.statusTarget = statusTarget;
-    }
-
-    public long getIdOwner() {
-        return idOwner;
-    }
-
-    public void setIdOwner(long idOwner) {
-        this.idOwner = idOwner;
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
     }
 }

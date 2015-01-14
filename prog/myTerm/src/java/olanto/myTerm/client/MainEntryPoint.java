@@ -69,7 +69,6 @@ public class MainEntryPoint implements EntryPoint {
                 String ownerID = Long.toString(user.getId());
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
-                userDTO = user;
                 showMain(user);
             }
         }
@@ -91,7 +90,6 @@ public class MainEntryPoint implements EntryPoint {
                 String ownerID = Long.toString(user.getId());
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.SessionID, sessionID);
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.ownerID, ownerID);
-                userDTO = user;
                 showMain(user);
             }
         }

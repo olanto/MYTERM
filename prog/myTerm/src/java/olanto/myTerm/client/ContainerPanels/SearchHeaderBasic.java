@@ -21,6 +21,7 @@
  */
 package olanto.myTerm.client.ContainerPanels;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -29,6 +30,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Langs.LangList;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Resources.ResourceList;
 
 /**
@@ -63,7 +65,12 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));
-        rsrc = new ResourceList(ownerID, "READER");
+        if (MainEntryPoint.userDTO != null) {
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "READER");
+        } else {
+            Window.alert("The user Id is not set correctly, Try to reload the page");
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "READER");
+        }
         add(rsrc);
         add(new HTML("&nbsp;"));
         add(new Label("Domain: "));

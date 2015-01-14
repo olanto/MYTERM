@@ -23,13 +23,10 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import java.math.BigInteger;
-import java.util.Date;
 import olanto.myTerm.client.Domains.DomainList;
 import olanto.myTerm.client.Resources.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
@@ -64,7 +61,6 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     public Button submit = new Button("SUBMIT");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
-    private long ownerID;
     public int type = 1;
 
     public ConceptFormREDACTOR(ResourceList rsrc) {
@@ -125,13 +121,13 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         text_def.setText(conceptDTO.getConceptDefinition());
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
-        if ((conceptDTO.getSubjectField() != null) && (!conceptDTO.getSubjectField().equalsIgnoreCase("ANY"))) {
+        if ((conceptDTO.getSubjectField() != null) && (!conceptDTO.getSubjectField().isEmpty()) && (conceptDTO.getSubjectField().length() > 1)) {
             type = 0;
             sfPanel.remove(sf);
             label_dom.setText(conceptDTO.getSubjectField());
             sfPanel.add(label_dom);
         }
-        label_rs.setText(rl.getResName(conceptDTO.getIdResource()));
+        label_rs.setText(rl.getResName(""+conceptDTO.getIdResource()));
     }
 
     public void clearAllText() {
@@ -152,10 +148,6 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         conceptDTO.setConceptDefinition(text_def.getText());
         conceptDTO.setConceptNote(text_nt.getText());
         conceptDTO.setConceptSourceDefinition(text_sdef.getText());
-        conceptDTO.setCreateBy(BigInteger.valueOf(ownerID));
-        conceptDTO.setCreation(new Date(System.currentTimeMillis()));
-        conceptDTO.setLastmodified(new Date(System.currentTimeMillis()));
-        conceptDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         if (type == 0) {
             conceptDTO.setSubjectField(label_dom.getText());
         } else {
