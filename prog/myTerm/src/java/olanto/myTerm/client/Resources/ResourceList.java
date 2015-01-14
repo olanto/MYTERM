@@ -56,7 +56,7 @@ public class ResourceList extends ListBox {
             @Override
             public void onSuccess(ArrayList<ResourceDTO> result) {
                 if (result != null) {
-                    if (role.equals("REARDER")) {
+                    if (role.equals("READER")) {
                         addItem("ALL", getAllResources(result));
                     }
                     int i = 0;

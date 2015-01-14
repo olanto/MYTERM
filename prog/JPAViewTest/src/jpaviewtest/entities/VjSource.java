@@ -29,6 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSource.findBySourceStatus", query = "SELECT v FROM VjSource v WHERE v.source = :source  AND v.status like :status AND v.solang = :solang AND v.lastmodifiedBy = :lastmodifiedBy"),
     @NamedQuery(name = "VjSource.findBySourceResourceStatus", query = "SELECT v FROM VjSource v WHERE v.source = :source AND v.idResource IN (:selectedValues) AND v.status like :status AND v.solang = :solang  AND v.lastmodifiedBy = :lastmodifiedBy"),
     @NamedQuery(name = "VjSource.findBySourceResourceStatusSubjectField", query = "SELECT v FROM VjSource v WHERE v.source = :source AND v.idResource IN (:selectedValues) AND v.status like :status AND v.subjectField = :subjectField AND v.solang = :solang  AND v.lastmodifiedBy = :lastmodifiedBy"),
+    @NamedQuery(name = "VjSource.findPublicBySourceResource", query = "SELECT v FROM VjSource v WHERE v.source = :source AND v.idResource IN (:selectedValues) AND v.status like 'p' AND v.solang = :solang"),
+    @NamedQuery(name = "VjSource.findPublicBySourceResourceSubjectField", query = "SELECT v FROM VjSource v WHERE v.source = :source AND v.idResource IN (:selectedValues) AND v.status like 'p' AND v.subjectField = :subjectField AND v.solang = :solang"),
     @NamedQuery(name = "VjSource.findBySource", query = "SELECT v FROM VjSource v WHERE v.source = :source"),
     @NamedQuery(name = "VjSource.findByIdTermSource", query = "SELECT v FROM VjSource v WHERE v.idTermSource = :idTermSource"),
     @NamedQuery(name = "VjSource.findBySolang", query = "SELECT v FROM VjSource v WHERE v.solang = :solang"),

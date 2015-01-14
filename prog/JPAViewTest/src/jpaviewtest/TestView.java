@@ -38,7 +38,7 @@ public class TestView {
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", " "));
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
-//        getApproveElementsByLange("EN", 1001);
+//        getApproveElementsByLang("EN", 1001);
         getResourcesByOwner("redactor", "READER");
     }
 
@@ -170,10 +170,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceTargetResource");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
         } else {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceTargetResourceSubjectField");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("source", term);
@@ -210,10 +210,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceResource");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
         } else {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceResourceSubjectField");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("source", term);
@@ -240,51 +240,37 @@ public class TestView {
         Query query;
         query = em.createNamedQuery("VjSourcetarget.findBySolang");
         query.setParameter("solang", solang);
+        query.setParameter("idConcept", conceptID);
         List<VjSourcetarget> resultQ = query.getResultList();
 
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
-                if (result.getIdConcept() == conceptID) {
-                    res.append("<tr>");
-                    res.append("<td>").append(result.getTarget()).append("</td>");
-                    res.append("</tr>");
-                }
+                res.append("<tr>");
+                res.append("<td>").append(result.getTarget()).append("</td>");
+                res.append("</tr>");
             }
             res.append("</table>");
         }
         return res.toString();
     }
 
-    public static String getSourceForThis(String term, String solang, String resID, String domID, long ownerID) {
+    public static String getSourceForThis(String term, String solang, String resID, String domID) {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
-        Query query1;
         if ((domID.equals(" ") || domID.length() < 2)) {
-            query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query1 = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("idResource", resID);
-            query1.setParameter("idResource", resID);
+            query = em.createNamedQuery("VjSource.findPublicBySourceResource");
+            query.setParameter("selectedValues", resID);
         } else {
-            query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query1 = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("idResource", resID);
+            query = em.createNamedQuery("VjSource.findPublicBySourceResourceSubjectField");
+            query.setParameter("selectedValues", resID);
             query.setParameter("subjectField", domID);
-            query1.setParameter("idResource", resID);
-            query1.setParameter("subjectField", domID);
         }
-        query.setParameter("status", 'e');
-        query.setParameter("lastmodifiedBy", ownerID);
         query.setParameter("source", term);
         query.setParameter("solang", solang);
-        query1.setParameter("status", 'p');
-        query1.setParameter("lastmodifiedBy", ownerID);
-        query1.setParameter("source", term);
-        query1.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
-        resultQ.addAll(query1.getResultList());
         if (resultQ.isEmpty()) {
             return null;
         } else {
@@ -305,10 +291,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
         } else {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("idResource", resID);
+            query.setParameter("selectedValues", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("status", 'r');
@@ -353,7 +339,7 @@ public class TestView {
         return res.toString();
     }
 
-    public static String getApproveElementsByLange(String solang, long ownerID) {
+    public static String getApproveElementsByLang(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
@@ -399,7 +385,7 @@ public class TestView {
             query.setParameter("ownerRoles", role);
             query.setParameter("ownerMailing", ownerMailing);
             List<VjUsersResources> result = query.getResultList();
-            System.out.println(result.get(0).getResourceName());
+//            System.out.println(result.get(0).getResourceName());
             return result;
         }
         return null;

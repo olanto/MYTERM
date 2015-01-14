@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSourcetarget.findPublicBySourceResource", query = "SELECT DISTINCT v FROM VjSourcetarget v WHERE v.source LIKE :source AND v.solang = :solang AND v.idResource IN (:selectedValues) AND v.statusSource like 'p' AND v.statusTarget like 'p'"),
     @NamedQuery(name = "VjSourcetarget.findBySource", query = "SELECT v FROM VjSourcetarget v WHERE v.source = :source"),
     @NamedQuery(name = "VjSourcetarget.findByIdTermSource", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermSource = :idTermSource"),
-    @NamedQuery(name = "VjSourcetarget.findBySolang", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang"),
+    @NamedQuery(name = "VjSourcetarget.findBySolangAndConcept", query = "SELECT v FROM VjSourcetarget v WHERE v.solang = :solang AND v.idConcept = :idConcept"),
     @NamedQuery(name = "VjSourcetarget.findByTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.target = :target"),
     @NamedQuery(name = "VjSourcetarget.findByIdTermTarget", query = "SELECT v FROM VjSourcetarget v WHERE v.idTermTarget = :idTermTarget"),
     @NamedQuery(name = "VjSourcetarget.findByTalang", query = "SELECT v FROM VjSourcetarget v WHERE v.talang = :talang"),

@@ -103,8 +103,6 @@ where t1.id_langset=l1.id_langset
 ;
 
 
-select 
-
 /*
 create or replace view v_sourcetarget as
 select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,

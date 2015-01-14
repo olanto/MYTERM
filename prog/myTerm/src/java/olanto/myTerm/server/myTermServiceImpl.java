@@ -220,7 +220,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID) {
-        String response = TestView.getSourceForThis(s, ls, resID, domID, ownerID);
+        String response = TestView.getSourceForThis(s, ls, resID, domID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
@@ -488,7 +488,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getApproveElements(String ls, long ownerID) {
-        String response = TestView.getApproveElementsByLange(ls, ownerID);
+        String response = TestView.getApproveElementsByLang(ls, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
