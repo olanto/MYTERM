@@ -40,7 +40,7 @@ public class TestView {
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-        getResourcesByOwner("redactor", "READER");
+        getSourceForThis("test", "EN", "1", " ");
     }
 
     public static void init() {
@@ -281,6 +281,7 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        System.out.println(res.toString());
         return res.toString();
     }
 

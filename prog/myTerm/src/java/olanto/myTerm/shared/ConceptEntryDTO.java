@@ -44,16 +44,16 @@ public class ConceptEntryDTO implements IsSerializable {
         this.extraConcepts = "";
     }
 
-    public void addTerm(String term_form, String lang, char status) {
+    public void addTerm(String term_form, String lang, char status, long modifBy) {
         for (int i = 0; i < listlang.size(); i++) {
             LangEntryDTO lan = listlang.get(i);
             if (lan.lan.getIdLanguage().equals(lang)) {
-                lan.addTerm(term_form);
+                lan.addTerm(term_form, lang, status, modifBy);
                 return;
             }
         }
         LangEntryDTO lan = new LangEntryDTO(lang);
-        lan.addTerm(term_form, lang, status);
+        lan.addTerm(term_form, lang, status, modifBy);
         listlang.add(lan);
     }
 

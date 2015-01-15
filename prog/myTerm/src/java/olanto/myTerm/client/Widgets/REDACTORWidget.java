@@ -364,7 +364,7 @@ public class REDACTORWidget extends VerticalPanel {
         conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
         conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
-        conceptEntryDTO.addTerm(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e');
+        conceptEntryDTO.addTerm(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e', ownerID);
     }
 
     public void createNewConceptEntry() {

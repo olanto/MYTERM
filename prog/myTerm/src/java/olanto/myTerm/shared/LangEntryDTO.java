@@ -22,7 +22,9 @@
 package olanto.myTerm.shared;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class LangEntryDTO implements IsSerializable {
 
@@ -43,14 +45,13 @@ public class LangEntryDTO implements IsSerializable {
         lan.setIdLangset(idLangset);
     }
 
-    public void addTerm(String term_form) {
-        TermDTO term = new TermDTO(null, term_form, 'e'); // minimal information
-        listterm.add(term);
-    }
-
-    public void addTerm(String term_form, String idLanguage, char status) {
+    public void addTerm(String term_form, String idLanguage, char status, long modifBy) {
         TermDTO term = new TermDTO(null, term_form, status); // minimal information
         term.setIdLanguage(idLanguage);
+        term.setCreateBy(BigInteger.valueOf(modifBy));
+        term.setLastmodifiedBy(BigInteger.valueOf(modifBy));
+        term.setCreation(new Date(System.currentTimeMillis()));
+        term.setLastmodified(new Date(System.currentTimeMillis()));
         listterm.add(term);
     }
 
