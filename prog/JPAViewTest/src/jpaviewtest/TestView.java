@@ -4,6 +4,7 @@
  */
 package jpaviewtest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManager;
@@ -163,7 +164,7 @@ public class TestView {
         return null;
     }
 
-    public static String getPublicSearchBySourceTarget(String term, String solang, String talang, String resID, String domID) {
+    public static String getPublicSearchBySourceTarget(String term, String solang, String talang, ArrayList<Long> resID, String domID) {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
@@ -210,10 +211,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceResource");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
         } else {
             query = em.createNamedQuery("VjSourcetarget.findPublicBySourceResourceSubjectField");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("source", term);
@@ -262,10 +263,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSource.findPublicBySourceResource");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
         } else {
             query = em.createNamedQuery("VjSource.findPublicBySourceResourceSubjectField");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("source", term);
@@ -291,10 +292,10 @@ public class TestView {
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
         } else {
             query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("selectedValues", resID);
+            query.setParameter("idResource", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("status", 'r');

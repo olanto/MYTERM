@@ -127,7 +127,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
             label_dom.setText(conceptDTO.getSubjectField());
             sfPanel.add(label_dom);
         }
-        label_rs.setText(rl.getResName(""+conceptDTO.getIdResource()));
+        label_rs.setText(rl.getResName(conceptDTO.getIdResource()));
     }
 
     public void clearAllText() {

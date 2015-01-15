@@ -44,7 +44,7 @@ public class ResourceList extends ListBox {
     private final myTermServiceAsync rsrcService = GWT.create(myTermService.class);
     public AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
     private static ArrayList<String> rsrclist = new ArrayList<>();
-    private static ArrayList<String> rsrcIDlist = new ArrayList<>();
+    private static ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
     public ResourceList(String ownerMailing, final String role) {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
@@ -57,12 +57,12 @@ public class ResourceList extends ListBox {
             public void onSuccess(ArrayList<ResourceDTO> result) {
                 if (result != null) {
                     if (role.equals("READER")) {
-                        addItem("ALL", getAllResources(result));
+                        addItem("ALL", "-1");
                     }
                     int i = 0;
                     for (ResourceDTO s : result) {
                         rsrclist.add(s.getResourceName());
-                        rsrcIDlist.add(s.getIdResource().toString());
+                        rsrcIDlist.add(s.getIdResource());
                         addItem(s.getResourceName(), "("+s.getIdResource().toString()+")");
                         if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
                             i = result.indexOf(s);
@@ -93,9 +93,9 @@ public class ResourceList extends ListBox {
         }
     }
 
-    public void selectResourcebyID(String resourceID) {
+    public void selectResourcebyID(Long resourceID) {
         int i = 0;
-        for (String s : rsrcIDlist) {
+        for (Long s : rsrcIDlist) {
             if (s.equals(resourceID)) {
                 setSelectedIndex(i);
                 break;
@@ -104,13 +104,13 @@ public class ResourceList extends ListBox {
         }
     }
 
-    public String getIDResource(int i) {
+    public Long getIDResource(int i) {
         return rsrcIDlist.get(i);
     }
 
-    public String getResName(String IDRes) {
+    public String getResName(Long IDRes) {
         int i = 0;
-        for (String s : rsrcIDlist) {
+        for (Long s : rsrcIDlist) {
             if (s.equals(IDRes)) {
                 return rsrclist.get(i);
             }
@@ -118,18 +118,18 @@ public class ResourceList extends ListBox {
         }
         return "";
     }
+    
+    public ArrayList<Long> getSelectedRsIDs(int idx){
+        ArrayList<Long> rsIDs = new ArrayList<>();
+        if (idx == 0){
+            return rsrcIDlist;
+        } else{
+            rsIDs.add(rsrcIDlist.get(idx));
+        }
+        return rsIDs;
+    }
 
     public String getSelectedValue() {
         return this.getValue(this.getSelectedIndex());
-    }
-
-    private String getAllResources(ArrayList<ResourceDTO> rsrcList) {
-        String s = "(";
-        for (ResourceDTO r : rsrcList) {
-            s += "'"+r.getIdResource().toString()+"'" + ",";
-        }
-        s = s.substring(0, (s.length() - 1));
-        s += ")";
-        return s;
     }
 }

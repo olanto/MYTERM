@@ -23,7 +23,7 @@ public interface myTermService extends RemoteService {
 
     public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID);
 
-    public String getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID);
+    public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID);
 
     public ConceptEntryDTO getAddDetailsForConcept(long conceptID, long ownerID);
 

@@ -118,7 +118,7 @@ public class ConceptFormREVISOR extends HorizontalPanel {
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
         label_dom.setText(conceptDTO.getSubjectField());
-        label_rs.setText(rsrc.getResName(""+conceptDTO.getIdResource()));
+        label_rs.setText(rsrc.getResName(conceptDTO.getIdResource()));
     }
 
     public void clearAllText() {

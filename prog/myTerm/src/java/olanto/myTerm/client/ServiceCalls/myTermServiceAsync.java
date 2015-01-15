@@ -17,7 +17,7 @@ import olanto.myTerm.shared.ResourceDTO;
  */
 public interface myTermServiceAsync {
 
-    public void getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID, AsyncCallback<String> callback);
+    public void getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID, AsyncCallback<String> callback);
 
     public void getAddResult(String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> callback);
 

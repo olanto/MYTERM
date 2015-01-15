@@ -38,8 +38,8 @@ import org.olanto.myterm.extractor.entry.LangEntry;
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
 
     @Override
-    public String getSearchResult(String s, String ls, String lt, String resID, String domID, long ownerID) {
-        String response = TestView.getPublicSearchBySourceTarget(resID, domID, lt, resID, domID);
+    public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID) {
+        String response = TestView.getPublicSearchBySourceTarget(s, ls, lt, resID, domID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");

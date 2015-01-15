@@ -283,7 +283,7 @@ public class REVISORWidget extends VerticalPanel {
         conceptEntryDTO = new ConceptEntryDTO();
         conceptEntryDTO.concept.setCreateBy(BigInteger.valueOf(ownerID));
         conceptEntryDTO.concept.setCreation(new Date(System.currentTimeMillis()));
-        conceptEntryDTO.concept.setIdResource(Long.parseLong(searchMenu.rsrc.getIDResource(searchMenu.rsrc.getSelectedIndex())));
+        conceptEntryDTO.concept.setIdResource(searchMenu.rsrc.getIDResource(searchMenu.rsrc.getSelectedIndex()));
         conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
         conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
