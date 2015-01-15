@@ -63,7 +63,7 @@ public class ResourceList extends ListBox {
                     for (ResourceDTO s : result) {
                         rsrclist.add(s.getResourceName());
                         rsrcIDlist.add(s.getIdResource());
-                        addItem(s.getResourceName(), "("+s.getIdResource().toString()+")");
+                        addItem(s.getResourceName(), s.getIdResource().toString());
                         if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
                             i = result.indexOf(s);
                         }

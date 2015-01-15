@@ -197,14 +197,6 @@ public class REDACTORWidget extends VerticalPanel {
                 } else {
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
-                String srch = searchMenu.searchField.getText();
-                String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
-                if ((lan == null) || (lan.isEmpty())) {
-                    lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
-                }
-                if ((srch == null) || (srch.isEmpty())) {
-                    getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
-                }
             }
 
             @Override
@@ -473,6 +465,10 @@ public class REDACTORWidget extends VerticalPanel {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
         getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
+        String srch = searchMenu.searchField.getText();
+        if ((srch != null) && (!srch.isEmpty())) {
+            getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
+        }
     }
 
     private void commandAdd() {
