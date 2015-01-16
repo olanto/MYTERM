@@ -361,19 +361,18 @@ public class TestView {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
-        query = em.createNamedQuery("VjSource.findByStatusAndOwner");
+        query = em.createNamedQuery("VjSource.findByStatusSolang");
         query.setParameter("status", 'r');
-        query.setParameter("lastmodifiedBy", ownerID);
         query.setParameter("solang", solang);
-        List<VjSource> resultQ = query.getResultList();
+        List<Long> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
             return null;
         } else {
-            for (VjSource result : resultQ) {
+            for (long result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#Appnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang)).append("</td>");
+                res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
                 res.append("</tr>");
             }
         }
