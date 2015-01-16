@@ -23,12 +23,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "vj_getformsbyconcept")
 @XmlRootElement
 @NamedQueries({
-//    @NamedQuery(name = "VjGetformsbyconcept.findAll", query = "SELECT v FROM VjGetformsbyconcept v"),
-//    @NamedQuery(name = "VjGetformsbyconcept.findByUuid", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.uuid = :uuid"),
-//    @NamedQuery(name = "VjGetformsbyconcept.findByIdConcept", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept"),
+    //    @NamedQuery(name = "VjGetformsbyconcept.findAll", query = "SELECT v FROM VjGetformsbyconcept v"),
+    //    @NamedQuery(name = "VjGetformsbyconcept.findByUuid", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.uuid = :uuid"),
+    //    @NamedQuery(name = "VjGetformsbyconcept.findByIdConcept", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept"),
+    @NamedQuery(name = "VjGetformsbyconcept.findformsExceptsolang", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept AND v.idLanguage <> :idLanguage AND v.source <> '?'"),
     @NamedQuery(name = "VjGetformsbyconcept.findByLC", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept AND v.idLanguage = :idLanguage")})
-public class VjGetformsbyconcept implements Serializable {
 
+public class VjGetformsbyconcept implements Serializable {
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")
     @Id

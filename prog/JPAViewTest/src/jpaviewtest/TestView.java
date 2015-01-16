@@ -41,7 +41,7 @@ public class TestView {
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-        getSourceForLang(2966, "EN");
+        getTargetsForThis(2966, "EN");
     }
 
     public static void init() {
@@ -239,7 +239,7 @@ public class TestView {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
-        query = em.createNamedQuery("VjSourcetarget.findBySolangAndConcept");
+        query = em.createNamedQuery("VjGetformsbyconcept.findformsExceptsolang");
         query.setParameter("solang", solang);
         query.setParameter("idConcept", conceptID);
         List<VjSourcetarget> resultQ = query.getResultList();
