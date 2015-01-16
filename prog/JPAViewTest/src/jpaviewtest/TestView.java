@@ -240,15 +240,15 @@ public class TestView {
         StringBuilder res = new StringBuilder("");
         Query query;
         query = em.createNamedQuery("VjGetformsbyconcept.findformsExceptsolang");
-        query.setParameter("solang", solang);
+        query.setParameter("idLanguage", solang);
         query.setParameter("idConcept", conceptID);
-        List<VjSourcetarget> resultQ = query.getResultList();
+        List<VjGetformsbyconcept> resultQ = query.getResultList();
 
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
-            for (VjSourcetarget result : resultQ) {
+            for (VjGetformsbyconcept result : resultQ) {
                 res.append("<tr>");
-                res.append("<td>").append(result.getTarget()).append("</td>");
+                res.append("<td>").append(result.getSource()).append("</td>");
                 res.append("</tr>");
             }
             res.append("</table>");
