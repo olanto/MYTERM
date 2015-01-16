@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import jpaviewtest.entities.VjConceptdetail;
+import jpaviewtest.entities.VjGetformsbyconcept;
 import jpaviewtest.entities.VjReslang;
 import jpaviewtest.entities.VjSource;
 import jpaviewtest.entities.VjSourcetarget;
@@ -225,9 +226,9 @@ public class TestView {
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjSourcetarget result : resultQ) {
-                    res.append("<tr>");
-                    res.append("<td>").append(result.getTarget()).append("</td>");
-                    res.append("</tr>");
+                res.append("<tr>");
+                res.append("<td>").append(result.getTarget()).append("</td>");
+                res.append("</tr>");
             }
             res.append("</table>");
         }
@@ -323,7 +324,6 @@ public class TestView {
         query = em.createNamedQuery("VjSource.findByStatusAndOwner");
         query.setParameter("status", 'e');
         query.setParameter("lastmodifiedBy", ownerID);
-        query.setParameter("solang", solang);
         List<VjSource> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
@@ -331,13 +331,30 @@ public class TestView {
         } else {
             for (VjSource result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#WSnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#WSnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result.getIdConcept(), solang)).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang)).append("</td>");
                 res.append("</tr>");
             }
         }
 //        System.out.println(res.toString());
         return res.toString();
+    }
+
+    public static String getSourceForLang(long conceptID, String solang) {
+        init();
+        Query query = em.createNamedQuery("VjGetformsbyconcept.findByIdLanguageAndConcept");
+        query.setParameter("idConcept", conceptID);
+        query.setParameter("idLanguage", solang);
+        List<VjGetformsbyconcept> result = query.getResultList();
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + conceptID);
+            return "?";
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + conceptID);
+            return "?";
+        }
+        return result.get(0).getSource();
     }
 
     public static String getApproveElementsByLang(String solang, long ownerID) {

@@ -187,6 +187,10 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource ;
 
+create or replace view vj_source as
+SELECT uuid()  uuid,
+v_source.* FROM v_source;
+
 select * from v_source where status='e' and lastmodified_by=1070 ;
 
 create or replace view v_editedbyowner as
@@ -219,10 +223,9 @@ SELECT uuid()  uuid,
 v_getformsbyconcept.* FROM v_getformsbyconcept;
 
 
-select * from v_getformsbyconcept  where id_concept=58864 and id_language='EN';
-select * from v_getformsbyconcept  where id_concept=58857 and id_language='AR';
+select * from v_getformsbyconcept  where id_language='EN';
+select * from v_getformsbyconcept  where id_language='AR';
  
-
 
 /*
 create or replace view v_source as
@@ -243,10 +246,6 @@ where t1.id_langset=l1.id_langset
     and vur.id_resource=r.id_resource
  ;
 */
-
-create or replace view vj_source as
-SELECT uuid()  uuid,
-v_source.* FROM v_source;
 
 create or replace view v_source_lang as
 select distinct t1.id_language solang,
