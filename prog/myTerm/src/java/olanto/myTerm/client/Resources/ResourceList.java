@@ -43,8 +43,8 @@ public class ResourceList extends ListBox {
 
     private final myTermServiceAsync rsrcService = GWT.create(myTermService.class);
     public AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
-    private static ArrayList<String> rsrclist = new ArrayList<>();
-    private static ArrayList<Long> rsrcIDlist = new ArrayList<>();
+    private ArrayList<String> rsrclist = new ArrayList<>();
+    private ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
     public ResourceList(String ownerMailing, final String role) {
         RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
@@ -120,12 +120,12 @@ public class ResourceList extends ListBox {
         }
         return "";
     }
-    
-    public ArrayList<Long> getSelectedRsIDs(int idx){
+
+    public ArrayList<Long> getSelectedRsIDs(int idx) {
         ArrayList<Long> rsIDs = new ArrayList<>();
-        if (idx == 0){
+        if (idx == 0) {
             return rsrcIDlist;
-        } else{
+        } else {
             rsIDs.add(rsrcIDlist.get(idx));
         }
         return rsIDs;

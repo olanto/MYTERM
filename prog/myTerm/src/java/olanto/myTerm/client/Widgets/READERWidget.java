@@ -35,6 +35,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -109,6 +110,7 @@ public class READERWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
+                Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
@@ -122,6 +124,7 @@ public class READERWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
+                    Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
