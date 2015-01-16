@@ -41,7 +41,7 @@ public class TestView {
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-        getSourceForThis("test", "EN", "1", " ");
+        getSourceForLang(2966, "EN");
     }
 
     public static void init() {
@@ -324,15 +324,15 @@ public class TestView {
         query = em.createNamedQuery("VjSource.findByStatusAndOwner");
         query.setParameter("status", 'e');
         query.setParameter("lastmodifiedBy", ownerID);
-        List<VjSource> resultQ = query.getResultList();
+        List<Long> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
             return null;
         } else {
-            for (VjSource result : resultQ) {
+            for (long result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#WSnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result.getIdConcept(), solang)).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForThis(result.getIdConcept(), solang)).append("</td>");
+                res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
                 res.append("</tr>");
             }
         }
@@ -342,7 +342,7 @@ public class TestView {
 
     public static String getSourceForLang(long conceptID, String solang) {
         init();
-        Query query = em.createNamedQuery("VjGetformsbyconcept.findByIdLanguageAndConcept");
+        Query query = em.createNamedQuery("VjGetformsbyconcept.findByLC");
         query.setParameter("idConcept", conceptID);
         query.setParameter("idLanguage", solang);
         List<VjGetformsbyconcept> result = query.getResultList();

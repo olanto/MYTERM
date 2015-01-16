@@ -12,6 +12,8 @@
     <class>jpaviewtest.entities.VjUsersLanguages</class>
     <class>jpaviewtest.entities.VSourcetarget</class>
     <class>jpaviewtest.VjGetformsbyconcept</class>
+    <class>jpaviewtest.entities.VGetformsbyconcept</class>
+    <class>jpaviewtest.entities.VjGetformsbyconcept</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/myterm?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="x"/>

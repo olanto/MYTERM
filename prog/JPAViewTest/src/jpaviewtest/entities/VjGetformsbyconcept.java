@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 //    @NamedQuery(name = "VjGetformsbyconcept.findAll", query = "SELECT v FROM VjGetformsbyconcept v"),
 //    @NamedQuery(name = "VjGetformsbyconcept.findByUuid", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.uuid = :uuid"),
 //    @NamedQuery(name = "VjGetformsbyconcept.findByIdConcept", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept"),
-    @NamedQuery(name = "VjGetformsbyconcept.findByIdLanguageAndConcept", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept AND v.idLanguage = :idLanguage")})
+    @NamedQuery(name = "VjGetformsbyconcept.findByLC", query = "SELECT v FROM VjGetformsbyconcept v WHERE v.idConcept = :idConcept AND v.idLanguage = :idLanguage")})
 public class VjGetformsbyconcept implements Serializable {
 
     private static final long serialVersionUID = 1L;
