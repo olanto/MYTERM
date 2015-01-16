@@ -187,7 +187,42 @@ where t1.id_langset=l1.id_langset
 	and l1.id_concept=c.id_concept
     and c.id_resource=r.id_resource ;
 
-select * from v_source where status='e' and lastmodified_by=1070 and solang='EN' ;
+select * from v_source where status='e' and lastmodified_by=1070 ;
+
+create or replace view v_editedbyowner as
+select distinct id_concept,status,lastmodified_by from v_source;
+
+select * from v_editedbyowner  where status='e' and lastmodified_by=1070 ;
+
+create or replace view v_getformsbyconcept
+as 
+select c.id_concept,
+  t.source, t.solang
+from concepts c, v_source t
+where c.id_concept=t.id_concept;
+
+
+create or replace view v_conceptprodlang as
+select c.*,   l.id_language
+from concepts c , languages l;
+
+create or replace view v_getformsbyconcept
+as 
+select c.id_concept,c.id_language,
+ifnull(t.source,'?') source
+from v_conceptprodlang c left join  v_source t
+on( c.id_concept=t.id_concept and c.id_language=t.solang);
+
+
+create or replace view vj_getformsbyconcept as
+SELECT uuid()  uuid,
+v_getformsbyconcept.* FROM v_getformsbyconcept;
+
+
+select * from v_getformsbyconcept  where id_concept=58864 and id_language='EN';
+select * from v_getformsbyconcept  where id_concept=58857 and id_language='AR';
+ 
+
 
 /*
 create or replace view v_source as
