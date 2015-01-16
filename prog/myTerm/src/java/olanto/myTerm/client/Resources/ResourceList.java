@@ -58,6 +58,8 @@ public class ResourceList extends ListBox {
                 if (result != null) {
                     if (role.equals("READER")) {
                         addItem("ALL", "-1");
+                        rsrclist.add("ALL");
+                        rsrcIDlist.add(0L);
                     }
                     int i = 0;
                     for (ResourceDTO s : result) {
