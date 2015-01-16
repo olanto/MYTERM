@@ -201,7 +201,7 @@ public class REDACTORWidget extends VerticalPanel {
 
             @Override
             public void onFailure(Throwable caught) {
-                resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                resultsPanel.sideCurrent.setWidget(new Label("Communication failed"));
             }
         };
         getConceptDetailsCallback = new AsyncCallback<ConceptEntryDTO>() {
