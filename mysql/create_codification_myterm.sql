@@ -52,6 +52,14 @@ insert into codes values ('term_gender','other',null,'default');
 -- msg
 insert into codes values ('msg','msg.welcome','Welcome to olanto''s Terminology Manager',null);
 insert into codes values ('msg','btn.search','Search',null);
+insert into codes values ('msg','lbl.t.part_of_speech','Part of speech',null);
+insert into codes values ('msg','lbl.c.note','Note',null);
+
+
+-- system
+insert into codes values ('sys_field','t.part_of_speech','visible;3',null);
+insert into codes values ('sys_field','c.note','visible;3',null);
+
 
 
 commit;
