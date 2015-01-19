@@ -47,20 +47,48 @@ insert into codes values ('term_gender','feminine',null,null);
 insert into codes values ('term_gender','neuter',null,null);
 insert into codes values ('term_gender','other',null,'default');
 
-
-
 -- msg
 insert into codes values ('msg','msg.welcome','Welcome to olanto''s Terminology Manager',null);
 insert into codes values ('msg','btn.search','Search',null);
+insert into codes values ('msg','lbl.c.note','Note',null);
+insert into codes values ('msg','lbl.t.form','Form',null);
+insert into codes values ('msg','lbl.t.source','Source',null);
+insert into codes values ('msg','lbl.t.definition','Definition',null);
+insert into codes values ('msg','lbl.t.source_definition','Definition''s source',null);
+insert into codes values ('msg','lbl.t.status','Status',null);
+insert into codes values ('msg','lbl.t.type','Type',null);
+insert into codes values ('msg','lbl.t.note','Note',null);
+insert into codes values ('msg','lbl.t.usage','Usage',null);
+insert into codes values ('msg','lbl.t.extra','Extra',null);
+insert into codes values ('msg','lbl.t.gender','Gender',null);
 insert into codes values ('msg','lbl.t.part_of_speech','Part of speech',null);
+insert into codes values ('msg','lbl.t.context','Context',null);
+insert into codes values ('msg','lbl.t.source_context','Context''s source',null);
+insert into codes values ('msg','lbl.c.subject_field','Subject filed',null);
+insert into codes values ('msg','lbl.c.definition','Definition',null);
+insert into codes values ('msg','lbl.c.resource','Resource',null);
+insert into codes values ('msg','lbl.c.source_definition','Definition''s source',null);
 insert into codes values ('msg','lbl.c.note','Note',null);
 
-
 -- system
+insert into codes values ('sys_field','t.form','visible;1',null);
+insert into codes values ('sys_field','t.source','visible;1',null);
+insert into codes values ('sys_field','t.definition','visible;1',null);
+insert into codes values ('sys_field','t.source_definition','visible;1',null);
+insert into codes values ('sys_field','t.status','visible;2',null);
+insert into codes values ('sys_field','t.type','visible;2',null);
+insert into codes values ('sys_field','t.note','visible;2',null);
+insert into codes values ('sys_field','t.usage','visible;2',null);
+insert into codes values ('sys_field','t.extra','visible;2',null);
+insert into codes values ('sys_field','t.gender','visible;3',null);
 insert into codes values ('sys_field','t.part_of_speech','visible;3',null);
+insert into codes values ('sys_field','t.context','visible;3',null);
+insert into codes values ('sys_field','t.source_context','visible;3',null);
+insert into codes values ('sys_field','c.subject_field','visible;1',null);
+insert into codes values ('sys_field','c.definition','visible;1',null);
+insert into codes values ('sys_field','c.resource','visible;2',null);
+insert into codes values ('sys_field','c.source_definition','visible;2',null);
 insert into codes values ('sys_field','c.note','visible;3',null);
-
-
 
 commit;
 select * from codes;   
