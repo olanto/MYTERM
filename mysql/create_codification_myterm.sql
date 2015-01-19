@@ -7,7 +7,6 @@ drop table if exists codes;
 
 drop table if exists codeslang;
 
-
 -- --------------------------------- 
 
 create table codes
@@ -50,7 +49,6 @@ insert into codes values ('term_gender','other',null,'default');
 -- msg
 insert into codes values ('msg','msg.welcome','Welcome to olanto''s Terminology Manager',null);
 insert into codes values ('msg','btn.search','Search',null);
-insert into codes values ('msg','lbl.c.note','Note',null);
 insert into codes values ('msg','lbl.t.form','Form',null);
 insert into codes values ('msg','lbl.t.source','Source',null);
 insert into codes values ('msg','lbl.t.definition','Definition',null);
