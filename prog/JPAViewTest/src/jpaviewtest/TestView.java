@@ -379,6 +379,29 @@ public class TestView {
 //        System.out.println(res.toString());
         return res.toString();
     }
+    
+        public static String getApproveElements(String solang, ArrayList<String> ls, ArrayList<Long> resID, long ownerID) {
+        init();
+        StringBuilder res = new StringBuilder("");
+        Query query;
+        query = em.createNamedQuery("VjSource.findByApproveElementsBySolangANDResource");
+        query.setParameter("idResource", resID);
+        query.setParameter("solang", ls);
+        List<Long> resultQ = query.getResultList();
+
+        if (resultQ.isEmpty()) {
+            return null;
+        } else {
+            for (long result : resultQ) {
+                res.append("<tr>");
+                res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
+                res.append("</tr>");
+            }
+        }
+//        System.out.println(res.toString());
+        return res.toString();
+    }
 
     public static Vector<String> getListForThis(String term, String solang, String talang) {
         System.out.println("param:" + term);

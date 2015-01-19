@@ -224,8 +224,9 @@ v_getformsbyconcept.* FROM v_getformsbyconcept;
 
 
 select * from v_getformsbyconcept  where id_language='EN';
-select * from v_getformsbyconcept  where id_language='AR';
- 
+select * from v_getformsbyconcept  where id_language!='AR';
+
+select Distinct id_concept from v_source where status = 'r' and solang IN ('EN') and id_resource in (1);
 
 /*
 create or replace view v_source as

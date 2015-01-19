@@ -374,7 +374,7 @@ public class REVISORWidget extends VerticalPanel {
         if ((lan == null) || (lan.isEmpty())) {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
-        getService().getApproveElements(lan, ownerID, workspaceCallback);
+        getService().getApproveElementsShowByLang(lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), ownerID, workspaceCallback);
     }
 
     private void commandSearch() {

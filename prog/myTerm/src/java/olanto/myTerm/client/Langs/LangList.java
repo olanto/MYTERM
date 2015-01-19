@@ -175,4 +175,8 @@ public class LangList extends ListBox {
             i++;
         }
     }
+
+    public ArrayList<String> getLangIDs() {
+        return langIDlist;
+    }
 }

@@ -504,6 +504,25 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
+    
+    @Override
+    public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID) {
+        String response = TestView.getApproveElements(ls, lsList, resID, ownerID);
+        if (response != null) {
+            StringBuilder result = new StringBuilder("");
+            result.append("<div class =\"rpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
+            result.append("<th>").append("Targets").append("</th>");
+            result.append("</tr>");
+            result.append(response);
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
 
     @Override
     public String publishTermEntry(long termID) {

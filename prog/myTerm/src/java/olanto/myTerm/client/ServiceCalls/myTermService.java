@@ -35,6 +35,8 @@ public interface myTermService extends RemoteService {
 
     public String getApproveElements(String ls, long ownerID);
 
+    public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID);
+
     public ArrayList<String> getResults(String s, String ls, String lt, long ownerID);
 
     public ArrayList<LanguageDTO> getLanguages();

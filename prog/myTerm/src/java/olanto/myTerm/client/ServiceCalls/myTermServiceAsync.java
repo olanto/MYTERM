@@ -35,6 +35,8 @@ public interface myTermServiceAsync {
 
     public void getApproveElements(String ls, long ownerID, AsyncCallback<String> callback);
 
+    public void getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID,long ownerID, AsyncCallback<String> callback);
+
     public void getInventory(AsyncCallback<String> callback);
 
     public void getLanguages(AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);

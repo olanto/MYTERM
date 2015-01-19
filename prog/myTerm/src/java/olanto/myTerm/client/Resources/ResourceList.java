@@ -130,6 +130,10 @@ public class ResourceList extends ListBox {
         }
         return rsIDs;
     }
+    
+    public ArrayList<Long> getResourcesIDs(){
+        return rsrcIDlist;
+    }
 
     public String getSelectedValue() {
         return this.getValue(this.getSelectedIndex());
