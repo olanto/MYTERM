@@ -371,7 +371,7 @@ public class TestView {
         } else {
             for (long result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#Appnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
                 res.append("</tr>");
             }
@@ -379,8 +379,8 @@ public class TestView {
 //        System.out.println(res.toString());
         return res.toString();
     }
-    
-        public static String getApproveElements(String solang, ArrayList<String> ls, ArrayList<Long> resID, long ownerID) {
+
+    public static String getApproveElements(String solang, ArrayList<String> ls, ArrayList<Long> resID, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
@@ -394,7 +394,7 @@ public class TestView {
         } else {
             for (long result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td><a href=\"#Appnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
                 res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
                 res.append("</tr>");
             }
