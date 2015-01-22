@@ -24,6 +24,7 @@ package olanto.myTerm.client.Forms;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -34,6 +35,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
@@ -77,7 +79,7 @@ public class TermFormREVISOR extends VerticalPanel {
     private Label label_gdr = new Label("Gender:");
     private TextBox text_gdr = new TextBox();
     private Label label_st = new Label("Status:");
-    private TextBox text_st = new TextBox();
+    private Label text_st = new Label();
     private HorizontalPanel form = new HorizontalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     private Label label_ext = new Label("Extra:");
@@ -135,7 +137,6 @@ public class TermFormREVISOR extends VerticalPanel {
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
         form3.setWidget(4, 1, controls);
-        text_st.setReadOnly(true);
         controls.add(approve);
         approve.setTitle("Approve the current term");
         controls.add(disapprove);
@@ -173,12 +174,14 @@ public class TermFormREVISOR extends VerticalPanel {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
+                    History.newItem("page2");
                 }
 
                 @Override
                 public void onSuccess(String result) {
                     removeFromParent();
                     MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
+                    History.newItem("page2");
                 }
             });
         }
@@ -190,18 +193,20 @@ public class TermFormREVISOR extends VerticalPanel {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
+                    History.newItem("page2");
                 }
 
                 @Override
                 public void onSuccess(String result) {
                     removeFromParent();
                     MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
+                    History.newItem("page2");
                 }
             });
         }
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs) {
         termID = termDTO.getIdTerm();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
@@ -219,6 +224,11 @@ public class TermFormREVISOR extends VerticalPanel {
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
         form1.setWidget(0, 1, lang_lbl);
+        if ((termDTO.getStatus() == 'r') && (userLangs.contains(termDTO.getIdLanguage()))) {
+            this.setReadOnly(false);
+        } else {
+            this.setReadOnly(true);
+        }
     }
 
     public void adjustSize(int w) {
@@ -260,7 +270,6 @@ public class TermFormREVISOR extends VerticalPanel {
         text_tp.setReadOnly(edit);
         text_pos.setReadOnly(edit);
         text_gdr.setReadOnly(edit);
-        text_st.setReadOnly(true);
         text_ext.setReadOnly(edit);
     }
 
@@ -295,11 +304,11 @@ public class TermFormREVISOR extends VerticalPanel {
         termDTO.setTermGender(text_gdr.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        termDTO.setStatus('e');
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());
             termDTO.setLangName(lang_lbl.getText());
         } else {
+            termDTO.setStatus('e');
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }

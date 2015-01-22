@@ -110,7 +110,6 @@ public class REDACTORWidget extends VerticalPanel {
         termAddCallbackWS = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
                 if (result != null) {
                     searchMenu.btnAdd.setEnabled(true);
                     resultsPanel.addnewcpt.setVisible(true);
@@ -203,6 +202,7 @@ public class REDACTORWidget extends VerticalPanel {
                 } else {
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
+                MainEntryPoint.statusPanel.setMessage("info", "Entries retrieved successfully");
             }
 
             @Override
@@ -323,7 +323,7 @@ public class REDACTORWidget extends VerticalPanel {
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO);
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs());
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {

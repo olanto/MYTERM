@@ -348,11 +348,11 @@ public class TestView {
         query.setParameter("idLanguage", solang);
         List<VjGetformsbyconcept> result = query.getResultList();
         if (result.size() > 1) {
-            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + conceptID);
-            return "?";
+//            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + conceptID);
+            return result.get(0).getSource();
         }
         if (result.isEmpty()) {
-            System.out.println("NO RETURNED VALUES for :" + conceptID);
+//            System.out.println("NO RETURNED VALUES for :" + conceptID);
             return "?";
         }
         return result.get(0).getSource();

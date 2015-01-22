@@ -24,6 +24,7 @@ package olanto.myTerm.client.Forms;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -77,23 +78,25 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO) {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs) {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0);
-                terms.add(ter);
-                desc.add(ter);
-                ter.adjustSize(getOffsetWidth() - 10);
-                ter.refreshContentFromTermDTO(tDTO);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
-                i++;
-                ter.delete.addClickHandler(new ClickHandler() {
-                    @Override
-                    public void onClick(ClickEvent event) {
-                        new MyDialog("Are you sure that you would like to delete this term?", ter).show();
-                    }
-                });
+                if ((tDTO.getStatus() == 'e') || (tDTO.getStatus() == 'p')) {
+                    final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0);
+                    i++;
+                    terms.add(ter);
+                    desc.add(ter);
+                    ter.adjustSize(getOffsetWidth() - 10);
+                    ter.refreshContentFromTermDTO(tDTO, userLangs);
+                    ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                    ter.delete.addClickHandler(new ClickHandler() {
+                        @Override
+                        public void onClick(ClickEvent event) {
+                            new MyDialog("Are you sure that you would like to delete this term?", ter).show();
+                        }
+                    });
+                }
             }
         }
     }
@@ -200,6 +203,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not delete Term");
+                    History.newItem("page1");
                 }
 
                 @Override
@@ -208,6 +212,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                     remterms.add(term);
                     term.removeFromParent();
                     MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
+                    History.newItem("page1");
                 }
             });
         } else {

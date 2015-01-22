@@ -143,6 +143,7 @@ public class REVISORWidget extends VerticalPanel {
                 } else {
                     resultsPanel.sideRes.setWidget(new HTML("No current entries"));
                 }
+                MainEntryPoint.statusPanel.setMessage("info", "Entries retrieved successfully");
             }
 
             @Override
@@ -247,7 +248,7 @@ public class REVISORWidget extends VerticalPanel {
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO);
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs());
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {
@@ -383,7 +384,6 @@ public class REVISORWidget extends VerticalPanel {
 
     private void commandSearch() {
         resultsPanel.sideRes.clear();
-        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getApproveResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 

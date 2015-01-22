@@ -21,6 +21,9 @@
  */
 package olanto.myTerm.client.Forms;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -29,6 +32,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.Lists.PartofSpeechList;
@@ -71,12 +75,13 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Label label_gdr = new Label("Gender:");
     private TermGenderList term_gdr;
     private Label label_st = new Label("Status:");
-    private TextBox text_st = new TextBox();
+    private Label text_st = new Label();
     private HorizontalPanel form = new HorizontalPanel();
     private HorizontalPanel controls = new HorizontalPanel();
     private Label label_ext = new Label("Extra:");
     private TextArea text_ext = new TextArea();
     public Button delete = new Button("Delete");
+    public Button edit = new Button("Edit");
     public int type;
     private long ownerID;
     private long termID = -1;
@@ -134,9 +139,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
         form3.setWidget(4, 1, controls);
-        text_st.setReadOnly(true);
+        controls.add(edit);
         controls.add(delete);
         delete.setTitle("Delete the current term");
+        edit.setTitle("Edit the current term");
+        edit.setEnabled(false);
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
@@ -147,9 +154,15 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText("");
         text_usg.setText("");
         text_ext.setText("");
+        edit.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                setReadOnly(false);
+            }
+        });
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs) {
         termID = termDTO.getIdTerm();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
@@ -175,12 +188,18 @@ public class TermFormREDACTOR extends VerticalPanel {
         form2.remove(term_type);
         term_type = new TermTypeList("EN", termDTO.getTermType());
         form2.setWidget(1, 1, term_type);
+        if ((termDTO.getStatus() == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
+            this.setReadOnly(false);
+        } else {
+            this.setReadOnly(true);
+        }
     }
 
     public void adjustSize(int w) {
         controls.setWidth(w * 1 / 5 + "px");
         controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
-        form.setWidth(w * 1 / 3  + "px");
+        controls.setCellHorizontalAlignment(edit, HorizontalPanel.ALIGN_LEFT);
+        form.setWidth(w * 1 / 3 + "px");
         form.setCellHorizontalAlignment(form1, HorizontalPanel.ALIGN_LEFT);
         form.setCellHorizontalAlignment(form2, HorizontalPanel.ALIGN_CENTER);
         form.setCellHorizontalAlignment(form3, HorizontalPanel.ALIGN_RIGHT);
@@ -213,11 +232,12 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_ctxt.setReadOnly(isReadOnly);
         text_sctxt.setReadOnly(isReadOnly);
         text_nt.setReadOnly(isReadOnly);
-        term_type.setEnabled(isReadOnly);
-        term_pos.setEnabled(isReadOnly);
-        term_gdr.setEnabled(isReadOnly);
-        text_st.setReadOnly(isReadOnly);
+        term_type.setEnabled(!isReadOnly);
+        term_pos.setEnabled(!isReadOnly);
+        term_gdr.setEnabled(!isReadOnly);
         text_ext.setReadOnly(isReadOnly);
+        delete.setEnabled(!isReadOnly);
+        edit.setEnabled(isReadOnly);
     }
 
     public String getTermForm() {
@@ -252,17 +272,16 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setExtra(text_ext.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        termDTO.setStatus('e');
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());
             termDTO.setLangName(lang_lbl.getText());
         } else {
+            termDTO.setStatus('e');
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
         termDTO.setTermType(term_type.getValue(term_type.getSelectedIndex()));
         termDTO.setTermPartofspeech(term_pos.getValue(term_pos.getSelectedIndex()));
         termDTO.setTermGender(term_gdr.getValue(term_gdr.getSelectedIndex()));
-
     }
 }

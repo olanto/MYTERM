@@ -24,6 +24,7 @@ package olanto.myTerm.client.ContainerPanels;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
@@ -39,8 +40,9 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     private VerticalPanel resVP = new VerticalPanel();
     private VerticalPanel sideVP = new VerticalPanel();
     public ScrollPanel conceptDetails = new ScrollPanel();
-    public Button addnewcpt = new Button("Create New Concept");
+    public Button addnewcpt = new Button("Create new entry");
     public HorizontalPanel buttonsPanel = new HorizontalPanel();
+    private Label currentHeader = new Label("Workspace Entries");
 
     public ResultsContainerREDACTOR() {
         add(sideVP);
@@ -51,6 +53,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         sideVP.add(buttonsPanel);
         buttonsPanel.add(addnewcpt);
         buttonsPanel.setStyleName("sideWidget");
+        sideVP.add(currentHeader);
+        currentHeader.setStyleName("sidecurhead");
         sideVP.add(sideCurrent);
         sideVP.setStyleName("side");
         sideRes.setStyleName("sideWidget");
@@ -63,8 +67,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     }
 
     public void adjustSize() {
-        int h = Window.getClientHeight() - 140;
-        int w = Window.getClientWidth() - 15;
+        int h = Window.getClientHeight() - 155;
+        int w = Window.getClientWidth() - 20;
         sideRes.setPixelSize((int) (w * 1 / 4), (h / 2 - 30));
         buttonsPanel.setPixelSize((int) (w * 1 / 4) + 2, 30);
         sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
@@ -74,8 +78,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
-        int h = Window.getClientHeight() - 140;
-        int w = Window.getClientWidth() - 15;
+        int h = Window.getClientHeight() - 155;
+        int w = Window.getClientWidth() - 20;
         sideRes.setPixelSize((int) (w * s_widthper), (h / 2 - 30));
         buttonsPanel.setPixelSize((int) (w * 1 / 4) + 2, 30);
         sideCurrent.setPixelSize((int) (w * s_widthper), h / 2);

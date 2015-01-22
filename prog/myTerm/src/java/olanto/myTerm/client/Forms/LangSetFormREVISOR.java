@@ -21,11 +21,7 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
 import olanto.myTerm.shared.LangEntryDTO;
@@ -49,17 +45,19 @@ public class LangSetFormREVISOR extends VerticalPanel {
         add(desc);
     }
 
-    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO) {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs) {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0);
-                terms.add(ter);
-                desc.add(ter);
-                ter.adjustSize(getOffsetWidth() - 10);
-                ter.refreshContentFromTermDTO(tDTO);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
-                i++;
+                if (tDTO.getStatus() == 'r') {
+                    final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0);
+                    i++;
+                    terms.add(ter);
+                    desc.add(ter);
+                    ter.adjustSize(getOffsetWidth() - 10);
+                    ter.refreshContentFromTermDTO(tDTO, userLangs);
+                    ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                }
             }
         }
     }
@@ -116,5 +114,5 @@ public class LangSetFormREVISOR extends VerticalPanel {
             }
         }
         return -1;
-    }  
+    }
 }
