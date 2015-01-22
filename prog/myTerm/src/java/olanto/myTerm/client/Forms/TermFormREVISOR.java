@@ -35,7 +35,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
-import olanto.myTerm.client.Langs.LangList;
+import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;

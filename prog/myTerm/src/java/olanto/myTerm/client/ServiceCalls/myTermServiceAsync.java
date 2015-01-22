@@ -6,10 +6,12 @@ package olanto.myTerm.client.ServiceCalls;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
+import java.util.HashMap;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
@@ -35,7 +37,7 @@ public interface myTermServiceAsync {
 
     public void getApproveElements(String ls, long ownerID, AsyncCallback<String> callback);
 
-    public void getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID,long ownerID, AsyncCallback<String> callback);
+    public void getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID, AsyncCallback<String> callback);
 
     public void getInventory(AsyncCallback<String> callback);
 
@@ -55,7 +57,7 @@ public interface myTermServiceAsync {
 
     public void disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+    public void updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
 
     public void deleteConceptEntry(long conceptID, long ownerID, AsyncCallback<String> asyncCallback);
 
@@ -64,4 +66,8 @@ public interface myTermServiceAsync {
     public void publishTermEntry(long termID, AsyncCallback<String> asyncCallback);
 
     public void disapproveTermEntry(long termID, AsyncCallback<String> asyncCallback);
+
+    public void getSysFieldsByLang(String langID, AsyncCallback<HashMap<String, SysFieldDTO>> asyncCallback);
+
+    public void getTermTypes(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
 }

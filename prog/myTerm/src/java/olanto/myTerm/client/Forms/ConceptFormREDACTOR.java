@@ -27,9 +27,11 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.Domains.DomainList;
-import olanto.myTerm.client.Resources.ResourceList;
+import java.util.HashMap;
+import olanto.myTerm.client.Lists.DomainList;
+import olanto.myTerm.client.Lists.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -44,35 +46,39 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     private Label label_rsrc = new Label("Added to resource:");
     private ResourceList rl;
     private Label label_def = new Label("Definition:");
-    private TextArea text_def = new TextArea();
+    private TextAreaMyTerm text_def;
     private Label label_sdef = new Label("Definition's source:");
-    private TextArea text_sdef = new TextArea();
+    private TextAreaMyTerm text_sdef;
     private Label label_nt = new Label("Note:");
-    private Label label_dom = new Label("");
-    private Label label_rs = new Label("");
-    private TextArea text_nt = new TextArea();
+    private TextAreaMyTerm text_nt;
     private HorizontalPanel sfPanel = new HorizontalPanel();
     private HorizontalPanel rsrcPanel = new HorizontalPanel();
     private HorizontalPanel ctrlPanel = new HorizontalPanel();
-    private VerticalPanel defPAnel = new VerticalPanel();
+    private VerticalPanel defPanel = new VerticalPanel();
     private VerticalPanel defsPanel = new VerticalPanel();
     private VerticalPanel ntPanel = new VerticalPanel();
     public Button save = new Button("SAVE");
     public Button submit = new Button("SUBMIT");
     public Button delete = new Button("DELETE");
     public Button escape = new Button("ESCAPE");
+    private Label label_dom = new Label("");
+    private Label label_rs = new Label("");
     public int type = 1;
+    public Boolean isEdited = false;
 
-    public ConceptFormREDACTOR(ResourceList rsrc) {
+    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields) {
         rl = rsrc;
         setStyleName("conceptForm");
         add(cform);
+        text_def = new TextAreaMyTerm("c.definition", sFields);
+        text_sdef = new TextAreaMyTerm("c.source_definition", sFields);
+        text_nt = new TextAreaMyTerm("c.note", sFields);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);
         cform.setWidget(0, 1, rsrcPanel);
         cform.setWidget(0, 2, ctrlPanel);
-        cform.setWidget(1, 0, defPAnel);
+        cform.setWidget(1, 0, defPanel);
         cform.setWidget(1, 1, defsPanel);
         cform.setWidget(1, 2, ntPanel);
         sfPanel.add(label_sf);
@@ -83,8 +89,8 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         ctrlPanel.add(submit);
         ctrlPanel.add(delete);
         ctrlPanel.add(escape);
-        defPAnel.add(label_def);
-        defPAnel.add(text_def);
+        defPanel.add(label_def);
+        defPanel.add(text_def);
         defsPanel.add(label_sdef);
         defsPanel.add(text_sdef);
         ntPanel.add(label_nt);
@@ -109,7 +115,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         ctrlPanel.setWidth(w * 1 / 3 + "px");
         ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_LEFT);
         ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_RIGHT);
-        defPAnel.setWidth(w * 1 / 3 + "px");
+        defPanel.setWidth(w * 1 / 3 + "px");
         defsPanel.setWidth(w * 1 / 3 + "px");
         ntPanel.setWidth(w * 1 / 3 + "px");
         text_def.setWidth(w * 1 / 3 + "px");

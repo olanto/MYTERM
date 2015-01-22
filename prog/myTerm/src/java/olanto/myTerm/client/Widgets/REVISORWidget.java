@@ -46,7 +46,7 @@ import olanto.myTerm.client.ContainerPanels.ResultsContainerREVISOR;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderREVISOR;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptFormREVISOR;
-import olanto.myTerm.client.Forms.LangSetFormREDACTOR;
+import olanto.myTerm.client.Forms.LangSetFormREVISOR;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -62,13 +62,13 @@ public class REVISORWidget extends VerticalPanel {
     private static SearchHeaderREVISOR searchMenu;
     private static ResultsContainerREVISOR resultsPanel = new ResultsContainerREVISOR();
     private static AsyncCallback<String> entryApproveCallback;
-    private static AsyncCallback<String> entrySaveCallback;
+    private static AsyncCallback<ConceptEntryDTO> entrySaveCallback;
     private static AsyncCallback<String> entryDisapproveCallback;
     private static AsyncCallback<String> workspaceCallback;
     private static AsyncCallback<ConceptEntryDTO> getConceptDetailsCallback;
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptFormREVISOR addcpt;
-    private static LangSetFormREDACTOR addterms;
+    private static LangSetFormREVISOR addterms;
     private long ownerID;
 
     public REVISORWidget(long idOwner) {
@@ -79,13 +79,16 @@ public class REVISORWidget extends VerticalPanel {
         add(resultsPanel);
 
         // Create an asynchronous callback to handle the result.
-        entrySaveCallback = new AsyncCallback<String>() {
+        entrySaveCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
-            public void onSuccess(String result) {
+            public void onSuccess(ConceptEntryDTO result) {
                 if (result != null) {
-                    History.newItem("saved");
+                    conceptEntryDTO = result;
+//                Window.alert(conceptEntryDTO.toStringDTO());
+                    refreshContentFromConceptEntryDTO();
+                    History.newItem("p2saved");
                 } else {
-                    History.newItem("notsaved");
+                    History.newItem("p2notsaved");
                 }
             }
 
@@ -101,9 +104,9 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 if (result != null) {
-                    History.newItem("approved");
+                    History.newItem("p2approved");
                 } else {
-                    History.newItem("notapproved");
+                    History.newItem("p2notapproved");
                 }
             }
 
@@ -117,9 +120,9 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 if (result != null) {
-                    History.newItem("disapproved");
+                    History.newItem("p2disapproved");
                 } else {
-                    History.newItem("notdisapproved");
+                    History.newItem("p2notdisapproved");
                 }
             }
 
@@ -131,7 +134,6 @@ public class REVISORWidget extends VerticalPanel {
         workspaceCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                MainEntryPoint.statusPanel.setMessage("Message", "Displaying current entries");
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
                 } else {
@@ -165,7 +167,7 @@ public class REVISORWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.clear();
                 searchMenu.btnSearch.setEnabled(false);
-                History.newItem("search");
+                History.newItem("p2search");
             }
         });
         // Listen for the button clicks
@@ -177,7 +179,7 @@ public class REVISORWidget extends VerticalPanel {
                     resultsPanel.termsDetails.clear();
                     resultsPanel.conceptDetails.clear();
                     searchMenu.btnSearch.setEnabled(false);
-                    History.newItem("search");
+                    History.newItem("p2search");
                 }
             }
         });
@@ -192,8 +194,6 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("Appnew")) {
                     long conceptID = Long.parseLong(event.getValue().substring(6));
                     getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
@@ -203,25 +203,25 @@ public class REVISORWidget extends VerticalPanel {
                         case "page2":
                             commandPage2();
                             break;
-                        case "search":
+                        case "p2search":
                             commandSearch();
                             break;
-                        case "saved":
+                        case "p2saved":
                             commandSaved();
                             break;
-                        case "notsaved":
+                        case "p2notsaved":
                             commandNotSaved();
                             break;
-                        case "approved":
+                        case "p2approved":
                             commandApproved();
                             break;
-                        case "notapproved":
+                        case "p2notapproved":
                             commandNotApproved();
                             break;
-                        case "disapproved":
+                        case "p2disapproved":
                             commandDisapproved();
                             break;
-                        case "notdisapproved":
+                        case "p2notdisapproved":
                             commandNotDisapproved();
                             break;
                     }
@@ -239,7 +239,7 @@ public class REVISORWidget extends VerticalPanel {
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
-                addterms = new LangSetFormREDACTOR(ownerID);
+                addterms = new LangSetFormREVISOR(ownerID);
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
@@ -294,7 +294,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         MainEntryPoint.statusPanel.setMessage("message", "Cancelled all modifications");
-        History.newItem("escape");
+        History.newItem("p2escape");
     }
 
     private static myTermServiceAsync getService() {
@@ -386,13 +386,13 @@ public class REVISORWidget extends VerticalPanel {
     private void commandSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
+        History.newItem("page2");
     }
 
     private void commandNotSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be updated");
+        History.newItem("page2");
     }
 
     private void commandApproved() {

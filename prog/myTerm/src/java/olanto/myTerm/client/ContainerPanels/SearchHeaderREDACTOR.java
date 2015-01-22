@@ -28,10 +28,10 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.Domains.DomainList;
-import olanto.myTerm.client.Langs.LangList;
+import olanto.myTerm.client.Lists.DomainList;
+import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
-import olanto.myTerm.client.Resources.ResourceList;
+import olanto.myTerm.client.Lists.ResourceList;
 
 /**
  *

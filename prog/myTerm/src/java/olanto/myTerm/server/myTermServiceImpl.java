@@ -6,8 +6,10 @@ package olanto.myTerm.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import jpaviewtest.TestView;
+import jpaviewtest.entities.VjCodifications;
 import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
 import olanto.myTerm.shared.DomainDTO;
@@ -19,6 +21,7 @@ import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.LangSetDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.ManageTerm;
@@ -455,10 +458,11 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+    public ConceptEntryDTO updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
-        if (cEntry.updateFromInterface() != null) {
-            return "Sucess";
+        Concepts c = cEntry.updateFromInterface();
+        if ( c!= null) {
+            return getAddDetailsForConcept(c.getIdConcept(),ownerID);
         }
         return null;
     }
@@ -504,7 +508,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID) {
         String response = TestView.getApproveElements(ls, lsList, resID, ownerID);
@@ -575,5 +579,30 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             return "Sucess";
         }
         return null;
+    }
+
+    @Override
+    public HashMap<String, SysFieldDTO> getSysFieldsByLang(String langID) {
+        HashMap<String, SysFieldDTO> sysFields = new HashMap<>();
+        if (!langID.isEmpty()) {
+            List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("sys_field", langID);
+            for (VjCodifications field : codes) {
+                if (!field.getCodeExtra().isEmpty()) {
+                    String[] values = field.getCodeExtra().split(";");
+                    if ((values.length > 1) && (!field.getCodeValue().isEmpty())) {
+                        SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim());
+                        sysFields.put(field.getCodeValue(), s);
+                    }
+                }
+            }
+        }
+        return sysFields;
+    }
+
+    @Override
+    public ArrayList<String> getTermTypes(String langID) {
+        ArrayList<String> types = new ArrayList<>();
+        types.addAll(TestView.getTermTypes(langID));
+        return types;
     }
 }

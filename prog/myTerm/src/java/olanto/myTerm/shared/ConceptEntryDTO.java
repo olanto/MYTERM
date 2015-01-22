@@ -98,7 +98,8 @@ public class ConceptEntryDTO implements IsSerializable {
             for (TermDTO t : lan.listterm) {
                 conceptEntry += "----Term Details----\n";
                 conceptEntry += "Lang ID: " + t.getIdLanguage() + "\n";
-                conceptEntry += "Term Form: " + t.getTermForm() + "\n";
+                conceptEntry += "term form: " + t.getTermForm() + "\n";
+                conceptEntry += "Term type: " + t.getTermType()+ "\n";
             }
         }
         return conceptEntry;

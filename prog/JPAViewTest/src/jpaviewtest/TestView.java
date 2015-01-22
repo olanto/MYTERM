@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import jpaviewtest.entities.VjCodifications;
 import jpaviewtest.entities.VjConceptdetail;
 import jpaviewtest.entities.VjGetformsbyconcept;
 import jpaviewtest.entities.VjReslang;
@@ -41,7 +42,7 @@ public class TestView {
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-        getTargetsForThis(2966, "EN");
+        getTermTypes("FR");
     }
 
     public static void init() {
@@ -60,10 +61,10 @@ public class TestView {
         List<VjConceptdetail> resultQ = query.getResultList();
 
         StringBuilder result = new StringBuilder("");
+        result.append("<div class=\"ipanel\">");
+        result.append("<table>");
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
-            result.append("<div>");
-            result.append("<table>");
             result.append("<tr>");
             result.append("<td>");
             if ((t.getTermForm() != null)) {
@@ -115,9 +116,9 @@ public class TestView {
             if ((t.getExtcrossref() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Extra Cross Reference: </span>").append(t.getExtcrossref()).append("<br/>");
             }
-            if (t.getStatus() != ' ') {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Status: </span>").append(t.getStatus()).append("<br/>");
-            }
+//            if (t.getStatus() != ' ') {
+//                result.append("&nbsp").append("<span class = \"extrainfo\">Status: </span>").append(t.getStatus()).append("<br/>");
+//            }
             if ((t.getTermAdminStatus() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Admin Status: </span>").append(t.getTermAdminStatus()).append("<br/>");
             }
@@ -128,8 +129,8 @@ public class TestView {
                 result.append("&nbsp").append("<span class = \"extrainfo\">Gero Usage: </span>").append(t.getTermGeoUsage()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
-            result.append("</table>");
         }
+        result.append("</table>");
         result.append("</div>");
         return result.toString();
     }
@@ -482,5 +483,34 @@ public class TestView {
         }
         res.append("</table>");
         return res.toString();
+    }
+
+    public static List<VjCodifications> getCodificationByTypeAndLang(String codeType, String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findSysFieldsByLanguage");
+            query.setParameter("idLanguage", langID);
+            query.setParameter("codeType", codeType);
+            List<VjCodifications> result = query.getResultList();
+//            for (VjCodifications s : result) {
+//                System.out.println("Key: " + s.getUuid() + " content: " + s.getCodeValue() + ", " + s.getCodeExtra() + "\n");
+//            }
+            return result;
+        }
+        return null;
+    }
+
+    public static List<String> getTermTypes(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findTermTypesByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+            for (String s : result) {
+                System.out.println(s);
+            }
+            return result;
+        }
+        return null;
     }
 }

@@ -155,6 +155,6 @@ select * from vj_codifications where id_language='EN' and code_type='role';
 select * from vj_codifications where id_language='FR' and code_type='term_type';
 select * from vj_codifications where id_language='AR' and code_type='term_type';
 
-select * from vj_codifications where id_language='FR' and code_type='msg';
+select * from vj_codifications where id_language='EN' and code_type='sys_field';
 
 

@@ -90,7 +90,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 int i = getLangEntryIdx(tf.getIdLanguage(), listlang);
                 if (i > -1) {
                     if (tf.type == 0) {
-                        int j = getTermDTOIdx(tf.getTermForm(), listlang.get(i).listterm);
+                        int j = getTermDTOIdx(tf.getTermID(), listlang.get(i).listterm);
                         tf.updateTermDTOFromContent(listlang.get(i).listterm.get(j));
                     } else {
                         TermDTO termDTO = new TermDTO(null);
@@ -121,11 +121,11 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         return -1;
     }
 
-    private int getTermDTOIdx(String termform, ArrayList<TermDTO> listterm) {
+    private int getTermDTOIdx(Long termID, ArrayList<TermDTO> listterm) {
         if (!listterm.isEmpty()) {
             int i = 0;
             for (TermDTO tDTO : listterm) {
-                if (tDTO.getTermForm().equalsIgnoreCase(termform)) {
+                if (tDTO.getIdTerm().equals(termID)) {
                     return i;
                 }
                 i++;

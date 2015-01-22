@@ -44,6 +44,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerREDACTOR;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptFormREDACTOR;
@@ -53,6 +54,7 @@ import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
@@ -66,7 +68,7 @@ public class REDACTORWidget extends VerticalPanel {
     private static AsyncCallback<String> termAddCallbackWS;
     private static AsyncCallback<String> termAddedCallback;
     private static AsyncCallback<String> entrySubmitCallback;
-    private static AsyncCallback<String> entrySaveCallback;
+    private static AsyncCallback<ConceptEntryDTO> entrySaveCallback;
     private static AsyncCallback<String> entryDeleteCallback;
     private static AsyncCallback<String> workspaceCallback;
     private static AsyncCallback<ConceptEntryDTO> getConceptDetailsCallback;
@@ -74,9 +76,11 @@ public class REDACTORWidget extends VerticalPanel {
     private static ConceptFormREDACTOR addcpt;
     private static LangSetFormREDACTOR addterms;
     private long ownerID;
+    private HashMap<String, SysFieldDTO> sFields;
 
-    public REDACTORWidget(long idOwner) {
+    public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
         ownerID = idOwner;
+        sFields = sysFields;
         fixGwtNav();
         searchMenu = new SearchHeaderREDACTOR(ownerID);
         add(searchMenu);
@@ -139,10 +143,13 @@ public class REDACTORWidget extends VerticalPanel {
             }
         };
         // Create an asynchronous callback to handle the result.
-        entrySaveCallback = new AsyncCallback<String>() {
+        entrySaveCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
-            public void onSuccess(String result) {
+            public void onSuccess(ConceptEntryDTO result) {
                 if (result != null) {
+                    conceptEntryDTO = result;
+//                Window.alert(conceptEntryDTO.toStringDTO());
+                    refreshContentFromConceptEntryDTO();
                     History.newItem("saved");
                 } else {
                     History.newItem("notsaved");
@@ -191,7 +198,6 @@ public class REDACTORWidget extends VerticalPanel {
         workspaceCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                MainEntryPoint.statusPanel.setMessage("Message", "Displaying current entries");
                 if (result != null) {
                     resultsPanel.sideCurrent.setWidget(new HTML(result));
                 } else {
@@ -260,8 +266,6 @@ public class REDACTORWidget extends VerticalPanel {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("WSnew")) {
                     searchMenu.btnAdd.setEnabled(true);
                     long conceptID = Long.parseLong(event.getValue().substring(5));
@@ -309,7 +313,8 @@ public class REDACTORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
-            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc);
+//            Window.alert(conceptEntryDTO.toStringDTO());
+            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
@@ -491,13 +496,13 @@ public class REDACTORWidget extends VerticalPanel {
     private void commandSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
+        History.newItem("page1");
     }
 
     private void commandNotSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be updated");
+        History.newItem("page1");
     }
 
     private void commandDeleted() {

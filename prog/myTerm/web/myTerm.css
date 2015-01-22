@@ -92,7 +92,7 @@ body{
     width: 100%;
 }
 .sideCurrent{
-    background-color: floralwhite;
+    background-color: #EFF6FF;
     border-right: 1px solid black;
     border-top: 1px solid black;
     width: 100%;
@@ -111,24 +111,23 @@ body{
 }
 .resultsContainer{
     width: 100%;
-    border:1px dashed black;
+    background-color: #EFF6FF;
 }
 .langSetForm{
     margin-top: 1px;
-    background-color: floralwhite;
+    background-color: #EFF6FF;
     margin-bottom: 1px;
 }
 .conceptForm{
     margin-top: 1px;
-    background-color: beige;
+    background-color: #EFF6FF;
     margin-bottom: 1px;
-    border: 1px solid blueviolet;
 }
 .termForm{
     margin-top: 1px;
-    background-color: honeydew;
+    background-color: #EFF6FF;
     margin-bottom: 1px;
-    border: 1px solid blueviolet;
+    border-bottom: 1px black dotted;
 }
 .gwt-Anchor{
     cursor: pointer;
@@ -136,13 +135,14 @@ body{
 }
 .conceptContainer{
     width:99%;
-    background-color: beige;
-    border-bottom: 3px solid black;
+    background-color: #EFF6FF;
+    border-bottom: 1px solid black;
 }
 .termsContainer{
     margin-top: 2px;
     padding-top: 2px;
     width:99%;
+    background-color: #EFF6FF;
 }
 .edpanel{
     margin-top: 1px;
@@ -160,19 +160,37 @@ body{
 }
 .panel p {
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
     font-weight: bold;
 }
 .panel th {
     border:1px dotted #6495ed;
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
 }
 .panel td {
-    border:1px solid #6495ed;
     padding:1px;
     text-align:left;
     vertical-align: top;
+    background-color: white;
+}
+.ipanel{
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    vertical-align: top;
+}
+.ipanel th {
+    border:1px dotted #6495ed;
+    padding:1px;
+    background-color:#f3f3f4 !important;
+}
+.ipanel td {
+    padding:1px;
+    text-align:left;
+    vertical-align: top;
+    background-color:#f3f3f4 !important;
 }
 .rpanel{
     margin-top: 1px;
@@ -183,16 +201,16 @@ body{
 }
 .rpanel p {
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
     font-weight: bold;
 }
 .rpanel th {
     border:1px dotted #6495ed;
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
 }
 .rpanel td {
-    border:1px solid #6495ed;
+    background-color: white;
     padding:1px;
     text-align:left;
     vertical-align: top;
@@ -207,16 +225,16 @@ body{
 }
 .cpanel p {
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
     font-weight: bold;
 }
 .cpanel th {
     border:1px dotted #6495ed;
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
 }
 .cpanel td {
-    border:1px solid #6495ed;
+    background-color: white;
     padding:1px;
     text-align:left;
     vertical-align: top;
@@ -235,16 +253,16 @@ body{
 }
 .tpanel p {
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
     font-weight: bold;
 }
 .tpanel th {
     border:1px dotted #6495ed;
     padding:1px;
-    background-color:#EFF6FF;
+    background-color:white;
 }
 .tpanel td {
-    border:1px solid #6495ed;
+    background-color: white;
     padding:1px;
     text-align:left;
     vertical-align: top;

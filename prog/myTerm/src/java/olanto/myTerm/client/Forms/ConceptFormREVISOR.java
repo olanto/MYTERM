@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.Resources.ResourceList;
+import olanto.myTerm.client.Lists.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
 
 /**

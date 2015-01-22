@@ -35,7 +35,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
-import olanto.myTerm.client.Langs.LangList;
+import olanto.myTerm.client.Lists.LangList;
+import olanto.myTerm.client.Lists.TermTypeList;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -70,9 +71,8 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Label label_nt = new Label("Term's Note:");
     private TextArea text_nt = new TextArea();
     private Label label_tp = new Label("Type:");
-    private TextArea text_tp = new TextArea();
+    private TermTypeList term_type;
     private Label label_pos = new Label("Part of speech:");
-    private Label lang_lbl = new Label("");
     private TextBox text_pos = new TextBox();
     private Label label_gdr = new Label("Gender:");
     private TextBox text_gdr = new TextBox();
@@ -86,9 +86,12 @@ public class TermFormREDACTOR extends VerticalPanel {
     public int type;
     private long ownerID;
     private long termID = -1;
+    public Boolean isEdited = false;
+    private Label lang_lbl = new Label("");
 
     public TermFormREDACTOR(long ownerID, int type) {
         lang = new LangList(ownerID);
+        term_type = new TermTypeList("EN");
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -117,7 +120,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
         form2.setWidget(1, 0, label_tp);
-        form2.setWidget(1, 1, text_tp);
+        form2.setWidget(1, 1, term_type);
         form2.setWidget(2, 0, label_nt);
         form2.setWidget(2, 1, text_nt);
         form2.setWidget(3, 0, label_usg);
@@ -140,7 +143,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_tp.setText("");
         text_pos.setText("");
         text_gdr.setText("");
         text_st.setText("");
@@ -185,14 +187,17 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_ctxt.setText(termDTO.getTermContext());
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
-        text_tp.setText(termDTO.getTermType());
         text_pos.setText(termDTO.getTermPartofspeech());
         text_gdr.setText(termDTO.getTermGender());
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
+        form1.remove(lang);
         form1.setWidget(0, 1, lang_lbl);
+        form2.remove(term_type);
+        term_type = new TermTypeList("EN", termDTO.getTermType());
+        form2.setWidget(1, 1, term_type);
     }
 
     public void adjustSize(int w) {
@@ -209,7 +214,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_frm.setWidth(w * 1 / 5 + "px");
         text_src.setWidth(w * 1 / 5 + "px");
         text_def.setWidth(w * 1 / 5 + "px");
-        text_tp.setWidth(w * 1 / 5 + "px");
+        term_type.setWidth(w * 1 / 5 + "px");
         text_pos.setWidth(w * 1 / 5 + "px");
         text_gdr.setWidth(w * 1 / 5 + "px");
         text_st.setWidth(w * 1 / 5 + "px");
@@ -219,13 +224,14 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setWidth(w * 1 / 5 + "px");
         text_usg.setWidth(w * 1 / 5 + "px");
         text_ext.setWidth(w * 1 / 5 + "px");
+        lang_lbl.setWidth(w * 1 / 5 + "px");
     }
 
     public void clearAllText() {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_tp.setText("");
+        term_type.setSelectedIndex(0);
         text_pos.setText("");
         text_gdr.setText("");
         text_st.setText("");
@@ -237,20 +243,20 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_ext.setText("");
     }
 
-    public void setReadOnly(Boolean edit) {
-        text_frm.setReadOnly(edit);
-        text_src.setReadOnly(edit);
-        text_def.setReadOnly(edit);
-        text_sdef.setReadOnly(edit);
-        text_usg.setReadOnly(edit);
-        text_ctxt.setReadOnly(edit);
-        text_sctxt.setReadOnly(edit);
-        text_nt.setReadOnly(edit);
-        text_tp.setReadOnly(edit);
-        text_pos.setReadOnly(edit);
-        text_gdr.setReadOnly(edit);
+    public void setReadOnly(Boolean isReadOnly) {
+        text_frm.setReadOnly(isReadOnly);
+        text_src.setReadOnly(isReadOnly);
+        text_def.setReadOnly(isReadOnly);
+        text_sdef.setReadOnly(isReadOnly);
+        text_usg.setReadOnly(isReadOnly);
+        text_ctxt.setReadOnly(isReadOnly);
+        text_sctxt.setReadOnly(isReadOnly);
+        text_nt.setReadOnly(isReadOnly);
+        term_type.setEnabled(isReadOnly);
+        text_pos.setReadOnly(isReadOnly);
+        text_gdr.setReadOnly(isReadOnly);
         text_st.setReadOnly(true);
-        text_ext.setReadOnly(edit);
+        text_ext.setReadOnly(isReadOnly);
     }
 
     private static myTermServiceAsync getService() {
@@ -259,6 +265,10 @@ public class TermFormREDACTOR extends VerticalPanel {
 
     public String getTermForm() {
         return text_frm.getText();
+    }
+
+    public Long getTermID() {
+        return termID;
     }
 
     public String getIdLanguage() {
@@ -278,7 +288,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setTermContext(text_ctxt.getText());
         termDTO.setTermSourceContext(text_sctxt.getText());
         termDTO.setTermNote(text_nt.getText());
-        termDTO.setTermType(text_tp.getText());
         termDTO.setTermPartofspeech(text_pos.getText());
         termDTO.setExtra(text_ext.getText());
         termDTO.setTermGender(text_gdr.getText());
@@ -292,6 +301,7 @@ public class TermFormREDACTOR extends VerticalPanel {
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
+        termDTO.setTermType(term_type.getValue(term_type.getSelectedIndex()));
     }
 
     private class MyDialog extends DialogBox {

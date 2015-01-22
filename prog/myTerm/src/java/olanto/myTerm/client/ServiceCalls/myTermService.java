@@ -7,10 +7,12 @@ package olanto.myTerm.client.ServiceCalls;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
+import java.util.HashMap;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
@@ -57,7 +59,7 @@ public interface myTermService extends RemoteService {
 
     public String disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public String updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public ConceptEntryDTO updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
     public String deleteConceptEntry(long conceptID, long ownerID);
 
@@ -66,4 +68,8 @@ public interface myTermService extends RemoteService {
     public String publishTermEntry(long termID);
 
     public String disapproveTermEntry(long termID);
+
+    public HashMap<String, SysFieldDTO> getSysFieldsByLang(String langID);
+
+    public ArrayList<String> getTermTypes(String langID);
 }
