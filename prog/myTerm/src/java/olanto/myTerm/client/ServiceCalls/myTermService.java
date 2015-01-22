@@ -72,4 +72,6 @@ public interface myTermService extends RemoteService {
     public HashMap<String, SysFieldDTO> getSysFieldsByLang(String langID);
 
     public ArrayList<String> getTermTypes(String langID);
+
+    public ArrayList<String> getTermPOS(String langID);
 }

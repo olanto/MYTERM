@@ -21,13 +21,19 @@
  */
 package olanto.myTerm.client.Forms;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
+import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ServiceCalls.myTermService;
+import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -42,11 +48,13 @@ public class LangSetFormREDACTOR extends VerticalPanel {
     private HorizontalPanel controls = new HorizontalPanel();
     public Button addTerm = new Button("Add Term");
     private ArrayList<TermFormREDACTOR> terms;
+    private ArrayList<TermFormREDACTOR> remterms;
     private long ownerID;
 
     public LangSetFormREDACTOR(long idOwner) {
         ownerID = idOwner;
-        this.terms = new ArrayList<>();
+        terms = new ArrayList<>();
+        remterms = new ArrayList<>();
         this.setStyleName("langSetForm");
         add(desc);
         add(controls);
@@ -58,7 +66,13 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + (terms.size())));
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + desc.getWidgetCount()));
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        new MyDialog("Are you sure that you would like to delete this term?", ter).show();
+                    }
+                });
             }
         });
     }
@@ -74,6 +88,12 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 ter.refreshContentFromTermDTO(tDTO);
                 ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                 i++;
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        new MyDialog("Are you sure that you would like to delete this term?", ter).show();
+                    }
+                });
             }
         }
     }
@@ -85,6 +105,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
     }
 
     public void sortTermDTOByLangSet(ArrayList<LangEntryDTO> listlang) {
+        removeDeletedTerms(listlang);
         if (!terms.isEmpty()) {
             for (TermFormREDACTOR tf : terms) {
                 int i = getLangEntryIdx(tf.getIdLanguage(), listlang);
@@ -133,10 +154,81 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         }
         return -1;
     }
-    
-    public void clearAllText(){
-        for (TermFormREDACTOR term : terms){
-            term.clearAllText();
+
+    private class MyDialog extends DialogBox {
+
+        public MyDialog(String text, final TermFormREDACTOR term) {
+            // Set the dialog box's caption.
+            setText(text);
+            // Enable animation.
+            setAnimationEnabled(true);
+            // Enable glass background.
+            setGlassEnabled(true);
+            HorizontalPanel controls = new HorizontalPanel();
+            // DialogBox is a SimplePanel, so you have to set its widget property to
+            // whatever you want its contents to be.
+            final Button submit = new Button("Delete");
+
+            submit.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    MyDialog.this.hide();
+                    deleteTermEntry(term);
+                }
+            });
+            Button cancel = new Button("Cancel");
+            cancel.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    MyDialog.this.hide();
+                }
+            });
+            setPopupPosition(100, 100);
+            setWidth("400px");
+            controls.add(cancel);
+            controls.add(submit);
+            setWidget(controls);
+            controls.setWidth("400px");
+            controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
+            controls.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
         }
+    }
+
+    public void deleteTermEntry(final TermFormREDACTOR term) {
+        if (term.getTermID() > -1) {
+            getService().deleteTermEntry(term.getTermID(), new AsyncCallback<String>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MainEntryPoint.statusPanel.setMessage("error", "Could not delete Term");
+                }
+
+                @Override
+                public void onSuccess(String result) {
+                    terms.remove(term);
+                    remterms.add(term);
+                    term.removeFromParent();
+                    MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
+                }
+            });
+        } else {
+            terms.remove(term);
+            term.removeFromParent();
+            MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
+        }
+    }
+
+    private static myTermServiceAsync getService() {
+        return GWT.create(myTermService.class);
+    }
+
+    private void removeDeletedTerms(ArrayList<LangEntryDTO> listlang) {
+        for (TermFormREDACTOR trm : remterms) {
+            if ((trm.getTermID() > -1) && (trm.getLangID().length() > 1)) {
+                int i = getLangEntryIdx(trm.getIdLanguage(), listlang);
+                int j = getTermDTOIdx(trm.getTermID(), listlang.get(i).listterm);
+                listlang.get(i).listterm.remove(j);
+            }
+        }
+        remterms.clear();
     }
 }

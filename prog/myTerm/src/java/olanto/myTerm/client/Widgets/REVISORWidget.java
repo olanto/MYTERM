@@ -42,6 +42,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerREVISOR;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderREVISOR;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
@@ -52,6 +53,7 @@ import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
@@ -70,9 +72,11 @@ public class REVISORWidget extends VerticalPanel {
     private static ConceptFormREVISOR addcpt;
     private static LangSetFormREVISOR addterms;
     private long ownerID;
+    private HashMap<String, SysFieldDTO> sFields;
 
-    public REVISORWidget(long idOwner) {
+    public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
         ownerID = idOwner;
+        sFields = sysFields;
         fixGwtNav();
         searchMenu = new SearchHeaderREVISOR(ownerID);
         add(searchMenu);
@@ -234,7 +238,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
-            addcpt = new ConceptFormREVISOR(searchMenu.rsrc);
+            addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);

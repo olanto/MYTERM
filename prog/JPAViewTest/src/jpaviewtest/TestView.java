@@ -506,9 +506,23 @@ public class TestView {
             Query query = em.createNamedQuery("VjCodifications.findTermTypesByLanguage");
             query.setParameter("idLanguage", langID);
             List<String> result = query.getResultList();
-            for (String s : result) {
-                System.out.println(s);
-            }
+//            for (String s : result) {
+//                System.out.println(s);
+//            }
+            return result;
+        }
+        return null;
+    }
+    
+    public static List<String> getTermPOS(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findTermPOSByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+//            for (String s : result) {
+//                System.out.println(s);
+//            }
             return result;
         }
         return null;

@@ -36,6 +36,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.Date;
 import olanto.myTerm.client.Lists.LangList;
+import olanto.myTerm.client.Lists.PartofSpeechList;
 import olanto.myTerm.client.Lists.TermTypeList;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -73,7 +74,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Label label_tp = new Label("Type:");
     private TermTypeList term_type;
     private Label label_pos = new Label("Part of speech:");
-    private TextBox text_pos = new TextBox();
+    private PartofSpeechList term_pos;
     private Label label_gdr = new Label("Gender:");
     private TextBox text_gdr = new TextBox();
     private Label label_st = new Label("Status:");
@@ -86,12 +87,14 @@ public class TermFormREDACTOR extends VerticalPanel {
     public int type;
     private long ownerID;
     private long termID = -1;
+    private String langID = "";
     public Boolean isEdited = false;
     private Label lang_lbl = new Label("");
 
     public TermFormREDACTOR(long ownerID, int type) {
         lang = new LangList(ownerID);
         term_type = new TermTypeList("EN");
+        term_pos = new PartofSpeechList("EN");
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -131,7 +134,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form3.setWidget(0, 0, label_gdr);
         form3.setWidget(0, 1, text_gdr);
         form3.setWidget(1, 0, label_pos);
-        form3.setWidget(1, 1, text_pos);
+        form3.setWidget(1, 1, term_pos);
         form3.setWidget(2, 0, label_ctxt);
         form3.setWidget(2, 1, text_ctxt);
         form3.setWidget(3, 0, label_sctxt);
@@ -143,7 +146,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_pos.setText("");
         text_gdr.setText("");
         text_st.setText("");
         text_sdef.setText("");
@@ -152,29 +154,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText("");
         text_usg.setText("");
         text_ext.setText("");
-        delete.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                new MyDialog("Are you sure that you would like to delete this term?").show();
-            }
-        });
-    }
-
-    public void deleteTermEntry() {
-        if (termID > -1) {
-            getService().deleteTermEntry(termID, new AsyncCallback<String>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    MainEntryPoint.statusPanel.setMessage("error", "Could not delete Term");
-                }
-
-                @Override
-                public void onSuccess(String result) {
-                    removeFromParent();
-                    MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
-                }
-            });
-        }
     }
 
     public void refreshContentFromTermDTO(TermDTO termDTO) {
@@ -187,12 +166,15 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_ctxt.setText(termDTO.getTermContext());
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
-        text_pos.setText(termDTO.getTermPartofspeech());
+        form3.remove(term_pos);
+        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech());
+        form3.setWidget(1, 1, term_pos);
         text_gdr.setText(termDTO.getTermGender());
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
+        langID = termDTO.getIdLanguage();
         form1.remove(lang);
         form1.setWidget(0, 1, lang_lbl);
         form2.remove(term_type);
@@ -215,7 +197,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_src.setWidth(w * 1 / 5 + "px");
         text_def.setWidth(w * 1 / 5 + "px");
         term_type.setWidth(w * 1 / 5 + "px");
-        text_pos.setWidth(w * 1 / 5 + "px");
+        term_pos.setWidth(w * 1 / 5 + "px");
         text_gdr.setWidth(w * 1 / 5 + "px");
         text_st.setWidth(w * 1 / 5 + "px");
         text_sdef.setWidth(w * 1 / 5 + "px");
@@ -232,7 +214,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_src.setText("");
         text_def.setText("");
         term_type.setSelectedIndex(0);
-        text_pos.setText("");
+        term_pos.setSelectedIndex(0);
         text_gdr.setText("");
         text_st.setText("");
         text_sdef.setText("");
@@ -253,14 +235,10 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setReadOnly(isReadOnly);
         text_nt.setReadOnly(isReadOnly);
         term_type.setEnabled(isReadOnly);
-        text_pos.setReadOnly(isReadOnly);
+        term_pos.setEnabled(isReadOnly);
         text_gdr.setReadOnly(isReadOnly);
         text_st.setReadOnly(true);
         text_ext.setReadOnly(isReadOnly);
-    }
-
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
     }
 
     public String getTermForm() {
@@ -269,6 +247,10 @@ public class TermFormREDACTOR extends VerticalPanel {
 
     public Long getTermID() {
         return termID;
+    }
+    
+    public String getLangID() {
+        return langID;
     }
 
     public String getIdLanguage() {
@@ -288,7 +270,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setTermContext(text_ctxt.getText());
         termDTO.setTermSourceContext(text_sctxt.getText());
         termDTO.setTermNote(text_nt.getText());
-        termDTO.setTermPartofspeech(text_pos.getText());
         termDTO.setExtra(text_ext.getText());
         termDTO.setTermGender(text_gdr.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
@@ -302,44 +283,6 @@ public class TermFormREDACTOR extends VerticalPanel {
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
         termDTO.setTermType(term_type.getValue(term_type.getSelectedIndex()));
-    }
-
-    private class MyDialog extends DialogBox {
-
-        public MyDialog(String text) {
-            // Set the dialog box's caption.
-            setText(text);
-            // Enable animation.
-            setAnimationEnabled(true);
-            // Enable glass background.
-            setGlassEnabled(true);
-            HorizontalPanel controls = new HorizontalPanel();
-            // DialogBox is a SimplePanel, so you have to set its widget property to
-            // whatever you want its contents to be.
-            final Button submit = new Button("Delete");
-
-            submit.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    MyDialog.this.hide();
-                    deleteTermEntry();
-                }
-            });
-            Button cancel = new Button("Cancel");
-            cancel.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    MyDialog.this.hide();
-                }
-            });
-            setPopupPosition(100, 100);
-            setWidth("400px");
-            controls.add(cancel);
-            controls.add(submit);
-            setWidget(controls);
-            controls.setWidth("400px");
-            controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
-            controls.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
-        }
+        termDTO.setTermPartofspeech(term_pos.getValue(term_pos.getSelectedIndex()));
     }
 }

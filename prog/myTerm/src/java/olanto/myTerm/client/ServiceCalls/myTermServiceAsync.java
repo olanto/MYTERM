@@ -70,4 +70,6 @@ public interface myTermServiceAsync {
     public void getSysFieldsByLang(String langID, AsyncCallback<HashMap<String, SysFieldDTO>> asyncCallback);
 
     public void getTermTypes(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
+
+    public void getTermPOS(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
 }

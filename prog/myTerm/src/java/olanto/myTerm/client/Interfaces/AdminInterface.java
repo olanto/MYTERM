@@ -42,7 +42,7 @@ public class AdminInterface extends TabPanel {
                 sysFields = result;
                 bpan = new READERWidget(ownerID);
                 wpan = new REDACTORWidget(ownerID, result);
-                apan = new REVISORWidget(ownerID);
+                apan = new REVISORWidget(ownerID, result);
                 add(bpan, "Term Search");
                 add(wpan, "Workspace");
                 add(apan, "To approve");

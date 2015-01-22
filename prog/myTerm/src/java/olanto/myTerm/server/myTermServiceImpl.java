@@ -461,8 +461,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public ConceptEntryDTO updateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         Concepts c = cEntry.updateFromInterface();
-        if ( c!= null) {
-            return getAddDetailsForConcept(c.getIdConcept(),ownerID);
+        if (c != null) {
+            return getAddDetailsForConcept(c.getIdConcept(), ownerID);
         }
         return null;
     }
@@ -603,6 +603,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public ArrayList<String> getTermTypes(String langID) {
         ArrayList<String> types = new ArrayList<>();
         types.addAll(TestView.getTermTypes(langID));
+        return types;
+    }
+
+    @Override
+    public ArrayList<String> getTermPOS(String langID) {
+        ArrayList<String> types = new ArrayList<>();
+        types.addAll(TestView.getTermPOS(langID));
         return types;
     }
 }

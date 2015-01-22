@@ -39,8 +39,6 @@ import olanto.myTerm.shared.TermDTO;
 public class LangSetFormREVISOR extends VerticalPanel {
 
     public VerticalPanel desc = new VerticalPanel();
-    private HorizontalPanel controls = new HorizontalPanel();
-    public Button addTerm = new Button("Add Term");
     private ArrayList<TermFormREVISOR> terms;
     private long ownerID;
 
@@ -49,18 +47,6 @@ public class LangSetFormREVISOR extends VerticalPanel {
         this.terms = new ArrayList<>();
         this.setStyleName("langSetForm");
         add(desc);
-        add(controls);
-        controls.add(addTerm);
-        addTerm.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 1);
-                terms.add(ter);
-                desc.add(ter);
-                ter.adjustSize(getOffsetWidth() - 10);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + (terms.size())));
-            }
-        });
     }
 
     public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO) {
@@ -80,8 +66,6 @@ public class LangSetFormREVISOR extends VerticalPanel {
 
     public void adjustSize(int w) {
         setWidth(w + "px");
-        controls.setWidth(w + "px");
-        controls.setCellHorizontalAlignment(addTerm, HorizontalPanel.ALIGN_RIGHT);
     }
 
     public void sortTermDTOByLangSet(ArrayList<LangEntryDTO> listlang) {

@@ -25,10 +25,11 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.HashMap;
 import olanto.myTerm.client.Lists.ResourceList;
 import olanto.myTerm.shared.ConceptDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept
@@ -41,13 +42,13 @@ public class ConceptFormREVISOR extends HorizontalPanel {
     private Label label_sf = new Label("Subject field:");
     private Label label_rsrc = new Label("Add to resource:");
     private Label label_def = new Label("Definition:");
-    private TextArea text_def = new TextArea();
+    private TextAreaMyTerm text_def;
     private Label label_sdef = new Label("Definition's source:");
-    private TextArea text_sdef = new TextArea();
+    private TextAreaMyTerm text_sdef;
     private Label label_nt = new Label("Note:");
     private Label label_dom = new Label("");
     private Label label_rs = new Label("");
-    private TextArea text_nt = new TextArea();
+    private TextAreaMyTerm text_nt;
     private HorizontalPanel sfPanel = new HorizontalPanel();
     private HorizontalPanel rsrcPanel = new HorizontalPanel();
     private HorizontalPanel ctrlPanel = new HorizontalPanel();
@@ -60,10 +61,13 @@ public class ConceptFormREVISOR extends HorizontalPanel {
     public Button escape = new Button("ESCAPE");
     public ResourceList rsrc;
 
-    public ConceptFormREVISOR(ResourceList rs) {
+    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields) {
         rsrc = rs;
         setStyleName("conceptForm");
         add(cform);
+        text_def = new TextAreaMyTerm("c.definition", sFields);
+        text_sdef = new TextAreaMyTerm("c.source_definition", sFields);
+        text_nt = new TextAreaMyTerm("c.note", sFields);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);
