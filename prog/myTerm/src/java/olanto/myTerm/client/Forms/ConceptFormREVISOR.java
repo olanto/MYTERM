@@ -125,12 +125,6 @@ public class ConceptFormREVISOR extends HorizontalPanel {
         label_rs.setText(rsrc.getResName(conceptDTO.getIdResource()));
     }
 
-    public void clearAllText() {
-        text_def.setText("");
-        text_sdef.setText("");
-        text_nt.setText("");
-    }
-
     public void setReadOnly(Boolean edit) {
         text_def.setReadOnly(edit);
         text_sdef.setReadOnly(edit);

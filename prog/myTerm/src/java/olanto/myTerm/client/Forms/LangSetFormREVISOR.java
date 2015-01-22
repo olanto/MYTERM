@@ -116,11 +116,5 @@ public class LangSetFormREVISOR extends VerticalPanel {
             }
         }
         return -1;
-    }
-    
-    public void clearAllText(){
-        for (TermFormREVISOR term : terms){
-            term.clearAllText();
-        }
-    }
+    }  
 }

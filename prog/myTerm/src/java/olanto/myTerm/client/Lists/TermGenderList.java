@@ -33,17 +33,17 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
  *
  * @author nizar ghoula - simple
  */
-public class TermTypeList extends ListBox {
+public class TermGenderList extends ListBox {
 
-    private myTermServiceAsync typesService = GWT.create(myTermService.class);
-    private AsyncCallback<ArrayList<String>> termTypesCallback;
+    private myTermServiceAsync genderService = GWT.create(myTermService.class);
+    private AsyncCallback<ArrayList<String>> genderCallback;
 
-    public TermTypeList(String langID, final String currentType) {
+    public TermGenderList(String langID, final String currentType) {
         super();
-        termTypesCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
             public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
@@ -58,15 +58,15 @@ public class TermTypeList extends ListBox {
                 setSelectedIndex(i);
             }
         };
-        typesService.getTermTypes(langID, termTypesCallback);
+        genderService.getTermGender(langID, genderCallback);
     }
     
-     public TermTypeList(String langID) {
+     public TermGenderList(String langID) {
         super();
-        termTypesCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
             public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
@@ -77,6 +77,6 @@ public class TermTypeList extends ListBox {
                 setSelectedIndex(0);
             }
         };
-        typesService.getTermTypes(langID, termTypesCallback);
+        genderService.getTermGender(langID, genderCallback);
     }
 }

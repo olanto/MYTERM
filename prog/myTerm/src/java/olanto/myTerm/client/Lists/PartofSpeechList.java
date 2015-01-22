@@ -71,7 +71,6 @@ public class PartofSpeechList extends ListBox {
 
             @Override
             public void onSuccess(ArrayList<String> result) {
-                int i = 0;
                 for (String s : result) {
                     addItem(s, s);
                 }

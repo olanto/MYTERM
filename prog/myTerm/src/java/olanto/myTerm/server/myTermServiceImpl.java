@@ -608,8 +608,15 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public ArrayList<String> getTermPOS(String langID) {
-        ArrayList<String> types = new ArrayList<>();
-        types.addAll(TestView.getTermPOS(langID));
-        return types;
+        ArrayList<String> pos = new ArrayList<>();
+        pos.addAll(TestView.getTermPOS(langID));
+        return pos;
+    }
+
+    @Override
+    public ArrayList<String> getTermGender(String langID) {
+        ArrayList<String> gender = new ArrayList<>();
+        gender.addAll(TestView.getTermGender(langID));
+        return gender;
     }
 }

@@ -74,4 +74,6 @@ public interface myTermService extends RemoteService {
     public ArrayList<String> getTermTypes(String langID);
 
     public ArrayList<String> getTermPOS(String langID);
+
+    public ArrayList<String> getTermGender(String langID);
 }

@@ -21,12 +21,7 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -37,10 +32,8 @@ import java.math.BigInteger;
 import java.util.Date;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.Lists.PartofSpeechList;
+import olanto.myTerm.client.Lists.TermGenderList;
 import olanto.myTerm.client.Lists.TermTypeList;
-import olanto.myTerm.client.MainEntryPoint;
-import olanto.myTerm.client.ServiceCalls.myTermService;
-import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.TermDTO;
 
 /**
@@ -76,7 +69,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Label label_pos = new Label("Part of speech:");
     private PartofSpeechList term_pos;
     private Label label_gdr = new Label("Gender:");
-    private TextBox text_gdr = new TextBox();
+    private TermGenderList term_gdr;
     private Label label_st = new Label("Status:");
     private TextBox text_st = new TextBox();
     private HorizontalPanel form = new HorizontalPanel();
@@ -95,6 +88,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         lang = new LangList(ownerID);
         term_type = new TermTypeList("EN");
         term_pos = new PartofSpeechList("EN");
+        term_gdr = new TermGenderList("EN");
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -132,7 +126,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form2.setWidget(4, 1, text_ext);
 
         form3.setWidget(0, 0, label_gdr);
-        form3.setWidget(0, 1, text_gdr);
+        form3.setWidget(0, 1, term_gdr);
         form3.setWidget(1, 0, label_pos);
         form3.setWidget(1, 1, term_pos);
         form3.setWidget(2, 0, label_ctxt);
@@ -146,7 +140,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_gdr.setText("");
         text_st.setText("");
         text_sdef.setText("");
         text_nt.setText("");
@@ -169,7 +162,9 @@ public class TermFormREDACTOR extends VerticalPanel {
         form3.remove(term_pos);
         term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech());
         form3.setWidget(1, 1, term_pos);
-        text_gdr.setText(termDTO.getTermGender());
+        form3.remove(term_gdr);
+        term_gdr = new TermGenderList("EN", termDTO.getTermGender());
+        form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
         lang_lbl.setText(termDTO.getLangName());
@@ -185,7 +180,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     public void adjustSize(int w) {
         controls.setWidth(w * 1 / 5 + "px");
         controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
-        form.setWidth(w + "px");
+        form.setWidth(w * 1 / 3  + "px");
         form.setCellHorizontalAlignment(form1, HorizontalPanel.ALIGN_LEFT);
         form.setCellHorizontalAlignment(form2, HorizontalPanel.ALIGN_CENTER);
         form.setCellHorizontalAlignment(form3, HorizontalPanel.ALIGN_RIGHT);
@@ -198,7 +193,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_def.setWidth(w * 1 / 5 + "px");
         term_type.setWidth(w * 1 / 5 + "px");
         term_pos.setWidth(w * 1 / 5 + "px");
-        text_gdr.setWidth(w * 1 / 5 + "px");
+        term_gdr.setWidth(w * 1 / 5 + "px");
         text_st.setWidth(w * 1 / 5 + "px");
         text_sdef.setWidth(w * 1 / 5 + "px");
         text_nt.setWidth(w * 1 / 5 + "px");
@@ -207,22 +202,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_usg.setWidth(w * 1 / 5 + "px");
         text_ext.setWidth(w * 1 / 5 + "px");
         lang_lbl.setWidth(w * 1 / 5 + "px");
-    }
-
-    public void clearAllText() {
-        text_frm.setText("");
-        text_src.setText("");
-        text_def.setText("");
-        term_type.setSelectedIndex(0);
-        term_pos.setSelectedIndex(0);
-        text_gdr.setText("");
-        text_st.setText("");
-        text_sdef.setText("");
-        text_nt.setText("");
-        text_ctxt.setText("");
-        text_sctxt.setText("");
-        text_usg.setText("");
-        text_ext.setText("");
     }
 
     public void setReadOnly(Boolean isReadOnly) {
@@ -236,8 +215,8 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_nt.setReadOnly(isReadOnly);
         term_type.setEnabled(isReadOnly);
         term_pos.setEnabled(isReadOnly);
-        text_gdr.setReadOnly(isReadOnly);
-        text_st.setReadOnly(true);
+        term_gdr.setEnabled(isReadOnly);
+        text_st.setReadOnly(isReadOnly);
         text_ext.setReadOnly(isReadOnly);
     }
 
@@ -248,7 +227,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     public Long getTermID() {
         return termID;
     }
-    
+
     public String getLangID() {
         return langID;
     }
@@ -271,7 +250,6 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setTermSourceContext(text_sctxt.getText());
         termDTO.setTermNote(text_nt.getText());
         termDTO.setExtra(text_ext.getText());
-        termDTO.setTermGender(text_gdr.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         termDTO.setStatus('e');
@@ -284,5 +262,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         }
         termDTO.setTermType(term_type.getValue(term_type.getSelectedIndex()));
         termDTO.setTermPartofspeech(term_pos.getValue(term_pos.getSelectedIndex()));
+        termDTO.setTermGender(term_gdr.getValue(term_gdr.getSelectedIndex()));
+
     }
 }

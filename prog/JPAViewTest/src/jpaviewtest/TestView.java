@@ -513,11 +513,25 @@ public class TestView {
         }
         return null;
     }
-    
+
     public static List<String> getTermPOS(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findTermPOSByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+//            for (String s : result) {
+//                System.out.println(s);
+//            }
+            return result;
+        }
+        return null;
+    }
+
+    public static List<String> getTermGender(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findTermGenderByLanguage");
             query.setParameter("idLanguage", langID);
             List<String> result = query.getResultList();
 //            for (String s : result) {

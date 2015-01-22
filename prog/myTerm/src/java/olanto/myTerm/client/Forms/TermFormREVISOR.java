@@ -248,22 +248,6 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext.setWidth(w * 1 / 5 + "px");
     }
 
-    public void clearAllText() {
-        text_frm.setText("");
-        text_src.setText("");
-        text_def.setText("");
-        text_tp.setText("");
-        text_pos.setText("");
-        text_gdr.setText("");
-        text_st.setText("");
-        text_sdef.setText("");
-        text_nt.setText("");
-        text_ctxt.setText("");
-        text_sctxt.setText("");
-        text_usg.setText("");
-        text_ext.setText("");
-    }
-
     public void setReadOnly(Boolean edit) {
         text_frm.setReadOnly(edit);
         text_src.setReadOnly(edit);

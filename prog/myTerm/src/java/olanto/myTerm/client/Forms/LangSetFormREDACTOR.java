@@ -225,8 +225,12 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         for (TermFormREDACTOR trm : remterms) {
             if ((trm.getTermID() > -1) && (trm.getLangID().length() > 1)) {
                 int i = getLangEntryIdx(trm.getIdLanguage(), listlang);
-                int j = getTermDTOIdx(trm.getTermID(), listlang.get(i).listterm);
-                listlang.get(i).listterm.remove(j);
+                if (i > 0) {
+                    int j = getTermDTOIdx(trm.getTermID(), listlang.get(i).listterm);
+                    if (j > 0) {
+                        listlang.get(i).listterm.remove(j);
+                    }
+                }
             }
         }
         remterms.clear();
