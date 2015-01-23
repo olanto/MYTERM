@@ -22,10 +22,13 @@
 package olanto.myTerm.client.Lists;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -38,7 +41,7 @@ public class TermGenderList extends ListBox {
     private myTermServiceAsync genderService = GWT.create(myTermService.class);
     private AsyncCallback<ArrayList<String>> genderCallback;
 
-    public TermGenderList(String langID, final String currentType) {
+    public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited) {
         super();
         genderCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
@@ -58,10 +61,16 @@ public class TermGenderList extends ListBox {
                 setSelectedIndex(i);
             }
         };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         genderService.getTermGender(langID, genderCallback);
     }
-    
-     public TermGenderList(String langID) {
+
+    public TermGenderList(String langID, final BooleanWrap isEdited) {
         super();
         genderCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
@@ -77,6 +86,12 @@ public class TermGenderList extends ListBox {
                 setSelectedIndex(0);
             }
         };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         genderService.getTermGender(langID, genderCallback);
     }
 }

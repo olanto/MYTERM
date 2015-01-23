@@ -22,10 +22,13 @@
 package olanto.myTerm.client.Lists;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -38,7 +41,7 @@ public class PartofSpeechList extends ListBox {
     private myTermServiceAsync posService = GWT.create(myTermService.class);
     private AsyncCallback<ArrayList<String>> posCallback;
 
-    public PartofSpeechList(String langID, final String currentPOS) {
+    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited) {
         super();
         posCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
@@ -58,10 +61,16 @@ public class PartofSpeechList extends ListBox {
                 setSelectedIndex(i);
             }
         };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         posService.getTermPOS(langID, posCallback);
     }
-    
-     public PartofSpeechList(String langID) {
+
+    public PartofSpeechList(String langID, final BooleanWrap isEdited) {
         super();
         posCallback = new AsyncCallback<ArrayList<String>>() {
             @Override
@@ -77,6 +86,12 @@ public class PartofSpeechList extends ListBox {
                 setSelectedIndex(0);
             }
         };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         posService.getTermPOS(langID, posCallback);
     }
 }

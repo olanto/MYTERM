@@ -85,28 +85,6 @@ public class ResourceList extends ListBox {
         rsrcService.getResourcesByOwner(ownerMailing, role, RsrcCallback);
     }
 
-    public void selectResource(String resource) {
-        int i = 0;
-        for (String s : rsrclist) {
-            if (s.equalsIgnoreCase(resource)) {
-                setSelectedIndex(i);
-                break;
-            }
-            i++;
-        }
-    }
-
-    public void selectResourcebyID(Long resourceID) {
-        int i = 0;
-        for (Long s : rsrcIDlist) {
-            if (s.equals(resourceID)) {
-                setSelectedIndex(i);
-                break;
-            }
-            i++;
-        }
-    }
-
     public Long getIDResource(int i) {
         return rsrcIDlist.get(i);
     }
@@ -131,12 +109,8 @@ public class ResourceList extends ListBox {
         }
         return rsIDs;
     }
-    
-    public ArrayList<Long> getResourcesIDs(){
-        return rsrcIDlist;
-    }
 
-    public String getSelectedValue() {
-        return this.getValue(this.getSelectedIndex());
+    public ArrayList<Long> getResourcesIDs() {
+        return rsrcIDlist;
     }
 }
