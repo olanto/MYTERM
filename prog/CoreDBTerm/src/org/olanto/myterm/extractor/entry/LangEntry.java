@@ -87,10 +87,15 @@ public class LangEntry {
         if (lan.getIdLangset() != null) {
             for (int i = 0; i < listterm.size(); i++) {
                 Terms term = listterm.get(i);
-                term.setStatus('r');
                 if (term.getIdTerm() != null) {
+                    if (term.getStatus() == 'e') {
+                        term.setStatus('r');
+                    }
                     term = ManageTerm.edit(term);
                 } else {
+                    if (term.getStatus() == 'e') {
+                        term.setStatus('r');
+                    }
                     term = ManageTerm.addTermToLangset(lan, term);
                 }
             }
@@ -99,12 +104,15 @@ public class LangEntry {
             lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
             for (int i = 0; i < listterm.size(); i++) {
                 Terms term = listterm.get(i);
-                term.setStatus('r');
+                if (term.getStatus() == 'e') {
+                    term.setStatus('r');
+                }
                 term = ManageTerm.addTermToLangset(lan, term);
             }
         }
     }
-     public void approveLangInDB(Concepts concept) {
+
+    public void approveLangInDB(Concepts concept) {
         if (lan.getIdLangset() != null) {
             for (int i = 0; i < listterm.size(); i++) {
                 Terms term = listterm.get(i);
@@ -125,11 +133,14 @@ public class LangEntry {
             }
         }
     }
-      public void disapproveLangInDB(Concepts concept) {
+
+    public void disapproveLangInDB(Concepts concept) {
         if (lan.getIdLangset() != null) {
             for (int i = 0; i < listterm.size(); i++) {
                 Terms term = listterm.get(i);
-                term.setStatus('e');
+                if (term.getStatus() == 'r') {
+                    term.setStatus('e');
+                }
                 if (term.getIdTerm() != null) {
                     term = ManageTerm.edit(term);
                 } else {
@@ -141,7 +152,9 @@ public class LangEntry {
             lan = ManageLangsets.addLangsetToConcept(concept, lan.getIdLanguage());
             for (int i = 0; i < listterm.size(); i++) {
                 Terms term = listterm.get(i);
-                term.setStatus('e');
+                if (term.getStatus() == 'r') {
+                    term.setStatus('e');
+                }
                 term = ManageTerm.addTermToLangset(lan, term);
             }
         }

@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.Lists.DomainList;
 import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -41,7 +42,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
 
     private Grid cform = new Grid(2, 3);
     private Label label_sf = new Label("Subject field:");
-    public DomainList sf = new DomainList();
+    public DomainList sf;
     private Label label_rsrc = new Label("Added to resource:");
     private ResourceList rl;
     private Label label_def = new Label("Definition:");
@@ -63,15 +64,15 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     private Label label_dom = new Label("");
     private Label label_rs = new Label("");
     public int type = 1;
-    public Boolean isEdited = false;
 
-    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields) {
+    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         rl = rsrc;
         setStyleName("conceptForm");
         add(cform);
-        text_def = new TextAreaMyTerm("c.definition", sFields);
-        text_sdef = new TextAreaMyTerm("c.source_definition", sFields);
-        text_nt = new TextAreaMyTerm("c.note", sFields);
+        sf = new DomainList(isEdited);
+        text_def = new TextAreaMyTerm("c.definition", sFields, isEdited);
+        text_sdef = new TextAreaMyTerm("c.source_definition", sFields, isEdited);
+        text_nt = new TextAreaMyTerm("c.note", sFields, isEdited);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);

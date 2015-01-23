@@ -50,6 +50,7 @@ import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptFormREDACTOR;
 import olanto.myTerm.client.Forms.LangSetFormREDACTOR;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
@@ -77,6 +78,7 @@ public class REDACTORWidget extends VerticalPanel {
     private static LangSetFormREDACTOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
+    public BooleanWrap isEdited = new BooleanWrap();
 
     public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
         ownerID = idOwner;
@@ -286,7 +288,7 @@ public class REDACTORWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 if (event.getValue().contains("WSnew")) {
-                    searchMenu.btnAdd.setEnabled(true);
+                    isEdited.setVal(false);
                     long conceptID = Long.parseLong(event.getValue().substring(5));
                     getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
                 } else {
@@ -336,25 +338,27 @@ public class REDACTORWidget extends VerticalPanel {
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
 //            Window.alert(conceptEntryDTO.toStringDTO());
-            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields);
+            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields, isEdited);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
-                addterms = new LangSetFormREDACTOR(ownerID);
+                addterms = new LangSetFormREDACTOR(ownerID, sFields, isEdited);
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs());
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited);
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    addcpt.save.setEnabled(false);
-                    getConceptEntryDTOFromWidget();
+                    if (isEdited.getVal()) {
+                        addcpt.save.setEnabled(false);
+                        getConceptEntryDTOFromWidget();
 //                    Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().updateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
+                        getService().updateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
+                    }
                 }
             });
             addcpt.submit.addClickHandler(new ClickHandler() {
@@ -496,11 +500,11 @@ public class REDACTORWidget extends VerticalPanel {
     }
 
     private void commandAdd() {
+        searchMenu.btnAdd.setEnabled(true);
         resultsPanel.sideRes.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry entry, please wait...");
         if (searchMenu.searchField.getText().isEmpty()) {
             Window.alert("Please indicate the term's form");
-            searchMenu.btnAdd.setEnabled(true);
             MainEntryPoint.statusPanel.setMessage("message", "No entries were added");
             History.newItem("notadded");
         } else {
@@ -515,6 +519,7 @@ public class REDACTORWidget extends VerticalPanel {
     private void commandSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
+        isEdited.setVal(false);
         History.newItem("page1");
     }
 
@@ -525,6 +530,7 @@ public class REDACTORWidget extends VerticalPanel {
     }
 
     private void commandDeleted() {
+        addcpt.delete.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry deleted successfully");
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
@@ -532,16 +538,19 @@ public class REDACTORWidget extends VerticalPanel {
     }
 
     private void commandNotDeleted() {
+        addcpt.delete.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be deleted");
         History.newItem("page1");
     }
 
     private void commandAdded() {
+        searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry added successfully");
         History.newItem("page1");
     }
 
     private void commandNotAdded() {
+        searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "No entry was added");
         History.newItem("page1");
     }

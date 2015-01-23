@@ -21,8 +21,11 @@
  */
 package olanto.myTerm.client.Forms;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.TextArea;
 import java.util.HashMap;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.SysFieldDTO;
 
 /**
@@ -30,14 +33,18 @@ import olanto.myTerm.shared.SysFieldDTO;
  * @author nizar ghoula simple
  */
 public class TextAreaMyTerm extends TextArea {
-
+    
     public int position = 1;
-    public Boolean isEdited = false;
-
-    TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields) {
+    
+    TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
         super();
         this.setVisible(sFields.get(type).getVisibility());
         this.position = sFields.get(type).getPosition();
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
     }
-    
 }

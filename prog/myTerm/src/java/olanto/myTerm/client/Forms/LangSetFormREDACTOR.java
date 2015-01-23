@@ -32,10 +32,13 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
 /**
@@ -52,7 +55,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
     private ArrayList<TermFormREDACTOR> remterms;
     private long ownerID;
 
-    public LangSetFormREDACTOR(long idOwner) {
+    public LangSetFormREDACTOR(long idOwner, final HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
         ownerID = idOwner;
         terms = new ArrayList<>();
         remterms = new ArrayList<>();
@@ -63,7 +66,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         addTerm.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 1);
+                final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 1, sFields, isEdited);
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
@@ -78,17 +81,17 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs) {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
                 if ((tDTO.getStatus() == 'e') || (tDTO.getStatus() == 'p')) {
-                    final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0);
+                    final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0, sFields, isEdited);
                     i++;
                     terms.add(ter);
                     desc.add(ter);
                     ter.adjustSize(getOffsetWidth() - 10);
-                    ter.refreshContentFromTermDTO(tDTO, userLangs);
+                    ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited);
                     ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                     ter.delete.addClickHandler(new ClickHandler() {
                         @Override

@@ -24,7 +24,10 @@ package olanto.myTerm.client.Forms;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.ArrayList;
+import java.util.HashMap;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.LangEntryDTO;
+import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
 /**
@@ -45,17 +48,17 @@ public class LangSetFormREVISOR extends VerticalPanel {
         add(desc);
     }
 
-    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs) {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
                 if (tDTO.getStatus() == 'r') {
-                    final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0);
+                    final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0, sFields, isEdited);
                     i++;
                     terms.add(ter);
                     desc.add(ter);
                     ter.adjustSize(getOffsetWidth() - 10);
-                    ter.refreshContentFromTermDTO(tDTO, userLangs);
+                    ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited);
                     ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
                 }
             }

@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -46,8 +47,6 @@ public class ConceptFormREVISOR extends HorizontalPanel {
     private Label label_sdef = new Label("Definition's source:");
     private TextAreaMyTerm text_sdef;
     private Label label_nt = new Label("Note:");
-    private Label label_dom = new Label("");
-    private Label label_rs = new Label("");
     private TextAreaMyTerm text_nt;
     private HorizontalPanel sfPanel = new HorizontalPanel();
     private HorizontalPanel rsrcPanel = new HorizontalPanel();
@@ -60,14 +59,16 @@ public class ConceptFormREVISOR extends HorizontalPanel {
     public Button disapprove = new Button("DISAPPROVE ALL");
     public Button escape = new Button("ESCAPE");
     public ResourceList rsrc;
+    private Label label_dom = new Label("");
+    private Label label_rs = new Label("");
 
-    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields) {
+    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         rsrc = rs;
         setStyleName("conceptForm");
         add(cform);
-        text_def = new TextAreaMyTerm("c.definition", sFields);
-        text_sdef = new TextAreaMyTerm("c.source_definition", sFields);
-        text_nt = new TextAreaMyTerm("c.note", sFields);
+        text_def = new TextAreaMyTerm("c.definition", sFields, isEdited);
+        text_sdef = new TextAreaMyTerm("c.source_definition", sFields, isEdited);
+        text_nt = new TextAreaMyTerm("c.note", sFields, isEdited);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);

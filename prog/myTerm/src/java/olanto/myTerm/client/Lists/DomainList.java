@@ -32,6 +32,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -72,5 +73,35 @@ public class DomainList extends ListBox {
         });
         addItem(" ", "-1");
         domService.getDomains(domCallback);
-    }  
+    }
+
+    public DomainList(final BooleanWrap isEdited) {
+        super();
+        domCallback = new AsyncCallback<ArrayList<DomainDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Failed to get list of languages");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<DomainDTO> result) {
+                int i = 0;
+                for (DomainDTO s : result) {
+                    addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                    if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
+                        i = result.indexOf(s);
+                    }
+                }
+                setSelectedIndex(i);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
+        addItem(" ", "-1");
+        domService.getDomains(domCallback);
+    }
 }

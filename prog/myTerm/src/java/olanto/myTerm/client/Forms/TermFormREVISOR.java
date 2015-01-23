@@ -37,10 +37,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
 /**
@@ -91,8 +94,8 @@ public class TermFormREVISOR extends VerticalPanel {
     private long termID = -1;
     private char status = 'e';
 
-    public TermFormREVISOR(long ownerID, int type) {
-        lang = new LangList(ownerID);
+    public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+        lang = new LangList(ownerID, isEdited);
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -207,7 +210,7 @@ public class TermFormREVISOR extends VerticalPanel {
         }
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         termID = termDTO.getIdTerm();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());

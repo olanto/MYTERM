@@ -32,10 +32,13 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.Lists.PartofSpeechList;
 import olanto.myTerm.client.Lists.TermGenderList;
 import olanto.myTerm.client.Lists.TermTypeList;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
+import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
 /**
@@ -84,15 +87,14 @@ public class TermFormREDACTOR extends VerticalPanel {
     private long ownerID;
     private long termID = -1;
     private String langID = "";
-    public Boolean isEdited = false;
     private Label lang_lbl = new Label("");
-    private char status;
+    private char status = 'e';
 
-    public TermFormREDACTOR(long ownerID, int type) {
-        lang = new LangList(ownerID);
-        term_type = new TermTypeList("EN");
-        term_pos = new PartofSpeechList("EN");
-        term_gdr = new TermGenderList("EN");
+    public TermFormREDACTOR(long ownerID, int type,HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+        lang = new LangList(ownerID, isEdited);
+        term_type = new TermTypeList("EN", isEdited);
+        term_pos = new PartofSpeechList("EN", isEdited);
+        term_gdr = new TermGenderList("EN", isEdited);
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -161,7 +163,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, BooleanWrap isEdited) {
         termID = termDTO.getIdTerm();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
@@ -172,10 +174,10 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
         form3.remove(term_pos);
-        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech());
+        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited);
         form3.setWidget(1, 1, term_pos);
         form3.remove(term_gdr);
-        term_gdr = new TermGenderList("EN", termDTO.getTermGender());
+        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited);
         form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
@@ -185,7 +187,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.remove(lang);
         form1.setWidget(0, 1, lang_lbl);
         form2.remove(term_type);
-        term_type = new TermTypeList("EN", termDTO.getTermType());
+        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited);
         form2.setWidget(1, 1, term_type);
         status = termDTO.getStatus();
         if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {

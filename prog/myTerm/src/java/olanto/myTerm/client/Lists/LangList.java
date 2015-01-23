@@ -32,6 +32,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -136,7 +137,8 @@ public class LangList extends ListBox {
         langService.getLanguagesByOwner(ownerID, langCallback);
     }
 
-    public LangList(long ownerID) {
+    public LangList(long ownerID, final BooleanWrap isEdited) {
+        super();
         langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -153,6 +155,12 @@ public class LangList extends ListBox {
                 setSelectedIndex(0);
             }
         };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         langService.getLanguagesByOwner(ownerID, langCallback);
     }
 

@@ -49,6 +49,7 @@ import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptFormREVISOR;
 import olanto.myTerm.client.Forms.LangSetFormREVISOR;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
@@ -73,6 +74,7 @@ public class REVISORWidget extends VerticalPanel {
     private static LangSetFormREVISOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
+    public BooleanWrap isEdited = new BooleanWrap();
 
     public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
         ownerID = idOwner;
@@ -206,6 +208,7 @@ public class REVISORWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 if (event.getValue().contains("Appnew")) {
+                    isEdited.setVal(false);
                     long conceptID = Long.parseLong(event.getValue().substring(6));
                     getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
                 } else {
@@ -248,7 +251,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
-            addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields);
+            addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
@@ -257,7 +260,7 @@ public class REVISORWidget extends VerticalPanel {
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs());
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited);
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {
@@ -400,6 +403,7 @@ public class REVISORWidget extends VerticalPanel {
     private void commandSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
+        isEdited.setVal(false);
         History.newItem("page2");
     }
 
