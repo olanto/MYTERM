@@ -51,14 +51,11 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         resVP.add(termsDetails);
         sideVP.add(sideRes);
         sideVP.add(buttonsPanel);
+        sideVP.setStyleName("sideWidget");
         buttonsPanel.add(addnewcpt);
-        buttonsPanel.setStyleName("sideWidget");
         sideVP.add(currentHeader);
         currentHeader.setStyleName("sidecurhead");
         sideVP.add(sideCurrent);
-        sideVP.setStyleName("side");
-        sideRes.setStyleName("sideWidget");
-        sideCurrent.setStyleName("sideCurrent");
         conceptDetails.setStyleName("conceptContainer");
         termsDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
@@ -69,20 +66,24 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     public void adjustSize() {
         int h = Window.getClientHeight() - 155;
         int w = Window.getClientWidth() - 20;
-        sideRes.setPixelSize((int) (w * 1 / 4), (h / 2 - 30));
+        sideRes.setPixelSize((int) (w * 1 / 4) - 3, (h / 2 - 30));
         buttonsPanel.setPixelSize((int) (w * 1 / 4) + 2, 30);
         sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
-        termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
-        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
+        termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
+        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
+        currentHeader.setWidth((w * 1 / 4) - 3 + "px");
+        sideVP.setWidth((w * 1 / 4) + "px");
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
         int h = Window.getClientHeight() - 155;
         int w = Window.getClientWidth() - 20;
-        sideRes.setPixelSize((int) (w * s_widthper), (h / 2 - 30));
-        buttonsPanel.setPixelSize((int) (w * 1 / 4) + 2, 30);
-        sideCurrent.setPixelSize((int) (w * s_widthper), h / 2);
+        sideVP.setWidth((int) (w * s_widthper) + "px");
+        sideRes.setPixelSize((int) (w * s_widthper) - 3, (h / 2 - 30));
+        buttonsPanel.setPixelSize((int) (w * s_widthper), 30);
+        sideCurrent.setPixelSize((int) (w * s_widthper) - 3, h / 2);
+        currentHeader.setPixelSize((int) (w * s_widthper) - 3, 20);
         termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
         conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);

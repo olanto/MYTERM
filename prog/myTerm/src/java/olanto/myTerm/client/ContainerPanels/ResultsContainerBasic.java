@@ -52,8 +52,8 @@ public class ResultsContainerBasic extends HorizontalPanel {
         int h = Window.getClientHeight() - 140;
         int w = Window.getClientWidth() - 15;
         sideRes.setPixelSize(w * 1 / 4, h);
-        termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
-        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
+        termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
+        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {

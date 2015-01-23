@@ -42,7 +42,7 @@
     font-style: italic;
 }
 .sidecurhead{
-    border: 2px blue solid;
+    border: 1px blue solid;
     font-weight: bold;
     color:#000033;
     text-align: center;
@@ -94,14 +94,6 @@ body{
     background-color: #EFF6FF;
     border-right: 1px solid black;
     width: 100%;
-}
-.sideCurrent{
-    background-color: #EFF6FF;
-    border-right: 1px solid black;
-    width: 100%;
-}
-.side{
-    background-color: #EFF6FF;
 }
 .searchMenu{
     width: 100%;

@@ -105,6 +105,7 @@ public class REDACTORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 searchMenu.btnAdd.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         termAddCallbackWS = new AsyncCallback<String>() {
@@ -114,8 +115,10 @@ public class REDACTORWidget extends VerticalPanel {
                     searchMenu.btnAdd.setEnabled(true);
                     resultsPanel.addnewcpt.setVisible(true);
                     resultsPanel.sideRes.setWidget(new HTML(result));
+                    History.newItem("found");
                 } else {
                     searchMenu.btnAdd.setEnabled(true);
+                    History.newItem("notfound");
                 }
             }
 
@@ -123,6 +126,7 @@ public class REDACTORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 searchMenu.btnAdd.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         termAddedCallback = new AsyncCallback<String>() {
@@ -139,6 +143,7 @@ public class REDACTORWidget extends VerticalPanel {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         // Create an asynchronous callback to handle the result.
@@ -161,6 +166,7 @@ public class REDACTORWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         entrySubmitCallback = new AsyncCallback<String>() {
@@ -177,6 +183,7 @@ public class REDACTORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 addcpt.submit.setEnabled(true);
                 resultsPanel.sideCurrent.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         entryDeleteCallback = new AsyncCallback<String>() {
@@ -192,6 +199,7 @@ public class REDACTORWidget extends VerticalPanel {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideCurrent.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         workspaceCallback = new AsyncCallback<String>() {
@@ -203,17 +211,27 @@ public class REDACTORWidget extends VerticalPanel {
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
                 MainEntryPoint.statusPanel.setMessage("info", "Entries retrieved successfully");
+                String srch = searchMenu.searchField.getText();
+                String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
+                if ((lan == null) || (lan.isEmpty())) {
+                    lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
+                }
+                if ((srch != null) && (!srch.isEmpty())) {
+                    getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
+                }
             }
 
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideCurrent.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
         };
         getConceptDetailsCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
+                History.newItem("page1");
             }
 
             @Override
@@ -221,6 +239,7 @@ public class REDACTORWidget extends VerticalPanel {
                 conceptEntryDTO = result;
 //                Window.alert(conceptEntryDTO.toStringDTO());
                 refreshContentFromConceptEntryDTO();
+                History.newItem("loaded");
             }
         };
 
@@ -261,7 +280,7 @@ public class REDACTORWidget extends VerticalPanel {
                 createNewConceptEntry();
             }
         });
-        resultsPanel.adjustSize(0.25f, 0.3f);
+        resultsPanel.adjustSize(0.25f, 0.25f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
@@ -302,6 +321,9 @@ public class REDACTORWidget extends VerticalPanel {
                             break;
                         case "notsubmitted":
                             commandNotSubmitted();
+                            break;
+                        case "loaded":
+                            commandLoaded();
                             break;
                     }
                 }
@@ -448,6 +470,7 @@ public class REDACTORWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
+                    History.newItem("page1");
                 }
             });
             setPopupPosition(100, 100);
@@ -470,10 +493,6 @@ public class REDACTORWidget extends VerticalPanel {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
         getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
-        String srch = searchMenu.searchField.getText();
-        if ((srch != null) && (!srch.isEmpty())) {
-            getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
-        }
     }
 
     private void commandAdd() {
@@ -524,6 +543,11 @@ public class REDACTORWidget extends VerticalPanel {
 
     private void commandNotAdded() {
         MainEntryPoint.statusPanel.setMessage("error", "No entry was added");
+        History.newItem("page1");
+    }
+
+    private void commandLoaded() {
+        MainEntryPoint.statusPanel.setMessage("message", "Entry loaded successfully");
         History.newItem("page1");
     }
 

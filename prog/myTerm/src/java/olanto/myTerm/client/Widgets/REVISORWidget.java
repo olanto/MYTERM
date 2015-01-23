@@ -102,6 +102,7 @@ public class REVISORWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
+                History.newItem("page2");
             }
         };
         entryApproveCallback = new AsyncCallback<String>() {
@@ -118,6 +119,7 @@ public class REVISORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 addcpt.approve.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page2");
             }
         };
         entryDisapproveCallback = new AsyncCallback<String>() {
@@ -133,6 +135,7 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page2");
             }
         };
         workspaceCallback = new AsyncCallback<String>() {
@@ -149,12 +152,14 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page2");
             }
         };
         getConceptDetailsCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
+                History.newItem("page2");
             }
 
             @Override
@@ -162,6 +167,7 @@ public class REVISORWidget extends VerticalPanel {
                 conceptEntryDTO = result;
 //                Window.alert(conceptEntryDTO.toStringDTO());
                 refreshContentFromConceptEntryDTO();
+                History.newItem("loaded");
             }
         };
 
@@ -194,7 +200,7 @@ public class REVISORWidget extends VerticalPanel {
                 commandPage2();
             }
         });
-        resultsPanel.adjustSize(0.25f, 0.3f);
+        resultsPanel.adjustSize(0.25f, 0.25f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
@@ -227,6 +233,9 @@ public class REVISORWidget extends VerticalPanel {
                             commandDisapproved();
                             break;
                         case "p2notdisapproved":
+                            commandNotDisapproved();
+                            break;
+                        case "loaded":
                             commandNotDisapproved();
                             break;
                     }
@@ -359,6 +368,7 @@ public class REVISORWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
+                    History.newItem("page2");
                 }
             });
             setPopupPosition(100, 100);
@@ -437,6 +447,11 @@ public class REVISORWidget extends VerticalPanel {
         getConceptEntryDTOFromWidget();
 //                    Window.alert(conceptEntryDTO.toStringDTO());
         getService().disapproveConceptEntry(conceptEntryDTO, ownerID, entryDisapproveCallback);
+    }
+
+    private void commandLoaded() {
+        MainEntryPoint.statusPanel.setMessage("message", "Entry loaded successfully");
+        History.newItem("page2");
     }
 
     public static native void fixGwtNav() /*-{

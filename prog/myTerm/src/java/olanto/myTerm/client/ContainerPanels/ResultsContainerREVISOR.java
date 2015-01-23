@@ -22,7 +22,6 @@
 package olanto.myTerm.client.ContainerPanels;
 
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -55,8 +54,8 @@ public class ResultsContainerREVISOR extends HorizontalPanel {
         int h = Window.getClientHeight() - 140;
         int w = Window.getClientWidth() - 15;
         sideRes.setPixelSize((int) (w * 1 / 4), h);
-        termsDetails.setPixelSize(w * 3 / 4, h * 4 / 5);
-        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 5);
+        termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
+        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
