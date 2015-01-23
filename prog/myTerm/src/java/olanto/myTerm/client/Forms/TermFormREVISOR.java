@@ -89,6 +89,7 @@ public class TermFormREVISOR extends VerticalPanel {
     public int type;
     private long ownerID;
     private long termID = -1;
+    private char status = 'e';
 
     public TermFormREVISOR(long ownerID, int type) {
         lang = new LangList(ownerID);
@@ -224,7 +225,8 @@ public class TermFormREVISOR extends VerticalPanel {
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
         form1.setWidget(0, 1, lang_lbl);
-        if ((termDTO.getStatus() == 'r') && (userLangs.contains(termDTO.getIdLanguage()))) {
+        status = termDTO.getStatus();
+        if ((status == 'r') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
         } else {
             this.setReadOnly(true);
@@ -304,11 +306,11 @@ public class TermFormREVISOR extends VerticalPanel {
         termDTO.setTermGender(text_gdr.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
+        termDTO.setStatus(status);
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());
             termDTO.setLangName(lang_lbl.getText());
         } else {
-            termDTO.setStatus('e');
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }

@@ -23,13 +23,11 @@ package olanto.myTerm.client.Forms;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -88,6 +86,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     private String langID = "";
     public Boolean isEdited = false;
     private Label lang_lbl = new Label("");
+    private char status;
 
     public TermFormREDACTOR(long ownerID, int type) {
         lang = new LangList(ownerID);
@@ -188,7 +187,8 @@ public class TermFormREDACTOR extends VerticalPanel {
         form2.remove(term_type);
         term_type = new TermTypeList("EN", termDTO.getTermType());
         form2.setWidget(1, 1, term_type);
-        if ((termDTO.getStatus() == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
+        status = termDTO.getStatus();
+        if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
         } else {
             this.setReadOnly(true);
@@ -272,11 +272,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setExtra(text_ext.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
+        termDTO.setStatus(status);
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());
             termDTO.setLangName(lang_lbl.getText());
         } else {
-            termDTO.setStatus('e');
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
