@@ -532,8 +532,6 @@ public class REDACTORWidget extends VerticalPanel {
     private void commandDeleted() {
         addcpt.delete.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry deleted successfully");
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
         History.newItem("page1");
     }
 

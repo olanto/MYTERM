@@ -93,6 +93,7 @@ public class TermFormREVISOR extends VerticalPanel {
     private long ownerID;
     private long termID = -1;
     private char status = 'e';
+    private String langID = "";
 
     public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         lang = new LangList(ownerID, isEdited);
@@ -158,60 +159,11 @@ public class TermFormREVISOR extends VerticalPanel {
         text_sctxt.setText("");
         text_usg.setText("");
         text_ext.setText("");
-        approve.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                new MyDialog("Are you sure that you would like to aprove this term?", 0).show();
-            }
-        });
-        disapprove.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                new MyDialog("Are you sure that you would like to disaprove this term?", 1).show();
-            }
-        });
-    }
-
-    public void disapproveTermEntry() {
-        if (termID > -1) {
-            getService().disapproveTermEntry(termID, new AsyncCallback<String>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
-                    History.newItem("page2");
-                }
-
-                @Override
-                public void onSuccess(String result) {
-                    removeFromParent();
-                    MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
-                    History.newItem("page2");
-                }
-            });
-        }
-    }
-
-    public void publishTermEntry() {
-        if (termID > -1) {
-            getService().publishTermEntry(termID, new AsyncCallback<String>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
-                    History.newItem("page2");
-                }
-
-                @Override
-                public void onSuccess(String result) {
-                    removeFromParent();
-                    MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
-                    History.newItem("page2");
-                }
-            });
-        }
     }
 
     public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         termID = termDTO.getIdTerm();
+        langID = termDTO.getIdLanguage();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
         text_def.setText(termDTO.getTermDefinition());
@@ -278,10 +230,6 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext.setReadOnly(edit);
     }
 
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
-    }
-
     public String getTermForm() {
         return text_frm.getText();
     }
@@ -319,56 +267,11 @@ public class TermFormREVISOR extends VerticalPanel {
         }
     }
 
-    private class MyDialog extends DialogBox {
+    public String getLangID() {
+        return langID;
+    }
 
-        public MyDialog(String text, final int call) {
-            // Set the dialog box's caption.
-            setText(text);
-            // Enable animation.
-            setAnimationEnabled(true);
-            // Enable glass background.
-            setGlassEnabled(true);
-            HorizontalPanel controls = new HorizontalPanel();
-            // DialogBox is a SimplePanel, so you have to set its widget property to
-            // whatever you want its contents to be.
-            final Button submit = new Button("OK");
-            switch (call) {
-                case 0:
-                    submit.setText("Approve");
-                    break;
-                case 1:
-                    submit.setText("Disapprove");
-                    break;
-            }
-            submit.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    MyDialog.this.hide();
-                    switch (call) {
-                        case 0:
-                            publishTermEntry();
-                            break;
-                        case 1:
-                            disapproveTermEntry();
-                            break;
-                    }
-                }
-            });
-            Button cancel = new Button("Cancel");
-            cancel.addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(ClickEvent event) {
-                    MyDialog.this.hide();
-                }
-            });
-            setPopupPosition(100, 100);
-            setWidth("400px");
-            controls.add(cancel);
-            controls.add(submit);
-            setWidget(controls);
-            controls.setWidth("400px");
-            controls.setCellHorizontalAlignment(cancel, HorizontalPanel.ALIGN_LEFT);
-            controls.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
-        }
+    public long getTermID() {
+        return termID;
     }
 }

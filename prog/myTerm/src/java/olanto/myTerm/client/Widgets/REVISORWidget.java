@@ -239,7 +239,7 @@ public class REVISORWidget extends VerticalPanel {
                             commandNotDisapproved();
                             break;
                         case "loaded":
-                            commandNotDisapproved();
+                            commandLoaded();
                             break;
                     }
                 }
@@ -256,7 +256,7 @@ public class REVISORWidget extends VerticalPanel {
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
-                addterms = new LangSetFormREVISOR(ownerID);
+                addterms = new LangSetFormREVISOR(ownerID, addcpt);
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {

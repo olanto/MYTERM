@@ -206,7 +206,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not delete Term");
-                    History.newItem("page1");
+                    History.newItem("notdeleted");
                 }
 
                 @Override
@@ -215,13 +215,14 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                     remterms.add(term);
                     term.removeFromParent();
                     MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
-                    History.newItem("page1");
+                    History.newItem("deleted");
                 }
             });
         } else {
             terms.remove(term);
             term.removeFromParent();
             MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
+            History.newItem("deleted");
         }
     }
 
