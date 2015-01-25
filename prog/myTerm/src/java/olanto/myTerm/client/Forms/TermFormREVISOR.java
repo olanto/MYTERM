@@ -21,28 +21,20 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import olanto.myTerm.client.Lists.LangList;
-import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.Lists.PartofSpeechList;
+import olanto.myTerm.client.Lists.TermGenderList;
+import olanto.myTerm.client.Lists.TermTypeList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
-import olanto.myTerm.client.ServiceCalls.myTermService;
-import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -53,49 +45,88 @@ import olanto.myTerm.shared.TermDTO;
  */
 public class TermFormREVISOR extends VerticalPanel {
 
-    private Grid form1 = new Grid(5, 2);
-    private Grid form2 = new Grid(5, 2);
-    public Grid form3 = new Grid(5, 2);
-    private Label label_lng = new Label("Language:");
+    private Grid form1;
+    private Grid form2;
+    public Grid form3;
+    private Label label_lng;
     private LangList lang;
-    private Label label_frm = new Label("Term's form:");
-    private TextArea text_frm = new TextArea();
-    private Label label_src = new Label("Term's source:");
-    private TextArea text_src = new TextArea();
-    private Label label_def = new Label("Term's definition:");
-    private TextArea text_def = new TextArea();
-    private Label label_sdef = new Label("Definition's source:");
-    private TextArea text_sdef = new TextArea();
-    private Label label_usg = new Label("Term's usage:");
-    private TextArea text_usg = new TextArea();
-    private Label label_ctxt = new Label("Term's context:");
-    private TextArea text_ctxt = new TextArea();
-    private Label label_sctxt = new Label("Context's source:");
-    private TextArea text_sctxt = new TextArea();
-    private Label label_nt = new Label("Term's Note:");
-    private TextArea text_nt = new TextArea();
-    private Label label_tp = new Label("Type:");
-    private TextArea text_tp = new TextArea();
-    private Label label_pos = new Label("Part of speech:");
-    private Label lang_lbl = new Label("");
-    private TextBox text_pos = new TextBox();
-    private Label label_gdr = new Label("Gender:");
-    private TextBox text_gdr = new TextBox();
-    private Label label_st = new Label("Status:");
-    private Label text_st = new Label();
-    private HorizontalPanel form = new HorizontalPanel();
-    private HorizontalPanel controls = new HorizontalPanel();
-    private Label label_ext = new Label("Extra:");
-    private TextArea text_ext = new TextArea();
-    public Button approve = new Button("Approve");
-    public Button disapprove = new Button("Disapprove");
+    private Label label_frm;
+    private TextAreaMyTerm text_frm;
+    private Label label_src;
+    private TextAreaMyTerm text_src;
+    private Label label_def;
+    private TextAreaMyTerm text_def;
+    private Label label_sdef;
+    private TextAreaMyTerm text_sdef;
+    private Label label_usg;
+    private TextAreaMyTerm text_usg;
+    private Label label_ctxt;
+    private TextAreaMyTerm text_ctxt;
+    private Label label_sctxt;
+    private TextAreaMyTerm text_sctxt;
+    private Label label_nt;
+    private TextAreaMyTerm text_nt;
+    private Label label_tp;
+    private TermTypeList term_type;
+    private Label label_pos;
+    private PartofSpeechList term_pos;
+    private Label label_gdr;
+    private TermGenderList term_gdr;
+    private Label label_st;
+    private Label text_st;
+    private HorizontalPanel form;
+    private HorizontalPanel controls;
+    private Label label_ext;
+    private TextAreaMyTerm text_ext;
+    public Button approve;
+    public Button disapprove;
     public int type;
     private long ownerID;
-    private long termID = -1;
-    private char status = 'e';
-    private String langID = "";
+    private long termID;
+    private String langID;
+    private Label lang_lbl;
+    private char status;
 
     public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+        form1 = new Grid(5, 2);
+        form2 = new Grid(5, 2);
+        form3 = new Grid(5, 2);
+        label_lng = new Label("Language:");
+        label_frm = new Label("Term's form:");
+        text_frm = new TextAreaMyTerm("t.form", sFields, isEdited);
+        label_src = new Label("Term's source:");
+        text_src = new TextAreaMyTerm("t.source", sFields, isEdited);
+        label_def = new Label("Term's definition:");
+        text_def = new TextAreaMyTerm("t.definition", sFields, isEdited);
+        label_sdef = new Label("Definition's source:");
+        text_sdef = new TextAreaMyTerm("t.source_definition", sFields, isEdited);
+        label_usg = new Label("Term's usage:");
+        text_usg = new TextAreaMyTerm("t.usage", sFields, isEdited);
+        label_ctxt = new Label("Term's context:");
+        text_ctxt = new TextAreaMyTerm("t.context", sFields, isEdited);
+        label_sctxt = new Label("Context's source:");
+        text_sctxt = new TextAreaMyTerm("t.source_context", sFields, isEdited);
+        label_nt = new Label("Term's Note:");
+        text_nt = new TextAreaMyTerm("t.note", sFields, isEdited);
+        label_tp = new Label("Type:");
+        label_pos = new Label("Part of speech:");
+        label_gdr = new Label("Gender:");
+        label_st = new Label("Status:");
+        text_st = new Label();
+        form = new HorizontalPanel();
+        controls = new HorizontalPanel();
+        label_ext = new Label("Extra:");
+        text_ext = new TextAreaMyTerm("t.extra", sFields, isEdited);
+        approve = new Button("Approve");
+        disapprove = new Button("Disapprove");
+        termID = -1;
+        langID = "";
+        lang_lbl = new Label("");
+        status = 'e';
+        lang = new LangList(ownerID, isEdited);
+        term_type = new TermTypeList("EN", isEdited);
+        term_pos = new PartofSpeechList("EN", isEdited);
+        term_gdr = new TermGenderList("EN", isEdited);
         lang = new LangList(ownerID, isEdited);
         this.ownerID = ownerID;
         this.type = type;
@@ -125,7 +156,7 @@ public class TermFormREVISOR extends VerticalPanel {
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
         form2.setWidget(1, 0, label_tp);
-        form2.setWidget(1, 1, text_tp);
+        form2.setWidget(1, 1, term_type);
         form2.setWidget(2, 0, label_nt);
         form2.setWidget(2, 1, text_nt);
         form2.setWidget(3, 0, label_usg);
@@ -134,9 +165,9 @@ public class TermFormREVISOR extends VerticalPanel {
         form2.setWidget(4, 1, text_ext);
 
         form3.setWidget(0, 0, label_gdr);
-        form3.setWidget(0, 1, text_gdr);
+        form3.setWidget(0, 1, term_gdr);
         form3.setWidget(1, 0, label_pos);
-        form3.setWidget(1, 1, text_pos);
+        form3.setWidget(1, 1, term_pos);
         form3.setWidget(2, 0, label_ctxt);
         form3.setWidget(2, 1, text_ctxt);
         form3.setWidget(3, 0, label_sctxt);
@@ -149,9 +180,6 @@ public class TermFormREVISOR extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_tp.setText("");
-        text_pos.setText("");
-        text_gdr.setText("");
         text_st.setText("");
         text_sdef.setText("");
         text_nt.setText("");
@@ -172,9 +200,15 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ctxt.setText(termDTO.getTermContext());
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
-        text_tp.setText(termDTO.getTermType());
-        text_pos.setText(termDTO.getTermPartofspeech());
-        text_gdr.setText(termDTO.getTermGender());
+        form2.remove(term_type);
+        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited);
+        form2.setWidget(1, 1, term_type);
+        form3.remove(term_pos);
+        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited);
+        form3.setWidget(1, 1, term_pos);
+        form3.remove(term_gdr);
+        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited);
+        form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
         lang_lbl.setText(termDTO.getLangName());
@@ -203,9 +237,9 @@ public class TermFormREVISOR extends VerticalPanel {
         text_frm.setWidth(w * 1 / 5 + "px");
         text_src.setWidth(w * 1 / 5 + "px");
         text_def.setWidth(w * 1 / 5 + "px");
-        text_tp.setWidth(w * 1 / 5 + "px");
-        text_pos.setWidth(w * 1 / 5 + "px");
-        text_gdr.setWidth(w * 1 / 5 + "px");
+        term_type.setWidth(w * 1 / 5 + "px");
+        term_pos.setWidth(w * 1 / 5 + "px");
+        term_gdr.setWidth(w * 1 / 5 + "px");
         text_st.setWidth(w * 1 / 5 + "px");
         text_sdef.setWidth(w * 1 / 5 + "px");
         text_nt.setWidth(w * 1 / 5 + "px");
@@ -215,19 +249,19 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext.setWidth(w * 1 / 5 + "px");
     }
 
-    public void setReadOnly(Boolean edit) {
-        text_frm.setReadOnly(edit);
-        text_src.setReadOnly(edit);
-        text_def.setReadOnly(edit);
-        text_sdef.setReadOnly(edit);
-        text_usg.setReadOnly(edit);
-        text_ctxt.setReadOnly(edit);
-        text_sctxt.setReadOnly(edit);
-        text_nt.setReadOnly(edit);
-        text_tp.setReadOnly(edit);
-        text_pos.setReadOnly(edit);
-        text_gdr.setReadOnly(edit);
-        text_ext.setReadOnly(edit);
+    public void setReadOnly(Boolean isReadOnly) {
+        text_frm.setReadOnly(isReadOnly);
+        text_src.setReadOnly(isReadOnly);
+        text_def.setReadOnly(isReadOnly);
+        text_sdef.setReadOnly(isReadOnly);
+        text_usg.setReadOnly(isReadOnly);
+        text_ctxt.setReadOnly(isReadOnly);
+        text_sctxt.setReadOnly(isReadOnly);
+        text_nt.setReadOnly(isReadOnly);
+        term_type.setEnabled(!isReadOnly);
+        term_pos.setEnabled(!isReadOnly);
+        term_gdr.setEnabled(!isReadOnly);
+        text_ext.setReadOnly(isReadOnly);
     }
 
     public String getTermForm() {
@@ -251,10 +285,7 @@ public class TermFormREVISOR extends VerticalPanel {
         termDTO.setTermContext(text_ctxt.getText());
         termDTO.setTermSourceContext(text_sctxt.getText());
         termDTO.setTermNote(text_nt.getText());
-        termDTO.setTermType(text_tp.getText());
-        termDTO.setTermPartofspeech(text_pos.getText());
         termDTO.setExtra(text_ext.getText());
-        termDTO.setTermGender(text_gdr.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         termDTO.setStatus(status);
@@ -265,6 +296,9 @@ public class TermFormREVISOR extends VerticalPanel {
             termDTO.setIdLanguage(lang.getValue(lang.getSelectedIndex()));
             termDTO.setLangName(lang.getItemText(lang.getSelectedIndex()));
         }
+        termDTO.setTermType(term_type.getValue(term_type.getSelectedIndex()));
+        termDTO.setTermPartofspeech(term_pos.getValue(term_pos.getSelectedIndex()));
+        termDTO.setTermGender(term_gdr.getValue(term_gdr.getSelectedIndex()));
     }
 
     public String getLangID() {
