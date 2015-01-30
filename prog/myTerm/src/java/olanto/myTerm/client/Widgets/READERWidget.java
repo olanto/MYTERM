@@ -53,6 +53,7 @@ public class READERWidget extends VerticalPanel {
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
     private long ownerID;
+    private long conceptID = -1;
 
     public READERWidget(long idOwner) {
         ownerID = idOwner;
@@ -70,34 +71,40 @@ public class READERWidget extends VerticalPanel {
                 } else {
                     MainEntryPoint.statusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
                 }
+                History.newItem("page0");
             }
 
             @Override
             public void onFailure(Throwable caught) {
                 searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
+                History.newItem("page0");
             }
         };
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 resultsPanel.conceptDetails.add(new HTML(result));
+                getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
             }
 
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
+                History.newItem("page0");
             }
         };
         termsCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
                 resultsPanel.termsDetails.add(new HTML(result));
+                History.newItem("page0");
             }
 
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
+                History.newItem("page0");
             }
         };
         // Listen for the button clicks
@@ -133,12 +140,11 @@ public class READERWidget extends VerticalPanel {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
-                resultsPanel.conceptDetails.clear();
-                resultsPanel.termsDetails.clear();
                 if (event.getValue().contains("TS")) {
-                    long conceptID = Long.parseLong(event.getValue().substring(2));
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
+                    conceptID = Long.parseLong(event.getValue().substring(2));
                     getService().getdetailsForConcept(conceptID, ownerID, conceptCallback);
-                    getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
                 }
             }
         });
