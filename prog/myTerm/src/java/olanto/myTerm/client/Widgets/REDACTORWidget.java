@@ -77,7 +77,6 @@ public class REDACTORWidget extends VerticalPanel {
     private static ConceptFormREDACTOR addcpt;
     private static LangSetFormREDACTOR addterms;
     private long ownerID;
-    private long currentconceptID;
     private HashMap<String, SysFieldDTO> sFields;
     public BooleanWrap isEdited = new BooleanWrap();
 
@@ -285,11 +284,11 @@ public class REDACTORWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 if (event.getValue().contains("WSnew")) {
-                    currentconceptID = Long.parseLong(event.getValue().substring(5));
                     if (isEdited.getVal()) {
                         new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, event.getValue()).show();
                     } else {
-                        getService().getRedactorDetailsForConcept(currentconceptID, ownerID, getConceptDetailsCallback);
+                        long conceptID = Long.parseLong(event.getValue().substring(5));
+                        getService().getRedactorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
                     }
                 } else {
                     String command = event.getValue();
@@ -327,6 +326,9 @@ public class REDACTORWidget extends VerticalPanel {
                         case "loaded":
                             commandLoaded();
                             break;
+                        case "escape":
+                            commandEscape();
+                            break;
                     }
                 }
             }
@@ -357,7 +359,7 @@ public class REDACTORWidget extends VerticalPanel {
                         addcpt.save.setEnabled(false);
                         getConceptEntryDTOFromWidget();
 //                        Window.alert(conceptEntryDTO.toStringDTO());
-                        getService().RedactorUpdateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
+                        getService().RedactorUpdateConceptEntry(conceptEntryDTO, ownerID, searchMenu.langSrc.getLangIDs(), entrySaveCallback);
                     }
                 }
             });
@@ -381,6 +383,8 @@ public class REDACTORWidget extends VerticalPanel {
                 public void onClick(ClickEvent event) {
                     if (isEdited.getVal()) {
                         new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "escape").show();
+                    } else {
+                        MainEntryPoint.statusPanel.setMessage("warning", "Nothing has changed...");
                     }
                 }
             });
@@ -414,7 +418,12 @@ public class REDACTORWidget extends VerticalPanel {
 
     public void escapeEntry(String action) {
         isEdited.setVal(false);
-        History.newItem(action);
+        if (action.contains("WSnew")) {
+            long conceptID = Long.parseLong(action.substring(5));
+            getService().getRedactorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
+        } else {
+            History.newItem(action);
+        }
     }
 
     private static myTermServiceAsync getService() {
@@ -484,25 +493,30 @@ public class REDACTORWidget extends VerticalPanel {
                     MyDialog.this.hide();
                     addcpt.save.setEnabled(false);
                     getConceptEntryDTOFromWidget();
+                    isEdited.setVal(false);
 //                        Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().RedactorUpdateConceptEntry(conceptEntryDTO, ownerID, new AsyncCallback<ConceptEntryDTO>() {
+                    getService().RedactorSaveConceptEntry(conceptEntryDTO, ownerID, new AsyncCallback<String>() {
                         @Override
                         public void onFailure(Throwable caught) {
                             addcpt.save.setEnabled(true);
                             resultsPanel.conceptDetails.clear();
                             resultsPanel.termsDetails.clear();
                             resultsPanel.conceptDetails.setWidget(new Label("Communication failed"));
-                            History.newItem("page1");
+                            History.newItem("notsaved");
                         }
 
                         @Override
-                        public void onSuccess(ConceptEntryDTO result) {
+                        public void onSuccess(String result) {
+                            addcpt.save.setEnabled(false);
                             if (result != null) {
-                                conceptEntryDTO = result;
-                                refreshContentFromConceptEntryDTO();
-                                History.newItem(action);
+                                if (action.contains("WSnew")) {
+                                    long conceptID = Long.parseLong(action.substring(5));
+                                    getService().getRedactorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
+                                } else {
+                                    History.newItem(action);
+                                }
                             } else {
-                                History.newItem(action);
+                                History.newItem("notsaved");
                             }
                         }
                     });
@@ -569,6 +583,7 @@ public class REDACTORWidget extends VerticalPanel {
     private void commandDeleted() {
         addcpt.delete.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry deleted successfully");
+        isEdited.setVal(false);
         History.newItem("page1");
     }
 
@@ -580,17 +595,20 @@ public class REDACTORWidget extends VerticalPanel {
     private void commandAdded() {
         searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry added successfully");
+        isEdited.setVal(false);
         History.newItem("page1");
     }
 
     private void commandNotAdded() {
         searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "No entry was added");
+        isEdited.setVal(false);
         History.newItem("page1");
     }
 
     private void commandLoaded() {
         MainEntryPoint.statusPanel.setMessage("message", "Entry loaded successfully");
+        isEdited.setVal(false);
     }
 
     private void commandSubmitted() {
@@ -598,7 +616,16 @@ public class REDACTORWidget extends VerticalPanel {
         MainEntryPoint.statusPanel.setMessage("message", "Entry submitted successfully");
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
+        isEdited.setVal(false);
         History.newItem("page1");
+    }
+
+    private void commandEscape() {
+        searchMenu.btnAdd.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("message", "Changes cancelled successfully");
+        resultsPanel.conceptDetails.clear();
+        resultsPanel.termsDetails.clear();
+        isEdited.setVal(false);
     }
 
     private void commandNotSubmitted() {

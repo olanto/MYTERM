@@ -27,9 +27,9 @@ public interface myTermService extends RemoteService {
 
     public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID);
 
-    public ConceptEntryDTO getRedactorDetailsForConcept(long conceptID, long ownerID);
+    public ConceptEntryDTO getRedactorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList);
 
-    public ConceptEntryDTO getRevisorDetailsForConcept(long conceptID, long ownerID);
+    public ConceptEntryDTO getRevisorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList);
 
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID);
 
@@ -61,9 +61,13 @@ public interface myTermService extends RemoteService {
 
     public String disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
-    public ConceptEntryDTO RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public ConceptEntryDTO RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList);
 
-    public ConceptEntryDTO RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+    public String RedactorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
+
+    public ConceptEntryDTO RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList);
+
+    public String RevisorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID);
 
     public String deleteConceptEntry(long conceptID, long ownerID);
 

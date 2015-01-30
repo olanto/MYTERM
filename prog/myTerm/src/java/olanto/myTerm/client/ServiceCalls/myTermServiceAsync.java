@@ -29,9 +29,9 @@ public interface myTermServiceAsync {
 
     public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, AsyncCallback<String> callback);
 
-    public void getRedactorDetailsForConcept(long conceptID, long ownerID, AsyncCallback<ConceptEntryDTO> callback);
+    public void getRedactorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> callback);
 
-    public void getRevisorDetailsForConcept(long conceptID, long ownerID, AsyncCallback<ConceptEntryDTO> callback);
+    public void getRevisorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> callback);
 
     public void getResults(String s, String ls, String lt, long ownerID, AsyncCallback<ArrayList<String>> callback);
 
@@ -59,9 +59,13 @@ public interface myTermServiceAsync {
 
     public void disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public void RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
+    public void RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> asyncCallback);
 
-    public void RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<ConceptEntryDTO> asyncCallback);
+    public void RedactorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
+
+    public void RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> asyncCallback);
+
+    public void RevisorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
     public void deleteConceptEntry(long conceptID, long ownerID, AsyncCallback<String> asyncCallback);
 

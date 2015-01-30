@@ -260,17 +260,17 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ConceptEntryDTO getRedactorDetailsForConcept(long conceptID, long ownerID) {
+    public ConceptEntryDTO getRedactorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList) {
         ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
-        ConceptEntry c = TestView.getConceptAndAssociatedEditonTerms(conceptID);
+        ConceptEntry c = TestView.getConceptAndAssociatedEditonTerms(conceptID, ownerID, lsList);
         copyFromConceptEntry(conceptEntryDTO, c);
         return conceptEntryDTO;
     }
-    
+
     @Override
-    public ConceptEntryDTO getRevisorDetailsForConcept(long conceptID, long ownerID) {
+    public ConceptEntryDTO getRevisorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList) {
         ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
-        ConceptEntry c = TestView.getConceptAndAssociatedRevisionTerms(conceptID);
+        ConceptEntry c = TestView.getConceptAndAssociatedRevisionTerms(conceptID, ownerID, lsList);
         copyFromConceptEntry(conceptEntryDTO, c);
         return conceptEntryDTO;
     }
@@ -466,21 +466,41 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ConceptEntryDTO RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+    public ConceptEntryDTO RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         Concepts c = cEntry.updateFromInterface();
         if (c != null) {
-            return getRedactorDetailsForConcept(c.getIdConcept(), ownerID);
+            return getRedactorDetailsForConcept(c.getIdConcept(), ownerID, lsList);
         }
         return null;
     }
-    
+
     @Override
-    public ConceptEntryDTO RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+    public String RedactorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         Concepts c = cEntry.updateFromInterface();
         if (c != null) {
-            return getRevisorDetailsForConcept(c.getIdConcept(), ownerID);
+            return "success";
+        }
+        return null;
+    }
+
+    @Override
+    public ConceptEntryDTO RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        Concepts c = cEntry.updateFromInterface();
+        if (c != null) {
+            return getRevisorDetailsForConcept(c.getIdConcept(), ownerID, lsList);
+        }
+        return null;
+    }
+
+    @Override
+    public String RevisorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
+        ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
+        Concepts c = cEntry.updateFromInterface();
+        if (c != null) {
+            return "success";
         }
         return null;
     }

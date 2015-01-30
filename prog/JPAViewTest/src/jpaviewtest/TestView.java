@@ -166,7 +166,7 @@ public class TestView {
         return null;
     }
 
-    public static ConceptEntry getConceptAndAssociatedEditonTerms(long conceptID) {
+    public static ConceptEntry getConceptAndAssociatedEditonTerms(long conceptID, long ownerID, ArrayList<String> lsList) {
         TermDB.restart();
         init();
         Concepts cpt = Queries.getConceptByID(conceptID);
@@ -181,6 +181,7 @@ public class TestView {
                     Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLangSetWorkspace");
                     query.setParameter("idConcept", conceptID);
                     query.setParameter("idLangset", ls.getIdLangset());
+                    query.setParameter("idLanguage", lsList);
                     List<VjConceptdetail> resultQ = query.getResultList();
                     if (!resultQ.isEmpty()) {
                         for (VjConceptdetail res : resultQ) {
@@ -197,7 +198,7 @@ public class TestView {
         return null;
     }
 
-    public static ConceptEntry getConceptAndAssociatedRevisionTerms(long conceptID) {
+    public static ConceptEntry getConceptAndAssociatedRevisionTerms(long conceptID, long ownerID, ArrayList<String> lsList) {
         TermDB.restart();
         init();
         Concepts cpt = Queries.getConceptByID(conceptID);
@@ -212,6 +213,7 @@ public class TestView {
                     Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLangSetRevision");
                     query.setParameter("idConcept", conceptID);
                     query.setParameter("idLangset", ls.getIdLangset());
+                    query.setParameter("idLanguage", lsList);
                     List<VjConceptdetail> resultQ = query.getResultList();
                     if (!resultQ.isEmpty()) {
                         for (VjConceptdetail res : resultQ) {
