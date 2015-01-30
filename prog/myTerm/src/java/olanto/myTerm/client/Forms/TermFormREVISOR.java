@@ -51,7 +51,7 @@ public class TermFormREVISOR extends VerticalPanel {
     private Label label_lng;
     private LangList lang;
     private Label label_frm;
-    private TextAreaMyTerm text_frm;
+    private TextBoxMyTerm text_frm;
     private Label label_src;
     private TextAreaMyTerm text_src;
     private Label label_def;
@@ -93,7 +93,7 @@ public class TermFormREVISOR extends VerticalPanel {
         form3 = new Grid(5, 2);
         label_lng = new Label("Language:");
         label_frm = new Label("Term's form:");
-        text_frm = new TextAreaMyTerm("t.form", sFields, isEdited);
+        text_frm = new TextBoxMyTerm("t.form", sFields, isEdited);
         label_src = new Label("Term's source:");
         text_src = new TextAreaMyTerm("t.source", sFields, isEdited);
         label_def = new Label("Term's definition:");

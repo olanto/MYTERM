@@ -94,4 +94,60 @@ public class PartofSpeechList extends ListBox {
         });
         posService.getTermPOS(langID, posCallback);
     }
+
+    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        posCallback = new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of part of speech");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                int i = 0;
+                for (String s : result) {
+                    addItem(s, s);
+                    if (s.equalsIgnoreCase(currentPOS)) {
+                        i = result.indexOf(s);
+                    }
+                }
+                setSelectedIndex(i);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        posService.getTermPOS(langID, posCallback);
+    }
+
+    public PartofSpeechList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        posCallback = new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of part of speech");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                for (String s : result) {
+                    addItem(s, s);
+                }
+                setSelectedIndex(0);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        posService.getTermPOS(langID, posCallback);
+    }
 }

@@ -63,7 +63,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     public Button escape;
     private Label label_dom;
     private Label label_rs;
-    public int type = 1;
+    public int type;
 
     public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
         cform = new Grid(2, 3);

@@ -92,6 +92,7 @@ public class ConceptEntryDTO implements IsSerializable {
         conceptEntry += "Subject Field: " + this.concept.getSubjectField() + "\n";
         conceptEntry += "Ressource: " + this.concept.getIdResource() + "\n";
         conceptEntry += "Concept: " + this.concept.getIdConcept() + "\n";
+        conceptEntry += "Defintion: " + this.concept.getConceptDefinition() + "\n";
         for (LangEntryDTO lan : listlang) {
             conceptEntry += "----Language Details----\n";
             conceptEntry += "Lang Set: " + lan.lan.getIdLanguage() + "\n";

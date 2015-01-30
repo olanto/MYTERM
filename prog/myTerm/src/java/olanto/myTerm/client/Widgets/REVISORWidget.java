@@ -111,6 +111,8 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 if (result != null) {
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
                     History.newItem("p2approved");
                 } else {
                     History.newItem("p2notapproved");
@@ -128,6 +130,8 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onSuccess(String result) {
                 if (result != null) {
+                    resultsPanel.conceptDetails.clear();
+                    resultsPanel.termsDetails.clear();
                     History.newItem("p2disapproved");
                 } else {
                     History.newItem("p2notdisapproved");
@@ -148,7 +152,6 @@ public class REVISORWidget extends VerticalPanel {
                 } else {
                     resultsPanel.sideRes.setWidget(new HTML("No current entries"));
                 }
-                MainEntryPoint.statusPanel.setMessage("info", "Entries retrieved successfully");
             }
 
             @Override
@@ -210,7 +213,7 @@ public class REVISORWidget extends VerticalPanel {
                 if (event.getValue().contains("Appnew")) {
                     isEdited.setVal(false);
                     long conceptID = Long.parseLong(event.getValue().substring(6));
-                    getService().getAddDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
+                    getService().getRevisorDetailsForConcept(conceptID, ownerID, getConceptDetailsCallback);
                 } else {
                     String command = event.getValue();
                     switch (command) {
@@ -269,7 +272,7 @@ public class REVISORWidget extends VerticalPanel {
                     addcpt.save.setEnabled(false);
                     getConceptEntryDTOFromWidget();
 //                    Window.alert(conceptEntryDTO.toStringDTO());
-                    getService().updateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
+                    getService().RevisorUpdateConceptEntry(conceptEntryDTO, ownerID, entrySaveCallback);
                 }
             });
             addcpt.approve.addClickHandler(new ClickHandler() {
@@ -405,12 +408,11 @@ public class REVISORWidget extends VerticalPanel {
         MainEntryPoint.statusPanel.setMessage("message", "Entry saved successfully");
         isEdited.setVal(false);
         History.newItem("page2");
-    }
+        }
 
     private void commandNotSaved() {
         addcpt.save.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be updated");
-        History.newItem("page2");
     }
 
     private void commandApproved() {
@@ -419,12 +421,11 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         History.newItem("page2");
-    }
+        }
 
     private void commandNotApproved() {
         addcpt.approve.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be deleted");
-        History.newItem("page2");
     }
 
     private void commandDisapproved() {
@@ -433,12 +434,11 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         History.newItem("page2");
-    }
+        }
 
     private void commandNotDisapproved() {
         addcpt.disapprove.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("error", "Entry could not be submitted");
-        History.newItem("page2");
     }
 
     private void approveConceptEntry() {
@@ -455,8 +455,7 @@ public class REVISORWidget extends VerticalPanel {
 
     private void commandLoaded() {
         MainEntryPoint.statusPanel.setMessage("message", "Entry loaded successfully");
-        History.newItem("page2");
-    }
+        }
 
     public static native void fixGwtNav() /*-{
      $wnd.gwtnav = function(a) {

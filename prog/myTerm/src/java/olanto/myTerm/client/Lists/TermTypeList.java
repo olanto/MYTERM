@@ -94,4 +94,60 @@ public class TermTypeList extends ListBox {
         });
         typesService.getTermTypes(langID, termTypesCallback);
     }
+
+    public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        termTypesCallback = new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                int i = 0;
+                for (String s : result) {
+                    addItem(s, s);
+                    if (s.equalsIgnoreCase(currentType)) {
+                        i = result.indexOf(s);
+                    }
+                }
+                setSelectedIndex(i);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        typesService.getTermTypes(langID, termTypesCallback);
+    }
+
+    public TermTypeList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        termTypesCallback = new AsyncCallback<ArrayList<String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<String> result) {
+                for (String s : result) {
+                    addItem(s, s);
+                }
+                setSelectedIndex(0);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        typesService.getTermTypes(langID, termTypesCallback);
+    }
 }

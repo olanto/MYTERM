@@ -164,6 +164,34 @@ public class LangList extends ListBox {
         langService.getLanguagesByOwner(ownerID, langCallback);
     }
 
+    public LangList(long ownerID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
+            }
+
+            @Override
+            public void onSuccess(ArrayList<LanguageDTO> result) {
+                for (LanguageDTO s : result) {
+                    langlist.add(s.getLanguageDefaultName());
+                    langIDlist.add(s.getIdLanguage());
+                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                }
+                setSelectedIndex(0);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        langService.getLanguagesByOwner(ownerID, langCallback);
+    }
+
     public void selectlanguage(String language) {
         int i = 0;
         for (String s : langlist) {

@@ -67,27 +67,25 @@ public class LangSetFormREVISOR extends VerticalPanel {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                if (tDTO.getStatus() == 'r') {
-                    final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0, sFields, isEdited);
-                    i++;
-                    terms.add(ter);
-                    desc.add(ter);
-                    ter.adjustSize(getOffsetWidth() - 10);
-                    ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited);
-                    ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
-                    ter.approve.addClickHandler(new ClickHandler() {
-                        @Override
-                        public void onClick(ClickEvent event) {
-                            new MyDialog("Are you sure that you would like to aprove this term?", 0, ter).show();
-                        }
-                    });
-                    ter.disapprove.addClickHandler(new ClickHandler() {
-                        @Override
-                        public void onClick(ClickEvent event) {
-                            new MyDialog("Are you sure that you would like to disaprove this term?", 1, ter).show();
-                        }
-                    });
-                }
+                final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0, sFields, isEdited);
+                i++;
+                terms.add(ter);
+                desc.add(ter);
+                ter.adjustSize(getOffsetWidth() - 10);
+                ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited);
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                ter.approve.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        new MyDialog("Are you sure that you would like to aprove this term?", 0, ter).show();
+                    }
+                });
+                ter.disapprove.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        new MyDialog("Are you sure that you would like to disaprove this term?", 1, ter).show();
+                    }
+                });
             }
         }
     }
@@ -209,7 +207,7 @@ public class LangSetFormREVISOR extends VerticalPanel {
             getService().disapproveTermEntry(ter.getTermID(), new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    MainEntryPoint.statusPanel.setMessage("error", "Could not approve Term");
+                    MainEntryPoint.statusPanel.setMessage("error", "Could not disapprove Term");
                     History.newItem("p2notdisapproved");
                 }
 
@@ -218,12 +216,12 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     terms.remove(ter);
                     remterms.add(ter);
                     ter.removeFromParent();
-                    if (terms.isEmpty()) {
+                    if (desc.getWidgetCount() == 0) {
                         removeFromParent();
                         attachedcForm.removeFromParent();
                     }
-                    MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
-                    History.newItem("p2notdisapproved");
+                    MainEntryPoint.statusPanel.setMessage("message", "Term disapproved successfully");
+                    History.newItem("page2");
                 }
             });
         }
@@ -243,12 +241,12 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     terms.remove(ter);
                     remterms.add(ter);
                     ter.removeFromParent();
-                    if (terms.isEmpty()) {
+                    if (desc.getWidgetCount() == 0) {
                         removeFromParent();
                         attachedcForm.removeFromParent();
                     }
                     MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
-                    History.newItem("p2approved");
+                    History.newItem("page2");
                 }
             });
         }

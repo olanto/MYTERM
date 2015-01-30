@@ -53,7 +53,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Label label_lng;
     private LangList lang;
     private Label label_frm;
-    private TextAreaMyTerm text_frm;
+    private TextBoxMyTerm text_frm;
     private Label label_src;
     private TextAreaMyTerm text_src;
     private Label label_def;
@@ -88,29 +88,29 @@ public class TermFormREDACTOR extends VerticalPanel {
     private String langID;
     private Label lang_lbl;
     private char status;
+    private BooleanWrap isLocallyEdited = new BooleanWrap();
 
-    public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
-
+    public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
         form1 = new Grid(5, 2);
         form2 = new Grid(5, 2);
         form3 = new Grid(5, 2);
         label_lng = new Label("Language:");
         label_frm = new Label("Term's form:");
-        text_frm = new TextAreaMyTerm("t.form", sFields, isEdited);
+        text_frm = new TextBoxMyTerm("t.form", sFields, isEdited, isLocallyEdited);
         label_src = new Label("Term's source:");
-        text_src = new TextAreaMyTerm("t.source", sFields, isEdited);
+        text_src = new TextAreaMyTerm("t.source", sFields, isEdited, isLocallyEdited);
         label_def = new Label("Term's definition:");
-        text_def = new TextAreaMyTerm("t.definition", sFields, isEdited);
+        text_def = new TextAreaMyTerm("t.definition", sFields, isEdited, isLocallyEdited);
         label_sdef = new Label("Definition's source:");
-        text_sdef = new TextAreaMyTerm("t.source_definition", sFields, isEdited);
+        text_sdef = new TextAreaMyTerm("t.source_definition", sFields, isEdited, isLocallyEdited);
         label_usg = new Label("Term's usage:");
-        text_usg = new TextAreaMyTerm("t.usage", sFields, isEdited);
+        text_usg = new TextAreaMyTerm("t.usage", sFields, isEdited, isLocallyEdited);
         label_ctxt = new Label("Term's context:");
-        text_ctxt = new TextAreaMyTerm("t.context", sFields, isEdited);
+        text_ctxt = new TextAreaMyTerm("t.context", sFields, isEdited, isLocallyEdited);
         label_sctxt = new Label("Context's source:");
-        text_sctxt = new TextAreaMyTerm("t.source_context", sFields, isEdited);
+        text_sctxt = new TextAreaMyTerm("t.source_context", sFields, isEdited, isLocallyEdited);
         label_nt = new Label("Term's Note:");
-        text_nt = new TextAreaMyTerm("t.note", sFields, isEdited);
+        text_nt = new TextAreaMyTerm("t.note", sFields, isEdited, isLocallyEdited);
         label_tp = new Label("Type:");
         label_pos = new Label("Part of speech:");
         label_gdr = new Label("Gender:");
@@ -119,17 +119,17 @@ public class TermFormREDACTOR extends VerticalPanel {
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
         label_ext = new Label("Extra:");
-        text_ext = new TextAreaMyTerm("t.extra", sFields, isEdited);
+        text_ext = new TextAreaMyTerm("t.extra", sFields, isEdited, isLocallyEdited);
         delete = new Button("Delete");
         edit = new Button("Edit");
         termID = -1;
         langID = "";
         lang_lbl = new Label("");
         status = 'e';
-        lang = new LangList(ownerID, isEdited);
-        term_type = new TermTypeList("EN", isEdited);
-        term_pos = new PartofSpeechList("EN", isEdited);
-        term_gdr = new TermGenderList("EN", isEdited);
+        lang = new LangList(ownerID, isEdited, isLocallyEdited);
+        term_type = new TermTypeList("EN", isEdited, isLocallyEdited);
+        term_pos = new PartofSpeechList("EN", isEdited, isLocallyEdited);
+        term_gdr = new TermGenderList("EN", isEdited, isLocallyEdited);
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -206,10 +206,10 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
         form3.remove(term_pos);
-        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited);
+        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
         form3.setWidget(1, 1, term_pos);
         form3.remove(term_gdr);
-        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited);
+        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited, isLocallyEdited);
         form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
         text_st.setText(termDTO.getStatus() + "");
@@ -219,7 +219,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.remove(lang);
         form1.setWidget(0, 1, lang_lbl);
         form2.remove(term_type);
-        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited);
+        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited, isLocallyEdited);
         form2.setWidget(1, 1, term_type);
         status = termDTO.getStatus();
         if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
@@ -306,7 +306,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setExtra(text_ext.getText());
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        termDTO.setStatus(status);
+        if (isLocallyEdited.getVal()) {
+            termDTO.setStatus('e');
+        } else {
+            termDTO.setStatus(status);
+        }
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());
             termDTO.setLangName(lang_lbl.getText());

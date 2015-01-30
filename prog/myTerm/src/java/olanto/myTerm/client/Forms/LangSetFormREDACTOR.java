@@ -85,21 +85,19 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                if ((tDTO.getStatus() == 'e') || (tDTO.getStatus() == 'p')) {
-                    final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0, sFields, isEdited);
-                    i++;
-                    terms.add(ter);
-                    desc.add(ter);
-                    ter.adjustSize(getOffsetWidth() - 10);
-                    ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited);
-                    ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
-                    ter.delete.addClickHandler(new ClickHandler() {
-                        @Override
-                        public void onClick(ClickEvent event) {
-                            new MyDialog("Are you sure that you would like to delete this term?", ter).show();
-                        }
-                    });
-                }
+                final TermFormREDACTOR ter = new TermFormREDACTOR(ownerID, 0, sFields, isEdited);
+                i++;
+                terms.add(ter);
+                desc.add(ter);
+                ter.adjustSize(getOffsetWidth() - 10);
+                ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited);
+                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                ter.delete.addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(ClickEvent event) {
+                        new MyDialog("Are you sure that you would like to delete this term?", ter).show();
+                    }
+                });
             }
         }
     }
@@ -220,6 +218,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
             });
         } else {
             terms.remove(term);
+            remterms.add(term);
             term.removeFromParent();
             MainEntryPoint.statusPanel.setMessage("message", "Term Deleted successfully");
             History.newItem("deleted");
@@ -234,12 +233,8 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         for (TermFormREDACTOR trm : remterms) {
             if ((trm.getTermID() > -1) && (trm.getLangID().length() > 1)) {
                 int i = getLangEntryIdx(trm.getIdLanguage(), listlang);
-                if (i > 0) {
-                    int j = getTermDTOIdx(trm.getTermID(), listlang.get(i).listterm);
-                    if (j > 0) {
-                        listlang.get(i).listterm.remove(j);
-                    }
-                }
+                int j = getTermDTOIdx(trm.getTermID(), listlang.get(i).listterm);
+                listlang.get(i).listterm.remove(j);
             }
         }
         remterms.clear();

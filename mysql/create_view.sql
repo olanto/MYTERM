@@ -155,6 +155,7 @@ select
        t1.term_source,
        t1.term_definition,
        t1.term_note,
+       t1.status,
 	   c.id_concept,
 	   l1.id_langset
   from terms t1, langsets l1,

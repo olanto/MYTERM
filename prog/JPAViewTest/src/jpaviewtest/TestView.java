@@ -166,28 +166,90 @@ public class TestView {
         return null;
     }
 
+    public static ConceptEntry getConceptAndAssociatedEditonTerms(long conceptID) {
+        TermDB.restart();
+        init();
+        Concepts cpt = Queries.getConceptByID(conceptID);
+        if (cpt != null) {
+            ConceptEntry conceptEntry = new ConceptEntry(cpt, false);
+//            System.out.println(conceptEntry.getConcept().getIdConcept());
+            List<Langsets> langsets = Queries.getLangSetByConcept(conceptID);
+            if (!langsets.isEmpty()) {
+                for (Langsets ls : langsets) {
+                    LangEntry langE = new LangEntry();
+                    langE.lan = ls;
+                    Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLangSetWorkspace");
+                    query.setParameter("idConcept", conceptID);
+                    query.setParameter("idLangset", ls.getIdLangset());
+                    List<VjConceptdetail> resultQ = query.getResultList();
+                    if (!resultQ.isEmpty()) {
+                        for (VjConceptdetail res : resultQ) {
+                            Terms t = Queries.getTermByID(res.getIdTerm());
+                            langE.listterm.add(t);
+                        }
+                    }
+                    conceptEntry.listlang.add(langE);
+//                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
+                }
+            }
+            return conceptEntry;
+        }
+        return null;
+    }
+
+    public static ConceptEntry getConceptAndAssociatedRevisionTerms(long conceptID) {
+        TermDB.restart();
+        init();
+        Concepts cpt = Queries.getConceptByID(conceptID);
+        if (cpt != null) {
+            ConceptEntry conceptEntry = new ConceptEntry(cpt, false);
+//            System.out.println(conceptEntry.getConcept().getIdConcept());
+            List<Langsets> langsets = Queries.getLangSetByConcept(conceptID);
+            if (!langsets.isEmpty()) {
+                for (Langsets ls : langsets) {
+                    LangEntry langE = new LangEntry();
+                    langE.lan = ls;
+                    Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLangSetRevision");
+                    query.setParameter("idConcept", conceptID);
+                    query.setParameter("idLangset", ls.getIdLangset());
+                    List<VjConceptdetail> resultQ = query.getResultList();
+                    if (!resultQ.isEmpty()) {
+                        for (VjConceptdetail res : resultQ) {
+                            Terms t = Queries.getTermByID(res.getIdTerm());
+                            langE.listterm.add(t);
+                        }
+                    }
+                    conceptEntry.listlang.add(langE);
+//                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
+                }
+            }
+            return conceptEntry;
+        }
+        return null;
+    }
+
     public static String getPublicSearchBySourceTarget(String term, String solang, String talang, ArrayList<Long> resID, String domID) {
 //        System.out.println("param:" + term);
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
         if ((domID.equals(" ") || domID.length() < 2)) {
-            query = em.createNamedQuery("VjSourcetarget.findPublicBySourceTargetResource");
+            query = em.createNamedQuery("VjSourcetarget.findConceptPublicBySourceTargetResource");
             query.setParameter("selectedValues", resID);
         } else {
-            query = em.createNamedQuery("VjSourcetarget.findPublicBySourceTargetResourceSubjectField");
+            query = em.createNamedQuery("VjSourcetarget.findConceptPublicBySourceTargetResourceSubjectField");
             query.setParameter("selectedValues", resID);
             query.setParameter("subjectField", domID);
         }
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
-        List<VjSourcetarget> resultQ = query.getResultList();
+        List<Long> resultQ = query.getResultList();
         if (!resultQ.isEmpty()) {
-            for (VjSourcetarget result : resultQ) {
+            for (long result : resultQ) {
                 res.append("<tr>");
-                res.append("<td><a href=\"#TS").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
-                res.append("<td>").append(result.getTarget()).append("</td>");
+                res.append("<td><a href=\"#TS").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
+                res.append("<td>").append(getTargetsForLang(result, talang)).append("</td>");
                 res.append("</tr>");
             }
             return res.toString();
@@ -239,12 +301,31 @@ public class TestView {
     public static String getTargetsForThis(long conceptID, String solang) {
         init();
         StringBuilder res = new StringBuilder("");
-        Query query;
-        query = em.createNamedQuery("VjGetformsbyconcept.findformsExceptsolang");
+        Query query = em.createNamedQuery("VjGetformsbyconcept.findformsExceptsolang");
         query.setParameter("idLanguage", solang);
         query.setParameter("idConcept", conceptID);
         List<VjGetformsbyconcept> resultQ = query.getResultList();
 
+        if (!resultQ.isEmpty()) {
+            res.append("<table class =\"nost\">");
+            for (VjGetformsbyconcept result : resultQ) {
+                res.append("<tr>");
+                res.append("<td>").append(result.getSource()).append("</td>");
+                res.append("</tr>");
+            }
+            res.append("</table>");
+        }
+        return res.toString();
+    }
+
+    public static String getTargetsForLang(long conceptID, String talang) {
+        init();
+        StringBuilder res = new StringBuilder("");
+
+        Query query = em.createNamedQuery("VjGetformsbyconcept.findByLC");
+        query.setParameter("idConcept", conceptID);
+        query.setParameter("idLanguage", talang);
+        List<VjGetformsbyconcept> resultQ = query.getResultList();
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
             for (VjGetformsbyconcept result : resultQ) {
@@ -283,7 +364,7 @@ public class TestView {
                 res.append("</tr>");
             }
         }
-        System.out.println(res.toString());
+//        System.out.println(res.toString());
         return res.toString();
     }
 
@@ -405,7 +486,7 @@ public class TestView {
     }
 
     public static Vector<String> getListForThis(String term, String solang, String talang) {
-        System.out.println("param:" + term);
+//        System.out.println("param:" + term);
         init();
         Vector<String> res = new Vector<>();
         Query query = em.createNamedQuery("VjSourcetarget.findPublicBySource");
