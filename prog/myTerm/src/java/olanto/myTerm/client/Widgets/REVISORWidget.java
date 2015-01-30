@@ -327,8 +327,8 @@ public class REVISORWidget extends VerticalPanel {
     public void escapeEntry(String action) {
         isEdited.setVal(false);
         if (action.contains("Appnew")) {
-            long conceptID = Long.parseLong(action.substring(5));
-            getService().getRedactorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
+            long conceptID = Long.parseLong(action.substring(6));
+            getService().getRevisorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
         } else {
             History.newItem(action);
         }
@@ -417,7 +417,7 @@ public class REVISORWidget extends VerticalPanel {
                             addcpt.save.setEnabled(true);
                             if (result != null) {
                                 if (action.contains("Appnew")) {
-                                    long conceptID = Long.parseLong(action.substring(5));
+                                    long conceptID = Long.parseLong(action.substring(6));
                                     getService().getRevisorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
                                 } else {
                                     History.newItem(action);
@@ -481,8 +481,6 @@ public class REVISORWidget extends VerticalPanel {
     private void commandApproved() {
         addcpt.approve.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry deleted successfully");
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
         isEdited.setVal(false);
         History.newItem("page2");
     }
@@ -495,8 +493,6 @@ public class REVISORWidget extends VerticalPanel {
     private void commandDisapproved() {
         addcpt.disapprove.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Entry submitted successfully");
-        resultsPanel.conceptDetails.clear();
-        resultsPanel.termsDetails.clear();
         isEdited.setVal(false);
         History.newItem("page2");
     }

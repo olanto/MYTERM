@@ -216,12 +216,12 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     terms.remove(ter);
                     remterms.add(ter);
                     ter.removeFromParent();
-                    if (desc.getWidgetCount() == 0) {
+                    if (terms.isEmpty()) {
                         removeFromParent();
                         attachedcForm.removeFromParent();
                     }
                     MainEntryPoint.statusPanel.setMessage("message", "Term disapproved successfully");
-                    History.newItem("page2");
+                    History.newItem("p2disapproved");
                 }
             });
         }
@@ -241,12 +241,12 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     terms.remove(ter);
                     remterms.add(ter);
                     ter.removeFromParent();
-                    if (desc.getWidgetCount() == 0) {
+                    if (terms.isEmpty()) {
                         removeFromParent();
                         attachedcForm.removeFromParent();
                     }
                     MainEntryPoint.statusPanel.setMessage("message", "Term approved successfully");
-                    History.newItem("page2");
+                    History.newItem("p2approved");
                 }
             });
         }
