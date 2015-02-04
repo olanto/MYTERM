@@ -283,15 +283,15 @@ public class REDACTORWidget extends VerticalPanel {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
-                if (event.getValue().contains("WSnew")) {
+                String command = event.getValue();
+                if (command.contains("WSnew")) {
                     if (isEdited.getVal()) {
-                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, event.getValue()).show();
+                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, command).show();
                     } else {
-                        long conceptID = Long.parseLong(event.getValue().substring(5));
+                        long conceptID = Long.parseLong(command.substring(5));
                         getService().getRedactorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
                     }
                 } else {
-                    String command = event.getValue();
                     switch (command) {
                         case "page1":
                             commandPage1();
@@ -547,6 +547,10 @@ public class REDACTORWidget extends VerticalPanel {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
         getService().getWorkspaceElements(lan, ownerID, workspaceCallback);
+    }
+
+    public void commandPageOther(String action) {
+        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, action).show();
     }
 
     private void commandAdd() {

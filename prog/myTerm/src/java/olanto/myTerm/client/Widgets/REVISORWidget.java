@@ -213,15 +213,15 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
-                if (event.getValue().contains("Appnew")) {
+                String command = event.getValue();
+                if (command.contains("Appnew")) {
                     if (isEdited.getVal()) {
-                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, event.getValue()).show();
+                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, command).show();
                     } else {
-                        long conceptID = Long.parseLong(event.getValue().substring(6));
+                        long conceptID = Long.parseLong(command.substring(6));
                         getService().getRevisorDetailsForConcept(conceptID, ownerID, searchMenu.langSrc.getLangIDs(), getConceptDetailsCallback);
                     }
                 } else {
-                    String command = event.getValue();
                     switch (command) {
                         case "page2":
                             commandPage2();
@@ -454,6 +454,10 @@ public class REVISORWidget extends VerticalPanel {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
         getService().getApproveElementsShowByLang(lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), ownerID, workspaceCallback);
+    }
+
+    public void commandPageOther(String action) {
+        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, action).show();
     }
 
     private void commandSearch() {

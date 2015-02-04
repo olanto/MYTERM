@@ -132,6 +132,8 @@ public class TestView {
         }
         result.append("</table>");
         result.append("</div>");
+        resultQ.clear();
+        resultQ = null;
         return result.toString();
     }
 
@@ -157,10 +159,15 @@ public class TestView {
                             langE.listterm.add(t);
                         }
                     }
+                    resultQ.clear();
+                    resultQ = null;
                     conceptEntry.listlang.add(langE);
 //                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
                 }
             }
+            langsets.clear();
+            langsets = null;
+            cpt = null;
             return conceptEntry;
         }
         return null;
@@ -189,10 +196,15 @@ public class TestView {
                             langE.listterm.add(t);
                         }
                     }
+                    resultQ.clear();
+                    resultQ = null;
                     conceptEntry.listlang.add(langE);
 //                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
                 }
             }
+            langsets.clear();
+            langsets = null;
+            cpt = null;
             return conceptEntry;
         }
         return null;
@@ -221,10 +233,15 @@ public class TestView {
                             langE.listterm.add(t);
                         }
                     }
+                    resultQ.clear();
+                    resultQ = null;
                     conceptEntry.listlang.add(langE);
 //                    System.out.println("copying lang set from query: " + langE.lan.getIdLanguage());
                 }
             }
+            langsets.clear();
+            langsets = null;
+            cpt = null;
             return conceptEntry;
         }
         return null;
@@ -254,6 +271,8 @@ public class TestView {
                 res.append("<td>").append(getTargetsForLang(result, talang)).append("</td>");
                 res.append("</tr>");
             }
+            resultQ.clear();
+            resultQ = null;
             return res.toString();
         }
         return null;
@@ -297,6 +316,8 @@ public class TestView {
             }
             res.append("</table>");
         }
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
@@ -317,6 +338,8 @@ public class TestView {
             }
             res.append("</table>");
         }
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
@@ -337,6 +360,8 @@ public class TestView {
             }
             res.append("</table>");
         }
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
@@ -366,6 +391,8 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        resultQ.clear();
+        resultQ = null;
 //        System.out.println(res.toString());
         return res.toString();
     }
@@ -398,6 +425,8 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
@@ -420,12 +449,15 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        resultQ.clear();
+        resultQ = null;
 //        System.out.println(res.toString());
         return res.toString();
     }
 
     public static String getSourceForLang(long conceptID, String solang) {
         init();
+        String source = "";
         Query query = em.createNamedQuery("VjGetformsbyconcept.findByLC");
         query.setParameter("idConcept", conceptID);
         query.setParameter("idLanguage", solang);
@@ -438,7 +470,10 @@ public class TestView {
 //            System.out.println("NO RETURNED VALUES for :" + conceptID);
             return "?";
         }
-        return result.get(0).getSource();
+        source = result.get(0).getSource();
+        result.clear();
+        result = null;
+        return source;
     }
 
     public static String getApproveElementsByLang(String solang, long ownerID) {
@@ -460,6 +495,8 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        resultQ.clear();
+        resultQ = null;
 //        System.out.println(res.toString());
         return res.toString();
     }
@@ -483,6 +520,8 @@ public class TestView {
                 res.append("</tr>");
             }
         }
+        resultQ.clear();
+        resultQ = null;
 //        System.out.println(res.toString());
         return res.toString();
     }
@@ -535,6 +574,8 @@ public class TestView {
             res.append("</tr>");
         }
         res.append("</table>");
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
@@ -565,6 +606,8 @@ public class TestView {
             res.append("</tr>");
         }
         res.append("</table>");
+        resultQ.clear();
+        resultQ = null;
         return res.toString();
     }
 
