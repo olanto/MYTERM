@@ -6,7 +6,8 @@ package olanto.myTerm.client.ServiceCalls;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Map;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
@@ -33,7 +34,7 @@ public interface myTermServiceAsync {
 
     public void getRevisorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> callback);
 
-    public void getResults(String s, String ls, String lt, long ownerID, AsyncCallback<ArrayList<String>> callback);
+    public void getResults(String s, String ls, String lt, long ownerID, AsyncCallback<Collection<String>> callback);
 
     public void getWorkspaceElements(String ls, long ownerID, AsyncCallback<String> callback);
 
@@ -43,13 +44,13 @@ public interface myTermServiceAsync {
 
     public void getInventory(AsyncCallback<String> callback);
 
-    public void getLanguages(AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
+    public void getLanguages(AsyncCallback<Collection<LanguageDTO>> asyncCallback);
 
-    public void getDomains(AsyncCallback<ArrayList<DomainDTO>> asyncCallback);
+    public void getDomains(AsyncCallback<Collection<DomainDTO>> asyncCallback);
 
-    public void getResourcesByOwner(String ownerMailing, String role, AsyncCallback<ArrayList<ResourceDTO>> asyncCallback);
+    public void getResourcesByOwner(String ownerMailing, String role, AsyncCallback<Collection<ResourceDTO>> asyncCallback);
 
-    public void getLanguagesByOwner(long ownerID, AsyncCallback<ArrayList<LanguageDTO>> asyncCallback);
+    public void getLanguagesByOwner(long ownerID, AsyncCallback<Collection<LanguageDTO>> asyncCallback);
 
     public void createConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, AsyncCallback<String> asyncCallback);
 
@@ -75,11 +76,13 @@ public interface myTermServiceAsync {
 
     public void disapproveTermEntry(long termID, AsyncCallback<String> asyncCallback);
 
-    public void getSysFieldsByLang(String langID, AsyncCallback<HashMap<String, SysFieldDTO>> asyncCallback);
+    public void getSysFieldsByLang(String langID, AsyncCallback<Map<String, SysFieldDTO>> asyncCallback);
 
-    public void getTermTypes(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
+    public void getSysMsgByLang(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
-    public void getTermPOS(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
+    public void getTermTypes(String langID, AsyncCallback<Collection<String>> asyncCallback);
 
-    public void getTermGender(String langID, AsyncCallback<ArrayList<String>> asyncCallback);
+    public void getTermPOS(String langID, AsyncCallback<Collection<String>> asyncCallback);
+
+    public void getTermGender(String langID, AsyncCallback<Collection<String>> asyncCallback);
 }

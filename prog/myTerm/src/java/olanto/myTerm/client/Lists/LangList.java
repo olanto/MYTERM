@@ -31,6 +31,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import java.util.Collection;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -43,36 +44,39 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class LangList extends ListBox {
 
     private myTermServiceAsync langService = GWT.create(myTermService.class);
-    private AsyncCallback<ArrayList<LanguageDTO>> langCallback;
+    private AsyncCallback<Collection<LanguageDTO>> langCallback;
     private ArrayList<String> langlist = new ArrayList<>();
     private ArrayList<String> langIDlist = new ArrayList<>();
 
     public LangList(final String type) {
         super();
-        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages, please RELOAD THE PAGE");
             }
 
             @Override
-            public void onSuccess(ArrayList<LanguageDTO> result) {
-                int i = 0, j = 0;
-                for (LanguageDTO s : result) {
-                    langlist.add(s.getLanguageDefaultName());
-                    langIDlist.add(s.getIdLanguage());
-                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
-                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<LanguageDTO> result) {
+                ArrayList<LanguageDTO> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0, j = 0;
+                    for (LanguageDTO s : res) {
+                        langlist.add(s.getLanguageDefaultName());
+                        langIDlist.add(s.getIdLanguage());
+                        addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                        if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangS))) {
+                            i = res.indexOf(s);
+                        }
+                        if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT))) {
+                            j = res.indexOf(s);
+                        }
                     }
-                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangT))) {
-                        j = result.indexOf(s);
+                    if (type.equals("source")) {
+                        setSelectedIndex(i);
+                    } else {
+                        setSelectedIndex(j);
                     }
-                }
-                if (type.equals("source")) {
-                    setSelectedIndex(i);
-                } else {
-                    setSelectedIndex(j);
                 }
             }
         };
@@ -94,30 +98,33 @@ public class LangList extends ListBox {
 
     public LangList(long ownerID, final String type) {
         super();
-        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<LanguageDTO> result) {
-                int i = 0, j = 0;
-                for (LanguageDTO s : result) {
-                    langlist.add(s.getLanguageDefaultName());
-                    langIDlist.add(s.getIdLanguage());
-                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
-                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangSrc))) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<LanguageDTO> result) {
+                ArrayList<LanguageDTO> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0, j = 0;
+                    for (LanguageDTO s : res) {
+                        langlist.add(s.getLanguageDefaultName());
+                        langIDlist.add(s.getIdLanguage());
+                        addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                        if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangSrc))) {
+                            i = res.indexOf(s);
+                        }
+                        if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangTgt))) {
+                            j = res.indexOf(s);
+                        }
                     }
-                    if (s.getLanguageDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.MyTermlangTgt))) {
-                        j = result.indexOf(s);
+                    if (type.equals("source")) {
+                        setSelectedIndex(i);
+                    } else {
+                        setSelectedIndex(j);
                     }
-                }
-                if (type.equals("source")) {
-                    setSelectedIndex(i);
-                } else {
-                    setSelectedIndex(j);
                 }
             }
         };
@@ -139,14 +146,14 @@ public class LangList extends ListBox {
 
     public LangList(long ownerID, final BooleanWrap isEdited) {
         super();
-        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<LanguageDTO> result) {
+            public void onSuccess(Collection<LanguageDTO> result) {
                 for (LanguageDTO s : result) {
                     langlist.add(s.getLanguageDefaultName());
                     langIDlist.add(s.getIdLanguage());
@@ -166,14 +173,14 @@ public class LangList extends ListBox {
 
     public LangList(long ownerID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        langCallback = new AsyncCallback<ArrayList<LanguageDTO>>() {
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<LanguageDTO> result) {
+            public void onSuccess(Collection<LanguageDTO> result) {
                 for (LanguageDTO s : result) {
                     langlist.add(s.getLanguageDefaultName());
                     langIDlist.add(s.getIdLanguage());

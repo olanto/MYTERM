@@ -7,7 +7,8 @@ package olanto.myTerm.client.ServiceCalls;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.Map;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
@@ -41,15 +42,15 @@ public interface myTermService extends RemoteService {
 
     public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID);
 
-    public ArrayList<String> getResults(String s, String ls, String lt, long ownerID);
+    public Collection<String> getResults(String s, String ls, String lt, long ownerID);
 
-    public ArrayList<LanguageDTO> getLanguages();
+    public Collection<LanguageDTO> getLanguages();
 
-    public ArrayList<DomainDTO> getDomains();
+    public Collection<DomainDTO> getDomains();
 
-    public ArrayList<ResourceDTO> getResourcesByOwner(String ownerMailing, String role);
+    public Collection<ResourceDTO> getResourcesByOwner(String ownerMailing, String role);
 
-    public ArrayList<LanguageDTO> getLanguagesByOwner(long ownerID);
+    public Collection<LanguageDTO> getLanguagesByOwner(long ownerID);
 
     public String getInventory();
 
@@ -77,11 +78,13 @@ public interface myTermService extends RemoteService {
 
     public String disapproveTermEntry(long termID);
 
-    public HashMap<String, SysFieldDTO> getSysFieldsByLang(String langID);
+    public Map<String, SysFieldDTO> getSysFieldsByLang(String langID);
 
-    public ArrayList<String> getTermTypes(String langID);
+    public Map<String, String> getSysMsgByLang(String langID);
 
-    public ArrayList<String> getTermPOS(String langID);
+    public Collection<String> getTermTypes(String langID);
 
-    public ArrayList<String> getTermGender(String langID);
+    public Collection<String> getTermPOS(String langID);
+
+    public Collection<String> getTermGender(String langID);
 }

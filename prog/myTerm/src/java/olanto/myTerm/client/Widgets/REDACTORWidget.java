@@ -64,7 +64,7 @@ import olanto.myTerm.shared.SysFieldDTO;
 public class REDACTORWidget extends VerticalPanel {
 
     private static SearchHeaderREDACTOR searchMenu;
-    private static ResultsContainerREDACTOR resultsPanel = new ResultsContainerREDACTOR();
+    private static ResultsContainerREDACTOR resultsPanel;
     private static AsyncCallback<String> termAddCallback;
     private static AsyncCallback<String> termAddCallbackWS;
     private static AsyncCallback<String> termAddedCallback;
@@ -80,9 +80,10 @@ public class REDACTORWidget extends VerticalPanel {
     private HashMap<String, SysFieldDTO> sFields;
     public BooleanWrap isEdited = new BooleanWrap();
 
-    public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
+    public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         sFields = sysFields;
+        resultsPanel = new ResultsContainerREDACTOR();
         fixGwtNav();
         searchMenu = new SearchHeaderREDACTOR(ownerID);
         add(searchMenu);

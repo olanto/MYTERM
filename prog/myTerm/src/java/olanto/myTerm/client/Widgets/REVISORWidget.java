@@ -63,7 +63,7 @@ import olanto.myTerm.shared.SysFieldDTO;
 public class REVISORWidget extends VerticalPanel {
 
     private static SearchHeaderREVISOR searchMenu;
-    private static ResultsContainerREVISOR resultsPanel = new ResultsContainerREVISOR();
+    private static ResultsContainerREVISOR resultsPanel;
     private static AsyncCallback<String> entryApproveCallback;
     private static AsyncCallback<ConceptEntryDTO> entrySaveCallback;
     private static AsyncCallback<String> entryDisapproveCallback;
@@ -76,11 +76,12 @@ public class REVISORWidget extends VerticalPanel {
     private HashMap<String, SysFieldDTO> sFields;
     public BooleanWrap isEdited = new BooleanWrap();
 
-    public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields) {
+    public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         sFields = sysFields;
         fixGwtNav();
         searchMenu = new SearchHeaderREVISOR(ownerID);
+        resultsPanel = new ResultsContainerREVISOR();
         add(searchMenu);
         add(resultsPanel);
 

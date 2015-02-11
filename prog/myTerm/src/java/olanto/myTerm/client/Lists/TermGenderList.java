@@ -27,6 +27,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import java.util.Collection;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -39,26 +40,29 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class TermGenderList extends ListBox {
 
     private myTermServiceAsync genderService = GWT.create(myTermService.class);
-    private AsyncCallback<ArrayList<String>> genderCallback;
+    private AsyncCallback<Collection<String>> genderCallback;
 
     public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited) {
         super();
-        genderCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<Collection<String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
-            public void onSuccess(ArrayList<String> result) {
-                int i = 0;
-                for (String s : result) {
-                    addItem(s, s);
-                    if (s.equalsIgnoreCase(currentType)) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<String> result) {
+                ArrayList<String> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0;
+                    for (String s : res) {
+                        addItem(s, s);
+                        if (s.equalsIgnoreCase(currentType)) {
+                            i = res.indexOf(s);
+                        }
                     }
+                    setSelectedIndex(i);
                 }
-                setSelectedIndex(i);
             }
         };
         this.addChangeHandler(new ChangeHandler() {
@@ -72,14 +76,14 @@ public class TermGenderList extends ListBox {
 
     public TermGenderList(String langID, final BooleanWrap isEdited) {
         super();
-        genderCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<Collection<String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
-            public void onSuccess(ArrayList<String> result) {
+            public void onSuccess(Collection<String> result) {
                 for (String s : result) {
                     addItem(s, s);
                 }
@@ -97,22 +101,25 @@ public class TermGenderList extends ListBox {
 
     public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        genderCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<Collection<String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
-            public void onSuccess(ArrayList<String> result) {
-                int i = 0;
-                for (String s : result) {
-                    addItem(s, s);
-                    if (s.equalsIgnoreCase(currentType)) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<String> result) {
+                ArrayList<String> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0;
+                    for (String s : res) {
+                        addItem(s, s);
+                        if (s.equalsIgnoreCase(currentType)) {
+                            i = res.indexOf(s);
+                        }
                     }
+                    setSelectedIndex(i);
                 }
-                setSelectedIndex(i);
             }
         };
         this.addChangeHandler(new ChangeHandler() {
@@ -127,14 +134,14 @@ public class TermGenderList extends ListBox {
 
     public TermGenderList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        genderCallback = new AsyncCallback<ArrayList<String>>() {
+        genderCallback = new AsyncCallback<Collection<String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
 
             @Override
-            public void onSuccess(ArrayList<String> result) {
+            public void onSuccess(Collection<String> result) {
                 for (String s : result) {
                     addItem(s, s);
                 }

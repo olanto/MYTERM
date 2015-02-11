@@ -23,7 +23,7 @@ package olanto.myTerm.client.CookiesManager;
 
 import com.google.gwt.user.client.Cookies;
 import java.util.Date;
-import olanto.myTerm.client.ConstantsManager.GuiConstant;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  *

@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import olanto.myTerm.client.ConstantsManager.GuiConstant;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  *

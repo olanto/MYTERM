@@ -6,12 +6,16 @@ package olanto.myTerm.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jpaviewtest.TestView;
 import jpaviewtest.entities.VjCodifications;
 import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
@@ -39,6 +43,8 @@ import org.olanto.myterm.extractor.entry.LangEntry;
  * @author simple
  */
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
+
+    private HashMap<String, String> sysMsgsrv;
 
     @Override
     public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID) {
@@ -69,16 +75,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<String> getResults(String s, String ls, String lt, long ownerID) {
-        ArrayList<String> termsList = new ArrayList<>();
-        termsList.addAll(TestView.getListForThis(s, ls, lt));
-        return termsList;
+    public Collection<String> getResults(String s, String ls, String lt, long ownerID) {
+        return TestView.getListForThis(s, ls, lt);
     }
 
     @Override
-    public ArrayList<LanguageDTO> getLanguages() {
+    public Collection<LanguageDTO> getLanguages() {
         List<Languages> l = Queries.getLanguages();
-        ArrayList<LanguageDTO> languages = new ArrayList<>();
+        List<LanguageDTO> languages = new ArrayList<>();
         for (Languages lang : l) {
             LanguageDTO li = new LanguageDTO();
             li.setIdLanguage(lang.getIdLanguage());
@@ -89,45 +93,45 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<LanguageDTO> getLanguagesByOwner(long ownerID) {
+    public Collection<LanguageDTO> getLanguagesByOwner(long ownerID) {
         // try and catch, problem with the ownerID
         if (ownerID > 0) {
             List<VjUsersLanguages> l = TestView.getLanguagesByOwner(ownerID);
             if (!l.isEmpty()) {
-                ArrayList<LanguageDTO> languages = new ArrayList<>();
+                List<LanguageDTO> languages = new ArrayList<>();
                 for (VjUsersLanguages res : l) {
                     LanguageDTO ln = new LanguageDTO(res.getIdLanguage(), res.getLanguageDefaultName());
                     languages.add(ln);
                 }
                 return languages;
             }
-            return null;
+            return Collections.EMPTY_LIST;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     @Override
-    public ArrayList<ResourceDTO> getResourcesByOwner(String ownerMailing, String role) {
+    public Collection<ResourceDTO> getResourcesByOwner(String ownerMailing, String role) {
         // try and catch, problem with the ownerID
         if (!ownerMailing.isEmpty()) {
             List<VjUsersResources> l = TestView.getResourcesByOwner(ownerMailing, role);
             if (!l.isEmpty()) {
-                ArrayList<ResourceDTO> resources = new ArrayList<>();
+                List<ResourceDTO> resources = new ArrayList<>();
                 for (VjUsersResources res : l) {
                     ResourceDTO r = new ResourceDTO(res.getIdResource(), ownerMailing, res.getResourceName(), res.getResourcePrivacy());
                     resources.add(r);
                 }
                 return resources;
             }
-            return null;
+            return Collections.EMPTY_LIST;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     @Override
-    public ArrayList<DomainDTO> getDomains() {
+    public Collection<DomainDTO> getDomains() {
         List<Domains> l = Queries.getDomains();
-        ArrayList<DomainDTO> domains = new ArrayList<>();
+        List<DomainDTO> domains = new ArrayList<>();
         for (Domains res : l) {
             DomainDTO d = new DomainDTO();
             d.setIdDomain(res.getIdDomain());
@@ -152,56 +156,71 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             result.append("<tr>");
             result.append("<td>");
-            if ((c.getSubjectField() != null)) {
-                result.append("&nbsp").append("<span class = \"sfield\">Subject field: </span>").append(c.getSubjectField()).append("<br/>");
+            if ((sysMsgsrv == null)) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
             }
-            if ((c.getConceptDefinition() != null)) {
-                result.append("&nbsp").append("<span class = \"def\">Definition: </span>").append(c.getConceptDefinition()).append("<br/>");
+            if ((c.getSubjectField() != null) && (!c.getSubjectField().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"sfield\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SUBJECT_FIELD)).append(" </span>").append(c.getSubjectField()).append("<br/>");
             }
-            result.append("</td>").append("<td>");
-            if ((c.getConceptSourceDefinition() != null)) {
-                result.append("&nbsp").append("<span class = \"defsrc\">Definition's source: </span>").append(c.getConceptSourceDefinition()).append("<br/>");
-            }
-            if ((c.getConceptNote() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Note: </span>").append(c.getConceptNote()).append("<br/>");
-            }
-            if ((c.getCrossref() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Cross reference: </span>").append(c.getCrossref()).append("<br/>");
+            if ((c.getConceptDefinition() != null) && (!c.getConceptDefinition().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_C_DEFINITION)).append(" </span>").append(c.getConceptDefinition()).append("<br/>");
             }
             result.append("</td>").append("<td>");
-            if ((c.getExtcrossref() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Extra cross reference: </span>").append(c.getExtcrossref()).append("<br/>");
+            if ((c.getConceptSourceDefinition() != null) && (!c.getConceptSourceDefinition().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SOURCE_DEFINITION)).append(" </span>").append(c.getConceptSourceDefinition()).append("<br/>");
+            }
+            if ((c.getConceptNote() != null) && (!c.getConceptNote().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_C_NOTE)).append(" </span>").append(c.getConceptNote()).append("<br/>");
+            }
+            if ((c.getCrossref() != null) && (!c.getCrossref().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CROSS_REF)).append(" </span>").append(c.getCrossref()).append("<br/>");
+            }
+            result.append("</td>").append("<td>");
+            if ((c.getExtcrossref() != null) && (!c.getExtcrossref().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA_CROSS_REF)).append(" </span>").append(c.getExtcrossref()).append("<br/>");
             }
             if ((c.getCreateBy() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATED_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
             }
             if (c.getCreation() != null) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(c.getCreation()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(" </span>").append(c.getCreation()).append("<br/>");
             }
             result.append("</td>").append("<td>");
             if (c.getLastmodifiedBy() != null) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_LAST_MODIF_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
             }
             if (c.getLastmodified() != null) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(c.getLastmodified()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(" </span>").append(c.getLastmodified()).append("<br/>");
             }
-            if ((c.getImage() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Image: </span>").append(c.getImage()).append("<br/>");
+            if ((c.getImage() != null) && (!c.getImage().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_IMAGE)).append(" </span>").append(c.getImage()).append("<br/>");
             }
-            if ((c.getExtra() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Other information: </span>").append(c.getExtra()).append("<br/>");
+            if ((c.getExtra() != null) && (!c.getExtra().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA)).append(" </span>").append(c.getExtra()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
             result.append("</table>");
             result.append("</div>");
             return result.toString();
         }
+
         return null;
     }
 
     @Override
     public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID) {
         StringBuilder result = new StringBuilder("");
+        if ((sysMsgsrv == null)) {
+            sysMsgsrv = new HashMap<>();
+            List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+            for (VjCodifications field : codes) {
+                sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+            }
+        }
         result.append("<div class =\"tpanel\">");
         result.append("<table>");
         result.append("<tr>");
@@ -210,10 +229,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</tr>");
         result.append("<tr>");
         result.append("<td>")
-                .append(TestView.getTermsInfo(conceptID, langS))
+                .append(TestView.getTermsInfo(conceptID, langS, sysMsgsrv))
                 .append("</td>");
         result.append("<td>")
-                .append(TestView.getTermsInfo(conceptID, langT))
+                .append(TestView.getTermsInfo(conceptID, langT, sysMsgsrv))
                 .append("</td>");
         result.append("</tr>");
         result.append("</table>");
@@ -510,7 +529,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         if (ManageConcept.remove(conceptID)) {
             return "Sucess";
         }
-        return "Failed to remove concept entry";
+        return null;
     }
 
     @Override
@@ -620,8 +639,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public HashMap<String, SysFieldDTO> getSysFieldsByLang(String langID) {
-        HashMap<String, SysFieldDTO> sysFields = new HashMap<>();
+    public Map<String, SysFieldDTO> getSysFieldsByLang(String langID) {
+        Map<String, SysFieldDTO> sysFields = new HashMap<>();
         if (!langID.isEmpty()) {
             List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("sys_field", langID);
             for (VjCodifications field : codes) {
@@ -638,23 +657,31 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public ArrayList<String> getTermTypes(String langID) {
-        ArrayList<String> types = new ArrayList<>();
-        types.addAll(TestView.getTermTypes(langID));
-        return types;
+    public Collection<String> getTermTypes(String langID) {
+        return TestView.getTermTypes(langID);
     }
 
     @Override
-    public ArrayList<String> getTermPOS(String langID) {
-        ArrayList<String> pos = new ArrayList<>();
-        pos.addAll(TestView.getTermPOS(langID));
-        return pos;
+    public Collection<String> getTermPOS(String langID) {
+        return TestView.getTermPOS(langID);
     }
 
     @Override
-    public ArrayList<String> getTermGender(String langID) {
-        ArrayList<String> gender = new ArrayList<>();
-        gender.addAll(TestView.getTermGender(langID));
-        return gender;
+    public Collection<String> getTermGender(String langID) {
+        return TestView.getTermGender(langID);
+    }
+
+    @Override
+    public Map<String, String> getSysMsgByLang(String langID) {
+        Map<String, String> sysMsg = new HashMap<>();
+        sysMsgsrv = new HashMap<>();
+        if (!langID.isEmpty()) {
+            List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("msg", langID);
+            for (VjCodifications field : codes) {
+                sysMsg.put(field.getCodeValue(), field.getCodeExtraLang());
+            }
+        }
+        sysMsgsrv.putAll(sysMsg);
+        return sysMsg;
     }
 }

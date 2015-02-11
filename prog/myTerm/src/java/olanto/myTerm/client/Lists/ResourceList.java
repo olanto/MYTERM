@@ -29,6 +29,7 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import java.util.Collection;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.MainEntryPoint;
@@ -42,37 +43,40 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class ResourceList extends ListBox {
 
     private final myTermServiceAsync rsrcService = GWT.create(myTermService.class);
-    public AsyncCallback<ArrayList<ResourceDTO>> RsrcCallback;
+    public AsyncCallback<Collection<ResourceDTO>> RsrcCallback;
     private ArrayList<String> rsrclist = new ArrayList<>();
     private ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
     public ResourceList(String ownerMailing, final String role) {
         super();
-        RsrcCallback = new AsyncCallback<ArrayList<ResourceDTO>>() {
+        RsrcCallback = new AsyncCallback<Collection<ResourceDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources, please RELOAD THE PAGE");
             }
 
             @Override
-            public void onSuccess(ArrayList<ResourceDTO> result) {
+            public void onSuccess(Collection<ResourceDTO> result) {
                 if (result != null) {
                     if (role.equals("READER")) {
                         addItem("ALL", "-1");
                         rsrclist.add("ALL");
                         rsrcIDlist.add(0L);
                     }
-                    int i = 0;
-                    for (ResourceDTO s : result) {
-                        rsrclist.add(s.getResourceName());
-                        rsrcIDlist.add(s.getIdResource());
-                        addItem(s.getResourceName(), s.getIdResource().toString());
-                        if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
-                            i = result.indexOf(s);
+                    ArrayList<ResourceDTO> res = new ArrayList<>();
+                    if (res.addAll(result)) {
+                        int i = 0;
+                        for (ResourceDTO s : res) {
+                            rsrclist.add(s.getResourceName());
+                            rsrcIDlist.add(s.getIdResource());
+                            addItem(s.getResourceName(), s.getIdResource().toString());
+                            if (s.getResourceName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Resource))) {
+                                i = res.indexOf(s);
+                            }
                         }
-                    }
 
-                    setSelectedIndex(i);
+                        setSelectedIndex(i);
+                    }
                 }
             }
         };

@@ -5,6 +5,8 @@
 package jpaviewtest;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManager;
@@ -43,6 +45,7 @@ public class TestView {
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
         getTermTypes("FR");
+        getCodificationByTypeAndLang("msg", "EN");
     }
 
     public static void init() {
@@ -53,13 +56,12 @@ public class TestView {
         }
     }
 
-    public static String getTermsInfo(long conceptID, String lang) {
+    public static String getTermsInfo(long conceptID, String lang, HashMap<String, String> sysMsgsrv) {
         init();
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLanguage");
         query.setParameter("idConcept", conceptID);
         query.setParameter("idLanguage", lang);
         List<VjConceptdetail> resultQ = query.getResultList();
-
         StringBuilder result = new StringBuilder("");
         result.append("<div class=\"ipanel\">");
         result.append("<table>");
@@ -67,66 +69,66 @@ public class TestView {
             Terms t = Queries.getTermByID(res.getIdTerm());
             result.append("<tr>");
             result.append("<td>");
-            if ((t.getTermForm() != null)) {
-                result.append("&nbsp").append("<span class = \"tform\">Form: </span>").append(t.getTermForm()).append("<br/>");
+            if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(" </span>").append(t.getTermForm()).append("<br/>");
             }
-            if ((t.getTermDefinition() != null)) {
-                result.append("&nbsp").append("<span class = \"def\">Definition: </span>").append(t.getTermDefinition()).append("<br/>");
+            if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_T_DEFINITION)).append(" </span>").append(t.getTermDefinition()).append("<br/>");
             }
-            if ((t.getTermSource() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Source: </span>").append(t.getTermSource()).append("<br/>");
+            if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(" </span>").append(t.getTermSource()).append("<br/>");
             }
-            if ((t.getTermSourceDefinition() != null)) {
-                result.append("&nbsp").append("<span class = \"defsrc\">Source Definition: </span>").append(t.getTermSourceDefinition()).append("<br/>");
+            if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_DEFINITION)).append(" </span>").append(t.getTermSourceDefinition()).append("<br/>");
             }
-            if ((t.getTermSourceContext() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Source Context: </span>").append(t.getTermSourceContext()).append("<br/>");
+            if ((t.getTermSourceContext() != null) && (!t.getTermSourceContext().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_CONTEXT)).append(" </span>").append(t.getTermSourceContext()).append("<br/>");
             }
-            if ((t.getTermNote() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Note: </span>").append(t.getTermNote()).append("<br/>");
+            if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(" </span>").append(t.getTermNote()).append("<br/>");
             }
-            if ((t.getTermPartofspeech() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Part of Speech: </span>").append(t.getTermPartofspeech()).append("<br/>");
+            if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(" </span>").append(t.getTermPartofspeech()).append("<br/>");
             }
-            if ((t.getTermType() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Type: </span>").append(t.getTermType()).append("<br/>");
+            if ((t.getTermType() != null) && (!t.getTermType().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(" </span>").append(t.getTermType()).append("<br/>");
             }
-            if ((t.getTermUsage() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Usage: </span>").append(t.getTermUsage()).append("<br/>");
+            if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_USAGE)).append(" </span>").append(t.getTermUsage()).append("<br/>");
             }
-            if ((t.getTermContext() != null)) {
-                result.append("&nbsp").append("<span class = \"note\">Context: </span>").append(t.getTermContext()).append("<br/>");
+            if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(" </span>").append(t.getTermContext()).append("<br/>");
             }
             result.append("</td>").append("<td>");
             if ((t.getCreateBy() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Created By: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
             }
             if ((t.getCreation() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Creation Date: </span>").append(t.getCreation()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(" </span>").append(t.getCreation()).append("<br/>");
             }
             if ((t.getLastmodifiedBy() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Last modified by: </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
             }
             if ((t.getLastmodified() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Last modification on: </span>").append(t.getLastmodified()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(" </span>").append(t.getLastmodified()).append("<br/>");
             }
-            if ((t.getCrossref() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Cross Reference: </span>").append(t.getCrossref()).append("<br/>");
+            if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(" </span>").append(t.getCrossref()).append("<br/>");
             }
-            if ((t.getExtcrossref() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Extra Cross Reference: </span>").append(t.getExtcrossref()).append("<br/>");
+            if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(" </span>").append(t.getExtcrossref()).append("<br/>");
             }
 //            if (t.getStatus() != ' ') {
 //                result.append("&nbsp").append("<span class = \"extrainfo\">Status: </span>").append(t.getStatus()).append("<br/>");
 //            }
-            if ((t.getTermAdminStatus() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Admin Status: </span>").append(t.getTermAdminStatus()).append("<br/>");
+            if ((t.getTermAdminStatus() != null) && (!t.getTermAdminStatus().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_STATUS)).append(" </span>").append(t.getTermAdminStatus()).append("<br/>");
             }
-            if ((t.getTermGender() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Gender: </span>").append(t.getTermGender()).append("<br/>");
+            if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(" </span>").append(t.getTermGender()).append("<br/>");
             }
-            if ((t.getTermGeoUsage() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">Gero Usage: </span>").append(t.getTermGeoUsage()).append("<br/>");
+            if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(" </span>").append(t.getTermGeoUsage()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
         }
@@ -286,7 +288,7 @@ public class TestView {
             List<VjUsersLanguages> result = query.getResultList();
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     public static String getSourcesForThis(long conceptID, String term, String solang, String resID, String domID) {
@@ -551,7 +553,7 @@ public class TestView {
 //            System.out.println(result.get(0).getResourceName());
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     public static String getReslang() {
@@ -614,16 +616,16 @@ public class TestView {
     public static List<VjCodifications> getCodificationByTypeAndLang(String codeType, String langID) {
         init();
         if (!langID.isEmpty()) {
-            Query query = em.createNamedQuery("VjCodifications.findSysFieldsByLanguage");
+            Query query = em.createNamedQuery("VjCodifications.findFieldsByLanguage");
             query.setParameter("idLanguage", langID);
             query.setParameter("codeType", codeType);
             List<VjCodifications> result = query.getResultList();
 //            for (VjCodifications s : result) {
-//                System.out.println("Key: " + s.getUuid() + " content: " + s.getCodeValue() + ", " + s.getCodeExtra() + "\n");
+//                System.out.println("Key: " + s.getUuid() + " content: " + s.getCodeValue() + ", " + s.getCodeExtra() + ", " + s.getCodeExtraLang() + "\n");
 //            }
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     public static List<String> getTermTypes(String langID) {
@@ -637,7 +639,7 @@ public class TestView {
 //            }
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     public static List<String> getTermPOS(String langID) {
@@ -651,7 +653,7 @@ public class TestView {
 //            }
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 
     public static List<String> getTermGender(String langID) {
@@ -665,6 +667,6 @@ public class TestView {
 //            }
             return result;
         }
-        return null;
+        return Collections.EMPTY_LIST;
     }
 }

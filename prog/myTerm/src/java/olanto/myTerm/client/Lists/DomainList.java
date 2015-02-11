@@ -32,6 +32,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
+import java.util.Collection;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -43,26 +44,29 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class DomainList extends ListBox {
 
     private final myTermServiceAsync domService = GWT.create(myTermService.class);
-    private AsyncCallback<ArrayList<DomainDTO>> domCallback;
+    private AsyncCallback<Collection<DomainDTO>> domCallback;
 
     public DomainList() {
         super();
-        domCallback = new AsyncCallback<ArrayList<DomainDTO>>() {
+        domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<DomainDTO> result) {
-                int i = 0;
-                for (DomainDTO s : result) {
-                    addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
-                    if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<DomainDTO> result) {
+                ArrayList<DomainDTO> res = new ArrayList<>();
+                if (res.addAll(res)) {
+                    int i = 0;
+                    for (DomainDTO s : res) {
+                        addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                        if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
+                            i = res.indexOf(s);
+                        }
                     }
+                    setSelectedIndex(i);
                 }
-                setSelectedIndex(i);
             }
         };
         this.addChangeHandler(new ChangeHandler() {
@@ -77,22 +81,25 @@ public class DomainList extends ListBox {
 
     public DomainList(final BooleanWrap isEdited) {
         super();
-        domCallback = new AsyncCallback<ArrayList<DomainDTO>>() {
+        domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Failed to get list of languages");
             }
 
             @Override
-            public void onSuccess(ArrayList<DomainDTO> result) {
-                int i = 0;
-                for (DomainDTO s : result) {
-                    addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
-                    if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
-                        i = result.indexOf(s);
+            public void onSuccess(Collection<DomainDTO> result) {
+                ArrayList<DomainDTO> res = new ArrayList<>();
+                if (res.addAll(res)) {
+                    int i = 0;
+                    for (DomainDTO s : res) {
+                        addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                        if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
+                            i = res.indexOf(s);
+                        }
                     }
+                    setSelectedIndex(i);
                 }
-                setSelectedIndex(i);
             }
         };
         this.addChangeHandler(new ChangeHandler() {

@@ -36,6 +36,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.HTML;
+import java.util.HashMap;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -48,23 +49,25 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class READERWidget extends VerticalPanel {
 
     private SearchHeaderBasic searchMenu;
-    private ResultsContainerBasic resultsPanel = new ResultsContainerBasic();
+    private ResultsContainerBasic resultsPanel;
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
     private long ownerID;
     private long conceptID = -1;
 
-    public READERWidget(long idOwner) {
+    public READERWidget(long idOwner, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         fixGwtNav();
         searchMenu = new SearchHeaderBasic(ownerID);
+        resultsPanel = new ResultsContainerBasic();
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
         termCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.setMessage("message", "Query processed successfully");
                 searchMenu.btnSend.setEnabled(true);
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
@@ -76,6 +79,7 @@ public class READERWidget extends VerticalPanel {
 
             @Override
             public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("error", "Problem processing the query...");
                 searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
                 History.newItem("page0");
@@ -84,12 +88,14 @@ public class READERWidget extends VerticalPanel {
         conceptCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new HTML(result));
                 getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
             }
 
             @Override
             public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
                 History.newItem("page0");
             }
@@ -97,12 +103,14 @@ public class READERWidget extends VerticalPanel {
         termsCallback = new AsyncCallback<String>() {
             @Override
             public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new HTML(result));
                 History.newItem("page0");
             }
 
             @Override
             public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
                 History.newItem("page0");
             }
@@ -117,6 +125,7 @@ public class READERWidget extends VerticalPanel {
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
 //                Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
+                MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
                 getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
@@ -131,6 +140,7 @@ public class READERWidget extends VerticalPanel {
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
 //                    Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
+                    MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
                     getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
@@ -139,7 +149,6 @@ public class READERWidget extends VerticalPanel {
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
-                MainEntryPoint.statusPanel.clearMessages();
                 if (event.getValue().contains("TS")) {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
