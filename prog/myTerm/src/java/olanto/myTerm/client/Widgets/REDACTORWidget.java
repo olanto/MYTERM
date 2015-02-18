@@ -78,11 +78,13 @@ public class REDACTORWidget extends VerticalPanel {
     private static LangSetFormREDACTOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
+    HashMap<String, String> sysMsgs;
     public BooleanWrap isEdited = new BooleanWrap();
 
     public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         sFields = sysFields;
+        sysMsgs = sysMsg;
         resultsPanel = new ResultsContainerREDACTOR();
         fixGwtNav();
         searchMenu = new SearchHeaderREDACTOR(ownerID);
@@ -211,6 +213,7 @@ public class REDACTORWidget extends VerticalPanel {
                 } else {
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
+                MainEntryPoint.statusPanel.clearMessages();
                 String srch = searchMenu.searchField.getText();
                 String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
                 if ((lan == null) || (lan.isEmpty())) {
@@ -346,11 +349,11 @@ public class REDACTORWidget extends VerticalPanel {
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
-                addterms = new LangSetFormREDACTOR(ownerID, sFields, isEdited);
+                addterms = new LangSetFormREDACTOR(ownerID, sFields, isEdited, sysMsgs);
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited);
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited, sysMsgs);
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {

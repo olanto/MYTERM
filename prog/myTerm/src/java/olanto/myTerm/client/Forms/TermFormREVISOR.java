@@ -35,6 +35,7 @@ import olanto.myTerm.client.Lists.PartofSpeechList;
 import olanto.myTerm.client.Lists.TermGenderList;
 import olanto.myTerm.client.Lists.TermTypeList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -87,46 +88,45 @@ public class TermFormREVISOR extends VerticalPanel {
     private Label lang_lbl;
     private char status;
 
-    public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+    public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         form1 = new Grid(5, 2);
         form2 = new Grid(5, 2);
         form3 = new Grid(5, 2);
-        label_lng = new Label("Language:");
-        label_frm = new Label("Term's form:");
-        text_frm = new TextBoxMyTerm("t.form", sFields, isEdited);
-        label_src = new Label("Term's source:");
-        text_src = new TextAreaMyTerm("t.source", sFields, isEdited);
-        label_def = new Label("Term's definition:");
-        text_def = new TextAreaMyTerm("t.definition", sFields, isEdited);
-        label_sdef = new Label("Definition's source:");
-        text_sdef = new TextAreaMyTerm("t.source_definition", sFields, isEdited);
-        label_usg = new Label("Term's usage:");
-        text_usg = new TextAreaMyTerm("t.usage", sFields, isEdited);
-        label_ctxt = new Label("Term's context:");
-        text_ctxt = new TextAreaMyTerm("t.context", sFields, isEdited);
-        label_sctxt = new Label("Context's source:");
-        text_sctxt = new TextAreaMyTerm("t.source_context", sFields, isEdited);
-        label_nt = new Label("Term's Note:");
-        text_nt = new TextAreaMyTerm("t.note", sFields, isEdited);
-        label_tp = new Label("Type:");
-        label_pos = new Label("Part of speech:");
-        label_gdr = new Label("Gender:");
-        label_st = new Label("Status:");
+        label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
+        label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
+        text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited);
+        label_src = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE), sFields.get(GuiConstant.T_SOURCE));
+        text_src = new TextAreaMyTerm(GuiConstant.T_SOURCE, sFields, isEdited);
+        label_def = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_DEFINITION), sFields.get(GuiConstant.T_DEFINITION));
+        text_def = new TextAreaMyTerm(GuiConstant.T_DEFINITION, sFields, isEdited);
+        label_sdef = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_DEFINITION), sFields.get(GuiConstant.T_SOURCE_DEFINITION));
+        text_sdef = new TextAreaMyTerm(GuiConstant.T_SOURCE_DEFINITION, sFields, isEdited);
+        label_usg = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_USAGE), sFields.get(GuiConstant.T_USAGE));
+        text_usg = new TextAreaMyTerm(GuiConstant.T_USAGE, sFields, isEdited);
+        label_ctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CONTEXT), sFields.get(GuiConstant.T_CONTEXT));
+        text_ctxt = new TextAreaMyTerm(GuiConstant.T_CONTEXT, sFields, isEdited);
+        label_sctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_CONTEXT), sFields.get(GuiConstant.T_SOURCE_CONTEXT));
+        text_sctxt = new TextAreaMyTerm(GuiConstant.T_SOURCE_CONTEXT, sFields, isEdited);
+        label_nt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_NOTE), sFields.get(GuiConstant.T_NOTE));
+        text_nt = new TextAreaMyTerm(GuiConstant.T_NOTE, sFields, isEdited);
+        label_tp = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TYPE), sFields.get(GuiConstant.T_TYPE));
+        label_pos = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_POS), sFields.get(GuiConstant.T_POS));
+        label_gdr = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_GENDER), sFields.get(GuiConstant.T_GENDER));
+        label_st = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_STATUS), sFields.get(GuiConstant.T_STATUS));
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, isEdited);
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, isEdited);
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, isEdited);
+        label_ext = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_EXTRA), sFields.get(GuiConstant.T_EXTRA));
+        text_ext = new TextAreaMyTerm(GuiConstant.T_EXTRA, sFields, isEdited);
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
-        label_ext = new Label("Extra:");
-        text_ext = new TextAreaMyTerm("t.extra", sFields, isEdited);
-        approve = new Button("Approve");
-        disapprove = new Button("Disapprove");
+        approve = new Button(sysMsg.get(GuiConstant.APPROVE));
+        disapprove = new Button(sysMsg.get(GuiConstant.DISAPPROVE));
         termID = -1;
         langID = "";
         lang_lbl = new Label("");
-        status = 'e';
-        lang = new LangList(ownerID, isEdited);
-        term_type = new TermTypeList("EN", isEdited);
-        term_pos = new PartofSpeechList("EN", isEdited);
-        term_gdr = new TermGenderList("EN", isEdited);
+        status = 'r';
         lang = new LangList(ownerID, isEdited);
         this.ownerID = ownerID;
         this.type = type;
@@ -189,8 +189,9 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext.setText("");
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         termID = termDTO.getIdTerm();
+        status = termDTO.getStatus();
         langID = termDTO.getIdLanguage();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
@@ -201,20 +202,29 @@ public class TermFormREVISOR extends VerticalPanel {
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
         form2.remove(term_type);
-        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited);
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited);
         form2.setWidget(1, 1, term_type);
         form3.remove(term_pos);
-        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited);
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited);
         form3.setWidget(1, 1, term_pos);
         form3.remove(term_gdr);
-        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited);
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, termDTO.getTermGender(), isEdited);
         form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
-        text_st.setText(termDTO.getStatus() + "");
+        switch (status) {
+            case 'e':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_ED));
+                break;
+            case 'p':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_PUB));
+                break;
+            case 'r':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_REV));
+                break;
+        }
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
         form1.setWidget(0, 1, lang_lbl);
-        status = termDTO.getStatus();
         if ((status == 'r') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
         } else {
@@ -262,6 +272,8 @@ public class TermFormREVISOR extends VerticalPanel {
         term_pos.setEnabled(!isReadOnly);
         term_gdr.setEnabled(!isReadOnly);
         text_ext.setReadOnly(isReadOnly);
+        approve.setEnabled(!isReadOnly);;
+        disapprove.setEnabled(!isReadOnly);;
     }
 
     public String getTermForm() {

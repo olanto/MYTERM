@@ -47,6 +47,28 @@ insert into codes values ('term_gender','neuter',null,null);
 insert into codes values ('term_gender','other',null,'default');
 
 -- msg
+insert into codes values ('msg','msg.edited','Under edition',null);
+insert into codes values ('msg','msg.public','Published',null);
+insert into codes values ('msg','msg.revision','To be revised',null);
+insert into codes values ('msg','msg.termRank','Term Number: ',null);
+insert into codes values ('msg','msg.definitionDetails','Definition details',null);
+insert into codes values ('msg','msg.resourceDetails','Resource''s Details',null);
+insert into codes values ('msg','msg.creationDetails','Creation Details',null);
+insert into codes values ('msg','msg.extraDetails','Other Information',null);
+insert into codes values ('msg','msg.addTerm','ADD TERM',null);
+insert into codes values ('msg','msg.delete','DELETE',null);
+insert into codes values ('msg','msg.save','SAVE',null);
+insert into codes values ('msg','msg.edit','EDIT',null);
+insert into codes values ('msg','msg.submit','SUBMIT',null);
+insert into codes values ('msg','msg.approve','APPROVE',null);
+insert into codes values ('msg','msg.disapprove','DISAPPROVE',null);
+insert into codes values ('msg','msg.disapproveAll','Disapprove All',null);
+insert into codes values ('msg','msg.approveAll','Approve All',null);
+insert into codes values ('msg','msg.create','CREATE',null);
+insert into codes values ('msg','msg.abort','ABORT',null);
+insert into codes values ('msg','msg.createNew','Create New Entry',null);
+insert into codes values ('msg','msg.search','SEARCH',null);
+insert into codes values ('msg','msg.add','ADD',null);
 insert into codes values ('msg','msg.welcome','Welcome to olanto''s Terminology Manager',null);
 insert into codes values ('msg','btn.search','Search',null);
 insert into codes values ('msg','lbl.t.form','Form',null);
@@ -93,6 +115,7 @@ insert into codes values ('msg','lbl.c.extra_cross_ref', 'Extra Cross reference'
 insert into codes values ('msg','lbl.c.imported_ref', 'Imported reference', null);
 
 -- system --- values visibility (visible, extra or hidden);position in form (1,2 or 3); visibility in search (visible, extra or hidden)
+insert into codes values ('sys_field','t.lang','visible;1;visible;',null);
 insert into codes values ('sys_field','t.form','visible;1;visible;',null);
 insert into codes values ('sys_field','t.source','visible;1;visible',null);
 insert into codes values ('sys_field','t.definition','visible;1;visible',null);

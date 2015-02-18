@@ -117,7 +117,31 @@ public class GuiConstant implements IsSerializable {
     public static final String T_CROSS_REF = "t.cross_ref";
     public static final String T_EXTRA_CROSS_REF = "t.extra_cross_ref";
     public static final String T_IMAGE = "t.image";
-
+    public static final String T_LANG = "t.lang";
+    public static final String DELETE = "msg.delete";
+    public static final String SAVE = "msg.save";
+    public static final String SUBMIT = "msg.submit";
+    public static final String APPROVE = "msg.approve";
+    public static final String DISAPPROVE = "msg.disapprove";
+    public static final String EDIT = "msg.edit";
+    public static final String DISAPPROVEALL = "msg.disapproveAll";
+    public static final String APPROVEALL = "msg.approveALL";
+    public static final String CANCEL = "msg.cancel";
+    public static final String ABORT = "msg.abort";
+    public static final String CREATE = "msg.create";
+    public static final String CREATE_NEW = "msg.createNew";
+    public static final String SEARCH = "msg.search";
+    public static final String ADD = "msg.add";
+    public static final String ADD_TERM = "msg.addTerm";
+    public static final String TERM_RANK = "msg.termRank";
+    public static final String DEF_DETAILS = "msg.definitionDetails";
+    public static final String RESOURCE_DETAILS = "msg.resourceDetails";
+    public static final String CREATION_DETAILS = "msg.creationDetails";
+    public static final String EXTRA_DETAILS = "msg.extraDetails";
+    public static final String STATUS_ED = "msg.edited";
+    public static final String STATUS_PUB = "msg.public";
+    public static final String STATUS_REV = "msg.revision";
+  
     public GuiConstant() {
     }
 }

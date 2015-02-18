@@ -37,6 +37,7 @@ import olanto.myTerm.client.Lists.PartofSpeechList;
 import olanto.myTerm.client.Lists.TermGenderList;
 import olanto.myTerm.client.Lists.TermTypeList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 
@@ -90,46 +91,46 @@ public class TermFormREDACTOR extends VerticalPanel {
     private char status;
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
-    public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
+    public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         form1 = new Grid(5, 2);
         form2 = new Grid(5, 2);
         form3 = new Grid(5, 2);
-        label_lng = new Label("Language:");
-        label_frm = new Label("Term's form:");
-        text_frm = new TextBoxMyTerm("t.form", sFields, isEdited, isLocallyEdited);
-        label_src = new Label("Term's source:");
-        text_src = new TextAreaMyTerm("t.source", sFields, isEdited, isLocallyEdited);
-        label_def = new Label("Term's definition:");
-        text_def = new TextAreaMyTerm("t.definition", sFields, isEdited, isLocallyEdited);
-        label_sdef = new Label("Definition's source:");
-        text_sdef = new TextAreaMyTerm("t.source_definition", sFields, isEdited, isLocallyEdited);
-        label_usg = new Label("Term's usage:");
-        text_usg = new TextAreaMyTerm("t.usage", sFields, isEdited, isLocallyEdited);
-        label_ctxt = new Label("Term's context:");
-        text_ctxt = new TextAreaMyTerm("t.context", sFields, isEdited, isLocallyEdited);
-        label_sctxt = new Label("Context's source:");
-        text_sctxt = new TextAreaMyTerm("t.source_context", sFields, isEdited, isLocallyEdited);
-        label_nt = new Label("Term's Note:");
-        text_nt = new TextAreaMyTerm("t.note", sFields, isEdited, isLocallyEdited);
-        label_tp = new Label("Type:");
-        label_pos = new Label("Part of speech:");
-        label_gdr = new Label("Gender:");
-        label_st = new Label("Status:");
+        label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
+        label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
+        text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited, isLocallyEdited);
+        label_src = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE), sFields.get(GuiConstant.T_SOURCE));
+        text_src = new TextAreaMyTerm(GuiConstant.T_SOURCE, sFields, isEdited, isLocallyEdited);
+        label_def = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_DEFINITION), sFields.get(GuiConstant.T_DEFINITION));
+        text_def = new TextAreaMyTerm(GuiConstant.T_DEFINITION, sFields, isEdited, isLocallyEdited);
+        label_sdef = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_DEFINITION), sFields.get(GuiConstant.T_SOURCE_DEFINITION));
+        text_sdef = new TextAreaMyTerm(GuiConstant.T_SOURCE_DEFINITION, sFields, isEdited, isLocallyEdited);
+        label_usg = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_USAGE), sFields.get(GuiConstant.T_USAGE));
+        text_usg = new TextAreaMyTerm(GuiConstant.T_USAGE, sFields, isEdited, isLocallyEdited);
+        label_ctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CONTEXT), sFields.get(GuiConstant.T_CONTEXT));
+        text_ctxt = new TextAreaMyTerm(GuiConstant.T_CONTEXT, sFields, isEdited, isLocallyEdited);
+        label_sctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_CONTEXT), sFields.get(GuiConstant.T_SOURCE_CONTEXT));
+        text_sctxt = new TextAreaMyTerm(GuiConstant.T_SOURCE_CONTEXT, sFields, isEdited, isLocallyEdited);
+        label_nt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_NOTE), sFields.get(GuiConstant.T_NOTE));
+        text_nt = new TextAreaMyTerm(GuiConstant.T_NOTE, sFields, isEdited, isLocallyEdited);
+        label_tp = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TYPE), sFields.get(GuiConstant.T_TYPE));
+        label_pos = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_POS), sFields.get(GuiConstant.T_POS));
+        label_gdr = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_GENDER), sFields.get(GuiConstant.T_GENDER));
+        label_st = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_STATUS), sFields.get(GuiConstant.T_STATUS));
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
+        label_ext = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_EXTRA), sFields.get(GuiConstant.T_EXTRA));
+        text_ext = new TextAreaMyTerm(GuiConstant.T_EXTRA, sFields, isEdited, isLocallyEdited);
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
-        label_ext = new Label("Extra:");
-        text_ext = new TextAreaMyTerm("t.extra", sFields, isEdited, isLocallyEdited);
-        delete = new Button("Delete");
-        edit = new Button("Edit");
+        delete = new Button(sysMsg.get(GuiConstant.DELETE));
+        edit = new Button(sysMsg.get(GuiConstant.EDIT));
         termID = -1;
         langID = "";
         lang_lbl = new Label("");
         status = 'e';
         lang = new LangList(ownerID, isEdited, isLocallyEdited);
-        term_type = new TermTypeList("EN", isEdited, isLocallyEdited);
-        term_pos = new PartofSpeechList("EN", isEdited, isLocallyEdited);
-        term_gdr = new TermGenderList("EN", isEdited, isLocallyEdited);
         this.ownerID = ownerID;
         this.type = type;
         this.setStyleName("termForm");
@@ -195,8 +196,9 @@ public class TermFormREDACTOR extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, BooleanWrap isEdited) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         termID = termDTO.getIdTerm();
+        status = termDTO.getStatus();
         text_frm.setText(termDTO.getTermForm());
         text_src.setText(termDTO.getTermSource());
         text_def.setText(termDTO.getTermDefinition());
@@ -206,22 +208,31 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
         form3.remove(term_pos);
-        term_pos = new PartofSpeechList("EN", termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
         form3.setWidget(1, 1, term_pos);
         form3.remove(term_gdr);
-        term_gdr = new TermGenderList("EN", termDTO.getTermGender(), isEdited, isLocallyEdited);
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, termDTO.getTermGender(), isEdited, isLocallyEdited);
         form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
-        text_st.setText(termDTO.getStatus() + "");
+        switch (status) {
+            case 'e':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_ED));
+                break;
+            case 'p':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_PUB));
+                break;
+            case 'r':
+                text_st.setText(sysMsg.get(GuiConstant.STATUS_REV));
+                break;
+        }
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
         langID = termDTO.getIdLanguage();
         form1.remove(lang);
         form1.setWidget(0, 1, lang_lbl);
         form2.remove(term_type);
-        term_type = new TermTypeList("EN", termDTO.getTermType(), isEdited, isLocallyEdited);
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited);
         form2.setWidget(1, 1, term_type);
-        status = termDTO.getStatus();
         if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
         } else {

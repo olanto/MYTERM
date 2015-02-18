@@ -5,6 +5,7 @@
 package olanto.myTerm.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -45,6 +46,8 @@ import org.olanto.myterm.extractor.entry.LangEntry;
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
 
     private HashMap<String, String> sysMsgsrv;
+    static final SimpleDateFormat DF_EN = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a");
+    static final SimpleDateFormat DF_FR = new SimpleDateFormat("E dd.MM.yyyy");
 
     @Override
     public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID) {
@@ -146,16 +149,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         StringBuilder result = new StringBuilder("");
         Concepts c = Queries.getConceptByID(conceptID);
         if (c != null) {
-            result.append("<div class =\"cpanel\">");
-            result.append("<table>");
-            result.append("<tr>");
-            result.append("<th>").append("Definition for concept: ").append(c.getIdConcept()).append("</th>");
-            result.append("<th>").append("Details From resource: ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
-            result.append("<th>").append("Creation details").append("</th>");
-            result.append("<th>").append("Other information").append("</th>");
-            result.append("</tr>");
-            result.append("<tr>");
-            result.append("<td>");
             if ((sysMsgsrv == null)) {
                 sysMsgsrv = new HashMap<>();
                 List<VjCodifications> codes = TestView.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
@@ -163,6 +156,17 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                     sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
                 }
             }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.DEF_DETAILS)).append(c.getIdConcept()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.RESOURCE_DETAILS)).append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.CREATION_DETAILS)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.EXTRA_DETAILS)).append("</th>");
+            result.append("</tr>");
+            result.append("<tr>");
+            result.append("<td>");
+
             if ((c.getSubjectField() != null) && (!c.getSubjectField().isEmpty())) {
                 result.append("&nbsp").append("<span class = \"sfield\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SUBJECT_FIELD)).append(" </span>").append(c.getSubjectField()).append("<br/>");
             }
@@ -187,14 +191,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATED_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
             }
             if (c.getCreation() != null) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(" </span>").append(c.getCreation()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(" </span>").append(DF_FR.format(c.getCreation())).append("<br/>");
             }
             result.append("</td>").append("<td>");
             if (c.getLastmodifiedBy() != null) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_LAST_MODIF_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
             }
             if (c.getLastmodified() != null) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(" </span>").append(c.getLastmodified()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(" </span>").append(DF_FR.format(c.getLastmodified())).append("<br/>");
             }
             if ((c.getImage() != null) && (!c.getImage().isEmpty())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_IMAGE)).append(" </span>").append(c.getImage()).append("<br/>");

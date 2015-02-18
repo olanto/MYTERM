@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjConceptdetail.findByTermForm", query = "SELECT v FROM VjConceptdetail v WHERE v.termForm = :termForm"),
     @NamedQuery(name = "VjConceptdetail.findByIdConcept", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept"),
     @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLangSet", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLangset = :idLangset"),
-    @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLangSetRevision", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLangset = :idLangset AND v.idLanguage IN :idLanguage AND v.status LIKE 'r'"),
+    @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLangSetRevision", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLangset = :idLangset AND v.idLanguage IN :idLanguage AND v.status NOT LIKE 'e'"),
     @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLangSetWorkspace", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLangset = :idLangset AND v.idLanguage IN :idLanguage AND v.status NOT LIKE 'r'"),
     @NamedQuery(name = "VjConceptdetail.findByIdConceptAndLanguage", query = "SELECT v FROM VjConceptdetail v WHERE v.idConcept = :idConcept AND v.idLanguage = :idLanguage")})
 

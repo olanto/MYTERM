@@ -4,6 +4,7 @@
  */
 package jpaviewtest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -37,6 +38,8 @@ public class TestView {
 
     static EntityManagerFactory emf;
     static EntityManager em;
+    static final SimpleDateFormat DF_EN = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a");
+    static final SimpleDateFormat DF_FR = new SimpleDateFormat("E dd.MM.yyyy");
 
     public static void main(String[] args) {
 
@@ -104,13 +107,13 @@ public class TestView {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
             }
             if ((t.getCreation() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(" </span>").append(t.getCreation()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(" </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
             }
             if ((t.getLastmodifiedBy() != null)) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
             }
             if ((t.getLastmodified() != null)) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(" </span>").append(t.getLastmodified()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(" </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
             }
             if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(" </span>").append(t.getCrossref()).append("<br/>");

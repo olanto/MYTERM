@@ -74,11 +74,13 @@ public class REVISORWidget extends VerticalPanel {
     private static LangSetFormREVISOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
+    HashMap<String, String> sysMsgs;
     public BooleanWrap isEdited = new BooleanWrap();
 
     public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         sFields = sysFields;
+        sysMsgs = sysMsg;
         fixGwtNav();
         searchMenu = new SearchHeaderREVISOR(ownerID);
         resultsPanel = new ResultsContainerREVISOR();
@@ -273,7 +275,7 @@ public class REVISORWidget extends VerticalPanel {
                 addterms.adjustSize(addcpt.getOffsetWidth() - 20);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
-                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited);
+                    addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited, sysMsgs);
                 }
             }
             addcpt.save.addClickHandler(new ClickHandler() {

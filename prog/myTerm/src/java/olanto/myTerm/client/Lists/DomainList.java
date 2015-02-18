@@ -51,13 +51,13 @@ public class DomainList extends ListBox {
         domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of languages");
+                Window.alert("Failed to get list of domains");
             }
 
             @Override
             public void onSuccess(Collection<DomainDTO> result) {
                 ArrayList<DomainDTO> res = new ArrayList<>();
-                if (res.addAll(res)) {
+                if (res.addAll(result)) {
                     int i = 0;
                     for (DomainDTO s : res) {
                         addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
@@ -84,13 +84,13 @@ public class DomainList extends ListBox {
         domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                Window.alert("Failed to get list of languages");
+                Window.alert("Failed to get list of domains");
             }
 
             @Override
             public void onSuccess(Collection<DomainDTO> result) {
                 ArrayList<DomainDTO> res = new ArrayList<>();
-                if (res.addAll(res)) {
+                if (res.addAll(result)) {
                     int i = 0;
                     for (DomainDTO s : res) {
                         addItem(s.getDomainDefaultName(), s.getIdDomain().toString());

@@ -26,12 +26,6 @@ package jpaviewtest;
  * @author nizar ghoula - simple
  */
 public class GuiConstant {
-
-    public static String INTERFACE_LANG = "EN";
-    public static final int EXP_DAYS = 24;
-    public static final int TEXTAREA_HEIGHT = 100;
-    public static final String OLANTO_URL = "Powered by Olanto|http://olanto.org|_blank";
-    public static final String FEEDBACK_MAIL = "Feedback|info@olanto.org";
     public static final String C_SUBJECT_FIELD = "c.subject_field";
     public static final String C_DEFINITION = "c.definition";
     public static final String C_SOURCE_DEFINITION = "c.source_definition";
@@ -114,4 +108,5 @@ public class GuiConstant {
     public static final String T_CROSS_REF = "t.cross_ref";
     public static final String T_EXTRA_CROSS_REF = "t.extra_cross_ref";
     public static final String T_IMAGE = "t.image";
-}
+    public static final String T_LANG = "t.lang";
+    }

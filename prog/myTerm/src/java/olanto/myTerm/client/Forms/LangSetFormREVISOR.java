@@ -37,6 +37,7 @@ import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
@@ -48,13 +49,14 @@ import olanto.myTerm.shared.TermDTO;
  */
 public class LangSetFormREVISOR extends VerticalPanel {
 
-    public VerticalPanel desc = new VerticalPanel();
+    public VerticalPanel desc;
     private ArrayList<TermFormREVISOR> terms;
     private ArrayList<TermFormREVISOR> remterms;
     private long ownerID;
     private ConceptFormREVISOR attachedcForm;
 
     public LangSetFormREVISOR(long idOwner, ConceptFormREVISOR cpt) {
+        desc = new VerticalPanel();
         ownerID = idOwner;
         terms = new ArrayList<>();
         remterms = new ArrayList<>();
@@ -63,27 +65,27 @@ public class LangSetFormREVISOR extends VerticalPanel {
         add(desc);
     }
 
-    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+    public void refreshContentFromLangEntryDTO(final LangEntryDTO langEntryDTO, ArrayList<String> userLangs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, final HashMap<String, String> sysMsg) {
         if (!langEntryDTO.listterm.isEmpty()) {
             int i = 0;
             for (final TermDTO tDTO : langEntryDTO.listterm) {
-                final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0, sFields, isEdited);
+                final TermFormREVISOR ter = new TermFormREVISOR(ownerID, 0, sFields, isEdited, sysMsg);
                 i++;
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
-                ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited);
-                ter.form3.setWidget(4, 0, new HTML("Term number: " + i));
+                ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited, sysMsg);
+                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.TERM_RANK) + i));
                 ter.approve.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        new MyDialog("Are you sure that you would like to aprove this term?", 0, ter).show();
+                        new MyDialog("Are you sure that you would like to aprove this term?", 0, ter, sysMsg).show();
                     }
                 });
                 ter.disapprove.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
-                        new MyDialog("Are you sure that you would like to disaprove this term?", 1, ter).show();
+                        new MyDialog("Are you sure that you would like to disaprove this term?", 1, ter, sysMsg).show();
                     }
                 });
             }
@@ -147,7 +149,7 @@ public class LangSetFormREVISOR extends VerticalPanel {
 
     private class MyDialog extends DialogBox {
 
-        public MyDialog(String text, final int call, final TermFormREVISOR ter) {
+        public MyDialog(String text, final int call, final TermFormREVISOR ter, HashMap<String, String> sysMsg) {
             // Set the dialog box's caption.
             setText(text);
             // Enable animation.
@@ -160,10 +162,10 @@ public class LangSetFormREVISOR extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText("Approve");
+                    submit.setText(sysMsg.get(GuiConstant.APPROVE));
                     break;
                 case 1:
-                    submit.setText("Disapprove");
+                    submit.setText(sysMsg.get(GuiConstant.DISAPPROVE));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -180,7 +182,7 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button("Cancel");
+            Button cancel = new Button(sysMsg.get(GuiConstant.CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
