@@ -126,6 +126,7 @@ public class GuiConstant implements IsSerializable {
     public static final String EDIT = "msg.edit";
     public static final String DISAPPROVEALL = "msg.disapproveAll";
     public static final String APPROVEALL = "msg.approveALL";
+    public static final String ESCAPE = "msg.escape";
     public static final String CANCEL = "msg.cancel";
     public static final String ABORT = "msg.abort";
     public static final String CREATE = "msg.create";

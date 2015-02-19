@@ -54,6 +54,7 @@ import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -78,7 +79,7 @@ public class REDACTORWidget extends VerticalPanel {
     private static LangSetFormREDACTOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
-    HashMap<String, String> sysMsgs;
+    private HashMap<String, String> sysMsgs;
     public BooleanWrap isEdited = new BooleanWrap();
 
     public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
@@ -456,13 +457,13 @@ public class REDACTORWidget extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText("Create");
+                    submit.setText(sysMsgs.get(GuiConstant.CREATE));
                     break;
                 case 1:
-                    submit.setText("Delete");
+                    submit.setText(sysMsgs.get(GuiConstant.DELETE));
                     break;
                 case 2:
-                    submit.setText("Abort");
+                    submit.setText(sysMsgs.get(GuiConstant.ABORT));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -482,7 +483,7 @@ public class REDACTORWidget extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button("Cancel");
+            Button cancel = new Button(sysMsgs.get(GuiConstant.CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -490,7 +491,7 @@ public class REDACTORWidget extends VerticalPanel {
                     History.newItem("cancelled");
                 }
             });
-            Button save = new Button("Save");
+            Button save = new Button(sysMsgs.get(GuiConstant.SAVE));
             save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -634,6 +635,7 @@ public class REDACTORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         isEdited.setVal(false);
+        History.newItem("escaped");
     }
 
     private void commandNotSubmitted() {

@@ -65,6 +65,8 @@ insert into codes values ('msg','msg.disapprove','DISAPPROVE',null);
 insert into codes values ('msg','msg.disapproveAll','Disapprove All',null);
 insert into codes values ('msg','msg.approveAll','Approve All',null);
 insert into codes values ('msg','msg.create','CREATE',null);
+insert into codes values ('msg','msg.escape','ESCAPE',null);
+insert into codes values ('msg','msg.cancel','CANCEL',null);
 insert into codes values ('msg','msg.abort','ABORT',null);
 insert into codes values ('msg','msg.createNew','Create New Entry',null);
 insert into codes values ('msg','msg.search','SEARCH',null);

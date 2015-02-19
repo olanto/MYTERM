@@ -75,7 +75,7 @@ public class DomainList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
             }
         });
-        addItem(" ", "-1");
+        addItem(" ", " ");
         domService.getDomains(domCallback);
     }
 
@@ -108,7 +108,7 @@ public class DomainList extends ListBox {
                 isEdited.setVal(true);
             }
         });
-        addItem(" ", "-1");
+        addItem(" ", " ");
         domService.getDomains(domCallback);
     }
 }

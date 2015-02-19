@@ -41,6 +41,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerREVISOR;
@@ -53,6 +54,7 @@ import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.ConceptEntryDTO;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -74,13 +76,17 @@ public class REVISORWidget extends VerticalPanel {
     private static LangSetFormREVISOR addterms;
     private long ownerID;
     private HashMap<String, SysFieldDTO> sFields;
-    HashMap<String, String> sysMsgs;
+    private HashMap<String, String> sysMsgs;
+    private ArrayList<String> lsList;
+    private ArrayList<Long> rsList;
     public BooleanWrap isEdited = new BooleanWrap();
 
     public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         sFields = sysFields;
         sysMsgs = sysMsg;
+        rsList = new ArrayList<>();
+        lsList = new ArrayList<>();
         fixGwtNav();
         searchMenu = new SearchHeaderREVISOR(ownerID);
         resultsPanel = new ResultsContainerREVISOR();
@@ -157,6 +163,7 @@ public class REVISORWidget extends VerticalPanel {
                     resultsPanel.sideRes.setWidget(new HTML("No current entries"));
                 }
                 MainEntryPoint.statusPanel.setMessage("message", "Entries retrieved successfully...");
+                History.newItem("loaded");
             }
 
             @Override
@@ -186,7 +193,7 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onClick(ClickEvent event) {
                 if (isEdited.getVal()) {
-                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "add").show();
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "search").show();
                 } else {
                     History.newItem("p2search");
                 }
@@ -198,7 +205,7 @@ public class REVISORWidget extends VerticalPanel {
             public void onKeyPress(KeyPressEvent event) {
                 if (event.getNativeEvent().getKeyCode() == KeyCodes.KEY_ENTER) {
                     if (isEdited.getVal()) {
-                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "add").show();
+                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "search").show();
                     } else {
                         History.newItem("p2search");
                     }
@@ -363,13 +370,13 @@ public class REVISORWidget extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText("Approve");
+                    submit.setText(sysMsgs.get(GuiConstant.APPROVE));
                     break;
                 case 1:
-                    submit.setText("Disapprove");
+                    submit.setText(sysMsgs.get(GuiConstant.DISAPPROVE));
                     break;
                 case 2:
-                    submit.setText("Abort");
+                    submit.setText(sysMsgs.get(GuiConstant.ABORT));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -389,7 +396,7 @@ public class REVISORWidget extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button("Cancel");
+            Button cancel = new Button(sysMsgs.get(GuiConstant.CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -397,7 +404,7 @@ public class REVISORWidget extends VerticalPanel {
                     History.newItem("cancelled");
                 }
             });
-            Button save = new Button("Save");
+            Button save = new Button(sysMsgs.get(GuiConstant.SAVE));
             save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -456,7 +463,7 @@ public class REVISORWidget extends VerticalPanel {
         if ((lan == null) || (lan.isEmpty())) {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
-        getService().getApproveElementsShowByLang(lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), ownerID, workspaceCallback);
+        getService().getApproveElements("", lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 
     public void commandPageOther(String action) {
@@ -465,12 +472,18 @@ public class REVISORWidget extends VerticalPanel {
 
     private void commandSearch() {
         isEdited.setVal(false);
+        String lang = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
+        String rsID = searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex());
+        rsList.clear();
+        lsList.clear();
+        rsList.add(Long.parseLong(rsID));
+        lsList.add(lang);
         resultsPanel.termsDetails.clear();
         resultsPanel.conceptDetails.clear();
         searchMenu.btnSearch.setEnabled(false);
         resultsPanel.sideRes.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getApproveResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
+        getService().getApproveElements(searchMenu.searchField.getText(), lang, lsList, rsList, searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 
     private void commandSaved() {
@@ -532,6 +545,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         isEdited.setVal(false);
+        History.newItem("escaped");
     }
 
     public static native void fixGwtNav() /*-{

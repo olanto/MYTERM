@@ -34,13 +34,9 @@ public interface myTermService extends RemoteService {
 
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID);
 
-    public String getApproveResult(String s, String ls, String resID, String domID, long ownerID);
-
     public String getWorkspaceElements(String ls, long ownerID);
 
-    public String getApproveElements(String ls, long ownerID);
-
-    public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID);
+    public String getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID, String domID, long ownerID);
 
     public Collection<String> getResults(String s, String ls, String lt, long ownerID);
 

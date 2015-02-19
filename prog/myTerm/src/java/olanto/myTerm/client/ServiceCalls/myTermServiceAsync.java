@@ -24,8 +24,6 @@ public interface myTermServiceAsync {
 
     public void getAddResult(String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> callback);
 
-    public void getApproveResult(String s, String ls, String resID, String domID, long ownerID, AsyncCallback<String> callback);
-
     public void getdetailsForConcept(long conceptID, long ownerID, AsyncCallback<String> callback);
 
     public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, AsyncCallback<String> callback);
@@ -38,9 +36,7 @@ public interface myTermServiceAsync {
 
     public void getWorkspaceElements(String ls, long ownerID, AsyncCallback<String> callback);
 
-    public void getApproveElements(String ls, long ownerID, AsyncCallback<String> callback);
-
-    public void getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID, AsyncCallback<String> callback);
+    public void getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID,  String domID, long ownerID, AsyncCallback<String> callback);
 
     public void getInventory(AsyncCallback<String> callback);
 

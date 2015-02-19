@@ -552,27 +552,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String getApproveElements(String ls, long ownerID) {
-        String response = TestView.getApproveElementsByLang(ls, ownerID);
-        if (response != null) {
-            StringBuilder result = new StringBuilder("");
-            result.append("<div class =\"rpanel\">");
-            result.append("<table>");
-            result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append("Targets").append("</th>");
-            result.append("</tr>");
-            result.append(response);
-            result.append("</table>");
-            result.append("</div>");
-            return result.toString();
-        }
-        return null;
-    }
-
-    @Override
-    public String getApproveElementsShowByLang(String ls, ArrayList<String> lsList, ArrayList<Long> resID, long ownerID) {
-        String response = TestView.getApproveElements(ls, lsList, resID, ownerID);
+    public String getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID,  String domID, long ownerID) {
+        String response = TestView.getApproveElements(s, ls, lsList, resID, domID, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
             result.append("<div class =\"rpanel\">");
@@ -601,25 +582,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public String disapproveTermEntry(long termID) {
         if (ManageTerm.disapprove(termID) != null) {
             return "Success";
-        }
-        return null;
-    }
-
-    @Override
-    public String getApproveResult(String s, String ls, String resID, String domID, long ownerID) {
-        String response = TestView.getSubmittedForThis(s, ls, resID, domID, ownerID);
-        if (response != null) {
-            StringBuilder result = new StringBuilder("");
-            result.append("<div class =\"rpanel\">");
-            result.append("<table>");
-            result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append("Targets").append("</th>");
-            result.append("</tr>");
-            result.append(response);
-            result.append("</table>");
-            result.append("</div>");
-            return result.toString();
         }
         return null;
     }
