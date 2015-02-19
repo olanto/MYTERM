@@ -42,13 +42,12 @@ public class TestView {
     static final SimpleDateFormat DF_FR = new SimpleDateFormat("E dd.MM.yyyy");
 
     public static void main(String[] args) {
-
 //        System.out.println(getSourceForThis("tuna%", "EN", "FR", "-1", " "));
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-        getTermTypes("FR");
-        getCodificationByTypeAndLang("msg", "EN");
+//        getTermTypes("FR");
+//        getCodificationByTypeAndLang("msg", "EN");
     }
 
     public static void init() {
@@ -273,7 +272,7 @@ public class TestView {
             for (long result : resultQ) {
                 res.append("<tr>");
                 res.append("<td><a href=\"#TS").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForLang(result, talang)).append("</td>");
+                res.append("<td>").append(getSourcesForLang(result, talang)).append("</td>");
                 res.append("</tr>");
             }
             resultQ.clear();
@@ -326,7 +325,7 @@ public class TestView {
         return res.toString();
     }
 
-    public static String getTargetsForThis(long conceptID, String solang) {
+    public static String getTargetsForThisLang(long conceptID, String solang) {
         init();
         StringBuilder res = new StringBuilder("");
         Query query = em.createNamedQuery("VjGetformsbyconcept.findformsExceptsolang");
@@ -348,7 +347,7 @@ public class TestView {
         return res.toString();
     }
 
-    public static String getTargetsForLang(long conceptID, String talang) {
+    public static String getSourcesForLang(long conceptID, String talang) {
         init();
         StringBuilder res = new StringBuilder("");
 
@@ -402,39 +401,6 @@ public class TestView {
         return res.toString();
     }
 
-    public static String getSubmittedForThis(String term, String solang, String resID, String domID, long ownerID) {
-//        System.out.println("param:" + term);
-        init();
-        StringBuilder res = new StringBuilder("");
-        Query query;
-        if ((domID.equals(" ") || domID.length() < 2)) {
-            query = em.createNamedQuery("VjSource.findBySourceResourceStatus");
-            query.setParameter("idResource", Long.parseLong(resID));
-        } else {
-            query = em.createNamedQuery("VjSource.findBySourceResourceStatusSubjectField");
-            query.setParameter("idResource", Long.parseLong(resID));
-            query.setParameter("subjectField", domID);
-        }
-        query.setParameter("status", 'r');
-        query.setParameter("lastmodifiedBy", ownerID);
-        query.setParameter("source", term);
-        query.setParameter("solang", solang);
-        List<VjSource> resultQ = query.getResultList();
-        if (resultQ.isEmpty()) {
-            return null;
-        } else {
-            for (VjSource result : resultQ) {
-                res.append("<tr>");
-                res.append("<td><a href=\"#Appnew").append(result.getIdConcept()).append("\" onClick=\"return gwtnav(this);\">").append(result.getSource()).append("</a></td>").append("</td>");
-                res.append("<td>").append(getSourcesForThis(result.getIdConcept(), term, solang, resID, domID)).append("</td>");
-                res.append("</tr>");
-            }
-        }
-        resultQ.clear();
-        resultQ = null;
-        return res.toString();
-    }
-
     public static String getWorkspaceElementsByLang(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -450,7 +416,7 @@ public class TestView {
             for (long result : resultQ) {
                 res.append("<tr>");
                 res.append("<td><a href=\"#WSnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
+                res.append("<td>").append(getTargetsForThisLang(result, solang)).append("</td>");
                 res.append("</tr>");
             }
         }
@@ -481,38 +447,31 @@ public class TestView {
         return source;
     }
 
-    public static String getApproveElementsByLang(String solang, long ownerID) {
+    public static String getApproveElements(String term, String solang, ArrayList<String> ls, ArrayList<Long> resID, String domID, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
         Query query;
-        query = em.createNamedQuery("VjSource.findByStatusSolang");
-        query.setParameter("status", 'r');
-        query.setParameter("solang", solang);
-        List<Long> resultQ = query.getResultList();
-
-        if (resultQ.isEmpty()) {
-            return null;
-        } else {
-            for (long result : resultQ) {
-                res.append("<tr>");
-                res.append("<td><a href=\"#Appnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
-                res.append("</tr>");
+        if ((term.isEmpty()) || (term.equals(" "))) {
+            if ((domID.equals(" ") || domID.length() < 2)) {
+                query = em.createNamedQuery("VjSource.findBySolangResourceStatus");
+            } else {
+                query = em.createNamedQuery("VjSource.findBySolangResourceStatusSubjectField");
+                query.setParameter("subjectField", domID);
             }
+        } else {
+            if ((domID.equals(" ") || domID.length() < 2)) {
+                query = em.createNamedQuery("VjSource.findBySourceSolangResourceStatus");
+            } else {
+                query = em.createNamedQuery("VjSource.findBySourceSolangResourceStatusSubjectField");
+                query.setParameter("subjectField", domID);
+            }
+            query.setParameter("source", term);
         }
-        resultQ.clear();
-        resultQ = null;
-//        System.out.println(res.toString());
-        return res.toString();
-    }
 
-    public static String getApproveElements(String solang, ArrayList<String> ls, ArrayList<Long> resID, long ownerID) {
-        init();
-        StringBuilder res = new StringBuilder("");
-        Query query;
-        query = em.createNamedQuery("VjSource.findByApproveElementsBySolangANDResource");
+        query.setParameter("status", 'r');
         query.setParameter("idResource", resID);
         query.setParameter("solang", ls);
+
         List<Long> resultQ = query.getResultList();
 
         if (resultQ.isEmpty()) {
@@ -521,7 +480,7 @@ public class TestView {
             for (long result : resultQ) {
                 res.append("<tr>");
                 res.append("<td><a href=\"#Appnew").append(result).append("\" onClick=\"return gwtnav(this);\">").append(getSourceForLang(result, solang)).append("</a></td>").append("</td>");
-                res.append("<td>").append(getTargetsForThis(result, solang)).append("</td>");
+                res.append("<td>").append(getTargetsForThisLang(result, solang)).append("</td>");
                 res.append("</tr>");
             }
         }
