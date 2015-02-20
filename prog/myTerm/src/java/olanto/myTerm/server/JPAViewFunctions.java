@@ -130,14 +130,27 @@ public class JPAViewFunctions {
         if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibility())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
         }
-        if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
-            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
+        if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
+            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
+            }
+        } else {
+            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_EN.format(t.getCreation())).append("<br/>");
+            }
         }
+
         if ((t.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.T_LAST_MODIF_BY).getVisibility())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
         }
-        if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
-            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
+        if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
+            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
+            }
+        } else {
+            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_EN.format(t.getLastmodified())).append("<br/>");
+            }
         }
         if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CROSS_REF).getVisibility())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(": </span>").append(t.getCrossref()).append("<br/>");

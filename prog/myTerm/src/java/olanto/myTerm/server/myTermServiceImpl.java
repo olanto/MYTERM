@@ -172,8 +172,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"cpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.DEF_DETAILS)).append(c.getIdConcept()).append("</th>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.RESOURCE_DETAILS)).append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.DEF_DETAILS)).append(" : ").append(c.getIdConcept()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.RESOURCE_DETAILS)).append(" : ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.CREATION_DETAILS)).append("</th>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.EXTRA_DETAILS)).append("</th>");
             result.append("</tr>");
@@ -203,15 +203,27 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             if ((c.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.C_CREATED_BY).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
             }
-            if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(": </span>").append(DF_FR.format(c.getCreation())).append("<br/>");
+            if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
+                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibility())) {
+                    result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(": </span>").append(DF_FR.format(c.getCreation())).append("<br/>");
+                }
+            } else {
+                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibility())) {
+                    result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(": </span>").append(DF_EN.format(c.getCreation())).append("<br/>");
+                }
             }
             result.append("</td>").append("<td>");
             if ((c.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.C_LAST_MODIF_BY).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_LAST_MODIF_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
             }
-            if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(": </span>").append(DF_FR.format(c.getLastmodified())).append("<br/>");
+            if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
+                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibility())) {
+                    result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(": </span>").append(DF_FR.format(c.getLastmodified())).append("<br/>");
+                }
+            } else {
+                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibility())) {
+                    result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(": </span>").append(DF_EN.format(c.getLastmodified())).append("<br/>");
+                }
             }
             if ((c.getImage() != null) && (!c.getImage().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_IMAGE).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_IMAGE)).append(": </span>").append(c.getImage()).append("<br/>");
