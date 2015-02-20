@@ -72,69 +72,85 @@ public class JPAViewFunctions {
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
             result.append("<tr>");
-            result.append("<td>");
-            if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(" </span>").append(t.getTermForm()).append("<br/>");
+            String first = getFirstTermInfo(t, sysMsgsrv, sysFieldsrv);
+            String second = getSecondTermInfo(t, sysMsgsrv, sysFieldsrv);
+            if (!first.isEmpty()) {
+                result.append("<td>").append(first).append("</td>");
             }
-            if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_DEFINITION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_T_DEFINITION)).append(" </span>").append(t.getTermDefinition()).append("<br/>");
+            if (!second.isEmpty()) {
+                result.append("<td>").append(second).append("</td>");
             }
-
-            if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_DEFINITION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_DEFINITION)).append(" </span>").append(t.getTermSourceDefinition()).append("<br/>");
-            }
-            if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(" </span>").append(t.getTermSource()).append("<br/>");
-            }
-            if ((t.getTermSourceContext() != null) && (!t.getTermSourceContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_CONTEXT).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_CONTEXT)).append(" </span>").append(t.getTermSourceContext()).append("<br/>");
-            }
-            if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_NOTE).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(" </span>").append(t.getTermNote()).append("<br/>");
-            }
-            if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_POS).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(" </span>").append(t.getTermPartofspeech()).append("<br/>");
-            }
-            if ((t.getTermType() != null) && (!t.getTermType().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TYPE).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(" </span>").append(t.getTermType()).append("<br/>");
-            }
-            if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_USAGE).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_USAGE)).append(" </span>").append(t.getTermUsage()).append("<br/>");
-            }
-            if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(" </span>").append(t.getTermContext()).append("<br/>");
-            }
-            result.append("</td>").append("<td>");
-            if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
-            }
-            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(" </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
-            }
-            if ((t.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.T_LAST_MODIF_BY).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(" </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
-            }
-            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(" </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
-            }
-            if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CROSS_REF).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(" </span>").append(t.getCrossref()).append("<br/>");
-            }
-            if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_EXTRA_CROSS_REF).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(" </span>").append(t.getExtcrossref()).append("<br/>");
-            }
-            if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(" </span>").append(t.getTermGender()).append("<br/>");
-            }
-            if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibility())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(" </span>").append(t.getTermGeoUsage()).append("<br/>");
-            }
-            result.append("</td>").append("</tr>");
+            result.append("</tr>");
         }
         result.append("</table>");
         result.append("</div>");
         resultQ.clear();
         resultQ = null;
+        return result.toString();
+    }
+
+    private static String getFirstTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv) {
+        StringBuilder result = new StringBuilder("");
+        if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(": </span>").append(t.getTermForm()).append("<br/>");
+        }
+        if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_DEFINITION).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_T_DEFINITION)).append(": </span>").append(t.getTermDefinition()).append("<br/>");
+        }
+
+        if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_DEFINITION).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_DEFINITION)).append(": </span>").append(t.getTermSourceDefinition()).append("<br/>");
+        }
+        if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(": </span>").append(t.getTermSource()).append("<br/>");
+        }
+        if ((t.getTermSourceContext() != null) && (!t.getTermSourceContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_CONTEXT).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_CONTEXT)).append(": </span>").append(t.getTermSourceContext()).append("<br/>");
+        }
+        if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_NOTE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(": </span>").append(t.getTermNote()).append("<br/>");
+        }
+        if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_POS).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(": </span>").append(t.getTermPartofspeech()).append("<br/>");
+        }
+        if ((t.getTermType() != null) && (!t.getTermType().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TYPE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(": </span>").append(t.getTermType()).append("<br/>");
+        }
+        if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_USAGE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_USAGE)).append(": </span>").append(t.getTermUsage()).append("<br/>");
+        }
+        if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(": </span>").append(t.getTermContext()).append("<br/>");
+        }
+        return result.toString();
+    }
+
+    private static String getSecondTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv) {
+        StringBuilder result = new StringBuilder("");
+        if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
+        }
+        if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
+        }
+        if ((t.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.T_LAST_MODIF_BY).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
+        }
+        if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
+        }
+        if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CROSS_REF).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(": </span>").append(t.getCrossref()).append("<br/>");
+        }
+        if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_EXTRA_CROSS_REF).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(": </span>").append(t.getExtcrossref()).append("<br/>");
+        }
+        if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(": </span>").append(t.getTermGender()).append("<br/>");
+        }
+        if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(": </span>").append(t.getTermGeoUsage()).append("<br/>");
+        }
         return result.toString();
     }
 
