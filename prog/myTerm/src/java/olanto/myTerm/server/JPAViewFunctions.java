@@ -123,10 +123,10 @@ public class JPAViewFunctions {
             if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_EXTRA_CROSS_REF).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(" </span>").append(t.getExtcrossref()).append("<br/>");
             }
-            if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.LBL_T_GENDER).getVisibility())) {
+            if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(" </span>").append(t.getTermGender()).append("<br/>");
             }
-            if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.LBL_T_GEO_USG).getVisibility())) {
+            if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibility())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(" </span>").append(t.getTermGeoUsage()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
