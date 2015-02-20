@@ -62,7 +62,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
         remterms = new ArrayList<>();
         desc = new VerticalPanel();
         controls = new HorizontalPanel();
-        addTerm = new Button(sysMsg.get(GuiConstant.ADD_TERM));
+        addTerm = new Button(sysMsg.get(GuiConstant.BTN_ADD_TERM));
         this.setStyleName("langSetForm");
         add(desc);
         add(controls);
@@ -175,7 +175,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
             HorizontalPanel controls = new HorizontalPanel();
             // DialogBox is a SimplePanel, so you have to set its widget property to
             // whatever you want its contents to be.
-            final Button submit = new Button(sysMsg.get(GuiConstant.DELETE));
+            final Button submit = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
 
             submit.addClickHandler(new ClickHandler() {
                 @Override
@@ -184,7 +184,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                     deleteTermEntry(term);
                 }
             });
-            Button cancel = new Button(sysMsg.get(GuiConstant.CANCEL));
+            Button cancel = new Button(sysMsg.get(GuiConstant.BTN_CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {

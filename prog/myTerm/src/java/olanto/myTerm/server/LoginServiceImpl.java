@@ -27,23 +27,27 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     }
 
     @Override
-    public UserDTO loginCheck(String name, String password) {
+    public UserDTO loginCheck(String email, String password) {
         //check to see if the email exist in the datastore
         //check passwords
         TermDB.restart();
-        name = escapeHtml(name);
+        email = escapeHtml(email);
         password = escapeHtml(password);
         UserDTO user = new UserDTO();
-        Owners o = Queries.getOwner(name, password);
+        Owners o = Queries.getOwner(email, password);
         if (o != null) {
-            user.setEmail(o.getOwnerMailing());
-            user.setId(o.getIdOwner());
-            user.setSessionID(o.getIdOwner().toString());
-            user.setFirstName(o.getOwnerFirstName());
-            user.setLastName(o.getOwnerLastName());
-            user.setRole(o.getOwnerRoles());
-            //set the current_user for this session
-            storeUserInSession(user);
+            if ((password.equals(o.getOwnerHash()))) {
+                user.setEmail(o.getOwnerMailing());
+                user.setId(o.getIdOwner());
+                user.setSessionID(o.getIdOwner().toString());
+                user.setFirstName(o.getOwnerFirstName());
+                user.setLastName(o.getOwnerLastName());
+                user.setRole(o.getOwnerRoles());
+                //set the current_user for this session
+                storeUserInSession(user);
+            } else {
+                return null;//force showLogin
+            }
         } else {
             return null;//force showLogin
         }

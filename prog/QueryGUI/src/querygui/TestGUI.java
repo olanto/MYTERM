@@ -7,7 +7,7 @@ package querygui;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import jpaviewtest.TestView;
+import jpaviewtest.JPAViewFunctions;
 
 /**
  *
@@ -161,7 +161,7 @@ public class TestGUI extends javax.swing.JFrame {
         result.setText("<html><h1>"
                 + "Hello"
                 + "</h1>"
-                + TestView.getReslang()
+                + JPAViewFunctions.getReslang()
                 + "</html>");
 
     }//GEN-LAST:event_statisticActionPerformed
@@ -184,7 +184,7 @@ result.setEditorKit(kit);
         result.setText("<html><h1>"
                 + "Hello"
                 + "</h1>"
-                + TestView.getTargetForThis(sourceTerm.getText(), sourceLang.getText(),"FR")
+                + JPAViewFunctions.getTargetForThis(sourceTerm.getText(), sourceLang.getText(),"FR")
                 + "</html>");
     }//GEN-LAST:event_searchActionPerformed
 

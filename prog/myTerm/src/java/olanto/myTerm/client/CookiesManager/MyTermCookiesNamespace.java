@@ -40,4 +40,5 @@ public class MyTermCookiesNamespace {
     public static String Domain = "Domain";
     public static String SessionID = "SessionID";
     public static String ownerID = "ownerID";
+    public static String INTERFACE_LANG = "Language";
 }

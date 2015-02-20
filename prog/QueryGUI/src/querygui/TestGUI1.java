@@ -9,7 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import jpaviewtest.TestView;
+import jpaviewtest.JPAViewFunctions;
 
 /**
  *
@@ -197,7 +197,7 @@ public class TestGUI1 extends javax.swing.JFrame {
         result.setText("<html><h1>"
                 + "Hello"
                 + "</h1>"
-                + TestView.getReslang()
+                + JPAViewFunctions.getReslang()
                 + "</html>");
 
     }//GEN-LAST:event_statisticActionPerformed
@@ -220,9 +220,9 @@ result.setEditorKit(kit);
         result.setText("<html><h1>"
                 + "Hello"
                 + "</h1>"
-                + TestView.getTargetForThis(sourceTerm.getText(), sourceLang.getText(), targetLang.getText())
+                + JPAViewFunctions.getTargetForThis(sourceTerm.getText(), sourceLang.getText(), targetLang.getText())
                 + "</html>");
-        initList(TestView.getListForThis(sourceTerm.getText(), sourceLang.getText(), targetLang.getText()));
+        initList(JPAViewFunctions.getListForThis(sourceTerm.getText(), sourceLang.getText(), targetLang.getText()));
         
     }//GEN-LAST:event_searchActionPerformed
 
@@ -247,7 +247,7 @@ result.setEditorKit(kit);
          result.setText("<html><h1>"
                 + "Hello"
                 + "</h1>"
-                + TestView.getTargetForThis((String)termList.getSelectedValue(), sourceLang.getText(), targetLang.getText())
+                + JPAViewFunctions.getTargetForThis((String)termList.getSelectedValue(), sourceLang.getText(), targetLang.getText())
                 + "</html>");
        }
 

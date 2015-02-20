@@ -31,12 +31,17 @@ public class GuiConstant implements IsSerializable {
 
     private static final long serialVersionUID = 1L;
     public static String INTERFACE_LANG = "EN";
+    public static final String PROFILE_READER = "READER";
+    public static final String PROFILE_REDACTOR = "REDACTOR";
+    public static final String PROFILE_REVISOR = "REVISOR";
+    public static final String PROFILE_ADMIN = "ADMIN";
     public static final int EXP_DAYS = 24;
     public static final int TEXTAREA_HEIGHT = 100;
     public static final String OLANTO_URL = "Powered by Olanto|http://olanto.org|_blank";
     public static final String FEEDBACK_MAIL = "Feedback|info@olanto.org";
     public static final String C_SUBJECT_FIELD = "c.subject_field";
     public static final String C_DEFINITION = "c.definition";
+    public static final String C_RESOURCE = "c.resource";
     public static final String C_SOURCE_DEFINITION = "c.source_definition";
     public static final String C_NOTE = "c.note";
     public static final String C_CREATION = "c.creation";
@@ -118,22 +123,6 @@ public class GuiConstant implements IsSerializable {
     public static final String T_EXTRA_CROSS_REF = "t.extra_cross_ref";
     public static final String T_IMAGE = "t.image";
     public static final String T_LANG = "t.lang";
-    public static final String DELETE = "msg.delete";
-    public static final String SAVE = "msg.save";
-    public static final String SUBMIT = "msg.submit";
-    public static final String APPROVE = "msg.approve";
-    public static final String DISAPPROVE = "msg.disapprove";
-    public static final String EDIT = "msg.edit";
-    public static final String DISAPPROVEALL = "msg.disapproveAll";
-    public static final String APPROVEALL = "msg.approveALL";
-    public static final String ESCAPE = "msg.escape";
-    public static final String CANCEL = "msg.cancel";
-    public static final String ABORT = "msg.abort";
-    public static final String CREATE = "msg.create";
-    public static final String CREATE_NEW = "msg.createNew";
-    public static final String SEARCH = "msg.search";
-    public static final String ADD = "msg.add";
-    public static final String ADD_TERM = "msg.addTerm";
     public static final String TERM_RANK = "msg.termRank";
     public static final String DEF_DETAILS = "msg.definitionDetails";
     public static final String RESOURCE_DETAILS = "msg.resourceDetails";
@@ -142,7 +131,30 @@ public class GuiConstant implements IsSerializable {
     public static final String STATUS_ED = "msg.edited";
     public static final String STATUS_PUB = "msg.public";
     public static final String STATUS_REV = "msg.revision";
-  
+    public static final String SEARCH_PANEL = "msg.searchPanel";
+    public static final String REDACTION_PANEL = "msg.redactionPanel";
+    public static final String REVISION_PANEL = "msg.revisionPanel";
+    public static final String ADMINISTRATION_PANEL = "msg.adminPanel";
+    public static final String MSG_WELCOME = "msg.welcome";
+    public static final String MSG_SEARCH_INPUT = "msg.seachMessage";
+    public static final String BTN_DELETE = "msg.delete";
+    public static final String BTN_SAVE = "msg.save";
+    public static final String BTN_SUBMIT = "msg.submit";
+    public static final String BTN_APPROVE = "msg.approve";
+    public static final String BTN_DISAPPROVE = "msg.disapprove";
+    public static final String BTN_EDIT = "msg.edit";
+    public static final String BTN_DISAPPROVEALL = "msg.disapproveAll";
+    public static final String BTN_APPROVEALL = "msg.approveALL";
+    public static final String BTN_ESCAPE = "msg.escape";
+    public static final String BTN_CANCEL = "msg.cancel";
+    public static final String BTN_ABORT = "msg.abort";
+    public static final String BTN_CREATE = "msg.create";
+    public static final String BTN_CREATE_NEW = "msg.createNew";
+    public static final String SEARCH = "msg.search";
+    public static final String BTN_ADD = "msg.add";
+    public static final String BTN_ADD_TERM = "msg.addTerm";
+    public static final String BTN_SEARCH = "btn.search";
+
     public GuiConstant() {
     }
 }

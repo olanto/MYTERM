@@ -121,8 +121,8 @@ public class TermFormREVISOR extends VerticalPanel {
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
-        approve = new Button(sysMsg.get(GuiConstant.APPROVE));
-        disapprove = new Button(sysMsg.get(GuiConstant.DISAPPROVE));
+        approve = new Button(sysMsg.get(GuiConstant.BTN_APPROVE));
+        disapprove = new Button(sysMsg.get(GuiConstant.BTN_DISAPPROVE));
         termID = -1;
         langID = "";
         lang_lbl = new Label("");

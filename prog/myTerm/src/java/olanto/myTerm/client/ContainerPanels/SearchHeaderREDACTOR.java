@@ -28,10 +28,12 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.HashMap;
 import olanto.myTerm.client.Lists.DomainList;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
@@ -39,15 +41,18 @@ import olanto.myTerm.client.Lists.ResourceList;
  */
 public class SearchHeaderREDACTOR extends HorizontalPanel {
 
-    public Label termLabel = new Label("Input your search expression: ");
-    public TextBox searchField = new TextBox();
+    public Label termLabel;
+    public TextBox searchField;
     public LangList langSrc;
-//    public LangList langTgt;
     public ResourceList rsrc;
-    public DomainList dom = new DomainList();
-    public Button btnAdd = new Button("Add");
+    public DomainList dom;
+    public Button btnAdd;
 
-    public SearchHeaderREDACTOR(long ownerID) {
+    public SearchHeaderREDACTOR(long ownerID, HashMap<String, String> sysMsg) {
+        termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
+        searchField = new TextBox();
+        dom = new DomainList();
+        btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
@@ -63,10 +68,10 @@ public class SearchHeaderREDACTOR extends HorizontalPanel {
         add(langSrc);
         add(new HTML("&nbsp;"));
         if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "REDACTOR");
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
         } else {
             Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), "REDACTOR");
+            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
         }
         add(new Label("Resource: "));
         add(new HTML("&nbsp;"));

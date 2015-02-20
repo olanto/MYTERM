@@ -59,7 +59,7 @@ public class READERWidget extends VerticalPanel {
     public READERWidget(long idOwner, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
         fixGwtNav();
-        searchMenu = new SearchHeaderBasic(ownerID);
+        searchMenu = new SearchHeaderBasic(ownerID, sysMsg);
         resultsPanel = new ResultsContainerBasic();
         add(searchMenu);
         add(resultsPanel);

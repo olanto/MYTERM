@@ -88,7 +88,7 @@ public class REVISORWidget extends VerticalPanel {
         rsList = new ArrayList<>();
         lsList = new ArrayList<>();
         fixGwtNav();
-        searchMenu = new SearchHeaderREVISOR(ownerID);
+        searchMenu = new SearchHeaderREVISOR(ownerID, sysMsg);
         resultsPanel = new ResultsContainerREVISOR();
         add(searchMenu);
         add(resultsPanel);
@@ -273,9 +273,9 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
-            addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited);
+            addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
-            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
+            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 80);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetFormREVISOR(ownerID, addcpt);
@@ -370,13 +370,13 @@ public class REVISORWidget extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText(sysMsgs.get(GuiConstant.APPROVE));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_APPROVE));
                     break;
                 case 1:
-                    submit.setText(sysMsgs.get(GuiConstant.DISAPPROVE));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_DISAPPROVE));
                     break;
                 case 2:
-                    submit.setText(sysMsgs.get(GuiConstant.ABORT));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_ABORT));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -396,7 +396,7 @@ public class REVISORWidget extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button(sysMsgs.get(GuiConstant.CANCEL));
+            Button cancel = new Button(sysMsgs.get(GuiConstant.BTN_CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -404,7 +404,7 @@ public class REVISORWidget extends VerticalPanel {
                     History.newItem("cancelled");
                 }
             });
-            Button save = new Button(sysMsgs.get(GuiConstant.SAVE));
+            Button save = new Button(sysMsgs.get(GuiConstant.BTN_SAVE));
             save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {

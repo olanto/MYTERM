@@ -124,8 +124,8 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
-        delete = new Button(sysMsg.get(GuiConstant.DELETE));
-        edit = new Button(sysMsg.get(GuiConstant.EDIT));
+        delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
+        edit = new Button(sysMsg.get(GuiConstant.BTN_EDIT));
         termID = -1;
         langID = "";
         lang_lbl = new Label("");

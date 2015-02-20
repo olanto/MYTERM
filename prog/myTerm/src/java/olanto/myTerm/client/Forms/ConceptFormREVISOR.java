@@ -30,6 +30,7 @@ import java.util.HashMap;
 import olanto.myTerm.client.Lists.ResourceList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.ConceptDTO;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.SysFieldDTO;
 
 /**
@@ -39,36 +40,55 @@ import olanto.myTerm.shared.SysFieldDTO;
  */
 public class ConceptFormREVISOR extends HorizontalPanel {
 
-    private Grid cform = new Grid(2, 3);
-    private Label label_sf = new Label("Subject field:");
-    private Label label_rsrc = new Label("Add to resource:");
-    private Label label_def = new Label("Definition:");
+    private Grid cform;
+    private Label label_sf;
+    private Label label_rsrc;
+    private Label label_def;
     private TextAreaMyTerm text_def;
-    private Label label_sdef = new Label("Definition's source:");
+    private Label label_sdef;
     private TextAreaMyTerm text_sdef;
-    private Label label_nt = new Label("Note:");
+    private Label label_nt;
     private TextAreaMyTerm text_nt;
-    private HorizontalPanel sfPanel = new HorizontalPanel();
-    private HorizontalPanel rsrcPanel = new HorizontalPanel();
-    private HorizontalPanel ctrlPanel = new HorizontalPanel();
-    private VerticalPanel defPAnel = new VerticalPanel();
-    private VerticalPanel defsPanel = new VerticalPanel();
-    private VerticalPanel ntPanel = new VerticalPanel();
-    public Button approve = new Button("APPROVE ALL");
-    public Button save = new Button("SAVE");
-    public Button disapprove = new Button("DISAPPROVE ALL");
-    public Button escape = new Button("ESCAPE");
+    private HorizontalPanel sfPanel;
+    private HorizontalPanel rsrcPanel;
+    private HorizontalPanel ctrlPanel;
+    private VerticalPanel defPAnel;
+    private VerticalPanel defsPanel;
+    private VerticalPanel ntPanel;
+    public Button approve;
+    public Button save;
+    public Button disapprove;
+    public Button escape;
     public ResourceList rsrc;
-    private Label label_dom = new Label("");
-    private Label label_rs = new Label("");
+    private Label label_dom;
+    private Label label_rs;
 
-    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         rsrc = rs;
+        cform = new Grid(2, 3);
+        label_sf = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SUBJECT_FIELD), sFields.get(GuiConstant.C_SUBJECT_FIELD));
+        label_rsrc = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_RESOURCE), sFields.get(GuiConstant.C_RESOURCE));
+        label_def = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_DEFINITION), sFields.get(GuiConstant.C_DEFINITION));
+        label_sdef = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SOURCE_DEFINITION), sFields.get(GuiConstant.C_SOURCE_DEFINITION));
+        label_nt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_NOTE), sFields.get(GuiConstant.C_NOTE));
+        sfPanel = new HorizontalPanel();
+        rsrcPanel = new HorizontalPanel();
+        ctrlPanel = new HorizontalPanel();
+        defPAnel = new VerticalPanel();
+        defsPanel = new VerticalPanel();
+        ntPanel = new VerticalPanel();
+        approve = new Button(sysMsg.get(GuiConstant.BTN_APPROVEALL));
+        save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
+        disapprove = new Button(sysMsg.get(GuiConstant.BTN_DISAPPROVE));
+        escape = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
+        label_dom = new Label("");
+        label_rs = new Label("");
+
         setStyleName("conceptForm");
         add(cform);
-        text_def = new TextAreaMyTerm("c.definition", sFields, isEdited);
-        text_sdef = new TextAreaMyTerm("c.source_definition", sFields, isEdited);
-        text_nt = new TextAreaMyTerm("c.note", sFields, isEdited);
+        text_def = new TextAreaMyTerm(GuiConstant.C_DEFINITION, sFields, isEdited);
+        text_sdef = new TextAreaMyTerm(GuiConstant.C_SOURCE_DEFINITION, sFields, isEdited);
+        text_nt = new TextAreaMyTerm(GuiConstant.C_NOTE, sFields, isEdited);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);

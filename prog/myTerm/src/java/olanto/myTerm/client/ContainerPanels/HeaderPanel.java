@@ -31,8 +31,10 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.HashMap;
 import olanto.myTerm.client.ServiceCalls.LoginService;
 import olanto.myTerm.client.ServiceCalls.LoginServiceAsync;
+import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.UserDTO;
 
 /**
@@ -45,7 +47,7 @@ public class HeaderPanel extends HorizontalPanel {
     public Anchor logout = new Anchor("Logout");
     final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
-    public HeaderPanel(final UserDTO user) {
+    public HeaderPanel(final UserDTO user, HashMap<String, String> sysMsg) {
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(logo);
         logo.setPixelSize(30, 32);
@@ -54,7 +56,7 @@ public class HeaderPanel extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
-        add(new HTML("Welcome to olanto's Terminology Manager"));
+        add(new HTML(sysMsg.get(GuiConstant.MSG_WELCOME)));
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
         add(new HTML("User: " + user.getFirstName()));

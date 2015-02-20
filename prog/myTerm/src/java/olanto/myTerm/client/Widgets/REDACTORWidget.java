@@ -88,7 +88,7 @@ public class REDACTORWidget extends VerticalPanel {
         sysMsgs = sysMsg;
         resultsPanel = new ResultsContainerREDACTOR();
         fixGwtNav();
-        searchMenu = new SearchHeaderREDACTOR(ownerID);
+        searchMenu = new SearchHeaderREDACTOR(ownerID, sysMsg);
         add(searchMenu);
         add(resultsPanel);
         // Create an asynchronous callback to handle the result.
@@ -345,9 +345,9 @@ public class REDACTORWidget extends VerticalPanel {
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
 //            Window.alert(conceptEntryDTO.toStringDTO());
-            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields, isEdited);
+            addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
-            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 70);
+            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 80);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetFormREDACTOR(ownerID, sFields, isEdited, sysMsgs);
@@ -457,13 +457,13 @@ public class REDACTORWidget extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText(sysMsgs.get(GuiConstant.CREATE));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_CREATE));
                     break;
                 case 1:
-                    submit.setText(sysMsgs.get(GuiConstant.DELETE));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_DELETE));
                     break;
                 case 2:
-                    submit.setText(sysMsgs.get(GuiConstant.ABORT));
+                    submit.setText(sysMsgs.get(GuiConstant.BTN_ABORT));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -483,7 +483,7 @@ public class REDACTORWidget extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button(sysMsgs.get(GuiConstant.CANCEL));
+            Button cancel = new Button(sysMsgs.get(GuiConstant.BTN_CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -491,7 +491,7 @@ public class REDACTORWidget extends VerticalPanel {
                     History.newItem("cancelled");
                 }
             });
-            Button save = new Button(sysMsgs.get(GuiConstant.SAVE));
+            Button save = new Button(sysMsgs.get(GuiConstant.BTN_SAVE));
             save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {

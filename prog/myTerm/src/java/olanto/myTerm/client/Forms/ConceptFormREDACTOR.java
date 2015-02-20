@@ -66,24 +66,23 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     private Label label_rs;
     public int type;
 
-    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited) {
+    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         cform = new Grid(2, 3);
-        label_sf = new Label("Subject field:");
-        label_rsrc = new Label("Added to resource:");
-
-        label_def = new Label("Definition:");
-        label_sdef = new Label("Definition's source:");
-        label_nt = new Label("Note:");
+        label_sf = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SUBJECT_FIELD), sFields.get(GuiConstant.C_SUBJECT_FIELD));
+        label_rsrc = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_RESOURCE), sFields.get(GuiConstant.C_RESOURCE));
+        label_def = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_DEFINITION), sFields.get(GuiConstant.C_DEFINITION));
+        label_sdef = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SOURCE_DEFINITION), sFields.get(GuiConstant.C_SOURCE_DEFINITION));
+        label_nt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_NOTE), sFields.get(GuiConstant.C_NOTE));
         sfPanel = new HorizontalPanel();
         rsrcPanel = new HorizontalPanel();
         ctrlPanel = new HorizontalPanel();
         defPanel = new VerticalPanel();
         defsPanel = new VerticalPanel();
         ntPanel = new VerticalPanel();
-        save = new Button("SAVE");
-        submit = new Button("SUBMIT");
-        delete = new Button("DELETE");
-        escape = new Button("ESCAPE");
+        save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
+        submit = new Button(sysMsg.get(GuiConstant.BTN_SUBMIT));
+        delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
+        escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
         label_dom = new Label("");
         label_rs = new Label("");
         type = 1;

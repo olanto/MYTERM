@@ -162,10 +162,10 @@ public class LangSetFormREVISOR extends VerticalPanel {
             final Button submit = new Button("OK");
             switch (call) {
                 case 0:
-                    submit.setText(sysMsg.get(GuiConstant.APPROVE));
+                    submit.setText(sysMsg.get(GuiConstant.BTN_APPROVE));
                     break;
                 case 1:
-                    submit.setText(sysMsg.get(GuiConstant.DISAPPROVE));
+                    submit.setText(sysMsg.get(GuiConstant.BTN_DISAPPROVE));
                     break;
             }
             submit.addClickHandler(new ClickHandler() {
@@ -182,7 +182,7 @@ public class LangSetFormREVISOR extends VerticalPanel {
                     }
                 }
             });
-            Button cancel = new Button(sysMsg.get(GuiConstant.CANCEL));
+            Button cancel = new Button(sysMsg.get(GuiConstant.BTN_CANCEL));
             cancel.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
