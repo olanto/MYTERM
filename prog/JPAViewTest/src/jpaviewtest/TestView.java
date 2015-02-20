@@ -34,7 +34,7 @@ import org.olanto.myterm.extractor.entry.LangEntry;
  *
  * @author simple
  */
-public class JPAViewFunctions {
+public class TestView {
 
     static EntityManagerFactory emf;
     static EntityManager em;

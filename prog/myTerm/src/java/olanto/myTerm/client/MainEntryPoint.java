@@ -107,7 +107,10 @@ public class MainEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        String lang = Window.Location.getParameter("lang");
+        String lang = "undefined";
+        if (Window.Location.getHref().contains("?lang")) {
+            lang = Window.Location.getParameter("lang");
+        }
         initCookies();
         if ((!lang.equalsIgnoreCase("undefined")) && (lang.length() > 1) && (lang.length() < 4)) {
             MyTermCookies.updateCookie(MyTermCookiesNamespace.INTERFACE_LANG, lang);
