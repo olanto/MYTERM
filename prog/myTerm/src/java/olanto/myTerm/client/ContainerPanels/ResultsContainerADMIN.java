@@ -55,7 +55,7 @@ public class ResultsContainerADMIN extends HorizontalPanel {
     public void adjustSize() {
         int h = Window.getClientHeight() - GuiConstant.ADMIN_HEADER_HEIGHT;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
-        sideRes.setPixelSize((int) (w * 1 / 4), h);
-        termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
+        sideRes.setPixelSize((int) (w * 1 / 3), h);
+        termsDetails.setPixelSize(w * 2 / 3, h);
     }
 }
