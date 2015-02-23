@@ -24,8 +24,8 @@ public class RedactorInterface extends TabPanel {
 
         bpan = new READERWidget(ownerID, sysMsg);
         wpan = new REDACTORWidget(ownerID, sysFields, sysMsg);
-        add(bpan, sysMsg.get(GuiConstant.SEARCH_PANEL));
-        add(wpan, sysMsg.get(GuiConstant.REDACTION_PANEL));
+        add(bpan, sysMsg.get(GuiConstant.TAB_SEARCH));
+        add(wpan, sysMsg.get(GuiConstant.TAB_REDACTION));
         setStyleName("tabPanel");
         selectTab(0);
     }

@@ -21,7 +21,6 @@
  */
 package olanto.myTerm.client.ContainerPanels;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -31,7 +30,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.Lists.DomainList;
 import olanto.myTerm.client.Lists.LangList;
-import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.shared.GuiConstant;
 
@@ -39,40 +37,35 @@ import olanto.myTerm.shared.GuiConstant;
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderREDACTOR extends HorizontalPanel {
+public class SearchHeaderADMIN extends HorizontalPanel {
 
     public Label termLabel;
     public TextBox searchField;
     public LangList langSrc;
     public ResourcesList rsrc;
     public DomainList dom;
-    public Button btnAdd;
+    public Button btnSearch;
 
-    public SearchHeaderREDACTOR(long ownerID, HashMap<String, String> sysMsg) {
+    public SearchHeaderADMIN(HashMap<String, String> sysMsg) {
         termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
         searchField = new TextBox();
         dom = new DomainList();
-        btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
-        add(btnAdd);
-        btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        add(btnSearch);
+        btnSearch.setTitle(sysMsg.get(GuiConstant.MSG_SEARCH_TITLE));
         add(new HTML("&nbsp;"));
-        langSrc = new LangList(ownerID, "source");
+        langSrc = new LangList();
         add(new Label(sysMsg.get(GuiConstant.MSG_SOURCE_LANG)));
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
-        if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
-        } else {
-            Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
-        }
+        rsrc = new ResourcesList();
         add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));
         add(rsrc);

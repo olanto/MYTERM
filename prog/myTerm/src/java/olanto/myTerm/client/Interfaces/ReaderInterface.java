@@ -21,7 +21,7 @@ public class ReaderInterface extends TabPanel {
     public ReaderInterface(final long ownerID, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
 
         bpan = new READERWidget(ownerID, sysMsg);
-        add(bpan, sysMsg.get(GuiConstant.SEARCH_PANEL));
+        add(bpan, sysMsg.get(GuiConstant.TAB_SEARCH));
         setStyleName("tabPanel");
         selectTab(0);
     }

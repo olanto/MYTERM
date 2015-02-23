@@ -213,13 +213,13 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext.setText(termDTO.getExtra());
         switch (status) {
             case 'e':
-                text_st.setText(sysMsg.get(GuiConstant.STATUS_ED));
+                text_st.setText(sysMsg.get(GuiConstant.MSG_STATUS_ED));
                 break;
             case 'p':
-                text_st.setText(sysMsg.get(GuiConstant.STATUS_PUB));
+                text_st.setText(sysMsg.get(GuiConstant.MSG_STATUS_PUB));
                 break;
             case 'r':
-                text_st.setText(sysMsg.get(GuiConstant.STATUS_REV));
+                text_st.setText(sysMsg.get(GuiConstant.MSG_STATUS_REV));
                 break;
         }
         lang_lbl.setText(termDTO.getLangName());

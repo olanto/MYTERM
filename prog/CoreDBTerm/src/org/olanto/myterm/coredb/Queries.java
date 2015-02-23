@@ -88,6 +88,11 @@ public class Queries {
         return result.get(0);
     }
 
+    public static List<Owners> getOwners() {
+        Query query = TermDB.em.createNamedQuery("Owners.findAll");
+        return query.getResultList();
+    }
+    
     public static Owners getOwner(String ownermail, String hash) {
         Query query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingAndHash");
         query.setParameter("ownerMailing", ownermail);

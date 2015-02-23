@@ -86,7 +86,7 @@ public class REDACTORWidget extends VerticalPanel {
         ownerID = idOwner;
         sFields = sysFields;
         sysMsgs = sysMsg;
-        resultsPanel = new ResultsContainerREDACTOR();
+        resultsPanel = new ResultsContainerREDACTOR(sysMsg);
         fixGwtNav();
         searchMenu = new SearchHeaderREDACTOR(ownerID, sysMsg);
         add(searchMenu);

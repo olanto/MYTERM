@@ -27,9 +27,9 @@ public class RevisorInterface extends TabPanel {
         bpan = new READERWidget(ownerID, sysMsg);
         wpan = new REDACTORWidget(ownerID, sysFields, sysMsg);
         apan = new REVISORWidget(ownerID, sysFields, sysMsg);
-        add(bpan, sysMsg.get(GuiConstant.SEARCH_PANEL));
-        add(wpan, sysMsg.get(GuiConstant.REDACTION_PANEL));
-        add(apan, sysMsg.get(GuiConstant.REVISION_PANEL));
+        add(bpan, sysMsg.get(GuiConstant.TAB_SEARCH));
+        add(wpan, sysMsg.get(GuiConstant.TAB_REDACTION));
+        add(apan, sysMsg.get(GuiConstant.TAB_REVISION));
         setStyleName("tabPanel");
         selectTab(0);
     }

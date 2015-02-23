@@ -654,4 +654,37 @@ public class JPAViewFunctions {
         }
         return Collections.EMPTY_LIST;
     }
+
+    public static List<String> getOwnerRoles(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findOwnerRolesByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+            return result;
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    public static List<String> getOwnerStatus(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findOwnerStatusByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+            return result;
+        }
+        return Collections.EMPTY_LIST;
+    }
+    
+    public static List<String> getResourcePrivacy(String langID) {
+        init();
+        if (!langID.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findResourcePrivacyByLanguage");
+            query.setParameter("idLanguage", langID);
+            List<String> result = query.getResultList();
+            return result;
+        }
+        return Collections.EMPTY_LIST;
+    }
 }

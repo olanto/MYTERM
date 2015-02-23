@@ -75,7 +75,7 @@ public class LangSetFormREVISOR extends VerticalPanel {
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
                 ter.refreshContentFromTermDTO(tDTO, userLangs, sFields, isEdited, sysMsg);
-                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.TERM_RANK) + i));
+                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.MSG_TERM_RANK) + i));
                 ter.approve.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {

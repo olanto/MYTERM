@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.client.Lists.DomainList;
-import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.SysFieldDTO;
@@ -45,7 +45,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     private Label label_sf;
     public DomainList sf;
     private Label label_rsrc;
-    private ResourceList rl;
+    private ResourcesList rl;
     private Label label_def;
     private TextAreaMyTerm text_def;
     private Label label_sdef;
@@ -66,7 +66,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     private Label label_rs;
     public int type;
 
-    public ConceptFormREDACTOR(ResourceList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
+    public ConceptFormREDACTOR(ResourcesList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         cform = new Grid(2, 3);
         label_sf = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SUBJECT_FIELD), sFields.get(GuiConstant.C_SUBJECT_FIELD));
         label_rsrc = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_RESOURCE), sFields.get(GuiConstant.C_RESOURCE));

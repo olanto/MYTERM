@@ -12,6 +12,7 @@ import java.util.Map;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
+import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.ResourceDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -43,6 +44,8 @@ public interface myTermService extends RemoteService {
     public Collection<LanguageDTO> getLanguages();
 
     public Collection<DomainDTO> getDomains();
+
+    public Collection<ResourceDTO> getResources();
 
     public Collection<ResourceDTO> getResourcesByOwner(String ownerMailing, String role);
 
@@ -83,4 +86,12 @@ public interface myTermService extends RemoteService {
     public Collection<String> getTermPOS(String langID);
 
     public Collection<String> getTermGender(String langID);
+
+    public Collection<String> getOwnerRoles(String langID);
+
+    public Collection<String> getOwnerStatus(String langID);
+
+    public Collection<String> getResourcePrivacy(String langID);
+
+    public Collection<OwnerDTO> getOwners();
 }

@@ -25,6 +25,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
@@ -32,12 +33,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class ResultsContainerBasic extends HorizontalPanel {
 
-    public ScrollPanel sideRes = new ScrollPanel();
-    public ScrollPanel termsDetails = new ScrollPanel();
-    public VerticalPanel resVP = new VerticalPanel();
-    public ScrollPanel conceptDetails = new ScrollPanel();
+    public ScrollPanel sideRes;
+    public ScrollPanel termsDetails;
+    public VerticalPanel resVP;
+    public ScrollPanel conceptDetails;
 
     public ResultsContainerBasic() {
+        sideRes = new ScrollPanel();
+        termsDetails = new ScrollPanel();
+        resVP = new VerticalPanel();
+        conceptDetails = new ScrollPanel();
         add(sideRes);
         add(resVP);
         resVP.add(conceptDetails);
@@ -49,16 +54,16 @@ public class ResultsContainerBasic extends HorizontalPanel {
     }
 
     public void adjustSize() {
-        int h = Window.getClientHeight() - 140;
-        int w = Window.getClientWidth() - 15;
+        int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
         sideRes.setPixelSize(w * 1 / 4, h);
         termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
-        int h = Window.getClientHeight() - 140;
-        int w = Window.getClientWidth() - 15;
+        int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
         sideRes.setPixelSize((int) (w * s_widthper), h);
         termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
         conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));

@@ -35,7 +35,7 @@ import java.util.HashMap;
 import olanto.myTerm.client.ServiceCalls.LoginService;
 import olanto.myTerm.client.ServiceCalls.LoginServiceAsync;
 import olanto.myTerm.shared.GuiConstant;
-import olanto.myTerm.shared.UserDTO;
+import olanto.myTerm.shared.OwnerDTO;
 
 /**
  *
@@ -43,11 +43,15 @@ import olanto.myTerm.shared.UserDTO;
  */
 public class HeaderPanel extends HorizontalPanel {
 
-    public Image logo = new Image("img/olanto.jpg");
-    public Anchor logout = new Anchor("Logout");
-    final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    public Image logo;
+    public Anchor logout;
+    final LoginServiceAsync loginService;
 
-    public HeaderPanel(final UserDTO user, HashMap<String, String> sysMsg) {
+    public HeaderPanel(final OwnerDTO user, HashMap<String, String> sysMsg) {
+        logo = new Image("img/olanto.jpg");
+        logout = new Anchor("Logout");
+        loginService = GWT.create(LoginService.class);
+
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(logo);
         logo.setPixelSize(30, 32);

@@ -32,16 +32,26 @@ public class ResourceDTO implements IsSerializable {
     private static final long serialVersionUID = 1L;
     private Long idResource;
     private String ownerMailing;
+    private Long ownerID;
     private String resourceName;
     private String resourcePrivacy;
     private String resourceNote;
-    private String extra;
+    private String resourceExtra;
 
     public ResourceDTO() {
     }
 
     public ResourceDTO(Long idResource) {
         this.idResource = idResource;
+    }
+
+    public ResourceDTO(Long idResource, Long ownerID, String resourceName, String resourcePrivacy, String resourceNote, String resourceExtra) {
+        this.idResource = idResource;
+        this.ownerID = ownerID;
+        this.resourceName = resourceName;
+        this.resourcePrivacy = resourcePrivacy;
+        this.resourceNote = resourceNote;
+        this.resourceExtra = resourceExtra;
     }
 
     public ResourceDTO(Long idResource, String ownerMailing, String resourceName, String resourcePrivacy) {
@@ -61,8 +71,16 @@ public class ResourceDTO implements IsSerializable {
         return idResource;
     }
 
+    public Long getIdOwner() {
+        return ownerID;
+    }
+
     public void setIdResource(Long idResource) {
         this.idResource = idResource;
+    }
+
+    public void setIdOwner(Long idowner) {
+        this.ownerID = idowner;
     }
 
     public String getOwnerMailing() {
@@ -90,11 +108,11 @@ public class ResourceDTO implements IsSerializable {
     }
 
     public String getExtra() {
-        return extra;
+        return resourceExtra;
     }
 
     public void setExtra(String extra) {
-        this.extra = extra;
+        this.resourceExtra = extra;
     }
 
     @Override

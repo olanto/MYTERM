@@ -11,6 +11,7 @@ import java.util.Map;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
+import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.ResourceDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -36,13 +37,15 @@ public interface myTermServiceAsync {
 
     public void getWorkspaceElements(String ls, long ownerID, AsyncCallback<String> callback);
 
-    public void getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID,  String domID, long ownerID, AsyncCallback<String> callback);
+    public void getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID, String domID, long ownerID, AsyncCallback<String> callback);
 
     public void getInventory(AsyncCallback<String> callback);
 
     public void getLanguages(AsyncCallback<Collection<LanguageDTO>> asyncCallback);
 
     public void getDomains(AsyncCallback<Collection<DomainDTO>> asyncCallback);
+
+    public void getResources(AsyncCallback<Collection<ResourceDTO>> asyncCallback);
 
     public void getResourcesByOwner(String ownerMailing, String role, AsyncCallback<Collection<ResourceDTO>> asyncCallback);
 
@@ -81,4 +84,12 @@ public interface myTermServiceAsync {
     public void getTermPOS(String langID, AsyncCallback<Collection<String>> asyncCallback);
 
     public void getTermGender(String langID, AsyncCallback<Collection<String>> asyncCallback);
+
+    public void getOwnerRoles(String langID, AsyncCallback<Collection<String>> asyncCallback);
+
+    public void getOwnerStatus(String langID, AsyncCallback<Collection<String>> asyncCallback);
+
+    public void getResourcePrivacy(String langID, AsyncCallback<Collection<String>> asyncCallback);
+
+    public void getOwners(AsyncCallback<Collection<OwnerDTO>> asyncCallback);
 }

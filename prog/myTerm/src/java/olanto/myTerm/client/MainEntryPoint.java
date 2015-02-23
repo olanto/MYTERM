@@ -37,7 +37,7 @@ import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.SysFieldDTO;
-import olanto.myTerm.shared.UserDTO;
+import olanto.myTerm.shared.OwnerDTO;
 
 /**
  * Main entry point.
@@ -58,20 +58,20 @@ public class MainEntryPoint implements EntryPoint {
     private VerticalPanel vp = new VerticalPanel();
     private LoginView view = GWT.create(LoginView.class);
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-    public static UserDTO userDTO;
+    public static OwnerDTO userDTO;
     public static StatusPanel statusPanel = new StatusPanel();
     public static HashMap<String, String> sysMsg;
     public static HashMap<String, SysFieldDTO> sysFields;
     AsyncCallback<Map<String, SysFieldDTO>> getSysFields;
     AsyncCallback<Map<String, String>> getSysMsg;
-    AsyncCallback<UserDTO> login = new AsyncCallback<UserDTO>() {
+    AsyncCallback<OwnerDTO> login = new AsyncCallback<OwnerDTO>() {
         @Override
         public void onFailure(Throwable caught) {
             Window.alert("Failed to call login service");
         }
 
         @Override
-        public void onSuccess(UserDTO user) {
+        public void onSuccess(OwnerDTO user) {
             if (user == null) {
                 showLogin();
             } else {
@@ -83,14 +83,14 @@ public class MainEntryPoint implements EntryPoint {
             }
         }
     };
-    AsyncCallback<UserDTO> authenticate = new AsyncCallback<UserDTO>() {
+    AsyncCallback<OwnerDTO> authenticate = new AsyncCallback<OwnerDTO>() {
         @Override
         public void onFailure(Throwable caught) {
             Window.alert("Failed to call login service");
         }
 
         @Override
-        public void onSuccess(UserDTO user) {
+        public void onSuccess(OwnerDTO user) {
             if (user == null) {
                 //we can take this as a bad attempt
                 view.getMessage().setWidget(new HTML("Wrong! you have x trials left"));
@@ -187,7 +187,7 @@ public class MainEntryPoint implements EntryPoint {
         view.getEmailBox().setFocus(true);
     }
 
-    public void showMain(final UserDTO user) {
+    public void showMain(final OwnerDTO user) {
         sysFields = new HashMap<>();
         sysMsg = new HashMap<>();
         userDTO = user;

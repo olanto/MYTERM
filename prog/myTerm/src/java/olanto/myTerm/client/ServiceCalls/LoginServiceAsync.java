@@ -5,7 +5,7 @@
 package olanto.myTerm.client.ServiceCalls;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import olanto.myTerm.shared.UserDTO;
+import olanto.myTerm.shared.OwnerDTO;
 
 /**
  *
@@ -15,9 +15,9 @@ public interface LoginServiceAsync {
 
     public void myMethod(String s, AsyncCallback<String> callback);
 
-    public void loginCheck(String name, String password, AsyncCallback<UserDTO> callback);
+    public void loginCheck(String name, String password, AsyncCallback<OwnerDTO> callback);
 
-    public void loginFromSessionServer(AsyncCallback<UserDTO> callback);
+    public void loginFromSessionServer(AsyncCallback<OwnerDTO> callback);
 
     public void changePassword(String name, String newPassword, AsyncCallback callback);
 

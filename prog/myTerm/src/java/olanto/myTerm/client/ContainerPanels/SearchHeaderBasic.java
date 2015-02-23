@@ -32,7 +32,7 @@ import java.util.HashMap;
 import olanto.myTerm.client.Lists.DomainList;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.client.MainEntryPoint;
-import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.shared.GuiConstant;
 
 /**
@@ -45,7 +45,7 @@ public class SearchHeaderBasic extends HorizontalPanel {
     public TextBox searchField;
     public LangList langSrc;
     public LangList langTgt;
-    public ResourceList rsrc;
+    public ResourcesList rsrc;
     public DomainList dom;
     public Button btnSend;
 
@@ -63,25 +63,25 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(btnSend);
         add(new HTML("&nbsp;"));
-        add(new Label("Source Lang. "));
+        add(new Label(sysMsg.get(GuiConstant.MSG_SOURCE_LANG)));
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
-        add(new Label("Target Lang. "));
+        add(new Label(sysMsg.get(GuiConstant.MSG_TARGET_LANG)));
         add(new HTML("&nbsp;"));
         add(langTgt);
         add(new HTML("&nbsp;"));
-        add(new Label("Resource: "));
+        add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));
         if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
         } else {
             Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourceList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
         }
         add(rsrc);
         add(new HTML("&nbsp;"));
-        add(new Label("Domain: "));
+        add(new Label(sysMsg.get(GuiConstant.MSG_DOMAIN)));
         add(new HTML("&nbsp;"));
         add(dom);
         add(new HTML("&nbsp;"));

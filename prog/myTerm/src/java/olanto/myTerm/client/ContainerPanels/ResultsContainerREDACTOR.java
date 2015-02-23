@@ -27,6 +27,8 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import java.util.HashMap;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
@@ -34,17 +36,27 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class ResultsContainerREDACTOR extends HorizontalPanel {
 
-    public ScrollPanel sideRes = new ScrollPanel();
-    public ScrollPanel sideCurrent = new ScrollPanel();
-    public ScrollPanel termsDetails = new ScrollPanel();
-    private VerticalPanel resVP = new VerticalPanel();
-    private VerticalPanel sideVP = new VerticalPanel();
-    public ScrollPanel conceptDetails = new ScrollPanel();
-    public Button addnewcpt = new Button("Create new entry");
-    public HorizontalPanel buttonsPanel = new HorizontalPanel();
-    private Label currentHeader = new Label("Workspace Entries");
+    public ScrollPanel sideRes;
+    public ScrollPanel sideCurrent;
+    public ScrollPanel termsDetails;
+    private VerticalPanel resVP;
+    private VerticalPanel sideVP;
+    public ScrollPanel conceptDetails;
+    public Button addnewcpt;
+    public HorizontalPanel buttonsPanel;
+    private Label currentHeader;
 
-    public ResultsContainerREDACTOR() {
+    public ResultsContainerREDACTOR(HashMap<String, String> sysMsg) {
+
+        sideRes = new ScrollPanel();
+        sideCurrent = new ScrollPanel();
+        termsDetails = new ScrollPanel();
+        resVP = new VerticalPanel();
+        sideVP = new VerticalPanel();
+        conceptDetails = new ScrollPanel();
+        addnewcpt = new Button(sysMsg.get(GuiConstant.BTN_CREATE_NEW));
+        buttonsPanel = new HorizontalPanel();
+        currentHeader = new Label(sysMsg.get(GuiConstant.MSG_WORKSPACE_ENTRIES));
         add(sideVP);
         add(resVP);
         resVP.add(conceptDetails);
@@ -64,8 +76,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     }
 
     public void adjustSize() {
-        int h = Window.getClientHeight() - 155;
-        int w = Window.getClientWidth() - 20;
+        int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT_EXTRA;
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT_EXTRA;
         sideRes.setPixelSize((int) (w * 1 / 4) - 3, (h / 2 - 30));
         buttonsPanel.setPixelSize((int) (w * 1 / 4) + 2, 30);
         sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
@@ -77,8 +89,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
-        int h = Window.getClientHeight() - 155;
-        int w = Window.getClientWidth() - 20;
+        int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT_EXTRA;
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT_EXTRA;
         sideVP.setWidth((int) (w * s_widthper) + "px");
         sideRes.setPixelSize((int) (w * s_widthper) - 3, (h / 2 - 30));
         buttonsPanel.setPixelSize((int) (w * s_widthper), 30);

@@ -38,10 +38,12 @@ import olanto.myTerm.shared.GuiConstant;
  */
 public class StatusPanel extends HorizontalPanel {
 
-    private HorizontalPanel contact = new HorizontalPanel();
-    public static Label msg = new Label();
+    private HorizontalPanel contact;
+    public static Label msg;
 
     public StatusPanel() {
+        contact = new HorizontalPanel();
+        msg = new Label();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         setStyleName("headerPanel");
         add(msg);

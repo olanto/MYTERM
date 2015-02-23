@@ -48,6 +48,31 @@ public class LangList extends ListBox {
     private ArrayList<String> langlist = new ArrayList<>();
     private ArrayList<String> langIDlist = new ArrayList<>();
 
+    public LangList() {
+        super();
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages, please RELOAD THE PAGE");
+            }
+
+            @Override
+            public void onSuccess(Collection<LanguageDTO> result) {
+                ArrayList<LanguageDTO> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0, j = 0;
+                    for (LanguageDTO s : res) {
+                        langlist.add(s.getLanguageDefaultName());
+                        langIDlist.add(s.getIdLanguage());
+                        addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                    }
+                    setSelectedIndex(0);
+                }
+            }
+        };
+        langService.getLanguages(langCallback);
+    }
+
     public LangList(final String type) {
         super();
         langCallback = new AsyncCallback<Collection<LanguageDTO>>() {

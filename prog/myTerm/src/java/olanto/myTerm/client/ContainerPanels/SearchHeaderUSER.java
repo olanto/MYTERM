@@ -21,7 +21,6 @@
  */
 package olanto.myTerm.client.ContainerPanels;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -29,58 +28,46 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
-import olanto.myTerm.client.Lists.DomainList;
-import olanto.myTerm.client.Lists.LangList;
-import olanto.myTerm.client.MainEntryPoint;
-import olanto.myTerm.client.Lists.ResourcesList;
+import olanto.myTerm.client.Lists.OwnerRolesList;
+import olanto.myTerm.client.Lists.OwnerStatusList;
 import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderREDACTOR extends HorizontalPanel {
+public class SearchHeaderUSER extends HorizontalPanel {
 
-    public Label termLabel;
     public TextBox searchField;
-    public LangList langSrc;
-    public ResourcesList rsrc;
-    public DomainList dom;
+    public OwnerStatusList ownerStatus;
+    public OwnerRolesList ownerRole;
+    public Button btnSearch;
     public Button btnAdd;
 
-    public SearchHeaderREDACTOR(long ownerID, HashMap<String, String> sysMsg) {
-        termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
-        searchField = new TextBox();
-        dom = new DomainList();
+    public SearchHeaderUSER(HashMap<String, String> sysMsg) {
+        ownerStatus = new OwnerStatusList(GuiConstant.INTERFACE_LANG);
+        ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
+        btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        searchField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(termLabel);
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
+        add(btnSearch);
+        add(new HTML("&nbsp;"));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_STATUS)));
+        add(new HTML("&nbsp;"));
+        add(ownerStatus);
+        add(new HTML("&nbsp;"));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_ROLE)));
+        add(new HTML("&nbsp;"));
+        add(ownerRole);
         add(new HTML("&nbsp;"));
         add(btnAdd);
+        btnSearch.setTitle(sysMsg.get(GuiConstant.MSG_SEARCH_TITLE));
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
-        add(new HTML("&nbsp;"));
-        langSrc = new LangList(ownerID, "source");
-        add(new Label(sysMsg.get(GuiConstant.MSG_SOURCE_LANG)));
-        add(new HTML("&nbsp;"));
-        add(langSrc);
-        add(new HTML("&nbsp;"));
-        if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
-        } else {
-            Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
-        }
-        add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
-        add(new HTML("&nbsp;"));
-        add(rsrc);
-        add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.MSG_DOMAIN)));
-        add(new HTML("&nbsp;"));
-        add(dom);
-        add(new HTML("&nbsp;"));
         setStyleName("searchMenu");
     }
 }

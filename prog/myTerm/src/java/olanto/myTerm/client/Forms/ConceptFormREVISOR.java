@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
-import olanto.myTerm.client.Lists.ResourceList;
+import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.GuiConstant;
@@ -59,11 +59,11 @@ public class ConceptFormREVISOR extends HorizontalPanel {
     public Button save;
     public Button disapprove;
     public Button escape;
-    public ResourceList rsrc;
+    public ResourcesList rsrc;
     private Label label_dom;
     private Label label_rs;
 
-    public ConceptFormREVISOR(ResourceList rs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
+    public ConceptFormREVISOR(ResourcesList rs, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         rsrc = rs;
         cform = new Grid(2, 3);
         label_sf = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_C_SUBJECT_FIELD), sFields.get(GuiConstant.C_SUBJECT_FIELD));

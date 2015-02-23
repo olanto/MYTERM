@@ -74,7 +74,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
-                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.TERM_RANK) + desc.getWidgetCount()));
+                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.MSG_TERM_RANK) + desc.getWidgetCount()));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {
@@ -95,7 +95,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth() - 10);
                 ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited, sysMsg);
-                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.TERM_RANK) + i));
+                ter.form3.setWidget(4, 0, new HTML(sysMsg.get(GuiConstant.MSG_TERM_RANK) + i));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override
                     public void onClick(ClickEvent event) {

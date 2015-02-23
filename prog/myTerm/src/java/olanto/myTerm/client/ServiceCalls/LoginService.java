@@ -6,7 +6,7 @@ package olanto.myTerm.client.ServiceCalls;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import olanto.myTerm.shared.UserDTO;
+import olanto.myTerm.shared.OwnerDTO;
 
 /**
  *
@@ -17,9 +17,9 @@ public interface LoginService extends RemoteService {
 
     public String myMethod(String s);
 
-    UserDTO loginCheck(String name, String password);
+    OwnerDTO loginCheck(String name, String password);
 
-    UserDTO loginFromSessionServer();
+    OwnerDTO loginFromSessionServer();
 
     boolean changePassword(String name, String newPassword);
 

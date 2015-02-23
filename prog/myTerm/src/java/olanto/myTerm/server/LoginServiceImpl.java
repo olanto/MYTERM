@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import olanto.myTerm.client.ServiceCalls.LoginService;
-import olanto.myTerm.shared.UserDTO;
+import olanto.myTerm.shared.OwnerDTO;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Owners;
@@ -27,13 +27,13 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     }
 
     @Override
-    public UserDTO loginCheck(String email, String password) {
+    public OwnerDTO loginCheck(String email, String password) {
         //check to see if the email exist in the datastore
         //check passwords
         TermDB.restart();
         email = escapeHtml(email);
         password = escapeHtml(password);
-        UserDTO user = new UserDTO();
+        OwnerDTO user = new OwnerDTO();
         Owners o = Queries.getOwner(email, password);
         if (o != null) {
             if ((password.equals(o.getOwnerHash()))) {
@@ -55,7 +55,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
     }
 
     @Override
-    public UserDTO loginFromSessionServer() {
+    public OwnerDTO loginFromSessionServer() {
         return getUserAlreadyFromSession();
     }
 
@@ -69,18 +69,18 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
         return false;
     }
 
-    private UserDTO getUserAlreadyFromSession() {
-        UserDTO user = null;
+    private OwnerDTO getUserAlreadyFromSession() {
+        OwnerDTO user = null;
         HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
         HttpSession session = httpServletRequest.getSession();
         Object userObj = session.getAttribute("user");
-        if (userObj != null && userObj instanceof UserDTO) {
-            user = (UserDTO) userObj;
+        if (userObj != null && userObj instanceof OwnerDTO) {
+            user = (OwnerDTO) userObj;
         }
         return user;
     }
 
-    private void storeUserInSession(UserDTO user) {
+    private void storeUserInSession(OwnerDTO user) {
         HttpServletRequest httpServletRequest = this.getThreadLocalRequest();
         HttpSession session = httpServletRequest.getSession(true);
         session.setAttribute("user", user);

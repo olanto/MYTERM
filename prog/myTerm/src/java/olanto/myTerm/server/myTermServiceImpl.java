@@ -25,6 +25,7 @@ import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.LangEntryDTO;
 import olanto.myTerm.shared.LangSetDTO;
+import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.ManageConcept;
@@ -34,6 +35,8 @@ import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Languages;
+import org.olanto.myterm.coredb.entityclasses.Owners;
+import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
@@ -172,10 +175,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"cpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.DEF_DETAILS)).append(" : ").append(c.getIdConcept()).append("</th>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.RESOURCE_DETAILS)).append(" : ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.CREATION_DETAILS)).append("</th>");
-            result.append("<th>").append(sysMsgsrv.get(GuiConstant.EXTRA_DETAILS)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.MSG_DEF_DETAILS)).append(" : ").append(c.getIdConcept()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.MSG_RESOURCE_DETAILS)).append(" : ").append(Queries.getIdResources(c.getIdResource()).getResourceName()).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.MSG_CREATION_DETAILS)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.MSG_EXTRA_DETAILS)).append("</th>");
             result.append("</tr>");
             result.append("<tr>");
             result.append("<td>");
@@ -687,5 +690,48 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         sysMsgsrv.putAll(sysMsg);
         return sysMsg;
+    }
+
+    @Override
+    public Collection<String> getOwnerRoles(String langID) {
+        return JPAViewFunctions.getOwnerRoles(langID);
+    }
+
+    @Override
+    public Collection<String> getOwnerStatus(String langID) {
+        return JPAViewFunctions.getOwnerStatus(langID);
+    }
+
+    @Override
+    public Collection<ResourceDTO> getResources() {
+        List<Resources> l = Queries.getResources();
+        if (!l.isEmpty()) {
+            List<ResourceDTO> resources = new ArrayList<>();
+            for (Resources res : l) {
+                ResourceDTO r = new ResourceDTO(res.getIdResource(), res.getIdOwner(), res.getResourceName(), res.getResourcePrivacy(), res.getResourceNote(), res.getExtra());
+                resources.add(r);
+            }
+            return resources;
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public Collection<OwnerDTO> getOwners() {
+        List<Owners> o = Queries.getOwners();
+        if (!o.isEmpty()) {
+            List<OwnerDTO> owners = new ArrayList<>();
+            for (Owners own : o) {
+                OwnerDTO owner = new OwnerDTO(own.getIdOwner(), own.getOwnerFirstName(), own.getOwnerLastName(), own.getOwnerHash(), own.getOwnerMailing(), own.getOwnerRoles(), own.getOwnerStatus());
+                owners.add(owner);
+            }
+            return owners;
+        }
+        return Collections.EMPTY_LIST;
+    }
+
+    @Override
+    public Collection<String> getResourcePrivacy(String langID) {
+        return JPAViewFunctions.getResourcePrivacy(langID);
     }
 }
