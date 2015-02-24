@@ -6,10 +6,7 @@ package org.olanto.myterm.coredb;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.olanto.myterm.coredb.entityclasses.Concepts;
-import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Owners;
-import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
 /**

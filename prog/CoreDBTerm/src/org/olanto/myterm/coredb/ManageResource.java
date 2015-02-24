@@ -23,7 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 import org.olanto.myterm.coredb.entityclasses.Resources;
-import org.olanto.myterm.coredb.jpacontroller.exceptions.IllegalOrphanException;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
 /**

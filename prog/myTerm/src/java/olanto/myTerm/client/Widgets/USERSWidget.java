@@ -185,7 +185,6 @@ public class USERSWidget extends VerticalPanel {
                     if (isEdited.getVal()) {
                         MainEntryPoint.statusPanel.setMessage("warning", "Updating content...");
                         ownerForm.setOwnerDTOFromContent(ownerDTO);
-                        Window.alert(ownerDTO.toStringDTO());
                         getService().AdminUpdateUser(ownerDTO, getOwnerDetailsSaveCallback);
                     } else {
                         MainEntryPoint.statusPanel.setMessage("warning", "Nothing changed...");

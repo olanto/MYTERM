@@ -813,6 +813,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public OwnerDTO getOwnerDetails(long ownerID) {
+        TermDB.restart();
         Owners own = Queries.getOwnerbyID(ownerID);
         if (own != null) {
             OwnerDTO owner = new OwnerDTO(own.getIdOwner(), own.getOwnerFirstName(), own.getOwnerLastName(), own.getOwnerHash(), own.getOwnerMailing(), own.getOwnerRoles(), own.getOwnerStatus());
@@ -831,7 +832,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         oa.setOwnerRoles(ownerDTO.getRole());
         oa.setOwnerStatus(ownerDTO.getStatus());
         oa.setOwnerHash(ownerDTO.getHash());
-        if(ManageOwner.create(oa)!=null){
+        if (ManageOwner.create(oa) != null) {
             oa = null;
             return "success";
         }
