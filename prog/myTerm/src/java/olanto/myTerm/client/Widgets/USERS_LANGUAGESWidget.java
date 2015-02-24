@@ -48,7 +48,7 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
         searchMenu = new SearchHeaderUSER_LANGUAGE(sysMsg);
         add(searchMenu);
         add(resultsPanel);
-        resultsPanel.adjustSize();
+        resultsPanel.adjustSize(0.4f, 0.6f);
     }
 
     public static native void fixGwtNav() /*-{

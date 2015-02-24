@@ -52,6 +52,7 @@ public class ResourcePrivacyList extends ListBox {
 
             @Override
             public void onSuccess(Collection<String> result) {
+                addItem(" ", " ");
                 for (String s : result) {
                     addItem(s, s);
                 }

@@ -38,24 +38,20 @@ import olanto.myTerm.shared.GuiConstant;
  */
 public class SearchHeaderUSER extends HorizontalPanel {
 
-    public TextBox searchField;
+    public TextBox mailingField;
     public OwnerStatusList ownerStatus;
     public OwnerRolesList ownerRole;
-    public Button btnSearch;
     public Button btnAdd;
 
     public SearchHeaderUSER(HashMap<String, String> sysMsg) {
         ownerStatus = new OwnerStatusList(GuiConstant.INTERFACE_LANG);
         ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
-        btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
-        searchField = new TextBox();
+        mailingField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
         add(new HTML("&nbsp;"));
-        add(searchField);
-        add(new HTML("&nbsp;"));
-        add(btnSearch);
+        add(mailingField);
         add(new HTML("&nbsp;"));
         add(new Label(sysMsg.get(GuiConstant.LBL_O_STATUS)));
         add(new HTML("&nbsp;"));
@@ -66,7 +62,6 @@ public class SearchHeaderUSER extends HorizontalPanel {
         add(ownerRole);
         add(new HTML("&nbsp;"));
         add(btnAdd);
-        btnSearch.setTitle(sysMsg.get(GuiConstant.MSG_SEARCH_TITLE));
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
         setStyleName("searchMenu");
     }

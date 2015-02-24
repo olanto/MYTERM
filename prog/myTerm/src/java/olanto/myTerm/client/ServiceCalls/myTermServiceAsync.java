@@ -92,4 +92,26 @@ public interface myTermServiceAsync {
     public void getResourcePrivacy(String langID, AsyncCallback<Collection<String>> asyncCallback);
 
     public void getOwners(AsyncCallback<Collection<OwnerDTO>> asyncCallback);
+
+    public void createUser(OwnerDTO ownerDTO, AsyncCallback<String> asyncCallback);
+
+    public void getOwnerDetails(long ownerID, AsyncCallback<OwnerDTO> asyncCallback);
+
+    public void getOwnersDetails(String ownlerMailing, String ownerStatus, String ownerRole, AsyncCallback<String> asyncCallback);
+
+    public void getDomainsDetails(String domName, AsyncCallback<String> asyncCallback);
+
+    public void getResourcesDetails(String resName, String resPrivacy, AsyncCallback<String> asyncCallback);
+
+    public void getLanguagesDetails(String langID, String langName, AsyncCallback<String> asyncCallback);
+
+    public void getUsersResourcesDetails(long ownerID, long resID, String role, AsyncCallback<String> asyncCallback);
+
+    public void getUsersLanguagesDetails(long ownerID, String langID, AsyncCallback<String> asyncCallback);
+
+    public void getEntitiesDetails(String s, String langID, long resID, String domID, AsyncCallback<String> asyncCallback);
+
+    public void AdminUpdateUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
+
+    public void AdminSaveUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
 }

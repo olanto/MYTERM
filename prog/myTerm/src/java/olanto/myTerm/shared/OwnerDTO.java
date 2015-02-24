@@ -114,4 +114,14 @@ public class OwnerDTO implements IsSerializable {
     public void setRole(String role) {
         this.role = role;
     }
+     public String toStringDTO() {
+        String details = "----Owner Details----\n";
+        details += "ID: " + this.getId() + "\n";
+        details += "FN: " + this.getFirstName()+ "\n";
+        details += "LN: " + this.getLastName() + "\n";
+        details += "Mail: " + this.getEmail() + "\n";
+        details += "St: " + this.getStatus()+ "\n";
+        details += "Rl: " + this.getRole()+ "\n";
+        return details;
+    }
 }

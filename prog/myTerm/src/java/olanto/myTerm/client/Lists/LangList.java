@@ -58,9 +58,9 @@ public class LangList extends ListBox {
 
             @Override
             public void onSuccess(Collection<LanguageDTO> result) {
+                addItem(" ", " ");
                 ArrayList<LanguageDTO> res = new ArrayList<>();
                 if (res.addAll(result)) {
-                    int i = 0, j = 0;
                     for (LanguageDTO s : res) {
                         langlist.add(s.getLanguageDefaultName());
                         langIDlist.add(s.getIdLanguage());

@@ -100,6 +100,7 @@ public class ResourcesList extends ListBox {
             @Override
             public void onSuccess(Collection<ResourceDTO> result) {
                 if (result != null) {
+                    addItem(" ", "-1");
                     ArrayList<ResourceDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (ResourceDTO s : res) {

@@ -160,7 +160,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         text_def.setReadOnly(edit);
         text_sdef.setReadOnly(edit);
         text_nt.setReadOnly(edit);
-        sf.setEnabled(edit);
+        sf.setEnabled(!edit);
     }
 
     public void setConceptDTOFromContent(ConceptDTO conceptDTO) {

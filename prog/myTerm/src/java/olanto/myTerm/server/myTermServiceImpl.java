@@ -29,8 +29,10 @@ import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.ManageConcept;
+import org.olanto.myterm.coredb.ManageOwner;
 import org.olanto.myterm.coredb.ManageTerm;
 import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Domains;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
@@ -239,7 +241,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</div>");
             return result.toString();
         }
-
         return null;
     }
 
@@ -544,6 +545,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         Concepts c = cEntry.updateFromInterface();
         if (c != null) {
+            c = null;
             return "success";
         }
         return null;
@@ -564,6 +566,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
         Concepts c = cEntry.updateFromInterface();
         if (c != null) {
+            c = null;
             return "success";
         }
         return null;
@@ -733,5 +736,140 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public Collection<String> getResourcePrivacy(String langID) {
         return JPAViewFunctions.getResourcePrivacy(langID);
+    }
+
+    @Override
+    public String getOwnersDetails(String ownlerMailing, String ownerStatus, String ownerRole) {
+        List<Owners> o = Queries.getOwners();
+        if (!o.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+//            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_ID)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_LAST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_PWD)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_ROLE)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_STATUS)).append("</th>");
+            result.append("</tr>");
+            for (Owners own : o) {
+                result.append("<tr>");
+//                result.append("<td>").append(own.getIdOwner()).append("</td>");
+                result.append("<td><a href=\"#UM").append(own.getIdOwner()).append("\" onClick=\"return gwtnav(this);\">").append(own.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(own.getOwnerLastName()).append("</td>");
+                result.append("<td>").append(own.getOwnerMailing()).append("</td>");
+                result.append("<td>").append(own.getOwnerHash()).append("</td>");
+                result.append("<td>").append(own.getOwnerRoles()).append("</td>");
+                result.append("<td>").append(own.getOwnerStatus()).append("</td>");
+                result.append("</tr>");
+            }
+            o.clear();
+            o = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String getDomainsDetails(String domName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getResourcesDetails(String resName, String resPrivacy) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getLanguagesDetails(String langID, String langName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getUsersResourcesDetails(long ownerID, long resID, String role) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getUsersLanguagesDetails(long ownerID, String langID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getEntitiesDetails(String s, String langID, long resID, String domID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public OwnerDTO getOwnerDetails(long ownerID) {
+        Owners own = Queries.getOwnerbyID(ownerID);
+        if (own != null) {
+            OwnerDTO owner = new OwnerDTO(own.getIdOwner(), own.getOwnerFirstName(), own.getOwnerLastName(), own.getOwnerHash(), own.getOwnerMailing(), own.getOwnerRoles(), own.getOwnerStatus());
+            own = null;
+            return owner;
+        }
+        return null;
+    }
+
+    @Override
+    public String createUser(OwnerDTO ownerDTO) {
+        Owners oa = new Owners();
+        oa.setOwnerFirstName(ownerDTO.getFirstName());
+        oa.setOwnerLastName(ownerDTO.getLastName());
+        oa.setOwnerMailing(ownerDTO.getEmail());
+        oa.setOwnerRoles(ownerDTO.getRole());
+        oa.setOwnerStatus(ownerDTO.getStatus());
+        oa.setOwnerHash(ownerDTO.getHash());
+        if(ManageOwner.create(oa)!=null){
+            oa = null;
+            return "success";
+        }
+        return null;
+    }
+
+    @Override
+    public OwnerDTO AdminUpdateUser(OwnerDTO ownerDTO) {
+        Owners oa = new Owners();
+        oa.setIdOwner(ownerDTO.getId());
+        oa.setOwnerFirstName(ownerDTO.getFirstName());
+        oa.setOwnerLastName(ownerDTO.getLastName());
+        oa.setOwnerMailing(ownerDTO.getEmail());
+        oa.setOwnerRoles(ownerDTO.getRole());
+        oa.setOwnerStatus(ownerDTO.getStatus());
+        oa.setOwnerHash(ownerDTO.getHash());
+        oa = ManageOwner.edit(oa);
+        if (oa != null) {
+            return getOwnerDetails(oa.getIdOwner());
+        }
+        return null;
+    }
+
+    @Override
+    public String AdminSaveUser(OwnerDTO ownerDTO) {
+        Owners oa = new Owners();
+        oa.setIdOwner(ownerDTO.getId());
+        oa.setOwnerFirstName(ownerDTO.getFirstName());
+        oa.setOwnerLastName(ownerDTO.getLastName());
+        oa.setOwnerMailing(ownerDTO.getEmail());
+        oa.setOwnerRoles(ownerDTO.getRole());
+        oa.setOwnerStatus(ownerDTO.getStatus());
+        oa.setOwnerHash(ownerDTO.getHash());
+        oa = ManageOwner.edit(oa);
+        if (oa != null) {
+            oa = null;
+            return "sucess";
+        }
+        return null;
     }
 }

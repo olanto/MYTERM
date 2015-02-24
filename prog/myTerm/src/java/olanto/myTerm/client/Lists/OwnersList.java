@@ -52,6 +52,7 @@ public class OwnersList extends ListBox {
 
             @Override
             public void onSuccess(Collection<OwnerDTO> result) {
+                addItem(" ", "-1");
                 if (result != null) {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {

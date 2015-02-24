@@ -4,6 +4,9 @@
  */
 package olanto.myTerm.client.Widgets;
 
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.TabPanel;
 import java.util.HashMap;
 import olanto.myTerm.shared.GuiConstant;
@@ -39,6 +42,11 @@ public class ADMINPANEL extends TabPanel {
         add(dpan, sysMsg.get(GuiConstant.TAB_DOMAINS));
         add(epan, sysMsg.get(GuiConstant.TAB_ENTRIES));
         setStyleName("tabPanel");
-        selectTab(0);
+        this.addSelectionHandler(new SelectionHandler<Integer>() {
+            @Override
+            public void onSelection(SelectionEvent<Integer> event) {
+                History.newItem("page3" + event.getSelectedItem());
+            }
+        });
     }
 }

@@ -34,28 +34,28 @@ import olanto.myTerm.shared.GuiConstant;
 public class ResultsContainerADMIN extends HorizontalPanel {
 
     public ScrollPanel sideRes;
-    public ScrollPanel termsDetails;
+    public ScrollPanel elementDetails;
     private VerticalPanel resVP;
     private VerticalPanel sideVP;
 
     public ResultsContainerADMIN() {
         sideRes = new ScrollPanel();
-        termsDetails = new ScrollPanel();
+        elementDetails = new ScrollPanel();
         resVP = new VerticalPanel();
         sideVP = new VerticalPanel();
         add(sideVP);
         add(resVP);
-        resVP.add(termsDetails);
+        resVP.add(elementDetails);
         sideVP.add(sideRes);
         sideRes.setStyleName("sideWidget");
-        termsDetails.setStyleName("termsContainer");
+        elementDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
     }
 
-    public void adjustSize() {
+    public void adjustSize(float per_left, float per_right) {
         int h = Window.getClientHeight() - GuiConstant.ADMIN_HEADER_HEIGHT;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
-        sideRes.setPixelSize((int) (w * 1 / 3), h);
-        termsDetails.setPixelSize(w * 2 / 3, h);
+        sideRes.setPixelSize((int) (w * per_left), h);
+        elementDetails.setPixelSize((int) (w * per_right), h);
     }
 }

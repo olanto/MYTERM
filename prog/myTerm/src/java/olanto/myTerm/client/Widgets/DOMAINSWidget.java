@@ -48,7 +48,7 @@ public class DOMAINSWidget extends VerticalPanel {
         searchMenu = new SearchHeaderDOMAIN(sysMsg);
         add(searchMenu);
         add(resultsPanel);
-        resultsPanel.adjustSize();
+        resultsPanel.adjustSize(0.4f, 0.6f);
     }
 
     public static native void fixGwtNav() /*-{

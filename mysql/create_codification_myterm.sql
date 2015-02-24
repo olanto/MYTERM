@@ -126,6 +126,7 @@ insert into codes values ('msg','lbl.t.last_modified_by', 'Modified by', null);
 insert into codes values ('msg','lbl.t.cross_ref', 'Cross reference', null);
 insert into codes values ('msg','lbl.t.extra_cross_ref', 'Extra Cross reference', null);
 insert into codes values ('msg','lbl.t.image','Image',null);
+
 insert into codes values ('msg','lbl.c.subject_field','Subject field',null);
 insert into codes values ('msg','lbl.c.definition','Definition',null);
 insert into codes values ('msg','lbl.c.resource','Resource',null);
@@ -140,17 +141,21 @@ insert into codes values ('msg','lbl.c.last_modified_by', 'Modified by', null);
 insert into codes values ('msg','lbl.c.cross_ref', 'Cross reference', null);
 insert into codes values ('msg','lbl.c.extra_cross_ref', 'Extra Cross reference', null);
 insert into codes values ('msg','lbl.c.imported_ref', 'Imported reference', null);
-insert into codes values ('msg','lbl.o.id', 'Owner''s Role', null);
+
+insert into codes values ('msg','lbl.o.id', 'Owner''s ID', null);
 insert into codes values ('msg','lbl.o.role', 'Owner''s Role', null);
 insert into codes values ('msg','lbl.o.status', 'Owner''s Status', null);
 insert into codes values ('msg','lbl.o.mailing', 'Owner''s Mailing', null);
 insert into codes values ('msg','lbl.o.hash', 'Owner''s Password', null);
 insert into codes values ('msg','lbl.o.first_name', 'Owner''s First Name', null);
 insert into codes values ('msg','lbl.o.last_name', 'Owner''s Last Name', null);
+
 insert into codes values ('msg','lbl.d.id', 'Domaine''s ID', null);
 insert into codes values ('msg','lbl.d.default_name', 'Domaine''s Default Name', null);
+
 insert into codes values ('msg','lbl.l.id', 'Language''s ID', null);
 insert into codes values ('msg','lbl.l.default_name', 'Language''s Default Name', null);
+
 insert into codes values ('msg','lbl.r.id', 'Resource''s ID', null);
 insert into codes values ('msg','lbl.r.owner_id', 'Resource''s Owner', null);
 insert into codes values ('msg','lbl.r.name', 'Resource''s Name', null);
@@ -187,6 +192,7 @@ insert into codes values ('sys_field','t.cross_ref', 'hidden;2;extra', null);
 insert into codes values ('sys_field','t.extra_cross_ref', 'hidden;3;extra', null);
 insert into codes values ('sys_field','t.image', 'hidden;3;extra', null);
 insert into codes values ('sys_field','t.extra', 'hidden;3;extra', null);
+
 insert into codes values ('sys_field','c.subject_field','visible;1;visible',null);
 insert into codes values ('sys_field','c.definition','visible;1;visible',null);
 insert into codes values ('sys_field','c.resource','visible;2;visible',null);
@@ -201,6 +207,14 @@ insert into codes values ('sys_field','c.extra_cross_ref', 'hidden;3;extra', nul
 insert into codes values ('sys_field','c.imported_ref', 'hidden;3;extra', null);
 insert into codes values ('sys_field','c.image', 'hidden;3;extra', null);
 insert into codes values ('sys_field','c.extra', 'hidden;3;extra', null);
+
+insert into codes values ('sys_field','o.id', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.role', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.status', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.mailing', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.hash', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.first_name', 'visible;1;visible', null);
+insert into codes values ('sys_field','o.last_name', 'visible;1;visible', null);
 
 commit;
 select * from codes;   

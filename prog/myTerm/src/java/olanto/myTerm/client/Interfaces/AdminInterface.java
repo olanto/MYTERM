@@ -4,6 +4,8 @@
  */
 package olanto.myTerm.client.Interfaces;
 
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.TabPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.Widgets.ADMINPANEL;
@@ -34,6 +36,14 @@ public class AdminInterface extends TabPanel {
         add(apan, sysMsg.get(GuiConstant.TAB_REVISION));
         add(adpan, sysMsg.get(GuiConstant.TAB_ADMINISTRATION));
         setStyleName("tabPanel");
+        this.addSelectionHandler(new SelectionHandler<Integer>() {
+            @Override
+            public void onSelection(SelectionEvent<Integer> event) {
+                if (event.getSelectedItem() == 3){
+                    adpan.selectTab(0);
+                }
+            }
+        });
         selectTab(0);
     }
 }

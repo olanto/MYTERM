@@ -41,7 +41,7 @@ public class GuiConstant implements IsSerializable {
     public static final int WIDTH_UNIT = 15;
     public static final int HEADER_HEIGHT_EXTRA = 155;
     public static final int WIDTH_UNIT_EXTRA = 20;
-    public static final int ADMIN_HEADER_HEIGHT = 160;
+    public static final int ADMIN_HEADER_HEIGHT = 170;
     public static final String OLANTO_URL = "Powered by Olanto|http://olanto.org|_blank";
     public static final String FEEDBACK_MAIL = "Feedback|info@olanto.org";
     public static final String C_SUBJECT_FIELD = "c.subject_field";
@@ -58,6 +58,13 @@ public class GuiConstant implements IsSerializable {
     public static final String C_IMPORTED_REF = "c.imported_ref";
     public static final String C_IMAGE = "c.image";
     public static final String C_EXTRA = "c.extra";
+    public static final String O_ID = "o.id";
+    public static final String O_ROLE = "o.role";
+    public static final String O_STATUS = "o.status";
+    public static final String O_MAILING = "o.mailing";
+    public static final String O_FIRST_NAME = "o.first_name";
+    public static final String O_LAST_NAME = "o.last_name";
+    public static final String O_PWD = "o.hash";
     public static final String LBL_R_ID = "lbl.r.id";
     public static final String LBL_R_NAME = "lbl.r.name";
     public static final String LBL_R_PRIVACY = "lbl.r.privacy";

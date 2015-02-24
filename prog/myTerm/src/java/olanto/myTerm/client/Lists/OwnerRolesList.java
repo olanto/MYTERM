@@ -52,6 +52,7 @@ public class OwnerRolesList extends ListBox {
 
             @Override
             public void onSuccess(Collection<String> result) {
+                addItem(" ", " ");
                 for (String s : result) {
                     addItem(s, s);
                 }
@@ -61,7 +62,7 @@ public class OwnerRolesList extends ListBox {
         rolesService.getOwnerRoles(langID, rolesCallback);
     }
 
-    public OwnerRolesList(String langID, final String currentPOS, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    public OwnerRolesList(String langID, final String currentRole, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
         rolesCallback = new AsyncCallback<Collection<String>>() {
             @Override
@@ -76,7 +77,7 @@ public class OwnerRolesList extends ListBox {
                     int i = 0;
                     for (String s : res) {
                         addItem(s, s);
-                        if (s.equalsIgnoreCase(currentPOS)) {
+                        if (s.equalsIgnoreCase(currentRole)) {
                             i = res.indexOf(s);
                         }
                     }

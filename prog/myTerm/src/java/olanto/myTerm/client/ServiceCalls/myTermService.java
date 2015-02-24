@@ -94,4 +94,26 @@ public interface myTermService extends RemoteService {
     public Collection<String> getResourcePrivacy(String langID);
 
     public Collection<OwnerDTO> getOwners();
+
+    public String createUser(OwnerDTO ownerDTO);
+
+    public OwnerDTO getOwnerDetails(long ownerID);
+
+    public String getOwnersDetails(String ownlerMailing, String ownerStatus, String ownerRole);
+
+    public String getDomainsDetails(String domName);
+
+    public String getResourcesDetails(String resName, String resPrivacy);
+
+    public String getLanguagesDetails(String langID, String langName);
+
+    public String getUsersResourcesDetails(long ownerID, long resID, String role);
+
+    public String getUsersLanguagesDetails(long ownerID, String langID);
+
+    public String getEntitiesDetails(String s, String langID, long resID, String domID);
+
+    public OwnerDTO AdminUpdateUser(OwnerDTO ownerDTO);
+
+    public String AdminSaveUser(OwnerDTO ownerDTO);
 }
