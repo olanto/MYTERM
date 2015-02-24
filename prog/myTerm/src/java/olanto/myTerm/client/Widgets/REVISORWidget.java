@@ -163,7 +163,7 @@ public class REVISORWidget extends VerticalPanel {
                     resultsPanel.sideRes.setWidget(new HTML("No current entries"));
                 }
                 MainEntryPoint.statusPanel.setMessage("message", "Entries retrieved successfully...");
-                History.newItem("loaded");
+                History.newItem("p2loaded");
             }
 
             @Override
@@ -185,7 +185,7 @@ public class REVISORWidget extends VerticalPanel {
                 conceptEntryDTO = result;
 //                Window.alert(conceptEntryDTO.toStringDTO());
                 refreshContentFromConceptEntryDTO();
-                History.newItem("loaded");
+                History.newItem("p2loaded");
             }
         };
 
@@ -257,10 +257,10 @@ public class REVISORWidget extends VerticalPanel {
                         case "p2notdisapproved":
                             commandNotDisapproved();
                             break;
-                        case "loaded":
+                        case "p2loaded":
                             commandLoaded();
                             break;
-                        case "escape":
+                        case "p2escape":
                             commandEscape();
                             break;
                     }
@@ -312,7 +312,7 @@ public class REVISORWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     if (isEdited.getVal()) {
-                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "escape").show();
+                        new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 2, "p2escape").show();
                     } else {
                         MainEntryPoint.statusPanel.setMessage("warning", "Nothing has changed...");
                     }
@@ -545,7 +545,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         isEdited.setVal(false);
-        History.newItem("escaped");
+        History.newItem("p2escaped");
     }
 
     public static native void fixGwtNav() /*-{

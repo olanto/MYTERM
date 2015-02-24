@@ -103,13 +103,13 @@ public class USERSWidget extends VerticalPanel {
                 isEdited.setVal(false);
                 ownerDTO = result;
                 refreshContentFromOwnerDTO();
-                History.newItem("loaded");
+                History.newItem("p30loaded");
             }
         };
         getOwnerDetailsSaveCallback = new AsyncCallback<OwnerDTO>() {
             @Override
             public void onFailure(Throwable caught) {
-                History.newItem("notSaved");
+                History.newItem("p30notSaved");
             }
 
             @Override
@@ -134,7 +134,7 @@ public class USERSWidget extends VerticalPanel {
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
                 }
-                History.newItem("loaded");
+                History.newItem("p30loaded");
             }
         };
         resultsPanel.adjustSize(0.5f, 0.5f);
@@ -155,6 +155,9 @@ public class USERSWidget extends VerticalPanel {
                         case "page30":
                             commandInit();
                             break;
+                             case "p30escape":
+                            commandEscape();
+                            break;
                     }
                 }
             }
@@ -169,6 +172,13 @@ public class USERSWidget extends VerticalPanel {
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         resultsPanel.sideRes.clear();
         getService().getOwnersDetails("", "", "", ownersCallback);
+    }
+    private void commandEscape() {
+        searchMenu.btnAdd.setEnabled(true);
+        MainEntryPoint.statusPanel.setMessage("message", "Changes cancelled successfully");
+        resultsPanel.elementDetails.clear();
+        isEdited.setVal(false);
+        History.newItem("p30escaped");
     }
 
     public void refreshContentFromOwnerDTO() {
@@ -195,7 +205,7 @@ public class USERSWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     if (isEdited.getVal()) {
-                        new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, "escape").show();
+                        new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, "p30escape").show();
                     } else {
                         MainEntryPoint.statusPanel.setMessage("warning", "Nothing has changed...");
                     }
@@ -246,7 +256,7 @@ public class USERSWidget extends VerticalPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     MyDialog.this.hide();
-                    History.newItem("cancelled");
+                    History.newItem("p30cancelled");
                 }
             });
             Button save = new Button(sysMsgs.get(GuiConstant.BTN_SAVE));
@@ -264,7 +274,7 @@ public class USERSWidget extends VerticalPanel {
                             ownerForm.save.setEnabled(true);
                             resultsPanel.elementDetails.clear();
                             resultsPanel.elementDetails.setWidget(new Label("Communication failed"));
-                            History.newItem("notsaved");
+                            History.newItem("p30notsaved");
                         }
 
                         @Override
@@ -278,7 +288,7 @@ public class USERSWidget extends VerticalPanel {
                                     History.newItem(action);
                                 }
                             } else {
-                                History.newItem("notsaved");
+                                History.newItem("p30notsaved");
                             }
                         }
                     });
