@@ -21,11 +21,20 @@
  */
 package olanto.myTerm.client.Widgets;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerADMIN;
 import olanto.myTerm.client.ContainerPanels.SearchHeaderDOMAIN;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
+import olanto.myTerm.client.ServiceCalls.myTermService;
+import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.SysFieldDTO;
 
 /**
@@ -38,6 +47,7 @@ public class DOMAINSWidget extends VerticalPanel {
     private static ResultsContainerADMIN resultsPanel;
     private HashMap<String, SysFieldDTO> sFields;
     private HashMap<String, String> sysMsgs;
+    private static AsyncCallback<String> domainsCallback;
     public BooleanWrap isEdited = new BooleanWrap();
 
     public DOMAINSWidget(HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
@@ -48,7 +58,52 @@ public class DOMAINSWidget extends VerticalPanel {
         searchMenu = new SearchHeaderDOMAIN(sysMsg);
         add(searchMenu);
         add(resultsPanel);
-        resultsPanel.adjustSize(0.4f, 0.6f);
+        domainsCallback = new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                History.newItem("page33");
+            }
+
+            @Override
+            public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.setMessage("message", "Resources retreived successfully...");
+                searchMenu.btnAdd.setEnabled(true);
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                }
+                History.newItem("p33loaded");
+            }
+        };
+        resultsPanel.adjustSize(0.3f, 0.7f);
+        History.addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                MainEntryPoint.statusPanel.clearMessages();
+                String command = event.getValue();
+                if (command.contains("DM")) {
+                    if (isEdited.getVal()) {
+                    } else {
+                        long domID = Long.parseLong(command.substring(2));
+                    }
+                } else {
+                    switch (command) {
+                        case "page33":
+                            commandInit();
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+    private static myTermServiceAsync getService() {
+        return GWT.create(myTermService.class);
+    }
+
+    private void commandInit() {
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        resultsPanel.sideRes.clear();
+        getService().getDomainsDetails("", domainsCallback);
     }
 
     public static native void fixGwtNav() /*-{
