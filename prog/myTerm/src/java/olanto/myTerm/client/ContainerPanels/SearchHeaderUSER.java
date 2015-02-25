@@ -53,13 +53,13 @@ public class SearchHeaderUSER extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(mailingField);
         add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.LBL_O_STATUS)));
-        add(new HTML("&nbsp;"));
-        add(ownerStatus);
-        add(new HTML("&nbsp;"));
         add(new Label(sysMsg.get(GuiConstant.LBL_O_ROLE)));
         add(new HTML("&nbsp;"));
         add(ownerRole);
+        add(new HTML("&nbsp;"));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_STATUS)));
+        add(new HTML("&nbsp;"));
+        add(ownerStatus);
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));

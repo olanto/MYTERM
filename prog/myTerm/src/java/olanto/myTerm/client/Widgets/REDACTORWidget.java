@@ -223,6 +223,7 @@ public class REDACTORWidget extends VerticalPanel {
                 if ((srch != null) && (!srch.isEmpty())) {
                     getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
                 }
+                History.newItem("loaded");
             }
 
             @Override

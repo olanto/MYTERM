@@ -39,12 +39,10 @@ public class SearchHeaderRESOURCE extends HorizontalPanel {
 
     public TextBox rsrcField;
     public ResourcePrivacyList rsrcPrivay;
-    public Button btnSearch;
     public Button btnAdd;
 
     public SearchHeaderRESOURCE(HashMap<String, String> sysMsg) {
         rsrcPrivay = new ResourcePrivacyList(GuiConstant.INTERFACE_LANG);
-        btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
         rsrcField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
@@ -52,14 +50,12 @@ public class SearchHeaderRESOURCE extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(rsrcField);
         add(new HTML("&nbsp;"));
-        add(btnSearch);
         add(new HTML("&nbsp;"));
         add(new Label(sysMsg.get(GuiConstant.LBL_R_PRIVACY)));
         add(new HTML("&nbsp;"));
         add(rsrcPrivay);
         add(new HTML("&nbsp;"));
         add(btnAdd);
-        btnSearch.setTitle(sysMsg.get(GuiConstant.MSG_SEARCH_TITLE));
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
         setStyleName("searchMenu");
     }

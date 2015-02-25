@@ -93,7 +93,11 @@ public interface myTermServiceAsync {
 
     public void getOwners(AsyncCallback<Collection<OwnerDTO>> asyncCallback);
 
+    public void getOwnerUsage(long ownerID, AsyncCallback<Boolean> asyncCallback);
+
     public void createUser(OwnerDTO ownerDTO, AsyncCallback<String> asyncCallback);
+
+    public void deleteUser(long ownerID, AsyncCallback<String> asyncCallback);
 
     public void getOwnerDetails(long ownerID, AsyncCallback<OwnerDTO> asyncCallback);
 
@@ -114,4 +118,10 @@ public interface myTermServiceAsync {
     public void AdminUpdateUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
 
     public void AdminSaveUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
+
+    public void getResourceDetails(long resID, AsyncCallback<ResourceDTO> asyncCallback);
+
+    public void getLanguageDetails(String langID, AsyncCallback<LanguageDTO> asyncCallback);
+
+    public void getDomainDetails(long domID, AsyncCallback<DomainDTO> asyncCallback);
 }

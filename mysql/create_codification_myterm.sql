@@ -216,6 +216,20 @@ insert into codes values ('sys_field','o.hash', 'visible;1;visible', null);
 insert into codes values ('sys_field','o.first_name', 'visible;1;visible', null);
 insert into codes values ('sys_field','o.last_name', 'visible;1;visible', null);
 
+insert into codes values ('sys_field','r.id', 'visible;1;visible', null);
+insert into codes values ('sys_field','r.owner_id', 'visible;1;visible', null);
+insert into codes values ('sys_field','r.name', 'visible;1;visible', null);
+insert into codes values ('sys_field','r.privacy', 'visible;1;visible', null);
+insert into codes values ('sys_field','r.note', 'visible;1;visible', null);
+insert into codes values ('sys_field','r.extra', 'visible;1;visible', null);
+
+insert into codes values ('sys_field','l.id', 'visible;1;visible', null);
+insert into codes values ('sys_field','l.default_name', 'visible;1;visible', null);
+
+insert into codes values ('sys_field','d.id', 'visible;1;visible', null);
+insert into codes values ('sys_field','d.default_name', 'visible;1;visible', null);
+
+
 commit;
 select * from codes;   
 

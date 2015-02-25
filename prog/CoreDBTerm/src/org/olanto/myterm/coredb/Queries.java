@@ -88,11 +88,65 @@ public class Queries {
         return result.get(0);
     }
 
+    public static boolean getOwnerActivity(long ownerID) {
+        Query query1 = TermDB.em.createNamedQuery("UsersResources.findByIdOwner");
+        query1.setParameter("idOwner", ownerID);
+
+        Query query2 = TermDB.em.createNamedQuery("UsersLanguages.findByIdOwner");
+        query2.setParameter("idOwner", ownerID);
+
+        if (query1.getResultList().isEmpty() && query2.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static List<Owners> getOwners(String ownerMailing, String ownerStatus, String ownerRole) {
+        Query query;
+        if ((ownerMailing.equals(" ") || ownerMailing.length() < 2)) {
+            if ((ownerStatus.equals(" ") || ownerStatus.length() < 2)) {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("Owners.findAll");
+                } else {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerRole");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+            } else {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerStatus");
+                } else {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerRoleStatus");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+                query.setParameter("ownerStatus", ownerStatus);
+            }
+        } else {
+            if ((ownerStatus.equals(" ") || ownerStatus.length() < 2)) {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerMailing");
+                } else {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingRole");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+            } else {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingStatus");
+                } else {
+                    query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingStatusRole");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+                query.setParameter("ownerStatus", ownerStatus);
+            }
+            query.setParameter("ownerMailing", ownerMailing);
+        }
+        return query.getResultList();
+    }
+
     public static List<Owners> getOwners() {
         Query query = TermDB.em.createNamedQuery("Owners.findAll");
         return query.getResultList();
     }
-    
+
     public static Owners getOwner(String ownermail, String hash) {
         Query query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingAndHash");
         query.setParameter("ownerMailing", ownermail);
@@ -121,6 +175,38 @@ public class Queries {
         }
         if (result.isEmpty()) {
             System.out.println("NO RETURNED VALUES for :" + IDowner);
+            return null;
+        }
+        return result.get(0);
+    }
+
+    public static Resources getResourceByID(long resID) {
+        Query query = TermDB.em.createNamedQuery("Resources.findByIdResource");
+        query.setParameter("idResource", resID);
+        List<Resources> result = query.getResultList();
+//        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + resID);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + resID);
+            return null;
+        }
+        return result.get(0);
+    }
+    
+    public static Domains getDomainByID(long domID) {
+        Query query = TermDB.em.createNamedQuery("Domains.findByIdDomain");
+        query.setParameter("idDomain", domID);
+        List<Domains> result = query.getResultList();
+//        System.out.println("result size:" + result.size());
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + domID);
+            return null;
+        }
+        if (result.isEmpty()) {
+            System.out.println("NO RETURNED VALUES for :" + domID);
             return null;
         }
         return result.get(0);
@@ -186,6 +272,28 @@ public class Queries {
         return result;
     }
 
+    public static List<Languages> getLanguages(String langID, String langName) {
+        Query query;
+        if ((langID.equals(" ") || langID.length() < 2)) {
+            if ((langName.equals(" ") || langName.length() < 2)) {
+                query = TermDB.em.createNamedQuery("Languages.findAll");
+            } else {
+                query = TermDB.em.createNamedQuery("Languages.findByLanguageDefaultName");
+                query.setParameter("languageDefaultName", langName);
+            }
+        } else {
+            if ((langName.equals(" ") || langName.length() < 2)) {
+                query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");
+            } else {
+                query = TermDB.em.createNamedQuery("Languages.findByIdLanguageANDLanguageDefaultName");
+                query.setParameter("languageDefaultName", langName);
+            }
+            query.setParameter("idLanguage", langID);
+        }
+        List<Languages> result = query.getResultList();
+        return result;
+    }
+
     public static Languages getLanguageByID(String langID) {
         Query query = TermDB.em.createNamedQuery("Languages.findByIdLanguage");
         query.setParameter("idLanguage", langID);
@@ -232,6 +340,28 @@ public class Queries {
 
     public static List<Resources> getResources() {
         Query query = TermDB.em.createNamedQuery("Resources.findAll");
+        List<Resources> result = query.getResultList();
+        return result;
+    }
+
+    public static List<Resources> getResources(String resName, String resPrivacy) {
+        Query query;
+        if ((resName.equals(" ") || resName.length() < 2)) {
+            if ((resPrivacy.equals(" ") || resPrivacy.length() < 2)) {
+                query = TermDB.em.createNamedQuery("Resources.findAll");
+            } else {
+                query = TermDB.em.createNamedQuery("Resources.findByResourcePrivacy");
+                query.setParameter("resourcePrivacy", resPrivacy);
+            }
+        } else {
+            if ((resPrivacy.equals(" ") || resPrivacy.length() < 2)) {
+                query = TermDB.em.createNamedQuery("Resources.findByResourceName");
+            } else {
+                query = TermDB.em.createNamedQuery("Resources.findByResourceNameAndPrivacy");
+                query.setParameter("resourcePrivacy", resPrivacy);
+            }
+            query.setParameter("resourceName", resName);
+        }
         List<Resources> result = query.getResultList();
         return result;
     }
@@ -289,6 +419,17 @@ public class Queries {
 
     public static List<Domains> getDomains() {
         Query query = TermDB.em.createNamedQuery("Domains.findAll");
+        List<Domains> result = query.getResultList();
+        return result;
+    }
+    public static List<Domains> getDomains(String domName) {
+        Query query;
+        if ((domName.equals(" ") || domName.length() < 2)) {
+            query = TermDB.em.createNamedQuery("Domains.findAll");
+        }else{
+            query = TermDB.em.createNamedQuery("Domains.findByDomainDefaultName");
+            query.setParameter("domainDefaultName", domName);
+        }
         List<Domains> result = query.getResultList();
         return result;
     }

@@ -739,8 +739,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String getOwnersDetails(String ownlerMailing, String ownerStatus, String ownerRole) {
-        List<Owners> o = Queries.getOwners();
+    public String getOwnersDetails(String ownerMailing, String ownerStatus, String ownerRole) {
+        List<Owners> o = Queries.getOwners(ownerMailing, ownerStatus, ownerRole);
         if (!o.isEmpty()) {
             StringBuilder result = new StringBuilder("");
             if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
@@ -783,17 +783,105 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getDomainsDetails(String domName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Domains> dset = Queries.getDomains(domName);
+        if (!dset.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_D_DEFAULT_NAME)).append("</th>");
+            result.append("</tr>");
+            for (Domains d : dset) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#DM").append(d.getIdDomain()).append("\" onClick=\"return gwtnav(this);\">").append(d.getDomainDefaultName()).append("</a></td>");
+                result.append("</tr>");
+            }
+            dset.clear();
+            dset = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override
     public String getResourcesDetails(String resName, String resPrivacy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Resources> r = Queries.getResources(resName, resPrivacy);
+        if (!r.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_PRIVACY)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NOTE)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_OWNER)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_EXTRA)).append("</th>");
+            result.append("</tr>");
+            for (Resources res : r) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#RM").append(res.getIdResource()).append("\" onClick=\"return gwtnav(this);\">").append(res.getResourceName()).append("</a></td>");
+                result.append("<td>").append(res.getResourcePrivacy()).append("</td>");
+                result.append("<td>").append(res.getResourceNote()).append("</td>");
+                result.append("<td>").append(Queries.getOwnerbyID(res.getIdOwner()).getOwnerMailing()).append("</td>");
+                result.append("<td>").append(res.getExtra()).append("</td>");
+                result.append("</tr>");
+            }
+            r.clear();
+            r = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override
     public String getLanguagesDetails(String langID, String langName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Languages> lset = Queries.getLanguages(langID, langName);
+        if (!lset.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_L_ID)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_L_DEFAULT_NAME)).append("</th>");
+            result.append("</tr>");
+            for (Languages l : lset) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#LM").append(l.getIdLanguage()).append("\" onClick=\"return gwtnav(this);\">").append(l.getIdLanguage()).append("</a></td>");
+                result.append("<td>").append(l.getLanguageDefaultName()).append("</td>");
+                result.append("</tr>");
+            }
+            lset.clear();
+            lset = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override
@@ -824,19 +912,46 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String createUser(OwnerDTO ownerDTO) {
-        Owners oa = new Owners();
-        oa.setOwnerFirstName(ownerDTO.getFirstName());
-        oa.setOwnerLastName(ownerDTO.getLastName());
-        oa.setOwnerMailing(ownerDTO.getEmail());
-        oa.setOwnerRoles(ownerDTO.getRole());
-        oa.setOwnerStatus(ownerDTO.getStatus());
-        oa.setOwnerHash(ownerDTO.getHash());
-        if (ManageOwner.create(oa) != null) {
-            oa = null;
-            return "success";
+    public ResourceDTO getResourceDetails(long resID) {
+        TermDB.restart();
+        Resources res = Queries.getResourceByID(resID);
+        if (res != null) {
+            ResourceDTO rsrc = new ResourceDTO(res.getIdResource(), res.getIdOwner(), res.getResourceName(), res.getResourcePrivacy(), res.getResourceNote(), res.getExtra());
+            res = null;
+            return rsrc;
         }
         return null;
+    }
+
+    @Override
+    public DomainDTO getDomainDetails(long domID) {
+        TermDB.restart();
+        Domains dom = Queries.getDomainByID(domID);
+        if (dom != null) {
+            DomainDTO doms = new DomainDTO(dom.getIdDomain(), dom.getDomainDefaultName());
+            dom = null;
+            return doms;
+        }
+        return null;
+    }
+
+    @Override
+    public LanguageDTO getLanguageDetails(String langID) {
+        TermDB.restart();
+        Languages lan = Queries.getLanguageByID(langID);
+        if (lan != null) {
+            LanguageDTO lang = new LanguageDTO(lan.getIdLanguage(), lan.getLanguageDefaultName());
+            lan = null;
+            return lang;
+        }
+        return null;
+    }
+
+    @Override
+    public String createUser(OwnerDTO ownerDTO) {
+        ManageOwner.create(ownerDTO.getFirstName(), ownerDTO.getLastName(),
+                ownerDTO.getEmail(), ownerDTO.getStatus(), ownerDTO.getHash(), ownerDTO.getRole());
+        return "sucess";
     }
 
     @Override
@@ -872,5 +987,16 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             return "sucess";
         }
         return null;
+    }
+
+    @Override
+    public Boolean getOwnerUsage(long ownerID) {
+        return Queries.getOwnerActivity(ownerID);
+    }
+
+    @Override
+    public String deleteUser(long ownerID) {
+        ManageOwner.remove(ownerID);
+        return "Success";
     }
 }

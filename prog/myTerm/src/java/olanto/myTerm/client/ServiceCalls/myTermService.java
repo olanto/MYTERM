@@ -95,7 +95,11 @@ public interface myTermService extends RemoteService {
 
     public Collection<OwnerDTO> getOwners();
 
+    public Boolean getOwnerUsage(long ownerID);
+
     public String createUser(OwnerDTO ownerDTO);
+
+    public String deleteUser(long ownerID);
 
     public OwnerDTO getOwnerDetails(long ownerID);
 
@@ -116,4 +120,10 @@ public interface myTermService extends RemoteService {
     public OwnerDTO AdminUpdateUser(OwnerDTO ownerDTO);
 
     public String AdminSaveUser(OwnerDTO ownerDTO);
+
+    public ResourceDTO getResourceDetails(long resID);
+
+    public LanguageDTO getLanguageDetails(String LangID);
+
+    public DomainDTO getDomainDetails(long domID);
 }

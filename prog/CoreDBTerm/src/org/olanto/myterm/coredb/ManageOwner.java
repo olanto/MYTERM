@@ -37,7 +37,14 @@ public class ManageOwner {
         TermDB.ownersJC.create(oa);
         return oa;
     }
-    // public long AddOw("")
+    
+     public static Owners create(String ownerFirstName, String ownerLastName, String ownerMailing, String ownerStatus, String owherHash, String ownerRole) {
+        Owners oa = new Owners(null, ownerFirstName, ownerLastName, ownerMailing, ownerStatus);
+        oa.setOwnerHash(owherHash);
+        oa.setOwnerRoles(ownerRole);
+        TermDB.ownersJC.create(oa);
+        return oa;
+    }
 
     public static Owners edit(Owners ow) {
         try {
@@ -47,15 +54,12 @@ public class ManageOwner {
             Logger.getLogger(ManageOwner.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    }
-
-    public static Owners create(Owners ow) {
+    } 
+    public static void remove(long ownerID) {
         try {
-            TermDB.ownersJC.create(ow);
-            return ow;
+            TermDB.ownersJC.destroy(ownerID);
         } catch (Exception ex) {
             Logger.getLogger(ManageOwner.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
     }
 }

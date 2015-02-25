@@ -27,7 +27,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -52,19 +51,20 @@ import olanto.myTerm.shared.SysFieldDTO;
  * @author simple
  */
 public class USERSWidget extends VerticalPanel {
-
+    
     private static SearchHeaderUSER searchMenu;
     private static ResultsContainerADMIN resultsPanel;
     private HashMap<String, SysFieldDTO> sFields;
     private HashMap<String, String> sysMsgs;
     private static AsyncCallback<String> ownersCallback;
+    private static AsyncCallback<String> ownersAddCallback;
     private static AsyncCallback<String> userAddedCallback;
     private static AsyncCallback<OwnerDTO> getOwnerDetailsCallback;
     private static AsyncCallback<OwnerDTO> getOwnerDetailsSaveCallback;
     public BooleanWrap isEdited = new BooleanWrap();
     private OwnerDTO ownerDTO;
     private OwnerFormADMIN ownerForm;
-
+    
     public USERSWidget(HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         sFields = sysFields;
         sysMsgs = sysMsg;
@@ -81,11 +81,11 @@ public class USERSWidget extends VerticalPanel {
                     MainEntryPoint.statusPanel.setMessage("message", "Content added...");
                 } else {
                     MainEntryPoint.statusPanel.setMessage("error", "Content not added...");
-
+                    
                 }
                 History.newItem("page30");
             }
-
+            
             @Override
             public void onFailure(Throwable caught) {
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
@@ -97,7 +97,7 @@ public class USERSWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 History.newItem("page30");
             }
-
+            
             @Override
             public void onSuccess(OwnerDTO result) {
                 isEdited.setVal(false);
@@ -111,7 +111,7 @@ public class USERSWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 History.newItem("p30notSaved");
             }
-
+            
             @Override
             public void onSuccess(OwnerDTO result) {
                 isEdited.setVal(false);
@@ -121,12 +121,30 @@ public class USERSWidget extends VerticalPanel {
                 History.newItem("page30");
             }
         };
+        ownersAddCallback = new AsyncCallback<String>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                History.newItem("page30");
+            }
+            
+            @Override
+            public void onSuccess(String result) {
+                MainEntryPoint.statusPanel.setMessage("message", "Owners retreived successfully...");
+                searchMenu.btnAdd.setEnabled(true);
+                if (result != null) {
+                    resultsPanel.sideRes.setWidget(new HTML(result));
+                    History.newItem("p30loaded");
+                } else {
+                    new MyDialog("Would you like to add a new User?", 0, "p30add").show();
+                }
+            }
+        };
         ownersCallback = new AsyncCallback<String>() {
             @Override
             public void onFailure(Throwable caught) {
                 History.newItem("page30");
             }
-
+            
             @Override
             public void onSuccess(String result) {
                 MainEntryPoint.statusPanel.setMessage("message", "Owners retreived successfully...");
@@ -137,6 +155,17 @@ public class USERSWidget extends VerticalPanel {
                 History.newItem("p30loaded");
             }
         };
+        searchMenu.btnAdd.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                resultsPanel.sideRes.clear();
+                resultsPanel.elementDetails.clear();
+                isEdited.setVal(false);
+                getService().getOwnersDetails(searchMenu.mailingField.getText(),
+                        searchMenu.ownerStatus.getValue(searchMenu.ownerStatus.getSelectedIndex()),
+                        searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()), ownersAddCallback);
+            }
+        });
         resultsPanel.adjustSize(0.5f, 0.5f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
@@ -155,7 +184,7 @@ public class USERSWidget extends VerticalPanel {
                         case "page30":
                             commandInit();
                             break;
-                             case "p30escape":
+                        case "p30escape":
                             commandEscape();
                             break;
                     }
@@ -163,16 +192,17 @@ public class USERSWidget extends VerticalPanel {
             }
         });
     }
-
+    
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
     }
-
+    
     private void commandInit() {
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         resultsPanel.sideRes.clear();
         getService().getOwnersDetails("", "", "", ownersCallback);
     }
+    
     private void commandEscape() {
         searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Changes cancelled successfully");
@@ -180,7 +210,7 @@ public class USERSWidget extends VerticalPanel {
         isEdited.setVal(false);
         History.newItem("p30escaped");
     }
-
+    
     public void refreshContentFromOwnerDTO() {
         resultsPanel.elementDetails.clear();
         if (ownerDTO != null) {
@@ -189,6 +219,7 @@ public class USERSWidget extends VerticalPanel {
             resultsPanel.elementDetails.setWidget(ownerForm);
             ownerForm.adjustSize(resultsPanel.elementDetails.getOffsetWidth());
             ownerForm.setContentFromOwnerDTO(ownerDTO, isEdited);
+            ownerForm.addEvents(ownerDTO.getId());
             ownerForm.save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -207,17 +238,24 @@ public class USERSWidget extends VerticalPanel {
                     if (isEdited.getVal()) {
                         new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, "p30escape").show();
                     } else {
+                        ownerForm.removeFromParent();
                         MainEntryPoint.statusPanel.setMessage("warning", "Nothing has changed...");
                     }
+                }
+            });
+            ownerForm.delete.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    deleteUser();
                 }
             });
         } else {
             resultsPanel.elementDetails.setWidget(new Label("Owner details object is null, something is worng"));
         }
     }
-
+    
     private class MyDialog extends DialogBox {
-
+        
         public MyDialog(String text, final int call, final String action) {
             // Set the dialog box's caption.
             setText(text);
@@ -267,7 +305,6 @@ public class USERSWidget extends VerticalPanel {
                     ownerForm.save.setEnabled(false);
                     ownerForm.setOwnerDTOFromContent(ownerDTO);
                     isEdited.setVal(false);
-//                        Window.alert(conceptEntryDTO.toStringDTO());
                     getService().AdminSaveUser(ownerDTO, new AsyncCallback<OwnerDTO>() {
                         @Override
                         public void onFailure(Throwable caught) {
@@ -276,7 +313,7 @@ public class USERSWidget extends VerticalPanel {
                             resultsPanel.elementDetails.setWidget(new Label("Communication failed"));
                             History.newItem("p30notsaved");
                         }
-
+                        
                         @Override
                         public void onSuccess(OwnerDTO result) {
                             ownerForm.save.setEnabled(true);
@@ -309,7 +346,7 @@ public class USERSWidget extends VerticalPanel {
             }
         }
     }
-
+    
     public void escapeUser(String action) {
         isEdited.setVal(false);
         if (action.contains("UM")) {
@@ -319,19 +356,40 @@ public class USERSWidget extends VerticalPanel {
             History.newItem(action);
         }
     }
-
+    
     public void createNewUser() {
         getUserFromHeader();
         getService().createUser(ownerDTO, userAddedCallback);
     }
-
+    
     public void getUserFromHeader() {
         ownerDTO = new OwnerDTO();
+        ownerDTO.setFirstName("???");
+        ownerDTO.setLastName("???");
+        ownerDTO.setHash("???");
         ownerDTO.setEmail(searchMenu.mailingField.getText());
         ownerDTO.setRole(searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()));
         ownerDTO.setStatus(searchMenu.ownerStatus.getValue(searchMenu.ownerStatus.getSelectedIndex()));
     }
-
+    
+    public void deleteUser() {
+        if (ownerDTO.getId() > -1) {
+            getService().deleteUser(ownerDTO.getId(), new AsyncCallback<String>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    MainEntryPoint.statusPanel.setMessage("error", "Could not remove user");
+                }
+                
+                @Override
+                public void onSuccess(String result) {
+                    MainEntryPoint.statusPanel.setMessage("message", "User removed successfully");
+                    ownerForm.removeFromParent();
+                    History.newItem("page30");
+                }
+            });
+        }
+    }
+    
     public static native void fixGwtNav() /*-{
      $wnd.gwtnav = function(a) {
      var realhref = decodeURI(a.href.split("#")[1].split("?")[0]);

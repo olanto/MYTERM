@@ -28,10 +28,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Owners.findByIdOwner", query = "SELECT o FROM Owners o WHERE o.idOwner = :idOwner"),
     @NamedQuery(name = "Owners.findByOwnerFirstName", query = "SELECT o FROM Owners o WHERE o.ownerFirstName = :ownerFirstName"),
     @NamedQuery(name = "Owners.findByOwnerLastName", query = "SELECT o FROM Owners o WHERE o.ownerLastName = :ownerLastName"),
-    @NamedQuery(name = "Owners.findByOwnerMailing", query = "SELECT o FROM Owners o WHERE o.ownerMailing = :ownerMailing"),
+    @NamedQuery(name = "Owners.findByOwnerMailing", query = "SELECT o FROM Owners o WHERE o.ownerMailing LIKE :ownerMailing"),
+    @NamedQuery(name = "Owners.findByOwnerMailingStatus", query = "SELECT o FROM Owners o WHERE o.ownerMailing LIKE :ownerMailing AND o.ownerStatus LIKE :ownerStatus"),
+    @NamedQuery(name = "Owners.findByOwnerMailingRole", query = "SELECT o FROM Owners o WHERE o.ownerMailing LIKE :ownerMailing AND o.ownerRoles LIKE :ownerRoles"),
+    @NamedQuery(name = "Owners.findByOwnerRoleStatus", query = "SELECT o FROM Owners o WHERE o.ownerStatus LIKE :ownerStatus AND o.ownerRoles LIKE :ownerRoles"),
+    @NamedQuery(name = "Owners.findByOwnerMailingStatusRole", query = "SELECT o FROM Owners o WHERE o.ownerMailing LIKE :ownerMailing AND o.ownerStatus LIKE :ownerStatus AND o.ownerRoles LIKE :ownerRoles"),
     @NamedQuery(name = "Owners.findByOwnerMailingAndHash", query = "SELECT o FROM Owners o WHERE o.ownerMailing = :ownerMailing AND o.ownerHash = :ownerHash"),
     @NamedQuery(name = "Owners.findByOwnerHash", query = "SELECT o FROM Owners o WHERE o.ownerHash = :ownerHash"),
-    @NamedQuery(name = "Owners.findByOwnerStatus", query = "SELECT o FROM Owners o WHERE o.ownerStatus = :ownerStatus")})
+    @NamedQuery(name = "Owners.findByOwnerRole", query = "SELECT o FROM Owners o WHERE o.ownerRoles LIKE :ownerRoles"),
+    @NamedQuery(name = "Owners.findByOwnerStatus", query = "SELECT o FROM Owners o WHERE o.ownerStatus LIKE :ownerStatus")})
 public class Owners implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

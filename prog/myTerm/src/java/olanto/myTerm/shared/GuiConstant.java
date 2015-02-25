@@ -152,6 +152,16 @@ public class GuiConstant implements IsSerializable {
     public static final String T_EXTRA_CROSS_REF = "t.extra_cross_ref";
     public static final String T_IMAGE = "t.image";
     public static final String T_LANG = "t.lang";
+    public static final String R_ID = "r.id";
+    public static final String R_OWNER_ID = "r.owner_id";
+    public static final String R_NAME = "r.name";
+    public static final String R_PRIVACY = "r.privacy";
+    public static final String R_NOTE = "r.note";
+    public static final String R_EXTRA = "r.extra";
+    public static final String L_ID = "l.id";
+    public static final String L_NAME = "l.default_name";
+    public static final String D_ID = "d.id";
+    public static final String D_DEFAULT_NAME = "d.default_name";
     public static final String TAB_SEARCH = "tab.searchPanel";
     public static final String TAB_REDACTION = "tab.redactionPanel";
     public static final String TAB_REVISION = "tab.revisionPanel";

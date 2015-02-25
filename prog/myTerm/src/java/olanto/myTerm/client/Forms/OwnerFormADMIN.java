@@ -21,6 +21,8 @@
  */
 package olanto.myTerm.client.Forms;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -30,7 +32,10 @@ import java.util.HashMap;
 import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.client.Lists.OwnerRolesList;
 import olanto.myTerm.client.Lists.OwnerStatusList;
+import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
+import olanto.myTerm.client.ServiceCalls.myTermService;
+import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -61,8 +66,11 @@ public class OwnerFormADMIN extends VerticalPanel {
     private HorizontalPanel stPanel;
     public Button save;
     public Button escape;
+    public Button delete;
     public OwnerStatusList ownerStatus;
     public OwnerRolesList ownerRole;
+    private static AsyncCallback<String> ownersCallback;
+    private static AsyncCallback<Boolean> ownersUsageCallback;
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
     public OwnerFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
@@ -88,6 +96,8 @@ public class OwnerFormADMIN extends VerticalPanel {
         stPanel = new HorizontalPanel();
         save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
         escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
+        delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
+
         oform = new Grid(7, 2);
         add(oform);
 
@@ -120,10 +130,27 @@ public class OwnerFormADMIN extends VerticalPanel {
         stPanel.add(ownerStatus);
 
         ctrlPanel.add(escape);
+        ctrlPanel.add(delete);
         ctrlPanel.add(save);
 
         escape.setTitle("Abort all modifications");
         save.setTitle("Save changes without submit");
+
+        ownersUsageCallback = new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("error", "Coulc not get owner usage");
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                delete.setEnabled(!result);
+            }
+        };
+    }
+
+    public void addEvents(long ownerID) {
+        getService().getOwnerUsage(ownerID, ownersUsageCallback);
     }
 
     public void adjustSize(int wdth) {
@@ -150,6 +177,7 @@ public class OwnerFormADMIN extends VerticalPanel {
         stPanel.setCellHorizontalAlignment(ownerStatus, HorizontalPanel.ALIGN_RIGHT);
         ctrlPanel.setWidth(w + "px");
         ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_LEFT);
+        ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_CENTER);
         ctrlPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_RIGHT);
         text_fn.setWidth(w * 2 / 3 + "px");
         text_ln.setWidth(w * 2 / 3 + "px");
@@ -188,6 +216,10 @@ public class OwnerFormADMIN extends VerticalPanel {
         text_hash.setReadOnly(edit);
         ownerRole.setEnabled(!edit);
         ownerStatus.setEnabled(!edit);
+    }
+
+    private static myTermServiceAsync getService() {
+        return GWT.create(myTermService.class);
     }
 
     public void setOwnerDTOFromContent(OwnerDTO ownerDTO) {
