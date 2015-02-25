@@ -180,7 +180,7 @@ public class GuiConstant implements IsSerializable {
     public static final String BTN_DISAPPROVE = "btn.disapprove";
     public static final String BTN_EDIT = "btn.edit";
     public static final String BTN_DISAPPROVEALL = "btn.disapproveAll";
-    public static final String BTN_APPROVEALL = "btn.approveALL";
+    public static final String BTN_APPROVEALL = "btn.approveAll";
     public static final String BTN_ESCAPE = "btn.escape";
     public static final String BTN_CANCEL = "btn.cancel";
     public static final String BTN_ABORT = "btn.abort";

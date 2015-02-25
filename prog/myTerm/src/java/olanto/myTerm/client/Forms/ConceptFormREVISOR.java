@@ -79,7 +79,7 @@ public class ConceptFormREVISOR extends HorizontalPanel {
         ntPanel = new VerticalPanel();
         approve = new Button(sysMsg.get(GuiConstant.BTN_APPROVEALL));
         save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
-        disapprove = new Button(sysMsg.get(GuiConstant.BTN_DISAPPROVE));
+        disapprove = new Button(sysMsg.get(GuiConstant.BTN_DISAPPROVEALL));
         escape = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
         label_dom = new Label("");
         label_rs = new Label("");
