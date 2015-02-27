@@ -80,7 +80,7 @@ public class ConceptFormREVISOR extends HorizontalPanel {
         approve = new Button(sysMsg.get(GuiConstant.BTN_APPROVEALL));
         save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
         disapprove = new Button(sysMsg.get(GuiConstant.BTN_DISAPPROVEALL));
-        escape = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
+        escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
         label_dom = new Label("");
         label_rs = new Label("");
 

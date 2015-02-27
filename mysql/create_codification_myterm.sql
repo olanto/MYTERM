@@ -253,6 +253,9 @@ insert into codeslang values ('FR','term_type','fullForm','Forme complète',null
 
 
 -- msg
+insert into codeslang values ('FR', 'msg','tab.redactionPanel','Workspace','Espace de Travail');
+
+insert into codeslang values ('FR','msg','tab.searchPanel','?','Recherche des Termes');
 insert into codeslang values ('FR','msg','msg.welcome','?','Bienvenue dans le gestionnaire de terminologie Olanto');
 insert into codeslang values ('FR','msg','btn.search','?','Chercher');
 

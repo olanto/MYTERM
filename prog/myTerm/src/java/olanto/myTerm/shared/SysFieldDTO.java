@@ -34,6 +34,7 @@ public class SysFieldDTO implements IsSerializable {
     private String type;
     private Boolean visibility = false;
     private Boolean isExtra = false;
+    private Boolean isHidden = false;
     private int position = 1;
 
     public SysFieldDTO() {
@@ -46,6 +47,8 @@ public class SysFieldDTO implements IsSerializable {
             this.visibility = true;
         } else if (visibility.equalsIgnoreCase("extra")) {
             this.isExtra = true;
+        } else if (visibility.equalsIgnoreCase("hidden")) {
+            this.isHidden = true;
         }
         if (!position.isEmpty()) {
             this.position = Integer.parseInt(position);
@@ -74,6 +77,10 @@ public class SysFieldDTO implements IsSerializable {
 
     public Boolean isExtra() {
         return isExtra;
+    }
+
+    public Boolean isHidden() {
+        return isHidden;
     }
 
     public void setVisibility(Boolean visibility) {
