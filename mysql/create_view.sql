@@ -192,10 +192,12 @@ create or replace view vj_source as
 SELECT uuid()  uuid,
 v_source.* FROM v_source;
 
-select * from v_source where status='e' and lastmodified_by=1070 ;
+-- select * from v_source where status='e' and lastmodified_by=1070 ;
 
 create or replace view v_editedbyowner as
 select distinct id_concept,status,lastmodified_by from v_source;
+
+
 
 select * from v_editedbyowner  where status='e' and lastmodified_by=1070 ;
 

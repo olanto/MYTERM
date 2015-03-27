@@ -30,17 +30,32 @@ import org.olanto.myterm.coredb.ManageResource;
  * 
  * 
  */
-public class LoadInToDB {
+public class LoadInToDBnoREMOVE {
     
     public static void main(String[] args) {
-  //      loadAFile("C:/MYTERM/tests/TBX-basic-samples.tbx", "TESTTBX", "TBX-BASIC");
-        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-1.tbx", "IATE", "TBX-BASIC");
-   //     loadAFile("C:/MYTERM/tests/exportTBX.xml", "TESTTBXEXPORTED", "TBX-BASIC");
-     //     loadAFile("C:/MYTERM/tests/XDXF/dict_fr_en.xdxf", "XDXF_fr_en2", "XDXF");
-   //     loadAFile("C:/MYTERM/private/dict_en_ru.xdxf","XDXF_en_ru2", "XDXF");
-       //  loadAFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC","TBX-BASIC");
-   //     loadAFile("C:/MYTERM/private/WTOTerm public entries_EN_FR_ES__2014_12_01.xml","PUBLIC-OMC","MTF");
-       // loadAFile("C:/MYTERM/private/CERN_from_MELBY.tbx","TESTCERN","TBX-BASIC");
+//         loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-1.tbx", "IATE", "TBX-BASIC"); //ok
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-2.tbx", "IATE", "TBX-BASIC"); //ok
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-3.tbx", "IATE", "TBX-BASIC"); //ok
+
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-4.tbx", "IATE", "TBX-BASIC"); //ok
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-5.tbx", "IATE", "TBX-BASIC"); //ok
+                
+//         loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-6.tbx", "IATE", "TBX-BASIC"); //ok
+
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-7.tbx", "IATE", "TBX-BASIC"); //ok
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-8.tbx", "IATE", "TBX-BASIC");
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-9.tbx", "IATE", "TBX-BASIC");
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-10.tbx", "IATE", "TBX-BASIC");
+        
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-11.tbx", "IATE", "TBX-BASIC");
+
+ //       loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-12.tbx", "IATE", "TBX-BASIC"); // ok
+//
+
+        loadAFile(args[0], "IATE", "TBX-BASIC");
+        
+ //       loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-13.tbx", "IATE", "TBX-BASIC");
+//        loadAFile("C:/MYTERM/tests/IATE/IATE_export_27012015-14.tbx", "IATE", "TBX-BASIC");
     }
     
     public static void loadAFile(String fileName, String resourceName, String format) {
@@ -59,8 +74,8 @@ public class LoadInToDB {
                 System.out.println("Format:" + format + " not implemented ...");
                 return;
         }
-  System.out.println("-------- try to remove Resource if exist : " + resourceName);
-        ManageResource.remove(resourceName);
+ // System.out.println("-------- NO REMOVE  Resource if exist : " + resourceName);
+ //       ManageResource.remove(resourceName);
         System.out.println("-------- start loading file : " + fileName + ", format:" + format);        
         loader.loadAFileIntoTBXDB(fileName, resourceName);
         System.out.println("-------- end loading file : " + fileName);

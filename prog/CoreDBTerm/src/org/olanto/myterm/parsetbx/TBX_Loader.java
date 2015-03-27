@@ -56,7 +56,7 @@ public class TBX_Loader implements Loader {
     static Pattern p = Pattern.compile("[\\s]");  // les blancs
     static Namespace xmlNS = Namespace.XML_NAMESPACE;
     static Namespace noNS = Namespace.NO_NAMESPACE;
-    static boolean skipverbose = true;
+    static boolean skipverbose = false;
     static Resources resource;
     static SimpleDateFormat convertDate = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
 
@@ -101,7 +101,7 @@ public class TBX_Loader implements Loader {
     }
 
     static String getTig(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         boolean termFormExist = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
@@ -137,7 +137,7 @@ public class TBX_Loader implements Loader {
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
                 courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
                 termFormExist = true;
-            }else if (info.getName().equals("termNote")
+            } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
                 courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
                 termFormExist = true;
@@ -154,25 +154,29 @@ public class TBX_Loader implements Loader {
                 courantEntry.getTerm().setTermSource(getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("note")) {
-                courantEntry.getTerm().setTermNote(courantEntry.getTerm().getTermNote() + getText(info, localverbose) + "\n");
+                if (courantEntry.getTermNote().equals("")) {
+                     courantEntry.setTermNote(getText(info, localverbose));
+                } else {
+                    courantEntry.setTermNote(courantEntry.getTermNote() + "\n" + getText(info, localverbose));
+                }
                 termFormExist = true;
             } else if (info.getName().equals("ref")
                     && info.getAttributeValue("type").equals("crossReference")) {
-                courantEntry.getTerm().setCrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                courantEntry.getTerm().setCrossref("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("xref")
                     && info.getAttributeValue("type").equals("externalCrossReference")) {
-                courantEntry.getTerm().setExtcrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                courantEntry.getTerm().setExtcrossref("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
                 termFormExist = true;
-            }else if (info.getName().equals("xref")
+            } else if (info.getName().equals("xref")
                     && info.getAttributeValue("type").equals("xGraphic")) {
-                courantEntry.getTerm().setImage("\n" + 
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                courantEntry.getTerm().setImage("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
                 termFormExist = true;
             } else if (info.getName().equals("transacGrp")) {
                 getTermTransacGrp(info);
@@ -194,7 +198,7 @@ public class TBX_Loader implements Loader {
     }
 
     static String getLangSet(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         boolean attributeverbose = false;
 
         if (localverbose) {
@@ -226,7 +230,7 @@ public class TBX_Loader implements Loader {
     }
 
     static String getTermEntry(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
         courantEntry.setConceptNote("");
@@ -248,22 +252,22 @@ public class TBX_Loader implements Loader {
                 ; // process in next loop
             } else if (info.getName().equals("note")) {
                 courantEntry.getConcept().setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
-            }  else if (info.getName().equals("ref")
+            } else if (info.getName().equals("ref")
                     && info.getAttributeValue("type").equals("crossReference")) {
-                courantEntry.getConcept().setCrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
+                courantEntry.getConcept().setCrossref("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
             } else if (info.getName().equals("xref")
                     && info.getAttributeValue("type").equals("externalCrossReference")) {
-                courantEntry.getConcept().setExtcrossref(  "\n"+
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-            }else if (info.getName().equals("xref")
+                courantEntry.getConcept().setExtcrossref("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
+            } else if (info.getName().equals("xref")
                     && info.getAttributeValue("type").equals("xGraphic")) {
-                courantEntry.getConcept().setImage("\n" + 
-                        info.getAttributeValue("type")+";"+
-                        info.getAttributeValue("target")+";"+getText(info, localverbose) );
-            }else if (info.getName().equals("transacGrp")) {
+                courantEntry.getConcept().setImage("\n"
+                        + info.getAttributeValue("type") + ";"
+                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
+            } else if (info.getName().equals("transacGrp")) {
                 getConceptTransacGrp(info);
             } else {
                 String extra = getExtraElement(info);
@@ -285,8 +289,8 @@ public class TBX_Loader implements Loader {
         return "";
     }
 
-       static String getTermTransacGrp(Element e) {
-        boolean localverbose = true;
+    static String getTermTransacGrp(Element e) {
+        boolean localverbose = false;
         boolean attributeverbose = false;
         String transactionType = "";
 
@@ -299,7 +303,7 @@ public class TBX_Loader implements Loader {
             Element info = (Element) i.next();
             if (info.getName().equals("transac")
                     && (info.getAttributeValue("type").equals("transactionType")
-                    ||info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
+                    || info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
                 transactionType = getText(info, localverbose);
             } else if (info.getName().equals("transacNote")
                     && info.getAttributeValue("type").equals("responsibility")) {
@@ -349,9 +353,8 @@ public class TBX_Loader implements Loader {
         return "";
     }
 
-    
     static String getConceptTransacGrp(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         boolean attributeverbose = false;
         String transactionType = "";
 
@@ -364,7 +367,7 @@ public class TBX_Loader implements Loader {
             Element info = (Element) i.next();
             if (info.getName().equals("transac")
                     && (info.getAttributeValue("type").equals("transactionType")
-                    ||info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
+                    || info.getAttributeValue("type").equals("terminologyManagementTransactions"))) {
                 transactionType = getText(info, localverbose);
             } else if (info.getName().equals("transacNote")
                     && info.getAttributeValue("type").equals("responsibility")) {
@@ -444,8 +447,8 @@ public class TBX_Loader implements Loader {
         return res;
     }
 
-      static String getDescripGrpTerm(Element e) {
-        boolean localverbose = true;
+    static String getDescripGrpTerm(Element e) {
+        boolean localverbose = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
@@ -461,8 +464,8 @@ public class TBX_Loader implements Loader {
                 courantEntry.getTerm().setTermSourceContext(getText(info, localverbose));
             } else {
                 String extra = getExtraElement(info);
-                  courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
-              if (skipverbose) {
+                courantEntry.getTerm().setExtra(courantEntry.getTerm().getExtra() + extra + "\n");
+                if (skipverbose) {
                     System.out.println("--skip element:" + info.getName());
                     System.out.println(extra);
                 }
@@ -470,10 +473,9 @@ public class TBX_Loader implements Loader {
         }
         return "";
     }
-  
-    
+
     static String getDescripGrpConcept(Element e) {
-        boolean localverbose = true;
+        boolean localverbose = false;
         if (localverbose) {
             System.out.println("--- process:" + e.getName());
         }
@@ -484,6 +486,12 @@ public class TBX_Loader implements Loader {
             if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("definition")) {
                 courantEntry.getConcept().setConceptDefinition(getText(info, localverbose));
+            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("subjectField")) {
+                courantEntry.getConcept().setSubjectField(getText(info, localverbose));
+            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("note")) {
+                courantEntry.getConcept().setConceptNote(getText(info, localverbose));
             } else if (info.getName().equals("admin")
                     && info.getAttributeValue("type").equals("source")) {
                 courantEntry.getConcept().setConceptSourceDefinition(getText(info, localverbose));

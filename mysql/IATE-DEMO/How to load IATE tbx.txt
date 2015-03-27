@@ -1,0 +1,22 @@
+--
+
+import Iate.tbx
+
+unzip
+
+remove bad xml propertie
+
+split large file into smaller
+
+
+rebuild myterm schema
+
+load all tbx
+
+reassign iate tbx
+
+unify IATE ressource
+
+export myTERM db (dump)
+
+import on demo server
