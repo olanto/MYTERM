@@ -54,34 +54,56 @@ update concepts a set subject_field=(select english_name b from iate_domain
                                       where a.subject_field=iate_id) 
   where subject_field in (select iate_id from iate_domain);
 
+select distinct subject_field from concepts;
+
+
+-- rollback;
 commit;
 
+-- unify multiple load
+
+update concepts a set id_resource=1;
+
+delete from resources where id_resource>1;
+
+commit;
+
+
+
+
+
+
+
 /* there is some mistake ...
-00	97882
-04	143496
-08	22096
-1	255
+, 	20
+00	93179
+04	100952
+08	38188
+1	244
 1,	22
-10	28942
-12	114747
-16	27337
-2	13
-20	19763
-24	62293
-28	87463
-32	71041
-36	45903
-4	23
-4,	1
-40	4553
-44	42647
-48	58864
-52	47398
-56	71650
-60	4167
-64	16765
-66	12586
-68	54333
-72	1352
-76	1446
-*/
+10	36173
+12	104439
+16	36210
+2	15
+2,	1
+20	22142
+24	69097
+28	168724
+32	122002
+36	83355
+4	87
+4,	4
+40	6243
+42	1
+43	2
+44	24883
+48	92949
+52	54957
+56	71954
+60	4737
+64	39987
+66	17769
+68	132855
+72	1707
+76	2353
+80	1*/

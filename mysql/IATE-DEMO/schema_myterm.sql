@@ -162,6 +162,7 @@ insert into languages values ('SL','Slovene');
 insert into languages values ('SV','Swedish');
 insert into languages values ('MUL','Multilingual');
 
+insert into languages values ('JA','Japonese');
 
 
 commit; 
