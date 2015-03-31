@@ -45,6 +45,7 @@ import olanto.myTerm.shared.TermDTO;
  * @author nizar ghoula - simple
  */
 public class TermFormREVISOR extends VerticalPanel {
+    /* term list gendre, type etc. need to be also hidden (fix it for next release*/
 
     private Grid form1;
     private Grid form2;

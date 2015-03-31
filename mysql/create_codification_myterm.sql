@@ -163,7 +163,7 @@ insert into codes values ('msg','lbl.r.privacy', 'Resource''s Privacy', null);
 insert into codes values ('msg','lbl.r.note', 'Resource''s Note', null);
 insert into codes values ('msg','lbl.r.extra', 'Resource''s Extra', null);
 
--- system --- values visibility (visible, extra or hidden);position in form (1,2 or 3); visibility in search (visible, extra or hidden)
+-- system --- values visibility (visible, extra or hidden); position in form (1,2 or 3); visibility in search (visible, extra or hidden)
 insert into codes values ('sys_field','t.lang','visible;1;visible;',null);
 insert into codes values ('sys_field','t.form','visible;1;visible;',null);
 insert into codes values ('sys_field','t.source','visible;1;visible',null);
@@ -179,10 +179,10 @@ insert into codes values ('sys_field','t.linguistic_note_source','visible;2;extr
 insert into codes values ('sys_field','t.technical_note_source','visible;2;extra',null);
 insert into codes values ('sys_field','t.reference_note_source','visible;2;extra',null);
 insert into codes values ('sys_field','t.usage','extra;2;extra',null);
-insert into codes values ('sys_field','t.gender','visible;3;extra',null);
+insert into codes values ('sys_field','t.gender','extra;3;extra',null);
 insert into codes values ('sys_field','t.part_of_speech','visible;3;extra',null);
-insert into codes values ('sys_field','t.context','visible;3;extra',null);
-insert into codes values ('sys_field','t.source_context','visible;3;extra',null);
+insert into codes values ('sys_field','t.context','hidden;3;extra',null);
+insert into codes values ('sys_field','t.source_context','hidden;3;extra',null);
 insert into codes values ('sys_field','t.geo_usage', 'extra;1;extra', null);
 insert into codes values ('sys_field','t.creation', 'hidden;1;visible', null);
 insert into codes values ('sys_field','t.created_by', 'hidden;1;extra', null);

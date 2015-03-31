@@ -293,6 +293,8 @@ public class JPAViewFunctions {
         query.setParameter("source", term);
         query.setParameter("solang", solang);
         query.setParameter("talang", talang);
+        // add max result as a parameter of this method
+        query.setMaxResults(1000);
         List<Long> resultQ = query.getResultList();
         if (!resultQ.isEmpty()) {
             for (long result : resultQ) {
