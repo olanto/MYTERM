@@ -375,6 +375,20 @@ public class JPAViewFunctions {
         return res.toString();
     }
 
+    public static boolean getResourceActivity(long resID) {
+        init();
+        if (Queries.getResourceActivity(resID)) {
+            return true;
+        }
+        Query query = em.createNamedQuery("VjSource.findByUsageIdResource");
+        query.setParameter("idResource", resID);
+
+        if (query.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public static String getSourcesForLang(long conceptID, String talang) {
         init();
         StringBuilder res = new StringBuilder("");
@@ -678,7 +692,7 @@ public class JPAViewFunctions {
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     public static List<String> getResourcePrivacy(String langID) {
         init();
         if (!langID.isEmpty()) {

@@ -69,7 +69,6 @@ public class OwnerFormADMIN extends VerticalPanel {
     public Button delete;
     public OwnerStatusList ownerStatus;
     public OwnerRolesList ownerRole;
-    private static AsyncCallback<String> ownersCallback;
     private static AsyncCallback<Boolean> ownersUsageCallback;
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
@@ -139,7 +138,7 @@ public class OwnerFormADMIN extends VerticalPanel {
         ownersUsageCallback = new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("error", "Coulc not get owner usage");
+                MainEntryPoint.statusPanel.setMessage("error", "Could not get owner usage");
             }
 
             @Override

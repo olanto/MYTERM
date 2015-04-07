@@ -24,12 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "resources")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Resources.findAll", query = "SELECT r FROM Resources r"),
+    @NamedQuery(name = "Resources.findAll", query = "SELECT r FROM Resources r ORDER BY r.idResource DESC"),
     @NamedQuery(name = "Resources.findByIdResource", query = "SELECT r FROM Resources r WHERE r.idResource = :idResource"),
     @NamedQuery(name = "Resources.findByIdOwner", query = "SELECT r FROM Resources r WHERE r.idOwner = :idOwner"),
-    @NamedQuery(name = "Resources.findByResourceName", query = "SELECT r FROM Resources r WHERE r.resourceName = :resourceName"),
-    @NamedQuery(name = "Resources.findByResourcePrivacy", query = "SELECT r FROM Resources r WHERE r.resourcePrivacy = :resourcePrivacy"),
-    @NamedQuery(name = "Resources.findByResourceNameAndPrivacy", query = "SELECT r FROM Resources r WHERE r.resourceName LIKE :resourceName AND r.resourcePrivacy LIKE :resourcePrivacy"),
+    @NamedQuery(name = "Resources.findByResourceName", query = "SELECT r FROM Resources r WHERE r.resourceName = :resourceName ORDER BY r.idResource DESC"),
+    @NamedQuery(name = "Resources.findByResourcePrivacy", query = "SELECT r FROM Resources r WHERE r.resourcePrivacy = :resourcePrivacy ORDER BY r.idResource DESC"),
+    @NamedQuery(name = "Resources.findByResourceNameAndPrivacy", query = "SELECT r FROM Resources r WHERE r.resourceName LIKE :resourceName AND r.resourcePrivacy LIKE :resourcePrivacy ORDER BY r.idResource DESC"),
     @NamedQuery(name = "Resources.findByExtra", query = "SELECT r FROM Resources r WHERE r.extra = :extra")})
 public class Resources implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -62,7 +62,7 @@ public class ResourcePrivacyList extends ListBox {
         rsrcPrivacyService.getResourcePrivacy(langID, rsrcPrivacyCallback);
     }
 
-    public ResourcePrivacyList(String langID, final String currentPOS, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    public ResourcePrivacyList(String langID, final String currentPV, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
         rsrcPrivacyCallback = new AsyncCallback<Collection<String>>() {
             @Override
@@ -77,7 +77,7 @@ public class ResourcePrivacyList extends ListBox {
                     int i = 0;
                     for (String s : res) {
                         addItem(s, s);
-                        if (s.equalsIgnoreCase(currentPOS)) {
+                        if (s.equalsIgnoreCase(currentPV)) {
                             i = res.indexOf(s);
                         }
                     }

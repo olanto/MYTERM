@@ -123,6 +123,16 @@ public interface myTermService extends RemoteService {
 
     public ResourceDTO getResourceDetails(long resID);
 
+    public Boolean getResourceUsage(long resID);
+
+    public String createResource(ResourceDTO resourceDTO);
+
+    public String deleteResource(long resID);
+
+    public ResourceDTO AdminUpdateResource(ResourceDTO resourceDTO);
+
+    public String AdminSaveResource(ResourceDTO resourceDTO);
+
     public LanguageDTO getLanguageDetails(String LangID);
 
     public DomainDTO getDomainDetails(long domID);

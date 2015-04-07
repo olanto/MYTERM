@@ -30,6 +30,7 @@ import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.ManageOwner;
+import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.ManageTerm;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.TermDB;
@@ -998,5 +999,52 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public String deleteUser(long ownerID) {
         ManageOwner.remove(ownerID);
         return "Success";
+    }
+  @Override
+    public Boolean getResourceUsage(long resID) {
+        return JPAViewFunctions.getResourceActivity(resID);
+    }
+  
+  @Override
+    public String deleteResource(long resID) {
+        ManageResource.remove(resID);
+        return "Success";
+    }
+
+    @Override
+    public ResourceDTO AdminUpdateResource(ResourceDTO resourceDTO) {
+        Resources rs = new Resources();
+        rs.setIdResource(resourceDTO.getIdResource());
+        rs.setIdOwner(resourceDTO.getIdOwner());
+        rs.setResourceName(resourceDTO.getResourceName());
+        rs.setResourceNote(resourceDTO.getResourceNote());
+        rs.setResourcePrivacy(resourceDTO.getResourcePrivacy());
+        rs = ManageResource.edit(rs);
+        if (rs != null) {
+            return getResourceDetails(rs.getIdResource());
+        }
+        return null;
+    }
+
+    @Override
+    public String AdminSaveResource(ResourceDTO resourceDTO) {
+        Resources rs = new Resources();
+        rs.setIdResource(resourceDTO.getIdResource());
+        rs.setIdOwner(resourceDTO.getIdOwner());
+        rs.setResourceName(resourceDTO.getResourceName());
+        rs.setResourceNote(resourceDTO.getResourceNote());
+        rs.setResourcePrivacy(resourceDTO.getResourcePrivacy());
+        rs = ManageResource.edit(rs);
+        if (rs != null) {
+            rs = null;
+            return "sucess";
+        }
+        return null;
+    }
+
+    @Override
+    public String createResource(ResourceDTO resourceDTO) {
+     ManageResource.create(resourceDTO.getResourceName(), resourceDTO.getResourcePrivacy(), resourceDTO.getIdOwner(), resourceDTO.getExtra());
+        return "sucess";
     }
 }

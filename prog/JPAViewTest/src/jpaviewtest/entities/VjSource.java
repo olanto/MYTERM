@@ -31,8 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjSource.findBySolangResourceStatus", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.idResource IN :idResource AND v.solang IN :solang AND v.status like :status"),
     @NamedQuery(name = "VjSource.findBySolangResourceStatusSubjectField", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.idResource IN :idResource AND v.solang IN :solang AND v.status like :status AND v.subjectField = :subjectField"),
     @NamedQuery(name = "VjSource.findPublicBySourceResource", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.status like 'p' AND v.solang = :solang"),
-    @NamedQuery(name = "VjSource.findPublicBySourceResourceSubjectField", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.status like 'p' AND v.subjectField = :subjectField AND v.solang = :solang"), 
-   //    @NamedQuery(name = "VjSource.findBySource", query = "SELECT v FROM VjSource v WHERE v.source = :source"),
+    @NamedQuery(name = "VjSource.findPublicBySourceResourceSubjectField", query = "SELECT v FROM VjSource v WHERE v.source LIKE :source AND v.idResource = :idResource AND v.status like 'p' AND v.subjectField = :subjectField AND v.solang = :solang"),
+    @NamedQuery(name = "VjSource.findByUsageIdResource", query = "SELECT Distinct v.idResource FROM VjSource v WHERE v.idResource = :idResource")
+//    @NamedQuery(name = "VjSource.findBySource", query = "SELECT v FROM VjSource v WHERE v.source = :source"),
 //    @NamedQuery(name = "VjSource.findByIdTermSource", query = "SELECT v FROM VjSource v WHERE v.idTermSource = :idTermSource"),
 //    @NamedQuery(name = "VjSource.findBySolang", query = "SELECT v FROM VjSource v WHERE v.solang = :solang"),
 //    @NamedQuery(name = "VjSource.findByStatus", query = "SELECT v FROM VjSource v WHERE v.status = :status"),

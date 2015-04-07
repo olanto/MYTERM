@@ -117,8 +117,18 @@ public interface myTermServiceAsync {
 
     public void AdminUpdateUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
 
-    public void AdminSaveUser(OwnerDTO ownerDTO, AsyncCallback<OwnerDTO> asyncCallback);
+    public void AdminSaveUser(OwnerDTO ownerDTO, AsyncCallback<String> asyncCallback);
 
+    public void getResourceUsage(long resID, AsyncCallback<Boolean> asyncCallback);
+
+    public void createResource(ResourceDTO resourceDTO, AsyncCallback<String> asyncCallback);
+
+    public void deleteResource(long resID, AsyncCallback<String> asyncCallback);
+    
+    public void AdminUpdateResource(ResourceDTO resourceDTO, AsyncCallback<ResourceDTO> asyncCallback);
+
+    public void AdminSaveResource(ResourceDTO resourceDTO, AsyncCallback<String> asyncCallback);
+    
     public void getResourceDetails(long resID, AsyncCallback<ResourceDTO> asyncCallback);
 
     public void getLanguageDetails(String langID, AsyncCallback<LanguageDTO> asyncCallback);

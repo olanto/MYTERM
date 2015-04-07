@@ -88,6 +88,19 @@ public class Queries {
         return result.get(0);
     }
 
+    public static boolean getResourceActivity(long resID) {
+        Query query1 = TermDB.em.createNamedQuery("UsersResources.findByIdResource");
+        query1.setParameter("idResource", resID);
+
+        Query query2 = TermDB.em.createNamedQuery("ResourcesDomains.findByIdResource");
+        query2.setParameter("idResource", resID);
+
+        if (query1.getResultList().isEmpty() && query2.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public static boolean getOwnerActivity(long ownerID) {
         Query query1 = TermDB.em.createNamedQuery("UsersResources.findByIdOwner");
         query1.setParameter("idOwner", ownerID);
@@ -195,7 +208,7 @@ public class Queries {
         }
         return result.get(0);
     }
-    
+
     public static Domains getDomainByID(long domID) {
         Query query = TermDB.em.createNamedQuery("Domains.findByIdDomain");
         query.setParameter("idDomain", domID);
@@ -422,11 +435,12 @@ public class Queries {
         List<Domains> result = query.getResultList();
         return result;
     }
+
     public static List<Domains> getDomains(String domName) {
         Query query;
         if ((domName.equals(" ") || domName.length() < 2)) {
             query = TermDB.em.createNamedQuery("Domains.findAll");
-        }else{
+        } else {
             query = TermDB.em.createNamedQuery("Domains.findByDomainDefaultName");
             query.setParameter("domainDefaultName", domName);
         }

@@ -22,11 +22,14 @@
 package olanto.myTerm.client.Lists;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import java.util.Collection;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.OwnerDTO;
@@ -66,6 +69,78 @@ public class OwnersList extends ListBox {
                 }
             }
         };
+        ownerService.getOwners(ownerCallback);
+    }
+
+    public OwnersList(final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        ownerCallback = new AsyncCallback<Collection<OwnerDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of owners, please RELOAD THE PAGE");
+            }
+
+            @Override
+            public void onSuccess(Collection<OwnerDTO> result) {
+                addItem(" ", "-1");
+                if (result != null) {
+                    ArrayList<OwnerDTO> res = new ArrayList<>();
+                    if (res.addAll(result)) {
+                        for (OwnerDTO s : res) {
+                            ownerlist.add(s.getEmail());
+                            ownerIDlist.add(s.getId());
+                            addItem(s.getEmail(), "" + s.getId());
+                        }
+                    }
+                    setSelectedIndex(0);
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        ownerService.getOwners(ownerCallback);
+    }
+
+    public OwnersList(final Long currentOwner, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        ownerCallback = new AsyncCallback<Collection<OwnerDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of owners, please RELOAD THE PAGE");
+            }
+
+            @Override
+            public void onSuccess(Collection<OwnerDTO> result) {
+                addItem(" ", "-1");
+                if (result != null) {
+                    int i = 0;
+                    ArrayList<OwnerDTO> res = new ArrayList<>();
+                    if (res.addAll(result)) {
+                        for (OwnerDTO s : res) {
+                            ownerlist.add(s.getEmail());
+                            ownerIDlist.add(s.getId());
+                            addItem(s.getEmail(), "" + s.getId());
+                            if (currentOwner.compareTo(s.getId()) == 0) {
+                                i = res.indexOf(s);
+                            }
+                        }
+                    }
+                    setSelectedIndex(i);
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
         ownerService.getOwners(ownerCallback);
     }
 
