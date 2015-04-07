@@ -1,3 +1,7 @@
+
+delete from codeslang where id_language='FR';
+
+
 -- User roles: ADMIN, REVISOR, REDACTOR, READER
 insert into codeslang values ('FR',' role','ADMIN','ADMIN',null);
 insert into codeslang values ('FR',' role','REVISOR','REVISEUR',null);
@@ -10,9 +14,9 @@ insert into codeslang values ('FR','owner_status','INACTIVE','INACTIVE',null);
 insert into codeslang values ('FR','owner_status','DORMANT','DORMANT',null);
 
 -- Term type: fullForm, acronym, abbreviation, shortForm, variant, phrase
-insert into codeslang values ('FR', 'term_type','fullForm','Forme compl�te','default');
+insert into codeslang values ('FR', 'term_type','fullForm','Forme complète','default');
 insert into codeslang values ('FR', 'term_type','acronym','acronyme',null);
-insert into codeslang values ('FR', 'term_type','abbreviation','abr�viation',null);
+insert into codeslang values ('FR', 'term_type','abbreviation','abréviation',null);
 insert into codeslang values ('FR', 'term_type','shortForm','Forme courte',null);
 insert into codeslang values ('FR', 'term_type','variant','Variante',null);
 insert into codeslang values ('FR', 'term_type','phrase','phrase',null);
@@ -26,7 +30,7 @@ insert into codeslang values ('FR', 'term_partofspeech','properNoun','Nom propre
 insert into codeslang values ('FR', 'term_partofspeech','other','autre',null);
 -- masculine, feminine, neuter, other
 insert into codeslang values ('FR', 'term_gender','masculine','masculin',null);
-insert into codeslang values ('FR', 'term_gender','feminine','f�minin',null);
+insert into codeslang values ('FR', 'term_gender','feminine','féminin',null);
 insert into codeslang values ('FR', 'term_gender','neuter','neutre',null);
 insert into codeslang values ('FR', 'term_gender','other','autre','default');
 -- PRIVATE, PUBLIC
@@ -61,47 +65,47 @@ insert into codeslang values ('FR', 'msg','btn.escape','ESCAPE', 'SORTIR');
 insert into codeslang values ('FR', 'msg','btn.cancel','CANCEL', 'ANNULER');
 insert into codeslang values ('FR', 'msg','btn.abort','ABORT', 'ABANDONNER');
 insert into codeslang values ('FR', 'msg','btn.createNew','Create New', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','btn.search','SEARCH', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','btn.search','SEARCH', 'Chercher');
 insert into codeslang values ('FR', 'msg','btn.add','ADD', 'XXXXXXX');
 
-insert into codeslang values ('FR', 'msg','msg.resource','Resource', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.domain','Domain', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.sourceLanguage','Source lang.', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.targetLanguage','Target lang.', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','msg.resource','Resource', 'Ressource');
+insert into codeslang values ('FR', 'msg','msg.domain','Domain', 'Domaine');
+insert into codeslang values ('FR', 'msg','msg.sourceLanguage','Source lang.', 'Lang. Source');
+insert into codeslang values ('FR', 'msg','msg.targetLanguage','Target lang.', 'Lang. Cible');
 insert into codeslang values ('FR', 'msg','msg.addTitle','Click here to add entries', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','msg.searchTitle','Click here to retreive entries', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','msg.workspaceEntries','Workspace Entries', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.seachMessage','Input your search expression', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.welcome','Welcome to olanto''s Terminology Manager', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','msg.seachMessage','Input your search expression', 'Expression recherchée');
+insert into codeslang values ('FR', 'msg','msg.welcome','Welcome to olanto''s Terminology Manager', 'Bienvenue dans le gestionnaire de terminologie Olanto');
 insert into codeslang values ('FR', 'msg','msg.statusEdited','Under edition', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','msg.statusPublic','Published', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','msg.statusRevision','To be revised', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','msg.termRank','Term Number: ', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.definitionDetails','Definition details', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.resourceDetails','Resource''s Details', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.creationDetails','Creation Details', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','msg.extraDetails','Other Information', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','msg.definitionDetails','Definition details', 'Détail pour');
+insert into codeslang values ('FR', 'msg','msg.resourceDetails','Resource''s Details', 'Ressource');
+insert into codeslang values ('FR', 'msg','msg.creationDetails','Creation Details', 'Détail création');
+insert into codeslang values ('FR', 'msg','msg.extraDetails','Other Information', 'Autres informations');
 
-insert into codeslang values ('FR', 'msg','lbl.t.form','Form', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.lang','Language', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.source','Source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.definition','Definition', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.source_definition','Definition''s source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.status','Status', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.type','Type', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.note','Note', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.linguistic_note','Linguistic Note', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.technical_note','Technical Note', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.reference_note','Reference Note', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.linguistic_note_source','Linguistic Note Source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.technical_note_source','Technical Note Source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.reference_note_source','Reference Note Source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.usage','Usage', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.extra','Extra', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.gender','Gender', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.part_of_speech','Part of speech', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.context','Context', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.t.source_context','Context''s source', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','lbl.t.form','Form', 'Forme');
+insert into codeslang values ('FR', 'msg','lbl.t.lang','Language', 'XXXXXX1');
+insert into codeslang values ('FR', 'msg','lbl.t.source','Source', 'XXXXXX2');
+insert into codeslang values ('FR', 'msg','lbl.t.definition','Definition', 'XXXXXX3');
+insert into codeslang values ('FR', 'msg','lbl.t.source_definition','Definition''s source', 'XXXXXX4');
+insert into codeslang values ('FR', 'msg','lbl.t.status','Status', 'XXXXXX5');
+insert into codeslang values ('FR', 'msg','lbl.t.type','Type', 'Type');
+insert into codeslang values ('FR', 'msg','lbl.t.note','Note', 'Note');
+insert into codeslang values ('FR', 'msg','lbl.t.linguistic_note','Linguistic Note', 'XXXXXX6');
+insert into codeslang values ('FR', 'msg','lbl.t.technical_note','Technical Note', 'XXXXXX7');
+insert into codeslang values ('FR', 'msg','lbl.t.reference_note','Reference Note', 'XXXXXX8');
+insert into codeslang values ('FR', 'msg','lbl.t.linguistic_note_source','Linguistic Note Source', 'XXXXXX9');
+insert into codeslang values ('FR', 'msg','lbl.t.technical_note_source','Technical Note Source', 'XXXXXXX10');
+insert into codeslang values ('FR', 'msg','lbl.t.reference_note_source','Reference Note Source', 'XXXXXXX11');
+insert into codeslang values ('FR', 'msg','lbl.t.usage','Usage', 'XXXXXXX12');
+insert into codeslang values ('FR', 'msg','lbl.t.extra','Extra', 'XXXXXXX13');
+insert into codeslang values ('FR', 'msg','lbl.t.gender','Gender', 'XXXXXXX14');
+insert into codeslang values ('FR', 'msg','lbl.t.part_of_speech','Part of speech', 'Catégorie grammaticale');
+insert into codeslang values ('FR', 'msg','lbl.t.context','Context', 'XXXXXXX15');
+insert into codeslang values ('FR', 'msg','lbl.t.source_context','Context''s source', 'XXXXXXX16');
 insert into codeslang values ('FR', 'msg','lbl.t.geo_usage', 'Geo usage', null);
 insert into codeslang values ('FR', 'msg','lbl.t.creation', 'Creation date', null);
 insert into codeslang values ('FR', 'msg','lbl.t.created_by', 'Created by', null);
@@ -111,11 +115,11 @@ insert into codeslang values ('FR', 'msg','lbl.t.cross_ref', 'Cross reference', 
 insert into codeslang values ('FR', 'msg','lbl.t.extra_cross_ref', 'Extra Cross reference', null);
 insert into codeslang values ('FR', 'msg','lbl.t.image','Image', 'XXXXXXX');
 
-insert into codeslang values ('FR', 'msg','lbl.c.subject_field','Subject field', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','lbl.c.subject_field','Subject field', 'Domaine');
 insert into codeslang values ('FR', 'msg','lbl.c.definition','Definition', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','lbl.c.resource','Resource', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','lbl.c.source_definition','Definition''s source', 'XXXXXXX');
-insert into codeslang values ('FR', 'msg','lbl.c.note','Note', 'XXXXXXX');
+insert into codeslang values ('FR', 'msg','lbl.c.note','Note', 'Note');
 insert into codeslang values ('FR', 'msg','lbl.c.image','Image', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','lbl.c.extra','Extra information', 'XXXXXXX');
 insert into codeslang values ('FR', 'msg','lbl.c.creation', 'Creation date', null);
@@ -146,3 +150,5 @@ insert into codeslang values ('FR', 'msg','lbl.r.name', 'Resource''s Name', null
 insert into codeslang values ('FR', 'msg','lbl.r.privacy', 'Resource''s Privacy', null);
 insert into codeslang values ('FR', 'msg','lbl.r.note', 'Resource''s Note', null);
 insert into codeslang values ('FR', 'msg','lbl.r.extra', 'Resource''s Extra', null);
+
+commit;

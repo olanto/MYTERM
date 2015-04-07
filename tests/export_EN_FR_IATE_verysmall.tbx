@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<martif type="TBX-Default" xml:lang="en">
+  <martifHeader>
+    <fileDesc>
+      <sourceDesc>
+        <p>This is a TBX file downloaded from the IATE website. Address any enquiries to iate@cdt.europa.eu.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p type="XCSURI">TBXXCS.xcs</p>
+    </encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+      <termEntry id="IATE-120010">
+        <descripGrp>
+          <descrip type="subjectField">2806004</descrip>
+        </descripGrp>
+        <langSet xml:lang="en">
+          <tig>
+            <term>criminal abortion</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">1</descrip>
+          </tig>
+          <tig>
+            <term>illegal abortion</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">1</descrip>
+          </tig>
+        </langSet>
+        <langSet xml:lang="fr">
+          <tig>
+            <term>avortement criminel</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">1</descrip>
+          </tig>
+          <tig>
+            <term>avortement illicite</term>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="reliabilityCode">1</descrip>
+          </tig>
+        </langSet>
+      </termEntry>
+	  </body>
+     </text>
+</martif>
