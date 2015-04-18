@@ -148,6 +148,8 @@ public class LANGUAGESWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.setMessage("message", "Language retreived successfully...");
                 searchMenu.btnAdd.setEnabled(true);
                 if (result != null) {
+                    resultsPanel.sideRes.clear();
+                    resultsPanel.elementDetails.clear();
                     resultsPanel.sideRes.setWidget(new HTML(result));
                     History.newItem("p32loaded");
                 } else {
@@ -158,12 +160,11 @@ public class LANGUAGESWidget extends VerticalPanel {
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.sideRes.clear();
-                resultsPanel.elementDetails.clear();
-                isEdited.setVal(false);
-                getService().getLanguagesDetails(searchMenu.idField.getText(),
-                        searchMenu.nameField.getText(),
-                        languagesAddCallback);
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p32add").show();
+                } else {
+                    History.newItem("p32add");
+                }
             }
         });
 
@@ -187,6 +188,9 @@ public class LANGUAGESWidget extends VerticalPanel {
                         case "p32escape":
                             commandEscape();
                             break;
+                        case "p32add":
+                            commandAdd();
+                            break;
                     }
                 }
             }
@@ -195,6 +199,16 @@ public class LANGUAGESWidget extends VerticalPanel {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    private void commandAdd() {
+        resultsPanel.elementDetails.clear();
+        resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry, please wait...");
+        isEdited.setVal(false);
+        getService().getLanguagesDetails(searchMenu.idField.getText(),
+                searchMenu.nameField.getText(),
+                languagesAddCallback);
     }
 
     public void refreshContentFromLanguageDTO() {
@@ -377,12 +391,13 @@ public class LANGUAGESWidget extends VerticalPanel {
     }
 
     private void commandInit() {
+        isEdited.setVal(false);
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         resultsPanel.sideRes.clear();
         getService().getLanguagesDetails("", "", languagesCallback);
     }
-    
-     private void commandEscape() {
+
+    private void commandEscape() {
         searchMenu.btnAdd.setEnabled(true);
         MainEntryPoint.statusPanel.setMessage("message", "Changes cancelled successfully");
         resultsPanel.elementDetails.clear();

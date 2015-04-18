@@ -70,13 +70,14 @@ public class LanguageFormADMIN extends VerticalPanel {
         escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
         delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
 
-        rform = new Grid(7, 2);
+        rform = new Grid(3, 2);
         add(rform);
 
         rform.setCellSpacing(4);
         rform.setStyleName("edpanel");
         rform.setWidget(0, 0, lidPanel);
         rform.setWidget(1, 0, ldnPanel);
+        rform.setWidget(2, 0, ctrlPanel);
 
         lidPanel.add(label_lid);
         lidPanel.add(text_lid);

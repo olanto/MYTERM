@@ -256,7 +256,6 @@ public class REDACTORWidget extends VerticalPanel {
                 } else {
                     History.newItem("add");
                 }
-
             }
         });
         // Listen for the button clicks

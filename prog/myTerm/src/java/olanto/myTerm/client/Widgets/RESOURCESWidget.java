@@ -84,6 +84,8 @@ public class RESOURCESWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.setMessage("message", "Resources retreived successfully...");
                 searchMenu.btnAdd.setEnabled(true);
                 if (result != null) {
+                    resultsPanel.elementDetails.clear();
+                    resultsPanel.sideRes.clear();
                     resultsPanel.sideRes.setWidget(new HTML(result));
                 }
                 History.newItem("p31loaded");
@@ -158,12 +160,11 @@ public class RESOURCESWidget extends VerticalPanel {
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                resultsPanel.sideRes.clear();
-                resultsPanel.elementDetails.clear();
-                isEdited.setVal(false);
-                getService().getResourcesDetails(searchMenu.rsrcField.getText(),
-                        searchMenu.rsrcPrivay.getValue(searchMenu.rsrcPrivay.getSelectedIndex()),
-                        resourcesAddCallback);
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p31add").show();
+                } else {
+                    History.newItem("p31add");
+                }
             }
         });
 
@@ -188,6 +189,9 @@ public class RESOURCESWidget extends VerticalPanel {
                         case "p31escape":
                             commandEscape();
                             break;
+                        case "p31add":
+                            commandAdd();
+                            break;
                     }
                 }
             }
@@ -198,9 +202,20 @@ public class RESOURCESWidget extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    private void commandInit() {
-        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+    private void commandAdd() {
+        resultsPanel.elementDetails.clear();
         resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry, please wait...");
+        isEdited.setVal(false);
+        getService().getResourcesDetails(searchMenu.rsrcField.getText(),
+                searchMenu.rsrcPrivay.getValue(searchMenu.rsrcPrivay.getSelectedIndex()),
+                resourcesAddCallback);
+    }
+
+    private void commandInit() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getResourcesDetails("", "", resourcesCallback);
     }
 

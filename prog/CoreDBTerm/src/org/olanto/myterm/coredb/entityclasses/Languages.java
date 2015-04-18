@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "languages")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Languages.findAll", query = "SELECT l FROM Languages l ORDER BY l.idLanguage DESC"),
+    @NamedQuery(name = "Languages.findAll", query = "SELECT l FROM Languages l"),
     @NamedQuery(name = "Languages.findByIdLanguage", query = "SELECT l FROM Languages l WHERE l.idLanguage = :idLanguage"),
     @NamedQuery(name = "Languages.findByIdLanguageANDLanguageDefaultName", query = "SELECT l FROM Languages l WHERE l.idLanguage = :idLanguage AND l.languageDefaultName = :languageDefaultName"),
     @NamedQuery(name = "Languages.findByLanguageDefaultName", query = "SELECT l FROM Languages l WHERE l.languageDefaultName = :languageDefaultName")})
