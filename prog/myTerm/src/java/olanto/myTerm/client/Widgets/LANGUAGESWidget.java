@@ -2,9 +2,9 @@
  * ********
  * Copyright © 2013-2014 Olanto Foundation Geneva
  *
- * This file is part of myTERM.
+ * This file is part of myTELM.
  *
- * myTERM is free software: you can redistribute it and/or modify it under the
+ * myTELM is free software: you can redistribute it and/or modify it under the
  * terms of the GNU Affero General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
@@ -15,7 +15,7 @@
  * details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with myTERM. If not, see <http://www.gnu.org/licenses/>.
+ * along with myTELM. If not, see <http://www.gnu.org/licenses/>.
  *
  *********
  */
@@ -173,7 +173,7 @@ public class LANGUAGESWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
-                if (command.contains("RM")) {
+                if (command.contains("LM")) {
                     if (isEdited.getVal()) {
                         new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, command).show();
                     } else {
@@ -309,7 +309,7 @@ public class LANGUAGESWidget extends VerticalPanel {
                         public void onSuccess(String result) {
                             languageForm.save.setEnabled(true);
                             if (result != null) {
-                                if (action.contains("RM")) {
+                                if (action.contains("LM")) {
                                     String languageID = action.substring(2);
                                     getService().getLanguageDetails(languageID, getLanguageDetailsCallback);
                                 } else {
@@ -340,7 +340,7 @@ public class LANGUAGESWidget extends VerticalPanel {
 
     public void escapeLanguage(String action) {
         isEdited.setVal(false);
-        if (action.contains("RM")) {
+        if (action.contains("LM")) {
             getService().getLanguageDetails(action.substring(2), getLanguageDetailsCallback);
         } else {
             History.newItem(action);
