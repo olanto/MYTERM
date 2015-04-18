@@ -29,6 +29,7 @@ import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
 import org.olanto.myterm.coredb.ManageConcept;
+import org.olanto.myterm.coredb.ManageLanguages;
 import org.olanto.myterm.coredb.ManageOwner;
 import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.ManageTerm;
@@ -997,17 +998,22 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String deleteUser(long ownerID) {
-        ManageOwner.remove(ownerID);
+        if (getOwnerUsage(ownerID)) {
+            ManageOwner.remove(ownerID);
+        }
         return "Success";
     }
-  @Override
+
+    @Override
     public Boolean getResourceUsage(long resID) {
         return JPAViewFunctions.getResourceActivity(resID);
     }
-  
-  @Override
+
+    @Override
     public String deleteResource(long resID) {
-        ManageResource.remove(resID);
+        if (getResourceUsage(resID)) {
+            ManageResource.remove(resID);
+        }
         return "Success";
     }
 
@@ -1044,7 +1050,56 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String createResource(ResourceDTO resourceDTO) {
-     ManageResource.create(resourceDTO.getResourceName(), resourceDTO.getResourcePrivacy(), resourceDTO.getIdOwner(), resourceDTO.getExtra());
+        ManageResource.create(resourceDTO.getResourceName(), resourceDTO.getResourcePrivacy(), resourceDTO.getIdOwner(), resourceDTO.getExtra());
         return "sucess";
+    }
+
+    @Override
+    public Boolean getLanguageUsage(String langID) {
+        return JPAViewFunctions.getLanguageActivity(langID);
+    }
+
+    @Override
+    public String createLanguage(LanguageDTO langDTO) {
+        Languages lan = new Languages();
+        lan.setIdLanguage(langDTO.getIdLanguage());
+        lan.setLanguageDefaultName(langDTO.getLanguageDefaultName());
+        if (ManageLanguages.create(lan) != null) {
+            return "sucess";
+        }
+        return null;
+    }
+
+    @Override
+    public String deleteLanguage(String langID) {
+        if (getLanguageUsage(langID)) {
+            ManageLanguages.remove(langID);
+        }
+        return "success";
+    }
+
+    @Override
+    public LanguageDTO AdminUpdateLanguage(LanguageDTO langDTO) {
+        Languages lan = new Languages();
+        lan.setIdLanguage(langDTO.getIdLanguage());
+        lan.setLanguageDefaultName(langDTO.getLanguageDefaultName());
+        lan = ManageLanguages.update(lan);
+        if (lan != null) {
+            return getLanguageDetails(lan.getIdLanguage());
+        }
+        return null;
+    }
+
+    @Override
+    public String AdminSaveLanguage(LanguageDTO langDTO) {
+        Languages lan = new Languages();
+        lan.setIdLanguage(langDTO.getIdLanguage());
+        lan.setLanguageDefaultName(langDTO.getLanguageDefaultName());
+        lan = ManageLanguages.update(lan);
+        if (lan != null) {
+            lan = null;
+            return "sucess";
+        }
+        return null;
     }
 }

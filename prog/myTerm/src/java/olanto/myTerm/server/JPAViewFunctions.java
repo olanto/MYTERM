@@ -389,6 +389,18 @@ public class JPAViewFunctions {
         return true;
     }
 
+    public static boolean getLanguageActivity(String langID) {
+        init();
+        Query query = em.createNamedQuery("VjUsersLanguages.findByIdLanguage");
+        query.setParameter("IdLanguage", langID);
+
+        Query query2 = em.createNamedQuery("VjCodifications.findByIdLanguage");
+        if (query.getResultList().isEmpty() && query2.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
     public static String getSourcesForLang(long conceptID, String talang) {
         init();
         StringBuilder res = new StringBuilder("");

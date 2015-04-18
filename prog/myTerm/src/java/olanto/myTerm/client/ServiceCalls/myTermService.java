@@ -93,14 +93,6 @@ public interface myTermService extends RemoteService {
 
     public Collection<String> getResourcePrivacy(String langID);
 
-    public Collection<OwnerDTO> getOwners();
-
-    public Boolean getOwnerUsage(long ownerID);
-
-    public String createUser(OwnerDTO ownerDTO);
-
-    public String deleteUser(long ownerID);
-
     public OwnerDTO getOwnerDetails(long ownerID);
 
     public String getOwnersDetails(String ownlerMailing, String ownerStatus, String ownerRole);
@@ -117,6 +109,14 @@ public interface myTermService extends RemoteService {
 
     public String getEntitiesDetails(String s, String langID, long resID, String domID);
 
+    public Collection<OwnerDTO> getOwners();
+
+    public Boolean getOwnerUsage(long ownerID);
+
+    public String createUser(OwnerDTO ownerDTO);
+
+    public String deleteUser(long ownerID);
+
     public OwnerDTO AdminUpdateUser(OwnerDTO ownerDTO);
 
     public String AdminSaveUser(OwnerDTO ownerDTO);
@@ -125,6 +125,18 @@ public interface myTermService extends RemoteService {
 
     public Boolean getResourceUsage(long resID);
 
+    public LanguageDTO getLanguageDetails(String LangID);
+
+    public Boolean getLanguageUsage(String langID);
+
+    public String createLanguage(LanguageDTO langDTO);
+
+    public String deleteLanguage(String langID);
+
+    public LanguageDTO AdminUpdateLanguage(LanguageDTO langDTO);
+
+    public String AdminSaveLanguage(LanguageDTO langDTO);
+
     public String createResource(ResourceDTO resourceDTO);
 
     public String deleteResource(long resID);
@@ -132,8 +144,6 @@ public interface myTermService extends RemoteService {
     public ResourceDTO AdminUpdateResource(ResourceDTO resourceDTO);
 
     public String AdminSaveResource(ResourceDTO resourceDTO);
-
-    public LanguageDTO getLanguageDetails(String LangID);
 
     public DomainDTO getDomainDetails(long domID);
 }
