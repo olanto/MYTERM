@@ -58,6 +58,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID) {
+        TermDB.restart();
         String response = JPAViewFunctions.getPublicSearchBySourceTarget(s, ls, lt, resID, domID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
@@ -91,6 +92,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Collection<LanguageDTO> getLanguages() {
+        TermDB.restart();
         List<Languages> l = Queries.getLanguages();
         List<LanguageDTO> languages = new ArrayList<>();
         for (Languages lang : l) {
@@ -140,6 +142,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Collection<DomainDTO> getDomains() {
+        TermDB.restart();
         List<Domains> l = Queries.getDomains();
         List<DomainDTO> domains = new ArrayList<>();
         for (Domains res : l) {
@@ -290,6 +293,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID) {
+        TermDB.restart();
         String response = JPAViewFunctions.getSourceForThis(s, ls, resID, domID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
@@ -309,6 +313,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getWorkspaceElements(String ls, long ownerID) {
+        TermDB.restart();
         String response = JPAViewFunctions.getWorkspaceElementsByLang(ls, ownerID);
         if (response != null) {
             StringBuilder result = new StringBuilder("");
@@ -816,6 +821,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getResourcesDetails(String resName, String resPrivacy) {
+        TermDB.restart();
         List<Resources> r = Queries.getResources(resName, resPrivacy);
         if (!r.isEmpty()) {
             StringBuilder result = new StringBuilder("");
@@ -888,16 +894,19 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getUsersResourcesDetails(long ownerID, long resID, String role) {
+        TermDB.restart();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getUsersLanguagesDetails(long ownerID, String langID) {
+        TermDB.restart();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getEntitiesDetails(String s, String langID, long resID, String domID) {
+        TermDB.restart();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -993,6 +1002,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean getOwnerUsage(long ownerID) {
+        TermDB.restart();
         return Queries.getOwnerActivity(ownerID);
     }
 
@@ -1006,6 +1016,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean getResourceUsage(long resID) {
+        TermDB.restart();
         return JPAViewFunctions.getResourceActivity(resID);
     }
 
@@ -1056,6 +1067,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean getLanguageUsage(String langID) {
+        TermDB.restart();
         return JPAViewFunctions.getLanguageActivity(langID);
     }
 
