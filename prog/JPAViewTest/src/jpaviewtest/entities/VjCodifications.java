@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjCodifications.findOwnerRolesByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'role' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findOwnerStatusByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'owner_status' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findResourcePrivacyByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'privacy' AND v.idLanguage = :idLanguage"),
-    @NamedQuery(name = "VjCodifications.findByIdLanguage", query = "SELECT v FROM VjCodifications v WHERE v.idLanguage = :idLanguage"),
+//    @NamedQuery(name = "VjCodifications.findByIdLanguage", query = "SELECT v FROM VjCodifications v WHERE v.idLanguage = :idLanguage"),
 //    @NamedQuery(name = "VjCodifications.findByCodeType", query = "SELECT v FROM VjCodifications v WHERE v.codeType = :codeType"),
 //    @NamedQuery(name = "VjCodifications.findByCodeValue", query = "SELECT v FROM VjCodifications v WHERE v.codeValue = :codeValue"),
 //    @NamedQuery(name = "VjCodifications.findByCodeExtra", query = "SELECT v FROM VjCodifications v WHERE v.codeExtra = :codeExtra"),

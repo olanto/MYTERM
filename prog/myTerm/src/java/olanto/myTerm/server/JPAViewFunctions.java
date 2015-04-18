@@ -394,10 +394,7 @@ public class JPAViewFunctions {
         Query query = em.createNamedQuery("VjUsersLanguages.findByIdLanguage");
         query.setParameter("idLanguage", langID);
 
-        Query query2 = em.createNamedQuery("VjCodifications.findByIdLanguage");
-        query2.setParameter("idLanguage", langID);
-
-        if (query.getResultList().isEmpty() && query2.getResultList().isEmpty()) {
+        if (query.getResultList().isEmpty()) {
             return false;
         }
         return true;

@@ -48,6 +48,7 @@ public class TestView {
 //        getApproveElementsByLang("EN", 1001);
 //        getTermTypes("FR");
 //        getCodificationByTypeAndLang("msg", "EN");
+        System.out.println(""+getLanguageActivity("ooo"));
     }
 
     public static void init() {
@@ -57,7 +58,19 @@ public class TestView {
             em = emf.createEntityManager();
         }
     }
+  public static boolean getLanguageActivity(String langID) {
+        init();
+        Query query = em.createNamedQuery("VjUsersLanguages.findByIdLanguage");
+        query.setParameter("idLanguage", langID);
 
+        Query query2 = em.createNamedQuery("VjCodifications.findByIdLanguage");
+        query2.setParameter("idLanguage", langID);
+
+        if (/*query.getResultList().isEmpty() &&*/ query2.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
     public static String getTermsInfo(long conceptID, String lang, HashMap<String, String> sysMsgsrv) {
         init();
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLanguage");

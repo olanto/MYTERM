@@ -1002,29 +1002,23 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean getOwnerUsage(long ownerID) {
-        TermDB.restart();
         return Queries.getOwnerActivity(ownerID);
     }
 
     @Override
     public String deleteUser(long ownerID) {
-        if (getOwnerUsage(ownerID)) {
-            ManageOwner.remove(ownerID);
-        }
+        ManageOwner.remove(ownerID);
         return "Success";
     }
 
     @Override
     public Boolean getResourceUsage(long resID) {
-        TermDB.restart();
         return JPAViewFunctions.getResourceActivity(resID);
     }
 
     @Override
     public String deleteResource(long resID) {
-        if (getResourceUsage(resID)) {
-            ManageResource.remove(resID);
-        }
+        ManageResource.remove(resID);
         return "Success";
     }
 
@@ -1036,6 +1030,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         rs.setResourceName(resourceDTO.getResourceName());
         rs.setResourceNote(resourceDTO.getResourceNote());
         rs.setResourcePrivacy(resourceDTO.getResourcePrivacy());
+        rs.setExtra(resourceDTO.getExtra());
         rs = ManageResource.edit(rs);
         if (rs != null) {
             return getResourceDetails(rs.getIdResource());
@@ -1051,6 +1046,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         rs.setResourceName(resourceDTO.getResourceName());
         rs.setResourceNote(resourceDTO.getResourceNote());
         rs.setResourcePrivacy(resourceDTO.getResourcePrivacy());
+        rs.setExtra(resourceDTO.getExtra());
         rs = ManageResource.edit(rs);
         if (rs != null) {
             rs = null;
@@ -1067,7 +1063,6 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean getLanguageUsage(String langID) {
-        TermDB.restart();
         return JPAViewFunctions.getLanguageActivity(langID);
     }
 
@@ -1084,9 +1079,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String deleteLanguage(String langID) {
-        if (getLanguageUsage(langID)) {
-            ManageLanguages.remove(langID);
-        }
+        ManageLanguages.remove(langID);
         return "success";
     }
 
