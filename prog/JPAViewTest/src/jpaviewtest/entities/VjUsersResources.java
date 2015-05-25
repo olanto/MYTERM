@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjUsersResources.findByResourcePrivacy", query = "SELECT v FROM VjUsersResources v WHERE v.resourcePrivacy = :resourcePrivacy"),
     @NamedQuery(name = "VjUsersResources.findByOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerRoles = :ownerRoles")})
 public class VjUsersResources implements Serializable {
+    @Basic(optional = false)
+    @Column(name = "owner_first_name")
+    private String ownerFirstName;
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")
     @Id
@@ -123,6 +126,14 @@ public class VjUsersResources implements Serializable {
 
     public void setOwnerRoles(String ownerRoles) {
         this.ownerRoles = ownerRoles;
+    }
+
+    public String getOwnerFirstName() {
+        return ownerFirstName;
+    }
+
+    public void setOwnerFirstName(String ownerFirstName) {
+        this.ownerFirstName = ownerFirstName;
     }
     
 }

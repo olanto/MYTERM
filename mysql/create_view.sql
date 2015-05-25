@@ -16,7 +16,7 @@ where r.resource_privacy="PUBLIC"
 */
 
 create or replace view v_users_resources as
-select o.id_owner, o.owner_mailing,
+select o.id_owner, o.owner_first_name, o.owner_mailing,
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        'ADMIN' owner_roles
@@ -25,7 +25,7 @@ where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
    and ur.owner_roles='ADMIN'
 union
-select o.id_owner, o.owner_mailing, 
+select o.id_owner, o.owner_first_name, o.owner_mailing, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        'REVISOR' owner_roles
@@ -34,7 +34,7 @@ where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
    and ur.owner_roles IN ('ADMIN','REVISOR')
 union
-select o.id_owner, o.owner_mailing, 
+select o.id_owner, o.owner_first_name, o.owner_mailing, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        'REDACTOR' owner_roles
@@ -43,7 +43,7 @@ where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
    and ur.owner_roles IN ('ADMIN','REVISOR','REDACTOR')
 union
-select o.id_owner, o.owner_mailing, 
+select o.id_owner, o.owner_first_name, o.owner_mailing, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        'READER' owner_roles
@@ -52,7 +52,7 @@ where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
    and ur.owner_roles IN ('ADMIN','REVISOR','REDACTOR','READER')
 union
-select o.id_owner, o.owner_mailing, 
+select o.id_owner, o.owner_first_name, o.owner_mailing, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        ur.owner_roles
@@ -60,7 +60,7 @@ select o.id_owner, o.owner_mailing,
 where r.id_resource = ur.id_resource
    and o.id_owner=ur.id_owner
 union 
-  select o.id_owner, o.owner_mailing, 
+  select o.id_owner, o.owner_first_name, o.owner_mailing, 
 	   r.id_resource, r.resource_name,
 	   r.resource_privacy, r.resource_note,
        'READER'
@@ -319,7 +319,7 @@ SELECT uuid()  uuid,
 v_reslang.* FROM v_reslang;
 
 create or replace view v_users_languages as
-select o.id_owner, 
+select o.id_owner, o.owner_first_name, o.owner_mailing,  
 	   l.id_language, l.language_default_name
 
  from languages l, owners o, users_languages ul

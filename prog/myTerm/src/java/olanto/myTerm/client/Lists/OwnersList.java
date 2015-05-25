@@ -60,9 +60,9 @@ public class OwnersList extends ListBox {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getEmail());
+                            ownerlist.add(s.getFirstName());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getEmail(), "" + s.getId());
+                            addItem(s.getFirstName(), "" + s.getId());
                         }
                     }
                     setSelectedIndex(0);
@@ -87,9 +87,9 @@ public class OwnersList extends ListBox {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getEmail());
+                            ownerlist.add(s.getFirstName());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getEmail(), "" + s.getId());
+                            addItem(s.getFirstName(), "" + s.getId());
                         }
                     }
                     setSelectedIndex(0);
@@ -122,9 +122,9 @@ public class OwnersList extends ListBox {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getEmail());
+                            ownerlist.add(s.getFirstName());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getEmail(), "" + s.getId());
+                            addItem(s.getFirstName(), "" + s.getId());
                             if (currentOwner.compareTo(s.getId()) == 0) {
                                 i = res.indexOf(s);
                             }
