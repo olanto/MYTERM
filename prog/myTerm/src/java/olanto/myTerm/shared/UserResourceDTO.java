@@ -1,0 +1,122 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package olanto.myTerm.shared;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+/**
+ *
+ * @author simple
+ */
+public class UserResourceDTO implements IsSerializable {
+
+    private static final long serialVersionUID = 1L;
+    private Long idResource;
+    private String ownerMailing;
+    private String ownerFirstName;
+    private Long ownerID;
+    private String resourceName;
+    private String resourcePrivacy;
+    private String resourceNote;
+    private String ownerRole;
+
+    public UserResourceDTO() {
+    }
+
+    public Long getIdResource() {
+        return idResource;
+    }
+
+    public Long getIdOwner() {
+        return ownerID;
+    }
+
+    public void setIdResource(Long idResource) {
+        this.idResource = idResource;
+    }
+
+    public void setIdOwner(Long idowner) {
+        this.ownerID = idowner;
+    }
+
+    public String getOwnerMailing() {
+        return ownerMailing;
+    }
+
+    public void setOwnerMailing(String ownerMailing) {
+        this.ownerMailing = ownerMailing;
+    }
+
+    public void setOwnerFirstName(String ownerFirstName) {
+        this.ownerFirstName = ownerFirstName;
+    }
+
+    public String getOwnerFirstName() {
+        return this.ownerFirstName;
+    }
+
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    public String getResourcePrivacy() {
+        return resourcePrivacy;
+    }
+
+    public void setResourcePrivacy(String resourcePrivacy) {
+        this.resourcePrivacy = resourcePrivacy;
+    }
+
+    public String getOwnerRole() {
+        return ownerRole;
+    }
+
+    public void setOwnerRole(String ownerRole) {
+        this.ownerRole = ownerRole;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idResource != null ? idResource.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof UserResourceDTO)) {
+            return false;
+        }
+        UserResourceDTO other = (UserResourceDTO) object;
+        if ((this.idResource == null && other.idResource != null) || (this.idResource != null && !this.idResource.equals(other.idResource))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "org.olanto.myterm.coredb.entityclasses.Resources[ idResource=" + idResource + " ]";
+    }
+
+    /**
+     * @return the resourceNote
+     */
+    public String getResourceNote() {
+        return resourceNote;
+    }
+
+    /**
+     * @param resourceNote the resourceNote to set
+     */
+    public void setResourceNote(String resourceNote) {
+        this.resourceNote = resourceNote;
+    }
+}

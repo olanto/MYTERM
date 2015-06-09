@@ -60,9 +60,10 @@ public class OwnersList extends ListBox {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getFirstName());
+                            ownerlist.add(s.getEmail());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getFirstName(), "" + s.getId());
+                            addItem(s.getEmail(), "" + s.getId());
+                            setTitle(s.getFirstName());
                         }
                     }
                     setSelectedIndex(0);
@@ -87,9 +88,10 @@ public class OwnersList extends ListBox {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getFirstName());
+                            ownerlist.add(s.getEmail());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getFirstName(), "" + s.getId());
+                            addItem(s.getEmail(), "" + s.getId());
+                            setTitle(s.getFirstName());
                         }
                     }
                     setSelectedIndex(0);
@@ -118,13 +120,14 @@ public class OwnersList extends ListBox {
             public void onSuccess(Collection<OwnerDTO> result) {
                 addItem(" ", "-1");
                 if (result != null) {
-                    int i = 0;
+                    int i = 1;
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {
-                            ownerlist.add(s.getFirstName());
+                            ownerlist.add(s.getEmail());
                             ownerIDlist.add(s.getId());
-                            addItem(s.getFirstName(), "" + s.getId());
+                            addItem(s.getEmail(), "" + s.getId());
+                            setTitle(s.getFirstName());
                             if (currentOwner.compareTo(s.getId()) == 0) {
                                 i = res.indexOf(s);
                             }

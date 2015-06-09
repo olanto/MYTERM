@@ -57,15 +57,16 @@ public class ResourcesList extends ListBox {
 
             @Override
             public void onSuccess(Collection<ResourceDTO> result) {
+                int i = 0;
                 if (result != null) {
                     if (role.equals("READER")) {
                         addItem("ALL", "-1");
                         rsrclist.add("ALL");
                         rsrcIDlist.add(0L);
+                        i++;
                     }
                     ArrayList<ResourceDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
-                        int i = 0;
                         for (ResourceDTO s : res) {
                             rsrclist.add(s.getResourceName());
                             rsrcIDlist.add(s.getIdResource());
@@ -115,7 +116,7 @@ public class ResourcesList extends ListBox {
         };
         rsrcService.getResources(RsrcCallback);
     }
-    
+
     public Long getIDResource(int i) {
         return rsrcIDlist.get(i);
     }

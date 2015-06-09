@@ -28,12 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjUsersLanguages.findByIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjUsersLanguages.findByLanguageDefaultName", query = "SELECT v FROM VjUsersLanguages v WHERE v.languageDefaultName = :languageDefaultName")})
 public class VjUsersLanguages implements Serializable {
-    @Basic(optional = false)
-    @Column(name = "owner_first_name")
-    private String ownerFirstName;
-    @Basic(optional = false)
-    @Column(name = "owner_mailing")
-    private String ownerMailing;
 
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")
@@ -48,6 +42,12 @@ public class VjUsersLanguages implements Serializable {
     @Basic(optional = false)
     @Column(name = "language_default_name")
     private String languageDefaultName;
+    @Basic(optional = false)
+    @Column(name = "owner_first_name")
+    private String ownerFirstName;
+    @Basic(optional = false)
+    @Column(name = "owner_mailing")
+    private String ownerMailing;
 
     public VjUsersLanguages() {
     }
