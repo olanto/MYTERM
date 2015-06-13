@@ -495,6 +495,27 @@ public class JPAViewFunctions {
         return query.getResultList();
     }
 
+    public static List<VjUsersLanguages> getUsersLanguages(long ownerID, String langID) {
+        Query query;
+        if (ownerID <= 0) {
+            if ((langID.equals(" ") || langID.length() < 2)) {
+                query = em.createNamedQuery("VjUsersLanguages.findAll");
+            } else {
+                query = em.createNamedQuery("VjUsersLanguages.findByIdLanguage");
+                query.setParameter("idLanguage", langID);
+            }
+        } else {
+            if ((langID.equals(" ") || langID.length() < 2)) {
+                query = em.createNamedQuery("VjUsersLanguages.findByIdOwner");
+            } else {
+                query = em.createNamedQuery("VjUsersLanguages.findByIdOwnerIdLanguage");
+                query.setParameter("idLanguage", langID);
+            }
+            query.setParameter("idOwner", ownerID);
+        }
+        return query.getResultList();
+    }
+
     public static String getWorkspaceElementsByLang(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");

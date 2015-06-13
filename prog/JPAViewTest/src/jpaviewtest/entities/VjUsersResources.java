@@ -65,6 +65,9 @@ public class VjUsersResources implements Serializable {
     private String resourceNote;
     @Column(name = "owner_roles")
     private String ownerRoles;
+    @Basic(optional = false)
+    @Column(name = "owner_last_name", nullable = false, length = 32)
+    private String ownerLastName;
 
     public VjUsersResources() {
     }
@@ -139,5 +142,13 @@ public class VjUsersResources implements Serializable {
 
     public void setOwnerFirstName(String ownerFirstName) {
         this.ownerFirstName = ownerFirstName;
+    }
+
+    public String getOwnerLastName() {
+        return ownerLastName;
+    }
+
+    public void setOwnerLastName(String ownerLastName) {
+        this.ownerLastName = ownerLastName;
     }
 }

@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjUsersLanguages.findByUuid", query = "SELECT v FROM VjUsersLanguages v WHERE v.uuid = :uuid"),
     @NamedQuery(name = "VjUsersLanguages.findByIdOwner", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner"),
     @NamedQuery(name = "VjUsersLanguages.findByIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLanguage = :idLanguage"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdOwnerIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjUsersLanguages.findByLanguageDefaultName", query = "SELECT v FROM VjUsersLanguages v WHERE v.languageDefaultName = :languageDefaultName")})
 public class VjUsersLanguages implements Serializable {
 
@@ -48,6 +49,9 @@ public class VjUsersLanguages implements Serializable {
     @Basic(optional = false)
     @Column(name = "owner_mailing")
     private String ownerMailing;
+    @Basic(optional = false)
+    @Column(name = "owner_last_name", nullable = false, length = 32)
+    private String ownerLastName;
 
     public VjUsersLanguages() {
     }
@@ -98,5 +102,13 @@ public class VjUsersLanguages implements Serializable {
 
     public void setOwnerMailing(String ownerMailing) {
         this.ownerMailing = ownerMailing;
+    }
+
+    public String getOwnerLastName() {
+        return ownerLastName;
+    }
+
+    public void setOwnerLastName(String ownerLastName) {
+        this.ownerLastName = ownerLastName;
     }
 }

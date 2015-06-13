@@ -910,6 +910,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<table>");
             result.append("<tr>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_LAST_NAME)).append("</th>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NAME)).append("</th>");
             result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NOTE)).append("</th>");
@@ -919,6 +920,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
                 result.append("<td><a href=\"#URM").append(ur.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ur.getResourceName()).append("</td>");
                 result.append("<td>").append(ur.getResourceNote()).append("</td>");
@@ -938,7 +940,39 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public String getUsersLanguagesDetails(long ownerID, String langID) {
         TermDB.restart();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<VjUsersLanguages> usLan = JPAViewFunctions.getUsersLanguages(ownerID, langID);
+        if (!usLan.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_LAST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_L_DEFAULT_NAME)).append("</th>");
+            result.append("</tr>");
+            for (VjUsersLanguages ul : usLan) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#ULM").append(ul.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(ul.getOwnerLastName()).append("</td>");
+                result.append("<td>").append(ul.getOwnerMailing()).append("</td>");
+                result.append("<td>").append(ul.getLanguageDefaultName()).append("</td>");
+                result.append("</tr>");
+            }
+            usLan.clear();
+            usLan = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override

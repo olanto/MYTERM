@@ -81,7 +81,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
-                if (command.contains("RM")) {
+                if (command.contains("URM")) {
 //                    if (isEdited.getVal()) {
 //                        new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, command).show();
 //                    } else {
@@ -97,7 +97,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 }
             }
         });
-        resultsPanel.adjustSize(0.4f, 0.6f);
+        resultsPanel.adjustSize(0.5f, 0.5f);
     }
 
     private static myTermServiceAsync getService() {
