@@ -861,6 +861,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String getLanguagesDetails(String langID, String langName) {
+        TermDB.restart();
         List<Languages> lset = Queries.getLanguages(langID, langName);
         if (!lset.isEmpty()) {
             StringBuilder result = new StringBuilder("");
@@ -895,7 +896,43 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public String getUsersResourcesDetails(long ownerID, long resID, String role) {
         TermDB.restart();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<VjUsersResources> usRes = JPAViewFunctions.getUsersResources(ownerID, resID, role);
+        if (!usRes.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NOTE)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_PRIVACY)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_ROLE)).append("</th>");
+            result.append("</tr>");
+            for (VjUsersResources ur : usRes) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#URM").append(ur.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
+                result.append("<td>").append(ur.getResourceName()).append("</td>");
+                result.append("<td>").append(ur.getResourceNote()).append("</td>");
+                result.append("<td>").append(ur.getResourcePrivacy()).append("</td>");
+                result.append("<td>").append(ur.getOwnerRoles()).append("</td>");
+                result.append("</tr>");
+            }
+            usRes.clear();
+            usRes = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
     }
 
     @Override

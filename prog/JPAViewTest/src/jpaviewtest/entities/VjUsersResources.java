@@ -31,6 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjUsersResources.findByIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource"),
     @NamedQuery(name = "VjUsersResources.findByResourceName", query = "SELECT v FROM VjUsersResources v WHERE v.resourceName = :resourceName"),
     @NamedQuery(name = "VjUsersResources.findByResourcePrivacy", query = "SELECT v FROM VjUsersResources v WHERE v.resourcePrivacy = :resourcePrivacy"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource"),
+    @NamedQuery(name = "VjUsersResources.findByIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource AND v.ownerRoles = :ownerRoles"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource AND v.ownerRoles = :ownerRoles"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwnerOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.ownerRoles = :ownerRoles"),
     @NamedQuery(name = "VjUsersResources.findByOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerRoles = :ownerRoles")})
 public class VjUsersResources implements Serializable {
 

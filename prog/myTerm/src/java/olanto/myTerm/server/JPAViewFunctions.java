@@ -454,6 +454,47 @@ public class JPAViewFunctions {
         return res.toString();
     }
 
+    public static List<VjUsersResources> getUsersResources(long ownerID, long resID, String ownerRole) {
+        Query query;
+        if (ownerID <= 0) {
+            if (resID <= 0) {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = em.createNamedQuery("VjUsersResources.findAll");
+                } else {
+                    query = em.createNamedQuery("VjUsersResources.findByOwnerRoles");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+            } else {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdResource");
+                } else {
+                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdResourceOwnerRoles");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+                query.setParameter("IdResource", resID);
+            }
+        } else {
+            if (resID <= 0) {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = em.createNamedQuery("VjUsersResources.findByIdOwner");
+                } else {
+                    query = em.createNamedQuery("VjUsersResources.findByIdOwnerOwnerRoles");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+            } else {
+                if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
+                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdOwnerIdResource");
+                } else {
+                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdOwnerIdResourceOwnerRoles");
+                    query.setParameter("ownerRoles", ownerRole);
+                }
+                query.setParameter("IdResource", resID);
+            }
+            query.setParameter("idOwner", ownerID);
+        }
+        return query.getResultList();
+    }
+
     public static String getWorkspaceElementsByLang(String solang, long ownerID) {
         init();
         StringBuilder res = new StringBuilder("");
