@@ -14,6 +14,8 @@ import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.ResourceDTO;
 import olanto.myTerm.shared.SysFieldDTO;
+import olanto.myTerm.shared.UserLanguageDTO;
+import olanto.myTerm.shared.UserResourceDTO;
 
 /**
  *
@@ -144,4 +146,30 @@ public interface myTermServiceAsync {
     public void AdminSaveLanguage(LanguageDTO langDTO, AsyncCallback<String> asyncCallback);
 
     public void getDomainDetails(long domID, AsyncCallback<DomainDTO> asyncCallback);
+    
+    public void createUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
+
+    public void deleteUserResource(long resID, long ownerID, AsyncCallback<String> asyncCallback);
+
+    public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource, AsyncCallback<UserResourceDTO> asyncCallback);
+
+    public String AdminSaveUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
+
+    public String createUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
+
+    public String deleteUserLanguage(long ownerID, String langID, AsyncCallback<String> asyncCallback);
+
+    public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<UserLanguageDTO> asyncCallback);
+
+    public String AdminSaveUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
+
+    public Boolean getDomainUsage(long domID, AsyncCallback<LanguageDTO> asyncCallback);
+
+    public String createDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
+
+    public String deleteDomain(long domID, AsyncCallback<String> asyncCallback);
+
+    public void AdminUpdateDomain(DomainDTO domain, AsyncCallback<DomainDTO> asyncCallback);
+
+    public String AdminSaveDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
 }

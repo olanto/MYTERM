@@ -15,6 +15,8 @@ import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.ResourceDTO;
 import olanto.myTerm.shared.SysFieldDTO;
+import olanto.myTerm.shared.UserLanguageDTO;
+import olanto.myTerm.shared.UserResourceDTO;
 
 /**
  *
@@ -145,5 +147,31 @@ public interface myTermService extends RemoteService {
 
     public String AdminSaveResource(ResourceDTO resourceDTO);
 
+    public String createUserResource(UserResourceDTO userResource);
+
+    public String deleteUserResource(long resID, long ownerID);
+
+    public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource);
+
+    public String AdminSaveUserResource(UserResourceDTO userResource);
+
+    public String createUserLanguage(UserLanguageDTO userLanguage);
+
+    public String deleteUserLanguage(long ownerID, String langID);
+
+    public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage);
+
+    public String AdminSaveUserLanguage(UserLanguageDTO userLanguage);
+
     public DomainDTO getDomainDetails(long domID);
+
+    public Boolean getDomainUsage(long domID);
+
+    public String createDomain(DomainDTO domain);
+
+    public String deleteDomain(long domID);
+
+    public DomainDTO AdminUpdateDomain(DomainDTO domain);
+
+    public String AdminSaveDomain(DomainDTO domain);
 }

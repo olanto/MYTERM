@@ -28,6 +28,8 @@ import olanto.myTerm.shared.LangSetDTO;
 import olanto.myTerm.shared.OwnerDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.TermDTO;
+import olanto.myTerm.shared.UserLanguageDTO;
+import olanto.myTerm.shared.UserResourceDTO;
 import org.olanto.myterm.coredb.ManageConcept;
 import org.olanto.myterm.coredb.ManageLanguages;
 import org.olanto.myterm.coredb.ManageOwner;
@@ -1177,5 +1179,70 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             return "sucess";
         }
         return null;
+    }
+
+    @Override
+    public String createUserResource(UserResourceDTO userResource) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String deleteUserResource(long resID, long ownerID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String AdminSaveUserResource(UserResourceDTO userResource) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String createUserLanguage(UserLanguageDTO userLanguage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String deleteUserLanguage(long ownerID, String langID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String AdminSaveUserLanguage(UserLanguageDTO userLanguage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean getDomainUsage(long domID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String createDomain(DomainDTO domain) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String deleteDomain(long domID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public DomainDTO AdminUpdateDomain(DomainDTO domain) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String AdminSaveDomain(DomainDTO domain) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
