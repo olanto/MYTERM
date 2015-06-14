@@ -151,25 +151,25 @@ public interface myTermServiceAsync {
 
     public void deleteUserResource(long resID, long ownerID, AsyncCallback<String> asyncCallback);
 
-    public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource, AsyncCallback<UserResourceDTO> asyncCallback);
+    public void AdminUpdateUserResource(UserResourceDTO userResource, AsyncCallback<UserResourceDTO> asyncCallback);
 
-    public String AdminSaveUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
+    public void AdminSaveUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
 
-    public String createUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
+    public void createUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
 
-    public String deleteUserLanguage(long ownerID, String langID, AsyncCallback<String> asyncCallback);
+    public void deleteUserLanguage(long ownerID, String langID, AsyncCallback<String> asyncCallback);
 
-    public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<UserLanguageDTO> asyncCallback);
+    public void AdminUpdateUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<UserLanguageDTO> asyncCallback);
 
-    public String AdminSaveUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
+    public void AdminSaveUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
 
-    public Boolean getDomainUsage(long domID, AsyncCallback<LanguageDTO> asyncCallback);
+    public void getDomainUsage(long domID, AsyncCallback<Boolean> asyncCallback);
 
-    public String createDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
+    public void createDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
 
-    public String deleteDomain(long domID, AsyncCallback<String> asyncCallback);
+    public void deleteDomain(long domID, AsyncCallback<String> asyncCallback);
 
     public void AdminUpdateDomain(DomainDTO domain, AsyncCallback<DomainDTO> asyncCallback);
 
-    public String AdminSaveDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
+    public void AdminSaveDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
 }
