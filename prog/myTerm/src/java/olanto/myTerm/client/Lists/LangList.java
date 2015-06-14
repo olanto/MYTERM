@@ -224,6 +224,65 @@ public class LangList extends ListBox {
         langService.getLanguagesByOwner(ownerID, langCallback);
     }
 
+    public LangList(final String currentlangID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
+            }
+
+            @Override
+            public void onSuccess(Collection<LanguageDTO> result) {
+                ArrayList<LanguageDTO> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 0;
+                    for (LanguageDTO s : res) {
+                        addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                        if (s.getIdLanguage().equalsIgnoreCase(currentlangID)) {
+                            i = res.indexOf(s);
+                        }
+                    }
+                    setSelectedIndex(i);
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        langService.getLanguages(langCallback);
+    }
+
+    public LangList(final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        langCallback = new AsyncCallback<Collection<LanguageDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of languages");
+            }
+
+            @Override
+            public void onSuccess(Collection<LanguageDTO> result) {
+                for (LanguageDTO s : result) {
+                    addItem(s.getLanguageDefaultName(), s.getIdLanguage());
+                }
+                setSelectedIndex(0);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        langService.getLanguages(langCallback);
+    }
+
     public void selectlanguage(String language) {
         int i = 0;
         for (String s : langlist) {

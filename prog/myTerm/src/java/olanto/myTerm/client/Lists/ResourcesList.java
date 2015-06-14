@@ -33,6 +33,7 @@ import java.util.Collection;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.MainEntryPoint;
+import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 
@@ -114,6 +115,72 @@ public class ResourcesList extends ListBox {
                 }
             }
         };
+        rsrcService.getResources(RsrcCallback);
+    }
+
+    public ResourcesList(final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        RsrcCallback = new AsyncCallback<Collection<ResourceDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources, please RELOAD THE PAGE");
+            }
+
+            @Override
+            public void onSuccess(Collection<ResourceDTO> result) {
+                if (result != null) {
+                    ArrayList<ResourceDTO> res = new ArrayList<>();
+                    if (res.addAll(result)) {
+                        for (ResourceDTO s : res) {
+                            addItem(s.getResourceName(), s.getIdResource().toString());
+                        }
+                        setSelectedIndex(0);
+                    }
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        rsrcService.getResources(RsrcCallback);
+    }
+
+    public ResourcesList(final long currentResID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+        super();
+        RsrcCallback = new AsyncCallback<Collection<ResourceDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of resources, please RELOAD THE PAGE");
+            }
+
+            @Override
+            public void onSuccess(Collection<ResourceDTO> result) {
+                if (result != null) {
+                    ArrayList<ResourceDTO> res = new ArrayList<>();
+                    if (res.addAll(result)) {
+                        int i = 0;
+                        for (ResourceDTO s : res) {
+                            addItem(s.getResourceName(), s.getIdResource().toString());
+                            if (s.getIdResource().compareTo(currentResID) == 0) {
+                                i = res.indexOf(s);
+                            }
+                        }
+                        setSelectedIndex(i);
+                    }
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
         rsrcService.getResources(RsrcCallback);
     }
 

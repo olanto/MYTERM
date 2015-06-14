@@ -14,12 +14,7 @@ public class UserResourceDTO implements IsSerializable {
 
     private static final long serialVersionUID = 1L;
     private Long idResource;
-    private String ownerMailing;
-    private String ownerFirstName;
     private Long ownerID;
-    private String resourceName;
-    private String resourcePrivacy;
-    private String resourceNote;
     private String ownerRole;
 
     public UserResourceDTO() {
@@ -39,38 +34,6 @@ public class UserResourceDTO implements IsSerializable {
 
     public void setIdOwner(Long idowner) {
         this.ownerID = idowner;
-    }
-
-    public String getOwnerMailing() {
-        return ownerMailing;
-    }
-
-    public void setOwnerMailing(String ownerMailing) {
-        this.ownerMailing = ownerMailing;
-    }
-
-    public void setOwnerFirstName(String ownerFirstName) {
-        this.ownerFirstName = ownerFirstName;
-    }
-
-    public String getOwnerFirstName() {
-        return this.ownerFirstName;
-    }
-
-    public String getResourceName() {
-        return resourceName;
-    }
-
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
-
-    public String getResourcePrivacy() {
-        return resourcePrivacy;
-    }
-
-    public void setResourcePrivacy(String resourcePrivacy) {
-        this.resourcePrivacy = resourcePrivacy;
     }
 
     public String getOwnerRole() {
@@ -98,25 +61,17 @@ public class UserResourceDTO implements IsSerializable {
         if ((this.idResource == null && other.idResource != null) || (this.idResource != null && !this.idResource.equals(other.idResource))) {
             return false;
         }
+        if ((this.ownerID == null && other.ownerID != null) || (this.ownerID != null && !this.ownerID.equals(other.ownerID))) {
+            return false;
+        }
+         if ((this.ownerRole == null && other.ownerRole != null) || (this.ownerRole != null && !this.ownerRole.equals(other.ownerRole))) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "org.olanto.myterm.coredb.entityclasses.Resources[ idResource=" + idResource + " ]";
-    }
-
-    /**
-     * @return the resourceNote
-     */
-    public String getResourceNote() {
-        return resourceNote;
-    }
-
-    /**
-     * @param resourceNote the resourceNote to set
-     */
-    public void setResourceNote(String resourceNote) {
-        this.resourceNote = resourceNote;
+        return "org.olanto.myterm.coredb.entityclasses.UsersResoures[ idResource=" + idResource + " , idOwner=" + ownerID + " , ownerRole=" + ownerRole + " ]";
     }
 }
