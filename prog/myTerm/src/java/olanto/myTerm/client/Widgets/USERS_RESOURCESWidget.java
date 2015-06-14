@@ -81,7 +81,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
-                if (command.contains("URM")) {
+                if (command.contains("UR")) {
 //                    if (isEdited.getVal()) {
 //                        new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, command).show();
 //                    } else {

@@ -38,7 +38,6 @@ import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.UserLanguageDTO;
-import olanto.myTerm.shared.UserResourceDTO;
 
 /**
  * Form for adding a new term in a given lanSet of a given concept

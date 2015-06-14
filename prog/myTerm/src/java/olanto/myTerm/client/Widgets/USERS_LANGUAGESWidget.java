@@ -81,7 +81,7 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
             public void onValueChange(ValueChangeEvent<String> event) {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
-                if (command.contains("ULM")) {
+                if (command.contains("UL")) {
 //                    if (isEdited.getVal()) {
 //                        new MyDialog("You have edited this user. Are you sure that you want to abort all the modifications?", 1, command).show();
 //                    } else {
