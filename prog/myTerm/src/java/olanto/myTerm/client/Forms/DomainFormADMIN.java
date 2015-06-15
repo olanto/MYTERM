@@ -35,7 +35,6 @@ import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.DomainDTO;
-import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
 /**
@@ -86,7 +85,7 @@ public class DomainFormADMIN extends VerticalPanel {
         domainUsageCallback = new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("error", "Could not get language's usage");
+                MainEntryPoint.statusPanel.setMessage("error", "Could not get domain's usage");
             }
 
             @Override
@@ -116,7 +115,7 @@ public class DomainFormADMIN extends VerticalPanel {
         text_dn.setWidth(w * 2 / 3 + "px");
     }
 
-    public void setContentFromLanguageDTO(DomainDTO domDTO) {
+    public void setContentFromDomainDTO(DomainDTO domDTO) {
         text_dn.setText(domDTO.getDomainDefaultName());
         addEvents(domDTO.getIdDomain());
     }
@@ -129,7 +128,7 @@ public class DomainFormADMIN extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    public void setLanguageDTOFromContent(LanguageDTO langDTO) {
-        langDTO.setLanguageDefaultName(text_dn.getText());
+    public void setDomainDTOFromContent(DomainDTO domDTO) {
+        domDTO.setDomainDefaultName(text_dn.getText());
     }
 }
