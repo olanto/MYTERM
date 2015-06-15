@@ -149,7 +149,7 @@ public interface myTermServiceAsync {
 
     public void getUsersResourcesDetails(long id, AsyncCallback<String> asyncCallback);
 
-    public void getUserResource(long id, String ownerRole, AsyncCallback<UserResourceDTO> asyncCallback);
+    public void getUserResource(long id, AsyncCallback<UserResourceDTO> asyncCallback);
 
     public void createUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
 

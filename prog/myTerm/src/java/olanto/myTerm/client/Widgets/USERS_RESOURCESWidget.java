@@ -174,11 +174,8 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
                 if (command.contains("UR")) {
-                    command = command.substring(2);
-                    String[] ids = command.split(";");
-                    long urID = Long.valueOf(ids[0]);
-                    String role = ids[1];
-                    getService().getUserResource(urID, role, getUserResourceDetailsCallback);
+                    long urID = Long.valueOf(command.substring(2));
+                    getService().getUserResource(urID, getUserResourceDetailsCallback);
                 } else {
                     switch (command) {
                         case "page33":
@@ -339,10 +336,8 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                             userResourceForm.save.setEnabled(true);
                             if (result != null) {
                                 if (action.contains("UR")) {
-                                    String[] ids = action.substring(2).split("|");
-                                    long urID = Long.parseLong(ids[0]);
-                                    String role = ids[1];
-                                    getService().getUserResource(urID, role, getUserResourceDetailsCallback);
+                                    long urID = Long.valueOf(action.substring(2));
+                                    getService().getUserResource(urID, getUserResourceDetailsCallback);
                                 } else {
                                     History.newItem(action);
                                 }
@@ -372,10 +367,8 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
     public void escapeUserResource(String action) {
         isEdited.setVal(false);
         if (action.contains("UR")) {
-            String[] ids = action.substring(2).split("|");
-            long urID = Long.parseLong(ids[0]);
-            String role = ids[1];
-            getService().getUserResource(urID, role, getUserResourceDetailsCallback);
+            long urID = Long.valueOf(action.substring(2));
+            getService().getUserResource(urID, getUserResourceDetailsCallback);
         } else {
             History.newItem(action);
         }

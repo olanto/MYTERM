@@ -925,7 +925,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append(";").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ur.getResourceName()).append("</td>");
@@ -969,7 +969,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append(";").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ur.getResourceName()).append("</td>");
@@ -1289,13 +1289,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public UserResourceDTO getUserResource(long id, String ownerRole) {
-        UsersResources ures = Queries.getUserResource(id, ownerRole);
+    public UserResourceDTO getUserResource(long id) {
+        UsersResources ures = Queries.getUserResource(id);
         UserResourceDTO usrRes = new UserResourceDTO();
         usrRes.setIdResource(ures.getIdResource());
         usrRes.setId(ures.getIdLink());
         usrRes.setIdOwner(ures.getIdOwner());
-        usrRes.setOwnerRole(ownerRole);
         return usrRes;
     }
 
@@ -1308,7 +1307,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         usrRes.setOwnerRoles(userResource.getOwnerRole());
         try {
             TermDB.usersResourcesJC.edit(usrRes);
-            return getUserResource(usrRes.getIdLink(), usrRes.getOwnerRoles());
+            return getUserResource(usrRes.getIdLink());
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

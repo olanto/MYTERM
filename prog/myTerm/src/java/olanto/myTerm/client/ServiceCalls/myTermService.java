@@ -109,7 +109,7 @@ public interface myTermService extends RemoteService {
 
     public String getUsersResourcesDetails(long id);
 
-    public UserResourceDTO getUserResource(long id, String ownerRole);
+    public UserResourceDTO getUserResource(long id);
 
     public String getUsersLanguagesDetails(long ownerID, String langID);
 

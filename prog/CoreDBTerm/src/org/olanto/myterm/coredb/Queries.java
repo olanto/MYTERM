@@ -134,24 +134,28 @@ public class Queries {
         query.setParameter("idLink", idlink);
         List<UsersLanguages> result = query.getResultList();
 
-        if (result.size() > 1) {
-            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
-            return null;
+        if (!result.isEmpty()) {
+            if (result.size() > 1) {
+                System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
+                return null;
+            }
+            return result.get(0);
         }
-        return result.get(0);
+        return null;
     }
-    
-    public static UsersResources getUserResource(long idlink, String OwnerRole) {
-        Query query = TermDB.em.createNamedQuery("UsersResources.findByOwnerRoles");
-        query.setParameter("idLink", idlink);
-        query.setParameter("ownerRoles", OwnerRole);
-        List<UsersResources> result = query.getResultList();
 
-        if (result.size() > 1) {
-            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
-            return null;
+    public static UsersResources getUserResource(long idlink) {
+        Query query = TermDB.em.createNamedQuery("UsersResources.findByIdLink");
+        query.setParameter("idLink", idlink);
+        List<UsersResources> result = query.getResultList();
+        if (!result.isEmpty()) {
+            if (result.size() > 1) {
+                System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
+                return null;
+            }
+            return result.get(0);
         }
-        return result.get(0);
+        return null;
     }
 
     public static List<Owners> getOwners(String ownerMailing, String ownerStatus, String ownerRole) {
