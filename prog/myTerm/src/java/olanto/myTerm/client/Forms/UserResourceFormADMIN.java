@@ -33,7 +33,6 @@ import olanto.myTerm.client.Lists.OwnerRolesList;
 import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.client.Lists.OwnersList;
 import olanto.myTerm.client.Lists.ResourcesList;
-import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -43,7 +42,7 @@ import olanto.myTerm.shared.UserResourceDTO;
 /**
  * Form for adding a new term in a given lanSet of a given concept
  *
- * @author nizar ghoula - simple
+ * @author nizar ghoula
  */
 public class UserResourceFormADMIN extends VerticalPanel {
 
@@ -61,7 +60,6 @@ public class UserResourceFormADMIN extends VerticalPanel {
     public OwnersList resOwner;
     public OwnerRolesList resOwnerRoles;
     public ResourcesList resList;
-    private static AsyncCallback<Boolean> resourcesUsageCallback;
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
     public UserResourceFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
@@ -108,23 +106,6 @@ public class UserResourceFormADMIN extends VerticalPanel {
 
         escape.setTitle("Abort all modifications");
         save.setTitle("Save changes without submit");
-
-        resourcesUsageCallback = new AsyncCallback<Boolean>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("error", "Could not get resource's usage");
-            }
-
-            @Override
-            public void onSuccess(Boolean result) {
-//                Window.alert(""+result.booleanValue());
-                delete.setEnabled(!result.booleanValue());
-            }
-        };
-    }
-
-    public void addEvents(long resID) {
-        getService().getResourceUsage(resID, resourcesUsageCallback);
     }
 
     public void adjustSize(int wdth) {
@@ -153,7 +134,7 @@ public class UserResourceFormADMIN extends VerticalPanel {
         resOwnerRoles.setWidth(w * 2 / 3 + "px");
     }
 
-    public void setContentFromResourceDTO(UserResourceDTO userResourceDTO, BooleanWrap isEdited) {
+    public void setContentFromUserResourceDTO(UserResourceDTO userResourceDTO, BooleanWrap isEdited) {
         int w = this.getOffsetWidth();
         w = w * 5 / 6;
         rowPanel.remove(resOwner);
@@ -195,7 +176,7 @@ public class UserResourceFormADMIN extends VerticalPanel {
         return GWT.create(myTermService.class);
     }
 
-    public void setResourceDTOFromContent(UserResourceDTO userResourceDTO) {
+    public void setUserResourceDTOFromContent(UserResourceDTO userResourceDTO) {
         userResourceDTO.setIdResource(Long.parseLong(resList.getValue(resList.getSelectedIndex())));
         userResourceDTO.setIdOwner(Long.parseLong(resOwner.getValue(resOwner.getSelectedIndex())));
         userResourceDTO.setOwnerRole(resOwnerRoles.getValue(resOwnerRoles.getSelectedIndex()));

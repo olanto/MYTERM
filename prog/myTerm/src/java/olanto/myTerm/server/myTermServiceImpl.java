@@ -925,7 +925,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UR").append(ur.getUuid()).append("|").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append(";").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ur.getResourceName()).append("</td>");
@@ -969,7 +969,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UR").append(ur.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UR").append(ur.getIdLink()).append(";").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ur.getResourceName()).append("</td>");
@@ -1010,7 +1010,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersLanguages ul : usLan) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UL").append(ul.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UL").append(ul.getIdLink()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ul.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ul.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ul.getLanguageDefaultName()).append("</td>");
@@ -1048,7 +1048,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersLanguages ul : usLan) {
                 result.append("<tr>");
-                result.append("<td><a href=\"#UL").append(ul.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
+                result.append("<td><a href=\"#UL").append(ul.getIdLink()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ul.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ul.getOwnerMailing()).append("</td>");
                 result.append("<td>").append(ul.getLanguageDefaultName()).append("</td>");

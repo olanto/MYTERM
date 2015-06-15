@@ -149,33 +149,4 @@ public class OwnersList extends ListBox {
         });
         ownerService.getOwners(ownerCallback);
     }
-
-    public Long getIDResource(int i) {
-        return ownerIDlist.get(i);
-    }
-
-    public String getResName(Long IDRes) {
-        int i = 0;
-        for (Long s : ownerIDlist) {
-            if (s.equals(IDRes)) {
-                return ownerlist.get(i);
-            }
-            i++;
-        }
-        return "";
-    }
-
-    public ArrayList<Long> getSelectedRsIDs(int idx) {
-        ArrayList<Long> ownIDs = new ArrayList<>();
-        if (idx == 0) {
-            return ownerIDlist;
-        } else {
-            ownIDs.add(ownerIDlist.get(idx));
-        }
-        return ownIDs;
-    }
-
-    public ArrayList<Long> getResourcesIDs() {
-        return ownerIDlist;
-    }
 }

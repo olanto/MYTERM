@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VjUsersLanguages.findAll", query = "SELECT v FROM VjUsersLanguages v"),
     @NamedQuery(name = "VjUsersLanguages.findByUuid", query = "SELECT v FROM VjUsersLanguages v WHERE v.uuid = :uuid"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdLink", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLink = :idLink"),
     @NamedQuery(name = "VjUsersLanguages.findByIdOwner", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner"),
     @NamedQuery(name = "VjUsersLanguages.findByIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjUsersLanguages.findByIdOwnerIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner AND v.idLanguage = :idLanguage"),
@@ -34,6 +35,9 @@ public class VjUsersLanguages implements Serializable {
     @Column(name = "uuid")
     @Id
     private String uuid;
+    @Basic(optional = false)
+    @Column(name = "id_link", nullable = false)
+    private long idLink;
     @Basic(optional = false)
     @Column(name = "id_owner")
     private long idOwner;
@@ -110,5 +114,13 @@ public class VjUsersLanguages implements Serializable {
 
     public void setOwnerLastName(String ownerLastName) {
         this.ownerLastName = ownerLastName;
+    }
+
+    public long getIdLink() {
+        return idLink;
+    }
+
+    public void setIdLink(long idLink) {
+        this.idLink = idLink;
     }
 }

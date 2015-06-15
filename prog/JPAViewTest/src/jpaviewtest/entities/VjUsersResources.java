@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "VjUsersResources.findAll", query = "SELECT v FROM VjUsersResources v"),
     @NamedQuery(name = "VjUsersResources.findByUuid", query = "SELECT v FROM VjUsersResources v WHERE v.uuid = :uuid"),
+    @NamedQuery(name = "VjUsersResources.findByIdLink", query = "SELECT v FROM VjUsersResources v WHERE v.idLink = :idLink"),
     @NamedQuery(name = "VjUsersResources.findByIdOwner", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner"),
     @NamedQuery(name = "VjUsersResources.findByOwnerMailing", query = "SELECT v FROM VjUsersResources v WHERE v.ownerMailing = :ownerMailing"),
     @NamedQuery(name = "VjUsersResources.findByOwnerMailingOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerMailing = :ownerMailing AND v.ownerRoles = :ownerRoles"),
@@ -37,11 +38,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjUsersResources.findByIdOwnerOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.ownerRoles = :ownerRoles"),
     @NamedQuery(name = "VjUsersResources.findByOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerRoles = :ownerRoles")})
 public class VjUsersResources implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Column(name = "uuid")
     @Id
     private String uuid;
+    @Basic(optional = false)
+    @Column(name = "id_link", nullable = false)
+    private long idLink;
     @Basic(optional = false)
     @Column(name = "id_owner")
     private long idOwner;
@@ -150,5 +154,13 @@ public class VjUsersResources implements Serializable {
 
     public void setOwnerLastName(String ownerLastName) {
         this.ownerLastName = ownerLastName;
+    }
+
+    public long getIdLink() {
+        return idLink;
+    }
+
+    public void setIdLink(long idLink) {
+        this.idLink = idLink;
     }
 }

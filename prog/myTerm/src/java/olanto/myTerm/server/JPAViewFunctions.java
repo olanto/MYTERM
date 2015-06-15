@@ -496,8 +496,8 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersResources> getUsersResources(long id) {
-        Query query = TermDB.em.createNamedQuery("VjUsersResources.findByUuid");
-        query.setParameter("uuid", id);
+        Query query = TermDB.em.createNamedQuery("VjUsersResources.findByIdLink");
+        query.setParameter("idLink", id);
 
         return query.getResultList();
     }
@@ -524,8 +524,8 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersLanguages> getUsersLanguages(long id) {
-        Query query = TermDB.em.createNamedQuery("VjUsersLanguages.findByUuid");
-        query.setParameter("uuid", id);
+        Query query = TermDB.em.createNamedQuery("VjUsersLanguages.findByIdLink");
+        query.setParameter("idLink", id);
         return query.getResultList();
     }
 
