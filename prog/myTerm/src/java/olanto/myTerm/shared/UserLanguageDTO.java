@@ -15,8 +15,17 @@ public class UserLanguageDTO implements IsSerializable {
     private static final long serialVersionUID = 1L;
     private String langID;
     private Long ownerID;
+    private long id;
 
     public UserLanguageDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdOwner() {

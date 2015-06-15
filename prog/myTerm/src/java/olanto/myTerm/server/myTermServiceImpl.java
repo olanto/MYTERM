@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jpaviewtest.entities.VjCodifications;
 import jpaviewtest.entities.VjUsersLanguages;
 import jpaviewtest.entities.VjUsersResources;
@@ -19,7 +21,6 @@ import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.ResourceDTO;
-
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.shared.ConceptDTO;
 import olanto.myTerm.shared.ConceptEntryDTO;
@@ -44,6 +45,9 @@ import org.olanto.myterm.coredb.entityclasses.Languages;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
+import org.olanto.myterm.coredb.entityclasses.UsersLanguages;
+import org.olanto.myterm.coredb.entityclasses.UsersResources;
+import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
 
@@ -921,6 +925,50 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             for (VjUsersResources ur : usRes) {
                 result.append("<tr>");
+                result.append("<td><a href=\"#UR").append(ur.getUuid()).append("|").append(ur.getOwnerRoles()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
+                result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
+                result.append("<td>").append(ur.getResourceName()).append("</td>");
+                result.append("<td>").append(ur.getResourceNote()).append("</td>");
+                result.append("<td>").append(ur.getResourcePrivacy()).append("</td>");
+                result.append("<td>").append(ur.getOwnerRoles()).append("</td>");
+                result.append("</tr>");
+            }
+            usRes.clear();
+            usRes = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String getUsersResourcesDetails(long id) {
+        TermDB.restart();
+        List<VjUsersResources> usRes = JPAViewFunctions.getUsersResources(id);
+        if (!usRes.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_LAST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_NOTE)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_R_PRIVACY)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_ROLE)).append("</th>");
+            result.append("</tr>");
+            for (VjUsersResources ur : usRes) {
+                result.append("<tr>");
                 result.append("<td><a href=\"#UR").append(ur.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ur.getOwnerFirstName()).append("</a></td>");
                 result.append("<td>").append(ur.getOwnerLastName()).append("</td>");
                 result.append("<td>").append(ur.getOwnerMailing()).append("</td>");
@@ -943,6 +991,44 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     public String getUsersLanguagesDetails(long ownerID, String langID) {
         TermDB.restart();
         List<VjUsersLanguages> usLan = JPAViewFunctions.getUsersLanguages(ownerID, langID);
+        if (!usLan.isEmpty()) {
+            StringBuilder result = new StringBuilder("");
+            if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
+                sysMsgsrv = new HashMap<>();
+                List<VjCodifications> codes = JPAViewFunctions.getCodificationByTypeAndLang("msg", GuiConstant.INTERFACE_LANG);
+                for (VjCodifications field : codes) {
+                    sysMsgsrv.put(field.getCodeValue(), field.getCodeExtraLang());
+                }
+            }
+            result.append("<div class =\"cpanel\">");
+            result.append("<table>");
+            result.append("<tr>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_FIRST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_LAST_NAME)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_O_MAILING)).append("</th>");
+            result.append("<th>").append(sysMsgsrv.get(GuiConstant.LBL_L_DEFAULT_NAME)).append("</th>");
+            result.append("</tr>");
+            for (VjUsersLanguages ul : usLan) {
+                result.append("<tr>");
+                result.append("<td><a href=\"#UL").append(ul.getUuid()).append("\" onClick=\"return gwtnav(this);\">").append(ul.getOwnerFirstName()).append("</a></td>");
+                result.append("<td>").append(ul.getOwnerLastName()).append("</td>");
+                result.append("<td>").append(ul.getOwnerMailing()).append("</td>");
+                result.append("<td>").append(ul.getLanguageDefaultName()).append("</td>");
+                result.append("</tr>");
+            }
+            usLan.clear();
+            usLan = null;
+            result.append("</table>");
+            result.append("</div>");
+            return result.toString();
+        }
+        return null;
+    }
+
+    @Override
+    public String getUsersLanguagesDetails(long id) {
+        TermDB.restart();
+        List<VjUsersLanguages> usLan = JPAViewFunctions.getUsersLanguages(id);
         if (!usLan.isEmpty()) {
             StringBuilder result = new StringBuilder("");
             if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
@@ -1183,66 +1269,190 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public String createUserResource(UserResourceDTO userResource) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersResources usrRes = new UsersResources();
+        usrRes.setIdOwner(userResource.getIdOwner());
+        usrRes.setIdResource(userResource.getIdResource());
+        usrRes.setOwnerRoles(userResource.getOwnerRole());
+        TermDB.usersResourcesJC.create(usrRes);
+        return "success";
     }
 
     @Override
-    public String deleteUserResource(long resID, long ownerID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String deleteUserResource(long id) {
+        try {
+            TermDB.usersResourcesJC.destroy(id);
+            return "success";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public UserResourceDTO getUserResource(long id, String ownerRole) {
+        UsersResources ures = Queries.getUserResource(id, ownerRole);
+        UserResourceDTO usrRes = new UserResourceDTO();
+        usrRes.setIdResource(ures.getIdResource());
+        usrRes.setId(ures.getIdLink());
+        usrRes.setIdOwner(ures.getIdOwner());
+        usrRes.setOwnerRole(ownerRole);
+        return usrRes;
     }
 
     @Override
     public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersResources usrRes = new UsersResources();
+        usrRes.setIdOwner(userResource.getIdOwner());
+        usrRes.setIdLink(userResource.getId());
+        usrRes.setIdResource(userResource.getIdResource());
+        usrRes.setOwnerRoles(userResource.getOwnerRole());
+        try {
+            TermDB.usersResourcesJC.edit(usrRes);
+            return getUserResource(usrRes.getIdLink(), usrRes.getOwnerRoles());
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public String AdminSaveUserResource(UserResourceDTO userResource) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersResources usrRes = new UsersResources();
+        usrRes.setIdOwner(userResource.getIdOwner());
+        usrRes.setIdLink(userResource.getId());
+        usrRes.setIdResource(userResource.getIdResource());
+        usrRes.setOwnerRoles(userResource.getOwnerRole());
+        try {
+            TermDB.usersResourcesJC.edit(usrRes);
+            return "success";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public String createUserLanguage(UserLanguageDTO userLanguage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersLanguages usrLang = new UsersLanguages();
+        usrLang.setIdLanguage(userLanguage.getIdLang());
+        usrLang.setIdOwner(userLanguage.getIdOwner());
+        TermDB.usersLanguagesJC.create(usrLang);
+        return "success";
     }
 
     @Override
-    public String deleteUserLanguage(long ownerID, String langID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String deleteUserLanguage(long id) {
+        try {
+            TermDB.usersLanguagesJC.destroy(id);
+            return "success";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public UserLanguageDTO getUserLanguage(long id) {
+        UsersLanguages ulang = Queries.getUserLanguage(id);
+        UserLanguageDTO usrLang = new UserLanguageDTO();
+        usrLang.setIdLang(ulang.getIdLanguage());
+        usrLang.setId(ulang.getIdLink());
+        usrLang.setIdOwner(ulang.getIdOwner());
+        return usrLang;
     }
 
     @Override
     public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersLanguages usrLang = new UsersLanguages();
+        usrLang.setIdLanguage(userLanguage.getIdLang());
+        usrLang.setIdOwner(userLanguage.getIdOwner());
+        usrLang.setIdLink(userLanguage.getId());
+        try {
+            TermDB.usersLanguagesJC.edit(usrLang);
+            return getUserLanguage(usrLang.getIdLink());
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public String AdminSaveUserLanguage(UserLanguageDTO userLanguage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UsersLanguages usrLang = new UsersLanguages();
+        usrLang.setIdLanguage(userLanguage.getIdLang());
+        usrLang.setIdOwner(userLanguage.getIdOwner());
+        usrLang.setIdLink(userLanguage.getId());
+        try {
+            TermDB.usersLanguagesJC.edit(usrLang);
+            return "success";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public Boolean getDomainUsage(long domID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Queries.getDomainActivity(domID);
     }
 
     @Override
     public String createDomain(DomainDTO domain) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Domains dom = new Domains();
+        dom.setIdDomain(domain.getIdDomain());
+        dom.setDomainDefaultName(domain.getDomainDefaultName());
+        TermDB.domainsJC.create(dom);
+        return "success";
     }
 
     @Override
     public String deleteDomain(long domID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            TermDB.domainsJC.destroy(domID);
+            return "sucess";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public DomainDTO AdminUpdateDomain(DomainDTO domain) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Domains dom = new Domains();
+        dom.setIdDomain(domain.getIdDomain());
+        dom.setDomainDefaultName(domain.getDomainDefaultName());
+        try {
+            TermDB.domainsJC.edit(dom);
+            return getDomainDetails(dom.getIdDomain());
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
     public String AdminSaveDomain(DomainDTO domain) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Domains dom = new Domains();
+        dom.setIdDomain(domain.getIdDomain());
+        dom.setDomainDefaultName(domain.getDomainDefaultName());
+        try {
+            TermDB.domainsJC.edit(dom);
+            return "success";
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(myTermServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

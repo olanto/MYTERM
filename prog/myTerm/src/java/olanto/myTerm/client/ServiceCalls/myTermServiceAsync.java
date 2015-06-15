@@ -146,18 +146,26 @@ public interface myTermServiceAsync {
     public void AdminSaveLanguage(LanguageDTO langDTO, AsyncCallback<String> asyncCallback);
 
     public void getDomainDetails(long domID, AsyncCallback<DomainDTO> asyncCallback);
-    
+
+    public void getUsersResourcesDetails(long id, AsyncCallback<String> asyncCallback);
+
+    public void getUserResource(long id, String ownerRole, AsyncCallback<UserResourceDTO> asyncCallback);
+
     public void createUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
 
-    public void deleteUserResource(long resID, long ownerID, AsyncCallback<String> asyncCallback);
+    public void deleteUserResource(long id, AsyncCallback<String> asyncCallback);
 
     public void AdminUpdateUserResource(UserResourceDTO userResource, AsyncCallback<UserResourceDTO> asyncCallback);
 
     public void AdminSaveUserResource(UserResourceDTO userResource, AsyncCallback<String> asyncCallback);
 
+    public void getUsersLanguagesDetails(long id, AsyncCallback<String> asyncCallback);
+
+    public void getUserLanguage(long id, AsyncCallback<UserLanguageDTO> asyncCallback);
+
     public void createUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<String> asyncCallback);
 
-    public void deleteUserLanguage(long ownerID, String langID, AsyncCallback<String> asyncCallback);
+    public void deleteUserLanguage(long id, AsyncCallback<String> asyncCallback);
 
     public void AdminUpdateUserLanguage(UserLanguageDTO userLanguage, AsyncCallback<UserLanguageDTO> asyncCallback);
 

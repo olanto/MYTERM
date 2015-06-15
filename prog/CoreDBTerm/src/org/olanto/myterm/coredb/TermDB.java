@@ -64,5 +64,7 @@ public class TermDB {
         langsetsJC = new LangsetsJpaController(TermDB.emf);
         languagesJC = new LanguagesJpaController(TermDB.emf);
         termsJC = new TermsJpaController(TermDB.emf);
+        usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
+        usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
     }
 }

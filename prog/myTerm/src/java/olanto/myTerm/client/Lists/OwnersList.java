@@ -56,6 +56,8 @@ public class OwnersList extends ListBox {
             @Override
             public void onSuccess(Collection<OwnerDTO> result) {
                 addItem(" ", "-1");
+                ownerlist.add(" ");
+                ownerIDlist.add(-1l);
                 if (result != null) {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
@@ -84,6 +86,8 @@ public class OwnersList extends ListBox {
             @Override
             public void onSuccess(Collection<OwnerDTO> result) {
                 addItem(" ", "-1");
+                ownerlist.add(" ");
+                ownerIDlist.add(-1l);
                 if (result != null) {
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
@@ -118,9 +122,8 @@ public class OwnersList extends ListBox {
 
             @Override
             public void onSuccess(Collection<OwnerDTO> result) {
-                addItem(" ", "-1");
                 if (result != null) {
-                    int i = 1;
+                    int i = 0;
                     ArrayList<OwnerDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (OwnerDTO s : res) {

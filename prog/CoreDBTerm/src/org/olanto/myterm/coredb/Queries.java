@@ -33,6 +33,8 @@ import org.olanto.myterm.coredb.entityclasses.Languages;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
+import org.olanto.myterm.coredb.entityclasses.UsersLanguages;
+import org.olanto.myterm.coredb.entityclasses.UsersResources;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.PreexistingEntityException;
 
 /**
@@ -112,6 +114,44 @@ public class Queries {
             return false;
         }
         return true;
+    }
+
+    public static boolean getDomainActivity(long domId) {
+        Query query1 = TermDB.em.createNamedQuery("ResourcesDomains.findByIdDomain");
+        query1.setParameter("idDomain", domId);
+
+        Query query2 = TermDB.em.createNamedQuery("ConceptsDomains.findByIdDomain");
+        query2.setParameter("idDomain", domId);
+
+        if (query1.getResultList().isEmpty() && query2.getResultList().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public static UsersLanguages getUserLanguage(long idlink) {
+        Query query = TermDB.em.createNamedQuery("UsersLanguages.findByIdLink");
+        query.setParameter("idLink", idlink);
+        List<UsersLanguages> result = query.getResultList();
+
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
+            return null;
+        }
+        return result.get(0);
+    }
+    
+    public static UsersResources getUserResource(long idlink, String OwnerRole) {
+        Query query = TermDB.em.createNamedQuery("UsersResources.findByOwnerRoles");
+        query.setParameter("idLink", idlink);
+        query.setParameter("ownerRoles", OwnerRole);
+        List<UsersResources> result = query.getResultList();
+
+        if (result.size() > 1) {
+            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + idlink);
+            return null;
+        }
+        return result.get(0);
     }
 
     public static List<Owners> getOwners(String ownerMailing, String ownerStatus, String ownerRole) {

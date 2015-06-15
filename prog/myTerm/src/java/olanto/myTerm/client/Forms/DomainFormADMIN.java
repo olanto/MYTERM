@@ -34,6 +34,7 @@ import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.shared.DomainDTO;
 import olanto.myTerm.shared.LanguageDTO;
 import olanto.myTerm.shared.SysFieldDTO;
 
@@ -42,30 +43,24 @@ import olanto.myTerm.shared.SysFieldDTO;
  *
  * @author nizar ghoula - simple
  */
-public class LanguageFormADMIN extends VerticalPanel {
+public class DomainFormADMIN extends VerticalPanel {
 
     private Grid rform;
-    private Label label_lid;
-    private Label label_ldn;
-    private TextBoxMyTerm text_lid;
-    private TextBoxMyTerm text_ldn;
+    private Label label_dn;
+    private TextBoxMyTerm text_dn;
     private HorizontalPanel ctrlPanel;
-    private HorizontalPanel lidPanel;
-    private HorizontalPanel ldnPanel;
+    private HorizontalPanel dnPanel;
     public Button save;
     public Button escape;
     public Button delete;
-    private static AsyncCallback<Boolean> languagesUsageCallback;
+    private static AsyncCallback<Boolean> domainUsageCallback;
 
-    public LanguageFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        label_lid = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_L_ID), sFields.get(GuiConstant.L_ID));
-        label_ldn = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME), sFields.get(GuiConstant.L_NAME));
-        text_lid = new TextBoxMyTerm(GuiConstant.L_ID, sFields, isEdited);
-        text_ldn = new TextBoxMyTerm(GuiConstant.L_NAME, sFields, isEdited);
+    public DomainFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
+        label_dn = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_D_DEFAULT_NAME), sFields.get(GuiConstant.D_DEFAULT_NAME));
+        text_dn = new TextBoxMyTerm(GuiConstant.D_DEFAULT_NAME, sFields, isEdited);
 
         ctrlPanel = new HorizontalPanel();
-        lidPanel = new HorizontalPanel();
-        ldnPanel = new HorizontalPanel();
+        dnPanel = new HorizontalPanel();
         save = new Button(sysMsg.get(GuiConstant.BTN_SAVE));
         escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
         delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
@@ -75,16 +70,12 @@ public class LanguageFormADMIN extends VerticalPanel {
 
         rform.setCellSpacing(4);
         rform.setStyleName("edpanel");
-        rform.setWidget(0, 0, lidPanel);
-        rform.setWidget(1, 0, ldnPanel);
+        rform.setWidget(0, 0, dnPanel);
         rform.setWidget(2, 0, ctrlPanel);
 
-        lidPanel.add(label_lid);
-        lidPanel.add(text_lid);
+        dnPanel.add(label_dn);
+        dnPanel.add(text_dn);
 
-        ldnPanel.add(label_ldn);
-        ldnPanel.add(text_ldn);
-        
         ctrlPanel.add(escape);
         ctrlPanel.add(delete);
         ctrlPanel.add(save);
@@ -92,7 +83,7 @@ public class LanguageFormADMIN extends VerticalPanel {
         escape.setTitle("Abort all modifications");
         save.setTitle("Save changes without submit");
 
-        languagesUsageCallback = new AsyncCallback<Boolean>() {
+        domainUsageCallback = new AsyncCallback<Boolean>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("error", "Could not get language's usage");
@@ -106,38 +97,32 @@ public class LanguageFormADMIN extends VerticalPanel {
         };
     }
 
-    public void addEvents(String langID) {
-        getService().getLanguageUsage(langID, languagesUsageCallback);
+    public void addEvents(long domID) {
+        getService().getDomainUsage(domID, domainUsageCallback);
     }
 
     public void adjustSize(int wdth) {
         setWidth(wdth + "px");
         setCellHorizontalAlignment(rform, HorizontalPanel.ALIGN_CENTER);
         int w = wdth * 5 / 6;
-        lidPanel.setWidth(w + "px");
-        lidPanel.setCellHorizontalAlignment(label_lid, HorizontalPanel.ALIGN_LEFT);
-        lidPanel.setCellHorizontalAlignment(text_lid, HorizontalPanel.ALIGN_RIGHT);
-        ldnPanel.setWidth(w + "px");
-        ldnPanel.setCellHorizontalAlignment(label_ldn, HorizontalPanel.ALIGN_LEFT);
-        ldnPanel.setCellHorizontalAlignment(text_ldn, HorizontalPanel.ALIGN_RIGHT);
-        
+        dnPanel.setWidth(w + "px");
+        dnPanel.setCellHorizontalAlignment(label_dn, HorizontalPanel.ALIGN_LEFT);
+        dnPanel.setCellHorizontalAlignment(text_dn, HorizontalPanel.ALIGN_RIGHT);
+
         ctrlPanel.setWidth(w + "px");
         ctrlPanel.setCellHorizontalAlignment(escape, HorizontalPanel.ALIGN_LEFT);
         ctrlPanel.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_CENTER);
         ctrlPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_RIGHT);
-        text_lid.setWidth(w * 2 / 3 + "px");
-        text_ldn.setWidth(w * 2 / 3 + "px");
+        text_dn.setWidth(w * 2 / 3 + "px");
     }
 
-    public void setContentFromLanguageDTO(LanguageDTO langDTO) {
-        text_lid.setText(langDTO.getIdLanguage());
-        text_ldn.setText(langDTO.getLanguageDefaultName());   
-        addEvents(langDTO.getIdLanguage());
+    public void setContentFromLanguageDTO(DomainDTO domDTO) {
+        text_dn.setText(domDTO.getDomainDefaultName());
+        addEvents(domDTO.getIdDomain());
     }
 
     public void setReadOnly(Boolean edit) {
-        text_lid.setReadOnly(edit);
-        text_ldn.setReadOnly(edit);
+        text_dn.setReadOnly(edit);
     }
 
     private static myTermServiceAsync getService() {
@@ -145,7 +130,6 @@ public class LanguageFormADMIN extends VerticalPanel {
     }
 
     public void setLanguageDTOFromContent(LanguageDTO langDTO) {
-        langDTO.setIdLanguage(text_lid.getText());
-        langDTO.setLanguageDefaultName(text_ldn.getText());
+        langDTO.setLanguageDefaultName(text_dn.getText());
     }
 }

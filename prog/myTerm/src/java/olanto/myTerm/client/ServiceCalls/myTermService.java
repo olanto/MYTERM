@@ -107,7 +107,15 @@ public interface myTermService extends RemoteService {
 
     public String getUsersResourcesDetails(long ownerID, long resID, String role);
 
+    public String getUsersResourcesDetails(long id);
+
+    public UserResourceDTO getUserResource(long id, String ownerRole);
+
     public String getUsersLanguagesDetails(long ownerID, String langID);
+
+    public String getUsersLanguagesDetails(long id);
+
+    public UserLanguageDTO getUserLanguage(long id);
 
     public String getEntitiesDetails(String s, String langID, long resID, String domID);
 
@@ -149,7 +157,7 @@ public interface myTermService extends RemoteService {
 
     public String createUserResource(UserResourceDTO userResource);
 
-    public String deleteUserResource(long resID, long ownerID);
+    public String deleteUserResource(long id);
 
     public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource);
 
@@ -157,7 +165,7 @@ public interface myTermService extends RemoteService {
 
     public String createUserLanguage(UserLanguageDTO userLanguage);
 
-    public String deleteUserLanguage(long ownerID, String langID);
+    public String deleteUserLanguage(long id);
 
     public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage);
 

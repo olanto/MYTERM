@@ -63,7 +63,7 @@ public class ResourcesList extends ListBox {
                     if (role.equals("READER")) {
                         addItem("ALL", "-1");
                         rsrclist.add("ALL");
-                        rsrcIDlist.add(0L);
+                        rsrcIDlist.add(-1l);
                         i++;
                     }
                     ArrayList<ResourceDTO> res = new ArrayList<>();
@@ -103,6 +103,8 @@ public class ResourcesList extends ListBox {
             public void onSuccess(Collection<ResourceDTO> result) {
                 if (result != null) {
                     addItem(" ", "-1");
+                    rsrclist.add(" ");
+                    rsrcIDlist.add(-1l);
                     ArrayList<ResourceDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {
                         for (ResourceDTO s : res) {

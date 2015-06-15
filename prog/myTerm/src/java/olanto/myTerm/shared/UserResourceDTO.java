@@ -13,11 +13,20 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class UserResourceDTO implements IsSerializable {
 
     private static final long serialVersionUID = 1L;
+    private Long id;
     private Long idResource;
     private Long ownerID;
     private String ownerRole;
 
     public UserResourceDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdResource() {
@@ -64,7 +73,7 @@ public class UserResourceDTO implements IsSerializable {
         if ((this.ownerID == null && other.ownerID != null) || (this.ownerID != null && !this.ownerID.equals(other.ownerID))) {
             return false;
         }
-         if ((this.ownerRole == null && other.ownerRole != null) || (this.ownerRole != null && !this.ownerRole.equals(other.ownerRole))) {
+        if ((this.ownerRole == null && other.ownerRole != null) || (this.ownerRole != null && !this.ownerRole.equals(other.ownerRole))) {
             return false;
         }
         return true;

@@ -217,7 +217,7 @@ public class LANGUAGESWidget extends VerticalPanel {
             languageForm = new LanguageFormADMIN(sFields, isEdited, sysMsgs);
             resultsPanel.elementDetails.setWidget(languageForm);
             languageForm.adjustSize(resultsPanel.elementDetails.getOffsetWidth());
-            languageForm.setContentFromLanguageDTO(languageDTO, isEdited);
+            languageForm.setContentFromLanguageDTO(languageDTO);
             languageForm.save.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -247,7 +247,6 @@ public class LANGUAGESWidget extends VerticalPanel {
                     new MyDialog("Are you aure that you want to delete this language?", 2, "").show();
                 }
             });
-            languageForm.addEvents(languageDTO.getIdLanguage());
         } else {
             resultsPanel.elementDetails.setWidget(new Label("Language details object is null, something is worng"));
         }
