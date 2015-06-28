@@ -21,8 +21,6 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -32,10 +30,7 @@ import java.util.HashMap;
 import olanto.myTerm.client.Lists.LangList;
 import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.client.Lists.OwnersList;
-import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
-import olanto.myTerm.client.ServiceCalls.myTermService;
-import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.UserLanguageDTO;
 
@@ -57,11 +52,10 @@ public class UserLanguageFormADMIN extends VerticalPanel {
     public Button delete;
     public OwnersList langOwner;
     public LangList lang;
-    private static AsyncCallback<Boolean> resourcesUsageCallback;
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
     public UserLanguageFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        label_ow = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_OWNER), sFields.get(GuiConstant.R_OWNER_ID));
+        label_ow = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_FIRST_NAME), sFields.get(GuiConstant.O_FIRST_NAME));
         label_lang = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME), sFields.get(GuiConstant.L_NAME));
         lang = new LangList(isEdited, isLocallyEdited);
         langOwner = new OwnersList(isEdited, isLocallyEdited);
@@ -94,23 +88,6 @@ public class UserLanguageFormADMIN extends VerticalPanel {
 
         escape.setTitle("Abort all modifications");
         save.setTitle("Save changes without submit");
-
-        resourcesUsageCallback = new AsyncCallback<Boolean>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("error", "Could not get resource's usage");
-            }
-
-            @Override
-            public void onSuccess(Boolean result) {
-//                Window.alert(""+result.booleanValue());
-                delete.setEnabled(!result.booleanValue());
-            }
-        };
-    }
-
-    public void addEvents(long resID) {
-        getService().getResourceUsage(resID, resourcesUsageCallback);
     }
 
     public void adjustSize(int wdth) {
@@ -133,14 +110,14 @@ public class UserLanguageFormADMIN extends VerticalPanel {
         lang.setWidth(w * 2 / 3 + "px");
     }
 
-    public void setContentFromResourceDTO(UserLanguageDTO userLanguageDTO, BooleanWrap isEdited) {
+    public void setContentFromLanguageDTO(UserLanguageDTO userLanguageDTO, BooleanWrap isEdited) {
         int w = this.getOffsetWidth();
         w = w * 5 / 6;
         owPanel.remove(langOwner);
         langPanel.remove(lang);
 
         lang = new LangList(userLanguageDTO.getIdLang(), isEdited, isLocallyEdited);
-        langOwner = new OwnersList(isEdited, isLocallyEdited);
+        langOwner = new OwnersList(userLanguageDTO.getIdOwner(), isEdited, isLocallyEdited);
 
         owPanel.add(langOwner);
         langPanel.add(lang);
@@ -162,11 +139,7 @@ public class UserLanguageFormADMIN extends VerticalPanel {
         langOwner.setEnabled(!edit);
     }
 
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
-    }
-
-    public void setResourceDTOFromContent(UserLanguageDTO userLanguageDTO) {
+    public void setUserLanguageDTOFromContent(UserLanguageDTO userLanguageDTO) {
         userLanguageDTO.setIdOwner(Long.parseLong(langOwner.getValue(langOwner.getSelectedIndex())));
         userLanguageDTO.setIdLang(lang.getValue(lang.getSelectedIndex()));
     }

@@ -173,8 +173,12 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 String command = event.getValue();
                 if (command.contains("UR")) {
-                    long urID = Long.valueOf(command.substring(2));
-                    getService().getUserResource(urID, getUserResourceDetailsCallback);
+                    if (isEdited.getVal()) {
+                        new MyDialog("You have edited an entry. Are you sure that you want to abort all the modifications?", 1, command).show();
+                    } else {
+                        long urID = Long.valueOf(command.substring(2));
+                        getService().getUserResource(urID, getUserResourceDetailsCallback);
+                    }
                 } else {
                     switch (command) {
                         case "page33":
@@ -335,8 +339,8 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                             userResourceForm.save.setEnabled(true);
                             if (result != null) {
                                 if (action.contains("UR")) {
-                                    long urID = Long.valueOf(action.substring(2));
-                                    getService().getUserResource(urID, getUserResourceDetailsCallback);
+                                        long urID = Long.valueOf(action.substring(2));
+                                        getService().getUserResource(urID, getUserResourceDetailsCallback);
                                 } else {
                                     History.newItem(action);
                                 }
