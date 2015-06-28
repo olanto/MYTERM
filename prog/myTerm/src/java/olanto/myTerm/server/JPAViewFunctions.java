@@ -467,9 +467,9 @@ public class JPAViewFunctions {
                 }
             } else {
                 if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
-                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdResource");
+                    query = em.createNamedQuery("VjUsersResources.findByIdResource");
                 } else {
-                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdResourceOwnerRoles");
+                    query = em.createNamedQuery("VjUsersResources.findByIdResourceOwnerRoles");
                     query.setParameter("ownerRoles", ownerRole);
                 }
                 query.setParameter("IdResource", resID);
@@ -484,9 +484,9 @@ public class JPAViewFunctions {
                 }
             } else {
                 if ((ownerRole.equals(" ") || ownerRole.length() < 2)) {
-                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdOwnerIdResource");
+                    query = em.createNamedQuery("VjUsersResources.findByIdOwnerIdResource");
                 } else {
-                    query = TermDB.em.createNamedQuery("VjUsersResources.findByIdOwnerIdResourceOwnerRoles");
+                    query = em.createNamedQuery("VjUsersResources.findByIdOwnerIdResourceOwnerRoles");
                     query.setParameter("ownerRoles", ownerRole);
                 }
                 query.setParameter("IdResource", resID);
@@ -498,7 +498,7 @@ public class JPAViewFunctions {
 
     public static List<VjUsersResources> getUsersResources(long id) {
         init();
-        Query query = TermDB.em.createNamedQuery("VjUsersResources.findByIdLink");
+        Query query = em.createNamedQuery("VjUsersResources.findByIdLink");
         query.setParameter("idLink", id);
 
         return query.getResultList();
@@ -528,7 +528,7 @@ public class JPAViewFunctions {
 
     public static List<VjUsersLanguages> getUsersLanguages(long id) {
         init();
-        Query query = TermDB.em.createNamedQuery("VjUsersLanguages.findByIdLink");
+        Query query = em.createNamedQuery("VjUsersLanguages.findByIdLink");
         query.setParameter("idLink", id);
         return query.getResultList();
     }
