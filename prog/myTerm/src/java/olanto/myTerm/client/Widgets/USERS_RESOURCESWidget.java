@@ -392,7 +392,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
 
     public void deleteUserResource() {
         if (userResourceDTO.getIdResource() > -1) {
-            getService().deleteResource(userResourceDTO.getIdResource(), new AsyncCallback<String>() {
+            getService().deleteUserResource(userResourceDTO.getId(), new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not remove relation");

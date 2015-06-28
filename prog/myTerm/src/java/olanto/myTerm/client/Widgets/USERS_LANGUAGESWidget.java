@@ -391,7 +391,7 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
 
     public void deleteUserLanguage() {
         if (!userLanguageDTO.getIdLang().isEmpty()) {
-            getService().deleteLanguage(userLanguageDTO.getIdLang(), new AsyncCallback<String>() {
+            getService().deleteUserLanguage(userLanguageDTO.getId(), new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     MainEntryPoint.statusPanel.setMessage("error", "Could not remove relation");
