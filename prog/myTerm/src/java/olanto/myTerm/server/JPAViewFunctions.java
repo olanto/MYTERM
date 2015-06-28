@@ -455,6 +455,7 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersResources> getUsersResources(long ownerID, long resID, String ownerRole) {
+        init();
         Query query;
         if (ownerID <= 0) {
             if (resID <= 0) {
@@ -496,6 +497,7 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersResources> getUsersResources(long id) {
+        init();
         Query query = TermDB.em.createNamedQuery("VjUsersResources.findByIdLink");
         query.setParameter("idLink", id);
 
@@ -503,6 +505,7 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersLanguages> getUsersLanguages(long ownerID, String langID) {
+        init();
         Query query;
         if (ownerID <= 0) {
             if ((langID.equals(" ") || langID.length() < 2)) {
@@ -524,6 +527,7 @@ public class JPAViewFunctions {
     }
 
     public static List<VjUsersLanguages> getUsersLanguages(long id) {
+        init();
         Query query = TermDB.em.createNamedQuery("VjUsersLanguages.findByIdLink");
         query.setParameter("idLink", id);
         return query.getResultList();
