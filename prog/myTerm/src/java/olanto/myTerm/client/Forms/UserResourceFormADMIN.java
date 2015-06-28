@@ -21,8 +21,6 @@
  */
 package olanto.myTerm.client.Forms;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -34,8 +32,6 @@ import olanto.myTerm.shared.GuiConstant;
 import olanto.myTerm.client.Lists.OwnersList;
 import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
-import olanto.myTerm.client.ServiceCalls.myTermService;
-import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 import olanto.myTerm.shared.SysFieldDTO;
 import olanto.myTerm.shared.UserResourceDTO;
 
@@ -64,8 +60,8 @@ public class UserResourceFormADMIN extends VerticalPanel {
 
     public UserResourceFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         label_rn = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_NAME), sFields.get(GuiConstant.R_NAME));
-        label_row = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_OWNER), sFields.get(GuiConstant.R_OWNER_ID));
-        label_rowrl = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_ROLE), sFields.get(GuiConstant.O_ROLE));
+        label_row = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_OWNER)+" derived from", sFields.get(GuiConstant.R_OWNER_ID));
+        label_rowrl = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_ROLE)+" derived from", sFields.get(GuiConstant.O_ROLE));
 
         resOwner = new OwnersList(isEdited, isLocallyEdited);
         resOwnerRoles = new OwnerRolesList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
@@ -171,11 +167,6 @@ public class UserResourceFormADMIN extends VerticalPanel {
         resList.setEnabled(!edit);
         resOwnerRoles.setEnabled(!edit);
     }
-
-    private static myTermServiceAsync getService() {
-        return GWT.create(myTermService.class);
-    }
-
     public void setUserResourceDTOFromContent(UserResourceDTO userResourceDTO) {
         userResourceDTO.setIdResource(Long.parseLong(resList.getValue(resList.getSelectedIndex())));
         userResourceDTO.setIdOwner(Long.parseLong(resOwner.getValue(resOwner.getSelectedIndex())));

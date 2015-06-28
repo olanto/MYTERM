@@ -27,7 +27,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -121,7 +120,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
             public void onSuccess(UserResourceDTO result) {
                 isEdited.setVal(false);
                 userResourceDTO = result;
-                refreshContentFromResourceDTO();
+                refreshContentFromUserResourceDTO();
                 History.newItem("p33loaded");
             }
         };
@@ -135,7 +134,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
             public void onSuccess(UserResourceDTO result) {
                 isEdited.setVal(false);
                 userResourceDTO = result;
-                refreshContentFromResourceDTO();
+                refreshContentFromUserResourceDTO();
                 MainEntryPoint.statusPanel.setMessage("message", "Content updated...");
                 History.newItem("page33");
             }
@@ -224,7 +223,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
         History.newItem("p33escaped");
     }
 
-    public void refreshContentFromResourceDTO() {
+    public void refreshContentFromUserResourceDTO() {
         resultsPanel.elementDetails.clear();
         if (userResourceDTO != null) {
             userResourceForm = new UserResourceFormADMIN(sFields, isEdited, sysMsgs);

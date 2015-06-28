@@ -1295,6 +1295,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         usrRes.setIdResource(ures.getIdResource());
         usrRes.setId(ures.getIdLink());
         usrRes.setIdOwner(ures.getIdOwner());
+        usrRes.setOwnerRole(ures.getOwnerRoles());
         return usrRes;
     }
 
