@@ -472,7 +472,7 @@ public class JPAViewFunctions {
                     query = em.createNamedQuery("VjUsersResources.findByIdResourceOwnerRoles");
                     query.setParameter("ownerRoles", ownerRole);
                 }
-                query.setParameter("IdResource", resID);
+                query.setParameter("idResource", resID);
             }
         } else {
             if (resID <= 0) {
@@ -489,7 +489,7 @@ public class JPAViewFunctions {
                     query = em.createNamedQuery("VjUsersResources.findByIdOwnerIdResourceOwnerRoles");
                     query.setParameter("ownerRoles", ownerRole);
                 }
-                query.setParameter("IdResource", resID);
+                query.setParameter("idResource", resID);
             }
             query.setParameter("idOwner", ownerID);
         }
