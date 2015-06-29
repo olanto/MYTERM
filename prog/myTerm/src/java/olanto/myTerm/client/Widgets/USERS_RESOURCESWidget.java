@@ -24,6 +24,8 @@ package olanto.myTerm.client.Widgets;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -167,6 +169,19 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 }
             }
         });
+
+
+        searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p33add").show();
+                } else {
+                    History.newItem("p33add");
+                }
+            }
+        });
+
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
@@ -205,7 +220,10 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
         isEdited.setVal(false);
         resultsPanel.sideRes.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getUsersResourcesDetails(-1, -1, " ", usersResourcesCallback);
+        getService().getUsersResourcesDetails(Long.valueOf(searchMenu.ownerList.getValue(searchMenu.ownerList.getSelectedIndex())),
+                Long.valueOf(searchMenu.rsrcList.getValue(searchMenu.rsrcList.getSelectedIndex())),
+                searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()),
+                usersResourcesCallback);
     }
 
     private void commandAdd() {
@@ -339,8 +357,8 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                             userResourceForm.save.setEnabled(true);
                             if (result != null) {
                                 if (action.contains("UR")) {
-                                        long urID = Long.valueOf(action.substring(2));
-                                        getService().getUserResource(urID, getUserResourceDetailsCallback);
+                                    long urID = Long.valueOf(action.substring(2));
+                                    getService().getUserResource(urID, getUserResourceDetailsCallback);
                                 } else {
                                     History.newItem(action);
                                 }

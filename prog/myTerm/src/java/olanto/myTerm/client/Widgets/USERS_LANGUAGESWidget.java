@@ -24,6 +24,8 @@ package olanto.myTerm.client.Widgets;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -168,6 +170,18 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
                 }
             }
         });
+
+        searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p34add").show();
+                } else {
+                    History.newItem("p34add");
+                }
+            }
+        });
+
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
@@ -200,6 +214,14 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
+    }
+
+    private void commandInit() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getUsersLanguagesDetails(Long.valueOf(searchMenu.ownerList.getValue(searchMenu.ownerList.getSelectedIndex())),
+                searchMenu.langList.getValue(searchMenu.langList.getSelectedIndex()), usersLanguagesCallback);
     }
 
     private void commandAdd() {
@@ -358,13 +380,6 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
                 save.setEnabled(false);
             }
         }
-    }
-
-    private void commandInit() {
-        isEdited.setVal(false);
-        resultsPanel.sideRes.clear();
-        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getUsersLanguagesDetails(-1, " ", usersLanguagesCallback);
     }
 
     public void escapeUserLanguage(String action) {

@@ -24,6 +24,8 @@ package olanto.myTerm.client.Widgets;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
@@ -167,6 +169,18 @@ public class USERSWidget extends VerticalPanel {
                 }
             }
         });
+        
+        searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
+            @Override
+            public void onKeyPress(KeyPressEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p30add").show();
+                } else {
+                    History.newItem("p30add");
+                }
+            }
+        });
+        
         resultsPanel.adjustSize(0.5f, 0.5f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override

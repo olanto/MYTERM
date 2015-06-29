@@ -126,8 +126,7 @@ create or replace view v_users_resources as
         owners o,
         users_resources ur
     where
-        r.resource_privacy = 'PUBLIC'
-;
+        r.resource_privacy = 'PUBLIC';
 
 select 
     *
