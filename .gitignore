@@ -22,7 +22,8 @@ prog/*/store/
 prog/*/nbdist/
 prog/*/nbactions.xml
 prog/*/nb-configuration.xml
-
+prog/myTerm/nbproject/*.properties
+prog/myTerm/nbproject/project.properties
 
 
 ############
@@ -34,6 +35,3 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
-
-
-prog/myTerm/nbproject/*.properties
