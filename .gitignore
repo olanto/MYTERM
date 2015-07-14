@@ -9,11 +9,11 @@ GWT/*
 logs/*
 private/*
 private/*
+mysql/credentials/*
 
 #################
 ## Netbeans
 #################
-
 prog/*/nbproject/private/
 prog/*/build/
 prog/*/nbbuild/
@@ -36,3 +36,4 @@ Thumbs.db
 Desktop.ini
 
 
+prog/myTerm/nbproject/*.properties
