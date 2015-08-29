@@ -19,7 +19,7 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -28,32 +28,38 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
-import olanto.myTerm.client.Lists.ResourcePrivacyList;
+import olanto.myTerm.client.Lists.OwnerRolesList;
+import olanto.myTerm.client.Lists.OwnerStatusList;
 import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderRESOURCE extends HorizontalPanel {
+public class SearchHeaderUSER extends HorizontalPanel {
 
-    public TextBox rsrcField;
-    public ResourcePrivacyList rsrcPrivay;
+    public TextBox mailingField;
+    public OwnerStatusList ownerStatus;
+    public OwnerRolesList ownerRole;
     public Button btnAdd;
 
-    public SearchHeaderRESOURCE(HashMap<String, String> sysMsg) {
-        rsrcPrivay = new ResourcePrivacyList(GuiConstant.INTERFACE_LANG);
+    public SearchHeaderUSER(HashMap<String, String> sysMsg) {
+        ownerStatus = new OwnerStatusList(GuiConstant.INTERFACE_LANG);
+        ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
-        rsrcField = new TextBox();
+        mailingField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(new Label(sysMsg.get(GuiConstant.LBL_R_NAME)));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
         add(new HTML("&nbsp;"));
-        add(rsrcField);
+        add(mailingField);
         add(new HTML("&nbsp;"));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_ROLE)));
         add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.LBL_R_PRIVACY)));
+        add(ownerRole);
         add(new HTML("&nbsp;"));
-        add(rsrcPrivay);
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_STATUS)));
+        add(new HTML("&nbsp;"));
+        add(ownerStatus);
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));

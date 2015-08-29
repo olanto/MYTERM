@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerADMIN;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderUSER_LANGUAGE;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderUSER_LANGUAGE;
 import olanto.myTerm.client.Forms.UserLanguageFormADMIN;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;

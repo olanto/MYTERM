@@ -19,47 +19,33 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
-import olanto.myTerm.client.Lists.OwnerRolesList;
-import olanto.myTerm.client.Lists.OwnersList;
-import olanto.myTerm.client.Lists.ResourcesList;
 import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
+public class SearchHeaderDOMAIN extends HorizontalPanel {
 
-    public OwnerRolesList ownerRole;
-    public ResourcesList rsrcList;
-    public OwnersList ownerList;
+    public TextBox addField;
     public Button btnAdd;
 
-    public SearchHeaderUSER_RESOURCE(HashMap<String, String> sysMsg) {
-        ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
-        rsrcList = new ResourcesList();
-        ownerList = new OwnersList();
+    public SearchHeaderDOMAIN(HashMap<String, String> sysMsg) {
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        addField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
+        add(new Label(sysMsg.get(GuiConstant.LBL_D_DEFAULT_NAME)));
         add(new HTML("&nbsp;"));
-        add(ownerList);
-        add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.LBL_R_NAME)));
-        add(new HTML("&nbsp;"));
-        add(rsrcList);
-        add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.LBL_O_ROLE)));
-        add(new HTML("&nbsp;"));
-        add(ownerRole);
+        add(addField);
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));

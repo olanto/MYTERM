@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerADMIN;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderUSER_RESOURCE;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderUSER_RESOURCE;
 import olanto.myTerm.client.Forms.UserResourceFormADMIN;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
@@ -170,6 +170,16 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
             }
         });
 
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p33displayAll").show();
+                } else {
+                    History.newItem("p33displayAll");
+                }
+            }
+        });
 
         searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
             @Override
@@ -205,6 +215,9 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                         case "p33add":
                             commandAdd();
                             break;
+                        case "p33displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -224,6 +237,16 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 Long.valueOf(searchMenu.rsrcList.getValue(searchMenu.rsrcList.getSelectedIndex())),
                 searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()),
                 usersResourcesCallback);
+    }
+
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        searchMenu.ownerList.setSelectedIndex(0);
+        searchMenu.rsrcList.setSelectedIndex(0);
+        searchMenu.ownerRole.setSelectedIndex(0);
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getUsersResourcesDetails(-1, -1, "", usersResourcesCallback);
     }
 
     private void commandAdd() {

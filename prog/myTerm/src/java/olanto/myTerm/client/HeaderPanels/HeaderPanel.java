@@ -19,7 +19,7 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

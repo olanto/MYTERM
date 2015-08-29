@@ -19,7 +19,7 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -28,30 +28,32 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
+import olanto.myTerm.client.Lists.ResourcePrivacyList;
 import olanto.myTerm.shared.GuiConstant;
 
 /**
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderLANGUAGE extends HorizontalPanel {
+public class SearchHeaderRESOURCE extends HorizontalPanel {
 
-    public TextBox idField;
-    public TextBox nameField;
+    public TextBox rsrcField;
+    public ResourcePrivacyList rsrcPrivay;
     public Button btnAdd;
 
-    public SearchHeaderLANGUAGE(HashMap<String, String> sysMsg) {
+    public SearchHeaderRESOURCE(HashMap<String, String> sysMsg) {
+        rsrcPrivay = new ResourcePrivacyList(GuiConstant.INTERFACE_LANG);
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
-        idField = new TextBox();
-        nameField = new TextBox();
+        rsrcField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(new Label(sysMsg.get(GuiConstant.LBL_L_ID)));
+        add(new Label(sysMsg.get(GuiConstant.LBL_R_NAME)));
         add(new HTML("&nbsp;"));
-        add(idField);
+        add(rsrcField);
         add(new HTML("&nbsp;"));
-        add(new Label(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME)));
         add(new HTML("&nbsp;"));
-        add(nameField);      
+        add(new Label(sysMsg.get(GuiConstant.LBL_R_PRIVACY)));
+        add(new HTML("&nbsp;"));
+        add(rsrcPrivay);
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));

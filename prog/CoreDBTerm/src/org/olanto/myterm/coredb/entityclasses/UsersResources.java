@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UsersResources.findByIdResource", query = "SELECT u FROM UsersResources u WHERE u.idResource = :idResource"),
     @NamedQuery(name = "UsersResources.findByIdOwner", query = "SELECT u FROM UsersResources u WHERE u.idOwner = :idOwner"),
     @NamedQuery(name = "UsersResources.findByIdLinkOwnerRoles", query = "SELECT u FROM UsersResources u WHERE u.idLink = :idLink AND u.ownerRoles = :ownerRoles"),
+    @NamedQuery(name = "UsersResources.findByIdOwnerOwnerRoles", query = "SELECT u FROM UsersResources u WHERE u.idOwner = :idOwner AND u.ownerRoles = :ownerRoles"),
     @NamedQuery(name = "UsersResources.findByOwnerRoles", query = "SELECT u FROM UsersResources u WHERE u.ownerRoles = :ownerRoles"),
     @NamedQuery(name = "UsersResources.findByDefaultResource", query = "SELECT u FROM UsersResources u WHERE u.defaultResource = :defaultResource")})
 public class UsersResources implements Serializable {

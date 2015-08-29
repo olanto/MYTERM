@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerREVISOR;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderREVISOR;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderREVISOR;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
 import olanto.myTerm.client.Forms.ConceptFormREVISOR;
 import olanto.myTerm.client.Forms.LangSetFormREVISOR;
@@ -331,7 +331,7 @@ public class REVISORWidget extends VerticalPanel {
         conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
         conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
-        conceptEntryDTO.addTerm(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e', ownerID);
+        conceptEntryDTO.addTerm(searchMenu.searchField.getText().replace("%", ""), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e', ownerID);
     }
 
     public void escapeEntry(String action) {
@@ -483,7 +483,7 @@ public class REVISORWidget extends VerticalPanel {
         searchMenu.btnSearch.setEnabled(false);
         resultsPanel.sideRes.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getApproveElements(searchMenu.searchField.getText(), lang, lsList, rsList, searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
+        getService().getApproveElements(searchMenu.searchField.getText().replace("*", "%"), lang, lsList, rsList, searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 
     private void commandSaved() {

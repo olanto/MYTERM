@@ -19,7 +19,7 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
@@ -34,18 +34,24 @@ import olanto.myTerm.shared.GuiConstant;
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderDOMAIN extends HorizontalPanel {
+public class SearchHeaderLANGUAGE extends HorizontalPanel {
 
-    public TextBox addField;
+    public TextBox idField;
+    public TextBox nameField;
     public Button btnAdd;
 
-    public SearchHeaderDOMAIN(HashMap<String, String> sysMsg) {
+    public SearchHeaderLANGUAGE(HashMap<String, String> sysMsg) {
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
-        addField = new TextBox();
+        idField = new TextBox();
+        nameField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(new Label(sysMsg.get(GuiConstant.LBL_D_DEFAULT_NAME)));
+        add(new Label(sysMsg.get(GuiConstant.LBL_L_ID)));
         add(new HTML("&nbsp;"));
-        add(addField);
+        add(idField);
+        add(new HTML("&nbsp;"));
+        add(new Label(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME)));
+        add(new HTML("&nbsp;"));
+        add(nameField);      
         add(new HTML("&nbsp;"));
         add(btnAdd);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));

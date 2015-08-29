@@ -19,7 +19,7 @@
  *
  *********
  */
-package olanto.myTerm.client.ContainerPanels;
+package olanto.myTerm.client.HeaderPanels;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
@@ -39,28 +39,28 @@ import olanto.myTerm.shared.GuiConstant;
  *
  * @author nizar ghoula - simple
  */
-public class SearchHeaderREDACTOR extends HorizontalPanel {
+public class SearchHeaderREVISOR extends HorizontalPanel {
 
     public Label termLabel;
     public TextBox searchField;
     public LangList langSrc;
     public ResourcesList rsrc;
     public DomainList dom;
-    public Button btnAdd;
+    public Button btnSearch;
 
-    public SearchHeaderREDACTOR(long ownerID, HashMap<String, String> sysMsg) {
+    public SearchHeaderREVISOR(long ownerID, HashMap<String, String> sysMsg) {
         termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
         searchField = new TextBox();
         dom = new DomainList();
-        btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
         add(new HTML("&nbsp;"));
         add(searchField);
         add(new HTML("&nbsp;"));
         add(new HTML("&nbsp;"));
-        add(btnAdd);
-        btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        add(btnSearch);
+        btnSearch.setTitle(sysMsg.get(GuiConstant.MSG_SEARCH_TITLE));
         add(new HTML("&nbsp;"));
         langSrc = new LangList(ownerID, "source");
         add(new Label(sysMsg.get(GuiConstant.MSG_SOURCE_LANG)));
@@ -68,10 +68,10 @@ public class SearchHeaderREDACTOR extends HorizontalPanel {
         add(langSrc);
         add(new HTML("&nbsp;"));
         if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR);
         } else {
             Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REDACTOR);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR);
         }
         add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));

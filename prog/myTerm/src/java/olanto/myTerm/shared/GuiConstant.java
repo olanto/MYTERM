@@ -187,6 +187,7 @@ public class GuiConstant implements IsSerializable {
     public static final String BTN_CREATE = "btn.create";
     public static final String BTN_CREATE_NEW = "btn.createNew";
     public static final String BTN_ADD = "btn.add";
+    public static final String BTN_DISPLAY_ALL = "btn.displayAll";
     public static final String BTN_ADD_TERM = "btn.addTerm";
     public static final String BTN_SEARCH = "btn.search";
     public static final String MSG_WELCOME = "msg.welcome";
@@ -202,6 +203,7 @@ public class GuiConstant implements IsSerializable {
     public static final String MSG_STATUS_REV = "msg.statusRevision";
     public static final String MSG_SEARCH_TITLE = "msg.searchTitle";
     public static final String MSG_ADD_TITLE = "msg.addTitle";
+    public static final String MSG_DISPLAY_ALL_TITLE = "msg.displayAllTitle";
     public static final String MSG_SOURCE_LANG = "msg.sourceLanguage";
     public static final String MSG_TARGET_LANG = "targetLanguage";
     public static final String MSG_RESOURCE = "msg.resource";

@@ -22,7 +22,7 @@
 package olanto.myTerm.client.Widgets;
 
 import olanto.myTerm.client.ContainerPanels.ResultsContainerBasic;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderBasic;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderBasic;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
@@ -126,7 +126,7 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(false);
 //                Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                 MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
-                getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                getService().getSearchResult(searchMenu.searchField.getText().replace("*", "%"), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
             }
         });
         // Listen for the button clicks
@@ -141,7 +141,7 @@ public class READERWidget extends VerticalPanel {
                     searchMenu.btnSend.setEnabled(false);
 //                    Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                     MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
-                    getService().getSearchResult(searchMenu.searchField.getText(), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
+                    getService().getSearchResult(searchMenu.searchField.getText().replace("*", "%"), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), termCallback);
                 }
             }
         });

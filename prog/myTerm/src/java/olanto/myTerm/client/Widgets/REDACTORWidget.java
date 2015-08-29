@@ -21,7 +21,7 @@
  */
 package olanto.myTerm.client.Widgets;
 
-import olanto.myTerm.client.ContainerPanels.SearchHeaderREDACTOR;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderREDACTOR;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -215,13 +215,13 @@ public class REDACTORWidget extends VerticalPanel {
                     resultsPanel.sideCurrent.setWidget(new HTML("No current entries"));
                 }
                 MainEntryPoint.statusPanel.clearMessages();
-                String srch = searchMenu.searchField.getText();
+                String srch = searchMenu.searchField.getText().replace("*", "%");
                 String lan = searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex());
                 if ((lan == null) || (lan.isEmpty())) {
                     lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
                 }
                 if ((srch != null) && (!srch.isEmpty())) {
-                    getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
+                    getService().getAddResult(srch, lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
                 }
                 History.newItem("loaded");
             }
@@ -573,7 +573,7 @@ public class REDACTORWidget extends VerticalPanel {
             if ((lan == null) || (lan.isEmpty())) {
                 lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
             }
-            getService().getAddResult(searchMenu.searchField.getText(), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+            getService().getAddResult(searchMenu.searchField.getText().replace("*", "%"), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
         }
     }
 

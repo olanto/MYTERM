@@ -24,7 +24,7 @@ package olanto.myTerm.client.Widgets;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import olanto.myTerm.client.ContainerPanels.ResultsContainerADMIN;
-import olanto.myTerm.client.ContainerPanels.SearchHeaderADMIN;
+import olanto.myTerm.client.HeaderPanels.SearchHeaderADMIN;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.shared.SysFieldDTO;
 

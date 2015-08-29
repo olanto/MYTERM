@@ -23,20 +23,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "vj_users_resources")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VjUsersResources.findAll", query = "SELECT v FROM VjUsersResources v"),
+    @NamedQuery(name = "VjUsersResources.findAll", query = "SELECT v FROM VjUsersResources v group by v.idLink order by v.ownerMailing asc"),
     @NamedQuery(name = "VjUsersResources.findByUuid", query = "SELECT v FROM VjUsersResources v WHERE v.uuid = :uuid"),
     @NamedQuery(name = "VjUsersResources.findByIdLink", query = "SELECT v FROM VjUsersResources v WHERE v.idLink = :idLink"),
-    @NamedQuery(name = "VjUsersResources.findByIdOwner", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwner", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner group by v.idLink order by v.ownerMailing asc"),
     @NamedQuery(name = "VjUsersResources.findByOwnerMailing", query = "SELECT v FROM VjUsersResources v WHERE v.ownerMailing = :ownerMailing"),
-    @NamedQuery(name = "VjUsersResources.findByOwnerMailingOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerMailing = :ownerMailing AND v.ownerRoles = :ownerRoles"),
-    @NamedQuery(name = "VjUsersResources.findByIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource"),
+    @NamedQuery(name = "VjUsersResources.findByOwnerMailingOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerMailing = :ownerMailing AND v.ownerRoles = :ownerRoles Group by v.idResource"),
+    @NamedQuery(name = "VjUsersResources.findByIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource group by v.idLink order by v.ownerMailing asc"),
     @NamedQuery(name = "VjUsersResources.findByResourceName", query = "SELECT v FROM VjUsersResources v WHERE v.resourceName = :resourceName"),
     @NamedQuery(name = "VjUsersResources.findByResourcePrivacy", query = "SELECT v FROM VjUsersResources v WHERE v.resourcePrivacy = :resourcePrivacy"),
-    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource"),
-    @NamedQuery(name = "VjUsersResources.findByIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource AND v.ownerRoles = :ownerRoles"),
-    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource AND v.ownerRoles = :ownerRoles"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResource", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource group by v.idLink order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersResources.findByIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idResource = :idResource AND v.ownerRoles = :ownerRoles group by v.idLink order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersResources.findByIdOwnerIdResourceOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.idResource = :idResource AND v.ownerRoles = :ownerRoles group by v.idLink order by v.ownerMailing asc"),
     @NamedQuery(name = "VjUsersResources.findByIdOwnerOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.idOwner = :idOwner AND v.ownerRoles = :ownerRoles"),
-    @NamedQuery(name = "VjUsersResources.findByOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerRoles = :ownerRoles")})
+    @NamedQuery(name = "VjUsersResources.findByOwnerRoles", query = "SELECT v FROM VjUsersResources v WHERE v.ownerRoles = :ownerRoles group by v.idLink order by v.ownerMailing asc")})
 public class VjUsersResources implements Serializable {
     
     private static final long serialVersionUID = 1L;

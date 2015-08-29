@@ -79,12 +79,14 @@ insert into codes values ('msg','btn.abort','ABORT',null);
 insert into codes values ('msg','btn.createNew','Create New',null);
 insert into codes values ('msg','btn.search','SEARCH',null);
 insert into codes values ('msg','btn.add','ADD',null);
+insert into codes values ('msg','btn.displayAll','DisplayAll',null);
 
 insert into codes values ('msg','msg.resource','Resource',null);
 insert into codes values ('msg','msg.domain','Domain',null);
 insert into codes values ('msg','msg.sourceLanguage','Source lang.',null);
 insert into codes values ('msg','msg.targetLanguage','Target lang.',null);
 insert into codes values ('msg','msg.addTitle','Click here to add entries',null);
+insert into codes values ('msg','msg.displayAllTitle','Click here display all entries',null);
 insert into codes values ('msg','msg.searchTitle','Click here to retreive entries',null);
 insert into codes values ('msg','msg.workspaceEntries','Workspace Entries',null);
 insert into codes values ('msg','msg.seachMessage','Input your search expression',null);
