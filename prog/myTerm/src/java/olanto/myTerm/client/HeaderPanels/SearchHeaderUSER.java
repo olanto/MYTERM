@@ -42,11 +42,13 @@ public class SearchHeaderUSER extends HorizontalPanel {
     public OwnerStatusList ownerStatus;
     public OwnerRolesList ownerRole;
     public Button btnAdd;
+    public Button btnDispAll;
 
     public SearchHeaderUSER(HashMap<String, String> sysMsg) {
         ownerStatus = new OwnerStatusList(GuiConstant.INTERFACE_LANG);
         ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
         mailingField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
@@ -62,7 +64,10 @@ public class SearchHeaderUSER extends HorizontalPanel {
         add(ownerStatus);
         add(new HTML("&nbsp;"));
         add(btnAdd);
+        add(new HTML("&nbsp;"));
+        add(btnDispAll);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        btnDispAll.setTitle(sysMsg.get(GuiConstant.MSG_DISPLAY_ALL_TITLE));
         setStyleName("searchMenu");
     }
 }

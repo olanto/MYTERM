@@ -171,6 +171,17 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
             }
         });
 
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p33displayAll").show();
+                } else {
+                    History.newItem("p34displayAll");
+                }
+            }
+        });
+
         searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
@@ -205,6 +216,9 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
                         case "p34add":
                             commandAdd();
                             break;
+                        case "p34displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -222,6 +236,15 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getUsersLanguagesDetails(Long.valueOf(searchMenu.ownerList.getValue(searchMenu.ownerList.getSelectedIndex())),
                 searchMenu.langList.getValue(searchMenu.langList.getSelectedIndex()), usersLanguagesCallback);
+    }
+
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        searchMenu.ownerList.setSelectedIndex(0);
+        searchMenu.langList.setSelectedIndex(0);
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getUsersLanguagesDetails(-1, "", usersLanguagesCallback);
     }
 
     private void commandAdd() {
@@ -416,7 +439,7 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "Relation removed successfully");
                     userLanguageForm.removeFromParent();
-                    History.newItem("page34");
+                    History.newItem("p34displayAll");
                 }
             });
         }

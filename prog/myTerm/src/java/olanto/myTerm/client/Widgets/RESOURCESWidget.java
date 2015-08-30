@@ -169,11 +169,21 @@ public class RESOURCESWidget extends VerticalPanel {
                 }
             }
         });
-        
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p33displayAll").show();
+                } else {
+                    History.newItem("p31displayAll");
+                }
+            }
+        });
+
         searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
-               if (isEdited.getVal()) {
+                if (isEdited.getVal()) {
                     new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p31add").show();
                 } else {
                     History.newItem("p31add");
@@ -205,6 +215,9 @@ public class RESOURCESWidget extends VerticalPanel {
                         case "p31add":
                             commandAdd();
                             break;
+                        case "p31displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -225,11 +238,24 @@ public class RESOURCESWidget extends VerticalPanel {
                 resourcesAddCallback);
     }
 
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.elementDetails.clear();
+        resultsPanel.sideRes.clear();
+        searchMenu.rsrcField.setText("");
+        searchMenu.rsrcPrivay.setSelectedIndex(0);
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getResourcesDetails("", "", resourcesCallback);
+    }
+
     private void commandInit() {
         isEdited.setVal(false);
         resultsPanel.sideRes.clear();
+        resultsPanel.elementDetails.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getResourcesDetails("", "", resourcesCallback);
+        getService().getResourcesDetails(searchMenu.rsrcField.getText(),
+                searchMenu.rsrcPrivay.getValue(searchMenu.rsrcPrivay.getSelectedIndex()),
+                resourcesCallback);
     }
 
     private void commandEscape() {
@@ -417,7 +443,7 @@ public class RESOURCESWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "Resource removed successfully");
                     resourceForm.removeFromParent();
-                    History.newItem("page31");
+                    History.newItem("p31displayAll");
                 }
             });
         }

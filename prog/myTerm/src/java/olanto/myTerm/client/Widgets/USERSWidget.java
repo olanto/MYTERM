@@ -169,7 +169,7 @@ public class USERSWidget extends VerticalPanel {
                 }
             }
         });
-        
+
         searchMenu.btnAdd.addKeyPressHandler(new KeyPressHandler() {
             @Override
             public void onKeyPress(KeyPressEvent event) {
@@ -180,7 +180,18 @@ public class USERSWidget extends VerticalPanel {
                 }
             }
         });
-        
+
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p33displayAll").show();
+                } else {
+                    History.newItem("p30displayAll");
+                }
+            }
+        });
+
         resultsPanel.adjustSize(0.5f, 0.5f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
@@ -205,6 +216,9 @@ public class USERSWidget extends VerticalPanel {
                         case "p30add":
                             commandAdd();
                             break;
+                        case "p30displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -225,11 +239,25 @@ public class USERSWidget extends VerticalPanel {
                 searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()), ownersAddCallback);
     }
 
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        resultsPanel.elementDetails.clear();
+        searchMenu.ownerRole.setSelectedIndex(0);
+        searchMenu.ownerStatus.setSelectedIndex(0);
+        searchMenu.mailingField.setText("");
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getOwnersDetails("", "", "", ownersCallback);
+    }
+
     private void commandInit() {
         isEdited.setVal(false);
         resultsPanel.sideRes.clear();
+        resultsPanel.elementDetails.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getOwnersDetails("", "", "", ownersCallback);
+        getService().getOwnersDetails(searchMenu.mailingField.getText(),
+                searchMenu.ownerStatus.getValue(searchMenu.ownerStatus.getSelectedIndex()),
+                searchMenu.ownerRole.getValue(searchMenu.ownerRole.getSelectedIndex()), ownersCallback);
     }
 
     private void commandEscape() {
@@ -419,7 +447,7 @@ public class USERSWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "User removed successfully");
                     ownerForm.removeFromParent();
-                    History.newItem("page30");
+                    History.newItem("p30displayAll");
                 }
             });
         }

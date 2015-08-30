@@ -40,11 +40,13 @@ public class SearchHeaderUSER_LANGUAGE extends HorizontalPanel {
     public LangList langList;
     public OwnersList ownerList;
     public Button btnAdd;
+    public Button btnDispAll;
 
     public SearchHeaderUSER_LANGUAGE(HashMap<String, String> sysMsg) {
         ownerList = new OwnersList();
         langList = new LangList();
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
         add(new HTML("&nbsp;"));
@@ -55,7 +57,10 @@ public class SearchHeaderUSER_LANGUAGE extends HorizontalPanel {
         add(langList);
         add(new HTML("&nbsp;"));
         add(btnAdd);
+        add(new HTML("&nbsp;"));
+        add(btnDispAll);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        btnDispAll.setTitle(sysMsg.get(GuiConstant.MSG_DISPLAY_ALL_TITLE));
         setStyleName("searchMenu");
     }
 }

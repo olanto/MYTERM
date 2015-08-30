@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "domains")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Domains.findAll", query = "SELECT d FROM Domains d"),
+    @NamedQuery(name = "Domains.findAll", query = "SELECT d FROM Domains d order by d.domainDefaultName"),
     @NamedQuery(name = "Domains.findByIdDomain", query = "SELECT d FROM Domains d WHERE d.idDomain = :idDomain"),
     @NamedQuery(name = "Domains.findByDomainDefaultName", query = "SELECT d FROM Domains d WHERE d.domainDefaultName = :domainDefaultName")})
 public class Domains implements Serializable {

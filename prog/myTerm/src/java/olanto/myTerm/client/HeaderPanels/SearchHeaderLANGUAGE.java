@@ -39,9 +39,11 @@ public class SearchHeaderLANGUAGE extends HorizontalPanel {
     public TextBox idField;
     public TextBox nameField;
     public Button btnAdd;
+    public Button btnDispAll;
 
     public SearchHeaderLANGUAGE(HashMap<String, String> sysMsg) {
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
         idField = new TextBox();
         nameField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
@@ -51,10 +53,13 @@ public class SearchHeaderLANGUAGE extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(new Label(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME)));
         add(new HTML("&nbsp;"));
-        add(nameField);      
+        add(nameField);
         add(new HTML("&nbsp;"));
         add(btnAdd);
+        add(new HTML("&nbsp;"));
+        add(btnDispAll);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        btnDispAll.setTitle(sysMsg.get(GuiConstant.MSG_DISPLAY_ALL_TITLE));
         setStyleName("searchMenu");
     }
 }

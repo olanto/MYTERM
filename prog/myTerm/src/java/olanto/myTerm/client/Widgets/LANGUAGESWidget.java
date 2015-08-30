@@ -24,7 +24,6 @@ package olanto.myTerm.client.Widgets;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -205,6 +204,9 @@ public class LANGUAGESWidget extends VerticalPanel {
                         case "p32add":
                             commandAdd();
                             break;
+                        case "p32displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -213,16 +215,6 @@ public class LANGUAGESWidget extends VerticalPanel {
 
     private static myTermServiceAsync getService() {
         return GWT.create(myTermService.class);
-    }
-
-    private void commandAdd() {
-        resultsPanel.elementDetails.clear();
-        resultsPanel.sideRes.clear();
-        MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry, please wait...");
-        isEdited.setVal(false);
-        getService().getLanguagesDetails(searchMenu.idField.getText(),
-                searchMenu.nameField.getText(),
-                languagesAddCallback);
     }
 
     public void refreshContentFromLanguageDTO() {
@@ -397,7 +389,7 @@ public class LANGUAGESWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "Language removed successfully");
                     languageForm.removeFromParent();
-                    History.newItem("page32");
+                    History.newItem("p32displayAll");
                 }
             });
         }
@@ -407,6 +399,28 @@ public class LANGUAGESWidget extends VerticalPanel {
         isEdited.setVal(false);
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         resultsPanel.sideRes.clear();
+        resultsPanel.elementDetails.clear();
+        getService().getLanguagesDetails(searchMenu.idField.getText(),
+                searchMenu.nameField.getText(), languagesCallback);
+    }
+
+    private void commandAdd() {
+        resultsPanel.elementDetails.clear();
+        resultsPanel.sideRes.clear();
+        MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry, please wait...");
+        isEdited.setVal(false);
+        getService().getLanguagesDetails(searchMenu.idField.getText(),
+                searchMenu.nameField.getText(),
+                languagesAddCallback);
+    }
+
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.elementDetails.clear();
+        resultsPanel.sideRes.clear();
+        searchMenu.idField.setText("");
+        searchMenu.nameField.setText("");
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getLanguagesDetails("", "", languagesCallback);
     }
 

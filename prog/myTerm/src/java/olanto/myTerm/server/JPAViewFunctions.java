@@ -4,12 +4,16 @@
  */
 package olanto.myTerm.server;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -69,6 +73,7 @@ public class JPAViewFunctions {
         StringBuilder result = new StringBuilder("");
         result.append("<div class=\"ipanel\">");
         result.append("<table>");
+        result.append("<tr></tr>");
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
             result.append("<tr>");
@@ -121,6 +126,15 @@ public class JPAViewFunctions {
         }
         if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(": </span>").append(t.getTermContext()).append("<br/>");
+        }
+         if ((t.getSup0()!= null) && (!t.getSup0().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TECH_NOTE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TECH_NOTE)).append(": </span>").append(t.getSup0()).append("<br/>");
+        }
+          if ((t.getSup1()!= null) && (!t.getSup1().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_LING_NOTE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LING_NOTE)).append(": </span>").append(t.getSup1()).append("<br/>");
+        }
+           if ((t.getSup2() != null) && (!t.getSup2().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_REFERENCE_NOTE).getVisibility())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_REFERENCE_NOTE)).append(": </span>").append(t.getSup2()).append("<br/>");
         }
         return result.toString();
     }
@@ -341,6 +355,7 @@ public class JPAViewFunctions {
 
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
+            res.append("<tr></tr>");
             for (VjSourcetarget result : resultQ) {
                 res.append("<tr>");
                 res.append("<td>").append(result.getTarget()).append("</td>");
@@ -363,6 +378,7 @@ public class JPAViewFunctions {
 
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
+            res.append("<tr></tr>");
             for (VjGetformsbyconcept result : resultQ) {
                 res.append("<tr>");
                 res.append("<td>").append(result.getSource()).append("</td>");
@@ -410,6 +426,7 @@ public class JPAViewFunctions {
         List<VjGetformsbyconcept> resultQ = query.getResultList();
         if (!resultQ.isEmpty()) {
             res.append("<table class =\"nost\">");
+            res.append("<tr></tr>");
             for (VjGetformsbyconcept result : resultQ) {
                 res.append("<tr>");
                 res.append("<td>").append(result.getSource()).append("</td>");
@@ -566,11 +583,11 @@ public class JPAViewFunctions {
         query.setParameter("idLanguage", solang);
         List<VjGetformsbyconcept> result = query.getResultList();
         if (result.size() > 1) {
-//            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + conceptID);
+            //            System.out.println("TO MANY RETURNED VALUES :" + result.size() + ", for :" + conceptID);
             return result.get(0).getSource();
         }
         if (result.isEmpty()) {
-//            System.out.println("NO RETURNED VALUES for :" + conceptID);
+            //            System.out.println("NO RETURNED VALUES for :" + conceptID);
             return "?";
         }
         source = result.get(0).getSource();

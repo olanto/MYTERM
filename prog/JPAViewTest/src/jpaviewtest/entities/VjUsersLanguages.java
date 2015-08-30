@@ -22,13 +22,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "vj_users_languages")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VjUsersLanguages.findAll", query = "SELECT v FROM VjUsersLanguages v"),
-    @NamedQuery(name = "VjUsersLanguages.findByUuid", query = "SELECT v FROM VjUsersLanguages v WHERE v.uuid = :uuid"),
-    @NamedQuery(name = "VjUsersLanguages.findByIdLink", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLink = :idLink"),
-    @NamedQuery(name = "VjUsersLanguages.findByIdOwner", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner"),
-    @NamedQuery(name = "VjUsersLanguages.findByIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLanguage = :idLanguage"),
-    @NamedQuery(name = "VjUsersLanguages.findByIdOwnerIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner AND v.idLanguage = :idLanguage"),
-    @NamedQuery(name = "VjUsersLanguages.findByLanguageDefaultName", query = "SELECT v FROM VjUsersLanguages v WHERE v.languageDefaultName = :languageDefaultName")})
+    @NamedQuery(name = "VjUsersLanguages.findAll", query = "SELECT v FROM VjUsersLanguages v order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByUuid", query = "SELECT v FROM VjUsersLanguages v WHERE v.uuid = :uuid order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdLink", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLink = :idLink order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdOwner", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idLanguage = :idLanguage order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByIdOwnerIdLanguage", query = "SELECT v FROM VjUsersLanguages v WHERE v.idOwner = :idOwner AND v.idLanguage = :idLanguage order by v.ownerMailing asc"),
+    @NamedQuery(name = "VjUsersLanguages.findByLanguageDefaultName", query = "SELECT v FROM VjUsersLanguages v WHERE v.languageDefaultName = :languageDefaultName order by v.ownerMailing asc")})
 public class VjUsersLanguages implements Serializable {
 
     private static final long serialVersionUID = 1L;

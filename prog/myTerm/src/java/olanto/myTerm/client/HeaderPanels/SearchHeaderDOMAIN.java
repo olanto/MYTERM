@@ -38,9 +38,11 @@ public class SearchHeaderDOMAIN extends HorizontalPanel {
 
     public TextBox addField;
     public Button btnAdd;
+    public Button btnDispAll;
 
     public SearchHeaderDOMAIN(HashMap<String, String> sysMsg) {
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
+        btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
         addField = new TextBox();
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(new Label(sysMsg.get(GuiConstant.LBL_D_DEFAULT_NAME)));
@@ -48,7 +50,10 @@ public class SearchHeaderDOMAIN extends HorizontalPanel {
         add(addField);
         add(new HTML("&nbsp;"));
         add(btnAdd);
+        add(new HTML("&nbsp;"));
+        add(btnDispAll);
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
+        btnDispAll.setTitle(sysMsg.get(GuiConstant.MSG_DISPLAY_ALL_TITLE));
         setStyleName("searchMenu");
     }
 }

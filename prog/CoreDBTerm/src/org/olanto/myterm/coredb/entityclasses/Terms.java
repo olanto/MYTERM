@@ -146,8 +146,6 @@ public class Terms implements Serializable {
 
     public Terms(Long idTerm, String termForm, char status) {
         this.idTerm = idTerm;
-        this.idLanguage = idLanguage;
-        this.idLangset = idLangset;
         this.termForm = termForm;
         this.status = status;
     }

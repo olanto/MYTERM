@@ -71,8 +71,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"rpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</th>");
+            result.append("<td>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</td>");
+            result.append("<td>").append(Queries.getLanguageByID(lt).getLanguageDefaultName()).append("</td>");
             result.append("</tr>");
             result.append(response);
             result.append("</table>");
@@ -306,8 +306,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"rpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append("Targets").append("</th>");
+            result.append("<td>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</td>");
+            result.append("<td>").append("Targets").append("</td>");
             result.append("</tr>");
             result.append(response);
             result.append("</table>");
@@ -326,8 +326,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"rpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append("Targets").append("</th>");
+            result.append("<td>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</td>");
+            result.append("<td>").append("Targets").append("</td>");
             result.append("</tr>");
             result.append(response);
             result.append("</table>");
@@ -491,6 +491,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setTermSourceDefinition(t.getTermSourceDefinition());
             tDTO.setTermType(t.getTermType());
             tDTO.setTermUsage(t.getTermUsage());
+            // technical, linguistic and reference
+            tDTO.setTechnicalNote(t.getSup0());
+            tDTO.setLinguisticNote(t.getSup1());
+            tDTO.setReferenceNote(t.getSup2());
             return tDTO;
         }
         return null;
@@ -529,6 +533,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             t.setTermSourceDefinition(tDTO.getTermSourceDefinition());
             t.setTermType(tDTO.getTermType());
             t.setTermUsage(tDTO.getTermUsage());
+            // technical, linguistic and reference
+            t.setSup0(tDTO.getTechnicalNote());
+            t.setSup1(tDTO.getLinguisticNote());
+            t.setSup2(tDTO.getReferenceNote());
             return t;
         }
         return null;
@@ -616,8 +624,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<div class =\"rpanel\">");
             result.append("<table>");
             result.append("<tr>");
-            result.append("<th>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</th>");
-            result.append("<th>").append("Targets").append("</th>");
+            result.append("<td>").append(Queries.getLanguageByID(ls).getLanguageDefaultName()).append("</td>");
+            result.append("<td>").append("Targets").append("</td>");
             result.append("</tr>");
             result.append(response);
             result.append("</table>");

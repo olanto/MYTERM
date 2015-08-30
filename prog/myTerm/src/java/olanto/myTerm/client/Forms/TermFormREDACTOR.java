@@ -82,6 +82,12 @@ public class TermFormREDACTOR extends VerticalPanel {
     private HorizontalPanel controls;
     private Label label_ext;
     private TextAreaMyTerm text_ext;
+    private Label label_techNt;
+    private TextAreaMyTerm text_techNt;
+    private Label label_lingNt;
+    private TextAreaMyTerm text_lingNt;
+    private Label label_refNt;
+    private TextAreaMyTerm text_refNt;
     public Button delete;
     public Button edit;
     public int type;
@@ -93,8 +99,8 @@ public class TermFormREDACTOR extends VerticalPanel {
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
     public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        form1 = new Grid(5, 2);
-        form2 = new Grid(5, 2);
+        form1 = new Grid(6, 2);
+        form2 = new Grid(7, 2);
         form3 = new Grid(5, 2);
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
@@ -122,6 +128,12 @@ public class TermFormREDACTOR extends VerticalPanel {
         term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
         label_ext = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_EXTRA), sFields.get(GuiConstant.T_EXTRA));
         text_ext = new TextAreaMyTerm(GuiConstant.T_EXTRA, sFields, isEdited, isLocallyEdited);
+        label_techNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TECH_NOTE), sFields.get(GuiConstant.T_TECH_NOTE));
+        text_techNt = new TextAreaMyTerm(GuiConstant.T_TECH_NOTE, sFields, isEdited, isLocallyEdited);
+        label_lingNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LING_NOTE), sFields.get(GuiConstant.T_LING_NOTE));
+        text_lingNt = new TextAreaMyTerm(GuiConstant.T_LING_NOTE, sFields, isEdited, isLocallyEdited);
+        label_refNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_REFERENCE_NOTE), sFields.get(GuiConstant.T_REFERENCE_NOTE));
+        text_refNt = new TextAreaMyTerm(GuiConstant.T_REFERENCE_NOTE, sFields, isEdited, isLocallyEdited);
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
@@ -155,6 +167,9 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.setWidget(3, 1, text_def);
         form1.setWidget(4, 0, label_sdef);
         form1.setWidget(4, 1, text_sdef);
+        form1.setWidget(5, 0, label_techNt);
+        form1.setWidget(5, 1, text_techNt);
+
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
         form2.setWidget(1, 0, label_tp);
@@ -165,6 +180,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         form2.setWidget(3, 1, text_usg);
         form2.setWidget(4, 0, label_ext);
         form2.setWidget(4, 1, text_ext);
+        form2.setWidget(5, 0, label_lingNt);
+        form2.setWidget(5, 1, text_lingNt);
+        form2.setWidget(6, 0, label_refNt);
+        form2.setWidget(6, 1, text_refNt);
+
         form3.setWidget(0, 0, label_gdr);
         form3.setWidget(0, 1, term_gdr);
         form3.setWidget(1, 0, label_pos);
@@ -189,6 +209,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_sctxt.setText("");
         text_usg.setText("");
         text_ext.setText("");
+
+        text_techNt.setText("");
+        text_lingNt.setText("");
+        text_refNt.setText("");
+
         edit.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -208,6 +233,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_ctxt.setText(termDTO.getTermContext());
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
+
+        text_techNt.setText(termDTO.getTechnicalNote());
+        text_lingNt.setText(termDTO.getLinguisticNote());
+        text_refNt.setText(termDTO.getReferenceNote());
+
         form3.remove(term_pos);
         term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
         form3.setWidget(1, 1, term_pos);
@@ -242,7 +272,7 @@ public class TermFormREDACTOR extends VerticalPanel {
     }
 
     public void adjustSize(int w) {
-        controls.setWidth(w * 1 / 5 + "px");
+        controls.setWidth(w * 1 / 8 + "px");
         controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
         controls.setCellHorizontalAlignment(edit, HorizontalPanel.ALIGN_LEFT);
         form.setWidth(w * 1 / 3 + "px");
@@ -252,21 +282,28 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.setWidth(w * 1 / 3 + "px");
         form2.setWidth(w * 1 / 3 + "px");
         form3.setWidth(w * 1 / 3 + "px");
-        lang.setWidth(w * 1 / 5 + "px");
-        text_frm.setWidth(w * 1 / 5 + "px");
-        text_src.setWidth(w * 1 / 5 + "px");
-        text_def.setWidth(w * 1 / 5 + "px");
-        term_type.setWidth(w * 1 / 5 + "px");
-        term_pos.setWidth(w * 1 / 5 + "px");
-        term_gdr.setWidth(w * 1 / 5 + "px");
-        text_st.setWidth(w * 1 / 5 + "px");
-        text_sdef.setWidth(w * 1 / 5 + "px");
-        text_nt.setWidth(w * 1 / 5 + "px");
-        text_ctxt.setWidth(w * 1 / 5 + "px");
-        text_sctxt.setWidth(w * 1 / 5 + "px");
-        text_usg.setWidth(w * 1 / 5 + "px");
-        text_ext.setWidth(w * 1 / 5 + "px");
-        lang_lbl.setWidth(w * 1 / 5 + "px");
+        lang.setWidth(w * 1 / 8 + "px");
+        text_frm.setWidth(w * 1 / 8 + "px");
+        text_src.setWidth(w * 1 / 8 + "px");
+        text_def.setWidth(w * 1 / 8 + "px");
+        term_type.setWidth(w * 1 / 8 + "px");
+        term_pos.setWidth(w * 1 / 8 + "px");
+        term_gdr.setWidth(w * 1 / 8 + "px");
+        text_st.setWidth(w * 1 / 8 + "px");
+        text_sdef.setWidth(w * 1 / 8 + "px");
+        text_nt.setWidth(w * 1 / 8 + "px");
+        text_ctxt.setWidth(w * 1 / 8 + "px");
+        text_sctxt.setWidth(w * 1 / 8 + "px");
+        text_usg.setWidth(w * 1 / 8 + "px");
+        text_ext.setWidth(w * 1 / 8 + "px");
+        lang_lbl.setWidth(w * 1 / 8 + "px");
+
+        label_techNt.setWidth(w * 1 / 8 + "px");
+        text_techNt.setWidth(w * 1 / 8 + "px");
+        label_lingNt.setWidth(w * 1 / 8 + "px");
+        text_lingNt.setWidth(w * 1 / 8 + "px");
+        label_refNt.setWidth(w * 1 / 8 + "px");
+        text_refNt.setWidth(w * 1 / 8 + "px");
     }
 
     public void setReadOnly(Boolean isReadOnly) {
@@ -281,7 +318,12 @@ public class TermFormREDACTOR extends VerticalPanel {
         term_type.setEnabled(!isReadOnly);
         term_pos.setEnabled(!isReadOnly);
         term_gdr.setEnabled(!isReadOnly);
+
         text_ext.setReadOnly(isReadOnly);
+        text_techNt.setReadOnly(isReadOnly);
+        text_lingNt.setReadOnly(isReadOnly);
+        text_refNt.setReadOnly(isReadOnly);
+
         delete.setEnabled(!isReadOnly);
         edit.setEnabled(isReadOnly);
     }
@@ -316,6 +358,11 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setTermSourceContext(text_sctxt.getText());
         termDTO.setTermNote(text_nt.getText());
         termDTO.setExtra(text_ext.getText());
+
+        termDTO.setTechnicalNote(text_techNt.getText());
+        termDTO.setLinguisticNote(text_lingNt.getText());
+        termDTO.setReferenceNote(text_refNt.getText());
+
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
         if (isLocallyEdited.getVal()) {

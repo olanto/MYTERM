@@ -44,6 +44,9 @@ public class TermDTO implements IsSerializable {
     private String termContext;
     private String termSourceContext;
     private String termNote;
+    private String technicalNote;
+    private String referenceNote;
+    private String linguisticNote;
     private String termType;
     private String termPartofspeech;
     private String termGender;
@@ -209,6 +212,30 @@ public class TermDTO implements IsSerializable {
 
     public void setTermAdminStatus(String termAdminStatus) {
         this.termAdminStatus = termAdminStatus;
+    }
+
+    public String getTechnicalNote() {
+        return technicalNote;
+    }
+
+    public String getLinguisticNote() {
+        return linguisticNote;
+    }
+
+    public String getReferenceNote() {
+        return referenceNote;
+    }
+
+    public void setTechnicalNote(String technicalNote) {
+        this.technicalNote = technicalNote;
+    }
+
+    public void setLinguisticNote(String linguisticNote) {
+        this.linguisticNote = linguisticNote;
+    }
+
+    public void setReferenceNote(String referenceNote) {
+        this.referenceNote = referenceNote;
     }
 
     public String getTermGeoUsage() {

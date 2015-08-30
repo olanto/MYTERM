@@ -241,6 +241,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
 
     private void commandReload() {
         isEdited.setVal(false);
+        resultsPanel.elementDetails.clear();
         resultsPanel.sideRes.clear();
         searchMenu.ownerList.setSelectedIndex(0);
         searchMenu.rsrcList.setSelectedIndex(0);
@@ -443,7 +444,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "Relation removed successfully");
                     userResourceForm.removeFromParent();
-                    History.newItem("page33");
+                    History.newItem("p33displayAll");
                 }
             });
         }

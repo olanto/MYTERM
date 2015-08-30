@@ -208,6 +208,9 @@ public class DOMAINSWidget extends VerticalPanel {
                         case "p35add":
                             commandAdd();
                             break;
+                        case "p35displayAll":
+                            commandReload();
+                            break;
                     }
                 }
             }
@@ -224,6 +227,14 @@ public class DOMAINSWidget extends VerticalPanel {
         MainEntryPoint.statusPanel.setMessage("warning", "Adding a new entry, please wait...");
         isEdited.setVal(false);
         getService().getDomainsDetails(searchMenu.addField.getText(), domainAddCallback);
+    }
+
+    private void commandReload() {
+        isEdited.setVal(false);
+        resultsPanel.sideRes.clear();
+        searchMenu.addField.setText("");
+        MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
+        getService().getDomainsDetails("", domainAddCallback);
     }
 
     public void refreshContentFromLanguageDTO() {
@@ -369,7 +380,7 @@ public class DOMAINSWidget extends VerticalPanel {
     private void commandInit() {
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         resultsPanel.sideRes.clear();
-        getService().getDomainsDetails("", domainsCallback);
+        getService().getDomainsDetails(searchMenu.addField.getText(), domainsCallback);
     }
 
     public void escapeDomain(String action) {
@@ -403,7 +414,7 @@ public class DOMAINSWidget extends VerticalPanel {
                 public void onSuccess(String result) {
                     MainEntryPoint.statusPanel.setMessage("message", "Domain removed successfully");
                     domainForm.removeFromParent();
-                    History.newItem("page35");
+                    History.newItem("p35displayAll");
                 }
             });
         }
