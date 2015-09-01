@@ -232,6 +232,7 @@ public class USERS_RESOURCESWidget extends VerticalPanel {
     private void commandInit() {
         isEdited.setVal(false);
         resultsPanel.sideRes.clear();
+        searchMenu.refresh();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getUsersResourcesDetails(Long.valueOf(searchMenu.ownerList.getValue(searchMenu.ownerList.getSelectedIndex())),
                 Long.valueOf(searchMenu.rsrcList.getValue(searchMenu.rsrcList.getSelectedIndex())),

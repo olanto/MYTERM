@@ -51,7 +51,7 @@ public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
         btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        add(new Label(sysMsg.get(GuiConstant.LBL_O_MAILING)));
+        add(new Label(sysMsg.get(GuiConstant.LBL_O_LAST_NAME)));
         add(new HTML("&nbsp;"));
         add(ownerList);
         add(new HTML("&nbsp;"));
@@ -69,5 +69,14 @@ public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
         btnAdd.setTitle(sysMsg.get(GuiConstant.MSG_ADD_TITLE));
         btnDispAll.setTitle(sysMsg.get(GuiConstant.MSG_DISPLAY_ALL_TITLE));
         setStyleName("searchMenu");
+    }
+
+    public void refresh() {
+        remove(rsrcList);
+        remove(ownerList);
+        rsrcList = new ResourcesList();
+        ownerList = new OwnersList();
+        this.insert(ownerList, 2);
+        this.insert(rsrcList, 7);
     }
 }

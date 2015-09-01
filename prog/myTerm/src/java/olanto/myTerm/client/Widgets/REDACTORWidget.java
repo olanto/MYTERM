@@ -283,7 +283,7 @@ public class REDACTORWidget extends VerticalPanel {
                 createNewConceptEntry();
             }
         });
-        resultsPanel.adjustSize(0.25f, 0.25f);
+        resultsPanel.adjustSize(0.2f, 0.25f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {

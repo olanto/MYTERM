@@ -96,9 +96,9 @@ public class TermFormREVISOR extends VerticalPanel {
     private char status;
 
     public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        form1 = new Grid(6, 2);
-        form2 = new Grid(7, 2);
-        form3 = new Grid(5, 2);
+        form1 = new Grid(5, 2);
+        form2 = new Grid(6, 2);
+        form3 = new Grid(7, 2);
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
         text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited);
@@ -152,9 +152,9 @@ public class TermFormREVISOR extends VerticalPanel {
         form1.setStyleName("edpanel");
         form2.setStyleName("edpanel");
         form3.setStyleName("edpanel");
-        form1.setCellSpacing(6);
-        form2.setCellSpacing(6);
-        form3.setCellSpacing(6);
+        form1.setCellSpacing(3);
+        form2.setCellSpacing(3);
+        form3.setCellSpacing(3);
 
         form1.setWidget(0, 0, label_lng);
         form1.setWidget(0, 1, lang);
@@ -166,8 +166,6 @@ public class TermFormREVISOR extends VerticalPanel {
         form1.setWidget(3, 1, text_def);
         form1.setWidget(4, 0, label_sdef);
         form1.setWidget(4, 1, text_sdef);
-        form1.setWidget(5, 0, label_techNt);
-        form1.setWidget(5, 1, text_techNt);
 
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
@@ -179,10 +177,8 @@ public class TermFormREVISOR extends VerticalPanel {
         form2.setWidget(3, 1, text_usg);
         form2.setWidget(4, 0, label_ext);
         form2.setWidget(4, 1, text_ext);
-        form2.setWidget(5, 0, label_lingNt);
-        form2.setWidget(5, 1, text_lingNt);
-        form2.setWidget(6, 0, label_refNt);
-        form2.setWidget(6, 1, text_refNt);
+        form2.setWidget(5, 0, label_techNt);
+        form2.setWidget(5, 1, text_techNt);
 
         form3.setWidget(0, 0, label_gdr);
         form3.setWidget(0, 1, term_gdr);
@@ -192,7 +188,11 @@ public class TermFormREVISOR extends VerticalPanel {
         form3.setWidget(2, 1, text_ctxt);
         form3.setWidget(3, 0, label_sctxt);
         form3.setWidget(3, 1, text_sctxt);
-        form3.setWidget(4, 1, controls);
+        form3.setWidget(4, 0, label_lingNt);
+        form3.setWidget(4, 1, text_lingNt);
+        form3.setWidget(5, 0, label_refNt);
+        form3.setWidget(5, 1, text_refNt);
+        form3.setWidget(6, 1, controls);
         controls.add(approve);
         approve.setTitle("Approve the current term");
         controls.add(disapprove);
@@ -200,7 +200,7 @@ public class TermFormREVISOR extends VerticalPanel {
         text_frm.setText("");
         text_src.setText("");
         text_def.setText("");
-        text_st.setText("");
+        text_st.setText(sysMsg.get(GuiConstant.MSG_STATUS_ED));
         text_sdef.setText("");
         text_nt.setText("");
         text_ctxt.setText("");
@@ -259,7 +259,8 @@ public class TermFormREVISOR extends VerticalPanel {
     }
 
     public void adjustSize(int w) {
-        controls.setWidth(w * 1 / 8 + "px");
+        label_gdr.setVisible(true);
+        controls.setWidth(w * 1 / 4 + "px");
         controls.setCellHorizontalAlignment(approve, HorizontalPanel.ALIGN_LEFT);
         controls.setCellHorizontalAlignment(disapprove, HorizontalPanel.ALIGN_RIGHT);
         form.setWidth(w + "px");
@@ -269,26 +270,23 @@ public class TermFormREVISOR extends VerticalPanel {
         form1.setWidth(w * 1 / 3 + "px");
         form2.setWidth(w * 1 / 3 + "px");
         form3.setWidth(w * 1 / 3 + "px");
-        lang.setWidth(w * 1 / 8 + "px");
-        text_frm.setWidth(w * 1 / 8 + "px");
-        text_src.setWidth(w * 1 / 8 + "px");
-        text_def.setWidth(w * 1 / 8 + "px");
-        term_type.setWidth(w * 1 / 8 + "px");
-        term_pos.setWidth(w * 1 / 8 + "px");
-        term_gdr.setWidth(w * 1 / 8 + "px");
-        text_st.setWidth(w * 1 / 8 + "px");
-        text_sdef.setWidth(w * 1 / 8 + "px");
-        text_nt.setWidth(w * 1 / 8 + "px");
-        text_ctxt.setWidth(w * 1 / 8 + "px");
-        text_sctxt.setWidth(w * 1 / 8 + "px");
-        text_usg.setWidth(w * 1 / 8 + "px");
-        text_ext.setWidth(w * 1 / 8 + "px");
-        label_techNt.setWidth(w * 1 / 8 + "px");
-        text_techNt.setWidth(w * 1 / 8 + "px");
-        label_lingNt.setWidth(w * 1 / 8 + "px");
-        text_lingNt.setWidth(w * 1 / 8 + "px");
-        label_refNt.setWidth(w * 1 / 8 + "px");
-        text_refNt.setWidth(w * 1 / 8 + "px");
+        lang.setWidth(w * 1 / 4 + "px");
+        text_frm.setWidth(w * 1 / 4 + "px");
+        text_src.setWidth(w * 1 / 4 + "px");
+        text_def.setWidth(w * 1 / 4 + "px");
+        term_type.setWidth(w * 1 / 4 + "px");
+        term_pos.setWidth(w * 1 / 4 + "px");
+        term_gdr.setWidth(w * 1 / 4 + "px");
+        text_st.setWidth(w * 1 / 4 + "px");
+        text_sdef.setWidth(w * 1 / 4 + "px");
+        text_nt.setWidth(w * 1 / 4 + "px");
+        text_ctxt.setWidth(w * 1 / 4 + "px");
+        text_sctxt.setWidth(w * 1 / 4 + "px");
+        text_usg.setWidth(w * 1 / 4 + "px");
+        text_ext.setWidth(w * 1 / 4 + "px");
+        text_techNt.setWidth(w * 1 / 4 + "px");
+        text_lingNt.setWidth(w * 1 / 4 + "px");
+        text_refNt.setWidth(w * 1 / 4 + "px");
     }
 
     public void setReadOnly(Boolean isReadOnly) {

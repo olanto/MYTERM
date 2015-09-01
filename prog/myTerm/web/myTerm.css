@@ -189,7 +189,7 @@ body{
 }
 .rpanel {
     margin:0px;padding:0px;
-    width:100%;
+    width:99%;
     border:1px solid #ffffff;
 
     -moz-border-radius-bottomleft:0px;
@@ -210,7 +210,7 @@ body{
 }.rpanel table{
     border-collapse: collapse;
     border-spacing: 0;
-    width:100%;
+    width:99%;
     height:100%;
     margin:0px;padding:0px;
 }.rpanel tr:last-child td:last-child {
@@ -310,7 +310,7 @@ body{
 }.cpanel table{
     border-collapse: collapse;
     border-spacing: 0;
-    width:100%;
+    width:99%;
     height:100%;
     margin:0px;padding:0px;
 }.cpanel tr:last-child td:last-child {

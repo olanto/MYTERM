@@ -50,7 +50,7 @@ import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
- * @author simple
+ * @author nizar ghoula
  */
 public class RESOURCESWidget extends VerticalPanel {
 
