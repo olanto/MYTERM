@@ -85,13 +85,6 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
         currentHeader.setWidth((w * 1 / 4) - 3 + "px");
         sideVP.setWidth((w * 1 / 4) + "px");
-        if ((int) (h * 1 / 6) > GuiConstant.CPT_HEIGHT) {
-            conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
-            termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
-        } else {
-            conceptDetails.setHeight((int) (h * 1 / 6) + "px");
-            termsDetails.setHeight((int) (h * 5 / 6) + "px");
-        }
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 
@@ -99,10 +92,19 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT_EXTRA;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT_EXTRA;
         sideVP.setWidth((int) (w * s_widthper) + "px");
-        sideRes.setPixelSize((int) (w * s_widthper) - 3, (h / 2 - 30));
+        sideRes.setHeight((int) (h / 2 - 30) + "px");
         buttonsPanel.setPixelSize((int) (w * s_widthper), 30);
-        sideCurrent.setPixelSize((int) (w * s_widthper) - 3, h / 2);
-        currentHeader.setPixelSize((int) (w * s_widthper) - 3, 20);
+        sideCurrent.setPixelSize((int) (w * s_widthper), h / 2);
+        currentHeader.setPixelSize((int) (w * s_widthper), GuiConstant.WIDTH_UNIT_EXTRA);
+        if ((int) (w * s_widthper) > GuiConstant.SIDE_WIDTH) {
+            sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            conceptDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            termsDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+        } else {
+            sideRes.setWidth((int) (w * s_widthper) + "px");
+            conceptDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
+            termsDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
+        }
         if ((int) (h * s_heightper) > GuiConstant.CPT_HEIGHT) {
             conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
             termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
