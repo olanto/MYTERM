@@ -65,11 +65,15 @@ public class SearchHeaderUSER_LANGUAGE extends HorizontalPanel {
     }
 
     public void refresh() {
+        int i = langList.getSelectedIndex();
+        int j = ownerList.getSelectedIndex();
         remove(langList);
         remove(ownerList);
         ownerList = new OwnersList();
         langList = new LangList();
         this.insert(ownerList, 2);
-        this.insert(langList, 8);
+        this.insert(langList, 6);
+        ownerList.setSelectedIndex(i);
+        langList.setSelectedIndex(j);
     }
 }

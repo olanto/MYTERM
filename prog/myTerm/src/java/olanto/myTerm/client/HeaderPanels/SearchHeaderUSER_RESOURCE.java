@@ -72,11 +72,15 @@ public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
     }
 
     public void refresh() {
+        int i = rsrcList.getSelectedIndex();
+        int j = ownerList.getSelectedIndex();
         remove(rsrcList);
         remove(ownerList);
         rsrcList = new ResourcesList();
         ownerList = new OwnersList();
         this.insert(ownerList, 2);
         this.insert(rsrcList, 7);
+        ownerList.setSelectedIndex(j);
+        rsrcList.setSelectedIndex(i);
     }
 }

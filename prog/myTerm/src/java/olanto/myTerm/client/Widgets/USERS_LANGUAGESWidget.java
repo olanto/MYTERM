@@ -233,6 +233,7 @@ public class USERS_LANGUAGESWidget extends VerticalPanel {
     private void commandInit() {
         isEdited.setVal(false);
         resultsPanel.sideRes.clear();
+        searchMenu.refresh();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
         getService().getUsersLanguagesDetails(Long.valueOf(searchMenu.ownerList.getValue(searchMenu.ownerList.getSelectedIndex())),
                 searchMenu.langList.getValue(searchMenu.langList.getSelectedIndex()), usersLanguagesCallback);

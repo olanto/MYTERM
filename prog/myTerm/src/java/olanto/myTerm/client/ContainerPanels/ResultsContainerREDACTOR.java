@@ -85,6 +85,13 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
         currentHeader.setWidth((w * 1 / 4) - 3 + "px");
         sideVP.setWidth((w * 1 / 4) + "px");
+        if ((int) (h * 1 / 6) > GuiConstant.CPT_HEIGHT) {
+            conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
+            termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
+        } else {
+            conceptDetails.setHeight((int) (h * 1 / 6) + "px");
+            termsDetails.setHeight((int) (h * 5 / 6) + "px");
+        }
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 
@@ -96,8 +103,13 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         buttonsPanel.setPixelSize((int) (w * s_widthper), 30);
         sideCurrent.setPixelSize((int) (w * s_widthper) - 3, h / 2);
         currentHeader.setPixelSize((int) (w * s_widthper) - 3, 20);
-        termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
-        conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
+        if ((int) (h * s_heightper) > GuiConstant.CPT_HEIGHT) {
+            conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
+            termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
+        } else {
+            conceptDetails.setHeight((int) (h * s_heightper) + "px");
+            termsDetails.setHeight((int) (h * (1 - s_heightper)) + "px");
+        }
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
     }
 }

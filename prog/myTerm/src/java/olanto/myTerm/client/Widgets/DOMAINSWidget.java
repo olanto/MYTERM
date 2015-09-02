@@ -181,6 +181,17 @@ public class DOMAINSWidget extends VerticalPanel {
             }
         });
 
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p35displayAll").show();
+                } else {
+                    History.newItem("p35displayAll");
+                }
+            }
+        });
+
         resultsPanel.adjustSize(0.3f, 0.7f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override

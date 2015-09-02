@@ -218,7 +218,7 @@ public class REVISORWidget extends VerticalPanel {
                 commandPage2();
             }
         });
-        resultsPanel.adjustSize(0.2f, 0.25f);
+        resultsPanel.adjustSize(0.2f, 0.3f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
@@ -275,11 +275,11 @@ public class REVISORWidget extends VerticalPanel {
         if (conceptEntryDTO != null) {
             addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
-            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 80);
+            addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 5 * GuiConstant.WIDTH_UNIT);
             addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetFormREVISOR(ownerID, addcpt);
-                addterms.adjustSize(addcpt.getOffsetWidth() - 20);
+                addterms.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - (int) 1.5 * GuiConstant.WIDTH_UNIT);
                 resultsPanel.termsDetails.setWidget(addterms);
                 for (LangEntryDTO langEntryDTO : conceptEntryDTO.listlang) {
                     addterms.refreshContentFromLangEntryDTO(langEntryDTO, searchMenu.langSrc.getLangIDs(), sFields, isEdited, sysMsgs);

@@ -59,17 +59,45 @@ public class ResultsContainerREVISOR extends HorizontalPanel {
 
     public void adjustSize() {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
-        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
-        sideRes.setPixelSize((int) (w * 1 / 4), h);
-        termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
-        conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT - 2;
+        sideRes.setHeight(h + "px");
+        if ((w * 1 / 4) > GuiConstant.SIDE_WIDTH) {
+            sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            conceptDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            termsDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+        } else {
+            sideRes.setWidth((int) (w * 1 / 4) + "px");
+            conceptDetails.setWidth((int) (w * 3 / 4) + "px");
+            termsDetails.setWidth((int) (w * 3 / 4) + "px");
+        }
+        if ((h * 1 / 6) > GuiConstant.CPT_HEIGHT) {
+            conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
+            termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
+        } else {
+            conceptDetails.setHeight((int) (h * 1 / 6) + "px");
+            termsDetails.setHeight((int) (h * 5 / 6) + "px");
+        }
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
-        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT;
-        sideRes.setPixelSize((int) (w * s_widthper), h);
-        termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
-        conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
+        int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT - 2;
+        sideRes.setHeight(h + "px");
+        if ((int) (w * s_widthper) > GuiConstant.SIDE_WIDTH) {
+            sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            conceptDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            termsDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+        } else {
+            sideRes.setWidth((int) (w * s_widthper) + "px");
+            conceptDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
+            termsDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
+        }
+        if ((int) (h * s_heightper) > GuiConstant.CPT_HEIGHT) {
+            conceptDetails.setHeight(GuiConstant.CPT_HEIGHT + "px");
+            termsDetails.setHeight((h - GuiConstant.CPT_HEIGHT) + "px");
+        } else {
+            conceptDetails.setHeight((int) (h * s_heightper) + "px");
+            termsDetails.setHeight((int) (h * (1 - s_heightper)) + "px");
+        }
     }
 }

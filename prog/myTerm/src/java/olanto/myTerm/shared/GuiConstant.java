@@ -37,10 +37,12 @@ public class GuiConstant implements IsSerializable {
     public static final String PROFILE_ADMIN = "ADMIN";
     public static final int EXP_DAYS = 24;
     public static final int TEXTAREA_HEIGHT = 100;
-    public static final int HEADER_HEIGHT = 140;
-    public static final int WIDTH_UNIT = 15;
-    public static final int HEADER_HEIGHT_EXTRA = 155;
-    public static final int WIDTH_UNIT_EXTRA = 20;
+    public static final int HEADER_HEIGHT = 130;
+    public static final int CPT_HEIGHT = 140;
+    public static final int SIDE_WIDTH = 340;
+    public static final int WIDTH_UNIT = 8;
+    public static final int HEADER_HEIGHT_EXTRA = 150;
+    public static final int WIDTH_UNIT_EXTRA = 18;
     public static final int ADMIN_HEADER_HEIGHT = 170;
     public static final String OLANTO_URL = "Powered by Olanto|http://olanto.org|_blank";
     public static final String FEEDBACK_MAIL = "Feedback|info@olanto.org";

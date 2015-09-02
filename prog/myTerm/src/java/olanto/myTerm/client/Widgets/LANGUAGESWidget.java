@@ -29,6 +29,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -181,6 +182,18 @@ public class LANGUAGESWidget extends VerticalPanel {
                 }
             }
         });
+
+        searchMenu.btnDispAll.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                if (isEdited.getVal()) {
+                    new MyDialog("You have edited this entry. Are you sure that you want to abort all the modifications?", 1, "p32displayAll").show();
+                } else {
+                    History.newItem("p32displayAll");
+                }
+            }
+        });
+
         resultsPanel.adjustSize(0.5f, 0.5f);
         History.addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
@@ -368,7 +381,13 @@ public class LANGUAGESWidget extends VerticalPanel {
 
     public void createNewLanguage() {
         getLanguageFromHeader();
-        getService().createLanguage(languageDTO, languageAddedCallback);
+        if (languageDTO.getIdLanguage().length() <= 5) {
+            getService().createLanguage(languageDTO, languageAddedCallback);
+        } else {
+            Window.alert("Language ID should be less than 5 caracters");
+            searchMenu.idField.setText("");
+            searchMenu.nameField.setText("");
+        }
     }
 
     public void getLanguageFromHeader() {
