@@ -44,12 +44,14 @@ create table owners
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into owners
-  values (1,'anonymous','not defined','','','INACTIVE',null);
+  values (1,'boss','Admin need to change pwd','admin','admin','ACTIVE','ADMIN');
+/*
 insert into owners
   values (2,'jacques','guyot','jacques@olanto.org','aaaabbbb','ACTIVE','ADMIN');
 insert into owners
   values (3,'nizar','ghoula','nizar@olanto.org','fasdfasdfsadf','ACTIVE','ADMIN');
-commit; 
+commit;
+*/ 
 select * from owners;   
 
 -- --------------------------------- 
@@ -70,7 +72,7 @@ ON DELETE NO ACTION ON UPDATE CASCADE)
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into resources
-  values (1,1,'INSERTED WITH SQL','PUBLIC',null,null);
+  values (1,1,'DEMO resource','PUBLIC','Only for demo','extra information on source');
 commit; 
 select * from resources;   
 
@@ -96,9 +98,11 @@ AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 -- --------------------------------- 
 
 
-insert into users_resources values (1,1,1,'READER','PUBLIC',null);
+insert into users_resources values (1,1,1,'ADMIN','PUBLIC',null);
+/*
 insert into users_resources values (2,1,2,'READER','PUBLIC',null);
 insert into users_resources values (3,1,3,'READER','PUBLIC',null);
+*/
 commit; 
 select * from users_resources; 
 
@@ -179,12 +183,14 @@ ON DELETE NO ACTION ON UPDATE CASCADE)
 AUTO_INCREMENT=1000,DEFAULT CHARSET=utf8;
 
 insert into users_languages values (null,'EN',1,null);
-insert into users_languages values (null,'EN',2,null);
-insert into users_languages values (null,'EN',3,null);
 insert into users_languages values (null,'FR',1,null);
+/*
+insert into users_languages values (null,'AR',3,null);
 insert into users_languages values (null,'FR',2,null);
 insert into users_languages values (null,'FR',3,null);
-insert into users_languages values (null,'AR',3,null);
+insert into users_languages values (null,'EN',2,null);
+insert into users_languages values (null,'EN',3,null);
+*/
 commit; 
 select * from users_languages; 
 
@@ -211,8 +217,6 @@ insert into translations values ('EN','DOMAINS',3,'Painting');
 insert into translations values ('FR','DOMAINS',1,'Ordinateur');
 insert into translations values ('FR','DOMAINS',2,'Astronomie');
 insert into translations values ('FR','DOMAINS',3,'Peinture');
-insert into translations values ('EN','LOV_PRIVACY',1,'PUBLIC');
-insert into translations values ('EN','LOV_PRIVACY',2,'PRIVATE');
 commit; 
 select * from translations; 
 

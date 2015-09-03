@@ -1,7 +1,25 @@
 -- MYTERM SCHEMA
--- 
--- created 7.1.2014 by Jacques Guyot 
--- modified   by 
+/**
+ * ********
+ * Copyright © 2013-2015 Olanto Foundation Geneva
+ *
+ * This file is part of myTERM.
+ *
+ * myTERM is free software: you can redistribute it and/or modify it under the
+ * terms of the GNU Affero General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
+ *
+ * myCAT is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with myTERM. If not, see <http://www.gnu.org/licenses/>.
+ *
+ *********
+ */
 
 drop table if exists codes;
 
@@ -276,6 +294,7 @@ select
   c.code_default
 from codes c , languages l;
 
+select * from v_codeprodlang where id_language='FR' and code_type in ('role', 'term_type');
 
 create or replace view v_codifications as
 select
@@ -299,6 +318,9 @@ SELECT uuid()  uuid,
 v_codifications.* FROM v_codifications;
 
 select * from vj_codifications where id_language='EN' and code_type='role';
+select * from vj_codifications where  id_language='FR' and code_type in ('role', 'term_type');
+
+
 select * from vj_codifications where id_language='FR' and code_type='term_type';
 select * from vj_codifications where id_language='AR' and code_type='term_type';
 
