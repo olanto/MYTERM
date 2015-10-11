@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TBXBasiccoreStructV02.dtd>
+<martif type="TBX-Basic" xml:lang="en-US">
+  <martifHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Tokipona Gloss</title>
+        <note>https://en.wikipedia.org /wiki/Toki_Pona</note>
+      </titleStmt>
+      <sourceDesc>
+        <p>exported from myTerm (olanto.org) date: 2015-40-08 12:40:28</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs</encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+      <termEntry id="1000">
+        <descrip type="subjectField" />
+        <descripGrp>
+          <descrip type="definition">I, we, me, our</descrip>
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="TOKI">
+          <tig>
+            <term>mi</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">other</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source">web</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>I</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>we</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>me</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>our</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="1001">
+        <descrip type="subjectField" />
+        <descripGrp>
+          <descrip type="definition">big, tall, long, important</descrip>
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="TOKI">
+          <tig>
+            <term>suli</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source">web</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>big</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>tall</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>long</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>important</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term />
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="1002">
+        <descrip type="subjectField" />
+        <descripGrp>
+          <descrip type="definition">good, simple, to fix, to repair</descrip>
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">lang</transacNote>
+          <date>2015-00-06T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="TOKI">
+          <tig>
+            <term>pona</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source">web</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>good</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>simple</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>to repair</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+          <tig>
+            <term>to fix</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">lang</transacNote>
+              <date>2015-00-06T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="definition" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+    </body>
+  </text>
+</martif>
