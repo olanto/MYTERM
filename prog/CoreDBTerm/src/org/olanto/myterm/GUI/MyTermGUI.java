@@ -6,6 +6,7 @@ package org.olanto.myterm.GUI;
 
 import java.io.PrintStream;
 import javax.swing.JFileChooser;
+import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.export.ExportTBXFromDB;
 import org.olanto.myterm.extractor.ConvertAndLoadIntoDB;
@@ -31,15 +32,23 @@ public class MyTermGUI extends javax.swing.JFrame {
         System.setOut(logStream);
         System.setErr(logStream);
     }
-   private void myInitOthers() {
+
+    private void myInitOthers() {
 
         PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaOthers, 100));
         System.setOut(logStream);
         System.setErr(logStream);
     }
-  private void myInitEXPORT() {
+
+    private void myInitEXPORT() {
 
         PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaEXPORT, 100));
+        System.setOut(logStream);
+        System.setErr(logStream);
+    }
+   private void myInitREMOVE() {
+
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaREMOVE, 100));
         System.setOut(logStream);
         System.setErr(logStream);
     }
@@ -90,6 +99,13 @@ public class MyTermGUI extends javax.swing.JFrame {
         startEXPORT = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         logAreaEXPORT = new javax.swing.JTextArea();
+        REMOVE = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        resourceNameREMOVE = new javax.swing.JTextField();
+        startREMOVE = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        logAreaREMOVE = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -375,6 +391,63 @@ public class MyTermGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("EXPORT", EXPORT);
 
+        jLabel9.setText("Make a DB backup and remove all users on this ressource before use this ...");
+
+        jLabel10.setText("resource Name");
+
+        resourceNameREMOVE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameREMOVEActionPerformed(evt);
+            }
+        });
+
+        startREMOVE.setText("Remove this ressource");
+        startREMOVE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startREMOVEActionPerformed(evt);
+            }
+        });
+
+        logAreaREMOVE.setColumns(20);
+        logAreaREMOVE.setRows(5);
+        jScrollPane6.setViewportView(logAreaREMOVE);
+
+        javax.swing.GroupLayout REMOVELayout = new javax.swing.GroupLayout(REMOVE);
+        REMOVE.setLayout(REMOVELayout);
+        REMOVELayout.setHorizontalGroup(
+            REMOVELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(REMOVELayout.createSequentialGroup()
+                .addGroup(REMOVELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(REMOVELayout.createSequentialGroup()
+                        .addGroup(REMOVELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(startREMOVE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resourceNameREMOVE, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 363, Short.MAX_VALUE))
+            .addGroup(REMOVELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6))
+        );
+        REMOVELayout.setVerticalGroup(
+            REMOVELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(REMOVELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(REMOVELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(resourceNameREMOVE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startREMOVE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("REMOVE", REMOVE);
+
         jSplitPane1.setRightComponent(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleName("IMPORT XML type");
         jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
@@ -435,8 +508,8 @@ public class MyTermGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fileChooseOthersActionPerformed
 
     private void startUploadOthersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startUploadOthersActionPerformed
-             TermDB.restart();
-             myInitOthers();
+        TermDB.restart();
+        myInitOthers();
         String fname = fileNameOthers.getText();
         String modelname = fileNameModel.getText();
         String resource = resourceNameOthers.getText();
@@ -447,7 +520,7 @@ public class MyTermGUI extends javax.swing.JFrame {
         System.out.println("   Resource Name: " + resource);
         System.out.println("   type: " + type);
         System.out.println("------------------------------------------------");
-        ConvertAndLoadIntoDB.ConvertAFile(fname,resource, ModelEnum.Model.valueOf(type), modelname);
+        ConvertAndLoadIntoDB.ConvertAFile(fname, resource, ModelEnum.Model.valueOf(type), modelname);
     }//GEN-LAST:event_startUploadOthersActionPerformed
 
     private void fileChooseModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseModelActionPerformed
@@ -468,7 +541,7 @@ public class MyTermGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_resourceNameEXPORTActionPerformed
 
     private void fileChooseEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseEXPORTActionPerformed
-            JFileChooser fileOpen = new JFileChooser();
+        JFileChooser fileOpen = new JFileChooser();
         int ret = fileOpen.showDialog(null, "Open File");
         if (ret == JFileChooser.APPROVE_OPTION) {
             fileNameEXPORT.setText("" + fileOpen.getSelectedFile());
@@ -477,17 +550,33 @@ public class MyTermGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fileChooseEXPORTActionPerformed
 
     private void startEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startEXPORTActionPerformed
-                   TermDB.restart();
-             myInitOthers();
+        TermDB.restart();
+        myInitOthers();
         String fname = fileNameEXPORT.getText();
         String resource = resourceNameEXPORT.getText();
         System.out.println("Export:");
         System.out.println("   File Name: " + fname);
         System.out.println("   Resource Name: " + resource);
         System.out.println("------------------------------------------------");
-        ExportTBXFromDB.doIt(logAreaEXPORT, fname, resource,false);
-   
+        ExportTBXFromDB.doIt(logAreaEXPORT, fname, resource, false);
+
     }//GEN-LAST:event_startEXPORTActionPerformed
+
+    private void resourceNameREMOVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameREMOVEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameREMOVEActionPerformed
+
+    private void startREMOVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startREMOVEActionPerformed
+        TermDB.restart();
+        myInitREMOVE();
+        String resource = resourceNameREMOVE.getText();
+        System.out.println("Try to remove:");
+        System.out.println("   Resource Name: " + resource);
+        System.out.println("------------------------------------------------");
+        ManageResource.remove(resource);
+        System.out.println("end of removing");
+  
+    }//GEN-LAST:event_startREMOVEActionPerformed
 
     /**
      * @param args the command line arguments
@@ -526,6 +615,7 @@ public class MyTermGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EXPORT;
     private javax.swing.JPanel Others;
+    private javax.swing.JPanel REMOVE;
     private javax.swing.JPanel XML;
     private javax.swing.JPanel XML1;
     private javax.swing.JButton fileChooseEXPORT;
@@ -537,6 +627,7 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JTextField fileNameOthers;
     private javax.swing.JTextField fileNameXML;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -544,19 +635,24 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea logAreaEXPORT;
     private javax.swing.JTextArea logAreaOthers;
+    private javax.swing.JTextArea logAreaREMOVE;
     private javax.swing.JTextArea logAreaXML;
     private javax.swing.JTextField resourceNameEXPORT;
     private javax.swing.JTextField resourceNameOthers;
+    private javax.swing.JTextField resourceNameREMOVE;
     private javax.swing.JTextField resourceNameXML;
     private javax.swing.JButton startEXPORT;
+    private javax.swing.JButton startREMOVE;
     private javax.swing.JButton startUploadOthers;
     private javax.swing.JButton startUploadXML;
     private javax.swing.JComboBox typeChooserOthers;
