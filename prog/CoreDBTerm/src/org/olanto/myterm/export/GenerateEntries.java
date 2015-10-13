@@ -215,9 +215,36 @@ public class GenerateEntries {
             tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
         }
         if (ter.getTermDefinition() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermDefinition()).setAttribute("type", "definition"));
+            tig.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
+        }
+         if (ter.getTermDefinition() != null) {
+            tig.addContent(makeElem("descrip", ter.getTermDefinition()).setAttribute("type", "definition"));
+        }
+        if (ter.getTermDefinition() != null) {
+            tig.addContent(makeElem("admin", ter.getTermSourceDefinition()).setAttribute("type", "sourceDefinition"));
+        }
+        if (ter.getSup0() != null) {
+            tig.addContent(makeElem("termNote", ter.getSup0()).setAttribute("type", "sup0"));
+        }
+        if (ter.getSup1() != null) {
+            tig.addContent(makeElem("termNote", ter.getSup1()).setAttribute("type", "sup1"));
+        }
+        if (ter.getSup2() != null) {
+            tig.addContent(makeElem("termNote", ter.getSup2()).setAttribute("type", "sup2"));
+        }
+        if (ter.getSup3() != null) {
+            tig.addContent(makeElem("termNote", ter.getSup3()).setAttribute("type", "sup3"));
+        }
+        if (ter.getSup4() != null) {
+            tig.addContent(makeElem("termNote", ter.getSup4()).setAttribute("type", "sup4"));
         }
         if (ter.getTermSource() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
+        }
+       if (ter.getTermSource() != null) {
+            tig.addContent(makeElem("termNote", ter.getTermUsage()).setAttribute("type", "usage"));
+        }
+       if (ter.getTermSource() != null) {
             tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
         }
       if (ter.getCrossref()!= null) {

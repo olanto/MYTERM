@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TBXBasiccoreStructV02.dtd>
+<martif type="TBX-Basic" xml:lang="en-US">
+  <martifHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>DEMO resource</title>
+        <note>Only for demo</note>
+      </titleStmt>
+      <sourceDesc>
+        <p>exported from myTerm (olanto.org) date: 2015-38-13 13:38:56</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs</encodingDesc>
+  </martifHeader>
+  <text>
+    <body>
+      <termEntry id="1">
+        <descrip type="subjectField">Astronomy</descrip>
+        <descripGrp>
+          <descrip type="definition">cd</descrip>
+          <admin type="source">csd</admin>
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2015-00-13T00:00:00</date>
+        </transacGrp>
+        <note>cn xxx</note>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>star</term>
+            <descripGrp>
+              <descrip type="context">a new star in the sky</descrip>
+              <admin type="source">from book...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-00-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2015-00-13T00:00:00</date>
+            </transacGrp>
+            <note>here a note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">a new star in the sky</descrip>
+            <descrip type="definition">a star is</descrip>
+            <admin type="sourceDefinition">from dictionary ..</admin>
+            <termNote type="sup0">NT</termNote>
+            <termNote type="sup1">NL</termNote>
+            <termNote type="sup2">NR</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">used to ...</termNote>
+            <admin type="source">encyclodia ..</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>étoile</term>
+            <descripGrp>
+              <descrip type="context">une nouvelle étoile dans le ciel</descrip>
+              <admin type="source">du roman ...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-00-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2015-00-13T00:00:00</date>
+            </transacGrp>
+            <note>ici une note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">feminine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">une nouvelle étoile dans le ciel</descrip>
+            <descrip type="definition">une étoile est ....</descrip>
+            <admin type="sourceDefinition">du dictionnaire ..</admin>
+            <termNote type="sup0">NT</termNote>
+            <termNote type="sup1">NL</termNote>
+            <termNote type="sup2">NR</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">utilisé ...</termNote>
+            <admin type="source">encyclodie ..</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="2">
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>moon</term>
+            <descripGrp>
+              <descrip type="context">a new moon in the night</descrip>
+              <admin type="source">from book...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-00-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            </transacGrp>
+            <note>here a note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">a new moon in the night</descrip>
+            <descrip type="definition">a moon is</descrip>
+            <admin type="sourceDefinition">from dictionary ..</admin>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">used to ...</termNote>
+            <admin type="source">encyclodia ..</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>lune</term>
+            <descripGrp>
+              <descrip type="context">la lune est pleine ce soir</descrip>
+              <admin type="source">du roman ...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-00-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            </transacGrp>
+            <note>ici une note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">feminine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">la lune est pleine ce soir</descrip>
+            <descrip type="definition">la lune est le satellite ...</descrip>
+            <admin type="sourceDefinition">du dictionnaire ..</admin>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">utilisé ...</termNote>
+            <admin type="source">encyclodie ..</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+    </body>
+  </text>
+</martif>

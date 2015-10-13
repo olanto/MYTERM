@@ -136,12 +136,32 @@ public class TBX_Loader implements Loader {
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
                 courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
-                termFormExist = true;
+                termFormExist = true;   
+} else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("usage")) {
+                courantEntry.getTerm().setTermUsage(getText(info, localverbose));
+                termFormExist = true;   
             } else if (info.getName().equals("termNote")
-                    && info.getAttributeValue("type").equals("geographicalUsage")) {
-                courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
-                termFormExist = true;
-            } else if (info.getName().equals("descrip")
+                    && info.getAttributeValue("type").equals("sup0")) {
+                courantEntry.getTerm().setSup0(getText(info, localverbose));
+                termFormExist = true;   
+            } else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("sup1")) {
+                courantEntry.getTerm().setSup1(getText(info, localverbose));
+                termFormExist = true;   
+            } else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("sup2")) {
+                courantEntry.getTerm().setSup2(getText(info, localverbose));
+                termFormExist = true;   
+            } else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("sup3")) {
+                courantEntry.getTerm().setSup3(getText(info, localverbose));
+                termFormExist = true;   
+             } else if (info.getName().equals("termNote")
+                    && info.getAttributeValue("type").equals("sup4")) {
+                courantEntry.getTerm().setSup4(getText(info, localverbose));
+                termFormExist = true;   
+           } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("context")) {
                 courantEntry.getTerm().setTermContext(getText(info, localverbose));
                 termFormExist = true;
@@ -153,9 +173,13 @@ public class TBX_Loader implements Loader {
                     && info.getAttributeValue("type").equals("source")) {
                 courantEntry.getTerm().setTermSource(getText(info, localverbose));
                 termFormExist = true;
+            } else if (info.getName().equals("admin")
+                    && info.getAttributeValue("type").equals("sourceDefinition")) {
+                courantEntry.getTerm().setTermSourceDefinition(getText(info, localverbose));
+                termFormExist = true;
             } else if (info.getName().equals("note")) {
                 if (courantEntry.getTermNote().equals("")) {
-                     courantEntry.setTermNote(getText(info, localverbose));
+                    courantEntry.setTermNote(getText(info, localverbose));
                 } else {
                     courantEntry.setTermNote(courantEntry.getTermNote() + "\n" + getText(info, localverbose));
                 }
