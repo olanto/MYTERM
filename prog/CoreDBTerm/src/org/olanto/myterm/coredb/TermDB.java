@@ -33,6 +33,7 @@ import org.olanto.myterm.coredb.jpacontroller.ResourcesJpaController;
 import org.olanto.myterm.coredb.jpacontroller.TermsJpaController;
 import org.olanto.myterm.coredb.jpacontroller.UsersLanguagesJpaController;
 import org.olanto.myterm.coredb.jpacontroller.UsersResourcesJpaController;
+import org.olanto.myterm.coredb.jpacontroller.VjCodificationsJpaController;
 
 /**
  *
@@ -52,6 +53,7 @@ public class TermDB {
     static public TermsJpaController termsJC = new TermsJpaController(TermDB.emf);
     static public UsersLanguagesJpaController usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
     static public UsersResourcesJpaController usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
+   static public VjCodificationsJpaController vjCodificationsJC = new VjCodificationsJpaController(TermDB.emf);
 
     public static void restart() {
         emf = null;
@@ -66,5 +68,6 @@ public class TermDB {
         termsJC = new TermsJpaController(TermDB.emf);
         usersLanguagesJC = new UsersLanguagesJpaController(TermDB.emf);
         usersResourcesJC = new UsersResourcesJpaController(TermDB.emf);
+        vjCodificationsJC = new VjCodificationsJpaController(TermDB.emf);
     }
 }

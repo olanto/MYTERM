@@ -8,9 +8,10 @@ import java.io.PrintStream;
 import javax.swing.JFileChooser;
 import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.TermDB;
-import org.olanto.myterm.export.ExportTBXFromDB;
+import org.olanto.myterm.export.tbx.ExportTBXFromDB;
 import org.olanto.myterm.extractor.ConvertAndLoadIntoDB;
 import org.olanto.myterm.extractor.ModelEnum;
+import org.olanto.myterm.merge.MergeIntoDB;
 import org.olanto.myterm.parsetbx.LoadInToDB;
 
 /**
@@ -47,8 +48,12 @@ public class MyTermGUI extends javax.swing.JFrame {
         System.setErr(logStream);
     }
    private void myInitREMOVE() {
-
         PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaREMOVE, 100));
+        System.setOut(logStream);
+        System.setErr(logStream);
+    }
+  private void myInitMERGE() {
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaMERGE, 100));
         System.setOut(logStream);
         System.setErr(logStream);
     }
@@ -106,6 +111,15 @@ public class MyTermGUI extends javax.swing.JFrame {
         startREMOVE = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         logAreaREMOVE = new javax.swing.JTextArea();
+        MERGE = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        resourceNameFROM = new javax.swing.JTextField();
+        startMERGE = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        logAreaMERGE = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
+        resourceNameINTO = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -448,6 +462,78 @@ public class MyTermGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("REMOVE", REMOVE);
 
+        jLabel11.setText("Make a DB backup and export  ressources  before use this ...");
+
+        jLabel12.setText("merged resource Name");
+
+        resourceNameFROM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameFROMActionPerformed(evt);
+            }
+        });
+
+        startMERGE.setText("Merge this ressource");
+        startMERGE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startMERGEActionPerformed(evt);
+            }
+        });
+
+        logAreaMERGE.setColumns(20);
+        logAreaMERGE.setRows(5);
+        jScrollPane7.setViewportView(logAreaMERGE);
+
+        jLabel13.setText("into resource Name");
+
+        resourceNameINTO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameINTOActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MERGELayout = new javax.swing.GroupLayout(MERGE);
+        MERGE.setLayout(MERGELayout);
+        MERGELayout.setHorizontalGroup(
+            MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MERGELayout.createSequentialGroup()
+                .addGroup(MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(MERGELayout.createSequentialGroup()
+                        .addGroup(MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(startMERGE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resourceNameFROM, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(resourceNameINTO, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 371, Short.MAX_VALUE))
+            .addGroup(MERGELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7))
+        );
+        MERGELayout.setVerticalGroup(
+            MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MERGELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(resourceNameFROM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addGroup(MERGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resourceNameINTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startMERGE, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("MERGE", MERGE);
+
         jSplitPane1.setRightComponent(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleName("IMPORT XML type");
         jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
@@ -578,6 +664,25 @@ public class MyTermGUI extends javax.swing.JFrame {
   
     }//GEN-LAST:event_startREMOVEActionPerformed
 
+    private void resourceNameFROMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameFROMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameFROMActionPerformed
+
+    private void startMERGEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startMERGEActionPerformed
+              TermDB.restart();
+        myInitMERGE();
+        String resourceFrom = resourceNameFROM.getText();
+        String resourceInto = resourceNameINTO.getText();
+        System.out.println("Start to remove:");
+         MergeIntoDB.mergeARessource(resourceFrom, resourceInto);
+        System.out.println("end of removing");
+
+    }//GEN-LAST:event_startMERGEActionPerformed
+
+    private void resourceNameINTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameINTOActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameINTOActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -614,6 +719,7 @@ public class MyTermGUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EXPORT;
+    private javax.swing.JPanel MERGE;
     private javax.swing.JPanel Others;
     private javax.swing.JPanel REMOVE;
     private javax.swing.JPanel XML;
@@ -628,6 +734,9 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JTextField fileNameXML;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -641,17 +750,22 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea logAreaEXPORT;
+    private javax.swing.JTextArea logAreaMERGE;
     private javax.swing.JTextArea logAreaOthers;
     private javax.swing.JTextArea logAreaREMOVE;
     private javax.swing.JTextArea logAreaXML;
     private javax.swing.JTextField resourceNameEXPORT;
+    private javax.swing.JTextField resourceNameFROM;
+    private javax.swing.JTextField resourceNameINTO;
     private javax.swing.JTextField resourceNameOthers;
     private javax.swing.JTextField resourceNameREMOVE;
     private javax.swing.JTextField resourceNameXML;
     private javax.swing.JButton startEXPORT;
+    private javax.swing.JButton startMERGE;
     private javax.swing.JButton startREMOVE;
     private javax.swing.JButton startUploadOthers;
     private javax.swing.JButton startUploadXML;

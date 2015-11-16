@@ -4,9 +4,11 @@
  */
 package org.olanto.myterm.coredb;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.olanto.myterm.coredb.entityclasses.Owners;
+import org.olanto.myterm.coredb.entityclasses.VjCodifications;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 
 /**
@@ -26,15 +28,15 @@ public class _TBX_test {
            // System.out.println("owner id just after create:" + ManageOwner.create("JOE", "SMITH", "xxx@yyy.com", "DORMANT", "AAA000").getIdOwner());
             // 1026
             
-            Owners o1= Queries.getOwnerID("SMITH", TermEnum.AutoCreate.NO);
-            System.out.println(o1.getOwnerFirstName()+" "+o1.getOwnerLastName());
-            
-            o1.setOwnerFirstName("JACK");
-            
-            TermDB.ownersJC.edit(o1);
-            
-            System.out.println(o1.getOwnerFirstName()+" "+o1.getOwnerLastName());
-          
+//            Owners o1= Queries.getOwnerID("SMITH", TermEnum.AutoCreate.NO);
+//            System.out.println(o1.getOwnerFirstName()+" "+o1.getOwnerLastName());
+//            
+//            o1.setOwnerFirstName("JACK");
+//            
+//            TermDB.ownersJC.edit(o1);
+//            
+//            System.out.println(o1.getOwnerFirstName()+" "+o1.getOwnerLastName());
+//          
     //        
     //        System.out.println("resource id just after create:" + ManageResource.create("R2", "PUBLIC", "ADMIN_IMPORT").getIdResource());
     //    Concepts con=ManageConcept.addConceptToResource("R3");
@@ -52,9 +54,13 @@ public class _TBX_test {
             
            
             // Close the database connection:
+          
+            List<VjCodifications> testcode=Queries.getMsgCodification("msg","FR");
+            for (VjCodifications code:testcode ) 
+                System.out.println(code.getCodeValue()+", "+code.getCodeExtraLang());
+        
+                        
             TermDB.emf.close();
-        } catch (NonexistentEntityException ex) {
-            Logger.getLogger(_TBX_test.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(_TBX_test.class.getName()).log(Level.SEVERE, null, ex);
         }

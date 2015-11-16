@@ -168,6 +168,7 @@ select
 FROM
     vj_users_resources;
 
+/* old view 
 create or replace view v_sourcetarget as
     select 
         t1.term_form source,
@@ -198,46 +199,97 @@ create or replace view v_sourcetarget as
             and l1.id_langset != l2.id_langset
             and t1.id_term != t2.id_term
 ;
-
-
-/*
-create or replace view v_sourcetarget as
-select t1.term_form source, t1.id_term id_term_source, t1.id_language solang,
-       t2.term_form target, t2.id_term id_term_target, t2.id_language talang,
-	   t1.status status_source,
-	   t2.status status_target,
-	   c.id_concept,
-	   c.subject_field,
-	   r.id_resource,
-	   r.resource_name,
-	   vur.id_owner
-
- from terms t1, langsets l1,
-      terms t2, langsets l2,
-	  concepts c,
-      resources r,
-	  v_users_resources vur
-where t1.id_langset=l1.id_langset
-   and l1.id_concept=c.id_concept
-   and t2.id_langset=l2.id_langset
-   and l2.id_concept=c.id_concept
-   and c.id_resource=r.id_resource
-   and l1.id_langset!=l2.id_langset
-   and t1.id_term!=t2.id_term
-   and r.id_resource=vur.id_resource
-;
 */
+
+
+create or replace view v_sourcetarget_withtarget as
+    select 
+        t1.term_form source,
+        t1.id_term id_term_source,
+        t1.id_language solang,
+        t2.term_form target,
+        t2.id_term id_term_target,
+        t2.id_language talang,
+        t1.status status_source,
+        t2.status status_target,
+        c.id_concept,
+        c.subject_field,
+        r.id_resource,
+        r.resource_name
+    from
+        terms t1,
+        langsets l1,
+        terms t2,
+        langsets l2,
+        concepts c,
+        resources r
+    where
+        t1.id_langset = l1.id_langset
+            and l1.id_concept = c.id_concept
+            and t2.id_langset = l2.id_langset
+            and l2.id_concept = c.id_concept
+            and c.id_resource = r.id_resource
+            and l1.id_langset != l2.id_langset
+            and t1.id_term != t2.id_term
+;
+
+-- add term with no translation (ANY)
+create or replace view v_sourcetarget_notarget as
+    select 
+        t1.term_form source,
+        t1.id_term id_term_source,
+        t1.id_language solang,
+        '?',
+        0,
+        'ANY',
+        t1.status status_source,
+        'p',
+        c.id_concept,
+        c.subject_field,
+        r.id_resource,
+        r.resource_name
+    from
+        terms t1,
+        langsets l1,
+        concepts c,
+        resources r
+    where
+        t1.id_langset = l1.id_langset
+            and l1.id_concept = c.id_concept
+            and c.id_resource = r.id_resource
+     --       and not exists(select 'ok' from v_sourcetarget_withtarget where t1.id_term=id_term_source);
+ ;
+
+
+
+select * from v_sourcetarget_notarget where
+    source like 'XXX' 
+    and solang = 'EN'
+    and status_source like 'p';
+
+create or replace view v_sourcetarget as
+      select * from v_sourcetarget_withtarget
+union all 
+select * from v_sourcetarget_notarget;
 
 create or replace view vj_sourcetarget as
     SELECT 
         uuid() uuid, v_sourcetarget . *
     FROM
-        v_sourcetarget;
+        v_sourcetarget
+order by source;
+
+select * from vj_sourcetarget where
+    source like 'XXX' 
+    and solang = 'EN'
+    and status_source like 'p';
+
 
 select 
     *
 from
     v_sourcetarget;
+
 select 
     *
 from
@@ -245,6 +297,7 @@ from
 where
     source like 'mye' and solang = 'FR'
         and status_source like 'p';
+
 select 
     *
 from

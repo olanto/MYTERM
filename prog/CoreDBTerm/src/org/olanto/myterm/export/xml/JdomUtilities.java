@@ -19,8 +19,9 @@
  *
  *********
  */
-package org.olanto.myterm.export;
+package org.olanto.myterm.export.xml;
 
+import org.olanto.myterm.export.tbx.ExportTBXFromDB;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

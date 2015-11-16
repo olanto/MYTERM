@@ -19,12 +19,12 @@
  *
  *********
  */
-package org.olanto.myterm.export;
+package org.olanto.myterm.export.xml;
 
 import java.util.List;
 import javax.persistence.Query;
-import static org.olanto.myterm.export.ExportTBXFromDB.*;
-import static org.olanto.myterm.export.JdomUtilities.*;
+import static org.olanto.myterm.export.xml.ExportXMLFromDB.*;
+import static org.olanto.myterm.export.xml.JdomUtilities.*;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;
@@ -35,6 +35,7 @@ import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 
+
 /**
  * gÃ©nÃ©re la partie fixe de l'entÃªte du fichier.
  *
@@ -42,18 +43,17 @@ import org.olanto.myterm.coredb.entityclasses.Terms;
  *
  *
  */
-public class GenerateEntries {
+public class GenerateXMLEntries {
 
     /**
      * génère les entrées
      *
      * @return
      */
-    public static Element getTermsFromDB() {
-        Element res = makeElem("text");
-        Element body = makeElem("body");
-        res.addContent(body);
-        addConcept(body, resource);
+    public static Element getTermsFromDB(String usrlang) {
+        LabelCodification.init(usrlang);
+        Element res = makeElem("body");
+        addConcept(res, resource);
 
         return res;
     }
@@ -65,8 +65,8 @@ public class GenerateEntries {
         for (Concepts con : listOfConcept) {
             Element termentry = makeElem("termEntry");
             if (con.getImportedref() == null) {
-                termentry.setAttribute("id", con.getIdConcept().toString());
-            } else termentry.setAttribute("id", con.getImportedref());
+                termentry.addContent(makeElem("idConcept").addContent( "ID: "+con.getIdConcept().toString()));
+            } else termentry.addContent(makeElem("idConcept").addContent( "ID: "+con.getImportedref()));
             addConceptElem(termentry, con);
             body.addContent(termentry);
             addLangset(termentry, con);

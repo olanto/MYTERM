@@ -35,6 +35,7 @@ import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 import org.olanto.myterm.coredb.entityclasses.UsersLanguages;
 import org.olanto.myterm.coredb.entityclasses.UsersResources;
+import org.olanto.myterm.coredb.entityclasses.VjCodifications;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.PreexistingEntityException;
 
 /**
@@ -204,6 +205,7 @@ public class Queries {
         return query.getResultList();
     }
 
+    
     public static Owners getOwner(String ownermail, String hash) {
         Query query = TermDB.em.createNamedQuery("Owners.findByOwnerMailingAndHash");
         query.setParameter("ownerMailing", ownermail);
@@ -491,4 +493,15 @@ public class Queries {
         List<Domains> result = query.getResultList();
         return result;
     }
+    
+       public static List<VjCodifications> getMsgCodification(String codeType, String idLanguage) {
+        Query query;
+           query = TermDB.em.createNamedQuery("VjCodifications.findFieldsByLanguage");
+            query.setParameter("codeType", codeType);
+           query.setParameter("idLanguage", idLanguage);
+   
+        List<VjCodifications> result = query.getResultList();
+        return result;
+    }
+ 
 }

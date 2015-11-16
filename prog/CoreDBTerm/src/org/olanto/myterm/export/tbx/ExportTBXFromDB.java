@@ -19,7 +19,7 @@
  *
  *********
  */
-package org.olanto.myterm.export;
+package org.olanto.myterm.export.tbx;
 
 import javax.swing.JTextArea;
 import java.io.FileInputStream;
@@ -32,7 +32,7 @@ import org.jdom2.Namespace;
 import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.TermEnum;
 import org.olanto.myterm.coredb.entityclasses.Resources;
-import static org.olanto.myterm.export.JdomUtilities.*;
+import static org.olanto.myterm.export.tbx.JdomUtilities.*;
 
 /**
  *
@@ -51,7 +51,7 @@ public class ExportTBXFromDB {
     public static JTextArea logArea;
 
     public static void main(String[] args) {
-        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\export.properties");
+        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\tbx\\export.properties");
         doIt(null, "C:\\MYTERM\\tests\\exportTBX.xml", "TESTTBX",true);
     }
 

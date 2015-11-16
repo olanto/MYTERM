@@ -17,6 +17,7 @@
     <class>org.olanto.myterm.coredb.entityclasses.UsersLanguages</class>
     <class>org.olanto.myterm.coredb.entityclasses.Codes</class>
     <class>org.olanto.myterm.coredb.entityclasses.Codeslang</class>
+    <class>org.olanto.myterm.coredb.entityclasses.VjCodifications</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/myterm?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="x"/>

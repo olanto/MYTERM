@@ -20,10 +20,10 @@
  *********
  */
 
-package org.olanto.myterm.export;
+package org.olanto.myterm.export.tbx;
 
-import static org.olanto.myterm.export.ExportTBXFromDB.*;
-import static org.olanto.myterm.export.JdomUtilities.*;
+import static org.olanto.myterm.export.tbx.ExportTBXFromDB.*;
+import static org.olanto.myterm.export.tbx.JdomUtilities.*;
 
 import org.jdom2.Element;
 import org.jdom2.Namespace;
