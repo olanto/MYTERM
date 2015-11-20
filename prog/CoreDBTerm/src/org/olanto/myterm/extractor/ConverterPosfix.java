@@ -126,6 +126,12 @@ public class ConverterPosfix implements Converter {
             case "termDefinition":
                 term.setTermDefinition(parts[position]);
                 break;
+            case "termNote":
+                term.setTermNote(parts[position]);
+                break;
+            case "termUsage":
+                term.setTermUsage(parts[position]);
+                break;
             default:
                 System.out.println("Definition:" + definition + " not implemented ...");
         }
