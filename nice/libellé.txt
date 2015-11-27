@@ -1,0 +1,120 @@
+ant -f C:\\MYTERM\\prog\\CoreDBTerm -Djavac.includes=org/olanto/myterm/export/xml/TestCodification.java -Drun.class=org.olanto.myterm.export.xml.TestCodification run-single
+init:
+Deleting: C:\MYTERM\prog\CoreDBTerm\build\built-jar.properties
+deps-jar:
+Updating property file: C:\MYTERM\prog\CoreDBTerm\build\built-jar.properties
+Compiling 1 source file to C:\MYTERM\prog\CoreDBTerm\build\classes
+warning: Supported source version 'RELEASE_6' from annotation processor 'org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor' less than -source '1.7'
+warning: The following options were not recognized by any processor: '[eclipselink.canonicalmodel.use_static_factory]'
+1 warning
+compile-single:
+run-single:
+[EL Info]: 2015-11-23 13:11:40.415--ServerSession(29184529)--EclipseLink, version: Eclipse Persistence Services - 2.5.0.v20130507-3faac2b
+[EL Info]: connection: 2015-11-23 13:11:40.913--ServerSession(29184529)--file:/C:/MYTERM/prog/CoreDBTerm/build/classes/_CoreDBTermPU login successful
+btn.abort, ABANDONNER
+btn.add, Ajouter
+btn.addTerm, AJOUTER UN TERME
+tab.adminPanel, Administration
+btn.approve, APPROUVER
+btn.approveAll, TOUT APPROUVER
+btn.cancel, ANNULER
+msg.addTitle, Cliquer ici pour ajouter une entrée
+msg.searchTitle, Cliquer ici pour retrouver une entrée
+lbl.t.context, Contexte
+lbl.t.source_context, Source du Contexte
+btn.create, CREER
+btn.createNew, Créer un homonyme
+lbl.t.created_by, Créer par
+lbl.c.created_by, Créer par
+lbl.c.creation, Créer le
+lbl.t.creation, Créer le
+msg.creationDetails, Détail création
+lbl.c.cross_ref, Référence Croisée
+lbl.t.cross_ref, Référence Croisée
+lbl.c.definition, Définition
+lbl.t.definition, Définition
+msg.definitionDetails, Détail pour
+lbl.t.source_definition, Source de définition
+lbl.c.source_definition, Source de la définition
+btn.delete, SUPPRIMER
+btn.disapprove, REJETER
+btn.disapproveAll, TOUT REJETER
+btn.displayAll, Tout voir
+msg.domain, Domaine
+lbl.d.default_name, Libellé par défaut du domaine
+lbl.d.id, Id Domaine
+tab.domainsPanel, Gestion des domaine
+btn.edit, EDITER
+tab.entriesPanel, Gestion des Termes
+btn.escape, SORTIR
+lbl.t.extra, Extra
+lbl.c.extra_cross_ref, Référence Croisée (extra)
+lbl.t.extra_cross_ref, Référence Croisée (extra)
+lbl.c.extra, Information suppl.
+lbl.t.form, Terme
+lbl.t.gender, Genre
+lbl.t.geo_usage, Usage GEO
+lbl.c.image, Image
+lbl.t.image, Image
+lbl.c.imported_ref, Référence importée
+msg.seachMessage, Terme recherché
+lbl.t.lang, Langue
+lbl.l.default_name, Libellé par défaut de la langue
+lbl.l.id, Id langue
+tab.languagesPanel, Gestion des langues
+lbl.t.linguistic_note, Note linguistique
+lbl.t.linguistic_note_source, Source note linguistique
+lbl.c.modification, Modifier le
+lbl.t.modification, Modifier le
+lbl.t.last_modified_by, Modifier par
+lbl.c.last_modified_by, Modifier par
+msg.displayAllTitle, Click here display all entries
+lbl.c.note, Note
+lbl.t.note, Note
+msg.extraDetails, Autres informations
+lbl.o.first_name, Prénom
+lbl.o.id, Id Utilisateur
+lbl.o.last_name, Nom
+lbl.o.mailing, Adr. mail
+lbl.o.hash, Mot de passe
+lbl.o.role, Rôle
+lbl.o.status, Statut
+lbl.t.part_of_speech, Catégorie grammaticale
+msg.statusPublic, Publié
+lbl.t.reference_note, Note Référence
+lbl.t.reference_note_source, Source note Référence
+msg.resource, Ressource
+lbl.c.resource, Ressource
+msg.resourceDetails, Ressource
+lbl.r.extra, Ressource (extra)
+lbl.r.id, Id Ressource
+lbl.r.name, Nom de la Ressource
+lbl.r.note, Note de la ressource
+lbl.r.owner_id, Propriétaire de la Ressource
+lbl.r.privacy, Visibilité de la ressource
+tab.resourcesPanel, Gestion des ressources
+btn.save, SAUVER
+btn.search, Chercher
+lbl.t.source, Source
+msg.sourceLanguage, 
+lbl.t.status, Statut
+lbl.c.subject_field, Domaine
+btn.submit, SOUMETTRE
+msg.targetLanguage, 
+lbl.t.technical_note, Note Technique
+lbl.t.technical_note_source, Source note Technique
+msg.termRank, No. Terme:
+tab.searchPanel, Recherche Terminologique
+tab.revisionPanel, A approuver
+msg.statusRevision, En cours de révision
+lbl.t.type, Type
+msg.statusEdited, En cours d'édition
+lbl.t.usage, Usage
+tab.usersPanel, Gestion des utilisateurs
+tab.usersLanguagesPanel, Droits sur les langues
+tab.usersResourcesPanel, Droits sur les ressources
+msg.welcome, Bienvenue dans le gestionnaire de terminologie Olanto
+tab.redactionPanel, Espace de travail
+msg.workspaceEntries, Zone de travail
+[EL Info]: connection: 2015-11-23 13:11:41.006--ServerSession(29184529)--file:/C:/MYTERM/prog/CoreDBTerm/build/classes/_CoreDBTermPU logout successful
+BUILD SUCCESSFUL (total time: 1 second)

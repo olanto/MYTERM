@@ -1,174 +1,477 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE TBXBasiccoreStructV02.dtd>
-<martif type="TBX-Basic" xml:lang="en-US">
-  <martifHeader>
-    <fileDesc>
-      <titleStmt>
-        <title>TESTTBX</title>
-        <note />
-      </titleStmt>
-      <sourceDesc>
-        <p>exported from myTerm (olanto.org) date: 2015-41-03 16:41:46</p>
-      </sourceDesc>
-    </fileDesc>
-    <encodingDesc type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs</encodingDesc>
-  </martifHeader>
-  <text>
-    <body>
-      <termEntry id="c5">
-        <langSet xml:lang="EN">
-          <tig>
-            <term>e-mail</term>
-            <note />
-          </tig>
-        </langSet>
-        <langSet xml:lang="FR">
-          <tig>
-            <term>courriel</term>
-            <note />
-          </tig>
-        </langSet>
-      </termEntry>
-      <termEntry id="c6">
-        <langSet xml:lang="EN">
-          <tig>
-            <term>federated database</term>
-            <descrip type="context">Users and applications interface with the federated database managed by the federated server.</descrip>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-          </tig>
-        </langSet>
-        <langSet xml:lang="FR">
-          <tig>
-            <term>base de données fédérée</term>
-            <descrip type="context">Une base de données fédérée est une base de données répartie hétérogène constituée de données fédérées, et nécessite donc une architecture qui permet la communication entre les différentes sources de données.</descrip>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-          </tig>
-        </langSet>
-      </termEntry>
-      <termEntry id="c7">
-        <descripGrp>
-          <descrip type="definition">corrective lenses used in eyeglasses to correct presbyopia and other disorders of accommodation, characterised by a gradient of increasing lens power, added to the wearer's correction for the other refractive errors.</descrip>
-          <admin type="source">Wikipedia</admin>
-        </descripGrp>
-        <langSet xml:lang="EN">
-          <tig>
-            <term>progressive lens</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">preferredTerm-admn-sts</termNote>
-          </tig>
-          <tig>
-            <term>progressive addition lens</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
-            <termNote type="termType">fullForm</termNote>
-          </tig>
-          <tig>
-            <term>PAL</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">deprecatedTerm-admn-sts</termNote>
-            <termNote type="termType">acronym</termNote>
-          </tig>
-          <tig>
-            <term>progressive power lens</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
-          </tig>
-          <tig>
-            <term>graduated lens</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">supersededTerm-admn-sts</termNote>
-          </tig>
-        </langSet>
-        <langSet xml:lang="FR">
-          <tig>
-            <term>lentille progressive</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="grammaticalGender">feminine</termNote>
-          </tig>
-        </langSet>
-        <langSet xml:lang="DE">
-          <tig>
-            <term>Gleitsichtglas</term>
-            <note />
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="grammaticalGender">masculine</termNote>
-          </tig>
-        </langSet>
-      </termEntry>
-      <termEntry id="c1">
-        <descrip type="subjectField">manufacturing</descrip>
-        <descripGrp>
-          <descrip type="definition">This is a sample definition at the entry level.</descrip>
-          <admin type="source">Terminology SIG</admin>
-        </descripGrp>
-        <transacGrp>
-          <transac type="transactionType">origination</transac>
-          <transacNote type="responsibility">Jane</transacNote>
-          <date>2005-00-19T00:00:00</date>
-        </transacGrp>
-        <transacGrp>
-          <transac type="transactionType">modification</transac>
-          <transacNote type="responsibility">John</transacNote>
-          <date>2007-00-19T00:00:00</date>
-        </transacGrp>
-        <note>This is a sample entry with some data categories at the entry level.</note>
-        <ref type="crossReference" target="c2">unscheduled operation</ref>
-        <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web site</xref>
-        <xref type="xGraphic" target="http://www.lisa.org/logo.gif">LISA logo</xref>
-        <langSet xml:lang="EN">
-          <tig>
-            <term>scheduled operation</term>
-            <descripGrp>
-              <descrip type="context">One hour is required between scheduled operations.</descrip>
-              <admin type="source">Tivoli Storage Manager Administrator's Guide</admin>
-            </descripGrp>
-            <note />
-            <termNote type="partOfSpeech">verb</termNote>
-            <termNote type="administrativeStatus">preferredTerm-admn-sts</termNote>
-            <termNote type="grammaticalGender">masculine</termNote>
-            <termNote type="termType">fullForm</termNote>
-            <termNote type="geographicalUsage">Canada</termNote>
-            <admin type="source">IBM</admin>
-          </tig>
-        </langSet>
-      </termEntry>
-      <termEntry id="c2">
-        <descrip type="subjectField">manufacturing</descrip>
-        <langSet xml:lang="EN">
-          <descrip type="definition">This is a sample definition at the language level. This one has no source information required therefore it is not embedded in a descripGrp.</descrip>
-          <tig>
-            <term>unscheduled operation</term>
-            <descrip type="context">Unscheduled operations should be recorded in a log.</descrip>
-            <transacGrp>
-              <transac type="transactionType">origination</transac>
-              <transacNote type="responsibility">Jane</transacNote>
-              <date>2007-00-22T00:00:00</date>
-            </transacGrp>
-            <transacGrp>
-              <transac type="transactionType">modification</transac>
-              <transacNote type="responsibility">John</transacNote>
-              <date>2007-00-23T00:00:00</date>
-            </transacGrp>
-            <note>This is a sample entry with some data categories at the term or language level</note>
-            <termNote type="partOfSpeech">noun</termNote>
-            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
-            <termNote type="grammaticalGender">masculine</termNote>
-            <termNote type="termType">fullForm</termNote>
-            <termNote type="geographicalUsage">en-US</termNote>
-            <admin type="source">Manufacturing Process Manual V2</admin>
-            <ref type="crossReference" target="c1">scheduled operation</ref>
-            <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web Site</xref>
-          </tig>
-        </langSet>
-      </termEntry>
-    </body>
-  </text>
-</martif>
+<?xml-stylesheet type="text/css" href="nice.css"?>
+<nicetbx type="TBX-Basic" xml:lang="en-US">
+  <header>
+    <titleRes>
+      <p>TESTTBX</p>
+    </titleRes>
+    <noteRes>
+      <p />
+    </noteRes>
+    <sourceRes>
+      <p>exported from myTerm (olanto.org) date: 2015-08-26 17:08:24</p>
+    </sourceRes>
+  </header>
+  <body>
+    <termEntry>
+      <idConcept>ID: c5</idConcept>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>e-mail</i>
+            </p>
+          </term>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>courriel</i>
+            </p>
+          </term>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: c6</idConcept>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>federated database</i>
+            </p>
+          </term>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Users and applications interface with the federated database managed by the federated server.</i>
+            </p>
+          </tcontext>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Users and applications interface with the federated database managed by the federated server.</i>
+            </p>
+          </tcontext>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>base de données fédérée</i>
+            </p>
+          </term>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Une base de données fédérée est une base de données répartie hétérogène constituée de données fédérées, et nécessite donc une architecture qui permet la communication entre les différentes sources de données.</i>
+            </p>
+          </tcontext>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Une base de données fédérée est une base de données répartie hétérogène constituée de données fédérées, et nécessite donc une architecture qui permet la communication entre les différentes sources de données.</i>
+            </p>
+          </tcontext>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: c7</idConcept>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>*** warning no code for: lbl.c.definition</e>
+            <i>corrective lenses used in eyeglasses to correct presbyopia and other disorders of accommodation, characterised by a gradient of increasing lens power, added to the wearer's correction for the other refractive errors.</i>
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>*** warning no code for: lbl.c.source_definition</e>
+            <i>Wikipedia</i>
+          </p>
+        </csource>
+      </descripGrp>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>progressive lens</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>preferredTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+        </tig>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>progressive addition lens</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <termType>
+            <p>
+              <e>*** warning no code for: lbl.t.type</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+        </tig>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>PAL</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>deprecatedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <termType>
+            <p>
+              <e>*** warning no code for: lbl.t.type</e>
+              <i>acronym</i>
+            </p>
+          </termType>
+        </tig>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>progressive power lens</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+        </tig>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>graduated lens</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>supersededTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>lentille progressive</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>*** warning no code for: lbl.t.gender</e>
+              <i>feminine</i>
+            </p>
+          </grammaticalGender>
+        </tig>
+      </langSet>
+      <langSet xml:lang="DE">
+        <idLang>Lang: DE</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>Gleitsichtglas</i>
+            </p>
+          </term>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>*** warning no code for: lbl.t.gender</e>
+              <i>masculine</i>
+            </p>
+          </grammaticalGender>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: c1</idConcept>
+      <subjectField>
+        <p>
+          <e>*** warning no code for: lbl.c.subject_field</e>
+          <i>manufacturing</i>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>*** warning no code for: lbl.c.definition</e>
+            <i>This is a sample definition at the entry level.</i>
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>*** warning no code for: lbl.c.source_definition</e>
+            <i>Terminology SIG</i>
+          </p>
+        </csource>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Jane</transacNote>
+        <date>2005-00-19T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">John</transacNote>
+        <date>2007-00-19T00:00:00</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>*** warning no code for: lbl.c.note</e>
+          <i>This is a sample entry with some data categories at the entry level.</i>
+        </p>
+      </cnote>
+      <p>crossReference: c2, unscheduled operation</p>
+      <p>externalCrossReference: http://www.lisa.org, LISA Web site</p>
+      <p>xGraphic: http://www.lisa.org/logo.gif, LISA logo</p>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>scheduled operation</i>
+            </p>
+          </term>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>*** warning no code for: lbl.t.context</e>
+                <i>One hour is required between scheduled operations.</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>*** warning no code for: lbl.t.source_context</e>
+                <i>Tivoli Storage Manager Administrator's Guide</i>
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>verb</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>preferredTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <grammaticalGender>
+            <p>
+              <e>*** warning no code for: lbl.t.gender</e>
+              <i>masculine</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>*** warning no code for: lbl.t.type</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <geographicalUsage>
+            <p>
+              <e>*** warning no code for: lbl.t.geo_usage</e>
+              <i>Canada</i>
+            </p>
+          </geographicalUsage>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>One hour is required between scheduled operations.</i>
+            </p>
+          </tcontext>
+          <tsource>
+            <p>
+              <e>*** warning no code for: lbl.t.source</e>
+              <i>IBM</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: c2</idConcept>
+      <subjectField>
+        <p>
+          <e>*** warning no code for: lbl.c.subject_field</e>
+          <i>manufacturing</i>
+        </p>
+      </subjectField>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <descrip type="definition">This is a sample definition at the language level. This one has no source information required therefore it is not embedded in a descripGrp.</descrip>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>unscheduled operation</i>
+            </p>
+          </term>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Unscheduled operations should be recorded in a log.</i>
+            </p>
+          </tcontext>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Jane</transacNote>
+            <date>2007-00-22T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">John</transacNote>
+            <date>2007-00-23T00:00:00</date>
+          </transacGrp>
+          <tnote>
+            <p>
+              <e>*** warning no code for: lbl.t.note</e>
+              <i>This is a sample entry with some data categories at the term or language level</i>
+            </p>
+          </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>*** warning no code for: lbl.t.part_of_speech</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>*** warning no code for: lbl.t.status</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <grammaticalGender>
+            <p>
+              <e>*** warning no code for: lbl.t.gender</e>
+              <i>masculine</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>*** warning no code for: lbl.t.type</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <geographicalUsage>
+            <p>
+              <e>*** warning no code for: lbl.t.geo_usage</e>
+              <i>en-US</i>
+            </p>
+          </geographicalUsage>
+          <tcontext>
+            <p>
+              <e>*** warning no code for: lbl.t.context</e>
+              <i>Unscheduled operations should be recorded in a log.</i>
+            </p>
+          </tcontext>
+          <tsource>
+            <p>
+              <e>*** warning no code for: lbl.t.source</e>
+              <i>Manufacturing Process Manual V2</i>
+            </p>
+          </tsource>
+          <p>crossReference: c1, scheduled operation</p>
+          <p>externalCrossReference: http://www.lisa.org, LISA Web Site</p>
+        </tig>
+      </langSet>
+    </termEntry>
+  </body>
+</nicetbx>

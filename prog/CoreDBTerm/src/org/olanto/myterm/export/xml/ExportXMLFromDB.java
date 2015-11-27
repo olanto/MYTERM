@@ -54,7 +54,11 @@ public class ExportXMLFromDB {
 
     public static void main(String[] args) {
         init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\xml\\export.properties");
-        doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "TESTTBX", true);
+    //   doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "TESTTBX","FR", true);
+
+   //  doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "CERN","EN", false);
+  
+     doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "DESAUSSURE","FR", true);
 
 
     }
@@ -63,7 +67,7 @@ public class ExportXMLFromDB {
         getProperties(propertiesFile);
     }
 
-    public static void doIt(JTextArea _logArea, String _outFileName, String _resourceName, boolean show) {
+    public static void doIt(JTextArea _logArea, String _outFileName, String _resourceName, String _language, boolean show) {
         resourceName = _resourceName;
         outFileName = _outFileName;
         logArea = _logArea;
@@ -71,6 +75,7 @@ public class ExportXMLFromDB {
         msg("File Generation XML\n");
         msg("CSS version: " + cssName);
         msg("rootName: " + rootName);
+        msg("language: " + _language);
         msg("exported file: " + outFileName + "\n");
         initRoot(rootName);
         racine = getRacine();
@@ -82,7 +87,7 @@ public class ExportXMLFromDB {
         resource = Queries.getResourceID(resourceName, TermEnum.AutoCreate.NO);
         JdomUtilities.msg("start exporting :");
         racine.addContent(GenerateXMLHeader.setHeader(cssName, rootName));
-        racine.addContent(GenerateXMLEntries.getTermsFromDB("FR"));
+        racine.addContent(GenerateXMLEntries.getTermsFromDB(_language));
 
 
         if (show) {

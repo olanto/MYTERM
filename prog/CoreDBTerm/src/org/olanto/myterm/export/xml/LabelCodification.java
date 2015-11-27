@@ -52,11 +52,12 @@ public class LabelCodification {
     }
     
     public static String  getMsg(String msg){
+        if (msg==null) return "";
         String msglang=lblcodif.get(msg);
         if (msglang==null){
             return "*** warning no code for: "+msg;
         }
-        return msglang;
+        return msglang+": ";
         
     }
             

@@ -2,11 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.olanto.myterm.coredb;
+package org.olanto.myterm.export.xml;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.olanto.myterm.coredb.Queries;
+import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Owners;
 import org.olanto.myterm.coredb.entityclasses.VjCodifications;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
@@ -15,7 +17,7 @@ import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityExcept
  *
  * @author simple
  */
-public class _TBX_test {
+public class TestCodification {
 
     public static void main(String[] args) {
         try {
@@ -62,7 +64,7 @@ public class _TBX_test {
                         
             TermDB.emf.close();
         } catch (Exception ex) {
-            Logger.getLogger(_TBX_test.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCodification.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

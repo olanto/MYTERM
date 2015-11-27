@@ -35,7 +35,6 @@ import org.olanto.myterm.coredb.entityclasses.Langsets;
 import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 
-
 /**
  * génére la partie fixe de l'entête du fichier.
  *
@@ -65,24 +64,43 @@ public class GenerateXMLEntries {
         for (Concepts con : listOfConcept) {
             Element termentry = makeElem("termEntry");
             if (con.getImportedref() == null) {
-                termentry.addContent(makeElem("idConcept").addContent( "ID: "+con.getIdConcept().toString()));
-            } else termentry.addContent(makeElem("idConcept").addContent( "ID: "+con.getImportedref()));
+                termentry.addContent(makeElem("idConcept").addContent("ID: " + con.getIdConcept().toString()));
+            } else {
+                termentry.addContent(makeElem("idConcept").addContent("ID: " + con.getImportedref()));
+            }
             addConceptElem(termentry, con);
             body.addContent(termentry);
             addLangset(termentry, con);
         }
     }
 
+    public static Element addXMLNice(Element elem, String tag, String lib, String content) {
+        Element child = makeElem(tag);
+        Element title = makeElem("e", LabelCodification.getMsg(lib));
+        Element cont = makeElem("i", content);
+        Element txt = makeElem("p");
+        txt.addContent(title);
+        txt.addContent(cont);
+        child.addContent(txt);
+
+        elem.addContent(child);
+        return child;
+    }
+
     public static void addConceptElem(Element termentry, Concepts con) {
         if (con.getSubjectField() != null) {
-            termentry.addContent(makeElem("descrip", con.getSubjectField()).setAttribute("type", "subjectField"));
+
+            //termentry.addContent(makeElem("descrip", con.getSubjectField()).setAttribute("type", "subjectField"));
+            addXMLNice(termentry, "subjectField", "lbl.c.subject_field", con.getSubjectField());
         }
         if (con.getConceptDefinition() != null) {
             Element descgrp = makeElem("descripGrp");
             termentry.addContent(descgrp);
-            descgrp.addContent(makeElem("descrip", con.getConceptDefinition()).setAttribute("type", "definition"));
+            //descgrp.addContent(makeElem("descrip", con.getConceptDefinition()).setAttribute("type", "definition"));
+            addXMLNice(descgrp, "cdefinition", "lbl.c.definition", con.getConceptDefinition());
             if (con.getConceptSourceDefinition() != null) {
-                descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
+                //descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
+                addXMLNice(descgrp, "csource", "lbl.c.source_definition", con.getConceptSourceDefinition());
             }
         }
         if (con.getCreateBy() != null) {
@@ -106,22 +124,24 @@ public class GenerateXMLEntries {
             }
         }
         if (con.getConceptNote() != null) {
-            termentry.addContent(makeElem("note", con.getConceptNote()));
-        }  
-        if (con.getCrossref()!= null) {
-            String ref=con.getCrossref().replace("\n", "");
-            String[] part=ref.split(";");
-            termentry.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+            //termentry.addContent(makeElem("note", con.getConceptNote()));
+            //descgrp.addContent(makeElem("admin", con.getConceptSourceDefinition()).setAttribute("type", "source"));
+            addXMLNice(termentry, "cnote", "lbl.c.note", con.getConceptNote());
         }
-       if (con.getExtcrossref()!= null) {
-            String ref=con.getExtcrossref().replace("\n", "");
-            String[] part=ref.split(";");
-            termentry.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        if (con.getCrossref() != null) {
+            String ref = con.getCrossref().replace("\n", "");
+            String[] part = ref.split(";");
+            termentry.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
-     if (con.getImage()!= null) {
-            String ref=con.getImage().replace("\n", "");
-            String[] part=ref.split(";");
-            termentry.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        if (con.getExtcrossref() != null) {
+            String ref = con.getExtcrossref().replace("\n", "");
+            String[] part = ref.split(";");
+            termentry.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
+        }
+        if (con.getImage() != null) {
+            String ref = con.getImage().replace("\n", "");
+            String[] part = ref.split(";");
+            termentry.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
 //            if (lan.getExtra()!=null){
 //                langset.addContent(makeElem("descrip",lan.getExtra()).setAttribute("type", "definition"));              
@@ -135,6 +155,7 @@ public class GenerateXMLEntries {
         List<Langsets> listOfLangsets = query.getResultList();
         for (Langsets lan : listOfLangsets) {
             Element langset = makeElem("langSet").setAttribute("lang", lan.getIdLanguage(), Namespace.XML_NAMESPACE);
+            langset.addContent(makeElem("idLang").addContent("Lang: " + lan.getIdLanguage().toString()));
             addLangsetElem(langset, lan);
             termentry.addContent(langset);
             addTerm(langset, lan);
@@ -158,23 +179,17 @@ public class GenerateXMLEntries {
         for (Terms ter : listOfTerms) {
             Element tig = makeElem("tig");
             langset.addContent(tig);
-            tig.addContent(makeElem("term", ter.getTermForm()));
+            //tig.addContent(makeElem("term", ter.getTermForm()));
+            addXMLNice(tig, "term", null, ter.getTermForm());
             addTermsetElem(tig, ter);
+            //langset.addContent(makeElem("hr"));
 
         }
     }
 
     public static void addTermsetElem(Element tig, Terms ter) {
-     
-        if (ter.getTermContext() != null && ter.getTermSourceContext() != null) {
-            Element descgrp = makeElem("descripGrp");
-            tig.addContent(descgrp);
-            descgrp.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
-            descgrp.addContent(makeElem("admin", ter.getTermSourceContext()).setAttribute("type", "source"));
-        }
-        if (ter.getTermContext() != null && ter.getTermSourceContext() == null) {
-            tig.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
-        }
+
+
         if (ter.getCreateBy() != null) {
             Element transgrp = makeElem("transacGrp");
             tig.addContent(transgrp);
@@ -195,72 +210,94 @@ public class GenerateXMLEntries {
                 transgrp.addContent(makeElem("date", getFormattedDate(ter.getLastmodified())));
             }
         }
-        if (ter.getTermNote() != null) {
-            tig.addContent(makeElem("note", ter.getTermNote()));
+        if (ter.getTermDefinition() != null) {
+            //tig.addContent(makeElem("descrip", ter.getTermDefinition()).setAttribute("type", "definition"));
+            addXMLNice(tig, "tdefinition", "lbl.t.definition", ter.getTermDefinition());
+        }
+        if (ter.getTermSourceDefinition() != null) {
+            //tig.addContent(makeElem("admin", ter.getTermSourceDefinition()).setAttribute("type", "sourceDefinition"));
+            addXMLNice(tig, "tsource_definition", "lbl.t.source_definition", ter.getTermSourceDefinition());
+        }
+        if (ter.getTermContext() != null && ter.getTermSourceContext() != null) {
+            Element descgrp = makeElem("descripGrp");
+            tig.addContent(descgrp);
+            //  descgrp.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
+            addXMLNice(descgrp, "tcontext", "lbl.t.context", ter.getTermContext());
+            //descgrp.addContent(makeElem("admin", ter.getTermSourceContext()).setAttribute("type", "source"));
+            addXMLNice(descgrp, "tsource_context", "lbl.t.source_context", ter.getTermSourceContext());
+
+        }
+        if (ter.getTermContext() != null && ter.getTermSourceContext() == null) {
+            //tig.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
+            addXMLNice(tig, "tcontext", "lbl.t.context", ter.getTermContext());
+        }
+        if (ter.getTermNote() != "") {
+            //tig.addContent(makeElem("note", ter.getTermNote()));
+            addXMLNice(tig, "tnote", "lbl.t.note", ter.getTermNote());
         }
         if (ter.getTermPartofspeech() != null) {
             //System.out.println("partOfSpeech"+ter.getTermPartofspeech());
-            tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+            //tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+            addXMLNice(tig, "tpartOfSpeech", "lbl.t.part_of_speech", ter.getTermPartofspeech());
         }
         if (ter.getTermAdminStatus() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermAdminStatus()).setAttribute("type", "administrativeStatus"));
+            //tig.addContent(makeElem("termNote", ter.getTermAdminStatus()).setAttribute("type", "administrativeStatus"));
+            addXMLNice(tig, "administrativeStatus", "lbl.t.status", ter.getTermAdminStatus());
         }
         if (ter.getTermGender() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermGender()).setAttribute("type", "grammaticalGender"));
+            //tig.addContent(makeElem("termNote", ter.getTermGender()).setAttribute("type", "grammaticalGender"));
+            addXMLNice(tig, "grammaticalGender", "lbl.t.gender", ter.getTermGender());
         }
         if (ter.getTermType() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermType()).setAttribute("type", "termType"));
+            //tig.addContent(makeElem("termNote", ter.getTermType()).setAttribute("type", "termType"));
+            addXMLNice(tig, "termType", "lbl.t.type", ter.getTermType());
         }
         if (ter.getTermGeoUsage() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
-        }
-        if (ter.getTermDefinition() != null) {
-            tig.addContent(makeElem("descrip", ter.getTermContext()).setAttribute("type", "context"));
-        }
-         if (ter.getTermDefinition() != null) {
-            tig.addContent(makeElem("descrip", ter.getTermDefinition()).setAttribute("type", "definition"));
-        }
-        if (ter.getTermDefinition() != null) {
-            tig.addContent(makeElem("admin", ter.getTermSourceDefinition()).setAttribute("type", "sourceDefinition"));
+            //tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
+            addXMLNice(tig, "geographicalUsage", "lbl.t.geo_usage", ter.getTermGeoUsage());
         }
         if (ter.getSup0() != null) {
-            tig.addContent(makeElem("termNote", ter.getSup0()).setAttribute("type", "sup0"));
+            //tig.addContent(makeElem("termNote", ter.getSup0()).setAttribute("type", "sup0"));
+            addXMLNice(tig, "sup0", "lbl.t.technical_note", ter.getSup0());
         }
         if (ter.getSup1() != null) {
-            tig.addContent(makeElem("termNote", ter.getSup1()).setAttribute("type", "sup1"));
+            //tig.addContent(makeElem("termNote", ter.getSup1()).setAttribute("type", "sup1"));
+            addXMLNice(tig, "sup1", "lbl.t.linguistic_note", ter.getSup1());
         }
         if (ter.getSup2() != null) {
             tig.addContent(makeElem("termNote", ter.getSup2()).setAttribute("type", "sup2"));
+            addXMLNice(tig, "sup2", "lbl.t.reference_note", ter.getSup2());
         }
         if (ter.getSup3() != null) {
-            tig.addContent(makeElem("termNote", ter.getSup3()).setAttribute("type", "sup3"));
+            //  tig.addContent(makeElem("termNote", ter.getSup3()).setAttribute("type", "sup3"));
+            addXMLNice(tig, "sup3", null, ter.getSup3());
         }
         if (ter.getSup4() != null) {
-            tig.addContent(makeElem("termNote", ter.getSup4()).setAttribute("type", "sup4"));
+            // tig.addContent(makeElem("termNote", ter.getSup4()).setAttribute("type", "sup4"));
+            addXMLNice(tig, "sup4", null, ter.getSup4());
+        }
+        if (ter.getTermUsage() != null) {
+            // tig.addContent(makeElem("termNote", ter.getTermUsage()).setAttribute("type", "usage"));
+            addXMLNice(tig, "tusage", "lbl.t.usage", ter.getTermUsage());
         }
         if (ter.getTermSource() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermGeoUsage()).setAttribute("type", "geographicalUsage"));
+            // tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
+            addXMLNice(tig, "tsource", "lbl.t.source", ter.getTermSource());
         }
-       if (ter.getTermSource() != null) {
-            tig.addContent(makeElem("termNote", ter.getTermUsage()).setAttribute("type", "usage"));
+        if (ter.getCrossref() != null) {
+            String ref = ter.getCrossref().replace("\n", "");
+            String[] part = ref.split(";");
+            tig.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
-       if (ter.getTermSource() != null) {
-            tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
+        if (ter.getExtcrossref() != null) {
+            String ref = ter.getExtcrossref().replace("\n", "");
+            String[] part = ref.split(";");
+            tig.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
-      if (ter.getCrossref()!= null) {
-            String ref=ter.getCrossref().replace("\n", "");
-            String[] part=ref.split(";");
-            tig.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
-        }
-       if (ter.getExtcrossref()!= null) {
-            String ref=ter.getExtcrossref().replace("\n", "");
-            String[] part=ref.split(";");
-            tig.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
-        }
-     if (ter.getImage()!= null) {
-            String ref=ter.getImage().replace("\n", "");
-            String[] part=ref.split(";");
-            tig.addContent(makeElem("xref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+        if (ter.getImage() != null) {
+            String ref = ter.getImage().replace("\n", "");
+            String[] part = ref.split(";");
+            tig.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
 
 //            if (lan.getExtra()!=null){

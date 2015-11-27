@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 import org.olanto.myterm.coredb.ManageResource;
 import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.export.tbx.ExportTBXFromDB;
+import org.olanto.myterm.export.xml.ExportXMLFromDB;
 import org.olanto.myterm.extractor.ConvertAndLoadIntoDB;
 import org.olanto.myterm.extractor.ModelEnum;
 import org.olanto.myterm.merge.MergeIntoDB;
@@ -54,6 +55,11 @@ public class MyTermGUI extends javax.swing.JFrame {
     }
   private void myInitMERGE() {
         PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaMERGE, 100));
+        System.setOut(logStream);
+        System.setErr(logStream);
+    }
+ private void myInitNICE() {
+        PrintStream logStream = new PrintStream(new OutputStreamForLog(logAreaNICE, 100));
         System.setOut(logStream);
         System.setErr(logStream);
     }
@@ -120,6 +126,17 @@ public class MyTermGUI extends javax.swing.JFrame {
         logAreaMERGE = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
         resourceNameINTO = new javax.swing.JTextField();
+        NICE = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        fileNameNICE = new javax.swing.JTextField();
+        resourceNameNICE = new javax.swing.JTextField();
+        fileChooseNICE = new javax.swing.JButton();
+        startNICE = new javax.swing.JButton();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        logAreaNICE = new javax.swing.JTextArea();
+        jLabel16 = new javax.swing.JLabel();
+        languageNICE = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +192,7 @@ public class MyTermGUI extends javax.swing.JFrame {
                     .addGroup(XMLLayout.createSequentialGroup()
                         .addComponent(resourceNameXML, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(typeChooserXML, 0, 354, Short.MAX_VALUE))
+                        .addComponent(typeChooserXML, 0, 413, Short.MAX_VALUE))
                     .addComponent(fileNameXML))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fileChooseXML))
@@ -269,7 +286,7 @@ public class MyTermGUI extends javax.swing.JFrame {
                             .addGroup(XML1Layout.createSequentialGroup()
                                 .addComponent(resourceNameOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(typeChooserOthers, 0, 354, Short.MAX_VALUE))
+                                .addComponent(typeChooserOthers, 0, 413, Short.MAX_VALUE))
                             .addComponent(fileNameOthers))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fileChooseOthers, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -311,7 +328,7 @@ public class MyTermGUI extends javax.swing.JFrame {
         OthersLayout.setHorizontalGroup(
             OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, OthersLayout.createSequentialGroup()
-                .addContainerGap(809, Short.MAX_VALUE)
+                .addContainerGap(868, Short.MAX_VALUE)
                 .addComponent(fileChooseModel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(OthersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +353,12 @@ public class MyTermGUI extends javax.swing.JFrame {
 
         jLabel8.setText("resource Name");
 
-        fileNameEXPORT.setText("C:/MYTERM/tests/Exported-TBX.xml");
+        fileNameEXPORT.setText("C:/MYTERM/Nice/Exported-Nice.xml");
+        fileNameEXPORT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileNameEXPORTActionPerformed(evt);
+            }
+        });
 
         resourceNameEXPORT.setText("TESTTBX");
         resourceNameEXPORT.addActionListener(new java.awt.event.ActionListener() {
@@ -375,14 +397,16 @@ public class MyTermGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(EXPORTLayout.createSequentialGroup()
+                        .addComponent(fileNameEXPORT)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fileChooseEXPORT))
+                    .addGroup(EXPORTLayout.createSequentialGroup()
                         .addComponent(resourceNameEXPORT, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 362, Short.MAX_VALUE))
-                    .addComponent(fileNameEXPORT))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fileChooseEXPORT))
+                        .addGap(288, 472, Short.MAX_VALUE))))
             .addGroup(EXPORTLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5))
+                .addComponent(jScrollPane5)
+                .addContainerGap())
         );
         EXPORTLayout.setVerticalGroup(
             EXPORTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +463,7 @@ public class MyTermGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(resourceNameREMOVE, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 363, Short.MAX_VALUE))
+                .addGap(0, 422, Short.MAX_VALUE))
             .addGroup(REMOVELayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6))
@@ -507,7 +531,7 @@ public class MyTermGUI extends javax.swing.JFrame {
                             .addComponent(resourceNameFROM, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(resourceNameINTO, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 371, Short.MAX_VALUE))
+                .addGap(0, 430, Short.MAX_VALUE))
             .addGroup(MERGELayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7))
@@ -534,6 +558,94 @@ public class MyTermGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("MERGE", MERGE);
 
+        jLabel14.setText("file Name");
+
+        jLabel15.setText("resource Name");
+
+        fileNameNICE.setText("C:/MYTERM/Nice/NICE-readable.xml");
+
+        resourceNameNICE.setText("TESTTBX");
+        resourceNameNICE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resourceNameNICEActionPerformed(evt);
+            }
+        });
+
+        fileChooseNICE.setText("...");
+        fileChooseNICE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooseNICEActionPerformed(evt);
+            }
+        });
+
+        startNICE.setText("Start Export");
+        startNICE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startNICEActionPerformed(evt);
+            }
+        });
+
+        logAreaNICE.setColumns(20);
+        logAreaNICE.setRows(5);
+        jScrollPane8.setViewportView(logAreaNICE);
+
+        jLabel16.setText("Label Language");
+
+        languageNICE.setText("EN");
+        languageNICE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                languageNICEActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout NICELayout = new javax.swing.GroupLayout(NICE);
+        NICE.setLayout(NICELayout);
+        NICELayout.setHorizontalGroup(
+            NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NICELayout.createSequentialGroup()
+                .addGroup(NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(startNICE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(NICELayout.createSequentialGroup()
+                        .addComponent(resourceNameNICE, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(languageNICE, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(256, 256, 256))
+                    .addComponent(fileNameNICE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fileChooseNICE))
+            .addGroup(NICELayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8))
+        );
+        NICELayout.setVerticalGroup(
+            NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NICELayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(fileNameNICE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileChooseNICE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(NICELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(resourceNameNICE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(languageNICE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startNICE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("NICE", NICE);
+
         jSplitPane1.setRightComponent(jTabbedPane1);
         jTabbedPane1.getAccessibleContext().setAccessibleName("IMPORT XML type");
         jTabbedPane1.getAccessibleContext().setAccessibleDescription("");
@@ -544,7 +656,7 @@ public class MyTermGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,7 +749,7 @@ public class MyTermGUI extends javax.swing.JFrame {
 
     private void startEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startEXPORTActionPerformed
         TermDB.restart();
-        myInitOthers();
+        myInitEXPORT();
         String fname = fileNameEXPORT.getText();
         String resource = resourceNameEXPORT.getText();
         System.out.println("Export:");
@@ -683,6 +795,38 @@ public class MyTermGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_resourceNameINTOActionPerformed
 
+    private void resourceNameNICEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resourceNameNICEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resourceNameNICEActionPerformed
+
+    private void fileChooseNICEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooseNICEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileChooseNICEActionPerformed
+
+    private void startNICEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startNICEActionPerformed
+        // TODO add your handling code here:
+              TermDB.restart();
+        myInitNICE();
+        String fname = fileNameNICE.getText();
+        String resource = resourceNameNICE.getText();
+       String language = languageNICE.getText();
+        System.out.println("Nice (Export):");
+        System.out.println("   Output File Name: " + fname);
+        System.out.println("   Resource Name: " + resource);
+        System.out.println("   Language for labels: " + language);
+        System.out.println("------------------------------------------------");
+        ExportXMLFromDB.doIt(logAreaEXPORT, fname, resource,language, false);
+
+    }//GEN-LAST:event_startNICEActionPerformed
+
+    private void fileNameEXPORTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameEXPORTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fileNameEXPORTActionPerformed
+
+    private void languageNICEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageNICEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_languageNICEActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -720,16 +864,19 @@ public class MyTermGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel EXPORT;
     private javax.swing.JPanel MERGE;
+    private javax.swing.JPanel NICE;
     private javax.swing.JPanel Others;
     private javax.swing.JPanel REMOVE;
     private javax.swing.JPanel XML;
     private javax.swing.JPanel XML1;
     private javax.swing.JButton fileChooseEXPORT;
     private javax.swing.JButton fileChooseModel;
+    private javax.swing.JButton fileChooseNICE;
     private javax.swing.JButton fileChooseOthers;
     private javax.swing.JButton fileChooseXML;
     private javax.swing.JTextField fileNameEXPORT;
     private javax.swing.JTextField fileNameModel;
+    private javax.swing.JTextField fileNameNICE;
     private javax.swing.JTextField fileNameOthers;
     private javax.swing.JTextField fileNameXML;
     private javax.swing.JLabel jLabel1;
@@ -737,6 +884,9 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -751,21 +901,26 @@ public class MyTermGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField languageNICE;
     private javax.swing.JTextArea logAreaEXPORT;
     private javax.swing.JTextArea logAreaMERGE;
+    private javax.swing.JTextArea logAreaNICE;
     private javax.swing.JTextArea logAreaOthers;
     private javax.swing.JTextArea logAreaREMOVE;
     private javax.swing.JTextArea logAreaXML;
     private javax.swing.JTextField resourceNameEXPORT;
     private javax.swing.JTextField resourceNameFROM;
     private javax.swing.JTextField resourceNameINTO;
+    private javax.swing.JTextField resourceNameNICE;
     private javax.swing.JTextField resourceNameOthers;
     private javax.swing.JTextField resourceNameREMOVE;
     private javax.swing.JTextField resourceNameXML;
     private javax.swing.JButton startEXPORT;
     private javax.swing.JButton startMERGE;
+    private javax.swing.JButton startNICE;
     private javax.swing.JButton startREMOVE;
     private javax.swing.JButton startUploadOthers;
     private javax.swing.JButton startUploadXML;
