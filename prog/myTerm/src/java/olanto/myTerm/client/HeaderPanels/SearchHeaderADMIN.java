@@ -49,7 +49,7 @@ public class SearchHeaderADMIN extends HorizontalPanel {
     public SearchHeaderADMIN(HashMap<String, String> sysMsg) {
         termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
         searchField = new TextBox();
-        dom = new DomainList();
+        dom = new DomainList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
@@ -65,7 +65,7 @@ public class SearchHeaderADMIN extends HorizontalPanel {
         add(new HTML("&nbsp;"));
         add(langSrc);
         add(new HTML("&nbsp;"));
-        rsrc = new ResourcesList();
+        rsrc = new ResourcesList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));
         add(rsrc);

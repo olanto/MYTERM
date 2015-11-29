@@ -89,7 +89,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         rl = rsrc;
         setStyleName("conceptForm");
         add(cform);
-        sf = new DomainList(isEdited);
+        sf = new DomainList(isEdited, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         text_def = new TextAreaMyTerm(GuiConstant.C_DEFINITION, sFields, isEdited);
         text_sdef = new TextAreaMyTerm(GuiConstant.C_SOURCE_DEFINITION, sFields, isEdited);
         text_nt = new TextAreaMyTerm(GuiConstant.C_NOTE, sFields, isEdited);

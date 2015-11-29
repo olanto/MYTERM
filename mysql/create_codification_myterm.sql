@@ -81,6 +81,9 @@ insert into codes values ('msg','tab.redactionPanel','Workspace',null);
 insert into codes values ('msg','tab.revisionPanel','To approve',null);
 insert into codes values ('msg','tab.adminPanel','Administration',null);
 
+-- Values of seraches with all values
+insert into codes values ('msg','msg.value.all','ALL',null);
+
 insert into codes values ('msg','btn.addTerm','ADD TERM',null);
 insert into codes values ('msg','btn.delete','DELETE',null);
 insert into codes values ('msg','btn.save','SAVE',null);

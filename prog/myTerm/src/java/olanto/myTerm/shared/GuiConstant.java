@@ -210,6 +210,7 @@ public class GuiConstant implements IsSerializable {
     public static final String MSG_TARGET_LANG = "targetLanguage";
     public static final String MSG_RESOURCE = "msg.resource";
     public static final String MSG_DOMAIN = "msg.domain";
+    public static final String MSG_ALL_VALUE = "msg.value.all";
 
     public GuiConstant() {
     }

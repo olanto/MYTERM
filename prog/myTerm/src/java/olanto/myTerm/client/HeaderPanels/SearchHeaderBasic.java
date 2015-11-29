@@ -54,7 +54,7 @@ public class SearchHeaderBasic extends HorizontalPanel {
         searchField = new TextBox();
         langSrc = new LangList("source");
         langTgt = new LangList("target");
-        dom = new DomainList();
+        dom = new DomainList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         btnSend = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
@@ -74,10 +74,10 @@ public class SearchHeaderBasic extends HorizontalPanel {
         add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));
         if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         } else {
             Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_READER, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         }
         add(rsrc);
         add(new HTML("&nbsp;"));

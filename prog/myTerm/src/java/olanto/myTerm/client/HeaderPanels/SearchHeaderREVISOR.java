@@ -51,7 +51,7 @@ public class SearchHeaderREVISOR extends HorizontalPanel {
     public SearchHeaderREVISOR(long ownerID, HashMap<String, String> sysMsg) {
         termLabel = new Label(sysMsg.get(GuiConstant.MSG_SEARCH_INPUT));
         searchField = new TextBox();
-        dom = new DomainList();
+        dom = new DomainList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         btnSearch = new Button(sysMsg.get(GuiConstant.BTN_SEARCH));
         setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
         add(termLabel);
@@ -68,10 +68,10 @@ public class SearchHeaderREVISOR extends HorizontalPanel {
         add(langSrc);
         add(new HTML("&nbsp;"));
         if (MainEntryPoint.userDTO != null) {
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         } else {
             Window.alert("The user Id is not set correctly, Try to reload the page");
-            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR);
+            rsrc = new ResourcesList(MainEntryPoint.userDTO.getEmail(), GuiConstant.PROFILE_REVISOR, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         }
         add(new Label(sysMsg.get(GuiConstant.MSG_RESOURCE)));
         add(new HTML("&nbsp;"));

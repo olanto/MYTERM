@@ -33,6 +33,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -46,7 +47,7 @@ public class DomainList extends ListBox {
     private final myTermServiceAsync domService = GWT.create(myTermService.class);
     private AsyncCallback<Collection<DomainDTO>> domCallback;
 
-    public DomainList() {
+    public DomainList(String all) {
         super();
         domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
@@ -75,11 +76,11 @@ public class DomainList extends ListBox {
                 MyTermCookies.updateCookie(MyTermCookiesNamespace.Domain, getItemText(getSelectedIndex()));
             }
         });
-        addItem(" ", " ");
+        addItem(all, " ");
         domService.getDomains(domCallback);
     }
 
-    public DomainList(final BooleanWrap isEdited) {
+    public DomainList(final BooleanWrap isEdited, String all) {
         super();
         domCallback = new AsyncCallback<Collection<DomainDTO>>() {
             @Override
@@ -108,7 +109,7 @@ public class DomainList extends ListBox {
                 isEdited.setVal(true);
             }
         });
-        addItem(" ", " ");
+        addItem(all, " ");
         domService.getDomains(domCallback);
     }
 }

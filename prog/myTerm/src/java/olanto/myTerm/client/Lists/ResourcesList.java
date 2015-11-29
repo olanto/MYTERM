@@ -48,7 +48,7 @@ public class ResourcesList extends ListBox {
     private ArrayList<String> rsrclist = new ArrayList<>();
     private ArrayList<Long> rsrcIDlist = new ArrayList<>();
 
-    public ResourcesList(String ownerMailing, final String role) {
+    public ResourcesList(String ownerMailing, final String role, final String all) {
         super();
         RsrcCallback = new AsyncCallback<Collection<ResourceDTO>>() {
             @Override
@@ -61,8 +61,8 @@ public class ResourcesList extends ListBox {
                 int i = 0;
                 if (result != null) {
                     if (role.equals("READER")) {
-                        addItem("ALL", "-1");
-                        rsrclist.add("ALL");
+                        addItem(all, "-1");
+                        rsrclist.add(all);
                         rsrcIDlist.add(-1l);
                         i++;
                     }
@@ -91,7 +91,7 @@ public class ResourcesList extends ListBox {
         rsrcService.getResourcesByOwner(ownerMailing, role, RsrcCallback);
     }
 
-    public ResourcesList() {
+    public ResourcesList(final String all) {
         super();
         RsrcCallback = new AsyncCallback<Collection<ResourceDTO>>() {
             @Override
@@ -102,8 +102,8 @@ public class ResourcesList extends ListBox {
             @Override
             public void onSuccess(Collection<ResourceDTO> result) {
                 if (result != null) {
-                    addItem(" ", "-1");
-                    rsrclist.add(" ");
+                    addItem(all, "-1");
+                    rsrclist.add(all);
                     rsrcIDlist.add(-1l);
                     ArrayList<ResourceDTO> res = new ArrayList<>();
                     if (res.addAll(result)) {

@@ -46,7 +46,7 @@ public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
 
     public SearchHeaderUSER_RESOURCE(HashMap<String, String> sysMsg) {
         ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG);
-        rsrcList = new ResourcesList();
+        rsrcList = new ResourcesList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         ownerList = new OwnersList();
         btnAdd = new Button(sysMsg.get(GuiConstant.BTN_ADD));
         btnDispAll = new Button(sysMsg.get(GuiConstant.BTN_DISPLAY_ALL));
@@ -71,12 +71,12 @@ public class SearchHeaderUSER_RESOURCE extends HorizontalPanel {
         setStyleName("searchMenu");
     }
 
-    public void refresh() {
+    public void refresh(HashMap<String, String> sysMsg) {
         int i = rsrcList.getSelectedIndex();
         int j = ownerList.getSelectedIndex();
         remove(rsrcList);
         remove(ownerList);
-        rsrcList = new ResourcesList();
+        rsrcList = new ResourcesList(sysMsg.get(GuiConstant.MSG_ALL_VALUE));
         ownerList = new OwnersList();
         this.insert(ownerList, 2);
         this.insert(rsrcList, 7);
