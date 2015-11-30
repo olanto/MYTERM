@@ -1,0 +1,10 @@
+﻿<model>
+   <separator>TAB</separator>
+   <nbcolumns>2</nbcolumns><!--minimum-->
+   <skipline>0</skipline>
+   <language>
+        <code>EN</code>
+		<position>0;termForm</position>
+		<position>1;termDefinition</position>
+	</language>
+</model>
