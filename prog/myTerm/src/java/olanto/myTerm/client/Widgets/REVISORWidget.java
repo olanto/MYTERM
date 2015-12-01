@@ -330,7 +330,7 @@ public class REVISORWidget extends VerticalPanel {
         conceptEntryDTO.concept.setIdResource(searchMenu.rsrc.getIDResource(searchMenu.rsrc.getSelectedIndex()));
         conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
         conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
+        conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()));
         conceptEntryDTO.addTerm(searchMenu.searchField.getText().replace("%", ""), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e', ownerID);
     }
 
@@ -463,7 +463,7 @@ public class REVISORWidget extends VerticalPanel {
         if ((lan == null) || (lan.isEmpty())) {
             lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
         }
-        getService().getApproveElements("", lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
+        getService().getApproveElements("", lan, searchMenu.langSrc.getLangIDs(), searchMenu.rsrc.getResourcesIDs(), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 
     public void commandPageOther(String action) {
@@ -483,7 +483,7 @@ public class REVISORWidget extends VerticalPanel {
         searchMenu.btnSearch.setEnabled(false);
         resultsPanel.sideRes.clear();
         MainEntryPoint.statusPanel.setMessage("warning", "Retrieving entries, please wait...");
-        getService().getApproveElements(searchMenu.searchField.getText().replace("*", "%"), lang, lsList, rsList, searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
+        getService().getApproveElements(searchMenu.searchField.getText().replace("*", "%"), lang, lsList, rsList, searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), ownerID, workspaceCallback);
     }
 
     private void commandSaved() {

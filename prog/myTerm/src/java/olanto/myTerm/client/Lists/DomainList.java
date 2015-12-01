@@ -33,7 +33,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -61,7 +60,7 @@ public class DomainList extends ListBox {
                 if (res.addAll(result)) {
                     int i = 0;
                     for (DomainDTO s : res) {
-                        addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                        addItem(s.getDomainDefaultName(), s.getDomainDefaultName());
                         if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                             i = res.indexOf(s);
                         }
@@ -94,7 +93,7 @@ public class DomainList extends ListBox {
                 if (res.addAll(result)) {
                     int i = 0;
                     for (DomainDTO s : res) {
-                        addItem(s.getDomainDefaultName(), s.getIdDomain().toString());
+                        addItem(s.getDomainDefaultName(),s.getDomainDefaultName());
                         if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                             i = res.indexOf(s);
                         }

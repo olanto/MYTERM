@@ -221,7 +221,7 @@ public class REDACTORWidget extends VerticalPanel {
                     lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
                 }
                 if ((srch != null) && (!srch.isEmpty())) {
-                    getService().getAddResult(srch, lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
+                    getService().getAddResult(srch, lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallbackWS);
                 }
                 History.newItem("loaded");
             }
@@ -405,7 +405,7 @@ public class REDACTORWidget extends VerticalPanel {
         conceptEntryDTO.concept.setIdResource(searchMenu.rsrc.getIDResource(searchMenu.rsrc.getSelectedIndex()));
         conceptEntryDTO.concept.setLastmodified(new Date(System.currentTimeMillis()));
         conceptEntryDTO.concept.setLastmodifiedBy(BigInteger.valueOf(ownerID));
-        conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()));
+        conceptEntryDTO.concept.setSubjectField(searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()));
         conceptEntryDTO.addTerm(searchMenu.searchField.getText().replace("%", ""), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), 'e', ownerID);
     }
 
@@ -573,7 +573,7 @@ public class REDACTORWidget extends VerticalPanel {
             if ((lan == null) || (lan.isEmpty())) {
                 lan = Cookies.getCookie(MyTermCookiesNamespace.MyTermIDlangSrc);
             }
-            getService().getAddResult(searchMenu.searchField.getText().replace("*", "%"), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getItemText(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
+            getService().getAddResult(searchMenu.searchField.getText().replace("*", "%"), lan, searchMenu.rsrc.getValue(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), ownerID, termAddCallback);
         }
     }
 
