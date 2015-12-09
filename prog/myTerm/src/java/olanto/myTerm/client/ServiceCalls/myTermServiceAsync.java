@@ -87,7 +87,7 @@ public interface myTermServiceAsync {
 
     public void getTermGender(String langID, AsyncCallback<Collection<String>> asyncCallback);
 
-    public void getOwnerRoles(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getOwnerRoles(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
     public void getOwnerStatus(String langID, AsyncCallback<Collection<String>> asyncCallback);
 

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "VjCodifications.findTermTypesByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'term_type' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findTermPOSByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType LIKE 'term_partofspeech' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findTermGenderByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'term_gender' AND v.idLanguage = :idLanguage"),
-    @NamedQuery(name = "VjCodifications.findOwnerRolesByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'role' AND v.idLanguage = :idLanguage"),
+    @NamedQuery(name = "VjCodifications.findOwnerRolesByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType LIKE 'role' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findOwnerStatusByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'owner_status' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findResourcePrivacyByLanguage", query = "SELECT v.codeValueLang FROM VjCodifications v WHERE v.codeType LIKE 'privacy' AND v.idLanguage = :idLanguage"),
 //    @NamedQuery(name = "VjCodifications.findByIdLanguage", query = "SELECT v FROM VjCodifications v WHERE v.idLanguage = :idLanguage"),

@@ -89,7 +89,7 @@ public interface myTermService extends RemoteService {
 
     public Collection<String> getTermGender(String langID);
 
-    public Collection<String> getOwnerRoles(String langID);
+    public Map<String, String> getOwnerRoles(String langID);
 
     public Collection<String> getOwnerStatus(String langID);
 

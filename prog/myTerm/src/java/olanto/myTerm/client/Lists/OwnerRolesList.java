@@ -27,7 +27,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Map;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -40,21 +40,21 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class OwnerRolesList extends ListBox {
 
     private myTermServiceAsync rolesService = GWT.create(myTermService.class);
-    private AsyncCallback<Collection<String>> rolesCallback;
+    private AsyncCallback<Map<String, String>> rolesCallback;
 
     public OwnerRolesList(String langID) {
         super();
-        rolesCallback = new AsyncCallback<Collection<String>>() {
+        rolesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner roles");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
+            public void onSuccess(Map<String, String> result) {
                 addItem(" ", " ");
-                for (String s : result) {
-                    addItem(s, s);
+                for (String s : result.keySet()) {
+                    addItem(s, result.get(s));
                 }
                 setSelectedIndex(0);
             }
@@ -64,20 +64,20 @@ public class OwnerRolesList extends ListBox {
 
     public OwnerRolesList(String langID, final String currentRole, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        rolesCallback = new AsyncCallback<Collection<String>>() {
+        rolesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner roles");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
+            public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
-                if (res.addAll(result)) {
+                if (res.addAll(result.keySet())) {
                     int i = 0;
                     for (String s : res) {
-                        addItem(s, s);
-                        if (s.equalsIgnoreCase(currentRole)) {
+                        addItem(s, result.get(s));
+                        if (result.get(s).equalsIgnoreCase(currentRole)) {
                             i = res.indexOf(s);
                         }
                     }
@@ -97,16 +97,16 @@ public class OwnerRolesList extends ListBox {
 
     public OwnerRolesList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        rolesCallback = new AsyncCallback<Collection<String>>() {
+        rolesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner roles");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
-                for (String s : result) {
-                    addItem(s, s);
+            public void onSuccess(Map<String, String> result) {
+                for (String s : result.keySet()) {
+                    addItem(s, result.get(s));
                 }
                 setSelectedIndex(0);
             }

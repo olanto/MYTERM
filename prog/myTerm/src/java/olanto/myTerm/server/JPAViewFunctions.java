@@ -774,12 +774,12 @@ public class JPAViewFunctions {
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getOwnerRoles(String langID) {
+    public static List<VjCodifications> getOwnerRoles(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findOwnerRolesByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
             return result;
         }
         return Collections.EMPTY_LIST;

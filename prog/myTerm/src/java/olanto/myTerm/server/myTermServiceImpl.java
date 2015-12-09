@@ -695,7 +695,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public Map<String, String> getTermPOS(String langID) {
         Map<String, String> map = new HashMap<>();
-        for(VjCodifications codes : JPAViewFunctions.getTermPOS(langID)){
+        for (VjCodifications codes : JPAViewFunctions.getTermPOS(langID)) {
             map.put(codes.getCodeValueLang(), codes.getCodeValue());
         }
         return map;
@@ -721,8 +721,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getOwnerRoles(String langID) {
-        return JPAViewFunctions.getOwnerRoles(langID);
+    public Map<String, String> getOwnerRoles(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for (VjCodifications codes : JPAViewFunctions.getOwnerRoles(langID)) {
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override
