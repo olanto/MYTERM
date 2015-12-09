@@ -83,7 +83,7 @@ public interface myTermServiceAsync {
 
     public void getTermTypes(String langID, AsyncCallback<Collection<String>> asyncCallback);
 
-    public void getTermPOS(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getTermPOS(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
     public void getTermGender(String langID, AsyncCallback<Collection<String>> asyncCallback);
 

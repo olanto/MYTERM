@@ -746,12 +746,12 @@ public class JPAViewFunctions {
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getTermPOS(String langID) {
+    public static List<VjCodifications> getTermPOS(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findTermPOSByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
 //            for (String s : result) {
 //                System.out.println(s);
 //            }

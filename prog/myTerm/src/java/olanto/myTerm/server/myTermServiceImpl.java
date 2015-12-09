@@ -693,8 +693,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getTermPOS(String langID) {
-        return JPAViewFunctions.getTermPOS(langID);
+    public Map<String, String> getTermPOS(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for(VjCodifications codes : JPAViewFunctions.getTermPOS(langID)){
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override
