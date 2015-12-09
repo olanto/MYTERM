@@ -81,17 +81,17 @@ public interface myTermServiceAsync {
 
     public void getSysMsgByLang(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
-    public void getTermTypes(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getTermTypes(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
     public void getTermPOS(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
-    public void getTermGender(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getTermGender(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
     public void getOwnerRoles(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
-    public void getOwnerStatus(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getOwnerStatus(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
-    public void getResourcePrivacy(String langID, AsyncCallback<Collection<String>> asyncCallback);
+    public void getResourcePrivacy(String langID, AsyncCallback<Map<String, String>> asyncCallback);
 
     public void getOwners(AsyncCallback<Collection<OwnerDTO>> asyncCallback);
 

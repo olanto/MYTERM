@@ -688,8 +688,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getTermTypes(String langID) {
-        return JPAViewFunctions.getTermTypes(langID);
+    public Map<String, String> getTermTypes(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for (VjCodifications codes : JPAViewFunctions.getTermTypes(langID)) {
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override
@@ -702,8 +706,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getTermGender(String langID) {
-        return JPAViewFunctions.getTermGender(langID);
+    public Map<String, String> getTermGender(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for (VjCodifications codes : JPAViewFunctions.getTermGender(langID)) {
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override
@@ -730,8 +738,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getOwnerStatus(String langID) {
-        return JPAViewFunctions.getOwnerStatus(langID);
+    public Map<String, String> getOwnerStatus(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for (VjCodifications codes : JPAViewFunctions.getOwnerStatus(langID)) {
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override
@@ -763,8 +775,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public Collection<String> getResourcePrivacy(String langID) {
-        return JPAViewFunctions.getResourcePrivacy(langID);
+    public Map<String, String> getResourcePrivacy(String langID) {
+        Map<String, String> map = new HashMap<>();
+        for (VjCodifications codes : JPAViewFunctions.getResourcePrivacy(langID)) {
+            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+        }
+        return map;
     }
 
     @Override

@@ -28,6 +28,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
@@ -40,21 +41,21 @@ import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
 public class OwnerStatusList extends ListBox {
 
     private myTermServiceAsync ownerStatusService = GWT.create(myTermService.class);
-    private AsyncCallback<Collection<String>> ownerStatusCallback;
+    private AsyncCallback<Map<String, String>> ownerStatusCallback;
 
 
     public OwnerStatusList(String langID) {
         super();
-        ownerStatusCallback = new AsyncCallback<Collection<String>>() {
+        ownerStatusCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner status");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
+            public void onSuccess(Map<String, String> result) {
                 addItem(" ", " ");
-                for (String s : result) {
+                for (String s : result.keySet()) {
                     addItem(s, s);
                 }
                 setSelectedIndex(0);
@@ -65,20 +66,20 @@ public class OwnerStatusList extends ListBox {
 
     public OwnerStatusList(String langID, final String currentStatus, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        ownerStatusCallback = new AsyncCallback<Collection<String>>() {
+        ownerStatusCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner status");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
+            public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
-                if (res.addAll(result)) {
+                if (res.addAll(result.keySet())) {
                     int i = 0;
                     for (String s : res) {
-                        addItem(s, s);
-                        if (s.equalsIgnoreCase(currentStatus)) {
+                        addItem(s, result.get(s));
+                        if (result.get(s).equalsIgnoreCase(currentStatus)) {
                             i = res.indexOf(s);
                         }
                     }
@@ -98,16 +99,16 @@ public class OwnerStatusList extends ListBox {
 
     public OwnerStatusList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        ownerStatusCallback = new AsyncCallback<Collection<String>>() {
+        ownerStatusCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of owner status");
             }
 
             @Override
-            public void onSuccess(Collection<String> result) {
-                for (String s : result) {
-                    addItem(s, s);
+            public void onSuccess(Map<String, String> result) {
+                for (String s : result.keySet()) {
+                    addItem(s, result.get(s));
                 }
                 setSelectedIndex(0);
             }

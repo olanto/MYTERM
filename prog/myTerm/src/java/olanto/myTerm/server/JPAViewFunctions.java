@@ -732,12 +732,12 @@ public class JPAViewFunctions {
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getTermTypes(String langID) {
+    public static List<VjCodifications> getTermTypes(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findTermTypesByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
 //            for (String s : result) {
 //                System.out.println(s);
 //            }
@@ -760,12 +760,12 @@ public class JPAViewFunctions {
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getTermGender(String langID) {
+    public static List<VjCodifications> getTermGender(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findTermGenderByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
 //            for (String s : result) {
 //                System.out.println(s);
 //            }
@@ -785,23 +785,23 @@ public class JPAViewFunctions {
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getOwnerStatus(String langID) {
+    public static List<VjCodifications> getOwnerStatus(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findOwnerStatusByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
             return result;
         }
         return Collections.EMPTY_LIST;
     }
 
-    public static List<String> getResourcePrivacy(String langID) {
+    public static List<VjCodifications> getResourcePrivacy(String langID) {
         init();
         if (!langID.isEmpty()) {
             Query query = em.createNamedQuery("VjCodifications.findResourcePrivacyByLanguage");
             query.setParameter("idLanguage", langID);
-            List<String> result = query.getResultList();
+            List<VjCodifications> result = query.getResultList();
             return result;
         }
         return Collections.EMPTY_LIST;

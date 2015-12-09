@@ -83,17 +83,17 @@ public interface myTermService extends RemoteService {
 
     public Map<String, String> getSysMsgByLang(String langID);
 
-    public Collection<String> getTermTypes(String langID);
+    public Map<String, String> getTermTypes(String langID);
 
     public Map<String, String> getTermPOS(String langID);
 
-    public Collection<String> getTermGender(String langID);
+    public Map<String, String> getTermGender(String langID);
 
     public Map<String, String> getOwnerRoles(String langID);
 
-    public Collection<String> getOwnerStatus(String langID);
+    public Map<String, String> getOwnerStatus(String langID);
 
-    public Collection<String> getResourcePrivacy(String langID);
+    public Map<String, String> getResourcePrivacy(String langID);
 
     public OwnerDTO getOwnerDetails(long ownerID);
 
