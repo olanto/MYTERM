@@ -6,8 +6,8 @@ sourceRes { width: 100%; display: block; font-size: 10pt; font-weight: bold; tex
 idConcept { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: center; color: #000000; background-color: #cccccc; padding: 5px; margin-bottom: 10px; }
 idLang { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: left; color: #000000; background-color: #eeeeee; padding: 5px; margin-bottom: 10px; }
 transacGrp { display: none; }
-term{font-size: 16pt;color: blue; }
-
+term{font-size: 16pt;color: red; }
+{}
 seg { display: block; clear: both; margin: 0; padding: 0; height: 6px; }
 src { float: left; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }
 tgt { float: right; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }

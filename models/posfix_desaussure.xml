@@ -9,9 +9,4 @@
 		<position>2;termNote</position>
 		<position>3;termUsage</position>
 	</language>
-<!--
-    <concept>
-		<position>3;conceptNote</position>
-	</concept>
--->
 </model>
