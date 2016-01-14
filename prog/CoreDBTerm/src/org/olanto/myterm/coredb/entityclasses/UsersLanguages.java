@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "users_languages")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UsersLanguages.findAll", query = "SELECT u FROM UsersLanguages u"),
+    @NamedQuery(name = "UsersLanguages.findAll", query = "SELECT u FROM UsersLanguages u ORDER BY u.idLanguage, u.idOwner"),
     @NamedQuery(name = "UsersLanguages.findByIdLink", query = "SELECT u FROM UsersLanguages u WHERE u.idLink = :idLink"),
     @NamedQuery(name = "UsersLanguages.findByIdLanguage", query = "SELECT u FROM UsersLanguages u WHERE u.idLanguage = :idLanguage"),
     @NamedQuery(name = "UsersLanguages.findByIdOwner", query = "SELECT u FROM UsersLanguages u WHERE u.idOwner = :idOwner")})

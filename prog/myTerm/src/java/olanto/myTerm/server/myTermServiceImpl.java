@@ -256,7 +256,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     }
 
     @Override
-    public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID) {
+    public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
         if ((sysMsgsrv == null) || (sysMsgsrv.isEmpty())) {
             sysMsgsrv = new HashMap<>();
@@ -286,10 +286,10 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</tr>");
         result.append("<tr>");
         result.append("<td>")
-                .append(JPAViewFunctions.getTermsInfo(conceptID, langS, sysMsgsrv, sysFieldsrv))
+                .append(JPAViewFunctions.getTermsInfo(conceptID, langS, sysMsgsrv, sysFieldsrv, interfaceLang))
                 .append("</td>");
         result.append("<td>")
-                .append(JPAViewFunctions.getTermsInfo(conceptID, langT, sysMsgsrv, sysFieldsrv))
+                .append(JPAViewFunctions.getTermsInfo(conceptID, langT, sysMsgsrv, sysFieldsrv, interfaceLang))
                 .append("</td>");
         result.append("</tr>");
         result.append("</table>");

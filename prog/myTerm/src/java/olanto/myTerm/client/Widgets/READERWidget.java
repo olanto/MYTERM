@@ -40,6 +40,7 @@ import java.util.HashMap;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.shared.GuiConstant;
 
 /**
  * Search interface class using the myTermService service.
@@ -90,7 +91,7 @@ public class READERWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new HTML(result));
-                getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, termsCallback);
+                getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID,GuiConstant.INTERFACE_LANG, termsCallback);
             }
 
             @Override

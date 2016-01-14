@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -60,7 +61,7 @@ public class JPAViewFunctions {
         }
     }
 
-    public static String getTermsInfo(long conceptID, String lang, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv) {
+    public static String getTermsInfo(long conceptID, String lang, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv, String interfaceLang) {
         init();
         Query query = em.createNamedQuery("VjConceptdetail.findByIdConceptAndLanguage");
         query.setParameter("idConcept", conceptID);
@@ -73,8 +74,8 @@ public class JPAViewFunctions {
         for (VjConceptdetail res : resultQ) {
             Terms t = Queries.getTermByID(res.getIdTerm());
             result.append("<tr>");
-            String first = getFirstTermInfo(t, sysMsgsrv, sysFieldsrv);
-            String second = getSecondTermInfo(t, sysMsgsrv, sysFieldsrv);
+            String first = getFirstTermInfo(t, sysMsgsrv, sysFieldsrv, interfaceLang);
+            String second = getSecondTermInfo(t, sysMsgsrv, sysFieldsrv, interfaceLang);
             if (!first.isEmpty()) {
                 result.append("<td>").append(first).append("</td>");
             }
@@ -90,7 +91,7 @@ public class JPAViewFunctions {
         return result.toString();
     }
 
-    private static String getFirstTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv) {
+    private static String getFirstTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
         if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibility())) {
             result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(": </span>").append(t.getTermForm()).append("<br/>");
@@ -112,10 +113,12 @@ public class JPAViewFunctions {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(": </span>").append(t.getTermNote()).append("<br/>");
         }
         if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_POS).getVisibility())) {
-            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(": </span>").append(t.getTermPartofspeech()).append("<br/>");
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(": </span>").append(
+            DecodeCodeValue(interfaceLang,"term_partofspeech", t.getTermPartofspeech())).append("<br/>");
         }
         if ((t.getTermType() != null) && (!t.getTermType().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TYPE).getVisibility())) {
-            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(": </span>").append(t.getTermType()).append("<br/>");
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(": </span>").append(
+                    DecodeCodeValue(interfaceLang,"term_type", t.getTermType())).append("<br/>");
         }
         if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_USAGE).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_USAGE)).append(": </span>").append(t.getTermUsage()).append("<br/>");
@@ -123,19 +126,19 @@ public class JPAViewFunctions {
         if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(": </span>").append(t.getTermContext()).append("<br/>");
         }
-         if ((t.getSup0()!= null) && (!t.getSup0().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TECH_NOTE).getVisibility())) {
+        if ((t.getSup0() != null) && (!t.getSup0().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TECH_NOTE).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TECH_NOTE)).append(": </span>").append(t.getSup0()).append("<br/>");
         }
-          if ((t.getSup1()!= null) && (!t.getSup1().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_LING_NOTE).getVisibility())) {
+        if ((t.getSup1() != null) && (!t.getSup1().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_LING_NOTE).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LING_NOTE)).append(": </span>").append(t.getSup1()).append("<br/>");
         }
-           if ((t.getSup2() != null) && (!t.getSup2().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_REFERENCE_NOTE).getVisibility())) {
+        if ((t.getSup2() != null) && (!t.getSup2().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_REFERENCE_NOTE).getVisibility())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_REFERENCE_NOTE)).append(": </span>").append(t.getSup2()).append("<br/>");
         }
         return result.toString();
     }
 
-    private static String getSecondTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv) {
+    private static String getSecondTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
         if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibility())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
@@ -169,7 +172,8 @@ public class JPAViewFunctions {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(": </span>").append(t.getExtcrossref()).append("<br/>");
         }
         if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibility())) {
-            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(": </span>").append(t.getTermGender()).append("<br/>");
+            result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(": </span>").append(
+                    DecodeCodeValue(interfaceLang,"term_gender",t.getTermGender())).append("<br/>");
         }
         if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibility())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(": </span>").append(t.getTermGeoUsage()).append("<br/>");
@@ -758,6 +762,26 @@ public class JPAViewFunctions {
             return result;
         }
         return Collections.EMPTY_LIST;
+    }
+
+    public static String DecodeCodeValue(String interfaceLang, String codeType, String codeValue) {
+        init();
+        //System.out.println("INTERFACE_LANG: " + interfaceLang + ", codeType:" + codeType + ", codeValue:" + codeValue);
+        if (!interfaceLang.isEmpty()) {
+            Query query = em.createNamedQuery("VjCodifications.findFieldsByValues");
+            query.setParameter("idLanguage", interfaceLang);
+            query.setParameter("codeType", codeType);
+            query.setParameter("codeValue", codeValue);
+            List<VjCodifications> result = query.getResultList();
+            //System.out.println("result size: " + result.size());
+            if (result.size() != 1) {
+
+                return codeValue;
+            }
+            //System.out.println(result);
+            return result.get(0).getCodeValueLang();
+        }
+        return codeValue;
     }
 
     public static List<VjCodifications> getTermGender(String langID) {

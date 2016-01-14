@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 //    @NamedQuery(name = "VjCodifications.findAll", query = "SELECT v FROM VjCodifications v"),
 //    @NamedQuery(name = "VjCodifications.findByUuid", query = "SELECT v FROM VjCodifications v WHERE v.uuid = :uuid"),
     @NamedQuery(name = "VjCodifications.findFieldsByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType = :codeType AND v.idLanguage = :idLanguage"),
+    @NamedQuery(name = "VjCodifications.findFieldsByValues", query = "SELECT v FROM VjCodifications v WHERE v.codeType = :codeType AND v.idLanguage = :idLanguage AND v.codeValue = :codeValue"),
     @NamedQuery(name = "VjCodifications.findTermTypesByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType LIKE 'term_type' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findTermPOSByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType LIKE 'term_partofspeech' AND v.idLanguage = :idLanguage"),
     @NamedQuery(name = "VjCodifications.findTermGenderByLanguage", query = "SELECT v FROM VjCodifications v WHERE v.codeType LIKE 'term_gender' AND v.idLanguage = :idLanguage"),

@@ -29,7 +29,7 @@ public interface myTermServiceAsync {
 
     public void getdetailsForConcept(long conceptID, long ownerID, AsyncCallback<String> callback);
 
-    public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, AsyncCallback<String> callback);
+    public void getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, String interfaceLang, AsyncCallback<String> callback);
 
     public void getRedactorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList, AsyncCallback<ConceptEntryDTO> callback);
 

@@ -62,9 +62,6 @@ insert into codeslang values ('FR', 'term_gender','other','autre','default');
 -- PRIVATE, PUBLIC
 insert into codeslang values ('FR', 'privacy','PRIVATE','PRIVE',null);
 insert into codeslang values ('FR', 'privacy','PUBLIC','PUBLIC',null);
-*/
-
-
 
 
 -- msg

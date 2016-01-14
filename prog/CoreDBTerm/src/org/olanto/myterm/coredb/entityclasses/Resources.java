@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "resources")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Resources.findAll", query = "SELECT r FROM Resources r ORDER BY r.idResource DESC"),
+    @NamedQuery(name = "Resources.findAll", query = "SELECT r FROM Resources r ORDER BY r.resourceName"),
     @NamedQuery(name = "Resources.findByIdResource", query = "SELECT r FROM Resources r WHERE r.idResource = :idResource"),
     @NamedQuery(name = "Resources.findByIdOwner", query = "SELECT r FROM Resources r WHERE r.idOwner = :idOwner"),
     @NamedQuery(name = "Resources.findByResourceName", query = "SELECT r FROM Resources r WHERE r.resourceName = :resourceName ORDER BY r.idResource DESC"),
