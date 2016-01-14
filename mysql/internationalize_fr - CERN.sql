@@ -28,7 +28,7 @@ delete from codeslang where id_language='FR';
 
 -- code for lists
 -- User roles: ADMIN, REVISOR, REDACTOR, READER
-/*
+
 insert into codeslang values ('FR','role','ADMIN','ADMIN',null);
 insert into codeslang values ('FR','role','REVISOR','REVISEUR',null);
 insert into codeslang values ('FR','role','REDACTOR','REDACTEUR',null);
