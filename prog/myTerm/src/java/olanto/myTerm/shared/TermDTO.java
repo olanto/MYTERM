@@ -55,12 +55,14 @@ public class TermDTO implements IsSerializable {
     private Date creation;
     private BigInteger createBy;
     private Date lastmodified;
-    private BigInteger lastmodifiedBy;
+    private BigInteger modifiedBy;
     private char status;
     private Integer seq;
     private String extra;
     private String extcrossref;
     private String crossref;
+    private String createdBy;
+    private String lastmodifiedBy;
 
     public TermDTO() {
     }
@@ -270,12 +272,12 @@ public class TermDTO implements IsSerializable {
         this.lastmodified = lastmodified;
     }
 
-    public BigInteger getLastmodifiedBy() {
-        return lastmodifiedBy;
+    public BigInteger getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setLastmodifiedBy(BigInteger lastmodifiedBy) {
-        this.lastmodifiedBy = lastmodifiedBy;
+    public void setModifiedBy(BigInteger lastmodifiedBy) {
+        this.modifiedBy = lastmodifiedBy;
     }
 
     public char getStatus() {
@@ -304,6 +306,22 @@ public class TermDTO implements IsSerializable {
 
     public void setLangName(String langName) {
         this.langName = langName;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastmodifiedBy = lastModifiedBy;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastmodifiedBy;
     }
 
     @Override

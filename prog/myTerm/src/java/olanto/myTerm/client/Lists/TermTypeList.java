@@ -27,12 +27,12 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
+import olanto.myTerm.shared.SysFieldDTO;
 
 /**
  *
@@ -156,6 +156,33 @@ public class TermTypeList extends ListBox {
                 isLocallyEdited.setVal(true);
             }
         });
+        typesService.getTermTypes(langID, termTypesCallback);
+    }
+
+    public TermTypeList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
+        super();
+        termTypesCallback = new AsyncCallback<Map<String, String>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
+            }
+
+            @Override
+            public void onSuccess(Map<String, String> result) {
+                for (String s : result.keySet()) {
+                    addItem(s, s);
+                }
+                setSelectedIndex(0);
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+                isLocallyEdited.setVal(true);
+            }
+        });
+        this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
 }

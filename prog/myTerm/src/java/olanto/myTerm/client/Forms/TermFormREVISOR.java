@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,6 +51,10 @@ public class TermFormREVISOR extends VerticalPanel {
     private Grid form1;
     private Grid form2;
     public Grid form3;
+    private Label created_by;
+    private Label created_by_ct;
+    private Label last_modif_by;
+    private Label last_modif_by_ct;
     private Label label_lng;
     private LangList lang;
     private Label label_frm;
@@ -96,9 +101,13 @@ public class TermFormREVISOR extends VerticalPanel {
     private char status;
 
     public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        form1 = new Grid(5, 2);
-        form2 = new Grid(6, 2);
+        form1 = new Grid(7, 2);
+        form2 = new Grid(7, 2);
         form3 = new Grid(7, 2);
+        created_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CREATED_BY), sFields.get(GuiConstant.T_LANG));
+        created_by_ct = new Label("");
+        last_modif_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LAST_MODIF_BY), sFields.get(GuiConstant.T_LANG));
+        last_modif_by_ct = new Label("");
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
         text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited);
@@ -156,16 +165,20 @@ public class TermFormREVISOR extends VerticalPanel {
         form2.setCellSpacing(3);
         form3.setCellSpacing(3);
 
-        form1.setWidget(0, 0, label_lng);
-        form1.setWidget(0, 1, lang);
-        form1.setWidget(1, 0, label_frm);
-        form1.setWidget(1, 1, text_frm);
-        form1.setWidget(2, 0, label_src);
-        form1.setWidget(2, 1, text_src);
-        form1.setWidget(3, 0, label_def);
-        form1.setWidget(3, 1, text_def);
-        form1.setWidget(4, 0, label_sdef);
-        form1.setWidget(4, 1, text_sdef);
+        form1.setWidget(0, 0, created_by);
+        form1.setWidget(0, 1, created_by_ct);
+        form1.setWidget(1, 0, last_modif_by);
+        form1.setWidget(1, 1, last_modif_by_ct);
+        form1.setWidget(2, 0, label_lng);
+        form1.setWidget(2, 1, lang);
+        form1.setWidget(3, 0, label_frm);
+        form1.setWidget(3, 1, text_frm);
+        form1.setWidget(4, 0, label_src);
+        form1.setWidget(4, 1, text_src);
+        form1.setWidget(5, 0, label_def);
+        form1.setWidget(5, 1, text_def);
+        form1.setWidget(6, 0, label_sdef);
+        form1.setWidget(6, 1, text_sdef);
 
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
@@ -193,6 +206,7 @@ public class TermFormREVISOR extends VerticalPanel {
         form3.setWidget(5, 0, label_refNt);
         form3.setWidget(5, 1, text_refNt);
         form3.setWidget(6, 1, controls);
+
         controls.add(approve);
         approve.setTitle("Approve the current term");
         controls.add(disapprove);
@@ -227,6 +241,10 @@ public class TermFormREVISOR extends VerticalPanel {
         text_techNt.setText(termDTO.getTechnicalNote());
         text_lingNt.setText(termDTO.getLinguisticNote());
         text_refNt.setText(termDTO.getReferenceNote());
+        
+        created_by_ct.setText(termDTO.getCreatedBy());
+        last_modif_by_ct.setText(termDTO.getLastModifiedBy());
+        
         form2.remove(term_type);
         term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited);
         form2.setWidget(1, 1, term_type);
@@ -250,7 +268,7 @@ public class TermFormREVISOR extends VerticalPanel {
         }
         lang_lbl.setText(termDTO.getLangName());
         lang_lbl.setTitle(termDTO.getIdLanguage());
-        form1.setWidget(0, 1, lang_lbl);
+        form1.setWidget(2, 1, lang_lbl);
         if ((status == 'r') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
         } else {
@@ -337,7 +355,7 @@ public class TermFormREVISOR extends VerticalPanel {
         termDTO.setReferenceNote(text_refNt.getText());
 
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
-        termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
+        termDTO.setModifiedBy(BigInteger.valueOf(ownerID));
         termDTO.setStatus(status);
         if (type == 0) {
             termDTO.setIdLanguage(lang_lbl.getTitle());

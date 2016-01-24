@@ -49,7 +49,7 @@ public class LangEntryDTO implements IsSerializable {
         TermDTO term = new TermDTO(null, term_form, status); // minimal information
         term.setIdLanguage(idLanguage);
         term.setCreateBy(BigInteger.valueOf(modifBy));
-        term.setLastmodifiedBy(BigInteger.valueOf(modifBy));
+        term.setModifiedBy(BigInteger.valueOf(modifBy));
         term.setCreation(new Date(System.currentTimeMillis()));
         term.setLastmodified(new Date(System.currentTimeMillis()));
         listterm.add(term);

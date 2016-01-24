@@ -38,7 +38,7 @@ public class TextAreaMyTerm extends TextArea {
 
     TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibility());
+        this.setVisible(sFields.get(type).getVisibilityForm());
         this.position = sFields.get(type).getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override
@@ -51,7 +51,7 @@ public class TextAreaMyTerm extends TextArea {
 
     TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibility());
+        this.setVisible(sFields.get(type).getVisibilityForm());
         this.position = sFields.get(type).getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override

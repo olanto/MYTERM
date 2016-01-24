@@ -208,7 +208,7 @@ insert into codes values ('sys_field','t.context','visible;3;extra',null);
 insert into codes values ('sys_field','t.source_context','hidden;3;extra',null);
 insert into codes values ('sys_field','t.geo_usage', 'extra;1;extra', null);
 insert into codes values ('sys_field','t.creation', 'hidden;1;visible', null);
-insert into codes values ('sys_field','t.created_by', 'hidden;1;extra', null);
+insert into codes values ('sys_field','t.created_by', 'hidden;1;visible', null);
 insert into codes values ('sys_field','t.modification', 'hidden;1;extra', null);
 insert into codes values ('sys_field','t.last_modified_by', 'hidden;1;visible', null);
 insert into codes values ('sys_field','t.cross_ref', 'hidden;2;extra', null);

@@ -93,46 +93,46 @@ public class JPAViewFunctions {
 
     private static String getFirstTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
-        if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibility())) {
+        if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(": </span>").append(t.getTermForm()).append("<br/>");
         }
-        if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_DEFINITION).getVisibility())) {
+        if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_DEFINITION).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_T_DEFINITION)).append(": </span>").append(t.getTermDefinition()).append("<br/>");
         }
 
-        if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_DEFINITION).getVisibility())) {
+        if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_DEFINITION).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_DEFINITION)).append(": </span>").append(t.getTermSourceDefinition()).append("<br/>");
         }
-        if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibility())) {
+        if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(": </span>").append(t.getTermSource()).append("<br/>");
         }
-        if ((t.getTermSourceContext() != null) && (!t.getTermSourceContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_CONTEXT).getVisibility())) {
+        if ((t.getTermSourceContext() != null) && (!t.getTermSourceContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_CONTEXT).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_CONTEXT)).append(": </span>").append(t.getTermSourceContext()).append("<br/>");
         }
-        if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_NOTE).getVisibility())) {
+        if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_NOTE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(": </span>").append(t.getTermNote()).append("<br/>");
         }
-        if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_POS).getVisibility())) {
+        if ((t.getTermPartofspeech() != null) && (!t.getTermPartofspeech().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_POS).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_POS)).append(": </span>").append(
             DecodeCodeValue(interfaceLang,"term_partofspeech", t.getTermPartofspeech())).append("<br/>");
         }
-        if ((t.getTermType() != null) && (!t.getTermType().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TYPE).getVisibility())) {
+        if ((t.getTermType() != null) && (!t.getTermType().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TYPE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TYPE)).append(": </span>").append(
                     DecodeCodeValue(interfaceLang,"term_type", t.getTermType())).append("<br/>");
         }
-        if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_USAGE).getVisibility())) {
+        if ((t.getTermUsage() != null) && (!t.getTermUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_USAGE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_USAGE)).append(": </span>").append(t.getTermUsage()).append("<br/>");
         }
-        if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibility())) {
+        if ((t.getTermContext() != null) && (!t.getTermContext().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CONTEXT).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CONTEXT)).append(": </span>").append(t.getTermContext()).append("<br/>");
         }
-        if ((t.getSup0() != null) && (!t.getSup0().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TECH_NOTE).getVisibility())) {
+        if ((t.getSup0() != null) && (!t.getSup0().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_TECH_NOTE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_TECH_NOTE)).append(": </span>").append(t.getSup0()).append("<br/>");
         }
-        if ((t.getSup1() != null) && (!t.getSup1().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_LING_NOTE).getVisibility())) {
+        if ((t.getSup1() != null) && (!t.getSup1().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_LING_NOTE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LING_NOTE)).append(": </span>").append(t.getSup1()).append("<br/>");
         }
-        if ((t.getSup2() != null) && (!t.getSup2().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_REFERENCE_NOTE).getVisibility())) {
+        if ((t.getSup2() != null) && (!t.getSup2().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_REFERENCE_NOTE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_REFERENCE_NOTE)).append(": </span>").append(t.getSup2()).append("<br/>");
         }
         return result.toString();
@@ -140,42 +140,42 @@ public class JPAViewFunctions {
 
     private static String getSecondTermInfo(Terms t, HashMap<String, String> sysMsgsrv, HashMap<String, SysFieldDTO> sysFieldsrv, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
-        if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibility())) {
+        if ((t.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.T_CREATED_BY).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString()))).append("<br/>");
         }
         if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
-            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
+            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_FR.format(t.getCreation())).append("<br/>");
             }
         } else {
-            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibility())) {
+            if ((t.getCreation() != null) && (sysFieldsrv.get(GuiConstant.T_CREATION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CREATION)).append(": </span>").append(DF_EN.format(t.getCreation())).append("<br/>");
             }
         }
 
-        if ((t.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.T_LAST_MODIF_BY).getVisibility())) {
+        if ((t.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.T_LAST_MODIF_BY).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_LAST_MODIF_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString()))).append("<br/>");
         }
         if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
-            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
+            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_FR.format(t.getLastmodified())).append("<br/>");
             }
         } else {
-            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibility())) {
+            if ((t.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.T_MODIFICATION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_MODIFICATION)).append(": </span>").append(DF_EN.format(t.getLastmodified())).append("<br/>");
             }
         }
-        if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CROSS_REF).getVisibility())) {
+        if ((t.getCrossref() != null) && (!t.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_CROSS_REF).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_CROSS_REF)).append(": </span>").append(t.getCrossref()).append("<br/>");
         }
-        if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_EXTRA_CROSS_REF).getVisibility())) {
+        if ((t.getExtcrossref() != null) && (!t.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_EXTRA_CROSS_REF).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_EXTRA_CROSS_REF)).append(": </span>").append(t.getExtcrossref()).append("<br/>");
         }
-        if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibility())) {
+        if ((t.getTermGender() != null) && (!t.getTermGender().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GENDER).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GENDER)).append(": </span>").append(
                     DecodeCodeValue(interfaceLang,"term_gender",t.getTermGender())).append("<br/>");
         }
-        if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibility())) {
+        if ((t.getTermGeoUsage() != null) && (!t.getTermGeoUsage().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_GEO_USG).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_T_GEO_USG)).append(": </span>").append(t.getTermGeoUsage()).append("<br/>");
         }
         return result.toString();

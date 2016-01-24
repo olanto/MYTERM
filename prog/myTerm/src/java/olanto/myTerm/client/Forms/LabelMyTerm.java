@@ -34,7 +34,7 @@ public class LabelMyTerm extends Label {
 
     LabelMyTerm(String content, SysFieldDTO type) {
         super();
-        this.setVisible(type.getVisibility());
+        this.setVisible(type.getVisibilityForm());
         this.position = type.getPosition();
         this.setText(content);
     }

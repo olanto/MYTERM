@@ -179,7 +179,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                     if (!field.getCodeExtra().isEmpty()) {
                         String[] values = field.getCodeExtra().split(";");
                         if ((values.length > 1) && (!field.getCodeValue().isEmpty())) {
-                            SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim());
+                            SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim(), values[2].trim());
                             sysFieldsrv.put(field.getCodeValue(), s);
                         }
                     }
@@ -196,55 +196,55 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("<tr>");
             result.append("<td>");
 
-            if ((c.getSubjectField() != null) && (!c.getSubjectField().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SUBJECT_FIELD).getVisibility())) {
+            if ((c.getSubjectField() != null) && (!c.getSubjectField().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SUBJECT_FIELD).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"sfield\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SUBJECT_FIELD)).append(": </span>").append(c.getSubjectField()).append("<br/>");
             }
-            if ((c.getConceptDefinition() != null) && (!c.getConceptDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_DEFINITION).getVisibility())) {
+            if ((c.getConceptDefinition() != null) && (!c.getConceptDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_DEFINITION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_C_DEFINITION)).append(": </span>").append(c.getConceptDefinition()).append("<br/>");
             }
             result.append("</td>").append("<td>");
-            if ((c.getConceptSourceDefinition() != null) && (!c.getConceptSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SOURCE_DEFINITION).getVisibility())) {
+            if ((c.getConceptSourceDefinition() != null) && (!c.getConceptSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SOURCE_DEFINITION).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SOURCE_DEFINITION)).append(": </span>").append(c.getConceptSourceDefinition()).append("<br/>");
             }
-            if ((c.getConceptNote() != null) && (!c.getConceptNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_NOTE).getVisibility())) {
+            if ((c.getConceptNote() != null) && (!c.getConceptNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_NOTE).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_C_NOTE)).append(": </span>").append(c.getConceptNote()).append("<br/>");
             }
-            if ((c.getCrossref() != null) && (!c.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_CROSS_REF).getVisibility())) {
+            if ((c.getCrossref() != null) && (!c.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_CROSS_REF).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CROSS_REF)).append(": </span>").append(c.getCrossref()).append("<br/>");
             }
             result.append("</td>").append("<td>");
-            if ((c.getExtcrossref() != null) && (!c.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA_CROSS_REF).getVisibility())) {
+            if ((c.getExtcrossref() != null) && (!c.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA_CROSS_REF).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA_CROSS_REF)).append(": </span>").append(c.getExtcrossref()).append("<br/>");
             }
-            if ((c.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.C_CREATED_BY).getVisibility())) {
+            if ((c.getCreateBy() != null) && (sysFieldsrv.get(GuiConstant.C_CREATED_BY).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATED_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getCreateBy().toString()))).append("<br/>");
             }
             if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
-                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibility())) {
+                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibilityPublic())) {
                     result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(": </span>").append(DF_FR.format(c.getCreation())).append("<br/>");
                 }
             } else {
-                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibility())) {
+                if ((c.getCreation() != null) && (sysFieldsrv.get(GuiConstant.C_CREATION).getVisibilityPublic())) {
                     result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CREATION)).append(": </span>").append(DF_EN.format(c.getCreation())).append("<br/>");
                 }
             }
             result.append("</td>").append("<td>");
-            if ((c.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.C_LAST_MODIF_BY).getVisibility())) {
+            if ((c.getLastmodifiedBy() != null) && (sysFieldsrv.get(GuiConstant.C_LAST_MODIF_BY).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_LAST_MODIF_BY)).append(": </span>").append(Queries.getOwnerFullNamebyID(Long.parseLong(c.getLastmodifiedBy().toString()))).append("<br/>");
             }
             if (GuiConstant.INTERFACE_LANG.equalsIgnoreCase("fr")) {
-                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibility())) {
+                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibilityPublic())) {
                     result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(": </span>").append(DF_FR.format(c.getLastmodified())).append("<br/>");
                 }
             } else {
-                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibility())) {
+                if ((c.getLastmodified() != null) && (sysFieldsrv.get(GuiConstant.C_MODIFICATION).getVisibilityPublic())) {
                     result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_MODIFICATION)).append(": </span>").append(DF_EN.format(c.getLastmodified())).append("<br/>");
                 }
             }
-            if ((c.getImage() != null) && (!c.getImage().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_IMAGE).getVisibility())) {
+            if ((c.getImage() != null) && (!c.getImage().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_IMAGE).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_IMAGE)).append(": </span>").append(c.getImage()).append("<br/>");
             }
-            if ((c.getExtra() != null) && (!c.getExtra().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA).getVisibility())) {
+            if ((c.getExtra() != null) && (!c.getExtra().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA)).append(": </span>").append(c.getExtra()).append("<br/>");
             }
             result.append("</td>").append("</tr>");
@@ -272,7 +272,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 if (!field.getCodeExtra().isEmpty()) {
                     String[] values = field.getCodeExtra().split(";");
                     if ((values.length > 1) && (!field.getCodeValue().isEmpty())) {
-                        SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim());
+                        SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim(), values[2].trim());
                         sysFieldsrv.put(field.getCodeValue(), s);
                     }
                 }
@@ -475,7 +475,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setIdLanguage(t.getIdLanguage());
             tDTO.setIdTerm(t.getIdTerm());
             tDTO.setLastmodified(t.getLastmodified());
-            tDTO.setLastmodifiedBy(t.getLastmodifiedBy());
+            tDTO.setModifiedBy(t.getLastmodifiedBy());
             tDTO.setSeq(t.getSeq());
             tDTO.setStatus(t.getStatus());
             tDTO.setTermAdminStatus(t.getTermAdminStatus());
@@ -491,6 +491,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setTermSourceDefinition(t.getTermSourceDefinition());
             tDTO.setTermType(t.getTermType());
             tDTO.setTermUsage(t.getTermUsage());
+            if (t.getCreateBy() != null) {
+                tDTO.setCreatedBy(Queries.getOwnerFullNamebyID(Long.parseLong(t.getCreateBy().toString())) + " (" + DF_FR.format(t.getCreation()) + ")");
+            }
+            if (t.getLastmodifiedBy() != null) {
+                tDTO.setLastModifiedBy(Queries.getOwnerFullNamebyID(Long.parseLong(t.getLastmodifiedBy().toString())) + " (" + DF_FR.format(t.getLastmodified()) + ")");
+            }
+
             // technical, linguistic and reference
             tDTO.setTechnicalNote(t.getSup0());
             tDTO.setLinguisticNote(t.getSup1());
@@ -517,7 +524,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             t.setIdLanguage(tDTO.getIdLanguage());
             t.setIdTerm(tDTO.getIdTerm());
             t.setLastmodified(tDTO.getLastmodified());
-            t.setLastmodifiedBy(tDTO.getLastmodifiedBy());
+            t.setLastmodifiedBy(tDTO.getModifiedBy());
             t.setSeq(tDTO.getSeq());
             t.setStatus(tDTO.getStatus());
             t.setTermAdminStatus(tDTO.getTermAdminStatus());
@@ -678,7 +685,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 if (!field.getCodeExtra().isEmpty()) {
                     String[] values = field.getCodeExtra().split(";");
                     if ((values.length > 1) && (!field.getCodeValue().isEmpty())) {
-                        SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim());
+                        SysFieldDTO s = new SysFieldDTO(field.getCodeValue(), values[0].trim(), values[1].trim(), values[2].trim());
                         sysFields.put(field.getCodeValue(), s);
                     }
                 }

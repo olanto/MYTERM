@@ -52,6 +52,10 @@ public class TermFormREDACTOR extends VerticalPanel {
     private Grid form1;
     private Grid form2;
     public Grid form3;
+    private Label created_by;
+    private Label created_by_ct;
+    private Label last_modif_by;
+    private Label last_modif_by_ct;
     private Label label_lng;
     private LangList lang;
     private Label label_frm;
@@ -99,9 +103,13 @@ public class TermFormREDACTOR extends VerticalPanel {
     private BooleanWrap isLocallyEdited = new BooleanWrap();
 
     public TermFormREDACTOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, HashMap<String, String> sysMsg) {
-        form1 = new Grid(5, 2);
-        form2 = new Grid(6, 2);
+        form1 = new Grid(7, 2);
+        form2 = new Grid(7, 2);
         form3 = new Grid(7, 2);
+        created_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CREATED_BY), sFields.get(GuiConstant.T_LANG));
+        created_by_ct = new Label("");
+        last_modif_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LAST_MODIF_BY), sFields.get(GuiConstant.T_LANG));
+        last_modif_by_ct = new Label("");
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
         text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited, isLocallyEdited);
@@ -157,16 +165,21 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.setCellSpacing(3);
         form2.setCellSpacing(3);
         form3.setCellSpacing(3);
-        form1.setWidget(0, 0, label_lng);
-        form1.setWidget(0, 1, lang);
-        form1.setWidget(1, 0, label_frm);
-        form1.setWidget(1, 1, text_frm);
-        form1.setWidget(2, 0, label_src);
-        form1.setWidget(2, 1, text_src);
-        form1.setWidget(3, 0, label_def);
-        form1.setWidget(3, 1, text_def);
-        form1.setWidget(4, 0, label_sdef);
-        form1.setWidget(4, 1, text_sdef);
+
+        form1.setWidget(0, 0, created_by);
+        form1.setWidget(0, 1, created_by_ct);
+        form1.setWidget(1, 0, last_modif_by);
+        form1.setWidget(1, 1, last_modif_by_ct);
+        form1.setWidget(2, 0, label_lng);
+        form1.setWidget(2, 1, lang);
+        form1.setWidget(3, 0, label_frm);
+        form1.setWidget(3, 1, text_frm);
+        form1.setWidget(4, 0, label_src);
+        form1.setWidget(4, 1, text_src);
+        form1.setWidget(5, 0, label_def);
+        form1.setWidget(5, 1, text_def);
+        form1.setWidget(6, 0, label_sdef);
+        form1.setWidget(6, 1, text_sdef);
 
         form2.setWidget(0, 0, label_st);
         form2.setWidget(0, 1, text_st);
@@ -193,6 +206,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form3.setWidget(4, 1, text_lingNt);
         form3.setWidget(5, 0, label_refNt);
         form3.setWidget(5, 1, text_refNt);
+
         form3.setWidget(6, 1, controls);
         controls.add(edit);
         controls.add(delete);
@@ -239,6 +253,9 @@ public class TermFormREDACTOR extends VerticalPanel {
         text_lingNt.setText(termDTO.getLinguisticNote());
         text_refNt.setText(termDTO.getReferenceNote());
 
+        created_by_ct.setText(termDTO.getCreatedBy());
+        last_modif_by_ct.setText(termDTO.getLastModifiedBy());
+
         form3.remove(term_pos);
         term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
         form3.setWidget(1, 1, term_pos);
@@ -261,7 +278,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         lang_lbl.setTitle(termDTO.getIdLanguage());
         langID = termDTO.getIdLanguage();
         form1.remove(lang);
-        form1.setWidget(0, 1, lang_lbl);
+        form1.setWidget(2, 1, lang_lbl);
         form2.remove(term_type);
         term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited);
         form2.setWidget(1, 1, term_type);
@@ -362,7 +379,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         termDTO.setReferenceNote(text_refNt.getText());
 
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
-        termDTO.setLastmodifiedBy(BigInteger.valueOf(ownerID));
+        termDTO.setModifiedBy(BigInteger.valueOf(ownerID));
         if (isLocallyEdited.getVal()) {
             termDTO.setStatus('e');
         } else {

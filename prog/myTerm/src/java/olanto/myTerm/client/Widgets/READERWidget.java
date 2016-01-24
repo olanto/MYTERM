@@ -91,7 +91,7 @@ public class READERWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new HTML(result));
-                getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID,GuiConstant.INTERFACE_LANG, termsCallback);
+                getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, GuiConstant.INTERFACE_LANG, termsCallback);
             }
 
             @Override
