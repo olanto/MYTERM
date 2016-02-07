@@ -56,7 +56,7 @@ public class DomainFormADMIN extends VerticalPanel {
 
     public DomainFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         label_dn = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_D_DEFAULT_NAME), sFields.get(GuiConstant.D_DEFAULT_NAME));
-        text_dn = new TextBoxMyTerm(GuiConstant.D_DEFAULT_NAME, sFields, isEdited);
+        text_dn = new TextBoxMyTerm(sFields.get(GuiConstant.D_DEFAULT_NAME), isEdited);
 
         ctrlPanel = new HorizontalPanel();
         dnPanel = new HorizontalPanel();

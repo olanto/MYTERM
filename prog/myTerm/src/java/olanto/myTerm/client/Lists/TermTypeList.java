@@ -39,18 +39,18 @@ import olanto.myTerm.shared.SysFieldDTO;
  * @author nizar ghoula - simple
  */
 public class TermTypeList extends ListBox {
-
+    
     private myTermServiceAsync typesService = GWT.create(myTermService.class);
     private AsyncCallback<Map<String, String>> termTypesCallback;
-
-    public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited) {
+    
+    public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
@@ -72,17 +72,18 @@ public class TermTypeList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-
-    public TermTypeList(String langID, final BooleanWrap isEdited) {
+    
+    public TermTypeList(String langID, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 for (String s : result.keySet()) {
@@ -97,17 +98,18 @@ public class TermTypeList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-
-    public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    
+    public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
@@ -130,35 +132,10 @@ public class TermTypeList extends ListBox {
                 isLocallyEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-
-    public TermTypeList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
-        super();
-        termTypesCallback = new AsyncCallback<Map<String, String>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
-            }
-
-            @Override
-            public void onSuccess(Map<String, String> result) {
-                for (String s : result.keySet()) {
-                    addItem(s, s);
-                }
-                setSelectedIndex(0);
-            }
-        };
-        this.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                isEdited.setVal(true);
-                isLocallyEdited.setVal(true);
-            }
-        });
-        typesService.getTermTypes(langID, termTypesCallback);
-    }
-
+    
     public TermTypeList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
@@ -166,7 +143,7 @@ public class TermTypeList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 for (String s : result.keySet()) {

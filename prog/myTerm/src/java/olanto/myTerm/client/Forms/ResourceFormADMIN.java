@@ -75,9 +75,9 @@ public class ResourceFormADMIN extends VerticalPanel {
         label_rpv = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_PRIVACY), sFields.get(GuiConstant.R_PRIVACY));
         label_row = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_OWNER), sFields.get(GuiConstant.R_OWNER_ID));
         label_rex = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_R_EXTRA), sFields.get(GuiConstant.R_EXTRA));
-        text_rn = new TextBoxMyTerm(GuiConstant.R_NAME, sFields, isEdited);
-        text_rnt = new TextBoxMyTerm(GuiConstant.R_NOTE, sFields, isEdited);
-        text_rex = new TextBoxMyTerm(GuiConstant.R_EXTRA, sFields, isEdited);
+        text_rn = new TextBoxMyTerm(sFields.get(GuiConstant.R_NAME), isEdited);
+        text_rnt = new TextBoxMyTerm(sFields.get(GuiConstant.R_NOTE), isEdited);
+        text_rex = new TextBoxMyTerm(sFields.get(GuiConstant.R_EXTRA), isEdited);
         resPrivacy = new ResourcePrivacyList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
         resOwner = new OwnersList(isEdited, isLocallyEdited);
 

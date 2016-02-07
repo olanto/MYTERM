@@ -27,7 +27,6 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import olanto.myTerm.client.MainEntryPoint;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
@@ -40,18 +39,18 @@ import olanto.myTerm.shared.SysFieldDTO;
  * @author nizar ghoula - simple
  */
 public class TermGenderList extends ListBox {
-
+    
     private myTermServiceAsync genderService = GWT.create(myTermService.class);
     private AsyncCallback<Map<String, String>> genderCallback;
-
-    public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited) {
+    
+    public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         genderCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
@@ -73,17 +72,18 @@ public class TermGenderList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         genderService.getTermGender(langID, genderCallback);
     }
-
-    public TermGenderList(String langID, final BooleanWrap isEdited) {
+    
+    public TermGenderList(String langID, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         genderCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 for (String s : result.keySet()) {
@@ -98,17 +98,18 @@ public class TermGenderList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         genderService.getTermGender(langID, genderCallback);
     }
-
-    public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    
+    public TermGenderList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         genderCallback = new AsyncCallback<Map<String, String>>() {
             @Override
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
@@ -131,35 +132,10 @@ public class TermGenderList extends ListBox {
                 isLocallyEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         genderService.getTermGender(langID, genderCallback);
     }
-
-    public TermGenderList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
-        super();
-        genderCallback = new AsyncCallback<Map<String, String>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
-            }
-
-            @Override
-            public void onSuccess(Map<String, String> result) {
-                for (String s : result.keySet()) {
-                    addItem(s, s);
-                }
-                setSelectedIndex(0);
-            }
-        };
-        this.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                isEdited.setVal(true);
-                isLocallyEdited.setVal(true);
-            }
-        });
-        genderService.getTermGender(langID, genderCallback);
-    }
-
+    
     public TermGenderList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         genderCallback = new AsyncCallback<Map<String, String>>() {
@@ -167,7 +143,7 @@ public class TermGenderList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term gender");
             }
-
+            
             @Override
             public void onSuccess(Map<String, String> result) {
                 for (String s : result.keySet()) {

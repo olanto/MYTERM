@@ -94,7 +94,7 @@ public class LangSetFormREDACTOR extends VerticalPanel {
                 terms.add(ter);
                 desc.add(ter);
                 ter.adjustSize(getOffsetWidth());
-                ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited, sysMsg);
+                ter.refreshContentFromTermDTO(tDTO, userLangs, isEdited, sysMsg, sFields);
                 ter.form3.setWidget(6, 0, new HTML(sysMsg.get(GuiConstant.MSG_TERM_RANK) + i));
                 ter.delete.addClickHandler(new ClickHandler() {
                     @Override

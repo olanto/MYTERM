@@ -36,10 +36,10 @@ public class TextAreaMyTerm extends TextArea {
 
     public int position = 1;
 
-    TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    TextAreaMyTerm(SysFieldDTO type, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibilityForm());
-        this.position = sFields.get(type).getPosition();
+        this.setVisible(type.getVisibilityForm());
+        this.position = type.getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
@@ -49,10 +49,10 @@ public class TextAreaMyTerm extends TextArea {
         });
     }
 
-    TextAreaMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
+    TextAreaMyTerm(SysFieldDTO type, final BooleanWrap isEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibilityForm());
-        this.position = sFields.get(type).getPosition();
+        this.setVisible(type.getVisibilityForm());
+        this.position = type.getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {

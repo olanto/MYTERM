@@ -36,10 +36,10 @@ public class TextBoxMyTerm extends TextBox {
 
     public int position = 1;
 
-    TextBoxMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    TextBoxMyTerm(SysFieldDTO type, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibilityForm());
-        this.position = sFields.get(type).getPosition();
+        this.setVisible(type.getVisibilityForm());
+        this.position = type.getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
@@ -49,10 +49,10 @@ public class TextBoxMyTerm extends TextBox {
         });
     }
 
-    TextBoxMyTerm(String type, HashMap<String, SysFieldDTO> sFields, final BooleanWrap isEdited) {
+    TextBoxMyTerm(SysFieldDTO type, final BooleanWrap isEdited) {
         super();
-        this.setVisible(sFields.get(type).getVisibilityForm());
-        this.position = sFields.get(type).getPosition();
+        this.setVisible(type.getVisibilityForm());
+        this.position = type.getPosition();
         this.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {

@@ -112,36 +112,36 @@ public class TermFormREDACTOR extends VerticalPanel {
         last_modif_by_ct = new Label("");
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
-        text_frm = new TextBoxMyTerm(GuiConstant.T_FORM, sFields, isEdited, isLocallyEdited);
+        text_frm = new TextBoxMyTerm(sFields.get(GuiConstant.T_FORM), isEdited, isLocallyEdited);
         label_src = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE), sFields.get(GuiConstant.T_SOURCE));
-        text_src = new TextAreaMyTerm(GuiConstant.T_SOURCE, sFields, isEdited, isLocallyEdited);
+        text_src = new TextAreaMyTerm(sFields.get(GuiConstant.T_SOURCE), isEdited, isLocallyEdited);
         label_def = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_DEFINITION), sFields.get(GuiConstant.T_DEFINITION));
-        text_def = new TextAreaMyTerm(GuiConstant.T_DEFINITION, sFields, isEdited, isLocallyEdited);
+        text_def = new TextAreaMyTerm(sFields.get(GuiConstant.T_DEFINITION), isEdited, isLocallyEdited);
         label_sdef = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_DEFINITION), sFields.get(GuiConstant.T_SOURCE_DEFINITION));
-        text_sdef = new TextAreaMyTerm(GuiConstant.T_SOURCE_DEFINITION, sFields, isEdited, isLocallyEdited);
+        text_sdef = new TextAreaMyTerm(sFields.get(GuiConstant.T_SOURCE_DEFINITION), isEdited, isLocallyEdited);
         label_usg = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_USAGE), sFields.get(GuiConstant.T_USAGE));
-        text_usg = new TextAreaMyTerm(GuiConstant.T_USAGE, sFields, isEdited, isLocallyEdited);
+        text_usg = new TextAreaMyTerm(sFields.get(GuiConstant.T_USAGE), isEdited, isLocallyEdited);
         label_ctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CONTEXT), sFields.get(GuiConstant.T_CONTEXT));
-        text_ctxt = new TextAreaMyTerm(GuiConstant.T_CONTEXT, sFields, isEdited, isLocallyEdited);
+        text_ctxt = new TextAreaMyTerm(sFields.get(GuiConstant.T_CONTEXT), isEdited, isLocallyEdited);
         label_sctxt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_SOURCE_CONTEXT), sFields.get(GuiConstant.T_SOURCE_CONTEXT));
-        text_sctxt = new TextAreaMyTerm(GuiConstant.T_SOURCE_CONTEXT, sFields, isEdited, isLocallyEdited);
+        text_sctxt = new TextAreaMyTerm(sFields.get(GuiConstant.T_SOURCE_CONTEXT), isEdited, isLocallyEdited);
         label_nt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_NOTE), sFields.get(GuiConstant.T_NOTE));
-        text_nt = new TextAreaMyTerm(GuiConstant.T_NOTE, sFields, isEdited, isLocallyEdited);
+        text_nt = new TextAreaMyTerm(sFields.get(GuiConstant.T_NOTE), isEdited, isLocallyEdited);
         label_tp = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TYPE), sFields.get(GuiConstant.T_TYPE));
         label_pos = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_POS), sFields.get(GuiConstant.T_POS));
         label_gdr = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_GENDER), sFields.get(GuiConstant.T_GENDER));
         label_st = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_STATUS), sFields.get(GuiConstant.T_STATUS));
-        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
-        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
-        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited, sFields.get(GuiConstant.T_TYPE));
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited, sFields.get(GuiConstant.T_POS));
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited, sFields.get(GuiConstant.T_GENDER));
         label_ext = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_EXTRA), sFields.get(GuiConstant.T_EXTRA));
-        text_ext = new TextAreaMyTerm(GuiConstant.T_EXTRA, sFields, isEdited, isLocallyEdited);
+        text_ext = new TextAreaMyTerm(sFields.get(GuiConstant.T_EXTRA), isEdited, isLocallyEdited);
         label_techNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TECH_NOTE), sFields.get(GuiConstant.T_TECH_NOTE));
-        text_techNt = new TextAreaMyTerm(GuiConstant.T_TECH_NOTE, sFields, isEdited, isLocallyEdited);
+        text_techNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_TECH_NOTE), isEdited, isLocallyEdited);
         label_lingNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LING_NOTE), sFields.get(GuiConstant.T_LING_NOTE));
-        text_lingNt = new TextAreaMyTerm(GuiConstant.T_LING_NOTE, sFields, isEdited, isLocallyEdited);
+        text_lingNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_LING_NOTE), isEdited, isLocallyEdited);
         label_refNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_REFERENCE_NOTE), sFields.get(GuiConstant.T_REFERENCE_NOTE));
-        text_refNt = new TextAreaMyTerm(GuiConstant.T_REFERENCE_NOTE, sFields, isEdited, isLocallyEdited);
+        text_refNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_REFERENCE_NOTE), isEdited, isLocallyEdited);
         text_st = new Label();
         form = new HorizontalPanel();
         controls = new HorizontalPanel();
@@ -237,7 +237,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         });
     }
 
-    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
+    public void refreshContentFromTermDTO(TermDTO termDTO, ArrayList<String> userLangs, BooleanWrap isEdited, HashMap<String, String> sysMsg, HashMap<String, SysFieldDTO> sFields) {
         termID = termDTO.getIdTerm();
         status = termDTO.getStatus();
         text_frm.setText(termDTO.getTermForm());
@@ -257,10 +257,10 @@ public class TermFormREDACTOR extends VerticalPanel {
         last_modif_by_ct.setText(termDTO.getLastModifiedBy());
 
         form3.remove(term_pos);
-        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited, isLocallyEdited);
+        term_pos = new PartofSpeechList(GuiConstant.INTERFACE_LANG, termDTO.getTermPartofspeech(), isEdited, isLocallyEdited, sFields.get(GuiConstant.T_POS));
         form3.setWidget(1, 1, term_pos);
         form3.remove(term_gdr);
-        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, termDTO.getTermGender(), isEdited, isLocallyEdited);
+        term_gdr = new TermGenderList(GuiConstant.INTERFACE_LANG, termDTO.getTermGender(), isEdited, isLocallyEdited, sFields.get(GuiConstant.T_GENDER));
         form3.setWidget(0, 1, term_gdr);
         text_ext.setText(termDTO.getExtra());
         switch (status) {
@@ -280,7 +280,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.remove(lang);
         form1.setWidget(2, 1, lang_lbl);
         form2.remove(term_type);
-        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited);
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited,sFields.get(GuiConstant.T_TYPE));
         form2.setWidget(1, 1, term_type);
         if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
@@ -290,7 +290,6 @@ public class TermFormREDACTOR extends VerticalPanel {
     }
 
     public void adjustSize(int w) {
-        label_gdr.setVisible(true);
         controls.setWidth(w * 1 / 4 + "px");
         controls.setCellHorizontalAlignment(delete, HorizontalPanel.ALIGN_RIGHT);
         controls.setCellHorizontalAlignment(edit, HorizontalPanel.ALIGN_LEFT);

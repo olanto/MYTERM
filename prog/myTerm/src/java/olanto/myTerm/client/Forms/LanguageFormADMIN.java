@@ -60,8 +60,8 @@ public class LanguageFormADMIN extends VerticalPanel {
     public LanguageFormADMIN(HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         label_lid = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_L_ID), sFields.get(GuiConstant.L_ID));
         label_ldn = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_L_DEFAULT_NAME), sFields.get(GuiConstant.L_NAME));
-        text_lid = new TextBoxMyTerm(GuiConstant.L_ID, sFields, isEdited);
-        text_ldn = new TextBoxMyTerm(GuiConstant.L_NAME, sFields, isEdited);
+        text_lid = new TextBoxMyTerm(sFields.get(GuiConstant.L_ID), isEdited);
+        text_ldn = new TextBoxMyTerm(sFields.get(GuiConstant.L_NAME), isEdited);
 
         ctrlPanel = new HorizontalPanel();
         lidPanel = new HorizontalPanel();

@@ -90,9 +90,9 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         setStyleName("conceptForm");
         add(cform);
         sf = new DomainList(isEdited, sysMsg.get(GuiConstant.MSG_ALL_VALUE));
-        text_def = new TextAreaMyTerm(GuiConstant.C_DEFINITION, sFields, isEdited);
-        text_sdef = new TextAreaMyTerm(GuiConstant.C_SOURCE_DEFINITION, sFields, isEdited);
-        text_nt = new TextAreaMyTerm(GuiConstant.C_NOTE, sFields, isEdited);
+        text_def = new TextAreaMyTerm(sFields.get(GuiConstant.C_DEFINITION), isEdited);
+        text_sdef = new TextAreaMyTerm(sFields.get(GuiConstant.C_SOURCE_DEFINITION), isEdited);
+        text_nt = new TextAreaMyTerm(sFields.get(GuiConstant.C_NOTE), isEdited);
         cform.setStyleName("edpanel");
         cform.setCellSpacing(4);
         cform.setWidget(0, 0, sfPanel);

@@ -43,7 +43,7 @@ public class PartofSpeechList extends ListBox {
     private myTermServiceAsync posService = GWT.create(myTermService.class);
     private AsyncCallback<Map<String, String>> posCallback;
 
-    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited) {
+    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         posCallback = new AsyncCallback<Map<String, String>>() {
             @Override
@@ -72,10 +72,11 @@ public class PartofSpeechList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         posService.getTermPOS(langID, posCallback);
     }
 
-    public PartofSpeechList(String langID, final BooleanWrap isEdited) {
+    public PartofSpeechList(String langID, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         posCallback = new AsyncCallback<Map<String, String>>() {
             @Override
@@ -97,10 +98,11 @@ public class PartofSpeechList extends ListBox {
                 isEdited.setVal(true);
             }
         });
+        this.setVisible(type.getVisibilityForm());
         posService.getTermPOS(langID, posCallback);
     }
 
-    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
+    public PartofSpeechList(String langID, final String currentPOS, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         posCallback = new AsyncCallback<Map<String, String>>() {
             @Override
@@ -130,32 +132,7 @@ public class PartofSpeechList extends ListBox {
                 isLocallyEdited.setVal(true);
             }
         });
-        posService.getTermPOS(langID, posCallback);
-    }
-
-    public PartofSpeechList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited) {
-        super();
-        posCallback = new AsyncCallback<Map<String, String>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                MainEntryPoint.statusPanel.setMessage("warning", "Failed to get values of part of speech");
-            }
-
-            @Override
-            public void onSuccess(Map<String, String> result) {
-                for (String s : result.keySet()) {
-                    addItem(s, result.get(s));
-                }
-                setSelectedIndex(0);
-            }
-        };
-        this.addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                isEdited.setVal(true);
-                isLocallyEdited.setVal(true);
-            }
-        });
+        this.setVisible(type.getVisibilityForm());
         posService.getTermPOS(langID, posCallback);
     }
 

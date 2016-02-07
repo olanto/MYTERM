@@ -79,10 +79,10 @@ public class OwnerFormADMIN extends VerticalPanel {
         label_hash = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_PWD), sFields.get(GuiConstant.O_PWD));
         label_role = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_ROLE), sFields.get(GuiConstant.O_ROLE));
         label_st = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_O_STATUS), sFields.get(GuiConstant.O_STATUS));
-        text_fn = new TextBoxMyTerm(GuiConstant.O_FIRST_NAME, sFields, isEdited);
-        text_ln = new TextBoxMyTerm(GuiConstant.O_LAST_NAME, sFields, isEdited);
-        text_email = new TextBoxMyTerm(GuiConstant.O_MAILING, sFields, isEdited);
-        text_hash = new TextBoxMyTerm(GuiConstant.O_PWD, sFields, isEdited);
+        text_fn = new TextBoxMyTerm(sFields.get(GuiConstant.O_FIRST_NAME), isEdited);
+        text_ln = new TextBoxMyTerm(sFields.get(GuiConstant.O_LAST_NAME), isEdited);
+        text_email = new TextBoxMyTerm(sFields.get(GuiConstant.O_MAILING), isEdited);
+        text_hash = new TextBoxMyTerm(sFields.get(GuiConstant.O_PWD), isEdited);
         ownerRole = new OwnerRolesList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
         ownerStatus = new OwnerStatusList(GuiConstant.INTERFACE_LANG, isEdited, isLocallyEdited);
 

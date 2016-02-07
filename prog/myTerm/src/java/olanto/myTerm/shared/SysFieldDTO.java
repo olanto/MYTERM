@@ -48,17 +48,37 @@ public class SysFieldDTO implements IsSerializable {
         this.type = type;
         if (visibilityPublic.equalsIgnoreCase("visible")) {
             this.publicVisibility = true;
+            this.isExtraPublic = false;
+            this.isHiddenPublic = false;
         } else if (visibilityPublic.equalsIgnoreCase("extra")) {
+            this.publicVisibility = false;
             this.isExtraPublic = true;
+            this.isHiddenPublic = false;
         } else if (visibilityPublic.equalsIgnoreCase("hidden")) {
+            this.publicVisibility = false;
+            this.isExtraPublic = false;
             this.isHiddenPublic = true;
+        } else {
+            this.publicVisibility = false;
+            this.isExtraPublic = false;
+            this.isHiddenPublic = false;
         }
         if (visibilityForm.equalsIgnoreCase("visible")) {
             this.formVisibility = true;
+            this.isExtraForm = false;
+            this.isExtraPublic = false;
         } else if (visibilityForm.equalsIgnoreCase("extra")) {
+            this.formVisibility = false;
             this.isExtraForm = true;
+            this.isExtraPublic = false;
         } else if (visibilityForm.equalsIgnoreCase("hidden")) {
-            this.isHiddenForm = true;
+            this.formVisibility = false;
+            this.isExtraForm = false;
+            this.isExtraPublic = true;
+        } else {
+            this.formVisibility = false;
+            this.isExtraForm = false;
+            this.isExtraPublic = false;
         }
         if (!position.isEmpty()) {
             this.position = Integer.parseInt(position);
@@ -81,7 +101,7 @@ public class SysFieldDTO implements IsSerializable {
         this.position = position;
     }
 
-        public Boolean getVisibilityForm() {
+    public Boolean getVisibilityForm() {
         return formVisibility;
     }
 
@@ -100,11 +120,11 @@ public class SysFieldDTO implements IsSerializable {
     public void setAsExtraForm(Boolean isExtraForm) {
         this.isExtraForm = isExtraForm;
     }
-    
+
     public void setAsHiddenForm(Boolean isHiddenForm) {
         this.isHiddenForm = isHiddenForm;
     }
-    
+
     public Boolean getVisibilityPublic() {
         return publicVisibility;
     }
@@ -124,7 +144,7 @@ public class SysFieldDTO implements IsSerializable {
     public void setAsExtraPublic(Boolean isExtra) {
         this.isExtraPublic = isExtra;
     }
-    
+
     public void setAsHiddenPublic(Boolean isHiddenPublic) {
         this.isHiddenPublic = isHiddenPublic;
     }
@@ -151,6 +171,6 @@ public class SysFieldDTO implements IsSerializable {
 
     @Override
     public String toString() {
-        return "Field Type: " + this.type + "\nField Value: " + this.publicVisibility + ";" + this.position;
+        return "Field Type: " + this.type + "\nField Value: " + this.publicVisibility + ";" + this.position  + ";" +this.formVisibility;
     }
 }
