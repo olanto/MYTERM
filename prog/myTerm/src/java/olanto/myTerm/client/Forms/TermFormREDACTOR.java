@@ -280,7 +280,7 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1.remove(lang);
         form1.setWidget(2, 1, lang_lbl);
         form2.remove(term_type);
-        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited,sFields.get(GuiConstant.T_TYPE));
+        term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, isLocallyEdited, sFields.get(GuiConstant.T_TYPE));
         form2.setWidget(1, 1, term_type);
         if ((status == 'e') && (userLangs.contains(termDTO.getIdLanguage()))) {
             this.setReadOnly(false);
@@ -379,6 +379,11 @@ public class TermFormREDACTOR extends VerticalPanel {
 
         termDTO.setLastmodified(new Date(System.currentTimeMillis()));
         termDTO.setModifiedBy(BigInteger.valueOf(ownerID));
+
+        if (termDTO.getCreateBy() == null) {
+            termDTO.setCreation(new Date(System.currentTimeMillis()));
+            termDTO.setCreateBy(BigInteger.valueOf(ownerID));
+        }
         if (isLocallyEdited.getVal()) {
             termDTO.setStatus('e');
         } else {

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     //    @NamedQuery(name = "VjSource.findAll", query = "SELECT v FROM VjSource v"),
     //    @NamedQuery(name = "VjSource.findByUuid", query = "SELECT v FROM VjSource v WHERE v.uuid = :uuid"),
-    @NamedQuery(name = "VjSource.findByStatusAndOwner", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.status like :status AND v.lastmodifiedBy = :lastmodifiedBy"),
+    @NamedQuery(name = "VjSource.findByStatusAndOwner", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.status like :status AND (v.lastmodifiedBy = :lastmodifiedBy OR v.createBy = :lastmodifiedBy)"),
     @NamedQuery(name = "VjSource.findBySourceSolangResourceStatus", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.source LIKE :source AND v.idResource IN :idResource AND v.solang IN :solang AND v.status like :status"),
     @NamedQuery(name = "VjSource.findBySourceSolangResourceStatusSubjectField", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.source LIKE :source AND v.idResource IN :idResource AND v.solang IN :solang AND v.status like :status AND v.subjectField = :subjectField"),
     @NamedQuery(name = "VjSource.findBySolangResourceStatus", query = "SELECT DISTINCT v.idConcept FROM VjSource v WHERE v.idResource IN :idResource AND v.solang IN :solang AND v.status like :status"),
@@ -66,6 +66,8 @@ public class VjSource implements Serializable {
     private long idConcept;
     @Column(name = "lastmodified_by")
     private BigInteger lastmodifiedBy;
+    @Column(name = "create_by")
+    private BigInteger createBy;
     @Basic(optional = false)
     @Column(name = "resource_name")
     private String resourceName;
@@ -156,5 +158,13 @@ public class VjSource implements Serializable {
 
     public void setSubjectField(String subjectField) {
         this.subjectField = subjectField;
+    }
+
+    public BigInteger getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(BigInteger createBy) {
+        this.createBy = createBy;
     }
 }

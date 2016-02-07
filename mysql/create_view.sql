@@ -390,6 +390,7 @@ create or replace view v_source as
         t1.status status,
         c.id_concept,
         t1.lastmodified_by,
+        t1.create_by,
         r.resource_name,
         r.id_resource,
         c.subject_field
