@@ -81,6 +81,8 @@ insert into codeslang values ('FR', 'msg','tab.redactionPanel','Workspace', 'Esp
 insert into codeslang values ('FR', 'msg','tab.revisionPanel','To approve', 'A approuver');
 insert into codeslang values ('FR', 'msg','tab.adminPanel','Administration', 'Administration');
 
+insert into codeslang values ('FR', 'msg','msg.value.all','ALL', 'TOUS');
+
 insert into codeslang values ('FR', 'msg','btn.addTerm','ADD TERM', 'AJOUTER UN TERME');
 insert into codeslang values ('FR', 'msg','btn.delete','DELETE', 'SUPPRIMER');
 insert into codeslang values ('FR', 'msg','btn.save','SAVE', 'SAUVER');

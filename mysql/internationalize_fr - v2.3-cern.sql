@@ -40,12 +40,12 @@ insert into codeslang values ('FR','owner_status','INACTIVE','INACTIVE',null);
 insert into codeslang values ('FR','owner_status','DORMANT','DORMANT',null);
 
 -- Term type: fullForm, acronym, abbreviation, shortForm, variant, phrase
-insert into codeslang values ('FR', 'term_type','fullForm','Forme complète','default');
-insert into codeslang values ('FR', 'term_type','acronym','acronyme',null);
-insert into codeslang values ('FR', 'term_type','abbreviation','abréviation',null);
+insert into codeslang values ('FR', 'term_type','fullForm','Vedette','default');
+insert into codeslang values ('FR', 'term_type','acronym','Acronyme',null);
+-- insert into codeslang values ('FR', 'term_type','abbreviation','abréviation',null);
 insert into codeslang values ('FR', 'term_type','shortForm','Forme courte',null);
-insert into codeslang values ('FR', 'term_type','variant','Variante',null);
-insert into codeslang values ('FR', 'term_type','phrase','phrase',null);
+insert into codeslang values ('FR', 'term_type','variant','Synonyme',null);
+-- insert into codeslang values ('FR', 'term_type','phrase','phrase',null);
 
 -- noun, verb, adjective, adverb, properNoun,other
 insert into codeslang values ('FR', 'term_partofspeech','noun','nom','default');
@@ -146,10 +146,10 @@ insert into codeslang values ('FR', 'msg','lbl.t.extra_cross_ref', 'Extra Cross 
 insert into codeslang values ('FR', 'msg','lbl.t.image','Image', 'Image');
 
 insert into codeslang values ('FR', 'msg','lbl.c.subject_field','Subject field', 'Domaine');
-insert into codeslang values ('FR', 'msg','lbl.c.definition','Definition', 'Définition');
+insert into codeslang values ('FR', 'msg','lbl.c.definition','Definition', 'Définition EN');
 insert into codeslang values ('FR', 'msg','lbl.c.resource','Resource', 'Ressource');
 insert into codeslang values ('FR', 'msg','lbl.c.source_definition','Definition''s source', 'Source de la définition');
-insert into codeslang values ('FR', 'msg','lbl.c.note','Note', 'Note');
+insert into codeslang values ('FR', 'msg','lbl.c.note','Note', 'Définition FR');
 insert into codeslang values ('FR', 'msg','lbl.c.image','Image', 'Image');
 insert into codeslang values ('FR', 'msg','lbl.c.extra','Extra information', 'Information suppl.');
 insert into codeslang values ('FR', 'msg','lbl.c.creation', 'Creation date', 'Créer le');

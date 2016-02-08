@@ -47,10 +47,10 @@ insert into codes values ('owner_status','DORMANT',null,null);
 -- fullForm, acronym, abbreviation, shortForm, variant, phrase
 insert into codes values ('term_type','fullForm',null,'default');
 insert into codes values ('term_type','acronym',null,null);
-insert into codes values ('term_type','abbreviation',null,null);
+-- insert into codes values ('term_type','abbreviation',null,null);
 insert into codes values ('term_type','shortForm',null,null);
 insert into codes values ('term_type','variant',null,null);
-insert into codes values ('term_type','phrase',null,null);
+-- insert into codes values ('term_type','phrase',null,null);
 -- noun, verb, adjective, adverb, properNoun,other
 insert into codes values ('term_partofspeech','noun',null,'default');
 insert into codes values ('term_partofspeech','verb',null,null);
@@ -80,6 +80,9 @@ insert into codes values ('msg','tab.searchPanel','Term Search',null);
 insert into codes values ('msg','tab.redactionPanel','Workspace',null);
 insert into codes values ('msg','tab.revisionPanel','To approve',null);
 insert into codes values ('msg','tab.adminPanel','Administration',null);
+
+-- Values of seraches with all values
+insert into codes values ('msg','msg.value.all','ALL',null);
 
 insert into codes values ('msg','btn.addTerm','ADD TERM',null);
 insert into codes values ('msg','btn.delete','DELETE',null);
@@ -190,7 +193,7 @@ insert into codes values ('sys_field','t.source','visible;1;visible',null);
 insert into codes values ('sys_field','t.definition','visible;1;visible',null);
 insert into codes values ('sys_field','t.source_definition','visible;1;visible',null);
 insert into codes values ('sys_field','t.status','visible;2;visible',null);
-insert into codes values ('sys_field','t.type','hidden;2;hidden',null);
+insert into codes values ('sys_field','t.type','visible;2;visible',null);
 insert into codes values ('sys_field','t.note','visible;2;visible',null);
 insert into codes values ('sys_field','t.linguistic_note','visible;2;visible',null);
 insert into codes values ('sys_field','t.technical_note','visible;2;visible',null);
@@ -201,13 +204,13 @@ insert into codes values ('sys_field','t.reference_note_source','visible;2;extra
 insert into codes values ('sys_field','t.usage','extra;2;extra',null);
 insert into codes values ('sys_field','t.gender','hidden;3;hidden',null);
 insert into codes values ('sys_field','t.part_of_speech','hidden;3;hidden',null);
-insert into codes values ('sys_field','t.context','visible;2;visible',null);
+insert into codes values ('sys_field','t.context','visible;3;extra',null);
 insert into codes values ('sys_field','t.source_context','hidden;3;extra',null);
 insert into codes values ('sys_field','t.geo_usage', 'extra;1;extra', null);
 insert into codes values ('sys_field','t.creation', 'hidden;1;visible', null);
 insert into codes values ('sys_field','t.created_by', 'hidden;1;extra', null);
 insert into codes values ('sys_field','t.modification', 'hidden;1;extra', null);
-insert into codes values ('sys_field','t.last_modified_by', 'hidden;1;extra', null);
+insert into codes values ('sys_field','t.last_modified_by', 'hidden;1;visible', null);
 insert into codes values ('sys_field','t.cross_ref', 'hidden;2;extra', null);
 insert into codes values ('sys_field','t.extra_cross_ref', 'hidden;3;extra', null);
 insert into codes values ('sys_field','t.image', 'hidden;3;extra', null);
@@ -321,6 +324,7 @@ select * from vj_codifications where id_language='EN' and code_type='role';
 select * from vj_codifications where  id_language='FR' and code_type in ('role', 'term_type');
 
 
+select * from vj_codifications where id_language='FR' and code_type='term_partofspeech';
 select * from vj_codifications where id_language='FR' and code_type='term_type';
 select * from vj_codifications where id_language='AR' and code_type='term_type';
 
