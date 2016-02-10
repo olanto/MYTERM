@@ -106,10 +106,10 @@ public class TermFormREDACTOR extends VerticalPanel {
         form1 = new Grid(7, 2);
         form2 = new Grid(7, 2);
         form3 = new Grid(7, 2);
-        created_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CREATED_BY), sFields.get(GuiConstant.T_LANG));
-        created_by_ct = new Label("");
-        last_modif_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LAST_MODIF_BY), sFields.get(GuiConstant.T_LANG));
-        last_modif_by_ct = new Label("");
+        created_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CREATED_BY), sFields.get(GuiConstant.T_CREATED_BY));
+        created_by_ct = new LabelMyTerm("", sFields.get(GuiConstant.T_CREATED_BY));
+        last_modif_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LAST_MODIF_BY), sFields.get(GuiConstant.T_LAST_MODIF_BY));
+        last_modif_by_ct = new LabelMyTerm("", sFields.get(GuiConstant.T_LAST_MODIF_BY));
         label_lng = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LANG), sFields.get(GuiConstant.T_LANG));
         label_frm = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_FORM), sFields.get(GuiConstant.T_FORM));
         text_frm = new TextBoxMyTerm(sFields.get(GuiConstant.T_FORM), isEdited, isLocallyEdited);
