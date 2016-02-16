@@ -1,0 +1,8 @@
+<i>italic text</i>
+<b>bold text</b>
+
+For more information about W3C, please consult the 
+<A href="http://www.w3.org/" target="_blank">W3C Web site</A>.
+
+
+<IMG SRC="images/volcan.jpg" TITLE="Texte à afficher">
