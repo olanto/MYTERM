@@ -204,7 +204,7 @@ insert into codes values ('sys_field','t.reference_note_source','visible;2;extra
 insert into codes values ('sys_field','t.usage','extra;2;extra',null);
 insert into codes values ('sys_field','t.gender','hidden;3;hidden',null);
 insert into codes values ('sys_field','t.part_of_speech','hidden;3;hidden',null);
-insert into codes values ('sys_field','t.context','visible;3;extra',null);
+insert into codes values ('sys_field','t.context','visible;3;visible',null);
 insert into codes values ('sys_field','t.source_context','hidden;3;extra',null);
 insert into codes values ('sys_field','t.geo_usage', 'extra;1;extra', null);
 insert into codes values ('sys_field','t.creation', 'hidden;1;hidden', null);

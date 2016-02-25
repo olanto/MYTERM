@@ -50,6 +50,7 @@ import org.olanto.myterm.coredb.entityclasses.UsersResources;
 import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityException;
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
+import static org.olanto.myterm.util.ReplaceMediaLink.*;
 
 /**
  *
@@ -200,14 +201,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 result.append("&nbsp").append("<span class = \"sfield\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SUBJECT_FIELD)).append(": </span>").append(c.getSubjectField()).append("<br/>");
             }
             if ((c.getConceptDefinition() != null) && (!c.getConceptDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_DEFINITION).getVisibilityPublic())) {
-                result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_C_DEFINITION)).append(": </span>").append(c.getConceptDefinition()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_C_DEFINITION)).append(": </span>").append(replaceMediaLink(c.getConceptDefinition())).append("<br/>");
             }
             result.append("</td>").append("<td>");
             if ((c.getConceptSourceDefinition() != null) && (!c.getConceptSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SOURCE_DEFINITION).getVisibilityPublic())) {
-                result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SOURCE_DEFINITION)).append(": </span>").append(c.getConceptSourceDefinition()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SOURCE_DEFINITION)).append(": </span>").append(replaceMediaLink(c.getConceptSourceDefinition())).append("<br/>");
             }
             if ((c.getConceptNote() != null) && (!c.getConceptNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_NOTE).getVisibilityPublic())) {
-                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_C_NOTE)).append(": </span>").append(c.getConceptNote()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_C_NOTE)).append(": </span>").append(replaceMediaLink(c.getConceptNote())).append("<br/>");
             }
             if ((c.getCrossref() != null) && (!c.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_CROSS_REF).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CROSS_REF)).append(": </span>").append(c.getCrossref()).append("<br/>");
@@ -245,7 +246,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_IMAGE)).append(": </span>").append(c.getImage()).append("<br/>");
             }
             if ((c.getExtra() != null) && (!c.getExtra().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA).getVisibilityPublic())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA)).append(": </span>").append(c.getExtra()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_EXTRA)).append(": </span>").append(replaceMediaLink(c.getExtra())).append("<br/>");
             }
             result.append("</td>").append("</tr>");
             result.append("</table>");
