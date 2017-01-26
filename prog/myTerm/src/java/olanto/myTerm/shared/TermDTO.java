@@ -45,6 +45,7 @@ public class TermDTO implements IsSerializable {
     private String termSourceContext;
     private String termNote;
     private String technicalNote;
+    private String technicalNoteSource;
     private String referenceNote;
     private String linguisticNote;
     private String termType;
@@ -375,5 +376,19 @@ public class TermDTO implements IsSerializable {
      */
     public void setCrossref(String crossref) {
         this.crossref = crossref;
+    }
+
+    /**
+     * @return the technicalNoteSource
+     */
+    public String getTechnicalNoteSource() {
+        return technicalNoteSource;
+    }
+
+    /**
+     * @param technicalNoteSource the technicalNoteSource to set
+     */
+    public void setTechnicalNoteSource(String technicalNoteSource) {
+        this.technicalNoteSource = technicalNoteSource;
     }
 }

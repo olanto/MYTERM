@@ -503,7 +503,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             tDTO.setTechnicalNote(t.getSup0());
             tDTO.setLinguisticNote(t.getSup1());
             tDTO.setReferenceNote(t.getSup2());
-            return tDTO;
+            tDTO.setTechnicalNoteSource(t.getSup3());
+         return tDTO;
         }
         return null;
     }
@@ -545,7 +546,8 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             t.setSup0(tDTO.getTechnicalNote());
             t.setSup1(tDTO.getLinguisticNote());
             t.setSup2(tDTO.getReferenceNote());
-            return t;
+            t.setSup3(tDTO.getTechnicalNoteSource());
+           return t;
         }
         return null;
     }
