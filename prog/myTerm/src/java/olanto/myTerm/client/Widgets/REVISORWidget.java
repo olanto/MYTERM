@@ -276,7 +276,7 @@ public class REVISORWidget extends VerticalPanel {
             addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 5 * GuiConstant.WIDTH_UNIT);
-            addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept);
+            addcpt.setContentFromConceptEntryDTO(conceptEntryDTO.concept, isEdited, sysMsgs);
             if (!conceptEntryDTO.listlang.isEmpty()) {
                 addterms = new LangSetFormREVISOR(ownerID, addcpt);
                 addterms.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - (int) 1.5 * GuiConstant.WIDTH_UNIT);

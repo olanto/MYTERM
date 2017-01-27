@@ -62,9 +62,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
     public Button submit;
     public Button delete;
     public Button escape;
-    private Label label_dom;
     private Label label_rs;
-    public int type;
 
     public ConceptFormREDACTOR(ResourcesList rsrc, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         cform = new Grid(2, 3);
@@ -83,9 +81,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         submit = new Button(sysMsg.get(GuiConstant.BTN_SUBMIT));
         delete = new Button(sysMsg.get(GuiConstant.BTN_DELETE));
         escape = new Button(sysMsg.get(GuiConstant.BTN_ESCAPE));
-        label_dom = new Label("");
         label_rs = new Label("");
-        type = 1;
         rl = rsrc;
         setStyleName("conceptForm");
         add(cform);
@@ -130,6 +126,7 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         sfPanel.setCellHorizontalAlignment(label_sf, HorizontalPanel.ALIGN_LEFT);
         sfPanel.setCellHorizontalAlignment(sf, HorizontalPanel.ALIGN_RIGHT);
         rsrcPanel.setWidth(w * 1 / 3 + "px");
+        rsrcPanel.setCellHorizontalAlignment(label_rs, HorizontalPanel.ALIGN_RIGHT);
         ctrlPanel.setCellHorizontalAlignment(save, HorizontalPanel.ALIGN_LEFT);
         ctrlPanel.setCellHorizontalAlignment(submit, HorizontalPanel.ALIGN_RIGHT);
         ctrlPanel.setWidth(w * 1 / 3 + "px");
@@ -143,17 +140,15 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         text_nt.setWidth(w * 1 / 3 + "px");
     }
 
-    public void setContentFromConceptEntryDTO(ConceptDTO conceptDTO) {
+    public void setContentFromConceptEntryDTO(ConceptDTO conceptDTO, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         text_def.setText(conceptDTO.getConceptDefinition());
         text_sdef.setText(conceptDTO.getConceptSourceDefinition());
         text_nt.setText(conceptDTO.getConceptNote());
-        if ((conceptDTO.getSubjectField() != null) && (!conceptDTO.getSubjectField().isEmpty()) && (conceptDTO.getSubjectField().length() > 1)) {
-            type = 0;
-            sfPanel.remove(sf);
-            label_dom.setText(conceptDTO.getSubjectField());
-            sfPanel.add(label_dom);
-        }
         label_rs.setText(rl.getResName(conceptDTO.getIdResource()));
+        sfPanel.remove(sf);
+        sf = new DomainList(isEdited, conceptDTO.getSubjectField(), sysMsg.get(GuiConstant.MSG_ALL_VALUE));
+        sfPanel.add(sf);
+        sfPanel.setCellHorizontalAlignment(sf, HorizontalPanel.ALIGN_RIGHT);
     }
 
     public void setReadOnly(Boolean edit) {
@@ -167,10 +162,6 @@ public class ConceptFormREDACTOR extends HorizontalPanel {
         conceptDTO.setConceptDefinition(text_def.getText());
         conceptDTO.setConceptNote(text_nt.getText());
         conceptDTO.setConceptSourceDefinition(text_sdef.getText());
-        if (type == 0) {
-            conceptDTO.setSubjectField(label_dom.getText());
-        } else {
-            conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
-        }
+        conceptDTO.setSubjectField(sf.getItemText(sf.getSelectedIndex()));
     }
 }

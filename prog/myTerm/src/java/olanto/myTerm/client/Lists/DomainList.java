@@ -93,7 +93,7 @@ public class DomainList extends ListBox {
                 if (res.addAll(result)) {
                     int i = 0;
                     for (DomainDTO s : res) {
-                        addItem(s.getDomainDefaultName(),s.getDomainDefaultName());
+                        addItem(s.getDomainDefaultName(), s.getDomainDefaultName());
                         if (s.getDomainDefaultName().equalsIgnoreCase(Cookies.getCookie(MyTermCookiesNamespace.Domain))) {
                             i = res.indexOf(s);
                         }
@@ -109,6 +109,39 @@ public class DomainList extends ListBox {
             }
         });
         addItem(all, " ");
+        domService.getDomains(domCallback);
+    }
+
+    public DomainList(final BooleanWrap isEdited, final String currentDomain, final String all) {
+
+        domCallback = new AsyncCallback<Collection<DomainDTO>>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Failed to get list of domains");
+            }
+
+            @Override
+            public void onSuccess(Collection<DomainDTO> result) {
+                addItem(all, " ");
+                ArrayList<DomainDTO> res = new ArrayList<>();
+                if (res.addAll(result)) {
+                    int i = 1;
+                    for (DomainDTO s : res) {
+                        addItem(s.getDomainDefaultName(), s.getDomainDefaultName());
+                        if (s.getDomainDefaultName().equalsIgnoreCase(currentDomain)) {
+                            i = res.indexOf(s);
+                        }
+                    }
+                    setSelectedIndex(i + 1);
+                }
+            }
+        };
+        this.addChangeHandler(new ChangeHandler() {
+            @Override
+            public void onChange(ChangeEvent event) {
+                isEdited.setVal(true);
+            }
+        });
         domService.getDomains(domCallback);
     }
 }
