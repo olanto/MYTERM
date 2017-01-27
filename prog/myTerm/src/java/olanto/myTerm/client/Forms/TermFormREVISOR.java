@@ -86,8 +86,8 @@ public class TermFormREVISOR extends VerticalPanel {
     private TextAreaMyTerm text_ext;
     private Label label_techNt;
     private TextAreaMyTerm text_techNt;
-//    private Label label_stechNt;
-//    private TextAreaMyTerm text_stechNt;
+    private Label label_stechNt;
+    private TextAreaMyTerm text_stechNt;
     private Label label_lingNt;
     private TextAreaMyTerm text_lingNt;
     private Label label_refNt;
@@ -104,7 +104,7 @@ public class TermFormREVISOR extends VerticalPanel {
     public TermFormREVISOR(long ownerID, int type, HashMap<String, SysFieldDTO> sFields, BooleanWrap isEdited, HashMap<String, String> sysMsg) {
         form1 = new Grid(7, 2);
         form2 = new Grid(7, 2);
-        form3 = new Grid(7, 2);        
+        form3 = new Grid(7, 2);
         created_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_CREATED_BY), sFields.get(GuiConstant.T_CREATED_BY));
         created_by_ct = new LabelMyTerm("", sFields.get(GuiConstant.T_CREATED_BY));
         last_modif_by = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LAST_MODIF_BY), sFields.get(GuiConstant.T_LAST_MODIF_BY));
@@ -137,8 +137,8 @@ public class TermFormREVISOR extends VerticalPanel {
         text_ext = new TextAreaMyTerm(sFields.get(GuiConstant.T_EXTRA), isEdited);
         label_techNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TECH_NOTE), sFields.get(GuiConstant.T_TECH_NOTE));
         text_techNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_TECH_NOTE), isEdited);
-//       label_stechNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TECH_NOTE_SRC), sFields.get(GuiConstant.LBL_T_TECH_NOTE_SRC));
-//        text_stechNt = new TextAreaMyTerm(sFields.get(GuiConstant.LBL_T_TECH_NOTE_SRC), isEdited);
+        label_stechNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_TECH_NOTE_SRC), sFields.get(GuiConstant.T_TECH_NOTE_SRC));
+        text_stechNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_TECH_NOTE_SRC), isEdited);
         label_lingNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_LING_NOTE), sFields.get(GuiConstant.T_LING_NOTE));
         text_lingNt = new TextAreaMyTerm(sFields.get(GuiConstant.T_LING_NOTE), isEdited);
         label_refNt = new LabelMyTerm(sysMsg.get(GuiConstant.LBL_T_REFERENCE_NOTE), sFields.get(GuiConstant.T_REFERENCE_NOTE));
@@ -195,8 +195,8 @@ public class TermFormREVISOR extends VerticalPanel {
         form2.setWidget(4, 1, text_ext);
         form2.setWidget(5, 0, label_techNt);
         form2.setWidget(5, 1, text_techNt);
-//        form2.setWidget(6, 0, label_stechNt);
-//        form2.setWidget(6, 1, text_stechNt);
+        form2.setWidget(6, 0, label_stechNt);
+        form2.setWidget(6, 1, text_stechNt);
 
         form3.setWidget(0, 0, label_gdr);
         form3.setWidget(0, 1, term_gdr);
@@ -245,13 +245,13 @@ public class TermFormREVISOR extends VerticalPanel {
         text_sctxt.setText(termDTO.getTermSourceContext());
         text_nt.setText(termDTO.getTermNote());
         text_techNt.setText(termDTO.getTechnicalNote());
-        //text_stechNt.setText(termDTO.getTechnicalNoteSource());
+        text_stechNt.setText(termDTO.getTechnicalNoteSource());
         text_lingNt.setText(termDTO.getLinguisticNote());
         text_refNt.setText(termDTO.getReferenceNote());
-        
+
         created_by_ct.setText(termDTO.getCreatedBy());
         last_modif_by_ct.setText(termDTO.getLastModifiedBy());
-        
+
         form2.remove(term_type);
         term_type = new TermTypeList(GuiConstant.INTERFACE_LANG, termDTO.getTermType(), isEdited, sFields.get(GuiConstant.T_TYPE));
         form2.setWidget(1, 1, term_type);
@@ -309,7 +309,7 @@ public class TermFormREVISOR extends VerticalPanel {
         text_usg.setWidth(w * 1 / 4 + "px");
         text_ext.setWidth(w * 1 / 4 + "px");
         text_techNt.setWidth(w * 1 / 4 + "px");
-//        text_stechNt.setWidth(w * 1 / 4 + "px");
+        text_stechNt.setWidth(w * 1 / 4 + "px");
         text_lingNt.setWidth(w * 1 / 4 + "px");
         text_refNt.setWidth(w * 1 / 4 + "px");
     }
@@ -331,7 +331,7 @@ public class TermFormREVISOR extends VerticalPanel {
         disapprove.setEnabled(!isReadOnly);
         text_ext.setReadOnly(isReadOnly);
         text_techNt.setReadOnly(isReadOnly);
- //       text_stechNt.setReadOnly(isReadOnly);
+        text_stechNt.setReadOnly(isReadOnly);
         text_lingNt.setReadOnly(isReadOnly);
         text_refNt.setReadOnly(isReadOnly);
     }
@@ -359,7 +359,7 @@ public class TermFormREVISOR extends VerticalPanel {
         termDTO.setTermNote(text_nt.getText());
         termDTO.setExtra(text_ext.getText());
         termDTO.setTechnicalNote(text_techNt.getText());
-        //termDTO.setTechnicalNoteSource(text_stechNt.getText());
+        termDTO.setTechnicalNoteSource(text_stechNt.getText());
         termDTO.setLinguisticNote(text_lingNt.getText());
         termDTO.setReferenceNote(text_refNt.getText());
 
