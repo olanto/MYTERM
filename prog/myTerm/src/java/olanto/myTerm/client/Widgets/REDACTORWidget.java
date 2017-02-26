@@ -363,7 +363,6 @@ public class REDACTORWidget extends VerticalPanel {
                     if (isEdited.getVal()) {
                         addcpt.save.setEnabled(false);
                         getConceptEntryDTOFromWidget();
-//                        Window.alert(conceptEntryDTO.toStringDTO());
                         getService().RedactorUpdateConceptEntry(conceptEntryDTO, ownerID, searchMenu.langSrc.getLangIDs(), entrySaveCallback);
                     }
                 }
@@ -373,7 +372,6 @@ public class REDACTORWidget extends VerticalPanel {
                 public void onClick(ClickEvent event) {
                     addcpt.submit.setEnabled(false);
                     getConceptEntryDTOFromWidget();
-//                    Window.alert(conceptEntryDTO.toStringDTO());
                     getService().submitConceptEntry(conceptEntryDTO, ownerID, entrySubmitCallback);
                 }
             });

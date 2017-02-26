@@ -99,7 +99,6 @@ public class REVISORWidget extends VerticalPanel {
             public void onSuccess(ConceptEntryDTO result) {
                 if (result != null) {
                     conceptEntryDTO = result;
-//                Window.alert(conceptEntryDTO.toStringDTO());
                     refreshContentFromConceptEntryDTO();
                     History.newItem("p2saved");
                 } else {
@@ -183,7 +182,6 @@ public class REVISORWidget extends VerticalPanel {
             @Override
             public void onSuccess(ConceptEntryDTO result) {
                 conceptEntryDTO = result;
-//                Window.alert(conceptEntryDTO.toStringDTO());
                 refreshContentFromConceptEntryDTO();
                 History.newItem("p2loaded");
             }
@@ -291,7 +289,6 @@ public class REVISORWidget extends VerticalPanel {
                     if (isEdited.getVal()) {
                         addcpt.save.setEnabled(false);
                         getConceptEntryDTOFromWidget();
-//                    Window.alert(conceptEntryDTO.toStringDTO());
                         getService().RevisorUpdateConceptEntry(conceptEntryDTO, ownerID, searchMenu.langSrc.getLangIDs(), entrySaveCallback);
                     }
                 }
@@ -524,13 +521,11 @@ public class REVISORWidget extends VerticalPanel {
 
     private void approveConceptEntry() {
         getConceptEntryDTOFromWidget();
-//                    Window.alert(conceptEntryDTO.toStringDTO());
         getService().approveConceptEntry(conceptEntryDTO, ownerID, entryApproveCallback);
     }
 
     private void disapproveConceptEntry() {
         getConceptEntryDTOFromWidget();
-//                    Window.alert(conceptEntryDTO.toStringDTO());
         getService().disapproveConceptEntry(conceptEntryDTO, ownerID, entryDisapproveCallback);
     }
 

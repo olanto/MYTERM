@@ -35,6 +35,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import java.util.HashMap;
 import olanto.myTerm.client.MainEntryPoint;
@@ -125,7 +126,6 @@ public class READERWidget extends VerticalPanel {
                 resultsPanel.conceptDetails.clear();
                 resultsPanel.termsDetails.clear();
                 searchMenu.btnSend.setEnabled(false);
-//                Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                 MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
                 getService().getSearchResult(searchMenu.searchField.getText().replace("*", "%"), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
             }
@@ -140,7 +140,6 @@ public class READERWidget extends VerticalPanel {
                     resultsPanel.conceptDetails.clear();
                     resultsPanel.termsDetails.clear();
                     searchMenu.btnSend.setEnabled(false);
-//                    Window.alert(searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()).toString());
                     MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
                     getService().getSearchResult(searchMenu.searchField.getText().replace("*", "%"), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
                 }

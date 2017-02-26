@@ -45,9 +45,12 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     public Button addnewcpt;
     public HorizontalPanel buttonsPanel;
     private Label currentHeader;
+    public HorizontalPanel printButtonArea;
+    public Button printBtn;
 
     public ResultsContainerREDACTOR(HashMap<String, String> sysMsg) {
-
+        printBtn = new Button("Print");
+        printButtonArea = new HorizontalPanel();
         sideRes = new ScrollPanel();
         sideCurrent = new ScrollPanel();
         termsDetails = new ScrollPanel();
@@ -59,6 +62,8 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         currentHeader = new Label(sysMsg.get(GuiConstant.MSG_WORKSPACE_ENTRIES));
         add(sideVP);
         add(resVP);
+        resVP.add(printButtonArea);
+        printButtonArea.add(printBtn);
         resVP.add(conceptDetails);
         resVP.add(termsDetails);
         sideVP.add(sideRes);
@@ -83,9 +88,12 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
         termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
+        printButtonArea.setPixelSize(w * 3 / 4 - 20, h * 1 / 6);
         currentHeader.setWidth((w * 1 / 4) - 3 + "px");
         sideVP.setWidth((w * 1 / 4) + "px");
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
+        printButtonArea.setPixelSize(w * 3 / 4, h * 1 / 6);
+        printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }
 
     public void adjustSize(float s_widthper, float s_heightper) {
@@ -98,11 +106,13 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         currentHeader.setPixelSize((int) (w * s_widthper), GuiConstant.WIDTH_UNIT_EXTRA);
         if ((int) (w * s_widthper) > GuiConstant.SIDE_WIDTH) {
             sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
-            conceptDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
-            termsDetails.setWidth(GuiConstant.SIDE_WIDTH + "px");
+            conceptDetails.setWidth((w - GuiConstant.SIDE_WIDTH) + "px");
+            printButtonArea.setWidth((w - GuiConstant.SIDE_WIDTH - 20) + "px");
+            termsDetails.setWidth((w - GuiConstant.SIDE_WIDTH) + "px");
         } else {
             sideRes.setWidth((int) (w * s_widthper) + "px");
             conceptDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
+            printButtonArea.setWidth((int) (w * (1 - s_widthper) - 20) + "px");
             termsDetails.setWidth((int) (w * (1 - s_widthper)) + "px");
         }
         if ((int) (h * s_heightper) > GuiConstant.CPT_HEIGHT) {
@@ -113,5 +123,6 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
             termsDetails.setHeight((int) (h * (1 - s_heightper)) + "px");
         }
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
+        printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }
 }
