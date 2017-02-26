@@ -58,6 +58,7 @@ public class ResultsContainerBasic extends HorizontalPanel {
         conceptDetails.setStyleName("conceptContainer");
         termsDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
+        printBtn.setVisible(false);
     }
 
     public void adjustSize() {

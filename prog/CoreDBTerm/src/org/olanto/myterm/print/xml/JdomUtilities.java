@@ -21,7 +21,6 @@
  */
 package org.olanto.myterm.print.xml;
 
-
 import org.olanto.myterm.export.tbx.ExportTBXFromDB;
 import java.io.FileOutputStream;
 import java.text.DateFormat;
@@ -67,7 +66,7 @@ public class JdomUtilities {
     }
 
     /**
-     * crée un élément 
+     * crée un élément
      *
      * @param name nom de l'élément
      * @return élément
@@ -76,8 +75,7 @@ public class JdomUtilities {
         return new Element(name);
     }
 
-    
-       /**
+    /**
      * crée un élément préfixé par le name space
      *
      * @param name nom de l'élément
@@ -98,7 +96,7 @@ public class JdomUtilities {
         return new Element(name, nameSpace).setText(text);
     }
 
-     /**
+    /**
      * crée un élément avec un texte
      *
      * @param name nom de l'élément
@@ -109,7 +107,6 @@ public class JdomUtilities {
         return new Element(name).setText(text);
     }
 
-    
     /**
      * @return the racine
      */
@@ -131,20 +128,17 @@ public class JdomUtilities {
         }
     }
 
-        /**
+    /**
      * affiche le texte du xml dans la console
      *
      * @param document xml
      */
     static String getXML(Document document) {
-              //On utilise ici un affichage classique avec getPrettyFormat()
-            XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-            return sortie.outputString(document);
-            
-        }
+        //On utilise ici un affichage classique avec getPrettyFormat()
+        XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+        return sortie.outputString(document);
+    }
 
-    
-    
     /**
      * copie le texte du xml dans un fichier
      *
@@ -153,7 +147,7 @@ public class JdomUtilities {
      */
     static void saveXML(Document document, String namefile) {
         try {
-            msg("export file in: "+namefile);
+            msg("export file in: " + namefile);
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
             sortie.output(document, new FileOutputStream(namefile));
         } catch (java.io.IOException e) {
@@ -183,15 +177,15 @@ public class JdomUtilities {
             System.out.println(line);
         }
     }
-    
-    public static String getCurrentDate(){
-    DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-Date dateobj = new Date();
-return df.format(dateobj);
-}
-     public static String getFormattedDate(Date d){
-    DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
-return df.format(d).replace(" ", "T");
-}
 
+    public static String getCurrentDate() {
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        Date dateobj = new Date();
+        return df.format(dateobj);
+    }
+
+    public static String getFormattedDate(Date d) {
+        DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        return df.format(d).replace(" ", "T");
+    }
 }

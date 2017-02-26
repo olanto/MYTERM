@@ -21,7 +21,6 @@
  */
 package org.olanto.myterm.print.xml;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,30 +35,30 @@ import org.olanto.myterm.coredb.entityclasses.VjCodifications;
 public class LabelCodification {
 
     private static Map<String, String> lblcodif;
-   public static void main(String[] args) {
-       init("FR");
-       System.out.println(getMsg("lbl.c.subject_field"));
+
+    public static void main(String[] args) {
+        init("FR");
+        System.out.println(getMsg("lbl.c.subject_field"));
         System.out.println(getMsg("lbl.c.subject_fieldx"));
-      
-   }
- 
+    }
+
     public static void init(String idLanguage) {
-        lblcodif= new HashMap<>();
+        lblcodif = new HashMap<>();
         List<VjCodifications> testcode = Queries.getMsgCodification("msg", idLanguage);
         for (VjCodifications code : testcode) {
             //System.out.println(code.getCodeValue() + ", " + code.getCodeExtraLang());
-            lblcodif.put(code.getCodeValue(),code.getCodeExtraLang());
+            lblcodif.put(code.getCodeValue(), code.getCodeExtraLang());
         }
     }
-    
-    public static String  getMsg(String msg){
-        if (msg==null) return "";
-        String msglang=lblcodif.get(msg);
-        if (msglang==null){
-            return "*** warning no code for: "+msg;
+
+    public static String getMsg(String msg) {
+        if (msg == null) {
+            return "";
         }
-        return msglang+": ";
-        
+        String msglang = lblcodif.get(msg);
+        if (msglang == null) {
+            return "*** warning no code for: " + msg;
+        }
+        return msglang + ": ";
     }
-            
 }

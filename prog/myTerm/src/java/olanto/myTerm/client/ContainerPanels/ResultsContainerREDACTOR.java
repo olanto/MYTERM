@@ -77,6 +77,7 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         termsDetails.setStyleName("termsContainer");
         setStyleName("resultsContainer");
         addnewcpt.setVisible(false);
+        printBtn.setVisible(false);
         addnewcpt.setStyleName("addcpt");
     }
 

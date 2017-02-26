@@ -35,6 +35,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class READERWidget extends VerticalPanel {
     private static AsyncCallback<String> termCallback;
     private static AsyncCallback<String> conceptCallback;
     private static AsyncCallback<String> termsCallback;
+    private static AsyncCallback<Boolean> printCallback;
     private long ownerID;
     private long conceptID = -1;
 
@@ -73,6 +75,7 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(true);
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
+                    resultsPanel.printBtn.setVisible(true);
                 } else {
                     MainEntryPoint.statusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
                 }
@@ -85,6 +88,7 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
                 History.newItem("page0");
+                resultsPanel.printBtn.setVisible(false);
             }
         };
         conceptCallback = new AsyncCallback<String>() {
@@ -92,6 +96,7 @@ public class READERWidget extends VerticalPanel {
             public void onSuccess(String result) {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new HTML(result));
+                resultsPanel.printBtn.setVisible(true);
                 getService().getdetailsForTerms(conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), ownerID, GuiConstant.INTERFACE_LANG, termsCallback);
             }
 
@@ -100,6 +105,7 @@ public class READERWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.conceptDetails.add(new Label("Communication failed"));
                 History.newItem("page0");
+                resultsPanel.printBtn.setVisible(false);
             }
         };
         termsCallback = new AsyncCallback<String>() {
@@ -108,6 +114,7 @@ public class READERWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new HTML(result));
                 History.newItem("page0");
+                resultsPanel.printBtn.setVisible(true);
             }
 
             @Override
@@ -115,8 +122,21 @@ public class READERWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
                 History.newItem("page0");
+                resultsPanel.printBtn.setVisible(false);
             }
         };
+        printCallback = new AsyncCallback<Boolean>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Issue generating XML file for print");
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+            }
+        };
+
         // Listen for the button clicks
         searchMenu.btnSend.addClickHandler(new ClickHandler() {
             @Override
@@ -128,6 +148,12 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(false);
                 MainEntryPoint.statusPanel.setMessage("warning", "Query Processing, Please Wait...");
                 getService().getSearchResult(searchMenu.searchField.getText().replace("*", "%"), searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), searchMenu.langTgt.getValue(searchMenu.langTgt.getSelectedIndex()), searchMenu.rsrc.getSelectedRsIDs(searchMenu.rsrc.getSelectedIndex()), searchMenu.dom.getValue(searchMenu.dom.getSelectedIndex()), termCallback);
+            }
+        });
+        resultsPanel.printBtn.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                getService().printConceptEntry("", conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
             }
         });
         // Listen for the button clicks

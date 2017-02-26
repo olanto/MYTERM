@@ -23,7 +23,6 @@ package org.olanto.myterm.print.xml;
 
 import java.util.List;
 import javax.persistence.Query;
-import static org.olanto.myterm.print.xml.PrintXMLFromDB.*;
 import static org.olanto.myterm.print.xml.JdomUtilities.*;
 
 import org.jdom2.Element;
@@ -32,7 +31,6 @@ import org.olanto.myterm.coredb.Queries;
 import org.olanto.myterm.coredb.TermDB;
 import org.olanto.myterm.coredb.entityclasses.Concepts;
 import org.olanto.myterm.coredb.entityclasses.Langsets;
-import org.olanto.myterm.coredb.entityclasses.Resources;
 import org.olanto.myterm.coredb.entityclasses.Terms;
 
 /**

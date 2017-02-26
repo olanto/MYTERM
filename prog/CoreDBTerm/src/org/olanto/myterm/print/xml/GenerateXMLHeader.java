@@ -52,5 +52,4 @@ public class GenerateXMLHeader {
         sd.addContent(makeElem("p", "exported from myTerm (olanto.org) date: "+getCurrentDate()));
         return res;
     }
-
  }

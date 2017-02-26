@@ -21,7 +21,6 @@
  */
 package org.olanto.myterm.print.xml;
 
-import javax.swing.JTextArea;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -58,8 +57,6 @@ public class PrintXMLFromDB {
    //  doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "CERN","EN", false);
   
     System.out.println( doIt( "TESTCERN",1425,"FR"));
-
-
     }
 
     public static void init(String propertiesFile) {
@@ -85,33 +82,21 @@ public class PrintXMLFromDB {
         resource = Queries.getResourceID(resourceName, TermEnum.AutoCreate.NO);
         JdomUtilities.msg("start exporting :");
         racine.addContent(GenerateXMLHeader.setHeader(cssName, rootName));
-        racine.addContent(GenerateXMLEntries.getTermsFromDB(_language, conceptid));
-
-
-        
+        racine.addContent(GenerateXMLEntries.getTermsFromDB(_language, conceptid)); 
         return getXML(document);
-        
-        
-
     }
 
     public static void getProperties(String fileName) {
         Properties prop = new Properties();
-
         try {
             //load a properties file
-
             prop.load(new FileInputStream(fileName));
-
             //get the property value and print it out
             cssName = prop.getProperty("cssName");
             rootName = prop.getProperty("rootName");
-
-
         } catch (IOException ex) {
             ex.printStackTrace();
             System.err.println("error:" + fileName);
         }
-
     }
 }
