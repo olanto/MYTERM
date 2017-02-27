@@ -36,7 +36,6 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import java.util.HashMap;
 import olanto.myTerm.client.MainEntryPoint;
@@ -130,8 +129,8 @@ public class READERWidget extends VerticalPanel {
             @Override
             public void onSuccess(Boolean result) {
                 if (result) {
-                    open(Window.Location.getHost() + "/print/Concept" + conceptID + ".xml",
-                            "_self",
+                    open( GWT.getHostPageBaseURL().replace("myTerm/", "") + "print/Concept" + conceptID + ".xml",
+                            "_blank",
                             "menubar=no,"
                             + "location=false,"
                             + "resizable=yes,"

@@ -74,6 +74,7 @@ public class REDACTORWidget extends VerticalPanel {
     private static AsyncCallback<String> entryDeleteCallback;
     private static AsyncCallback<String> workspaceCallback;
     private static AsyncCallback<ConceptEntryDTO> getConceptDetailsCallback;
+    private static AsyncCallback<Boolean> printCallback;
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptFormREDACTOR addcpt;
     private static LangSetFormREDACTOR addterms;
@@ -81,6 +82,7 @@ public class REDACTORWidget extends VerticalPanel {
     private HashMap<String, SysFieldDTO> sFields;
     private HashMap<String, String> sysMsgs;
     public BooleanWrap isEdited = new BooleanWrap();
+    private long conceptID = -1;
 
     public REDACTORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
@@ -150,6 +152,27 @@ public class REDACTORWidget extends VerticalPanel {
                 History.newItem("page1");
             }
         };
+        printCallback = new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Issue generating XML file for print");
+            }
+
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    open(GWT.getHostPageBaseURL().replace("myTerm/", "") + "print/Concept" + conceptID + ".xml",
+                            "_blank",
+                            "menubar=no,"
+                            + "location=false,"
+                            + "resizable=yes,"
+                            + "scrollbars=yes,"
+                            + "status=no,"
+                            + "dependent=true");
+                }
+            }
+        };
+
         // Create an asynchronous callback to handle the result.
         entrySaveCallback = new AsyncCallback<ConceptEntryDTO>() {
             @Override
@@ -237,17 +260,24 @@ public class REDACTORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
                 History.newItem("page1");
+                resultsPanel.printBtn.setVisible(false);
             }
 
             @Override
             public void onSuccess(ConceptEntryDTO result) {
                 conceptEntryDTO = result;
 //                Window.alert(conceptEntryDTO.toStringDTO());
+                resultsPanel.printBtn.setVisible(true);
                 refreshContentFromConceptEntryDTO();
                 History.newItem("loaded");
             }
         };
-
+        resultsPanel.printBtn.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                getService().printConceptEntry(searchMenu.rsrc.getItemText(searchMenu.rsrc.getSelectedIndex()), conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
+            }
+        });
         searchMenu.btnAdd.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -344,6 +374,7 @@ public class REDACTORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
+            conceptID = conceptEntryDTO.concept.getIdConcept();
 //            Window.alert(conceptEntryDTO.toStringDTO());
             addcpt = new ConceptFormREDACTOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
@@ -647,5 +678,10 @@ public class REDACTORWidget extends VerticalPanel {
      @com.google.gwt.user.client.History::newItem(Ljava/lang/String;)(realhref);
      return false;
      }
+     }-*/;
+
+    private static native void open(String url, String name, String features)/*-{
+     var window = $wnd.open(url, name, features);
+     return window;
      }-*/;
 }

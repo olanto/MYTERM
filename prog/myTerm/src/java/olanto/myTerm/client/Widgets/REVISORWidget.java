@@ -33,6 +33,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -71,6 +72,7 @@ public class REVISORWidget extends VerticalPanel {
     private static AsyncCallback<String> entryDisapproveCallback;
     private static AsyncCallback<String> workspaceCallback;
     private static AsyncCallback<ConceptEntryDTO> getConceptDetailsCallback;
+    private static AsyncCallback<Boolean> printCallback;
     private static ConceptEntryDTO conceptEntryDTO;
     private static ConceptFormREVISOR addcpt;
     private static LangSetFormREVISOR addterms;
@@ -80,6 +82,7 @@ public class REVISORWidget extends VerticalPanel {
     private ArrayList<String> lsList;
     private ArrayList<Long> rsList;
     public BooleanWrap isEdited = new BooleanWrap();
+    private long conceptID = -1;
 
     public REVISORWidget(long idOwner, HashMap<String, SysFieldDTO> sysFields, HashMap<String, String> sysMsg) {
         ownerID = idOwner;
@@ -177,16 +180,43 @@ public class REVISORWidget extends VerticalPanel {
             public void onFailure(Throwable caught) {
                 resultsPanel.termsDetails.setWidget(new Label("Communication failed"));
                 History.newItem("page2");
+                resultsPanel.printBtn.setVisible(false);
             }
 
             @Override
             public void onSuccess(ConceptEntryDTO result) {
                 conceptEntryDTO = result;
+                resultsPanel.printBtn.setVisible(true);
                 refreshContentFromConceptEntryDTO();
                 History.newItem("p2loaded");
             }
         };
+        printCallback = new AsyncCallback<Boolean>() {
+            @Override
+            public void onFailure(Throwable caught) {
+                Window.alert("Issue generating XML file for print");
+            }
 
+            @Override
+            public void onSuccess(Boolean result) {
+                if (result) {
+                    open(GWT.getHostPageBaseURL().replace("myTerm/", "") + "print/Concept" + conceptID + ".xml",
+                            "_blank",
+                            "menubar=no,"
+                            + "location=false,"
+                            + "resizable=yes,"
+                            + "scrollbars=yes,"
+                            + "status=no,"
+                            + "dependent=true");
+                }
+            }
+        };
+        resultsPanel.printBtn.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                getService().printConceptEntry(searchMenu.rsrc.getItemText(searchMenu.rsrc.getSelectedIndex()), conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
+            }
+        });
         searchMenu.btnSearch.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -271,6 +301,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.conceptDetails.clear();
         resultsPanel.termsDetails.clear();
         if (conceptEntryDTO != null) {
+            conceptID = conceptEntryDTO.concept.getIdConcept();
             addcpt = new ConceptFormREVISOR(searchMenu.rsrc, sFields, isEdited, sysMsgs);
             resultsPanel.conceptDetails.setWidget(addcpt);
             addcpt.adjustSize(resultsPanel.conceptDetails.getOffsetWidth() - 5 * GuiConstant.WIDTH_UNIT);
@@ -549,5 +580,10 @@ public class REVISORWidget extends VerticalPanel {
      @com.google.gwt.user.client.History::newItem(Ljava/lang/String;)(realhref);
      return false;
      }
+     }-*/;
+
+    private static native void open(String url, String name, String features)/*-{
+     var window = $wnd.open(url, name, features);
+     return window;
      }-*/;
 }
