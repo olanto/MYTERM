@@ -35,7 +35,7 @@ import olanto.myTerm.shared.GuiConstant;
  * @author nizar ghoula - simple
  */
 public class ResultsContainerREDACTOR extends HorizontalPanel {
-
+    
     public ScrollPanel sideRes;
     public ScrollPanel sideCurrent;
     public ScrollPanel termsDetails;
@@ -47,7 +47,7 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
     private Label currentHeader;
     public HorizontalPanel printButtonArea;
     public Button printBtn;
-
+    
     public ResultsContainerREDACTOR(HashMap<String, String> sysMsg) {
         printBtn = new Button("Print");
         printButtonArea = new HorizontalPanel();
@@ -80,7 +80,7 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         printBtn.setVisible(false);
         addnewcpt.setStyleName("addcpt");
     }
-
+    
     public void adjustSize() {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT_EXTRA;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT_EXTRA;
@@ -89,14 +89,14 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
         sideCurrent.setPixelSize((int) (w * 1 / 4), h / 2);
         termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
-        printButtonArea.setPixelSize(w * 3 / 4 - 20, h * 1 / 6);
+        printButtonArea.setPixelSize(w * 3 / 4 - 20, GuiConstant.HEIGHT_UNIT);
         currentHeader.setWidth((w * 1 / 4) - 3 + "px");
         sideVP.setWidth((w * 1 / 4) + "px");
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
         printButtonArea.setPixelSize(w * 3 / 4, h * 1 / 6);
         printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }
-
+    
     public void adjustSize(float s_widthper, float s_heightper) {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT_EXTRA;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT_EXTRA;
@@ -123,6 +123,7 @@ public class ResultsContainerREDACTOR extends HorizontalPanel {
             conceptDetails.setHeight((int) (h * s_heightper) + "px");
             termsDetails.setHeight((int) (h * (1 - s_heightper)) + "px");
         }
+        printButtonArea.setHeight(GuiConstant.HEIGHT_UNIT + "px");
         buttonsPanel.setCellHorizontalAlignment(addnewcpt, HorizontalPanel.ALIGN_RIGHT);
         printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }

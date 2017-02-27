@@ -67,7 +67,7 @@ public class ResultsContainerBasic extends HorizontalPanel {
         sideRes.setPixelSize(w * 1 / 4, h);
         termsDetails.setPixelSize(w * 3 / 4, h * 5 / 6);
         conceptDetails.setPixelSize(w * 3 / 4, h * 1 / 6);
-        printButtonArea.setPixelSize(w * 3 / 4 - 20, h * 1 / 6);
+        printButtonArea.setPixelSize(w * 3 / 4 - 20, GuiConstant.HEIGHT_UNIT);
         printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }
 
@@ -77,7 +77,7 @@ public class ResultsContainerBasic extends HorizontalPanel {
         sideRes.setPixelSize((int) (w * s_widthper), h);
         termsDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * (1 - s_heightper)));
         conceptDetails.setPixelSize((int) (w * (1 - s_widthper)), (int) (h * s_heightper));
-        printButtonArea.setPixelSize((int) (w * (1 - s_widthper) - 20), (int) (h * s_heightper));
+        printButtonArea.setPixelSize((int) (w * (1 - s_widthper) - 20), GuiConstant.HEIGHT_UNIT);
         printButtonArea.setCellHorizontalAlignment(printBtn, HorizontalPanel.ALIGN_RIGHT);
     }
 }

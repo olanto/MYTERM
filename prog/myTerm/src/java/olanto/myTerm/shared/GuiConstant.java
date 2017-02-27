@@ -41,6 +41,7 @@ public class GuiConstant implements IsSerializable {
     public static final int CPT_HEIGHT = 140;
     public static final int SIDE_WIDTH = 340;
     public static final int WIDTH_UNIT = 8;
+    public static final int HEIGHT_UNIT = 20;
     public static final int HEADER_HEIGHT_EXTRA = 150;
     public static final int WIDTH_UNIT_EXTRA = 18;
     public static final int ADMIN_HEADER_HEIGHT = 170;

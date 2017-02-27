@@ -51,6 +51,7 @@ import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityExcept
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
 import org.olanto.myterm.print.xml.PrintXMLFromDB;
+import static org.olanto.myterm.print.xml.PrintXMLFromDB.init;
 import static org.olanto.myterm.util.ReplaceMediaLink.*;
 
 /**
@@ -58,12 +59,12 @@ import static org.olanto.myterm.util.ReplaceMediaLink.*;
  * @author simple
  */
 public class myTermServiceImpl extends RemoteServiceServlet implements myTermService {
-    
+
     private HashMap<String, String> sysMsgsrv;
     private HashMap<String, SysFieldDTO> sysFieldsrv;
     static final SimpleDateFormat DF_EN = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a");
     static final SimpleDateFormat DF_FR = new SimpleDateFormat("E dd.MM.yyyy");
-    
+
     @Override
     public String getSearchResult(String s, String ls, String lt, ArrayList<Long> resID, String domID) {
         TermDB.restart();
@@ -83,7 +84,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getInventory() {
         StringBuilder result = new StringBuilder("");
@@ -92,12 +93,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</div>");
         return result.toString();
     }
-    
+
     @Override
     public Collection<String> getResults(String s, String ls, String lt, long ownerID) {
         return JPAViewFunctions.getListForThis(s, ls, lt);
     }
-    
+
     @Override
     public Collection<LanguageDTO> getLanguages() {
         TermDB.restart();
@@ -111,7 +112,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return languages;
     }
-    
+
     @Override
     public Collection<LanguageDTO> getLanguagesByOwner(long ownerID) {
         // try and catch, problem with the ownerID
@@ -129,7 +130,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     @Override
     public Collection<ResourceDTO> getResourcesByOwner(String ownerMailing, String role) {
         // try and catch, problem with the ownerID
@@ -147,7 +148,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     @Override
     public Collection<DomainDTO> getDomains() {
         TermDB.restart();
@@ -161,7 +162,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return domains;
     }
-    
+
     @Override
     public String getdetailsForConcept(long conceptID, long ownerID) {
         StringBuilder result = new StringBuilder("");
@@ -197,7 +198,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             result.append("</tr>");
             result.append("<tr>");
             result.append("<td>");
-            
+
             if ((c.getSubjectField() != null) && (!c.getSubjectField().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_SUBJECT_FIELD).getVisibilityPublic())) {
                 result.append("&nbsp").append("<span class = \"sfield\">").append(sysMsgsrv.get(GuiConstant.LBL_C_SUBJECT_FIELD)).append(": </span>").append(c.getSubjectField()).append("<br/>");
             }
@@ -256,7 +257,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getdetailsForTerms(long conceptID, String langS, String langT, long ownerID, String interfaceLang) {
         StringBuilder result = new StringBuilder("");
@@ -298,7 +299,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         result.append("</div>");
         return result.toString();
     }
-    
+
     @Override
     public String getAddResult(String s, String ls, String resID, String domID, long ownerID) {
         TermDB.restart();
@@ -318,7 +319,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getWorkspaceElements(String ls, long ownerID) {
         TermDB.restart();
@@ -338,7 +339,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public ConceptEntryDTO getRedactorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList) {
         ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
@@ -346,7 +347,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         copyFromConceptEntry(conceptEntryDTO, c);
         return conceptEntryDTO;
     }
-    
+
     @Override
     public ConceptEntryDTO getRevisorDetailsForConcept(long conceptID, long ownerID, ArrayList<String> lsList) {
         ConceptEntryDTO conceptEntryDTO = new ConceptEntryDTO();
@@ -354,7 +355,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         copyFromConceptEntry(conceptEntryDTO, c);
         return conceptEntryDTO;
     }
-    
+
     private void copyFromConceptEntry(ConceptEntryDTO concepEntrytDTO, ConceptEntry conceptEntry) {
         copyFormConcept(concepEntrytDTO.concept, conceptEntry.getConcept());
         if (!conceptEntry.listlang.isEmpty()) {
@@ -370,7 +371,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             }
         }
     }
-    
+
     private ConceptEntry createFromConceptEntryDTO(ConceptEntryDTO conceptEntryDTO) {
         if (conceptEntryDTO != null) {
             ConceptEntry conceptEntry = new ConceptEntry(true);
@@ -394,7 +395,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     private void copyFormConcept(ConceptDTO cDTO, Concepts c) {
         cDTO.setConceptDefinition(c.getConceptDefinition());
         cDTO.setConceptNote(c.getConceptNote());
@@ -411,7 +412,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         cDTO.setLastmodifiedBy(c.getLastmodifiedBy());
         cDTO.setSubjectField(c.getSubjectField());
     }
-    
+
     private void copyFromConceptDTO(Concepts c, ConceptDTO cDTO) {
         if (cDTO != null) {
             c.setConceptDefinition(cDTO.getConceptDefinition());
@@ -430,7 +431,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
             c.setSubjectField(cDTO.getSubjectField());
         }
     }
-    
+
     private LangSetDTO copyFromLangSet(Langsets ls) {
         if (ls != null) {
             LangSetDTO lsDTO = new LangSetDTO();
@@ -444,7 +445,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     private Langsets copyFromLangSetDTO(LangSetDTO lsDTO) {
         if (lsDTO != null) {
             Langsets ls;
@@ -463,7 +464,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     private TermDTO copyFromTerm(Terms t) {
         if (t != null) {
             TermDTO tDTO = new TermDTO();
@@ -509,7 +510,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     private Terms copyFromTermDTO(TermDTO tDTO) {
         if (tDTO != null) {
             Terms t = new Terms();
@@ -552,7 +553,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String createConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -561,7 +562,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public ConceptEntryDTO RedactorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -571,7 +572,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String RedactorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -582,7 +583,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public ConceptEntryDTO RevisorUpdateConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID, ArrayList<String> lsList) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -592,7 +593,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String RevisorSaveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -603,7 +604,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String deleteConceptEntry(long conceptID, long ownerID) {
         if (ManageConcept.remove(conceptID)) {
@@ -611,13 +612,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String deleteTermEntry(long term) {
         ManageTerm.remove(term);
         return "Success";
     }
-    
+
     @Override
     public String submitConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -626,7 +627,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getApproveElements(String s, String ls, ArrayList<String> lsList, ArrayList<Long> resID, String domID, long ownerID) {
         String response = JPAViewFunctions.getApproveElements(s, ls, lsList, resID, domID, ownerID);
@@ -645,7 +646,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String publishTermEntry(long termID) {
         if (ManageTerm.approve(termID) != null) {
@@ -653,7 +654,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String disapproveTermEntry(long termID) {
         if (ManageTerm.disapprove(termID) != null) {
@@ -661,7 +662,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String approveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -670,7 +671,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String disapproveConceptEntry(ConceptEntryDTO conceptEntryDTO, long ownerID) {
         ConceptEntry cEntry = createFromConceptEntryDTO(conceptEntryDTO);
@@ -679,7 +680,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public Map<String, SysFieldDTO> getSysFieldsByLang(String langID) {
         Map<String, SysFieldDTO> sysFields = new HashMap<>();
@@ -697,7 +698,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return sysFields;
     }
-    
+
     @Override
     public Map<String, String> getTermTypes(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -706,7 +707,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public Map<String, String> getTermPOS(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -715,7 +716,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public Map<String, String> getTermGender(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -724,7 +725,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public Map<String, String> getSysMsgByLang(String langID) {
         Map<String, String> sysMsg = new HashMap<>();
@@ -738,7 +739,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         sysMsgsrv.putAll(sysMsg);
         return sysMsg;
     }
-    
+
     @Override
     public Map<String, String> getOwnerRoles(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -747,7 +748,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public Map<String, String> getOwnerStatus(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -756,7 +757,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public Collection<ResourceDTO> getResources() {
         List<Resources> l = Queries.getResources();
@@ -770,7 +771,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     @Override
     public Collection<OwnerDTO> getOwners() {
         List<Owners> o = Queries.getOwners();
@@ -784,7 +785,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return Collections.EMPTY_LIST;
     }
-    
+
     @Override
     public Map<String, String> getResourcePrivacy(String langID) {
         Map<String, String> map = new HashMap<>();
@@ -793,7 +794,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return map;
     }
-    
+
     @Override
     public String getOwnersDetails(String ownerMailing, String ownerStatus, String ownerRole) {
         List<Owners> o = Queries.getOwners(ownerMailing, ownerStatus, ownerRole);
@@ -836,7 +837,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getDomainsDetails(String domName) {
         List<Domains> dset = Queries.getDomains(domName);
@@ -867,7 +868,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getResourcesDetails(String resName, String resPrivacy) {
         TermDB.restart();
@@ -907,7 +908,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getLanguagesDetails(String langID, String langName) {
         TermDB.restart();
@@ -941,7 +942,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getUsersResourcesDetails(long ownerID, long resID, String role) {
         TermDB.restart();
@@ -985,7 +986,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getUsersResourcesDetails(long id) {
         TermDB.restart();
@@ -1029,7 +1030,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getUsersLanguagesDetails(long ownerID, String langID) {
         TermDB.restart();
@@ -1067,7 +1068,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getUsersLanguagesDetails(long id) {
         TermDB.restart();
@@ -1105,13 +1106,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String getEntitiesDetails(String s, String langID, long resID, String domID) {
         TermDB.restart();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public OwnerDTO getOwnerDetails(long ownerID) {
         TermDB.restart();
@@ -1123,7 +1124,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public ResourceDTO getResourceDetails(long resID) {
         TermDB.restart();
@@ -1135,7 +1136,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public DomainDTO getDomainDetails(long domID) {
         TermDB.restart();
@@ -1147,7 +1148,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public LanguageDTO getLanguageDetails(String langID) {
         TermDB.restart();
@@ -1159,14 +1160,14 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String createUser(OwnerDTO ownerDTO) {
         ManageOwner.create(ownerDTO.getFirstName(), ownerDTO.getLastName(),
                 ownerDTO.getEmail(), ownerDTO.getStatus(), ownerDTO.getHash(), ownerDTO.getRole());
         return "sucess";
     }
-    
+
     @Override
     public OwnerDTO AdminUpdateUser(OwnerDTO ownerDTO) {
         Owners oa = new Owners();
@@ -1183,7 +1184,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveUser(OwnerDTO ownerDTO) {
         Owners oa = new Owners();
@@ -1201,29 +1202,29 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public Boolean getOwnerUsage(long ownerID) {
         return Queries.getOwnerActivity(ownerID);
     }
-    
+
     @Override
     public String deleteUser(long ownerID) {
         ManageOwner.remove(ownerID);
         return "Success";
     }
-    
+
     @Override
     public Boolean getResourceUsage(long resID) {
         return JPAViewFunctions.getResourceActivity(resID);
     }
-    
+
     @Override
     public String deleteResource(long resID) {
         ManageResource.remove(resID);
         return "Success";
     }
-    
+
     @Override
     public ResourceDTO AdminUpdateResource(ResourceDTO resourceDTO) {
         Resources rs = new Resources();
@@ -1239,7 +1240,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveResource(ResourceDTO resourceDTO) {
         Resources rs = new Resources();
@@ -1256,18 +1257,18 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String createResource(ResourceDTO resourceDTO) {
         ManageResource.create(resourceDTO.getResourceName(), resourceDTO.getResourcePrivacy(), resourceDTO.getIdOwner(), resourceDTO.getExtra());
         return "sucess";
     }
-    
+
     @Override
     public Boolean getLanguageUsage(String langID) {
         return JPAViewFunctions.getLanguageActivity(langID);
     }
-    
+
     @Override
     public String createLanguage(LanguageDTO langDTO) {
         Languages lan = new Languages();
@@ -1278,13 +1279,13 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String deleteLanguage(String langID) {
         ManageLanguages.remove(langID);
         return "success";
     }
-    
+
     @Override
     public LanguageDTO AdminUpdateLanguage(LanguageDTO langDTO) {
         Languages lan = new Languages();
@@ -1296,7 +1297,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveLanguage(LanguageDTO langDTO) {
         Languages lan = new Languages();
@@ -1309,7 +1310,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String createUserResource(UserResourceDTO userResource) {
         UsersResources usrRes = new UsersResources();
@@ -1319,7 +1320,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         TermDB.usersResourcesJC.create(usrRes);
         return "success";
     }
-    
+
     @Override
     public String deleteUserResource(long id) {
         try {
@@ -1330,7 +1331,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public UserResourceDTO getUserResource(long id) {
         UsersResources ures = Queries.getUserResource(id);
@@ -1341,7 +1342,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         usrRes.setOwnerRole(ures.getOwnerRoles());
         return usrRes;
     }
-    
+
     @Override
     public UserResourceDTO AdminUpdateUserResource(UserResourceDTO userResource) {
         UsersResources usrRes = new UsersResources();
@@ -1359,7 +1360,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveUserResource(UserResourceDTO userResource) {
         UsersResources usrRes = new UsersResources();
@@ -1377,7 +1378,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String createUserLanguage(UserLanguageDTO userLanguage) {
         UsersLanguages usrLang = new UsersLanguages();
@@ -1386,7 +1387,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         TermDB.usersLanguagesJC.create(usrLang);
         return "success";
     }
-    
+
     @Override
     public String deleteUserLanguage(long id) {
         try {
@@ -1397,7 +1398,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public UserLanguageDTO getUserLanguage(long id) {
         UsersLanguages ulang = Queries.getUserLanguage(id);
@@ -1407,7 +1408,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         usrLang.setIdOwner(ulang.getIdOwner());
         return usrLang;
     }
-    
+
     @Override
     public UserLanguageDTO AdminUpdateUserLanguage(UserLanguageDTO userLanguage) {
         UsersLanguages usrLang = new UsersLanguages();
@@ -1424,7 +1425,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveUserLanguage(UserLanguageDTO userLanguage) {
         UsersLanguages usrLang = new UsersLanguages();
@@ -1441,12 +1442,12 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public Boolean getDomainUsage(long domID) {
         return Queries.getDomainActivity(domID);
     }
-    
+
     @Override
     public String createDomain(DomainDTO domain) {
         Domains dom = new Domains();
@@ -1455,7 +1456,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         TermDB.domainsJC.create(dom);
         return "success";
     }
-    
+
     @Override
     public String deleteDomain(long domID) {
         try {
@@ -1466,7 +1467,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public DomainDTO AdminUpdateDomain(DomainDTO domain) {
         Domains dom = new Domains();
@@ -1482,7 +1483,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public String AdminSaveDomain(DomainDTO domain) {
         Domains dom = new Domains();
@@ -1498,12 +1499,17 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
         }
         return null;
     }
-    
+
     @Override
     public Boolean printConceptEntry(String resourceName, long conceptId, String language) {
-        String fileName = "Concept" + conceptId + ".xml";
-        PrintXMLFromDB.init(resourceName);
-        System.out.println(PrintXMLFromDB.doIt(resourceName, conceptId, language));
+        String fileName = "C:\\MYTERM\\includehtmltag\\print\\Concept" + conceptId + ".xml";
+        PrintXMLFromDB.init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\print\\xml\\print.properties");
+        String contentXML = PrintXMLFromDB.doIt(resourceName, conceptId, language);
+        if (contentXML != null && !contentXML.isEmpty()) {
+            if (UtilsFiles.String2File(fileName, contentXML) != null) {
+                return true;
+            }
+        }
         return false;
     }
 }

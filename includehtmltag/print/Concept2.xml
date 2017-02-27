@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="/print/nice.css"?>
+<nicetbx type="TBX-Basic" xml:lang="en-US">
+  <header>
+    <titleRes>
+      <p>INSERTED WITH SQL</p>
+    </titleRes>
+    <noteRes>
+      <p />
+    </noteRes>
+    <sourceRes>
+      <p>exported from myTerm (olanto.org) date: 2017-24-27 02:24:31</p>
+    </sourceRes>
+  </header>
+  <body>
+    <termEntry>
+      <idConcept>ID: 2</idConcept>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility" />
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility" />
+      </transacGrp>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>moon</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility" />
+            <date>2031-00-20T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility" />
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i>a moon is</i>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Definition's source:</e>
+              <i>from dictionary ..</i>
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>a new moon in the night</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Context's source:</e>
+                <i>from book...</i>
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i>here a note</i>
+            </p>
+          </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>Status:</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>neuter</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i>used to ...</i>
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>encyclodia ..</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>lune</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility" />
+            <date>2031-00-20T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility" />
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i>la lune est le satellite ...</i>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Definition's source:</e>
+              <i>du dictionnaire ..</i>
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>la lune est pleine ce soir</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Context's source:</e>
+                <i>du roman ...</i>
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i>ici une note</i>
+            </p>
+          </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <administrativeStatus>
+            <p>
+              <e>Status:</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>feminine</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i>utilis├® ...</i>
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>encyclodie ..</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+    </termEntry>
+  </body>
+</nicetbx>

@@ -75,7 +75,6 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(true);
                 if (result != null) {
                     resultsPanel.sideRes.setWidget(new HTML(result));
-                    resultsPanel.printBtn.setVisible(true);
                 } else {
                     MainEntryPoint.statusPanel.setMessage("warning", "Could not find what you are looking for, please try with a different term");
                 }
@@ -88,7 +87,6 @@ public class READERWidget extends VerticalPanel {
                 searchMenu.btnSend.setEnabled(true);
                 resultsPanel.sideRes.setWidget(new Label("Communication failed"));
                 History.newItem("page0");
-                resultsPanel.printBtn.setVisible(false);
             }
         };
         conceptCallback = new AsyncCallback<String>() {
@@ -114,7 +112,6 @@ public class READERWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new HTML(result));
                 History.newItem("page0");
-                resultsPanel.printBtn.setVisible(true);
             }
 
             @Override
@@ -122,11 +119,9 @@ public class READERWidget extends VerticalPanel {
                 MainEntryPoint.statusPanel.clearMessages();
                 resultsPanel.termsDetails.add(new Label("Communication failed"));
                 History.newItem("page0");
-                resultsPanel.printBtn.setVisible(false);
             }
         };
         printCallback = new AsyncCallback<Boolean>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Issue generating XML file for print");
@@ -134,6 +129,16 @@ public class READERWidget extends VerticalPanel {
 
             @Override
             public void onSuccess(Boolean result) {
+                if (result) {
+                    open(Window.Location.getHost() + "/print/Concept" + conceptID + ".xml",
+                            "_self",
+                            "menubar=no,"
+                            + "location=false,"
+                            + "resizable=yes,"
+                            + "scrollbars=yes,"
+                            + "status=no,"
+                            + "dependent=true");
+                }
             }
         };
 
@@ -153,7 +158,7 @@ public class READERWidget extends VerticalPanel {
         resultsPanel.printBtn.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                getService().printConceptEntry("", conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
+                getService().printConceptEntry(searchMenu.rsrc.getItemText(searchMenu.rsrc.getSelectedIndex()), conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
             }
         });
         // Listen for the button clicks
@@ -196,5 +201,10 @@ public class READERWidget extends VerticalPanel {
      @com.google.gwt.user.client.History::newItem(Ljava/lang/String;)(realhref);
      return false;
      }
+     }-*/;
+
+    private static native void open(String url, String name, String features)/*-{
+     var window = $wnd.open(url, name, features);
+     return window;
      }-*/;
 }

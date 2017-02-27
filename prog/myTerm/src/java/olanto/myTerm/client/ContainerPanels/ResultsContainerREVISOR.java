@@ -69,6 +69,7 @@ public class ResultsContainerREVISOR extends HorizontalPanel {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT - 2;
         sideRes.setHeight(h + "px");
+        printButtonArea.setHeight(GuiConstant.HEIGHT_UNIT + "px");
         if ((w * 1 / 4) > GuiConstant.SIDE_WIDTH) {
             sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
             conceptDetails.setWidth((w - GuiConstant.SIDE_WIDTH) + "px");
@@ -94,6 +95,7 @@ public class ResultsContainerREVISOR extends HorizontalPanel {
         int h = Window.getClientHeight() - GuiConstant.HEADER_HEIGHT;
         int w = Window.getClientWidth() - GuiConstant.WIDTH_UNIT - 2;
         sideRes.setHeight(h + "px");
+        printButtonArea.setHeight(GuiConstant.HEIGHT_UNIT + "px");
         if ((int) (w * s_widthper) > GuiConstant.SIDE_WIDTH) {
             sideRes.setWidth(GuiConstant.SIDE_WIDTH + "px");
             conceptDetails.setWidth((w - GuiConstant.SIDE_WIDTH) + "px");
