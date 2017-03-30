@@ -12,7 +12,7 @@ seg { display: block; clear: both; margin: 0; padding: 0; height: 6px; }
 src { float: left; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }
 tgt { float: right; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }
 b { font-weight: bold; }
-e { font-weight: italic; color: green;  }
+e { font-weight: italic; color: blue;  }
 i { font-weight: plain;  }
 u { text-decoration: underline; }
 p { display: block;}

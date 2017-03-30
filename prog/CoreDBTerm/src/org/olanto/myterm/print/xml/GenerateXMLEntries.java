@@ -74,17 +74,21 @@ public class GenerateXMLEntries {
 
     public static Element addXMLNice(Element elem, String tag, String lib, String content) {
         Element child = makeElem(tag);
-        Element title = makeElem("e", LabelCodification.getMsg(lib));
-        Element cont = makeElem("i", content);
-        Element txt = makeElem("p");
-        txt.addContent(title);
-        txt.addContent(cont);
-        child.addContent(txt);
-
+        if (!content.equals("")) {
+            Element title = makeElem("e", LabelCodification.getMsg(lib));
+        Element cont = makeElem("i", ReplaceMediaLink.replaceMediaLink(content));
+            Element txt = makeElem("p");
+            txt.addContent(title);
+            txt.addContent(cont);
+            child.addContent(txt);
+        }
+        //else System.out.println("empty");
         elem.addContent(child);
         return child;
     }
 
+ 
+    
     public static void addConceptElem(Element termentry, Concepts con) {
         if (con.getSubjectField() != null) {
 

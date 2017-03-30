@@ -136,9 +136,25 @@ public class JdomUtilities {
     static String getXML(Document document) {
         //On utilise ici un affichage classique avec getPrettyFormat()
         XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-        return sortie.outputString(document);
+        String result=sortie.outputString(document);
+        result = hackIMG(result);
+        return result;
     }
 
+     static String hackIMG(String s){
+             s=s.replace("&lt;MEDIA ","<");
+             s=s.replace("&gt;MEDIA",">");        
+             s=s.replace("&gt;MEDIA",">");
+            s=s.replace("&lt;h1&gt;","<h1>"); s=s.replace("&lt;/h1&gt;","</h1>"); 
+            s=s.replace("&lt;h2&gt;","<h2>"); s=s.replace("&lt;/h2&gt;","</h2>"); 
+            s=s.replace("&lt;p&gt;","<p>"); s=s.replace("&lt;/p&gt;","</p>");s=s.replace("&lt;p/&gt;","<p/>"); 
+            s=s.replace("&lt;br&gt;","<br>"); s=s.replace("&lt;/br&gt;","</br>");s=s.replace("&lt;br/&gt;","<br/>"); 
+           s=s.replace("&lt;ul&gt;","<ul>"); s=s.replace("&lt;/ul&gt;","</ul>");s=s.replace("&lt;ul/&gt;","<ul/>"); 
+           s=s.replace("&lt;li&gt;","<li>"); s=s.replace("&lt;/li&gt;","</li>");s=s.replace("&lt;li/&gt;","<li/>"); 
+            s=s.replace("&lt;h3&gt;","<h3>"); s=s.replace("&lt;/h3&gt;","</h3>"); 
+           return s;
+     }
+    
     /**
      * copie le texte du xml dans un fichier
      *
