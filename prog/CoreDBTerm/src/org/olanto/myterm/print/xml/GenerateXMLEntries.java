@@ -212,7 +212,11 @@ public class GenerateXMLEntries {
                 transgrp.addContent(makeElem("date", getFormattedDate(ter.getLastmodified())));
             }
         }
-        if (ter.getTermDefinition() != null) {
+         if (ter.getTermSource() != null) {
+            // tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
+            addXMLNice(tig, "tsource", "lbl.t.source", ter.getTermSource());
+        }
+       if (ter.getTermDefinition() != null) {
             //tig.addContent(makeElem("descrip", ter.getTermDefinition()).setAttribute("type", "definition"));
             addXMLNice(tig, "tdefinition", "lbl.t.definition", ter.getTermDefinition());
         }
@@ -237,19 +241,19 @@ public class GenerateXMLEntries {
             //tig.addContent(makeElem("note", ter.getTermNote()));
             addXMLNice(tig, "tnote", "lbl.t.note", ter.getTermNote());
         }
-        if (ter.getTermPartofspeech() != null) {
-            //System.out.println("partOfSpeech"+ter.getTermPartofspeech());
-            //tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
-            addXMLNice(tig, "tpartOfSpeech", "lbl.t.part_of_speech", ter.getTermPartofspeech());
-        }
+//        if (ter.getTermPartofspeech() != null) {
+//            //System.out.println("partOfSpeech"+ter.getTermPartofspeech());
+//            //tig.addContent(makeElem("termNote", ter.getTermPartofspeech()).setAttribute("type", "partOfSpeech"));
+//            addXMLNice(tig, "tpartOfSpeech", "lbl.t.part_of_speech", ter.getTermPartofspeech());
+//        }
         if (ter.getTermAdminStatus() != null) {
             //tig.addContent(makeElem("termNote", ter.getTermAdminStatus()).setAttribute("type", "administrativeStatus"));
             addXMLNice(tig, "administrativeStatus", "lbl.t.status", ter.getTermAdminStatus());
         }
-        if (ter.getTermGender() != null) {
-            //tig.addContent(makeElem("termNote", ter.getTermGender()).setAttribute("type", "grammaticalGender"));
-            addXMLNice(tig, "grammaticalGender", "lbl.t.gender", ter.getTermGender());
-        }
+//        if (ter.getTermGender() != null) {
+//            //tig.addContent(makeElem("termNote", ter.getTermGender()).setAttribute("type", "grammaticalGender"));
+//            addXMLNice(tig, "grammaticalGender", "lbl.t.gender", ter.getTermGender());
+//        }
         if (ter.getTermType() != null) {
             //tig.addContent(makeElem("termNote", ter.getTermType()).setAttribute("type", "termType"));
             addXMLNice(tig, "termType", "lbl.t.type", ter.getTermType());
@@ -281,10 +285,6 @@ public class GenerateXMLEntries {
         if (ter.getTermUsage() != null) {
             // tig.addContent(makeElem("termNote", ter.getTermUsage()).setAttribute("type", "usage"));
             addXMLNice(tig, "tusage", "lbl.t.usage", ter.getTermUsage());
-        }
-        if (ter.getTermSource() != null) {
-            // tig.addContent(makeElem("admin", ter.getTermSource()).setAttribute("type", "source"));
-            addXMLNice(tig, "tsource", "lbl.t.source", ter.getTermSource());
         }
         if (ter.getCrossref() != null) {
             String ref = ter.getCrossref().replace("\n", "");

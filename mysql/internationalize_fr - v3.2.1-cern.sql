@@ -139,7 +139,7 @@ insert into codeslang values ('EN', 'msg','lbl.t.linguistic_note_source','Lingui
 
 
 insert into codeslang values ('FR', 'msg','lbl.t.technical_note_source','Technical Note Source', 'Source note technique');
-insert into codeslang values ('EN', 'msg','lbl.t.technical_note_source','Technical Note Source', 'Source of technicaé note');
+insert into codeslang values ('EN', 'msg','lbl.t.technical_note_source','Technical Note Source', 'Source of technical note');
 
 insert into codeslang values ('FR', 'msg','lbl.t.reference_note_source','Reference Note Source', 'Source note Référence');
 insert into codeslang values ('EN', 'msg','lbl.t.reference_note_source','Reference Note Source', 'Source of reference note');
@@ -163,11 +163,22 @@ insert into codeslang values ('FR', 'msg','lbl.t.extra_cross_ref', 'Extra Cross 
 insert into codeslang values ('FR', 'msg','lbl.t.image','Image', 'Image');
 
 insert into codeslang values ('FR', 'msg','lbl.c.subject_field','Subject field', 'Domaine');
+
 insert into codeslang values ('FR', 'msg','lbl.c.definition','Definition', 'Image');
+insert into codeslang values ('EN', 'msg','lbl.c.definition','Definition', 'Image');
+
 insert into codeslang values ('FR', 'msg','lbl.c.resource','Resource', 'Ressource');
+
 insert into codeslang values ('FR', 'msg','lbl.c.source_definition','Definition''s source', 'Source');
+insert into codeslang values ('EN', 'msg','lbl.c.source_definition','Definition''s source', 'Source');
+
 insert into codeslang values ('FR', 'msg','lbl.c.note','Note', 'Renvoi');
+insert into codeslang values ('EN', 'msg','lbl.c.note','Note', 'Cross-reference');
+
+
 insert into codeslang values ('FR', 'msg','lbl.c.image','Image', 'Image');
+
+
 insert into codeslang values ('FR', 'msg','lbl.c.extra','Extra information', 'Information suppl.');
 insert into codeslang values ('FR', 'msg','lbl.c.creation', 'Creation date', 'Créé le');
 insert into codeslang values ('FR', 'msg','lbl.c.created_by', 'Created by', 'Créé par');

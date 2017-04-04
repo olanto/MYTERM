@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="nice.css"?>
+<nicetbx type="TBX-Basic" xml:lang="en-US">
+  <header>
+    <titleRes>
+      <p>TESTCERN</p>
+    </titleRes>
+    <noteRes>
+      <p />
+    </noteRes>
+    <sourceRes>
+      <p>exported from myTerm (olanto.org) date: 2017-51-23 16:51:27</p>
+    </sourceRes>
+  </header>
+  <body>
+    <termEntry>
+      <idConcept>ID: 6516</idConcept>
+      <subjectField>
+        <p>
+          <e>Domaine:</e>
+          <i>TOUS</i>
+		  <img SRC="/images/volcan.jpg" TITLE="Texte à afficher" width="200"/>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition />
+        <csource />
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2016-00-17T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2016-00-15T00:00:00</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>Définition FR:</e>
+          <i></i>
+        </p>
+      </cnote>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>test</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-00-17T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-00-15T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Définition:</e>
+              <img SRC="/images/volcan.jpg" TITLE="Texte à afficher" width="200"/>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source de définition:</e>
+              <i>xx</i>
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext />
+            <tsource_context />
+          </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i><h3>play videos</h3>
+<VIDEO SRC="/videos/big_buck_bunny_720p_1mb.mp4"  width="400" height="300" autostart="false" controls="true" />
+more 1...
+<VIDEO SRC="/videos/big_buck_bunny_720p_1mb.mp4" controls="true" />
+more 2...
+<VIDEO SRC="http://localhost/videos/big_buck_bunny_720p_1mb.mp4"  width="400" height="300" autostart="false" controls="true" />
+more 3 ...<VIDEO SRC="http://localhost/videos/big_buck_bunny_720p_1mb.mp4" controls="true" /></i>
+            </p>
+          </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Catégorie grammaticale:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Genre:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>shortForm</i>
+            </p>
+          </termType>
+          <sup0 />
+          <sup1 />
+          <termNote type="sup2" />
+          <sup2 />
+          <tusage />
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>For more information about W3C, please consult the 
+<A href="http://www.w3.org/" target="_blank">W3C Web site</A>.</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>test</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-00-15T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-00-15T00:00:00</date>
+          </transacGrp>
+          <tdefinition />
+          <tsource_definition />
+          <descripGrp>
+            <tcontext />
+            <tsource_context />
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Catégorie grammaticale:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Genre:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>shortForm</i>
+            </p>
+          </termType>
+          <sup0 />
+          <sup1 />
+          <termNote type="sup2" />
+          <sup2 />
+          <tusage />
+          <tsource />
+        </tig>
+      </langSet>
+    </termEntry>
+  </body>
+</nicetbx>
