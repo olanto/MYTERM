@@ -96,16 +96,16 @@ public class JPAViewFunctions {
         if ((t.getTermForm() != null) && (!t.getTermForm().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_FORM).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"tform\">").append(sysMsgsrv.get(GuiConstant.LBL_T_FORM)).append(": </span>").append(t.getTermForm()).append("<br/>");
         }
+        if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibilityPublic())) {
+            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(": </span>").append(replaceMediaLink(t.getTermSource())).append("<br/>");
+        }
         if ((t.getTermDefinition() != null) && (!t.getTermDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_DEFINITION).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"def\">").append(sysMsgsrv.get(GuiConstant.LBL_T_DEFINITION)).append(": </span>").append(replaceMediaLink(t.getTermDefinition())).append("<br/>");
         }
 
         if ((t.getTermSourceDefinition() != null) && (!t.getTermSourceDefinition().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE_DEFINITION).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"defsrc\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE_DEFINITION)).append(": </span>").append(replaceMediaLink(t.getTermSourceDefinition())).append("<br/>");
-        }
-        if ((t.getTermSource() != null) && (!t.getTermSource().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_SOURCE).getVisibilityPublic())) {
-            result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_SOURCE)).append(": </span>").append(replaceMediaLink(t.getTermSource())).append("<br/>");
-        }
+        }      
         if ((t.getTermNote() != null) && (!t.getTermNote().isEmpty()) && (sysFieldsrv.get(GuiConstant.T_NOTE).getVisibilityPublic())) {
             result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_T_NOTE)).append(": </span>").append(replaceMediaLink(t.getTermNote())).append("<br/>");
         }
