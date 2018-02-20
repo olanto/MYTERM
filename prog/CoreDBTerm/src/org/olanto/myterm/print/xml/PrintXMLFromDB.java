@@ -47,11 +47,12 @@ public class PrintXMLFromDB {
     static String encoding = "UTF-8";
     static String cssName = "nice.css";
     static String rootName = "nicetbx";
+    static boolean v4RR = false;
     static Resources resource;
 
 
     public static void main(String[] args) {
-        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\print\\xml\\print.properties");
+        init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\print\\xml\\print4RR.properties");
     //   doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "TESTTBX","FR", true);
 
    //  doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "CERN","EN", false);
@@ -70,6 +71,7 @@ public class PrintXMLFromDB {
         msg("File Generation XML\n");
         msg("CSS version: " + cssName);
         msg("rootName: " + rootName);
+        msg("v4RR: " + v4RR);
         msg("language: " + _language);
 
         initRoot(rootName);
@@ -82,7 +84,7 @@ public class PrintXMLFromDB {
         resource = Queries.getResourceID(resourceName, TermEnum.AutoCreate.NO);
         JdomUtilities.msg("start exporting :");
         racine.addContent(GenerateXMLHeader.setHeader(cssName, rootName));
-        racine.addContent(GenerateXMLEntries.getTermsFromDB(_language, conceptid)); 
+        racine.addContent(GenerateXMLEntries.getTermsFromDB(_language, conceptid,v4RR)); 
         return getXML(document);
     }
 
@@ -94,6 +96,7 @@ public class PrintXMLFromDB {
             //get the property value and print it out
             cssName = prop.getProperty("cssName");
             rootName = prop.getProperty("rootName");
+            v4RR = Boolean.parseBoolean(prop.getProperty("v4RR"));
         } catch (IOException ex) {
             ex.printStackTrace();
             System.err.println("error:" + fileName);

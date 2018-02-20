@@ -1,0 +1,26 @@
+<style type="text/css"> 
+nicetbx { font-family: Arial; }
+titleRes { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: center; color: #ffffff; background-color: #0082b8; padding: 5px; margin-bottom: 10px; }
+noteRes { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: center; color: #ffffff; background-color: #0082b8; padding: 5px; margin-bottom: 10px; }
+sourceRes { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: center; color: #ffffff; background-color: #0082b8; padding: 5px; margin-bottom: 10px; }
+idConcept { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: center; color: #000000; background-color: #cccccc; padding: 5px; margin-bottom: 10px; }
+idLang { width: 100%; display: block; font-size: 10pt; font-weight: bold; text-align: left; color: #000000; background-color: #eeeeee; padding: 5px; margin-top: 10px; }
+transacGrp { display: block; color: green;}
+term{font-size: 16pt;color: orange; margin-bottom:1.0; line-height: 2.0; }
+{}
+seg { display: block; clear: both; margin: 0; padding: 0; height: 6px; }
+src { float: left; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }
+tgt { float: right; margin: 0; width: 48%; padding: 6px; vertical-align: middle; border-top: 1px solid #ddd;  }
+b { font-weight: bold; }
+e { font-weight: italic; color: blue; margin-bottom:1.0; line-height: 2.0; }
+i { font-weight: plain;  }
+u { text-decoration: underline; }
+p { display: block;}
+br {display: block;}
+h1 {display: block;}
+h2 {display: block;}
+h3 {display: block;}
+ul {display: block;}
+li{display: block;}
+html:img {display: block; width: 150px;}
+</style> 

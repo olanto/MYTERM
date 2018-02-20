@@ -214,7 +214,7 @@ public class REVISORWidget extends VerticalPanel {
         resultsPanel.printBtn.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                getService().printConceptEntry(searchMenu.rsrc.getItemText(searchMenu.rsrc.getSelectedIndex()), conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
+                getService().printConceptEntry4RR(searchMenu.rsrc.getItemText(searchMenu.rsrc.getSelectedIndex()), conceptID, searchMenu.langSrc.getValue(searchMenu.langSrc.getSelectedIndex()), printCallback);
             }
         });
         searchMenu.btnSearch.addClickHandler(new ClickHandler() {

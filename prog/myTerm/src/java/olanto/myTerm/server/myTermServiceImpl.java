@@ -1502,9 +1502,26 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
 
     @Override
     public Boolean printConceptEntry(String resourceName, long conceptId, String language) {
+         System.out.println("printConceptEntry");
         String fileName = "C:\\MYTERM\\includehtmltag\\print\\Concept" + conceptId + ".xml";
         PrintXMLFromDB.init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\print\\xml\\print.properties");
         String contentXML = PrintXMLFromDB.doIt(resourceName, conceptId, language);
+        if (contentXML != null && !contentXML.isEmpty()) {
+            if (UtilsFiles.String2File(fileName, contentXML) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+
+    @Override
+    public Boolean printConceptEntry4RR(String resourceName, long conceptid, String language) {
+        System.out.println("printConceptEntry4RR");
+  String fileName = "C:\\MYTERM\\includehtmltag\\print\\Concept" + conceptid + ".xml";
+        PrintXMLFromDB.init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\print\\xml\\print4RR.properties");
+        String contentXML = PrintXMLFromDB.doIt(resourceName, conceptid, language);
         if (contentXML != null && !contentXML.isEmpty()) {
             if (UtilsFiles.String2File(fileName, contentXML) != null) {
                 return true;

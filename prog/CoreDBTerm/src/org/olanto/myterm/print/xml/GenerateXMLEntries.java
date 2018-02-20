@@ -47,7 +47,11 @@ public class GenerateXMLEntries {
      *
      * @return
      */
-    public static Element getTermsFromDB(String usrlang, long conceptid) {
+    
+    static boolean only4RR=false;
+    
+    public static Element getTermsFromDB(String usrlang, long conceptid, boolean _only4RR) {
+        only4RR=_only4RR;
         LabelCodification.init(usrlang);
         Element res = makeElem("body");
         addConcept(res, conceptid);

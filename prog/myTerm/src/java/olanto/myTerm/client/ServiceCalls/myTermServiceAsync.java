@@ -182,4 +182,6 @@ public interface myTermServiceAsync {
     public void AdminSaveDomain(DomainDTO domain, AsyncCallback<String> asyncCallback);
 
     public void printConceptEntry(String resourceName, long conceptid, String language, AsyncCallback<Boolean> asyncCallback);
+    
+    public void printConceptEntry4RR(String resourceName, long conceptid, String language, AsyncCallback<Boolean> asyncCallback);
 }

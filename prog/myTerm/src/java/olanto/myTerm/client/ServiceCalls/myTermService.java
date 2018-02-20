@@ -184,4 +184,6 @@ public interface myTermService extends RemoteService {
     public String AdminSaveDomain(DomainDTO domain);
 
     public Boolean printConceptEntry(String resourceName, long conceptid, String language);
+    
+   public Boolean printConceptEntry4RR(String resourceName, long conceptid, String language);
 }
