@@ -3,13 +3,13 @@
 <nicetbx type="TBX-Basic" xml:lang="en-US">
   <header>
     <titleRes>
-      <p>CERN</p>
+      <p>TESTCERN</p>
     </titleRes>
     <noteRes>
       <p />
     </noteRes>
     <sourceRes>
-      <p>exported from myTerm (olanto.org) date: 2016-57-25 11:57:56</p>
+      <p>exported from myTerm (olanto.org) date: 2018-36-20 10:36:15</p>
     </sourceRes>
   </header>
   <body>
@@ -335,13 +335,27 @@
       </langSet>
     </termEntry>
     <termEntry>
-      <idConcept>ID: _4</idConcept>
+      <idConcept>ID: 1003</idConcept>
       <subjectField>
         <p>
           <e>Subject field:</e>
           <i>Accelerator technology</i>
         </p>
       </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i />
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">John</transacNote>
@@ -349,9 +363,15 @@
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
-        <transacNote type="responsibility">Odile Martin</transacNote>
-        <date>2013-00-29T00:00:00</date>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2015-00-15T00:00:00</date>
       </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
       <langSet xml:lang="EN-GB">
         <idLang>Lang: EN-GB</idLang>
         <tig>
@@ -368,8 +388,8 @@
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">super</transacNote>
-            <date>2007-00-09T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-15T00:00:00</date>
           </transacGrp>
           <tdefinition>
             <p>
@@ -377,12 +397,75 @@
               <i>Main cable that carries the current for powering the magnets outside the magnet coil. LHC Design Report, vol. 1, 2004, chap. 2, p. 6</i>
             </p>
           </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>dans les manuels xxx</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
               <i>In LHC magnets.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -397,6 +480,80 @@
               <i>busbar</i>
             </p>
           </term>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-15T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -421,15 +578,84 @@
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">super</transacNote>
-            <date>2007-00-09T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-15T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
               <i>Terme en usage au CERN.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -451,8 +677,8 @@
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">super</transacNote>
-            <date>2007-00-09T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-15T00:00:00</date>
           </transacGrp>
           <tdefinition>
             <p>
@@ -460,12 +686,75 @@
               <i>Conducteur de faible impédance auquel peuvent être reliés plusieurs circuits électriques en des points séparés. IEC - Commission Electrotechnique Internationale, IEV number 151-12-30</i>
             </p>
           </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
               <i>Dans de nombreux cas, une barre omnibus est constituée d’une barre. IEC - Commission Electrotechnique Internationale, IEV number 151-12-30.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -21350,13 +21639,27 @@ En 2012, le Conseil a harmonisé les droits de la Roumanie avec ceux des Etats m
       </langSet>
     </termEntry>
     <termEntry>
-      <idConcept>ID: _208</idConcept>
+      <idConcept>ID: 1187</idConcept>
       <subjectField>
         <p>
           <e>Subject field:</e>
           <i>Rules/circulars</i>
         </p>
       </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i />
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">Odile Martin</transacNote>
@@ -21364,9 +21667,15 @@ En 2012, le Conseil a harmonisé les droits de la Roumanie avec ceux des Etats m
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
-        <transacNote type="responsibility">Odile Martin</transacNote>
-        <date>2012-00-02T00:00:00</date>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2015-00-09T00:00:00</date>
       </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
       <langSet xml:lang="EN-GB">
         <idLang>Lang: EN-GB</idLang>
         <tig>
@@ -21383,9 +21692,35 @@ En 2012, le Conseil a harmonisé les droits de la Roumanie avec ceux des Etats m
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2007-00-26T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
@@ -21393,6 +21728,49 @@ En 2012, le Conseil a harmonisé les droits de la Roumanie avec ceux des Etats m
 See also Associate Status.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -21417,17 +21795,86 @@ See also Associate Status.</i>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2012-00-02T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
-              <i>Voir aussi statut d'associé et statut d’Etat membre associé.
-Voir la Résolution du Conseil sur l'élargissement géographique du CERN de juin 2010 (document CERN/2918/Rév.) pour la redéfinition du statut d'Etat membre.
+              <i>Voir aussi statut d'associé et statut d’Etat membre associé.&lt;/br&gt;
+Voir la Résolution du Conseil sur l'élargissement géographique du CERN de juin 2010 (document CERN/2918/Rév.) pour la redéfinition du statut d'Etat membre.&lt;/br&gt;
 Expression à privilégier.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -21449,15 +21896,35 @@ Expression à privilégier.</i>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2012-00-02T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
-          <tcontext>
+          <tdefinition>
             <p>
-              <e>Context:</e>
-              <i>La qualité de membre s'obtient par décision unanime du Conseil, suivie de la ratification de la Convention du CERN par cet Etat (...). CERN/CC/1996 (Statut de membre), oct. 1993.</i>
+              <e>Definition:</e>
+              <i />
             </p>
-          </tcontext>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>La qualité de membre s'obtient par décision unanime du Conseil, suivie de la ratification de la Convention du CERN par cet Etat (...). CERN/CC/1996 (Statut de membre), oct. 1993.</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
@@ -21465,6 +21932,49 @@ Expression à privilégier.</i>
 Pour une description du statut de membre et des droits et obligations afférents, voir document CERN/CC/1996.</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -41810,13 +42320,27 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
       </langSet>
     </termEntry>
     <termEntry>
-      <idConcept>ID: _422</idConcept>
+      <idConcept>ID: 1382</idConcept>
       <subjectField>
         <p>
           <e>Subject field:</e>
           <i>Accelerator technology</i>
         </p>
       </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i />
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">Odile Martin</transacNote>
@@ -41824,9 +42348,15 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
-        <transacNote type="responsibility">Odile Martin</transacNote>
-        <date>2013-00-09T00:00:00</date>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2015-00-09T00:00:00</date>
       </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
       <langSet xml:lang="EN-GB">
         <idLang>Lang: EN-GB</idLang>
         <tig>
@@ -41843,9 +42373,78 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2009-00-23T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>x</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -41867,9 +42466,78 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2009-00-22T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -41894,22 +42562,84 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2009-00-23T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
-          <tcontext>
+          <tdefinition>
             <p>
-              <e>Context:</e>
-              <i>Le calorimètre électromagnétique est une section de tonneau couvrant 110° d’arc (...). Il est composé de 11 supermodules, dont chacun est lui-même composé de 288 modules distincts (...). Chacun de ces modules comprend 4 tours mesurant séparément l’énergie ce qui conduit à 12 672 canaux électroniques individuels. Chaque tour est un empilement de 77 couches alternées de plomb (1,44 mm) et de scintillateur (1,76 mm), correspondant à 20 longueurs de radiation. Les modules sont compressés à une pression de 1.2 kg/cm2. Pour résumer, 4 tours constituent un module. Site web LPSC</i>
+              <e>Definition:</e>
+              <i />
             </p>
-          </tcontext>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>Le calorimètre électromagnétique est une section de tonneau couvrant 110° d’arc (...). Il est composé de 11 supermodules, dont chacun est lui-même composé de 288 modules distincts (...). Chacun de ces modules comprend 4 tours mesurant séparément l’énergie ce qui conduit à 12 672 canaux électroniques individuels. Chaque tour est un empilement de 77 couches alternées de plomb (1,44 mm) et de scintillateur (1,76 mm), correspondant à 20 longueurs de radiation. Les modules sont compressés à une pression de 1.2 kg/cm2. Pour résumer, 4 tours constituent un module. Site web LPSC</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
               <i>Site web du Laboratoire de Physique Subatomique et de Cosmologie LPSC de Grenoble, Thématiques de recherche, ALICE-JLAB, ALICE EMCAL, EMCAL dans l'expérience ALICE</i>
             </p>
           </tsource>
-          <p>xGraphic: ALICE EMCAL.jpg, Graphic</p>
         </tig>
         <tig>
           <term>
@@ -41925,22 +42655,90 @@ See also CERN/Council-S/031 (Recognition of four EU R&amp;D Projects as ongoing 
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Odile Martin</transacNote>
-            <date>2009-00-22T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-00-09T00:00:00</date>
           </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
               <i>On trouve aussi fréquemment le sigle tout en majuscule (EMCAL).</i>
             </p>
           </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>noun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>Forme complète</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
               <i>Site Web LPSC</i>
             </p>
           </tsource>
-          <p>xGraphic: TOUR EMCAL.bmp, Graphic</p>
         </tig>
       </langSet>
     </termEntry>
@@ -46163,13 +46961,27 @@ In LHC magnets.</i>
       </langSet>
     </termEntry>
     <termEntry>
-      <idConcept>ID: _472</idConcept>
+      <idConcept>ID: 1425</idConcept>
       <subjectField>
         <p>
           <e>Subject field:</e>
-          <i>Accelerator technology</i>
+          <i>Astronomy</i>
         </p>
       </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i>def en</i>
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i>source def</i>
+          </p>
+        </csource>
+      </descripGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">Suzanne Curcu</transacNote>
@@ -46177,9 +46989,15 @@ In LHC magnets.</i>
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
-        <transacNote type="responsibility">Suzanne Curcu</transacNote>
-        <date>2010-00-29T00:00:00</date>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2017-00-26T00:00:00</date>
       </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i>def fr</i>
+        </p>
+      </cnote>
       <langSet xml:lang="EN-GB">
         <idLang>Lang: EN-GB</idLang>
         <tig>
@@ -46196,8 +47014,8 @@ In LHC magnets.</i>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Suzanne Curcu</transacNote>
-            <date>2010-00-04T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2017-00-26T00:00:00</date>
           </transacGrp>
           <tdefinition>
             <p>
@@ -46205,6 +47023,81 @@ In LHC magnets.</i>
               <i>Machine in which beams of charged particles are accelerated to high energies with electric fields and with magnets that steer and focus the beams in order to make them collide with a static target or with each other. According to CERN Annual Report 2009, Glossary, p. 49</i>
             </p>
           </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i>source def</i>
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>new contexte</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i>from xxxx</i>
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i>note</i>
+            </p>
+          </tnote>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>variant</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i>t1 modifié (26.7.2017 mmm)</i>
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i>note ling</i>
+            </p>
+          </sup1>
+          <termNote type="sup2">note ref</termNote>
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i>note ref</i>
+            </p>
+          </sup2>
+          <sup3>
+            <p>
+              <e />
+              <i>s3</i>
+            </p>
+          </sup3>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -46229,8 +47122,8 @@ In LHC magnets.</i>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Suzanne Curcu</transacNote>
-            <date>2010-00-04T00:00:00</date>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2017-00-26T00:00:00</date>
           </transacGrp>
           <tdefinition>
             <p>
@@ -46238,6 +47131,75 @@ In LHC magnets.</i>
               <i>Machine qui accélère des faisceaux de particules à l'aide de champs électriques pour les porter à des énergies élevées et qui, à l'aide d'aimants, guide et focalise les faisceaux pour les faire entrer en collision entre eux ou avec une cible fixe. D'après Rapport annuel du CERN 2009, Glossaire, p. 49</i>
             </p>
           </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>variant</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <sup3>
+            <p>
+              <e />
+              <i />
+            </p>
+          </sup3>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
           <tsource>
             <p>
               <e>Source:</e>
@@ -58783,6 +59745,610 @@ Voir informatique en nuage.</i>
             <p>
               <e>Source:</e>
               <i>Expert CERN IT-DH</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: 6761</idConcept>
+      <subjectField>
+        <p>
+          <e>Subject field:</e>
+          <i>TOUS</i>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i />
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">super</transacNote>
+        <date>2016-00-06T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2016-00-06T00:00:00</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>test321</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">super</transacNote>
+            <date>2016-00-06T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-00-06T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>shortForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i />
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>test321fr</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">super</transacNote>
+            <date>2016-00-06T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>shortForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i />
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: 6779</idConcept>
+      <subjectField>
+        <p>
+          <e>Subject field:</e>
+          <i>TOUS</i>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i />
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2017-00-23T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2017-00-23T00:00:00</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
+      <langSet xml:lang="EN-GB">
+        <idLang>Lang: EN-GB</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>accelerators</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2017-00-23T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2017-00-23T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>variant</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i />
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+    </termEntry>
+    <termEntry>
+      <idConcept>ID: 7044</idConcept>
+      <subjectField>
+        <p>
+          <e>Subject field:</e>
+          <i>Computer</i>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i>x</i>
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i />
+          </p>
+        </csource>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2018-00-31T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2018-00-20T00:00:00</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i />
+        </p>
+      </cnote>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>moon</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2018-00-31T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2018-00-20T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i>astre dans le &lt;i&gt;ciel&lt;/i&gt; voir satellite</i>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>other</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>neuter</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>shortForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <sup3>
+            <p>
+              <e />
+              <i />
+            </p>
+          </sup3>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>xxxy</i>
+            </p>
+          </tsource>
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>lune</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2018-00-19T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2018-00-20T00:00:00</date>
+          </transacGrp>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i />
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i />
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i />
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i />
+              </p>
+            </tsource_context>
+          </descripGrp>
+          <tpartOfSpeech>
+            <p>
+              <e>Part of speech:</e>
+              <i>properNoun</i>
+            </p>
+          </tpartOfSpeech>
+          <grammaticalGender>
+            <p>
+              <e>Gender:</e>
+              <i>other</i>
+            </p>
+          </grammaticalGender>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>variant</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i />
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i />
+            </p>
+          </sup1>
+          <termNote type="sup2" />
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i />
+            </p>
+          </sup2>
+          <sup3>
+            <p>
+              <e />
+              <i />
+            </p>
+          </sup3>
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i />
+            </p>
+          </tusage>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>xxxx</i>
             </p>
           </tsource>
         </tig>

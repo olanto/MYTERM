@@ -58,7 +58,7 @@ public class TBX_Loader implements Loader {
     static Namespace noNS = Namespace.NO_NAMESPACE;
     static boolean skipverbose = false;
     static Resources resource;
-    static SimpleDateFormat convertDate = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+    static SimpleDateFormat convertDate = new SimpleDateFormat("yyyyy-MM-dd hh:mm:ss");
 
     public void loadAFileIntoTBXDB(String fileName, String _resourceName) {
         resourceName = _resourceName;

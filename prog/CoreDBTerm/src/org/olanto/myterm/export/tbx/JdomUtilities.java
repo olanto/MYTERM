@@ -169,12 +169,12 @@ public class JdomUtilities {
     }
     
     public static String getCurrentDate(){
-    DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 Date dateobj = new Date();
 return df.format(dateobj);
 }
      public static String getFormattedDate(Date d){
-    DateFormat df = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 return df.format(d).replace(" ", "T");
 }
 

@@ -19,7 +19,8 @@
  *
  *********
  */
-package org.olanto.myterm.print.xml;
+package org.olanto.myterm.manage;
+
 
 import org.olanto.myterm.export.tbx.ExportTBXFromDB;
 import java.io.FileOutputStream;
@@ -39,6 +40,13 @@ import org.jdom2.output.XMLOutputter;
  * @author jg
  */
 public class JdomUtilities {
+    
+    public static void main(String[] args) {
+        System.out.println(getCurrentDate()); 
+                //getFormattedDate(Date d)
+        
+    }
+    
 
     /**
      * séparation dans les fichiers en sortie de la BD
@@ -195,13 +203,13 @@ public class JdomUtilities {
     }
 
     public static String getCurrentDate() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
         Date dateobj = new Date();
         return df.format(dateobj);
     }
 
     public static String getFormattedDate(Date d) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
         return df.format(d).replace(" ", "T");
     }
 }
