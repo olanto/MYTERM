@@ -63,6 +63,7 @@ public class GenerateXLSEntries {
     static String Tdate;
     static String TMuser;
     static String TMdate;
+   static String Tstatus;
 
     public static void getTermsFromDB(String usrlang) {
         LabelCodification.init(usrlang);
@@ -148,6 +149,7 @@ public class GenerateXLSEntries {
         List<Terms> listOfTerms = query.getResultList();
         for (Terms ter : listOfTerms) {
             Tform = ter.getTermForm();
+            Tstatus=""+ter.getStatus();
             Tdef = "";
             Tuser = "";
             Tdate = "";
@@ -164,6 +166,7 @@ public class GenerateXLSEntries {
                     + CMuser + "\t"
                     + CMdate + "\t"
                     + idLang + "\t"
+                    + Tstatus + "\t"
                     + Tform + "\t"
                     + Tdef + "\t"
                     + Tuser + "\t"

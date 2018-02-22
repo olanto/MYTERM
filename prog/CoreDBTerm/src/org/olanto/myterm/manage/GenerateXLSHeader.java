@@ -55,6 +55,7 @@ public class GenerateXLSHeader {
                     + "Concept modified by user\t"
                     + "Concept modified date\t"
                     + "Lang\t"
+                    + "Term Status\t"
                     + "Term Form\t"
                     + "Term definition\t"
                     + "Term create by user\t"
