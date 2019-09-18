@@ -77,7 +77,7 @@ public class PrintXMLFromDB {
         initRoot(rootName);
         racine = getRacine();
         document = new Document(racine);
-        Map<String, String> m = new HashMap<String, String>();
+        Map<String, String> m = new HashMap<>();
         m.put("href", cssName);
         m.put("type", "text/css");
         document.addContent(0, new ProcessingInstruction("xml-stylesheet", m));
