@@ -51,7 +51,6 @@ import org.olanto.myterm.coredb.jpacontroller.exceptions.NonexistentEntityExcept
 import org.olanto.myterm.extractor.entry.ConceptEntry;
 import org.olanto.myterm.extractor.entry.LangEntry;
 import org.olanto.myterm.print.xml.PrintXMLFromDB;
-import static org.olanto.myterm.print.xml.PrintXMLFromDB.init;
 import static org.olanto.myterm.util.ReplaceMediaLink.*;
 
 /**
@@ -213,7 +212,7 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
                 result.append("&nbsp").append("<span class = \"note\">").append(sysMsgsrv.get(GuiConstant.LBL_C_NOTE)).append(": </span>").append(replaceMediaLink(c.getConceptNote())).append("<br/>");
             }
             if ((c.getCrossref() != null) && (!c.getCrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_CROSS_REF).getVisibilityPublic())) {
-                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CROSS_REF)).append(": </span>").append(c.getCrossref()).append("<br/>");
+                result.append("&nbsp").append("<span class = \"extrainfo\">").append(sysMsgsrv.get(GuiConstant.LBL_C_CROSS_REF)).append(": </span>").append(Utils.extractCrossRef(c.getCrossref())).append("<br/>");
             }
             result.append("</td>").append("<td>");
             if ((c.getExtcrossref() != null) && (!c.getExtcrossref().isEmpty()) && (sysFieldsrv.get(GuiConstant.C_EXTRA_CROSS_REF).getVisibilityPublic())) {
