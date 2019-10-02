@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="/print/nice.css"?>
+<nicetbx type="TBX-Basic" xml:lang="en-US">
+  <header>
+    <titleRes>
+      <p>DEMO resource</p>
+    </titleRes>
+    <noteRes>
+      <p>Only for demo</p>
+    </noteRes>
+    <sourceRes>
+      <p>exported from myTerm (olanto.org) date: 2019-09-25 13:30:10</p>
+    </sourceRes>
+  </header>
+  <body>
+    <termEntry>
+      <idConcept>ID: 2688</idConcept>
+      <subjectField>
+        <p>
+          <e>Subject field:</e>
+          <i>Computer</i>
+        </p>
+      </subjectField>
+      <descripGrp>
+        <cdefinition>
+          <p>
+            <e>Image:</e>
+            <i>Defi EN</i>
+          </p>
+        </cdefinition>
+        <csource>
+          <p>
+            <e>Source:</e>
+            <i>source def concept</i>
+          </p>
+        </csource>
+      </descripGrp>
+      <transacGrp>
+        <transac type="transactionType">origination</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2015-11-12T00:00:00</date>
+      </transacGrp>
+      <transacGrp>
+        <transac type="transactionType">modification</transac>
+        <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        <date>2019-09-25T13:24:45</date>
+      </transacGrp>
+      <cnote>
+        <p>
+          <e>Cross-reference:</e>
+          <i>&lt;REFERENCE SRC="6770" &gt;synonyme&lt;/REFERENCE&gt;</i>
+        </p>
+      </cnote>
+      <langSet xml:lang="EN">
+        <idLang>Lang: EN</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>to test</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2015-11-12T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2019-09-25T13:24:45</date>
+          </transacGrp>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>source</i>
+            </p>
+          </tsource>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i>Définition</i>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i>srouce_def</i>
+            </p>
+          </tsource_definition>
+          <descripGrp>
+            <tcontext />
+            <tsource_context />
+          </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i>note</i>
+            </p>
+          </tnote>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0>
+            <p>
+              <e>Technical Note:</e>
+              <i>tech note</i>
+            </p>
+          </sup0>
+          <sup1>
+            <p>
+              <e>Linguistic Note:</e>
+              <i>ling note</i>
+            </p>
+          </sup1>
+          <termNote type="sup2">ref note</termNote>
+          <sup2>
+            <p>
+              <e>Reference Note:</e>
+              <i>ref note</i>
+            </p>
+          </sup2>
+          <sup3>
+            <p>
+              <e />
+              <i>x</i>
+            </p>
+          </sup3>
+          <tusage />
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term />
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-02-08T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2019-09-25T13:24:45</date>
+          </transacGrp>
+          <tsource />
+          <tdefinition />
+          <tsource_definition />
+          <descripGrp>
+            <tcontext />
+            <tsource_context />
+          </descripGrp>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>fullForm</i>
+            </p>
+          </termType>
+          <sup0 />
+          <sup1 />
+          <termNote type="sup2" />
+          <sup2 />
+          <sup3 />
+          <tusage />
+        </tig>
+      </langSet>
+    </termEntry>
+  </body>
+</nicetbx>
