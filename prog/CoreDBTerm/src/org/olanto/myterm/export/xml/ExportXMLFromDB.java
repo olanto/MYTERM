@@ -58,7 +58,7 @@ public class ExportXMLFromDB {
 
    //  doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "CERN","EN", false);
   
-     doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "DESAUSSURE","FR", true);
+     doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "DEMO resource","FR", true);
 
 
     }
