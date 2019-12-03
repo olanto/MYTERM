@@ -40,7 +40,7 @@
 .extrainfo{
     color: blueviolet;
     font-style: italic;
-    float: right !important
+    float: right !important;
 }
 .sidecurhead{
     border: 1px blue solid;
@@ -380,7 +380,7 @@ body{
 
 .extrainfo a {
     font-size: 12px;
-    float: right !important
+    float: right !important;
 }
 .nost td {
     border: none;
