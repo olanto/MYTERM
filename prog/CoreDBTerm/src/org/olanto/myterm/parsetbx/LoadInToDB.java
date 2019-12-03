@@ -40,7 +40,11 @@ public class LoadInToDB {
    //     loadAFile("C:/MYTERM/private/dict_en_ru.xdxf","XDXF_en_ru2", "XDXF");
        //  loadAFile("C:/MYTERM/private/WTODisputeSettlementTerminology.xml","TESTOMC","TBX-BASIC");
    //     loadAFile("C:/MYTERM/private/WTOTerm public entries_EN_FR_ES__2014_12_01.xml","PUBLIC-OMC","MTF");
-        loadAFile("C:/MYTERM/private/CERN_from_MELBY.tbx","TESTCERN","TBX-BASIC");
+   
+   //     loadAFile("C:/MYTERM/private/CERN_from_MELBY.tbx","TESTCERN","TBX-BASIC");
+        loadAFile("C:\\MYTERM\\tests\\exportTBX.xml","DEMO reload","TBX-BASIC");
+        
+      
     }
     
     public static void loadAFile(String fileName, String resourceName, String format) {

@@ -136,32 +136,32 @@ public class TBX_Loader implements Loader {
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("geographicalUsage")) {
                 courantEntry.getTerm().setTermGeoUsage(getText(info, localverbose));
-                termFormExist = true;   
-} else if (info.getName().equals("termNote")
+                termFormExist = true;
+            } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("usage")) {
                 courantEntry.getTerm().setTermUsage(getText(info, localverbose));
-                termFormExist = true;   
+                termFormExist = true;
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("sup0")) {
                 courantEntry.getTerm().setSup0(getText(info, localverbose));
-                termFormExist = true;   
+                termFormExist = true;
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("sup1")) {
                 courantEntry.getTerm().setSup1(getText(info, localverbose));
-                termFormExist = true;   
+                termFormExist = true;
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("sup2")) {
                 courantEntry.getTerm().setSup2(getText(info, localverbose));
-                termFormExist = true;   
+                termFormExist = true;
             } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("sup3")) {
                 courantEntry.getTerm().setSup3(getText(info, localverbose));
-                termFormExist = true;   
-             } else if (info.getName().equals("termNote")
+                termFormExist = true;
+            } else if (info.getName().equals("termNote")
                     && info.getAttributeValue("type").equals("sup4")) {
                 courantEntry.getTerm().setSup4(getText(info, localverbose));
-                termFormExist = true;   
-           } else if (info.getName().equals("descrip")
+                termFormExist = true;
+            } else if (info.getName().equals("descrip")
                     && info.getAttributeValue("type").equals("context")) {
                 courantEntry.getTerm().setTermContext(getText(info, localverbose));
                 termFormExist = true;
@@ -258,6 +258,7 @@ public class TBX_Loader implements Loader {
         courantEntry = new Entry(resource, true);
         courantEntry.setExtraConcepts("");
         courantEntry.setConceptNote("");
+        courantEntry.setCrossref("");
         courantEntry.setImportedRefConcepts(e.getAttributeValue("id"));
         totEntries++;
         if (localverbose) {
@@ -276,11 +277,14 @@ public class TBX_Loader implements Loader {
                 ; // process in next loop
             } else if (info.getName().equals("note")) {
                 courantEntry.getConcept().setConceptNote(courantEntry.getConceptNote() + getText(info, localverbose) + "\n");
-            } else if (info.getName().equals("ref")
-                    && info.getAttributeValue("type").equals("crossReference")) {
-                courantEntry.getConcept().setCrossref("\n"
-                        + info.getAttributeValue("type") + ";"
-                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
+            } else if (info.getName().equals("ref")) {
+                courantEntry.getConcept().setCrossref(courantEntry.getCrossref() + getText(info, localverbose) + "\n");
+
+//            } else if (info.getName().equals("ref")
+//                    && info.getAttributeValue("type").equals("crossReference")) {
+//                courantEntry.getConcept().setCrossref("\n"
+//                        + info.getAttributeValue("type") + ";"
+//                        + info.getAttributeValue("target") + ";" + getText(info, localverbose));
             } else if (info.getName().equals("xref")
                     && info.getAttributeValue("type").equals("externalCrossReference")) {
                 courantEntry.getConcept().setExtcrossref("\n"

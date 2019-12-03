@@ -52,7 +52,8 @@ public class ExportTBXFromDB {
 
     public static void main(String[] args) {
         init("C:\\MYTERM\\prog\\CoreDBTerm\\src\\org\\olanto\\myterm\\export\\tbx\\export.properties");
-        doIt(null, "C:\\MYTERM\\tests\\exportTBX.xml", "TESTTBX",true);
+//        doIt(null, "C:\\MYTERM\\tests\\exportTBX.xml", "TESTTBX",true);
+        doIt(null, "C:\\MYTERM\\tests\\exportTBX.xml", "DEMO resource",true);
     }
 
     public static void init(String propertiesFile) {

@@ -4,17 +4,391 @@
   <martifHeader>
     <fileDesc>
       <titleStmt>
-        <title>TESTTBX</title>
-        <note />
+        <title>DEMO resource</title>
+        <note>Only for demo</note>
       </titleStmt>
       <sourceDesc>
-        <p>exported from myTerm (olanto.org) date: 2015-09-14 20:09:04</p>
+        <p>exported from myTerm (olanto.org) date: 2019-12-03 13:13:57</p>
       </sourceDesc>
     </fileDesc>
     <encodingDesc type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx_basic/TBXBasicXCSV02.xcs</encodingDesc>
   </martifHeader>
   <text>
     <body>
+      <termEntry id="1">
+        <descrip type="subjectField">Astronomy</descrip>
+        <descripGrp>
+          <descrip type="definition">cd</descrip>
+          <admin type="source">csd</admin>
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-01-14T00:00:00</date>
+        </transacGrp>
+        <note>cn xxx</note>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>star</term>
+            <descripGrp>
+              <descrip type="context">a new star in the sky</descrip>
+              <admin type="source">from book...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-12-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-01-14T00:00:00</date>
+            </transacGrp>
+            <note>here a note</note>
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context">a new star in the sky</descrip>
+            <descrip type="definition">a star is</descrip>
+            <admin type="sourceDefinition">from dictionary ..</admin>
+            <termNote type="sup0">NT</termNote>
+            <termNote type="sup1">NL</termNote>
+            <termNote type="sup2">NR</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">used to ...</termNote>
+            <admin type="source">encyclodia ..</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>étoile</term>
+            <descripGrp>
+              <descrip type="context">une nouvelle étoile dans le ciel</descrip>
+              <admin type="source">du roman ...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-12-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-01-14T00:00:00</date>
+            </transacGrp>
+            <note>ici une note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">feminine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">une nouvelle étoile dans le ciel</descrip>
+            <descrip type="definition">une étoile est ....</descrip>
+            <admin type="sourceDefinition">du dictionnaire ..</admin>
+            <termNote type="sup0">NT</termNote>
+            <termNote type="sup1">NL</termNote>
+            <termNote type="sup2">NR</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">utilisé ...</termNote>
+            <admin type="source">encyclodie ..</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="2">
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+        </transacGrp>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>moon</term>
+            <descripGrp>
+              <descrip type="context">a new moon in the night</descrip>
+              <admin type="source">from book...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-12-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            </transacGrp>
+            <note>here a note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">a new moon in the night</descrip>
+            <descrip type="definition">a moon is</descrip>
+            <admin type="sourceDefinition">from dictionary ..</admin>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">used to ...</termNote>
+            <admin type="source">encyclodia ..</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>lune</term>
+            <descripGrp>
+              <descrip type="context">la lune est pleine ce soir</descrip>
+              <admin type="source">du roman ...</admin>
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2031-12-20T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            </transacGrp>
+            <note>ici une note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">feminine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context">la lune est pleine ce soir</descrip>
+            <descrip type="definition">la lune est le satellite ...</descrip>
+            <admin type="sourceDefinition">du dictionnaire ..</admin>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage">utilisé ...</termNote>
+            <admin type="source">encyclodie ..</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="2672">
+        <descrip type="subjectField">Computer</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2018-03-22T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>e-mail</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2018-03-22T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2018-03-22T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">other</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">shortForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="sup3" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">xxx</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>courriel</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2018-03-22T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2018-03-22T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">other</termNote>
+            <termNote type="grammaticalGender">neuter</termNote>
+            <termNote type="termType">shortForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="sup3" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="c6">
+        <langSet xml:lang="EN">
+          <tig>
+            <term>federated database</term>
+            <descrip type="context">Users and applications interface with the federated database managed by the federated server.</descrip>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>base de données fédérée</term>
+            <descrip type="context">Une base de données fédérée est une base de données répartie hétérogène constituée de données fédérées, et nécessite donc une architecture qui permet la communication entre les différentes sources de données.</descrip>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="c7">
+        <descripGrp>
+          <descrip type="definition">corrective lenses used in eyeglasses to correct presbyopia and other disorders of accommodation, characterised by a gradient of increasing lens power, added to the wearer's correction for the other refractive errors.</descrip>
+          <admin type="source">Wikipedia</admin>
+        </descripGrp>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>progressive lens</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">preferredTerm-admn-sts</termNote>
+          </tig>
+          <tig>
+            <term>progressive addition lens</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="termType">fullForm</termNote>
+          </tig>
+          <tig>
+            <term>PAL</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">deprecatedTerm-admn-sts</termNote>
+            <termNote type="termType">acronym</termNote>
+          </tig>
+          <tig>
+            <term>progressive power lens</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+          </tig>
+          <tig>
+            <term>graduated lens</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">supersededTerm-admn-sts</termNote>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>lentille progressive</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">feminine</termNote>
+          </tig>
+        </langSet>
+        <langSet xml:lang="DE">
+          <tig>
+            <term>Gleitsichtglas</term>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">masculine</termNote>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="c1">
+        <descrip type="subjectField">manufacturing</descrip>
+        <descripGrp>
+          <descrip type="definition">This is a sample definition at the entry level.</descrip>
+          <admin type="source">Terminology SIG</admin>
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Jane</transacNote>
+          <date>2005-01-19T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">John</transacNote>
+          <date>2007-01-19T00:00:00</date>
+        </transacGrp>
+        <note>This is a sample entry with some data categories at the entry level.</note>
+        <ref>crossReference;c2;unscheduled operation</ref>
+        <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web site</xref>
+        <xref type="xGraphic" target="http://www.lisa.org/logo.gif">LISA logo</xref>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>scheduled operation</term>
+            <descripGrp>
+              <descrip type="context">One hour is required between scheduled operations.</descrip>
+              <admin type="source">Tivoli Storage Manager Administrator's Guide</admin>
+            </descripGrp>
+            <note />
+            <termNote type="partOfSpeech">verb</termNote>
+            <termNote type="administrativeStatus">preferredTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">masculine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="geographicalUsage">Canada</termNote>
+            <termNote type="geographicalUsage">Canada</termNote>
+            <termNote type="usage" />
+            <admin type="source">IBM</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="c2">
+        <descrip type="subjectField">manufacturing</descrip>
+        <langSet xml:lang="EN">
+          <descrip type="definition">This is a sample definition at the language level. This one has no source information required therefore it is not embedded in a descripGrp.</descrip>
+          <tig>
+            <term>unscheduled operation</term>
+            <descrip type="context">Unscheduled operations should be recorded in a log.</descrip>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Jane</transacNote>
+              <date>2007-01-22T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">John</transacNote>
+              <date>2007-01-23T00:00:00</date>
+            </transacGrp>
+            <note>This is a sample entry with some data categories at the term or language level</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="administrativeStatus">admittedTerm-admn-sts</termNote>
+            <termNote type="grammaticalGender">masculine</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <termNote type="geographicalUsage">en-US</termNote>
+            <termNote type="geographicalUsage">en-US</termNote>
+            <termNote type="usage" />
+            <admin type="source">Manufacturing Process Manual V2</admin>
+            <ref type="crossReference" target="c1">scheduled operation</ref>
+            <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web Site</xref>
+          </tig>
+        </langSet>
+      </termEntry>
       <termEntry id="c5">
         <langSet xml:lang="EN">
           <tig>
@@ -112,15 +486,15 @@
         <transacGrp>
           <transac type="transactionType">origination</transac>
           <transacNote type="responsibility">Jane</transacNote>
-          <date>2005-00-19T00:00:00</date>
+          <date>2005-01-19T00:00:00</date>
         </transacGrp>
         <transacGrp>
           <transac type="transactionType">modification</transac>
           <transacNote type="responsibility">John</transacNote>
-          <date>2007-00-19T00:00:00</date>
+          <date>2007-01-19T00:00:00</date>
         </transacGrp>
         <note>This is a sample entry with some data categories at the entry level.</note>
-        <ref type="crossReference" target="c2">unscheduled operation</ref>
+        <ref>crossReference;c2;unscheduled operation</ref>
         <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web site</xref>
         <xref type="xGraphic" target="http://www.lisa.org/logo.gif">LISA logo</xref>
         <langSet xml:lang="EN">
@@ -152,12 +526,12 @@
             <transacGrp>
               <transac type="transactionType">origination</transac>
               <transacNote type="responsibility">Jane</transacNote>
-              <date>2007-00-22T00:00:00</date>
+              <date>2007-01-22T00:00:00</date>
             </transacGrp>
             <transacGrp>
               <transac type="transactionType">modification</transac>
               <transacNote type="responsibility">John</transacNote>
-              <date>2007-00-23T00:00:00</date>
+              <date>2007-01-23T00:00:00</date>
             </transacGrp>
             <note>This is a sample entry with some data categories at the term or language level</note>
             <termNote type="partOfSpeech">noun</termNote>
@@ -170,6 +544,882 @@
             <admin type="source">Manufacturing Process Manual V2</admin>
             <ref type="crossReference" target="c1">scheduled operation</ref>
             <xref type="externalCrossReference" target="http://www.lisa.org">LISA Web Site</xref>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="2688">
+        <descrip type="subjectField">Computer</descrip>
+        <descripGrp>
+          <descrip type="definition">Defi EN</descrip>
+          <admin type="source">source def concept</admin>
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2015-11-12T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2019-12-03T00:00:00</date>
+        </transacGrp>
+        <note>cross ref CERN</note>
+        <ref>&lt;REFERENCE SRC="6770" &gt;synonyme&lt;/REFERENCE&gt;;
+&lt;REFERENCE SRC="1" &gt;voir_aussi&lt;/REFERENCE&gt;;</ref>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>to test</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2015-11-12T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2019-12-03T00:00:00</date>
+            </transacGrp>
+            <note>note</note>
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition">Définition</descrip>
+            <admin type="sourceDefinition">srouce_def</admin>
+            <termNote type="sup0">tech note</termNote>
+            <termNote type="sup1">ling note</termNote>
+            <termNote type="sup2">ref note</termNote>
+            <termNote type="sup3">x</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">source</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term />
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-08T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2019-12-03T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="sup3" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="2689">
+        <descrip type="subjectField" />
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2015-11-12T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2015-11-16T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>xxx</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2015-11-12T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2015-11-16T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">noun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">fullForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6516">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-01-17T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-15T00:00:00</date>
+        </transacGrp>
+        <note>&lt;IMG SRC="/images/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;</note>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>test</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-01-17T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-15T00:00:00</date>
+            </transacGrp>
+            <note>&lt;h3&gt;play videos&lt;/h3&gt;
+&lt;VIDEO SRC="/videos/big_buck_bunny_720p_1mb.mp4"  width="400" height="300" autostart="false" controls="true" /&gt;
+more 1...
+&lt;VIDEO SRC="/videos/big_buck_bunny_720p_1mb.mp4" controls="true" /&gt;
+more 2...
+&lt;VIDEO SRC="http://localhost/videos/big_buck_bunny_720p_1mb.mp4"  width="400" height="300" autostart="false" controls="true" /&gt;
+more 3 ...&lt;VIDEO SRC="http://localhost/videos/big_buck_bunny_720p_1mb.mp4" controls="true" /&gt;</note>
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">shortForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition">&lt;IMG SRC="/images/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;</descrip>
+            <admin type="sourceDefinition">xx</admin>
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">For more information about W3C, please consult the 
+&lt;A href="http://www.w3.org/" target="_blank"&gt;W3C Web site&lt;/A&gt;.</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>test</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-15T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-15T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">shortForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6517">
+        <descrip type="subjectField" />
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-01-18T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-01-18T00:00:00</date>
+        </transacGrp>
+        <langSet xml:lang="EN-GB">
+          <tig>
+            <term>splitting</term>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-01-18T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-01-18T00:00:00</date>
+            </transacGrp>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6762">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-08T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2017-01-26T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>accelerator</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-08T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2017-01-26T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">shortForm</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6763">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition">def EN</descrip>
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-08T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-08T00:00:00</date>
+        </transacGrp>
+        <note>def FR</note>
+        <langSet xml:lang="EN-GB">
+          <tig>
+            <term>accelerator</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-08T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-08T00:00:00</date>
+            </transacGrp>
+            <note>T_note</note>
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition">T_Def</descrip>
+            <admin type="sourceDefinition">T_Source_def</admin>
+            <termNote type="sup0">T_n_tech</termNote>
+            <termNote type="sup1">T_note_ling</termNote>
+            <termNote type="sup2">T_note_refx</termNote>
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">T_Source</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6764">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-09T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-09T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>media</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-09T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-09T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">&lt;h1&gt;Test virtual path&lt;/h1&gt;
+&lt;h3&gt;external link&lt;/h3&gt;
+For more information about W3C, please consult the 
+&lt;A href="http://www.w3.org/" target="_blank"&gt;W3C Web site&lt;/A&gt;.
+&lt;h3&gt;show picture&lt;/h3&gt;
+&lt;IMG SRC="/pictures/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;
+&lt;h3&gt;link to play sound&lt;/h3&gt;
+&lt;A href="/sounds/sound.mp3" target="_blank"&gt;play here&lt;/A&gt;.
+&lt;h3&gt;play sound&lt;/h3&gt;
+&lt;audio src="/sounds/sound.mp3" autostart="false" controls="true"&gt;
+  Your browser does not support the &lt;code&gt;audio&lt;/code&gt; element.
+&lt;/audio&gt;
+&lt;h3&gt;play video&lt;/h3&gt;
+&lt;video src="/videos/big_buck_bunny_720p_1mb.mp4" width="400" height="300" autostart="false" controls="true"&gt;&lt;/video&gt;</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>media FR</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-09T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-09T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">&lt;h1&gt;Test virtual path&lt;/h1&gt;
+&lt;h3&gt;external link&lt;/h3&gt;
+For more information about W3C, please consult the 
+&lt;A href="http://www.w3.org/" target="_blank"&gt;W3C Web site&lt;/A&gt;.
+&lt;h3&gt;show picture&lt;/h3&gt;
+&lt;IMG SRC="/pictures/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;
+&lt;h3&gt;link to play sound&lt;/h3&gt;
+&lt;A href="/sounds/sound.mp3" target="_blank"&gt;play here&lt;/A&gt;.
+&lt;h3&gt;play sound&lt;/h3&gt;
+&lt;audio src="/sounds/sound.mp3" autostart="false" controls="true"&gt;
+  Your browser does not support the &lt;code&gt;audio&lt;/code&gt; element.
+&lt;/audio&gt;
+&lt;h3&gt;play video&lt;/h3&gt;
+&lt;video src="/videos/big_buck_bunny_720p_1mb.mp4" width="400" height="300" autostart="false" controls="true"&gt;&lt;/video&gt;</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6765">
+        <descrip type="subjectField">Computer</descrip>
+        <descripGrp>
+          <descrip type="definition">[[links/tuning mysql.txt]]
+[[images/volcan.jpg]]
+[[sounds/sound.mp3]]
+[[videos/big_buck_bunny_720p_1mb.mp4]]</descrip>
+          <admin type="source">[[links/tuning mysql.txt]]
+[[images/volcan.jpg]]
+[[sounds/sound.mp3]]
+[[videos/big_buck_bunny_720p_1mb.mp4]]</admin>
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-16T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2019-09-25T00:00:00</date>
+        </transacGrp>
+        <note>&lt;REFERENCE SRC="6770" &gt;synonyme&lt;/REFERENCE&gt;;</note>
+        <langSet xml:lang="EN">
+          <tig>
+            <term>x</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-16T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2019-09-25T00:00:00</date>
+            </transacGrp>
+            <note>&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</note>
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</descrip>
+            <admin type="sourceDefinition">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</admin>
+            <termNote type="sup0">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</termNote>
+            <termNote type="sup1">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</termNote>
+            <termNote type="sup2">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</termNote>
+            <termNote type="sup3" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">&lt;h3&gt;external link&lt;/h3&gt;
+[[links/tuning mysql.txt]]
+&lt;h3&gt;images link&lt;/h3&gt;
+[[images/volcan.jpg]]
+&lt;h3&gt;sounds link&lt;/h3&gt;
+[[sounds/sound.mp3]]
+&lt;h3&gt;videos link&lt;/h3&gt;
+[[videos/big_buck_bunny_720p_1mb.mp4]]</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>x FR</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-16T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2019-09-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="sup3" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6770">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition">[[images/volcan.png]]</descrip>
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-24T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-25T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>xx</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-24T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">test</admin>
+          </tig>
+          <tig>
+            <term>xx syn en</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>xx FR</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">mpdif</admin>
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6771">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-25T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-02-25T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>xx</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source">deuxième sens</admin>
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>xx 2</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-02-25T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+      </termEntry>
+      <termEntry id="6772">
+        <descrip type="subjectField">TOUS</descrip>
+        <descripGrp>
+          <descrip type="definition" />
+          <admin type="source" />
+        </descripGrp>
+        <transacGrp>
+          <transac type="transactionType">origination</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-08-18T00:00:00</date>
+        </transacGrp>
+        <transacGrp>
+          <transac type="transactionType">modification</transac>
+          <transacNote type="responsibility">Admin need to change pwd</transacNote>
+          <date>2016-08-18T00:00:00</date>
+        </transacGrp>
+        <note />
+        <langSet xml:lang="EN">
+          <tig>
+            <term>statistic</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-08-18T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-08-18T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
+          </tig>
+        </langSet>
+        <langSet xml:lang="FR">
+          <tig>
+            <term>statistique</term>
+            <descripGrp>
+              <descrip type="context" />
+              <admin type="source" />
+            </descripGrp>
+            <transacGrp>
+              <transac type="transactionType">origination</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-08-18T00:00:00</date>
+            </transacGrp>
+            <transacGrp>
+              <transac type="transactionType">modification</transac>
+              <transacNote type="responsibility">Admin need to change pwd</transacNote>
+              <date>2016-08-18T00:00:00</date>
+            </transacGrp>
+            <note />
+            <termNote type="partOfSpeech">properNoun</termNote>
+            <termNote type="grammaticalGender">other</termNote>
+            <termNote type="termType">variant</termNote>
+            <descrip type="context" />
+            <descrip type="definition" />
+            <admin type="sourceDefinition" />
+            <termNote type="sup0" />
+            <termNote type="sup1" />
+            <termNote type="sup2" />
+            <termNote type="geographicalUsage" />
+            <termNote type="usage" />
+            <admin type="source" />
           </tig>
         </langSet>
       </termEntry>

@@ -47,6 +47,7 @@ public class Entry {
     private String extraTerms;
     private String resourceNote;
     private String conceptNote;
+    private String crossref;
     private String langsetNote;
     private String termNote;
  
@@ -247,12 +248,24 @@ public class Entry {
     public String getConceptNote() {
         return conceptNote;
     }
-
+   
     /**
      * @param conceptNote the conceptNote to set
      */
     public void setConceptNote(String conceptNote) {
         this.conceptNote = conceptNote;
+    }
+/**
+     * @return the crossref
+     */
+    public String getCrossref() {
+        return crossref;
+    }
+    /**
+     * @param crossref the conceptNote to set
+     */
+    public void setCrossref(String crossref) {
+        this.crossref = crossref;
     }
 
     /**

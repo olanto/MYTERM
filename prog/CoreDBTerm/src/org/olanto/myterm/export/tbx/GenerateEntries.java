@@ -110,8 +110,9 @@ public class GenerateEntries {
         }  
         if (con.getCrossref()!= null) {
             String ref=con.getCrossref().replace("\n", "");
-            String[] part=ref.split(";");
-            termentry.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
+//            String[] part=ref.split(";");
+            termentry.addContent(makeElem("ref", con.getCrossref()));
+//            termentry.addContent(makeElem("ref", part[2]).setAttribute("type", part[0]).setAttribute("target", part[1]));
         }
        if (con.getExtcrossref()!= null) {
             String ref=con.getExtcrossref().replace("\n", "");
