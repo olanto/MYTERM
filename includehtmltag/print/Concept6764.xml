@@ -9,151 +9,71 @@
       <p>Only for demo</p>
     </noteRes>
     <sourceRes>
-      <p>exported from myTerm (olanto.org) date: 2019-12-03 12:42:03</p>
+      <p>exported from myTerm (olanto.org) date: 2019-12-03 12:08:17</p>
     </sourceRes>
   </header>
   <body>
     <termEntry>
-      <idConcept>ID: 2688</idConcept>
+      <idConcept>ID: 6764</idConcept>
       <subjectField>
         <p>
           <e>Subject field:</e>
-          <i>Computer</i>
+          <i>TOUS</i>
         </p>
       </subjectField>
       <descripGrp>
-        <cdefinition>
-          <p>
-            <e>Image:</e>
-            <i>Defi EN</i>
-          </p>
-        </cdefinition>
-        <csource>
-          <p>
-            <e>Source:</e>
-            <i>source def concept</i>
-          </p>
-        </csource>
+        <cdefinition />
+        <csource />
       </descripGrp>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">Admin need to change pwd</transacNote>
-        <date>2015-11-12T00:00:00</date>
+        <date>2016-02-09T00:00:00</date>
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
         <transacNote type="responsibility">Admin need to change pwd</transacNote>
-        <date>2019-12-03T00:00:00</date>
+        <date>2016-02-09T00:00:00</date>
       </transacGrp>
-      <cnote>
-        <p>
-          <e>Concept-Note:</e>
-          <i>cross ref CERN</i>
-        </p>
-      </cnote>
-      <ccrossref>
-        <p>
-          <e>Cross reference:</e>
-          <i>&lt;REFERENCE SRC="6770" &gt;synonyme&lt;/REFERENCE&gt;;
-&lt;REFERENCE SRC="1" &gt;voir_aussi&lt;/REFERENCE&gt;;</i>
-        </p>
-      </ccrossref>
+      <cnote />
       <langSet xml:lang="EN">
         <idLang>Lang: EN</idLang>
         <tig>
           <term>
             <p>
               <e />
-              <i>to test</i>
+              <i>media</i>
             </p>
           </term>
           <transacGrp>
             <transac type="transactionType">origination</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2015-11-12T00:00:00</date>
+            <date>2016-02-09T00:00:00</date>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2019-12-03T00:00:00</date>
+            <date>2016-02-09T00:00:00</date>
           </transacGrp>
           <tsource>
             <p>
               <e>Source:</e>
-              <i>source</i>
+              <i><h1>Test virtual path</h1>
+<h3>external link</h3>
+For more information about W3C, please consult the 
+&lt;A href="http://www.w3.org/" target="_blank"&gt;W3C Web site&lt;/A&gt;.
+<h3>show picture</h3>
+&lt;IMG SRC="/pictures/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;
+<h3>link to play sound</h3>
+&lt;A href="/sounds/sound.mp3" target="_blank"&gt;play here&lt;/A&gt;.
+<h3>play sound</h3>
+&lt;audio src="/sounds/sound.mp3" autostart="false" controls="true"&gt;
+  Your browser does not support the &lt;code&gt;audio&lt;/code&gt; element.
+&lt;/audio&gt;
+<h3>play video</h3>
+&lt;video src="/videos/big_buck_bunny_720p_1mb.mp4" width="400" height="300" autostart="false" controls="true"&gt;&lt;/video&gt;</i>
             </p>
           </tsource>
-          <tdefinition>
-            <p>
-              <e>Definition:</e>
-              <i>Définition</i>
-            </p>
-          </tdefinition>
-          <tsource_definition>
-            <p>
-              <e>Source of definition:</e>
-              <i>srouce_def</i>
-            </p>
-          </tsource_definition>
-          <descripGrp>
-            <tcontext />
-            <tsource_context />
-          </descripGrp>
-          <tnote>
-            <p>
-              <e>Note:</e>
-              <i>note</i>
-            </p>
-          </tnote>
-          <termType>
-            <p>
-              <e>Type:</e>
-              <i>fullForm</i>
-            </p>
-          </termType>
-          <sup0>
-            <p>
-              <e>Technical Note:</e>
-              <i>tech note</i>
-            </p>
-          </sup0>
-          <sup1>
-            <p>
-              <e>Linguistic Note:</e>
-              <i>ling note</i>
-            </p>
-          </sup1>
-          <termNote type="sup2">ref note</termNote>
-          <sup2>
-            <p>
-              <e>Reference Note:</e>
-              <i>ref note</i>
-            </p>
-          </sup2>
-          <sup3>
-            <p>
-              <e />
-              <i>x</i>
-            </p>
-          </sup3>
-          <tusage />
-        </tig>
-      </langSet>
-      <langSet xml:lang="FR">
-        <idLang>Lang: FR</idLang>
-        <tig>
-          <term />
-          <transacGrp>
-            <transac type="transactionType">origination</transac>
-            <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2016-02-08T00:00:00</date>
-          </transacGrp>
-          <transacGrp>
-            <transac type="transactionType">modification</transac>
-            <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2019-12-03T00:00:00</date>
-          </transacGrp>
-          <tsource />
           <tdefinition />
           <tsource_definition />
           <descripGrp>
@@ -163,14 +83,70 @@
           <termType>
             <p>
               <e>Type:</e>
-              <i>fullForm</i>
+              <i>variant</i>
             </p>
           </termType>
           <sup0 />
           <sup1 />
           <termNote type="sup2" />
           <sup2 />
-          <sup3 />
+          <tusage />
+        </tig>
+      </langSet>
+      <langSet xml:lang="FR">
+        <idLang>Lang: FR</idLang>
+        <tig>
+          <term>
+            <p>
+              <e />
+              <i>media FR</i>
+            </p>
+          </term>
+          <transacGrp>
+            <transac type="transactionType">origination</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-02-09T00:00:00</date>
+          </transacGrp>
+          <transacGrp>
+            <transac type="transactionType">modification</transac>
+            <transacNote type="responsibility">Admin need to change pwd</transacNote>
+            <date>2016-02-09T00:00:00</date>
+          </transacGrp>
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i><h1>Test virtual path</h1>
+<h3>external link</h3>
+For more information about W3C, please consult the 
+&lt;A href="http://www.w3.org/" target="_blank"&gt;W3C Web site&lt;/A&gt;.
+<h3>show picture</h3>
+&lt;IMG SRC="/pictures/volcan.jpg" TITLE="Texte à afficher" width="200"&gt;
+<h3>link to play sound</h3>
+&lt;A href="/sounds/sound.mp3" target="_blank"&gt;play here&lt;/A&gt;.
+<h3>play sound</h3>
+&lt;audio src="/sounds/sound.mp3" autostart="false" controls="true"&gt;
+  Your browser does not support the &lt;code&gt;audio&lt;/code&gt; element.
+&lt;/audio&gt;
+<h3>play video</h3>
+&lt;video src="/videos/big_buck_bunny_720p_1mb.mp4" width="400" height="300" autostart="false" controls="true"&gt;&lt;/video&gt;</i>
+            </p>
+          </tsource>
+          <tdefinition />
+          <tsource_definition />
+          <descripGrp>
+            <tcontext />
+            <tsource_context />
+          </descripGrp>
+          <termType>
+            <p>
+              <e>Type:</e>
+              <i>variant</i>
+            </p>
+          </termType>
+          <sup0 />
+          <sup1 />
+          <termNote type="sup2" />
+          <sup2 />
           <tusage />
         </tig>
       </langSet>

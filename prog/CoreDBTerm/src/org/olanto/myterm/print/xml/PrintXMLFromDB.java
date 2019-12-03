@@ -57,7 +57,8 @@ public class PrintXMLFromDB {
 
    //  doIt(null, "C:\\MYTERM\\nice\\DEMO resource NICE.xml", "CERN","EN", false);
   
-    System.out.println( doIt( "TESTCERN",6765,"FR"));
+//   System.out.println( doIt( "TESTCERN",6765,"FR"));
+   System.out.println( doIt( "DEMO resource",2688,"EN"));
     }
 
     public static void init(String propertiesFile) {

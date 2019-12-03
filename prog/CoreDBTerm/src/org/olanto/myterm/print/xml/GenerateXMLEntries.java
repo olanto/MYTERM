@@ -137,7 +137,8 @@ public class GenerateXMLEntries {
         if (con.getCrossref() != null) {
             String ref = con.getCrossref().replace("\n", "");
             String[] part = ref.split(";");
-            termentry.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
+             addXMLNice(termentry, "ccrossref", "lbl.c.cross_ref", con.getCrossref());
+//          termentry.addContent(makeElem("p", part[0] + ": " + part[1] + ", " + part[2]));
         }
         if (con.getExtcrossref() != null) {
             String ref = con.getExtcrossref().replace("\n", "");

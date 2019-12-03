@@ -16,7 +16,7 @@ import java.util.Map;
 public class Utils {
 
     public static String extractCrossRef(String crossReference) {
-        String ref = "<br/>";
+        String ref = "";
         Map<String, String> concepts = getConceptIDs(crossReference);
         for (Map.Entry<String, String> entry : concepts.entrySet()) {
             ref += "<br/><a href=#TS" + entry.getValue() + ">" + entry.getValue()+ " - " + entry.getKey() + "</a>";

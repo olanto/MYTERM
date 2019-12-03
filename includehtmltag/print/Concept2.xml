@@ -9,169 +9,170 @@
       <p>Only for demo</p>
     </noteRes>
     <sourceRes>
-      <p>exported from myTerm (olanto.org) date: 2019-12-03 12:42:03</p>
+      <p>exported from myTerm (olanto.org) date: 2019-12-03 12:13:17</p>
     </sourceRes>
   </header>
   <body>
     <termEntry>
-      <idConcept>ID: 2688</idConcept>
-      <subjectField>
-        <p>
-          <e>Subject field:</e>
-          <i>Computer</i>
-        </p>
-      </subjectField>
-      <descripGrp>
-        <cdefinition>
-          <p>
-            <e>Image:</e>
-            <i>Defi EN</i>
-          </p>
-        </cdefinition>
-        <csource>
-          <p>
-            <e>Source:</e>
-            <i>source def concept</i>
-          </p>
-        </csource>
-      </descripGrp>
+      <idConcept>ID: 2</idConcept>
       <transacGrp>
         <transac type="transactionType">origination</transac>
         <transacNote type="responsibility">Admin need to change pwd</transacNote>
-        <date>2015-11-12T00:00:00</date>
       </transacGrp>
       <transacGrp>
         <transac type="transactionType">modification</transac>
         <transacNote type="responsibility">Admin need to change pwd</transacNote>
-        <date>2019-12-03T00:00:00</date>
       </transacGrp>
-      <cnote>
-        <p>
-          <e>Concept-Note:</e>
-          <i>cross ref CERN</i>
-        </p>
-      </cnote>
-      <ccrossref>
-        <p>
-          <e>Cross reference:</e>
-          <i>&lt;REFERENCE SRC="6770" &gt;synonyme&lt;/REFERENCE&gt;;
-&lt;REFERENCE SRC="1" &gt;voir_aussi&lt;/REFERENCE&gt;;</i>
-        </p>
-      </ccrossref>
       <langSet xml:lang="EN">
         <idLang>Lang: EN</idLang>
         <tig>
           <term>
             <p>
               <e />
-              <i>to test</i>
+              <i>moon</i>
             </p>
           </term>
           <transacGrp>
             <transac type="transactionType">origination</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2015-11-12T00:00:00</date>
+            <date>2031-12-20T00:00:00</date>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2019-12-03T00:00:00</date>
           </transacGrp>
           <tsource>
             <p>
               <e>Source:</e>
-              <i>source</i>
+              <i>encyclodia ..</i>
             </p>
           </tsource>
           <tdefinition>
             <p>
               <e>Definition:</e>
-              <i>Définition</i>
+              <i>a moon is</i>
             </p>
           </tdefinition>
           <tsource_definition>
             <p>
               <e>Source of definition:</e>
-              <i>srouce_def</i>
+              <i>from dictionary ..</i>
             </p>
           </tsource_definition>
           <descripGrp>
-            <tcontext />
-            <tsource_context />
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>a new moon in the night</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i>from book...</i>
+              </p>
+            </tsource_context>
           </descripGrp>
           <tnote>
             <p>
               <e>Note:</e>
-              <i>note</i>
+              <i>here a note</i>
             </p>
           </tnote>
+          <administrativeStatus>
+            <p>
+              <e>Status:</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
           <termType>
             <p>
               <e>Type:</e>
               <i>fullForm</i>
             </p>
           </termType>
-          <sup0>
+          <tusage>
             <p>
-              <e>Technical Note:</e>
-              <i>tech note</i>
+              <e>Usage:</e>
+              <i>used to ...</i>
             </p>
-          </sup0>
-          <sup1>
-            <p>
-              <e>Linguistic Note:</e>
-              <i>ling note</i>
-            </p>
-          </sup1>
-          <termNote type="sup2">ref note</termNote>
-          <sup2>
-            <p>
-              <e>Reference Note:</e>
-              <i>ref note</i>
-            </p>
-          </sup2>
-          <sup3>
-            <p>
-              <e />
-              <i>x</i>
-            </p>
-          </sup3>
-          <tusage />
+          </tusage>
         </tig>
       </langSet>
       <langSet xml:lang="FR">
         <idLang>Lang: FR</idLang>
         <tig>
-          <term />
+          <term>
+            <p>
+              <e />
+              <i>lune</i>
+            </p>
+          </term>
           <transacGrp>
             <transac type="transactionType">origination</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2016-02-08T00:00:00</date>
+            <date>2031-12-20T00:00:00</date>
           </transacGrp>
           <transacGrp>
             <transac type="transactionType">modification</transac>
             <transacNote type="responsibility">Admin need to change pwd</transacNote>
-            <date>2019-12-03T00:00:00</date>
           </transacGrp>
-          <tsource />
-          <tdefinition />
-          <tsource_definition />
+          <tsource>
+            <p>
+              <e>Source:</e>
+              <i>encyclodie ..</i>
+            </p>
+          </tsource>
+          <tdefinition>
+            <p>
+              <e>Definition:</e>
+              <i>la lune est le satellite ...</i>
+            </p>
+          </tdefinition>
+          <tsource_definition>
+            <p>
+              <e>Source of definition:</e>
+              <i>du dictionnaire ..</i>
+            </p>
+          </tsource_definition>
           <descripGrp>
-            <tcontext />
-            <tsource_context />
+            <tcontext>
+              <p>
+                <e>Context:</e>
+                <i>la lune est pleine ce soir</i>
+              </p>
+            </tcontext>
+            <tsource_context>
+              <p>
+                <e>Source of context:</e>
+                <i>du roman ...</i>
+              </p>
+            </tsource_context>
           </descripGrp>
+          <tnote>
+            <p>
+              <e>Note:</e>
+              <i>ici une note</i>
+            </p>
+          </tnote>
+          <administrativeStatus>
+            <p>
+              <e>Status:</e>
+              <i>admittedTerm-admn-sts</i>
+            </p>
+          </administrativeStatus>
           <termType>
             <p>
               <e>Type:</e>
               <i>fullForm</i>
             </p>
           </termType>
-          <sup0 />
-          <sup1 />
-          <termNote type="sup2" />
-          <sup2 />
-          <sup3 />
-          <tusage />
+          <tusage>
+            <p>
+              <e>Usage:</e>
+              <i>utilisé ...</i>
+            </p>
+          </tusage>
         </tig>
       </langSet>
     </termEntry>
