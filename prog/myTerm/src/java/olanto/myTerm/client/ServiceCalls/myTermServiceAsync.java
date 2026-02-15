@@ -7,6 +7,7 @@ package olanto.myTerm.client.ServiceCalls;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import olanto.myTerm.shared.ConceptEntryDTO;
 import olanto.myTerm.shared.DomainDTO;

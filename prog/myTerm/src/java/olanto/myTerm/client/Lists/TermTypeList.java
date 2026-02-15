@@ -28,7 +28,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.ListBox;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
 import olanto.myTerm.client.MainEntryPoint;
+import static olanto.myTerm.client.MainEntryPoint.logger;
 import olanto.myTerm.client.ObjectWrappers.BooleanWrap;
 import olanto.myTerm.client.ServiceCalls.myTermService;
 import olanto.myTerm.client.ServiceCalls.myTermServiceAsync;
@@ -39,10 +41,10 @@ import olanto.myTerm.shared.SysFieldDTO;
  * @author nizar ghoula - simple
  */
 public class TermTypeList extends ListBox {
-    
+
     private myTermServiceAsync typesService = GWT.create(myTermService.class);
     private AsyncCallback<Map<String, String>> termTypesCallback;
-    
+
     public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
@@ -50,18 +52,38 @@ public class TermTypeList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-            
+
             @Override
             public void onSuccess(Map<String, String> result) {
                 ArrayList<String> res = new ArrayList<>();
-                if (res.addAll(result.keySet())) {
+                  for (int j = 0; j < result.size(); j++) {
+                    String posj = j + "";
+                    String val = result.get(posj);
+                    res.add(val);
+                    logger.log(Level.SEVERE, "TermTypeList1 add:" + result.get(posj) + ", index:" + posj);
+                }
+                if (res.size() > 0) {
                     int i = 0;
-                    for (String s : res) {
-                        addItem(s, result.get(s));
-                        if (result.get(s).equalsIgnoreCase(currentType)) {
-                            i = res.indexOf(s);
+                    for (int j = 0; j < result.size(); j++) {
+                        String posj = j + "";
+                        String val = result.get(posj);
+                        addItem(val, val);
+                        if (val.equalsIgnoreCase(currentType)) {
+                            i = j;
                         }
-                    }
+                        logger.log(Level.SEVERE, "TermTypeList1 find idx s:" + val + ", index:" + i);
+                    }    
+                
+//                if (res.addAll(result.keySet())) {
+//                    int i = 0;
+//                    for (String s : res) {
+//                        System.out.println();
+//                        addItem(s, result.get(s));
+//                        if (result.get(s).equalsIgnoreCase(currentType)) {
+//                            i = res.indexOf(s);
+//                        }
+//                        logger.log(Level.SEVERE, "TermTypeList1 s:" + s + ", index:" + i);
+//                    }
                     setSelectedIndex(i);
                 }
             }
@@ -75,7 +97,7 @@ public class TermTypeList extends ListBox {
         this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-    
+
     public TermTypeList(String langID, final BooleanWrap isEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
@@ -83,12 +105,20 @@ public class TermTypeList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-            
+
             @Override
             public void onSuccess(Map<String, String> result) {
-                for (String s : result.keySet()) {
-                    addItem(s, s);
-                }
+                             logger.log(Level.SEVERE, "TermTypeList2 size:" + result.size());
+                for (int j = 0; j < result.size(); j++) {
+                    String posj = j + "";
+                    String val = result.get(posj);
+                    addItem(val, val);
+                    logger.log(Level.SEVERE, "TermTypeList2 s:" + val + ", index:" + j + "first 0");
+                   }
+//                for (String s : result.keySet()) {
+//                    addItem(s, s);
+//                    logger.log(Level.SEVERE, "TermTypeList2 s:" + s + ", index:" + 0);
+//                }
                 setSelectedIndex(0);
             }
         };
@@ -101,7 +131,7 @@ public class TermTypeList extends ListBox {
         this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-    
+
     public TermTypeList(String langID, final String currentType, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
@@ -109,18 +139,35 @@ public class TermTypeList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-            
+
             @Override
             public void onSuccess(Map<String, String> result) {
+                logger.log(Level.SEVERE, "TermTypeList3 size:" + result.size());
                 ArrayList<String> res = new ArrayList<>();
-                if (res.addAll(result.keySet())) {
+                for (int j = 0; j < result.size(); j++) {
+                    String posj = j + "";
+                    String val = result.get(posj);
+                    res.add(val);
+                    logger.log(Level.SEVERE, "TermTypeList3 add:" + result.get(posj) + ", index:" + posj);
+                }
+                if (res.size() > 0) {
                     int i = 0;
-                    for (String s : res) {
-                        addItem(s, result.get(s));
-                        if (result.get(s).equalsIgnoreCase(currentType)) {
-                            i = res.indexOf(s);
+                    for (int j = 0; j < result.size(); j++) {
+                        String posj = j + "";
+                        String val = result.get(posj);
+                        addItem(val, val);
+                        if (val.equalsIgnoreCase(currentType)) {
+                            i = j;
                         }
+                        logger.log(Level.SEVERE, "TermTypeList3 find idx s:" + val + ", index:" + i);
                     }
+//                    for (String s : res) {
+//                        addItem(s, result.get(s));
+//                        if (result.get(s).equalsIgnoreCase(currentType)) {
+//                            i = res.indexOf(s);
+//                        }
+//                        logger.log(Level.SEVERE, "TermTypeList3 find idx s:" + s + ", index:" + i);
+//                    }
                     setSelectedIndex(i);
                 }
             }
@@ -135,7 +182,7 @@ public class TermTypeList extends ListBox {
         this.setVisible(type.getVisibilityForm());
         typesService.getTermTypes(langID, termTypesCallback);
     }
-    
+
     public TermTypeList(String langID, final BooleanWrap isEdited, final BooleanWrap isLocallyEdited, SysFieldDTO type) {
         super();
         termTypesCallback = new AsyncCallback<Map<String, String>>() {
@@ -143,12 +190,20 @@ public class TermTypeList extends ListBox {
             public void onFailure(Throwable caught) {
                 MainEntryPoint.statusPanel.setMessage("warning", "Failed to get list of term types");
             }
-            
+
             @Override
             public void onSuccess(Map<String, String> result) {
-                for (String s : result.keySet()) {
-                    addItem(s, s);
+                logger.log(Level.SEVERE, "TermTypeList4 size:" + result.size());
+                for (int j = 0; j < result.size(); j++) {
+                    String posj = j + "";
+                    String val = result.get(posj);
+                    addItem(val, val);
+                    logger.log(Level.SEVERE, "TermTypeList4 s:" + val + ", index:" + j + "first 0");
                 }
+//                for (String s : result.keySet()) {
+//                    addItem(s, s);
+//                    logger.log(Level.SEVERE, "TermTypeList4 s:" + s + ", index:" + 0);
+//                }
                 setSelectedIndex(0);
             }
         };

@@ -12,6 +12,10 @@
     <!-- <inherits name="com.google.gwt.user.theme.chrome.Chrome"/> -->
     <!-- <inherits name="com.google.gwt.user.theme.dark.Dark"/> -->
 
+<!-- log into console -->
+<inherits name="com.google.gwt.logging.Logging"/>
+<set-property name="gwt.logging.enabled" value="TRUE" />
+
     <entry-point class="olanto.myTerm.client.MainEntryPoint"/>
     <source path='client'/>
     <source path='shared'/>

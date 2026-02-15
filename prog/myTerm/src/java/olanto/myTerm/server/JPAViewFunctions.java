@@ -49,7 +49,7 @@ public class JPAViewFunctions {
 //        System.out.println(getPublicSearchBySourceTarget("tunas", "EN", "FR", "-1", " "));
 //        getConceptAndAssociatedTerms(3534);
 //        getApproveElementsByLang("EN", 1001);
-//        getTermTypes("FR");
+        getTermTypes("FR");
 //        getCodificationByTypeAndLang("msg", "EN");
     }
 
@@ -722,8 +722,8 @@ public class JPAViewFunctions {
             res.append("</tr>");
         }
         res.append("</table>");
-        resultQ.clear();
-        resultQ = null;
+//        resultQ.clear();
+       // resultQ = null;
         return res.toString();
     }
 
@@ -745,9 +745,9 @@ public class JPAViewFunctions {
             Query query = em.createNamedQuery("VjCodifications.findTermTypesByLanguage");
             query.setParameter("idLanguage", langID);
             List<VjCodifications> result = query.getResultList();
-//            for (String s : result) {
-//                System.out.println(s);
-//            }
+            for (VjCodifications s : result) {
+                System.out.println(s.getCodeValue());
+            }
             return result;
         }
         return Collections.EMPTY_LIST;
