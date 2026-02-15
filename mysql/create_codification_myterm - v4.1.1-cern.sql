@@ -289,6 +289,7 @@ select * from codeslang;
 
 -- --------------------------------- 
  
+
 create or replace view v_codeprodlang as
 select
   l.id_language,
@@ -296,7 +297,8 @@ select
   c.code_value,
   c.code_extra,
   c.code_default
-from codes c , languages l;
+from codes c , languages l
+order by code_default desc;
 
 select * from v_codeprodlang where id_language='FR' and code_type in ('role', 'term_type');
 

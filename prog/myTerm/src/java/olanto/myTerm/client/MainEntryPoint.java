@@ -25,6 +25,8 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import olanto.myTerm.client.Interfaces.AdminInterface;
 import olanto.myTerm.client.CookiesManager.MyTermCookies;
 import olanto.myTerm.client.CookiesManager.MyTermCookiesNamespace;
@@ -44,8 +46,12 @@ import olanto.myTerm.shared.OwnerDTO;
  *
  * @author simple
  */
-public class MainEntryPoint implements EntryPoint {
 
+
+
+public class MainEntryPoint implements EntryPoint {
+    
+public static Logger logger = Logger.getLogger("MT");
     /**
      * Creates a new instance of MainEntryPoint
      */
@@ -127,6 +133,10 @@ public class MainEntryPoint implements EntryPoint {
     }
 
     public void showLogin() {
+        
+    
+    logger.log(Level.SEVERE, "this message is logged");
+
         RootPanel.get("login").clear();
         RootPanel.get("header").clear();
         RootPanel.get("main").clear();

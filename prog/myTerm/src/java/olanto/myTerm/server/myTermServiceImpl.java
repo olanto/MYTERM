@@ -701,12 +701,23 @@ public class myTermServiceImpl extends RemoteServiceServlet implements myTermSer
     @Override
     public Map<String, String> getTermTypes(String langID) {
         Map<String, String> map = new HashMap<>();
+        int count=0;
         for (VjCodifications codes : JPAViewFunctions.getTermTypes(langID)) {
-            map.put(codes.getCodeValueLang(), codes.getCodeValue());
+            map.put(count+"", codes.getCodeValue());
+            count++;
         }
         return map;
     }
 
+//    @Override
+//    public List<String> getTermTypes(String langID) {
+//        List<String> list = new  ArrayList<String>();
+//        for (VjCodifications codes : JPAViewFunctions.getTermTypes(langID)) {
+//            list.add(codes.getCodeValue());
+//        }
+//        return list;
+//    }
+   
     @Override
     public Map<String, String> getTermPOS(String langID) {
         Map<String, String> map = new HashMap<>();
