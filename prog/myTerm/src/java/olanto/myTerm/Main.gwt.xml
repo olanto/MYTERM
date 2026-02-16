@@ -14,7 +14,7 @@
 
 <!-- log into console -->
 <inherits name="com.google.gwt.logging.Logging"/>
-<set-property name="gwt.logging.enabled" value="TRUE" />
+<set-property name="gwt.logging.enabled" value="FALSE" />
 
     <entry-point class="olanto.myTerm.client.MainEntryPoint"/>
     <source path='client'/>

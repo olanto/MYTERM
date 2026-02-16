@@ -745,9 +745,9 @@ public class JPAViewFunctions {
             Query query = em.createNamedQuery("VjCodifications.findTermTypesByLanguage");
             query.setParameter("idLanguage", langID);
             List<VjCodifications> result = query.getResultList();
-            for (VjCodifications s : result) {
-                System.out.println(s.getCodeValue());
-            }
+//            for (VjCodifications s : result) {  // only for debuggin
+//                System.out.println(s.getCodeValue());
+//            }
             return result;
         }
         return Collections.EMPTY_LIST;
