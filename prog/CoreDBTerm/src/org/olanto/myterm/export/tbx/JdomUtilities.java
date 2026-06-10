@@ -65,10 +65,10 @@ public class JdomUtilities {
     }
 
     /**
-     * cr�e un �l�ment 
+     * cree un element
      *
-     * @param name nom de l'�l�ment
-     * @return �l�ment
+     * @param name nom de l'element
+     * @return element
      */
     public static Element makeElem(String name) {
         return new Element(name);
@@ -76,32 +76,32 @@ public class JdomUtilities {
 
     
        /**
-     * cr�e un �l�ment pr�fix� par le name space
+     * cree un element prefixe par le name space
      *
-     * @param name nom de l'�l�ment
-     * @return �l�ment
+     * @param name nom de l'element
+     * @return element
      */
     public static Element makeElem(String name, Namespace nameSpace) {
         return new Element(name, nameSpace);
     }
 
     /**
-     * cr�e un �l�ment pr�fix� par le name space avec un texte
+     * cree un element prefixe par le name space avec un texte
      *
-     * @param name nom de l'�l�ment
-     * @param text texte de l'�l�ment
-     * @return �l�ment
+     * @param name nom de l'element
+     * @param text texte de l'element
+     * @return element
      */
     public static Element makeElem(String name, String text, Namespace nameSpace) {
         return new Element(name, nameSpace).setText(text);
     }
 
-     /**
-     * cr�e un �l�ment avec un texte
+    /**
+     * cree un element avec un texte
      *
-     * @param name nom de l'�l�ment
-     * @param text texte de l'�l�ment
-     * @return �l�ment
+     * @param name nom de l'element
+     * @param text texte de l'element
+     * @return element
      */
     public static Element makeElem(String name, String text) {
         return new Element(name).setText(text);
