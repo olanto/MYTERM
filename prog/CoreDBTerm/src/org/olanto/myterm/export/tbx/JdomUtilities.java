@@ -1,6 +1,6 @@
 /**
  * ********
- * Copyright © 2013-2014 Olanto Foundation Geneva
+ * Copyright ï¿½ 2013-2014 Olanto Foundation Geneva
  *
  * This file is part of myTERM.
  *
@@ -65,10 +65,10 @@ public class JdomUtilities {
     }
 
     /**
-     * crée un élément 
+     * crï¿½e un ï¿½lï¿½ment 
      *
-     * @param name nom de l'élément
-     * @return élément
+     * @param name nom de l'ï¿½lï¿½ment
+     * @return ï¿½lï¿½ment
      */
     public static Element makeElem(String name) {
         return new Element(name);
@@ -76,32 +76,32 @@ public class JdomUtilities {
 
     
        /**
-     * crée un élément préfixé par le name space
+     * crï¿½e un ï¿½lï¿½ment prï¿½fixï¿½ par le name space
      *
-     * @param name nom de l'élément
-     * @return élément
+     * @param name nom de l'ï¿½lï¿½ment
+     * @return ï¿½lï¿½ment
      */
     public static Element makeElem(String name, Namespace nameSpace) {
         return new Element(name, nameSpace);
     }
 
     /**
-     * crée un élément préfixé par le name space avec un texte
+     * crï¿½e un ï¿½lï¿½ment prï¿½fixï¿½ par le name space avec un texte
      *
-     * @param name nom de l'élément
-     * @param text texte de l'élément
-     * @return élément
+     * @param name nom de l'ï¿½lï¿½ment
+     * @param text texte de l'ï¿½lï¿½ment
+     * @return ï¿½lï¿½ment
      */
     public static Element makeElem(String name, String text, Namespace nameSpace) {
         return new Element(name, nameSpace).setText(text);
     }
 
      /**
-     * crée un élément avec un texte
+     * crï¿½e un ï¿½lï¿½ment avec un texte
      *
-     * @param name nom de l'élément
-     * @param text texte de l'élément
-     * @return élément
+     * @param name nom de l'ï¿½lï¿½ment
+     * @param text texte de l'ï¿½lï¿½ment
+     * @return ï¿½lï¿½ment
      */
     public static Element makeElem(String name, String text) {
         return new Element(name).setText(text);
@@ -139,8 +139,13 @@ public class JdomUtilities {
         try {
             msg("export file in: "+namefile);
             XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-            sortie.output(document, new FileOutputStream(namefile));
+            FileOutputStream fos = new FileOutputStream(namefile);
+            sortie.output(document, fos);
+            fos.close();
+            msg("export OK: "+namefile);
         } catch (java.io.IOException e) {
+            msg("ERROR saveXML: "+e.getClass().getName()+": "+e.getMessage());
+            e.printStackTrace();
         }
     }
 

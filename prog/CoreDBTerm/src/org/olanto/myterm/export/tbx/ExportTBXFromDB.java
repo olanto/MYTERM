@@ -1,6 +1,6 @@
 /**
  * ********
- * Copyright © 2013-2014 Olanto Foundation Geneva
+ * Copyright ï¿½ 2013-2014 Olanto Foundation Geneva
  *
  * This file is part of myTERM.
  *
@@ -74,6 +74,10 @@ public class ExportTBXFromDB {
         DocType doctype = new DocType("TBXBasiccoreStructV02.dtd");
         document = new Document(racine, doctype);
         resource = Queries.getResourceID(resourceName, TermEnum.AutoCreate.NO);
+        if (resource == null) {
+            msg("ERROR: resource '" + resourceName + "' not found in database. Export aborted.");
+            return;
+        }
         JdomUtilities.msg("start exporting :");
         racine.addContent(GenerateTBXHeader.setHeader(dtdName, rootName));
         racine.addContent(GenerateEntries.getTermsFromDB());
